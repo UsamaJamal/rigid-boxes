@@ -137,75 +137,80 @@
     }
 
     @media (max-width: 992px) {
+        .cta-container {
+            padding: 0;
+        }
         .cta-banner {
+            display: flex;
             flex-direction: column;
             max-width: 412px;
             margin: 0 auto;
+            padding: 24px 19px 0;
+            overflow: hidden;
+            background: linear-gradient(177.63deg, #BD7678 0%, #8D4445 100%);
+            border-radius: 0 0 2px 2px;
         }
-        /* Single card layout: image top, text bottom */
         .cta-image-wrapper {
             position: relative;
             left: auto;
             top: auto;
-            width: 100%;
-            height: 280px;
             order: 1;
             z-index: 1;
-            margin-bottom: 0;
+            width: 100%;
+            height: 184px;
+            margin: 0;
+            border-radius: 16px;
+        }
+        .cta-image-wrapper img {
+            object-fit: cover;
         }
         .cta-text-card {
             order: 2;
-            padding: 36px 32px 40px;
-            border-radius: 0 0 40px 40px;
-            min-height: unset;
-            align-self: stretch;
+            width: 100%;
+            min-height: 0;
+            padding: 26px 0 25px;
+            background: transparent;
+            border-radius: 0;
+            justify-content: flex-start;
         }
-        /* Mobile circles repositioned */
+        .cta-heading {
+            font-size: 20px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+        .cta-desc {
+            max-width: 280px;
+            margin: 0 0 12px;
+            font-size: 13px;
+            line-height: 1.38;
+        }
+        .cta-btn {
+            gap: 8px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .cta-text-card > :not(.cta-ellipse) {
+            position: relative;
+            z-index: 1;
+        }
         .cta-ellipse-1 {
-            width: 200px;
-            height: 200px;
-            bottom: -60px;
-            right: -50px;
+            width: 82px;
+            height: 74px;
+            right: -28px;
+            bottom: -25px;
         }
         .cta-ellipse-2 {
-            width: 120px;
-            height: 120px;
-            bottom: 20px;
-            right: 10px;
+            width: 62px;
+            height: 62px;
+            right: -2px;
+            bottom: 2px;
         }
     }
 
     @media (max-width: 576px) {
         .cta-section {
             padding: 0 0 50px;
-        }
-        .cta-banner {
-            max-width: 100%;
-        }
-        .cta-image-wrapper {
-            width: 100%;
-            height: 260px;
-        }
-        .cta-text-card {
-            padding: 28px 24px 36px;
-        }
-        .cta-ellipse-1 {
-            width: 170px;
-            height: 170px;
-            bottom: -50px;
-            right: -40px;
-        }
-        .cta-ellipse-2 {
-            width: 100px;
-            height: 100px;
-            bottom: 16px;
-            right: 8px;
-        }
-        .cta-heading {
-            font-size: 26px;
-        }
-        .cta-desc {
-            font-size: 14px;
         }
     }
 </style>

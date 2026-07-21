@@ -172,6 +172,125 @@
         transform: rotate(45deg);
     }
 
+    /* Figma-style desktop mega menu */
+    .header-nav li {
+        position: static;
+    }
+
+    .mega-trigger {
+        appearance: none;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        color: #fff;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .mega-trigger::after {
+        content: '';
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        margin: 0 0 3px 8px;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: rotate(45deg);
+        transition: transform .2s ease;
+    }
+
+    .mega-trigger[aria-expanded="true"]::after {
+        transform: translateY(3px) rotate(225deg);
+    }
+
+    .mega-menu {
+        position: absolute;
+        z-index: 1100;
+        top: calc(100% - 2px);
+        left: 50%;
+        width: min(760px, calc(100vw - 40px));
+        padding: 18px 22px;
+        background: var(--secondary-color);
+        border: 1px solid rgba(255,255,255,.38);
+        border-radius: 0 0 6px 6px;
+        box-shadow: 0 18px 35px rgba(45, 20, 20, .25);
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -8px);
+        transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+    }
+
+    .mega-menu.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+    }
+
+    .mega-menu-title {
+        margin: 0 0 14px;
+        color: var(--primary-color);
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .mega-menu-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px 18px;
+    }
+
+    .mega-menu-link {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        gap: 9px;
+        color: #333;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.25;
+        text-decoration: none;
+    }
+
+    .mega-menu-link:hover { color: var(--primary-color); }
+
+    .mega-menu-link img {
+        width: 23px;
+        height: 23px;
+        object-fit: contain;
+        flex: 0 0 auto;
+    }
+
+    .mega-menu-footer {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(141, 68, 69, .22);
+        color: #333;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .mega-menu-footer img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .mega-menu-cta {
+        margin-left: auto;
+        padding: 9px 20px;
+        border-radius: 4px;
+        background: var(--primary-color);
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 3px 6px rgba(95,45,47,.25);
+    }
     /* Desktop only items */
     @media (min-width: 993px) {
         .mobile-actions, .mobile-overlay, .mobile-sidebar {
@@ -432,14 +551,23 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="#">Home</a></li>
-            <li class="has-dropdown"><a href="#">Boxes By Industry</a></li>
-            <li class="has-dropdown"><a href="#">Boxes By Material</a></li>
-            <li class="has-dropdown"><a href="#">Boxes By Style</a></li>
-            <li class="has-dropdown"><a href="#">Packaging Supplies</a></li>
+            <li><button class="mega-trigger" type="button" data-mega-menu="industry" aria-expanded="false">Boxes By Industry</button></li>
+            <li><button class="mega-trigger" type="button" data-mega-menu="material" aria-expanded="false">Boxes By Material</button></li>
+            <li><button class="mega-trigger" type="button" data-mega-menu="style" aria-expanded="false">Boxes By Style</button></li>
+            <li><button class="mega-trigger" type="button" data-mega-menu="supplies" aria-expanded="false">Packaging Supplies</button></li>
             <li><a href="#">Blogs</a></li>
         </ul>
     </div>
 
+    <div class="mega-menu" id="megaMenu" aria-hidden="true">
+        <p class="mega-menu-title" id="megaMenuTitle">Boxes By Industry</p>
+        <div class="mega-menu-grid" id="megaMenuGrid"></div>
+        <div class="mega-menu-footer">
+            <img src="{{ request()->getBaseUrl() }}/uploads/customer-service.png" alt="">
+            <span>Need a custom packaging solution?</span>
+            <a href="#" class="mega-menu-cta">Talk to us</a>
+        </div>
+    </div>
     <!-- Mobile Sidebar -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-sidebar" id="mobileSidebar">
@@ -498,6 +626,50 @@
 </header>
 
 <script>
+    const megaMenuData = {
+        industry: { title: 'Boxes By Industry', items: ['Apparel Boxes', 'Chocolate Packaging', 'Electronics Packaging', 'Food Packaging', 'Cosmetic Packaging', 'Retail Packaging', 'Candle Boxes', 'Health Care Packaging'] },
+        material: { title: 'Boxes By Material', items: ['Cardboard Boxes', 'Kraft Paper Boxes', 'Rigid Boxes', 'Corrugated Boxes', 'Paperboard Boxes', 'Eco-Friendly Boxes', 'Grey Board Boxes', 'Textured Paper Boxes'] },
+        style: { title: 'Boxes By Style', items: ['Magnetic Closure Boxes', 'Two Piece Boxes', 'Drawer Boxes', 'Sleeve Boxes', 'Tuck Top Boxes', 'Gable Boxes', 'Pillow Boxes', 'Die Cut Boxes'] },
+        supplies: { title: 'Packaging Supplies', items: ['Custom Inserts', 'Tissue Paper', 'Packaging Sleeves', 'Shipping Boxes', 'Stickers & Labels', 'Thank You Cards', 'Ribbon & Twine', 'Protective Fill'] }
+    };
+
+    const megaMenu = document.getElementById('megaMenu');
+    const megaMenuTitle = document.getElementById('megaMenuTitle');
+    const megaMenuGrid = document.getElementById('megaMenuGrid');
+    const megaTriggers = document.querySelectorAll('.mega-trigger');
+    const megaAssetBase = "{{ request()->getBaseUrl() }}/uploads/";
+
+    function closeMegaMenu() {
+        megaMenu.classList.remove('is-open');
+        megaMenu.setAttribute('aria-hidden', 'true');
+        megaTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
+    }
+
+    function openMegaMenu(menuKey, trigger) {
+        const menu = megaMenuData[menuKey];
+        if (!menu) return;
+        const wasOpen = megaMenu.classList.contains('is-open') && trigger.getAttribute('aria-expanded') === 'true';
+        closeMegaMenu();
+        if (wasOpen) return;
+        megaMenuTitle.textContent = menu.title;
+        megaMenuGrid.innerHTML = menu.items.map(item => `<a href="#" class="mega-menu-link"><img src="${megaAssetBase}gift-box.png" alt=""><span>${item}</span></a>`).join('');
+        megaMenu.classList.add('is-open');
+        megaMenu.setAttribute('aria-hidden', 'false');
+        trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    megaTriggers.forEach(trigger => trigger.addEventListener('click', event => {
+        event.stopPropagation();
+        openMegaMenu(trigger.dataset.megaMenu, trigger);
+    }));
+
+    document.addEventListener('click', event => {
+        if (!megaMenu.contains(event.target) && !event.target.closest('.mega-trigger')) closeMegaMenu();
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMegaMenu();
+    });
     function toggleMobileMenu() {
         document.getElementById('mobileSidebar').classList.toggle('active');
         document.getElementById('mobileOverlay').classList.toggle('active');

@@ -68,7 +68,7 @@
         flex: 1;
         min-width: 0;
         height: 44px;
-        border: 0.2px solid var(--section-text-color);
+        border: 1px solid var(--primary-color);
         border-radius: 6px;
         padding: 0 14px;
         font-family: 'DM Sans', sans-serif;
@@ -103,8 +103,20 @@
     .select-wrapper select {
         width: 100%;
         min-width: 0;
-        padding-right: 36px;
+        height: 44px;
+        border: 1px solid var(--primary-color);
+        border-radius: 6px;
+        padding: 0 36px 0 14px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        color: #333;
+        background: #FAFAFA;
+        outline: none;
         cursor: pointer;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+        appearance: none;
+        -webkit-appearance: none;
     }
 
     .select-wrapper::after {
@@ -133,7 +145,7 @@
         flex: 1;
         min-width: 0;
         height: 44px;
-        border: 0.2px solid var(--section-text-color);
+        border: 1px solid var(--primary-color);
         border-radius: 6px;
         padding: 0 14px;
         font-family: 'DM Sans', sans-serif;
@@ -163,7 +175,7 @@
     .specs-unit select {
         width: 100%;
         height: 44px;
-        border: 0.2px solid var(--section-text-color);
+        border: 1px solid var(--primary-color);
         border-radius: 6px;
         padding: 0 24px 0 10px;
         font-family: 'DM Sans', sans-serif;
@@ -191,6 +203,13 @@
         pointer-events: none;
     }
 
+    .preferences-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
     /* Textarea row */
     .textarea-row {
         width: 100%;
@@ -199,7 +218,7 @@
     .textarea-row textarea {
         width: 100%;
         height: 128px;
-        border: 0.2px solid var(--section-text-color);
+        border: 1px solid var(--primary-color);
         border-radius: 8px;
         padding: 12px 14px;
         font-family: 'DM Sans', sans-serif;
@@ -217,7 +236,7 @@
     }
 
     .textarea-row textarea:focus {
-        border-color: var(--primary-color);
+        border-color:0.4px var(--primary-color);
         background: #fff;
     }
 
@@ -396,33 +415,78 @@
 
     @media (max-width: 576px) {
         .quote-section {
-            padding: 30px 0 40px;
+            padding: 30px 0;
         }
         .quote-container {
-            padding: 0 5%;
+            padding: 0 9%;
         }
         .quote-form-card {
-            padding: 28px 20px;
+            padding: 10px 14px 16px;
+            border-radius: 18px;
         }
         .quote-form-title {
-            font-size: 26px;
+            font-size: 19px;
+            line-height: 1.3;
+            margin: 0 0 10px;
         }
-        .form-row,
-        .specs-row {
+        .form-section-label {
+            font-size: 14px;
+            margin: 11px 0 8px;
+        }
+        .form-row {
             flex-direction: column;
-            gap: 10px;
+            gap: 11px;
         }
         .form-row input,
-        .specs-row input,
         .textarea-row textarea {
             width: 100%;
+        }
+        .specs-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px 8px;
+        }
+        .specs-row input,
+        .specs-unit {
+            width: 100%;
+        }
+        .preferences-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px 8px;
+        }
+        .form-row input,
+        .form-row select,
+        .specs-row input,
+        .specs-unit select,
+        .preferences-grid select {
+            height: 37px;
+            padding-left: 12px;
+            font-size: 12px;
+        }
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            flex: 0 0 37px;
         }
         .specs-unit,
         .select-wrapper {
             width: 100%;
         }
+        .select-wrapper::after {
+            right: 10px;
+        }
+        .textarea-row textarea {
+            height: 66px;
+            padding: 11px 12px;
+            font-size: 12px;
+        }
+        .quote-btn-wrap {
+            margin-top: 13px;
+        }
         .quote-submit-btn {
-            width: 100%;
+            width: 90%;
+            height: 38px;
+            font-size: 13px;
         }
         .step-title {
             font-size: 16px;
@@ -464,7 +528,7 @@
 
             <!-- Packaging Preferences -->
             <p class="form-section-label">Packaging Preferences</p>
-            <div class="form-row" style="margin-bottom: 12px;">
+            <div class="preferences-grid">
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select Your Box Style</option>
@@ -493,8 +557,6 @@
                         <option>Kraft Natural</option>
                     </select>
                 </div>
-            </div>
-            <div class="form-row">
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select Paper Coating</option>
