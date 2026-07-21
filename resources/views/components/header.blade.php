@@ -550,12 +550,12 @@
     <!-- Desktop Navigation -->
     <div class="header-bottom">
         <ul class="header-nav">
-            <li><a href="#">Home</a></li>
-            <li><button class="mega-trigger" type="button" data-mega-menu="industry" aria-expanded="false">Boxes By Industry</button></li>
-            <li><button class="mega-trigger" type="button" data-mega-menu="material" aria-expanded="false">Boxes By Material</button></li>
-            <li><button class="mega-trigger" type="button" data-mega-menu="style" aria-expanded="false">Boxes By Style</button></li>
-            <li><button class="mega-trigger" type="button" data-mega-menu="supplies" aria-expanded="false">Packaging Supplies</button></li>
-            <li><a href="#">Blogs</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/all-category">All Categories</a></li>
+            <li><a href="/category">Category</a></li>
+            <li><a href="/product">Product</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/blog">Blogs</a></li>
         </ul>
     </div>
 
@@ -591,12 +591,12 @@
             </div>
 
             <ul class="mobile-nav">
-                <li><a href="#">Home</a></li>
-                <li class="has-dropdown"><a href="#">Boxes By Industry</a></li>
-                <li class="has-dropdown"><a href="#">Boxes By Material</a></li>
-                <li class="has-dropdown"><a href="#">Boxes By Style</a></li>
-                <li class="has-dropdown"><a href="#">Packaging Supplies</a></li>
-                <li><a href="#">Blogs</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/all-category">All Categories</a></li>
+                <li><a href="/category">Category</a></li>
+                <li><a href="/product">Product</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/blog">Blogs</a></li>
             </ul>
 
             <div class="mobile-contact">

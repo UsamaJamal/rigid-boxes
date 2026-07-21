@@ -300,6 +300,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 </head>
 <body class="contact-page">
+    @include('components.header')
     <main>
         <section class="contact-hero">
             <div class="container contact-container">
@@ -341,7 +342,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
             </div>
         </div></section>
     </main>
-    <x-footer />
+    @include('components.footer')
     <script>
         document.querySelectorAll('.contact-faq button').forEach((button) => {
             button.addEventListener('click', () => {

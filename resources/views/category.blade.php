@@ -538,6 +538,8 @@
         @include('components.cta')
 
     </main>
+    
+    @include('components.footer')
 
     <script>
         const customizeCardOrders = {

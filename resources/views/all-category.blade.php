@@ -955,6 +955,7 @@
     </style>
 </head>
 <body>
+    @include('components.header')
     <main class="industries-main">
         <!-- Header Section -->
         <section class="hero-section">
@@ -1140,6 +1141,6 @@
     </main>
 
     <!-- Footer Component -->
-    <x-footer />
+    @include('components.footer')
 </body>
 </html>

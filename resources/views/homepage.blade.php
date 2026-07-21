@@ -33,7 +33,7 @@
         }
 
         .custom-boxes-container {
-            max-width: 1240px;
+            max-width: 1440px;
             margin: 0 auto;
             padding: 0 100px;
             text-align: center;
@@ -1774,8 +1774,9 @@
         @include('components.content')
         @include('components.blogs')
         @include('components.faq')
-
     </main>
+
+    @include('components.footer')
 
     <script>
         function toggleMobileMenu() {

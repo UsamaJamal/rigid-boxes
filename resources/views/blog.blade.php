@@ -336,7 +336,9 @@
 @media (max-width: 620px) {
     .category-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }</style>
-</head><body><div class="page"><main>
+</head><body>
+@include('components.header')
+<div class="page"><main>
 <section class="hero"><div class="container"><div><div class="breadcrumb">Home <span>/</span> Blog</div><h1>Insights on Luxury Packaging &amp; Design</h1><p>Expert perspectives on packaging trends, sustainable materials, unboxing strategy and brand elevation - curated for discerning B2B leaders.</p></div></div></section>
 <nav class="categories" aria-label="Blog categories"><div class="category-row">
 <button class="filter active" data-filter="all"><img src="{{ asset('images/Vector (5).svg') }}" class="filter-icon" alt=""> All</button>
@@ -570,5 +572,5 @@ nextBtn.addEventListener('click', () => {
     .cta .button { padding: 10px 16px; font-size: 13px; }
 }
 </style>
-<x-footer />
+@include('components.footer')
 </body></html>

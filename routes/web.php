@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('homepage');
+});
+
+Route::get('/category', function () {
+    return view('category');
+});
+
 Route::get('/all-category', function () {
     return view('all-category');
 });

@@ -1613,6 +1613,7 @@
     </style>
 </head>
 <body>
+    @include('components.header')
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -2463,6 +2464,6 @@ function toggleFaq(element) {
             clickedControl.style.setProperty('border', '1px solid #8d4445', 'important');
         }, true);
     </script>
-    <x-footer />
+    @include('components.footer')
 </body>
 </html>
