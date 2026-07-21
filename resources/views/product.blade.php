@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Magnetic Closure Rigid Boxes - Product Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <style>
+        :root {
+            --primary-color: #8D4445;
+            --secondary-color: #F8EEEC;
+            --background-color: #FAF8F8;
+            --footer-color: #5F2D2F;
+            --header-gradient: linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%);
+            
+            --color-text-primary: #2D2D2D;
+            --color-text-secondary: #666666;
+            --color-text-tertiary: #999999;
+            --color-border: #E5E5E5;
+            --color-card-bg: #FFFFFF;
+            
+            --container-width: 1400px;
+            --margin-sides: 20px;
+        }
+
+        body, body * {
+            text-shadow: none !important;
+            -webkit-text-stroke: 0 !important;
+            filter: none !important;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #FAF8F8;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--margin-sides);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 20px 0 40px;
+            background-color: #FAF8F8;
+            margin-top: 20px; /* space for header */
+        }
+        
+        .hero-container {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        
+        .hero-images {
+            flex: 0 0 456px;
+            max-width: 456px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .hero-details {
+            flex: 0 1 50%;
+            max-width: 600px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: auto;
+            margin: 0; /* Left align */
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            border: 1px solid var(--primary-color);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .main-image img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .thumbnails {
+            display: flex;
+            gap: 15px;
+            justify-content: center; /* Center align */
+        }
+        
+        .thumb {
+            width: 90px;
+            height: 90px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumb::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 16px;
+            background-color: #F2F4F5;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .thumb:hover, .thumb.active {
+            border-color: var(--primary-color);
+        }
+        
+        .trust-badges-container {
+            background: #F2F2F2;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* Product Form */
+        .hero-form {
+            flex: 1.2;
+            padding: 0;
+        }
+
+        .hero-form h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .hero-form > p {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .section-label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .form-grid-pref {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        /* Mobile view handled in main media query below */
+        
+        .form-grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 80px;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .form-grid-2-upload {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .file-upload-wrap {
+            display: flex;
+        }
+        
+        .file-upload-wrap input[type="text"] {
+            border-radius: 6px 0 0 6px;
+            border-right: none;
+            background: #fff;
+            flex: 1;
+        }
+        
+        .file-upload-wrap .upload-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .input-wrap input, .input-wrap select, .form-control, textarea.form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s;
+            background: #fff;
+        }
+
+        /* Custom Select Arrow Styling */
+        .input-wrap select, select.form-control {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black' stroke='black' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 14px;
+            padding-right: 40px;
+        }
+
+        /* Hide number input spin buttons */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        
+        .input-wrap input:focus, .input-wrap select:focus, .form-control:focus, textarea.form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        /* Custom JS Select Styling */
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .custom-select-trigger {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            background: #fff;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            text-align: left;
+            color: var(--color-text-primary);
+        }
+
+        .custom-select-trigger::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            pointer-events: none;
+        }
+
+        .custom-select-trigger.open {
+            border-color: var(--primary-color);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .custom-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--primary-color);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            z-index: 99;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .custom-options.open {
+            display: block;
+        }
+
+        .custom-option {
+            padding: 10px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .custom-option:hover, .custom-option.selected {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--footer-color);
+        }
+
+        /* Features Badges Section */
+        .features-badges-section {
+            background-color: #EFEFEF;
+            padding: 20px 0 10px 0;
+            margin-top: -12px;
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 12px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features-badges-section .container {
+            padding: 0 40px;
+        }
+
+        .badges-horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            width: 139px;
+            height: 104px;
+            object-fit: contain;
+        }
+
+        .feature-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .badges-horizontal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badges-wrapper {
+            text-align: center;
+        }
+
+        .trust-badges-image {
+            width: 220px;
+            height: 36px;
+            display: inline-block;
+            object-fit: contain;
+        }
+
+        .features-badges-wrapper {
+            text-align: center;
+        }
+
+        .features-badges-image {
+            width: 220px;
+            height: 36px;
+            display: inline-block;
+            object-fit: contain;
+        }
+
+        .shipping-badge-wrapper {
+            text-align: center;
+        }
+
+        .shipping-badge-image {
+            width: 220px;
+            height: 36px;
+            display: inline-block;
+            object-fit: contain;
+        }
+
+        .fourth-badge-wrapper {
+            text-align: center;
+        }
+
+        .fourth-badge-image {
+            width: 220px;
+            height: 36px;
+            display: inline-block;
+            object-fit: contain;
+        }
+
+        .badge-label {
+            display: none;
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            background: transparent;
+            padding: 20px 0;
+            border-bottom: none;
+            border-top: none;
+            margin-bottom: 0px;
+        }
+        
+        .tabs-list {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            justify-content: center;
+            background: #FFFFFF;
+            border: 2px solid #8d4445;
+            border-radius: 50px;
+            padding: 8px;
+            max-width: fit-content;
+            margin: 0 auto;
+        }
+        
+        .tab-item {
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .tab-item.active {
+            background: #8d4445;
+            color: #fff;
+        }
+        
+        .tab-item:not(.active) {
+            color: #000000;
+            background: transparent;
+        }
+        
+        .tab-item:not(.active):hover {
+            color: var(--primary-color);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding-bottom: 60px;
+        }
+        
+        .content-section h2 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 40px;
+            letter-spacing: 0.02em;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        .content-section p {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 15px;
+            line-height: 40px;
+            text-align: justify;
+        }
+        
+        .content-section ul {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            list-style: disc;
+            margin-left: 20px;
+            color: var(--color-text-secondary);
+            line-height: 40px;
+            text-align: justify;
+        }
+
+        /* Specs Section */
+        .specs-section {
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin: 32px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 0.5px solid #8d4445;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+        }
+        
+        .specs-table tr:nth-child(odd) {
+            background-color: #F8EEEC;
+        }
+        
+        .specs-table tr:nth-child(even) {
+            background-color: #FFFFFF;
+        }
+        
+        .specs-table td {
+            padding: 15px 30px;
+            color: var(--color-text-secondary);
+        }
+        
+        .specs-table td:first-child {
+            font-weight: 700;
+
+            color: #000;
+
+        }
+
+        /* FAQs Section */
+        .faqs-section {
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin: 32px auto;
+        }
+        
+        .faq-item {
+            background: #FFFDFD;
+            border: 1px solid #D6D6D6;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            /* background: #8d4445; */
+            /* color: #fff; */
+        }
+        
+        .faq-answer {
+            padding: 20px 20px 20px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: --color-text-primary;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .faq-icon {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        /* Order Process Section */
+        .order-process-section {
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin: 32px auto 60px;
+        }
+        
+        .process-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .process-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 325px;
+            height: 220px;
+            background-color: #F8EEEC;
+            border-radius: 8px;
+            padding: 25px 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .process-card:hover {
+            background-color: #8C3A3A;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(140, 58, 58, 0.3);
+        }
+        
+        .process-card:hover .process-icon {
+            color: #FFFFFF;
+        }
+        
+        .process-card:hover h4 {
+            color: #FFFFFF;
+        }
+        
+        .process-card:hover p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .process-icon {
+            font-size: 35px;
+            color: #8C3A3A;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .process-card h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .process-card p {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 18px;
+            color: #000000;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        /* Custom Finishes Section */
+        .finishes-section {
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin: -30px auto 30px auto;
+        }
+        
+        .mobile-heading-break { display: none; }
+
+        .finishes-header {
+            margin-top: 60px;
+            text-align: center;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 30px;
+        }
+        
+        .finishes-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        
+        .finishes-image-container {
+            flex: 1.34;
+            height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .finishes-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #fff; /* Increased border to match the larger size visually */
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        .carousel-dot.active {
+            background: #fff;
+        }
+        
+        .finishes-details-box {
+            flex: 1;
+            height: 420px;
+            background-color: #F8EEEC;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 20px 30px;
+            box-sizing: border-box;
+        }
+        
+        .finishes-top-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 19.23px;
+            font-weight: 600;
+            line-height: 28.84px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .finishes-middle-list {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .finish-item-light {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            color: rgba(0,0,0,0.3);
+            font-weight: 500;
+        }
+        
+        .finish-item-dark {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 32px;
+            color: #000;
+            font-weight: 700;
+        }
+        
+        .finishes-bottom-nav {
+            display: flex;
+            gap: 15px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 18.46px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .finishes-bottom-nav span {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .finishes-bottom-nav span:not([style*="font-weight: 700"]) {
+            color: #000000;
+        }
+
+        /* Quote Request Section */
+        .quote-section {
+            max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
+            width: calc(100% - (var(--margin-sides) * 2));
+            margin: 0 auto 60px;
+            padding: 40px 0;
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background-image: radial-gradient(rgba(255,255,255,0.2) 2px, transparent 2px);
+            background-size: 15px 15px;
+            opacity: 0.5;
+        }
+
+        .quote-grid {
+            display: flex;
+            gap: 60px;
+            width: 100%;
+            padding: 0 40px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .quote-form {
+            flex: 1.5;
+            background: #fff;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote-form-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quote-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: #F8EEEC;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .quote-form h2 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .quote-form p {
+            color: var(--color-text-secondary);
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .quote-form label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .quote-form .form-control {
+            background-color: #FAFAFA;
+            border: 0.5px solid #8d4445;
+            font-size: 13px;
+        }
+        /* Apply the same border interaction to the product (hero) form. */
+        .hero-form .form-control {
+            border: 0.5px solid #8d4445;
+        }
+
+        .hero-form .form-control:focus {
+            border: 1px solid #8d4445 !important;
+        }
+
+        .hero-form .custom-select-trigger {
+            border: 0.5px solid #8d4445;
+        }
+
+        .hero-form .custom-select-trigger.open {
+            border: 1px solid #8d4445 !important;
+        }
+
+        .quote-form .form-control:focus {
+            border: 1px solid #8d4445 !important;
+        }
+
+        /* The Box Style select is rendered as this custom trigger by JavaScript. */
+        .quote-form .custom-select-trigger {
+            background-color: #FAFAFA;
+            border: 0.5px solid #8d4445;
+            font-size: 13px;
+        }
+
+        .quote-form .custom-select-trigger.open {
+            border: 1px solid #8d4445 !important;
+        }
+        .hero-form .form-control.is-active,
+        .quote-form .form-control.is-active,
+        .hero-form .custom-select-trigger.is-active,
+        .quote-form .custom-select-trigger.is-active,
+        .hero-form .form-control:focus,
+        .quote-form .form-control:focus,
+        .hero-form .custom-select-trigger.open,
+        .quote-form .custom-select-trigger.open {
+            border: 1px solid #8d4445 !important;
+            box-shadow: 0 0 0 3px rgba(141, 68, 69, 0.1);
+            outline: none;
+        }
+        
+        .btn-submit-quote {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            width: 250px;
+            margin: 10px auto 0;
+            display: inline-block;
+        }
+        
+        .quote-info {
+            flex: 1;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .quote-info h3 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .quote-title-line {
+            width: 60px;
+            height: 3px;
+            background-color: #fff;
+            margin-bottom: 40px;
+        }
+        
+        .quote-info img {
+            width: 100%;
+            max-width: 350px;
+            display: block;
+            margin: 0 auto 40px;
+        }
+        
+        .features-list {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-icon {
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .feature-item span {
+            font-size: 12px;
+            font-weight: 600;
+            max-width: 100px;
+            line-height: 1.4;
+        }
+
+        /* Related Products Section */
+        .related-products {
+            margin-top: -54px;
+            padding: 10px 0 20px;
+            background-color: #fff;
+        }
+        
+        .related-products .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--margin-sides);
+        }
+        
+        .related-products h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 100%;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .product-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 10px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Responsive Margins */
+        @media (min-width: 1600px) {
+            :root { --margin-sides: 100px; }
+            .hero-container {
+                gap: 50px;
+            }
+            .hero-images {
+                max-width: 600px;
+            }
+        }
+        @media (max-width: 1440px) {
+            :root { --margin-sides: 80px; }
+        }
+        @media (max-width: 1200px) and (min-width: 1025px) {
+            :root { --margin-sides: 60px; }
+            .hero-container {
+                gap: 30px;
+            }
+            .hero-images {
+                max-width: 450px;
+            }
+        }
+        @media (max-width: 1024px) {
+            :root { --margin-sides: 60px; }
+            .hero-container {
+                gap: 25px;
+            }
+            .hero-images {
+                max-width: 400px;
+            }
+        }
+        @media (max-width: 768px) {
+            :root { --margin-sides: 20px; }
+            .hero-container {
+                gap: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            :root { --margin-sides: 15px; }
+        }
+
+        @media (max-width: 991px) {
+            .hero-container, .finishes-grid, .quote-grid {
+                flex-direction: column;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 767px) {
+            .content-section, .specs-section, .faqs-section {
+                width: calc(100% - (var(--margin-sides) * 2)); margin-left: auto; margin-right: auto;
+                margin-bottom: 10px !important;
+            }
+            .content-section h2 {
+                text-align: left;
+            }
+            .content-section .considerations-heading {
+                font-size: 21px;
+                line-height: 32px;
+                letter-spacing: 0;
+            }
+            .finishes-section {
+                margin-top: 0;
+            }
+            .mobile-heading-break { display: none; }
+
+        .finishes-header {
+                margin: 24px 0 18px;
+                font-size: 20px;
+                line-height: 24px;
+                max-width: 260px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .finishes-grid {
+                gap: 20px;
+            }
+            .finishes-details-box {
+                order: -1;
+                flex: none;
+                width: 100%;
+                height: auto;
+                padding: 0;
+                background: transparent;
+                border-radius: 0;
+            }
+            .finishes-top-text,
+            .finishes-middle-list {
+                display: none;
+            }
+            .finishes-bottom-nav {
+                display: flex;
+                flex-direction: row;
+                gap: 6px;
+                width: 100%;
+                margin: 0;
+                overflow-x: auto;
+                padding: 0 0 2px;
+                scrollbar-width: none;
+            }
+            .finishes-bottom-nav::-webkit-scrollbar {
+                display: none;
+            }
+            .finishes-bottom-nav span {
+                flex: 0 0 142px;
+                width: 142px;
+                padding: 11px 10px;
+                font-size: 12px;
+                line-height: 14px;
+            }
+            .finishes-image-container {
+                order: 1;
+                flex: none;
+                width: 100%;
+                aspect-ratio: 1.34;
+                height: auto;
+                border-radius: 16px;
+            }
+            .carousel-dots {
+                bottom: 10px;
+                left: 25px;
+                gap: 3px;
+            }
+            .carousel-dot {
+                width: 7px;
+                height: 7px;
+                border-width: 1px;
+            }
+            .main-image {
+                height: auto;
+                aspect-ratio: 1;
+            }
+            .thumbnails {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .thumb {
+                width: 65px;
+                height: 65px;
+            }
+            .form-row, .form-grid-3, .form-grid-2-upload {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .hero-form > p {
+                font-size: 13px;
+                line-height: 1.55;
+            }
+
+            #readMoreBtnLipstick {
+                font-size: 12px !important;
+                margin-left: 3px !important;
+                white-space: nowrap;
+            }
+            .form-grid-4, .form-grid-pref {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            .form-row-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+            .badges-horizontal {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 28px 16px;
+                align-items: center;
+            }
+            .badges-horizontal > div {
+                min-width: 0;
+            }
+            .badges-horizontal > div {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                text-align: left;
+            }
+            .badges-horizontal .badge-icon {
+                display: block;
+                width: 30px;
+                height: 30px;
+                flex: 0 0 30px;
+                object-fit: cover;
+                object-position: left center;
+            }
+            .badges-horizontal .badge-label {
+                display: block;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 14px;
+                color: #4D4D4D;
+                white-space: nowrap;
+            }
+            
+            .feature-item {
+                display: flex;
+                flex-direction: row !important;
+                align-items: center;
+                text-align: left;
+                gap: 12px;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .feature-icon {
+                width: 40px !important;
+                height: 40px !important;
+                flex-shrink: 0;
+            }
+            
+            .feature-text {
+                font-size: 16px;
+                flex: 1;
+            }
+            
+            .features-badges-section .container {
+                padding: 0 10px;
+            }
+            .tabs-section {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                padding: 20px 0 20px 20px;
+            }
+            .tabs-section {
+                scroll-snap-type: x mandatory;
+            }
+            .tabs-list .tab-item {
+                scroll-snap-align: center;
+            }
+            /* Final mobile tab styling */
+            .tabs-section .container {
+                border: 1px solid #8A8A8A;
+                border-radius: 28px;
+                background: #FFFFFF;
+            }
+            .tabs-list .tab-item.active {
+                background: #8D4445;
+                color: #FFFFFF;
+            }
+            /* Keep the tab border fixed while only its options scroll. */
+            .tabs-section {
+                overflow: hidden;
+                padding: 20px 0;
+            }
+            .tabs-section .container {
+                width: calc(100% - (var(--margin-sides) * 2));
+                margin: 0 auto;
+                padding: 0;
+                overflow-x: auto;
+                border: 2px solid #8d4445;
+                border-radius: 50px;
+                scrollbar-width: none;
+            }
+            .tabs-section .container::-webkit-scrollbar {
+                display: none;
+            }
+            .tabs-list {
+                border: 0;
+                border-radius: 0;
+                background: transparent;
+            }
+            .tabs-section::-webkit-scrollbar {
+                display: none;
+            }
+            .tabs-section .container {
+                padding: 0;
+            }
+            .tabs-list {
+                display: inline-flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                padding: 4px;
+                width: max-content;
+                margin: 0;
+                gap: 8px;
+            }
+            .tabs-list::-webkit-scrollbar {
+                display: none;
+            }
+            .tab-item {
+                flex: 0 0 auto;
+                padding: 10px 22px;
+                font-size: 15px;
+                white-space: nowrap;
+            }
+
+            .finishes-middle-list {
+                flex-direction: row;
+                overflow-x: hidden;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                width: 100%;
+                margin: 20px 0;
+            }
+            .finish-item-light {
+                display: block;
+                color: #A0A0A0;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+            .finish-item-dark {
+                color: #000;
+                font-weight: 700;
+                font-size: 15px;
+                border-bottom: 3px solid #8c4446;
+                padding-bottom: 5px;
+                white-space: nowrap;
+            }
+            .finishes-image-container, .finishes-details-box {
+                height: auto;
+            }
+            .finishes-bottom-nav {
+                flex-direction: column;
+                gap: 10px;
+                border-top: none;
+                padding-top: 0;
+                margin-top: 10px;
+            }
+            .finishes-bottom-nav span {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+                border: 1px solid #e0d0d0;
+                border-radius: 6px;
+                background-color: transparent;
+                font-weight: 600;
+                font-size: 12px;
+                color: #333;
+                text-transform: uppercase;
+                box-sizing: border-box;
+            }
+            .finishes-bottom-nav span.active-nav {
+                background-color: #8c4446;
+                color: #fff;
+                border-color: #8c4446;
+            }
+            /* Extend the tab frame beyond the right edge, then clip it. */
+            .tabs-section .container {
+                width: 140% !important;
+                margin-left: 10px !important;
+                margin-right: 0 !important;
+            }
+            .mobile-heading-break { display: block; }
+
+            /* Figma mobile finishes layout */
+            .finishes-details-box {
+                order: -1;
+                flex: none;
+                width: 100%;
+                padding: 0;
+                background: transparent;
+                border-radius: 0;
+            }
+            .finishes-top-text,
+            .finishes-middle-list {
+                display: none !important;
+            }
+            .finishes-bottom-nav {
+                display: flex;
+                flex-direction: row;
+                gap: 6px;
+                width: 100%;
+                margin: 0;
+                overflow-x: auto;
+                padding: 0 0 2px;
+                scrollbar-width: none;
+            }
+            .finishes-bottom-nav::-webkit-scrollbar {
+                display: none;
+            }
+            .finishes-bottom-nav span {
+                flex: 0 0 142px;
+                width: 142px;
+                padding: 11px 10px;
+                font-size: 12px;
+                line-height: 14px;
+            }
+            .finishes-image-container {
+                order: 1;
+                flex: none;
+                width: 100%;
+                aspect-ratio: 1.34;
+                height: auto;
+                border-radius: 16px;
+            }
+            .carousel-dots {
+                bottom: 10px;
+                left: 25px;
+                gap: 3px;
+            }
+            .carousel-dot {
+                width: 7px;
+                height: 7px;
+                border-width: 1px;
+            }
+            .quote-form-header p {
+                display: none;
+            }
+
+            .quote-icon-box {
+                display: none;
+            }
+
+            .mobile-quote-btn {
+                display: none !important;
+            }
+            .products-grid {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+                gap: 15px;
+                padding-bottom: 5px;
+            }
+            .products-grid::-webkit-scrollbar {
+                display: none;
+            }
+            .product-card {
+                flex: 0 0 calc(50% - 7.5px);
+                width: auto;
+                max-width: none;
+            }
+            .product-image {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+                margin-bottom: 10px;
+            }
+            .product-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain !important;
+            }
+            .quote-info {
+                display: none;
+            }
+            .quote-grid {
+                padding: 0 15px;
+                gap: 30px;
+            }
+            .quote-form {
+                padding: 25px 20px;
+            }
+        }
+
+
+
+
+        /* Keep the quote form balanced at 125% browser zoom. */
+        @media (min-width: 768px) and (max-width: 1366px) {
+            .quote-form-header {
+                gap: 10px;
+            }
+            .quote-form h2 {
+                font-size: 20px;
+                white-space: nowrap;
+            }
+            .quote-form .form-row {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 15px;
+            }
+            .quote-form .form-row.form-row-2col {
+                grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            }
+            .quote-form .form-row .form-group {
+                min-width: 0;
+            }
+            .quote-form label {
+                white-space: nowrap;
+            }
+            .quote-form .form-control {
+                min-width: 0;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-container">
+            <div class="hero-images">
+                <div class="main-image">
+                    <img src="{{ asset('images/lipstick-box.png') }}" alt="Lipstick Box" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div class="thumbnails">
+                    <div class="thumb active">
+                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                    </div>
+                    <div class="thumb">
+                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                    </div>
+                    <div class="thumb">
+                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                    </div>
+                    <div class="thumb">
+                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <img src="{{ asset('images/Container (Customized Packaging Boxes for Skin Care Products - Box Agency).png') }}" alt="Reviews" style="width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="hero-form">
+                <h1>Lipstick Boxes</h1>
+                <p>Custom Lipstick Boxes are crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes. Fully customizable in size, style, and design, they help create a lasting impression and enhance your product's shelf appeal<span id="dotsLipstick">... </span><span id="readMoreBtnLipstick" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; margin-left: 6px; text-shadow: none; -webkit-text-stroke: 0;">READ MORE</span><span id="moreLipstick" style="display: none;"></span></p>
+                
+                <form action="#">
+                    <div class="form-section">
+                        <span class="section-label">Contact Information</span>
+                        <div class="form-grid-3">
+                            <input type="text" class="form-control" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                            <input type="tel" class="form-control" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <span class="section-label">Box Specifications</span>
+                        <div class="form-grid-4">
+                            <input type="number" class="form-control" placeholder="Width">
+                            <input type="number" class="form-control" placeholder="Length">
+                            <input type="number" class="form-control" placeholder="Depth">
+                            <select class="form-control">
+                                <option>mm</option>
+                                <option>cm</option>
+                                <option>inch</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <span class="section-label">Packaging Preferences</span>
+                        <div class="form-grid-pref">
+                            <select class="form-control" id="pref-box-style">
+                                <option>Select Box Style</option>
+                            </select>
+                            <select class="form-control" id="pref-paper-stock">
+                                <option>Select Paper Stock</option>
+                            </select>
+                            <select class="form-control">
+                                <option>Select Color</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <span class="section-label">Production Details</span>
+                        <div class="form-grid-2-upload">
+                            <input type="number" class="form-control" placeholder="Quantity">
+                            <div class="file-upload-wrap">
+                                <input type="text" class="form-control" placeholder="No File Choosen" readonly>
+                                <button type="button" class="upload-btn">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <span class="section-label">Additional Details</span>
+                        <textarea class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                    </div>
+
+                    <button type="button" class="btn-primary">Get a Quote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Badges Section -->
+    <section class="features-badges-section">
+        <div class="container">
+            <div class="badges-horizontal">
+                <div class="trust-badges-wrapper">
+                    <img src="{{ asset('images/container (1).png') }}" alt="No Die & Plate Charges" class="trust-badges-image badge-icon">
+                    <span class="badge-label">No Die &amp; Plate<br>Charges</span>
+                </div>
+                <div class="features-badges-wrapper">
+                    <img src="{{ asset('images/container (2).png') }}" alt="Free Graphic Designing" class="features-badges-image badge-icon">
+                    <span class="badge-label">Free Graphic<br>Designing</span>
+                </div>
+                <div class="shipping-badge-wrapper">
+                    <img src="{{ asset('images/container (3).png') }}" alt="Quick Turnaround Time" class="shipping-badge-image badge-icon">
+                    <span class="badge-label">Quick Turnaround<br>Time</span>
+                </div>
+                <div class="fourth-badge-wrapper">
+                    <img src="{{ asset('images/container (4).png') }}" alt="Free Shipping" class="fourth-badge-image badge-icon">
+                    <span class="badge-label">Free Shipping</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <div class="tabs-section">
+        <div class="container">
+            <ul class="tabs-list">
+                <li class="tab-item active" onclick="switchTab('description')" id="tab-btn-description">Description</li>
+                <li class="tab-item" onclick="switchTab('specs')" id="tab-btn-specs">Product Specifications</li>
+                <li class="tab-item" onclick="switchTab('faqs')" id="tab-btn-faqs">FAQs</li>
+                <li class="tab-item" onclick="switchTab('order')" id="tab-btn-order">Order Process</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <section class="content-section container" id="content-description">
+        <h2>Everything you need to know about custom boxes</h2>
+        <p>Custom packaging is one of the most powerful tools a brand can use to create a lasting impression. Research shows that 72% of consumers say that packaging design influences their purchase decision, and 40% share photos of exciting unboxing experiences on social media.</p>
+        
+        <p>At KayPackaging, we believe every business — no matter the size — deserves packaging that reflects the quality of what's inside. Whether you're a solo founder shipping your first 10 orders or a growing brand sending thousands of packages per week, our custom box solutions are built to scale with you.</p>
+
+        <h2 class="considerations-heading">What to consider when choosing custom packaging:</h2>
+        <ul>
+            <li>Box style — mailer, rigid, folding carton, or corrugated shipping box depending on product type and fragility</li>
+            <li>Size — always measure your product first, then add 1-2cm clearance on each side for a snug fit</li>
+            <li>Material — E-flute corrugated for mailers, SBS paperboard for cosmetics, kraft for eco-friendly positioning</li>
+            <li>Finish — matte gives a premium feel, gloss increases vibrancy, soft touch adds texture, foil elevates luxury perception</li>
+            <li>Quantity — higher quantities dramatically reduce per-unit cost; order samples first to validate before bulk printing</li>
+        </ul>
+        
+        <div style="text-align: left; margin-top: 20px; margin-left: 20px;">
+            <span id="readMoreBtn" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer;">READ MORE</span>
+        </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section class="specs-section" id="content-specs" style="display: none;">
+        <table class="specs-table">
+            <tr>
+                <td>Box Style</td>
+                <td>Lipstick Boxes</td>
+            </tr>
+            <tr>
+                <td>Retail Boxes</td>
+                <td>All Custom Sizes & Shapes</td>
+            </tr>
+            <tr>
+                <td>MOQ</td>
+                <td>Starting from 100 Boxes</td>
+            </tr>
+            <tr>
+                <td>Paper Stock</td>
+                <td>10pt to 28pt (60lb to 400lb) Eco-Friendly Kraft, E-flute Corrugated, Bux Board, Cardstock</td>
+            </tr>
+            <tr>
+                <td>Printing</td>
+                <td>Digital (Standard and HD Print), Lithography, CMYK, CMYK + 1 PMS color, CMYK + 2 PMS colors</td>
+            </tr>
+            <tr>
+                <td>Finishing</td>
+                <td>Gloss Lamination, Matte Lamination, Gloss AQ, Gloss UV, Matte UV, Spot UV, Embossing, Foiling</td>
+            </tr>
+            <tr>
+                <td>Included Options</td>
+                <td>Die Cutting, Gluing, Scored, Perforation</td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td>Flat View, 3D Mock-up, Physical Sampling (On request)</td>
+            </tr>
+            <tr>
+                <td>Turnaround</td>
+                <td>12 - 16 days</td>
+            </tr>
+            <tr>
+                <td>Shipping</td>
+                <td>Flat</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section" id="content-faqs" style="display: none;">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What type of retail boxes are best for luxury product packaging?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Rigid boxes and premium folding cartons are typically best for luxury products, offering high durability and a premium unboxing experience.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Which retail boxes offer the most protect for fragile items?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Corrugated boxes provide the best protection for fragile items due to their fluted inner layer which absorbs shocks.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Do retail boxes have customizable shapes and structures?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Yes! We can create custom die-cut shapes and unique structures tailored specifically to your product's dimensions.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What printing customization are available for retail boxes?</span>
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>We offer full CMYK printing, Pantone matching, foil stamping, embossing, debossing, and UV spot treatments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Process Section -->
+    <section class="order-process-section" id="content-order" style="display: none;">
+        <div class="process-cards">
+            <div class="process-card">
+                <div class="process-icon"><i class="fas fa-gift"></i></div>
+                <h4>Customize Your Packaging</h4>
+                <p>Choose from our extensive packaging solutions and personalize them with a variety of options to bring your ideal packaging to life.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon"><i class="fas fa-clipboard-list"></i></div>
+                <h4>Request a Quote</h4>
+                <p>After customizing your packaging, simply request a quote, and our packaging specialists will review your submission.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon"><i class="fas fa-headset"></i></div>
+                <h4>Expert Consultation</h4>
+                <p>Get expert consultation on your quote to reduce costs, improve efficiency, and minimize environmental impact.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-icon"><i class="fas fa-truck-fast"></i></div>
+                <h4>Production & Delivery</h4>
+                <p>After finalizing the details, we'll handle the entire production and shipping process. Just sit back and wait for your packaging to arrive!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finishes Section -->
+    <section class="finishes-section">
+        <h2 class="finishes-header">Custom Finishes <br class="mobile-heading-break">For Premium Feel</h2>
+        <div class="finishes-grid">
+            <div class="finishes-image-container">
+                <img src="{{ asset('images/Container (5).png') }}" alt="Custom Finishes">
+                <div class="carousel-dots">
+                    <div class="carousel-dot active"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                    <div class="carousel-dot"></div>
+                </div>
+            </div>
+            <div class="finishes-details-box">
+                <div class="finishes-top-text">Finishes We Offer</div>
+                <div class="finishes-middle-list">
+                    <div class="finish-item-light">Matte Lamination</div>
+                    <div class="finish-item-dark">Drip Off</div>
+                    <div class="finish-item-light">Spot Gloss</div>
+                </div>
+                <div class="finishes-bottom-nav">
+                    <span class="active-nav">Materials</span>
+                    <span>Printing Methods</span>
+                    <span>Inks</span>
+                    <span>Finishing</span>
+                    <span>Add-ons</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+        <div class="quote-grid">
+            <div class="quote-form">
+                <div class="quote-form-header">
+                    <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="Sample Kit" style="width: 50px; height: 50px;"></div>
+                    <div>
+                        <h2>Request A Sample Kit</h2>
+                        <p>Fill out the form below and we'll send you a sample kit tailored to your needs.</p>
+                    </div>
+                </div>
+                
+                <form action="#">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" class="form-control" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="tel" class="form-control" placeholder="Phone number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" class="form-control" placeholder="Company">
+                        </div>
+                        <div class="form-group">
+                            <label>Website</label>
+                            <input type="text" class="form-control" placeholder="Website">
+                        </div>
+                        <div class="form-group">
+                            <label>Physical Address</label>
+                            <input type="text" class="form-control" placeholder="Address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row form-row-2col">
+                        <div class="form-group" style="flex: 1.5;">
+                            <label>Box Style *</label>
+                            <select class="form-control" id="quote-box-style">
+                                <option>Select style</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity *</label>
+                            <input type="number" class="form-control" placeholder="Enter quantity">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label>Message</label>
+                        <textarea class="form-control" rows="4" placeholder="Enter your message"></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="button" class="btn-submit-quote">Get Free Quote</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="quote-info">
+                <h3>Premium Packaging<br>Starts Here</h3>
+                <div class="quote-title-line"></div>
+                
+                <!-- Using the specific image requested by user -->
+                <img src="{{ asset('images/Jul 3, 2026, 03_38_53 PM 1.png') }}" alt="Premium Box">
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality" style="width: 139px; height: 104px;"></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs" style="width: 139px; height: 104px;"></div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery" style="width: 139px; height: 104px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <h2>Related Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('images/listic-boxes.png') }}" alt="Lipstick Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4>Lipstick Boxes</h4>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('images/Background_Border.png') }}" alt="Serum Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4>Serum Boxes</h4>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('images/perfume-box.png') }}" alt="Perfume Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4>Perfume Boxes</h4>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('images/skincare-box.png') }}" alt="Skincare Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h4>Skincare Boxes</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchTab(tabId) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            if (document.getElementById('tab-btn-' + tabId)) {
+                document.getElementById('tab-btn-' + tabId).classList.add('active');
+                if (window.matchMedia('(max-width: 767px)').matches) {
+                    const tabsScroller = document.querySelector('.tabs-section .container');
+                    const selectedTab = document.getElementById('tab-btn-' + tabId);
+                    if (tabsScroller && selectedTab) {
+                        tabsScroller.scrollTo({
+                            left: selectedTab.offsetLeft - (((window.innerWidth - tabsScroller.getBoundingClientRect().left) - selectedTab.offsetWidth) / 2),
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+            
+            // Hide all content sections
+            if (document.getElementById('content-description')) document.getElementById('content-description').style.display = 'none';
+            if (document.getElementById('content-specs')) document.getElementById('content-specs').style.display = 'none';
+            if (document.getElementById('content-faqs')) document.getElementById('content-faqs').style.display = 'none';
+            if (document.getElementById('content-order')) document.getElementById('content-order').style.display = 'none';
+            
+            // Show the target content
+            if (document.getElementById('content-' + tabId)) {
+                document.getElementById('content-' + tabId).style.display = 'block';
+            }
+        }
+function toggleFaq(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('.faq-icon');
+
+    // Close all other FAQs
+    document.querySelectorAll('.faq-answer').forEach(item => {
+        if (item !== answer) {
+            item.style.display = 'none';
+
+            const header = item.previousElementSibling;
+            const headerIcon = header.querySelector('.faq-icon');
+
+            header.style.backgroundColor = '';
+            header.style.color = '';
+            headerIcon.textContent = '+';
+            headerIcon.style.color = '';
+        }
+    });
+
+    // Toggle current FAQ
+    if (answer.style.display === 'none' || answer.style.display === '') {
+        answer.style.display = 'block';
+
+        element.style.backgroundColor = '#8d4445';
+        element.style.color = 'white';
+
+        icon.textContent = '−';
+        icon.style.color = 'white';
+    } else {
+        answer.style.display = 'none';
+
+        element.style.backgroundColor = '';
+        element.style.color = '';
+
+        icon.textContent = '+';
+        icon.style.color = '';
+    }
+}
+
+        // READ MORE / READ LESS toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const readMoreBtn = document.getElementById('readMoreBtn');
+            if (readMoreBtn) {
+                readMoreBtn.addEventListener('click', function() {
+                    if (this.textContent === 'READ MORE') {
+                        this.textContent = 'READ LESS';
+                    } else {
+                        this.textContent = 'READ MORE';
+                    }
+                });
+            }
+            
+            // Lipstick Boxes READ MORE toggle
+            const readMoreBtnLipstick = document.getElementById('readMoreBtnLipstick');
+            const dotsLipstick = document.getElementById('dotsLipstick');
+            const moreLipstick = document.getElementById('moreLipstick');
+            
+            if (readMoreBtnLipstick && dotsLipstick && moreLipstick) {
+                readMoreBtnLipstick.addEventListener('click', function() {
+                    if (dotsLipstick.style.display === 'none') {
+                        dotsLipstick.style.display = 'inline';
+                        moreLipstick.style.display = 'none';
+                        this.textContent = 'READ MORE';
+                    } else {
+                        dotsLipstick.style.display = 'none';
+                        moreLipstick.style.display = 'inline';
+                        this.textContent = 'READ LESS';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Finishes Tab and Carousel Script -->
+    <script>
+        // Finishes data for each tab with multiple products and their images
+        const finishesData = {
+            'Materials': {
+                title: 'Materials We Offer',
+                items: [
+                    { name: 'Cardboard', active: false, image: '{{ asset("images/Background+Border.png") }}' },
+                    { name: 'Corrugated', active: false, image: '{{ asset("images/Group 1000006173.png") }}' },
+                    { name: 'Kraft Paper', active: true, image: '{{ asset("images/perfume-box.png") }}' },
+                    { name: 'Rigid Board', active: false, image: '{{ asset("images/Container (4).png") }}' },
+                    { name: 'Art Paper', active: false, image: '{{ asset("images/lipstick-box.png") }}' }
+                ]
+            },
+            'Printing Methods': {
+                title: 'Printing Methods',
+                items: [
+                    { name: 'Offset Printing', active: false, image: '{{ asset("images/Container (5).png") }}' },
+                    { name: 'Digital Printing', active: true, image: '{{ asset("images/Gift-Boxes.webp") }}' },
+                    { name: 'Screen Printing', active: false, image: '{{ asset("images/Container (1).png") }}' },
+                    { name: 'Flexography', active: false, image: '{{ asset("images/Container (2).png") }}' },
+                    { name: 'Letterpress', active: false, image: '{{ asset("images/Figure.png") }}' }
+                ]
+            },
+            'Inks': {
+                title: 'Inks Available',
+                items: [
+                    { name: 'CMYK', active: false, image: '{{ asset("images/Container (3).png") }}' },
+                    { name: 'Pantone (PMS)', active: true, image: '{{ asset("images/Container.png") }}' },
+                    { name: 'Metallic Inks', active: false, image: '{{ asset("images/Background+Border (2).png") }}' },
+                    { name: 'Soy-Based Ink', active: false, image: '{{ asset("images/Group 1000006247.png") }}' },
+                    { name: 'UV Inks', active: false, image: '{{ asset("images/Jul 3, 2026, 03_38_53 PM 1.png") }}' }
+                ]
+            },
+            'Finishing': {
+                title: 'Finishing Options',
+                items: [
+                    { name: 'Matte Lamination', active: false, image: '{{ asset("images/Rectangle 8395.png") }}' },
+                    { name: 'Drip Off', active: true, image: '{{ asset("images/Container (5).png") }}' },
+                    { name: 'Spot Gloss', active: false, image: '{{ asset("images/Container (Customized Packaging Boxes for Skin Care Products - Box Agency).png") }}' },
+                    { name: 'Aqueous Coating', active: false, image: '{{ asset("images/Container (1).png") }}' },
+                    { name: 'Soft Touch', active: false, image: '{{ asset("images/Container (2).png") }}' }
+                ]
+            },
+            'Add-ons': {
+                title: 'Add-ons Available',
+                items: [
+                    { name: 'Foil Stamping', active: false, image: '{{ asset("images/Container (3).png") }}' },
+                    { name: 'Embossing', active: true, image: '{{ asset("images/Container (4).png") }}' },
+                    { name: 'Debossing', active: false, image: '{{ asset("images/Figure.png") }}' },
+                    { name: 'Die Cutting', active: false, image: '{{ asset("images/Gift-Boxes.webp") }}' },
+                    { name: 'Window Patching', active: false, image: '{{ asset("images/Background+Border.png") }}' }
+                ]
+            }
+        };
+
+        // Tab switching functionality with scroll and image sync
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.finishes-bottom-nav span');
+            const navContainer = document.querySelector('.finishes-bottom-nav');
+            const titleElement = document.querySelector('.finishes-top-text');
+            const itemsContainer = document.querySelector('.finishes-middle-list');
+            const carouselImage = document.querySelector('.finishes-image-container img');
+            const carouselDots = document.querySelectorAll('.carousel-dot');
+            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons'];
+            let currentTabIndex = 0;
+            let currentItemIndex = 2; // Start with middle item active
+
+            // Function to update image based on active product
+            function updateProductImage(imageUrl, dotIndex = null) {
+                if (carouselImage && imageUrl) {
+                    carouselImage.style.opacity = '0';
+                    setTimeout(() => {
+                        carouselImage.src = imageUrl;
+                        carouselImage.style.opacity = '1';
+                    }, 500);
+                }
+
+                // Update dots if index provided
+                if (dotIndex !== null) {
+                    carouselDots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === dotIndex);
+                    });
+                }
+            }
+
+            // Function to update tab content
+            function updateTabContent(tabIndex, scrollDirection = 0) {
+                // Remove active class from all tabs
+                navItems.forEach(nav => {
+                    nav.classList.remove('active-nav');
+                    nav.style.fontWeight = '';
+                    nav.style.color = '';
+                });
+
+                // Add active class to current tab
+                navItems[tabIndex].classList.add('active-nav');
+                navItems[tabIndex].style.fontWeight = '700';
+                navItems[tabIndex].style.color = '#fff';
+                if (navContainer) {
+                    navContainer.scrollTo({
+                        left: navItems[tabIndex].offsetLeft - ((navContainer.clientWidth - navItems[tabIndex].offsetWidth) / 2),
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Get the tab name
+                const tabName = tabNames[tabIndex];
+
+                // Update content based on tab
+                if (finishesData[tabName]) {
+                    const data = finishesData[tabName];
+                    
+                    // Update title
+                    titleElement.textContent = data.title;
+
+                    // If scrolling within same tab, rotate the active item
+                    if (scrollDirection !== 0 && currentTabIndex === tabIndex) {
+                        // Rotate items
+                        if (scrollDirection > 0) {
+                            currentItemIndex = (currentItemIndex + 1) % data.items.length;
+                        } else {
+                            currentItemIndex = (currentItemIndex - 1 + data.items.length) % data.items.length;
+                        }
+                    } else if (currentTabIndex !== tabIndex) {
+                        // When changing tabs, reset to index 0
+                        currentItemIndex = 0;
+                    }
+                    
+                    // Update active states in data
+                    data.items.forEach((item, idx) => {
+                        item.active = (idx === currentItemIndex);
+                    });
+
+                    // Update the product image for active item
+                    const activeItem = data.items[currentItemIndex];
+                    if (activeItem && activeItem.image) {
+                        updateProductImage(activeItem.image, currentItemIndex);
+                    }
+
+                    // Update items with animation
+                    itemsContainer.style.opacity = '0';
+                    setTimeout(() => {
+                        itemsContainer.innerHTML = '';
+                        
+                        // Show only 3 items at a time (before, current, after)
+                        const visibleItems = [];
+                        const visibleIndexes = [];
+                        for (let i = -1; i <= 1; i++) {
+                            const index = (currentItemIndex + i + data.items.length) % data.items.length;
+                            visibleItems.push({...data.items[index]}); // Create a copy
+                            visibleIndexes.push(index);
+                        }
+                        
+                        visibleItems.forEach((item, relativeIndex) => {
+                            const itemDiv = document.createElement('div');
+                            // Only the middle item (index 1) should be dark
+                            itemDiv.className = (relativeIndex === 1) ? 'finish-item-dark' : 'finish-item-light';
+                            itemDiv.textContent = item.name;
+                            
+                            // Add click handler to ALL items to center them when clicked
+                            itemDiv.style.cursor = 'pointer';
+                            itemDiv.addEventListener('click', () => {
+                                // Get the actual index from our visibleIndexes array
+                                const actualIndex = visibleIndexes[relativeIndex];
+                                currentItemIndex = actualIndex;
+                                updateTabContent(currentTabIndex);
+                                
+                                // Reset autoplay timer
+                                clearInterval(autoplayTimer);
+                                autoplayTimer = setInterval(advanceCarousel, 3000);
+                            });
+                            
+                            itemsContainer.appendChild(itemDiv);
+                        });
+                        
+                        itemsContainer.style.opacity = '1';
+                    }, 500);
+                }
+                
+                currentTabIndex = tabIndex;
+            }
+
+            // Click event for tabs
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    updateTabContent(index);
+                });
+            });
+
+            // Autoplay Carousel Logic
+            let autoplayTimer;
+            
+            function advanceCarousel() {
+                const tabName = tabNames[currentTabIndex];
+                const data = finishesData[tabName];
+                
+                if (currentItemIndex + 1 >= data.items.length) {
+                    // Switch to next tab automatically
+                    let nextTabIndex = (currentTabIndex + 1) % tabNames.length;
+                    updateTabContent(nextTabIndex);
+                } else {
+                    // Go to next item in current tab
+                    updateTabContent(currentTabIndex, 1);
+                }
+            }
+
+            // Start auto play
+            autoplayTimer = setInterval(advanceCarousel, 3000);
+            
+            // Pause on hover
+            const heroFormElement = document.querySelector('.hero-form');
+            if (itemsContainer) {
+                itemsContainer.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+                itemsContainer.addEventListener('mouseleave', () => autoplayTimer = setInterval(advanceCarousel, 3000));
+            }
+
+            // Manual dot click to change product directly
+            carouselDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const tabName = tabNames[currentTabIndex];
+                    if (finishesData[tabName] && finishesData[tabName].items[index]) {
+                        currentItemIndex = index;
+                        updateTabContent(currentTabIndex);
+                    }
+                });
+            });
+
+            // Add smooth transition for items and image
+            if (itemsContainer) {
+                itemsContainer.style.transition = 'opacity 0.5s ease';
+            }
+            if (carouselImage) {
+                carouselImage.style.transition = 'opacity 0.5s ease';
+            }
+
+            // Keep the clicked control visibly active in both page forms.
+            const formControlSelector = '.hero-form .form-control, .quote-form .form-control, .hero-form .custom-select-trigger, .quote-form .custom-select-trigger';
+            document.addEventListener('click', function(event) {
+                const activeControl = event.target.closest(formControlSelector);
+                if (!activeControl) return;
+
+                document.querySelectorAll(formControlSelector).forEach(control => {
+                    control.classList.remove('is-active');
+                });
+                activeControl.classList.add('is-active');
+            }, true);
+            // Custom JS Select Implementation
+            document.querySelectorAll('select.form-control').forEach(select => {
+                if (select.parentElement.classList.contains('custom-select-wrapper')) return;
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'custom-select-wrapper';
+                
+                select.parentNode.insertBefore(wrapper, select);
+                wrapper.appendChild(select);
+                select.style.display = 'none';
+                
+                const trigger = document.createElement('div');
+                trigger.className = 'custom-select-trigger';
+                trigger.textContent = select.options[select.selectedIndex]?.text || '';
+                wrapper.appendChild(trigger);
+                
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'custom-options';
+                
+                Array.from(select.options).forEach((option, index) => {
+                    const customOption = document.createElement('div');
+                    customOption.className = 'custom-option';
+                    if (index === select.selectedIndex) customOption.classList.add('selected');
+                    customOption.textContent = option.text;
+                    customOption.setAttribute('data-value', option.value || option.text);
+                    
+                    customOption.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        select.selectedIndex = index;
+                        select.dispatchEvent(new Event('change'));
+                        
+                        trigger.textContent = this.textContent;
+                        trigger.classList.remove('open');
+                        
+                        optionsContainer.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                        this.classList.add('selected');
+                        
+                        optionsContainer.classList.remove('open');
+                    });
+                    optionsContainer.appendChild(customOption);
+                });
+                
+                wrapper.appendChild(optionsContainer);
+                
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    document.querySelectorAll('.custom-select-trigger').forEach(t => {
+                        if (t !== trigger) {
+                            t.classList.remove('open');
+                            t.nextElementSibling.classList.remove('open');
+                        }
+                    });
+                    this.classList.toggle('open');
+                    optionsContainer.classList.toggle('open');
+                });
+            });
+            
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.custom-select-trigger').forEach(trigger => {
+                    trigger.classList.remove('open');
+                    trigger.nextElementSibling.classList.remove('open');
+                });
+            });
+
+            // Initialize with first tab
+            updateTabContent(0);
+        });
+    </script>
+
+
+</script>
+    
+    <script>
+        document.addEventListener('click', function (event) {
+            const formControlSelector = '.hero-form .form-control, .quote-form .form-control, .hero-form .custom-select-trigger, .quote-form .custom-select-trigger';
+            const clickedControl = event.target.closest(formControlSelector);
+            if (!clickedControl) return;
+
+            document.querySelectorAll(formControlSelector).forEach(function (control) {
+                control.style.setProperty('border', '0.5px solid #8d4445', 'important');
+            });
+            clickedControl.style.setProperty('border', '1px solid #8d4445', 'important');
+        }, true);
+    </script>
+    <x-footer />
+</body>
+</html>

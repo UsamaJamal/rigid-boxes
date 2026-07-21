@@ -1,0 +1,638 @@
+/* ==========================================================================
+   ALL CATEGORIES OF INDUSTRIES - DESIGN SYSTEM IMPLEMENTATION
+   ========================================================================== */
+
+/* CSS Reset & Base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================================================
+   01. COLOR PALETTE
+   ========================================================================== */
+
+:root {
+    /* Color System */
+    --primary-color: #8D4445;
+    --secondary-color: #F8EEEC;
+    --background-color: #FAF8F8;
+    --footer-color: #5F2D2F;
+    --header-gradient: linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%);
+    
+    /* Typography Colors */
+    --color-text-primary: #2D2D2D;
+    --color-text-secondary: #666666;
+    --color-text-tertiary: #999999;
+    
+    /* UI Colors */
+    --color-border: #E5E5E5;
+    --color-card-bg: #FFFFFF;
+    --color-card-hover: #F5F0EF;
+    
+    /* Spacing Scale */
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-48: 48px;
+    --space-64: 64px;
+    
+    /* Grid System */
+    --container-width: 1400px;
+    --margin-sides: 100px;
+    --gutter: 24px;
+}
+
+/* ==========================================================================
+   02. TYPOGRAPHY SYSTEM
+   ========================================================================== */
+
+body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--background-color);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading Scale - Open Sans */
+.heading-01 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    font-size: 32px;
+    line-height: 44px;
+    letter-spacing: 0px;
+    color: #000000;
+}
+
+.heading-02 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+}
+
+.heading-03 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+}
+
+.heading-04 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 21.43px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #000000;
+}
+
+/* Body Scale - DM Sans */
+.hero-body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #000000;
+}
+
+.body-regular {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   05. SPACING & LAYOUT SYSTEM
+   ========================================================================== */
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-left: var(--margin-sides);
+    padding-right: var(--margin-sides);
+}
+
+/* ==========================================================================
+   MAIN LAYOUT COMPONENTS
+   ========================================================================== */
+
+.industries-main {
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--background-color);
+    padding-top: var(--space-64);
+    padding-bottom: var(--space-8);
+}
+
+.hero-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-header .heading-01 {
+    margin-bottom: var(--space-8);
+}
+
+.hero-header .hero-body {
+    max-width: 791px;
+    margin: 0 auto;
+}
+
+/* Industries Grid Section */
+.industries-section {
+    background-color: var(--background-color);
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-64);
+}
+
+.industries-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gutter);
+    margin-top: 0;
+}
+
+/* ==========================================================================
+   03. UI COMPONENTS - CARD ARCHITECTURE (8PX RADIUS)
+   ========================================================================== */
+
+.industry-card {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: var(--space-48) var(--space-32);
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 279.55px;
+    height: 279.55px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Hover State */
+.industry-card:hover {
+    background-color: var(--color-card-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(141, 68, 69, 0.12);
+    border-color: rgba(141, 68, 69, 0.2);
+}
+
+.industry-card:hover .card-icon svg {
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.industry-card:hover .heading-04 {
+    color: var(--primary-color);
+}
+
+/* Card Icon */
+.card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--space-24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon svg {
+    color: var(--color-text-secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.industry-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+/* Card Typography */
+.industry-card:hover .heading-04 {
+    color: var(--primary-color);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Large Desktop */
+@media (max-width: 1440px) {
+    :root {
+        --margin-sides: 80px;
+    }
+}
+
+/* Medium Desktop */
+@media (max-width: 1200px) {
+    :root {
+        --margin-sides: 60px;
+    }
+    
+    .industries-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    :root {
+        --margin-sides: 40px;
+    }
+    
+    .heading-01 {
+        font-size: 36px;
+    }
+    
+    .hero-body {
+        font-size: 16px;
+    }
+    
+    .industries-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-16);
+    }
+    
+    .industry-card {
+        padding: var(--space-32) var(--space-24);
+        min-height: 150px;
+        width: auto;
+        height: auto;
+    }
+    
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: var(--space-16);
+    }
+    
+    .card-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        --margin-sides: 24px;
+    }
+    
+    .heading-01 {
+        font-size: 28px;
+    }
+    
+    .hero-body {
+        font-size: 14px;
+    }
+    
+    .hero-section {
+        padding-top: var(--space-48);
+        padding-bottom: var(--space-32);
+    }
+    
+    .industries-section {
+        padding-top: var(--space-32);
+        padding-bottom: var(--space-48);
+    }
+    
+    .industries-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+    }
+    
+    .industry-card {
+        padding: var(--space-24) var(--space-16);
+        min-height: 120px;
+        width: auto;
+        height: auto;
+    }
+    
+    .industry-card .heading-04 {
+        font-size: 14px;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & PERFORMANCE
+   ========================================================================== */
+
+/* Focus States */
+.industry-card:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --color-border: #000000;
+        --color-text-secondary: #000000;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .industry-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 2px solid var(--color-border);
+    }
+}
+
+
+/* ==========================================================================
+   BULK PACKAGING SOLUTIONS SECTION
+   ========================================================================== */
+
+.bulk-packaging-section {
+    margin-top: -108px;
+    padding: 80px 0;
+    background-color: var(--background-color);
+}
+
+.bulk-packaging-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Sustainable Container (Left) */
+.sustainable-container {
+    width: 922px;
+    min-height: 380px;
+    background-color: var(--secondary-color);
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.sustainable-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.sustainable-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.sustainable-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 28.8px;
+    letter-spacing: 0px;
+    color: #191919;
+    margin: 0;
+}
+
+.sustainable-description {
+    width: 495px;
+    height: 72px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 24px;
+    letter-spacing: 0.23px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.options-grid {
+    width: 100%;
+    max-width: 598px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: -26px;
+}
+
+.option-card {
+    background-color: transparent;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+.option-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 19.2px;
+    letter-spacing: 0px;
+    color: #191919;
+    margin: 0 0 12px 0;
+}
+
+.option-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 18px;
+    letter-spacing: 0.23px;
+    color: #4A4A4A;
+    margin: 0;
+}
+
+/* Bulk Info Container (Right) */
+.bulk-info-container {
+    margin-left: -218px;
+    margin-top: 204px;
+    width: 478px;
+    min-height: 200px;
+    background-color: var(--primary-color);
+    border-radius: 39px 26px 39px 0px;
+    padding: 16px;
+}
+
+.bulk-info-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+    margin: 0 0 6px 0;
+}
+
+.bulk-info-description {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .bulk-packaging-wrapper {
+        flex-direction: column;
+    }
+    
+    .sustainable-container,
+    .bulk-info-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sustainable-container,
+    .bulk-info-container {
+        padding: 24px;
+    }
+}
+
+/* ==========================================================================
+   CUSTOM BOXES DESCRIPTION SECTION
+   ========================================================================== */
+
+.custom-boxes-section {
+    max-width: 1164px;
+    margin: 80px auto;
+    padding: 0 var(--margin-sides);
+    background-color: var(--background-color);
+}
+
+.custom-boxes-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 44px;
+    color: #000000;
+    margin-bottom: 24px;
+}
+
+.custom-boxes-intro {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-text-secondary);
+    margin-bottom: 20px;
+}
+
+.custom-boxes-paragraph {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+}
+
+.custom-boxes-subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.custom-boxes-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-boxes-list li {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--color-text-secondary);
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.custom-boxes-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .custom-boxes-section {
+        margin: 48px auto;
+    }
+    
+    .custom-boxes-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    
+    .custom-boxes-subtitle {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    
+    .custom-boxes-intro,
+    .custom-boxes-paragraph,
+    .custom-boxes-list li {
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
