@@ -104,32 +104,47 @@
 
     @media (max-width: 992px) {
         .text-content-card {
-            padding: 36px 32px;
-            height: auto;
+            padding: 32px 12px 32px 24px;
+            height: 460px;
         }
         .text-content-inner {
-            height: auto;
-            overflow-y: visible;
-            padding-right: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 14px;
         }
     }
 
     @media (max-width: 576px) {
         .text-content-section {
-            padding: 20px 0;
+            padding: 24px 0;
+        }
+        .text-content-container {
+            padding: 0 16px;
         }
         .text-content-card {
-            padding: 28px 20px;
-            border-radius: 20px;
-            height: auto;
-            overflow-y: visible;
+            padding: 24px 10px 24px 18px;
+            border-radius: 24px;
+            border: 1.5px solid #000000;
+            height: 440px;
+        }
+        .text-content-inner {
+            height: 100%;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .text-content-inner::-webkit-scrollbar {
+            width: 6px;
         }
         .text-content-heading {
-            font-size: 20px;
+            font-size: 18px;
+            line-height: 1.35;
+            margin-bottom: 14px;
         }
         .text-content-body p,
         .text-content-body ul li {
-            font-size: 14px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            margin-bottom: 10px;
         }
     }
 </style>

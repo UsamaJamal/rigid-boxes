@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .blogs-section {
         background: var(--background-color, #FAF8F8);
-        padding: 20px 0;
+        padding: 40px 0;
         font-family: 'DM Sans', sans-serif;
     }
 
@@ -51,15 +51,21 @@
         border-radius: 4px;
         text-decoration: none;
         transition: background 0.3s;
-        border: 1px solid var(--primary-color, #8D4445);
+        border: none;
         white-space: nowrap;
-        margin-bottom: 5px;
     }
 
     .view-all-blogs-btn:hover {
-        background: var(--primary_color);
-        border-color: var(--primary_color);
+        background: #5F2D2F;
         color: #fff;
+    }
+
+    .mobile-btn-wrap {
+        display: none;
+    }
+
+    .blog-dots {
+        display: none;
     }
 
     .blogs-grid {
@@ -71,7 +77,7 @@
     .blog-card {
         background: #fff;
         border: 1px solid #EAEAEA;
-        border-radius: 8px;
+        border-radius: 16px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -117,7 +123,7 @@
     }
 
     .blog-card__title:hover {
-        color: var(--primary-color);
+        color: var(--primary-color, #8D4445);
     }
 
     .blog-card__desc {
@@ -127,12 +133,16 @@
         margin-bottom: 24px;
         flex: 1;
     }
-.blog-card__author{
-    color: var(--section-text-color);
-}
-.blog-card__date{
-    color:var(--section-text-color);
-}
+
+    .blog-card__author {
+        color: var(--section-text-color);
+        font-weight: 500;
+    }
+
+    .blog-card__date {
+        color: var(--section-text-color);
+    }
+
     .blog-card__readmore {
         display: inline-flex;
         align-items: center;
@@ -145,7 +155,7 @@
     }
 
     .blog-card__readmore:hover {
-        color: var(--primary_color);
+        color: #5F2D2F;
     }
 
     /* Responsive */
@@ -161,26 +171,114 @@
         }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
+        .blogs-section {
+            padding: 30px 0;
+        }
+
+        .blogs-container {
+            padding: 0 16px;
+        }
+
         .blogs-header {
             flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 24px;
+            gap: 10px;
         }
-        .view-all-blogs-btn {
-            margin-bottom: 0;
-        }
-    }
 
-    @media (max-width: 576px) {
-        .blogs-grid {
-            grid-template-columns: 1fr;
+        .blogs-header-text {
+            text-align: center;
         }
+
         .blogs-title {
-            font-size: 26px;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 8px;
         }
+
+        .blogs-subtitle {
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.45;
+        }
+
+        .desktop-btn {
+            display: none !important;
+        }
+
+        .blogs-grid {
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 16px !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+            scroll-behavior: smooth;
+        }
+
+        .blogs-grid::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .blog-card {
+            flex: 0 0 100% !important;
+            min-width: 100% !important;
+            scroll-snap-align: center !important;
+            border-radius: 16px !important;
+        }
+
         .blog-card__image {
-            height: 200px;
+            height: 210px;
+        }
+
+        .blog-card__content {
+            padding: 18px 16px 20px;
+        }
+
+        .blog-card__title {
+            font-size: 18px;
+        }
+
+        .blog-card__desc {
+            font-size: 13.5px;
+            margin-bottom: 18px;
+        }
+
+        .blog-dots {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .blog-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid #8D4445;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .blog-dot.active {
+            background: #8D4445;
+        }
+
+        .mobile-btn-wrap {
+            display: flex !important;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .mobile-btn {
+            width: 200px;
+            height: 46px;
+            font-size: 15px;
+            border-radius: 4px;
         }
     }
 </style>
@@ -190,13 +288,13 @@
 
         <div class="blogs-header">
             <div class="blogs-header-text">
-                <h2 class="blogs-title">Packaging Insights & Industry Trends</h2>
+                <h2 class="blogs-title">Packaging Insights &amp; Industry Trends</h2>
                 <p class="blogs-subtitle">Stay updated with packaging trends, design ideas, and expert tips to make smarter packaging decisions.</p>
             </div>
-            <a href="#" class="view-all-blogs-btn">View All Blogs</a>
+            <a href="#" class="view-all-blogs-btn desktop-btn">View All Blogs</a>
         </div>
 
-        <div class="blogs-grid">
+        <div class="blogs-grid" id="blogsGrid">
 
             <!-- Card 1 -->
             <article class="blog-card">
@@ -238,7 +336,7 @@
 
             <!-- Card 3 -->
             <article class="blog-card">
-                <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
                 <div class="blog-card__content">
                     <div class="blog-card__meta">
                         <span class="blog-card__author">Joe Danley</span>
@@ -257,5 +355,45 @@
 
         </div>
 
+        <!-- Mobile Pagination Dots -->
+        <div class="blog-dots" id="blogDots">
+            <span class="blog-dot active" data-index="0"></span>
+            <span class="blog-dot" data-index="1"></span>
+            <span class="blog-dot" data-index="2"></span>
+        </div>
+
+        <!-- Mobile View All Blogs Button -->
+        <div class="mobile-btn-wrap">
+            <a href="#" class="view-all-blogs-btn mobile-btn">View All Blogs</a>
+        </div>
+
     </div>
 </section>
+
+<script>
+    (function () {
+        var grid = document.getElementById('blogsGrid');
+        var dots = document.querySelectorAll('#blogDots .blog-dot');
+        if (!grid || !dots.length) return;
+
+        grid.addEventListener('scroll', function () {
+            var cardWidth = grid.offsetWidth;
+            if (!cardWidth) return;
+            var index = Math.round(grid.scrollLeft / cardWidth);
+            dots.forEach(function (dot, i) {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        dots.forEach(function (dot, i) {
+            dot.addEventListener('click', function () {
+                var cardWidth = grid.offsetWidth;
+                grid.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+            });
+        });
+    })();
+</script>

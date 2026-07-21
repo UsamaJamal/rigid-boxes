@@ -138,12 +138,10 @@
             display: none;
         }
 
-
-
         .hero-section {
             flex-direction: column;
             display: flex;
-            padding: 40px 24px 60px;
+            padding: 30px 24px 24px;
             text-align: left;
             gap: 20px;
         }
@@ -151,8 +149,6 @@
         .hero-content {
             max-width: 100%;
         }
-
-
 
         .hero-title {
             font-size: 38px;
@@ -169,15 +165,14 @@
             width: 100%;
             height: auto;
             max-width: 450px;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: auto;
         }
     }
 
     @media (max-width: 576px) {
 
-
         .hero-section {
-            padding: 30px 24px 40px;
+            padding: 24px 20px 16px;
             text-align: left;
         }
 
@@ -190,7 +185,6 @@
         .hero-description {
             font-size: 13px;
         }
-
 
     }
 </style>

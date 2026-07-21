@@ -48,7 +48,7 @@
         ───────────────────────────────────────── */
         .custom-boxes-section {
             background: #FAF8F8;
-            padding: 32px 0 70px;
+            padding: 32px 0 30px;
         }
 
         .custom-boxes-container {
@@ -112,15 +112,13 @@
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 19px;
-            line-height: 100%;
+            line-height: 1.25;
             letter-spacing: 0%;
             text-transform: capitalize;
             text-align: left;
             color: var(--section-text-color);
             padding: 22px 17px 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
             flex-shrink: 0;
         }
 
@@ -167,7 +165,9 @@
         /* Button — Figma: left:46px w:200 h:46
            border-radius:4px, border:1px, padding:12px 20px */
         .industry-card__btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 200px;
             height: 46px;
             margin-top: 14px;
@@ -186,7 +186,7 @@
             border-radius: 4px;
             padding: 11px 20px;
             cursor: pointer;
-            transition: background 0.25s, color 0.25s;
+            transition: background 0.25s, color 0.25s, border-color 0.25s;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -203,7 +203,7 @@
                   padding:12/20/12/20, centered
         ───────────────────────────────────────── */
         .view-all-wrap {
-            margin-top: 48px;
+            margin-top: 28px;
             display: flex;
             justify-content: center;
         }
@@ -240,7 +240,7 @@
         ───────────────────────────────────────── */
         .why-choose-section {
             background: var(--background-color, #FAF8F8);
-            padding: 60px 0 70px;
+            padding: 30px 0 70px;
         }
 
         .why-choose-container {
@@ -400,16 +400,19 @@
         .wc-yellow .why-card__text {
             text-align: left;
         }
-        .wc-blue .why-card__illus {
+        .wc-blue .why-card__img-box {
             position: absolute;
-            bottom: 0;
+            top: 0;
             right: 0;
             left: auto;
-            top: auto;
             width: 58%;
             height: 100%;
+            border-radius: 0;
+        }
+        .wc-blue .why-card__img-box img {
             object-fit: cover;
             object-position: right center;
+            border-radius: 0;
         }
 
         /* ─────────────────────────────────────────
@@ -502,31 +505,35 @@
 
         /* Mobile: single column */
         @media (max-width: 600px) {
-            .why-choose-section   { padding: 40px 0 50px; }
-            .why-choose-container { padding: 0 20px; }
+            .why-choose-section   { padding: 24px 0 40px; }
+            .why-choose-container { padding: 0 16px; }
             .why-choose-container h2 { font-size: 24px; }
 
-            .why-bento { width: 100%; }
+            .why-bento { width: 100%; display: flex; flex-direction: column; gap: 12px; }
 
             .why-row {
+                display: flex;
                 flex-direction: column;
                 gap: 12px;
             }
-            .why-row + .why-row { margin-top: 12px; }
+            .why-row + .why-row { margin-top: 0; }
 
             .why-card {
+                display: flex !important;
                 flex-direction: row !important;
                 align-items: center !important;
-                padding: 16px !important;
+                padding: 16px 18px !important;
                 gap: 16px !important;
-                border-radius: 12px !important;
+                border-radius: 16px !important;
+                box-shadow: none !important;
+                border: none !important;
             }
 
             .why-card__img-box,
             .why-card__illus {
                 order: -1;
-                width: 70px !important;
-                height: 70px !important;
+                width: 85px !important;
+                height: 85px !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: transparent !important;
@@ -537,24 +544,34 @@
                 flex-shrink: 0;
             }
 
+            .why-card__img-box img,
             .why-card__illus {
+                width: 100% !important;
+                height: 100% !important;
                 object-fit: contain !important;
             }
 
             .why-card__content {
                 order: 1;
-                width: calc(100% - 86px) !important;
+                flex: 1 !important;
+                width: auto !important;
                 max-width: none !important;
+                text-align: left !important;
             }
 
             .why-card__title {
-                font-size: 15px;
-                margin-bottom: 6px;
+                font-size: 16px !important;
+                font-weight: 700 !important;
+                margin-bottom: 4px !important;
+                line-height: 1.25 !important;
+                text-align: left !important;
             }
 
             .why-card__text {
-                font-size: 13px;
-                line-height: 1.4;
+                font-size: 13px !important;
+                line-height: 1.45 !important;
+                color: #444 !important;
+                text-align: left !important;
             }
 
             .wc-pink1,
@@ -750,21 +767,25 @@
             background: var(--secondary-color, #F8EEEC);
             padding: 60px 0;
             overflow: hidden;
+            width: 100%;
         }
 
         .bestseller-inner {
             max-width: 1440px;
+            width: 100%;
             margin: 0 auto;
             padding: 0 24px;
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 56px;
+            gap: 40px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         /* Left content block — w:260 */
         .bestseller-left {
-            width: 280px;
+            width: 260px;
             flex-shrink: 0;
         }
 
@@ -822,18 +843,26 @@
             display: flex;
             flex-direction: row;
             gap: 20px;
-            flex: 0 0 auto;
+            flex: 1;
             min-width: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+        }
+
+        .bestseller-cards::-webkit-scrollbar {
+            display: none;
         }
 
         .bestseller-card {
-            width: 330px;
-            min-width: 330px;
-            height: 370px;
-            flex: 0 0 330px;
+            width: 275px;
+            min-width: 275px;
+            height: 325px;
+            flex: 0 0 275px;
             border-radius: 17.22px;
             overflow: hidden;
-            flex-shrink: 1;
+            flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -841,8 +870,8 @@
         }
 
         .bestseller-card__img {
-            width: 330px;
-            height: 330px;
+            width: 275px;
+            height: 275px;
             aspect-ratio: auto;
             border-radius: 17.22px;
             overflow: hidden;
@@ -953,7 +982,7 @@
         /* Tablet portrait */
         @media (max-width: 768px) {
             .custom-boxes-section {
-                padding: 40px 0 50px;
+                padding: 24px 0 20px;
             }
 
             .custom-boxes-container {
@@ -967,51 +996,72 @@
 
             .industry-card {
                 width: 100%;
+                min-height: auto;
+            }
+
+            .industry-card__title {
+                font-size: 15px;
+                padding: 14px 12px 6px;
             }
 
             .industry-card__image-wrap {
                 width: calc(100% - 16px);
-                height: 200px;
+                height: 180px;
+            }
+
+            .industry-card__bottom {
+                padding: 12px;
             }
 
             .industry-card__btn {
-                width: 160px;
-                margin-left: 16px;
+                width: 100%;
+                margin-left: 0;
+                margin-top: 12px;
+                height: 40px;
+                font-size: 14px;
             }
         }
 
         /* Mobile */
         @media (max-width: 480px) {
+            .custom-boxes-container {
+                padding: 0 12px !important;
+            }
+
             .custom-boxes-container h2 {
                 font-size: 24px;
             }
 
             .custom-boxes-container .section-desc {
                 font-size: 14px;
-                margin-bottom: 32px;
+                margin-bottom: 24px;
             }
 
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+                gap: 10px;
             }
 
             .industry-card__title {
-                font-size: 13px;
-                padding: 12px 10px 8px;
+                font-size: 12px;
+                line-height: 1.25;
+                padding: 10px 8px 4px;
             }
 
             .industry-card__image-wrap {
-                width: calc(100% - 10px);
-                height: 130px;
+                width: 100%;
+                height: 140px;
+                padding: 0 6px;
+                box-sizing: border-box;
             }
 
             .industry-card__bottom {
-                padding: 10px 10px 14px;
+                padding: 8px 10px 12px;
             }
 
             .industry-card__text {
                 font-size: 11px;
+                line-height: 1.35;
             }
 
             .industry-card__btn {
@@ -1488,7 +1538,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Rigid Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1500,7 +1550,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Magnetic Closure Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1512,7 +1562,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Photo Presentation Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1524,7 +1574,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Book Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-rigid-plain-white-box.jfif') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1536,7 +1586,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Magnetic Book Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-custom-shoulder-box.jfif') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1548,7 +1598,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Drawer Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1572,7 +1622,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Rigid Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1626,13 +1676,15 @@
                             </div>
                         </div>
 
-                        <!-- CARD 3 — blue: Low MOQ (illustration absolutely positioned) -->
+                        <!-- CARD 3 — blue: Low MOQ -->
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Low MOQ</h3>
                                 <p class="why-card__text">Flexible minimum order quantities to help startups and growing brands order with confidence.</p>
                             </div>
-                            <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Small business owner holding a manageable box order" class="why-card__illus">
+                            <div class="why-card__img-box">
+                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Low MOQ">
+                            </div>
                         </div>
 
                     </div><!-- /.why-row row-1 -->
@@ -1658,7 +1710,7 @@
                                 <p class="why-card__text">Tailored packaging solutions crafted to match your product dimensions and brand identity.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Sizes and Designs">
+                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Custom Sizes and Designs">
                             </div>
                         </div>
 
@@ -1669,7 +1721,7 @@
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast Production and Delivery">
+                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Fast Production and Delivery">
                             </div>
                         </div>
 
@@ -1920,6 +1972,15 @@
                 if (!btn || !bar) return;
                 bar.querySelectorAll('.cdo-btn').forEach(function (b) { b.classList.remove('active'); });
                 btn.classList.add('active');
+
+                /* Smooth scroll selected option into the center of the scrollbar */
+                try {
+                    btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                } catch (err) {
+                    // Fallback for older browsers
+                    btn.scrollIntoView(false);
+                }
+
                 var data = cdoData[btn.dataset.cdo] || cdoData.foiling;
                 data.forEach(function (item, i) {
                     var img = document.getElementById('cdo-img-' + (i + 1));
@@ -1966,7 +2027,7 @@
     <script>
         // Best Seller tabs: keep the starter images identical for now while
         // preserving a working three-tab interaction for later replacements.
-        document.querySelectorAll('.bestseller-dot').forEach(function (dot) {
+        document.querySelectorAll('.bestseller-dot').forEach(function (dot, index) {
             dot.addEventListener('click', function () {
                 document.querySelectorAll('.bestseller-dot').forEach(function (item) {
                     item.classList.remove('active');
@@ -1974,6 +2035,12 @@
                 });
                 dot.classList.add('active');
                 dot.setAttribute('aria-selected', 'true');
+                var cardsContainer = document.querySelector('.bestseller-cards');
+                if (cardsContainer) {
+                    var firstCard = cardsContainer.querySelector('.bestseller-card');
+                    var cardWidth = firstCard ? firstCard.offsetWidth : 275;
+                    cardsContainer.scrollTo({ left: index * (cardWidth + 20), behavior: 'smooth' });
+                }
             });
         });
     </script>

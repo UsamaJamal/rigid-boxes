@@ -86,36 +86,63 @@
     @media (max-width: 992px) {
         .boxes-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 24px 16px;
         }
 
         .box-card {
+            width: 100%;
+            max-width: 100%;
             min-width: 0;
             height: auto;
         }
 
+        .box-image-wrapper {
+            height: 220px;
+        }
     }
 
     @media (max-width: 576px) {
         .popular-boxes-section {
-            padding: 24px 0 0px;
+            padding: 24px 0 32px;
         }
 
         .popular-boxes-inner {
-            padding: 0 20px;
+            padding: 0 16px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 13.5px;
+            margin-bottom: 20px;
         }
 
         .boxes-grid {
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px 10px; /* Reduced gap to fit cards */
+            gap: 20px 12px;
         }
 
         .box-card {
+            width: 100%;
+            max-width: 100%;
             min-width: 0;
             height: auto;
         }
 
+        .box-image-wrapper {
+            width: 100%;
+            height: 165px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+        }
+
         .box-title {
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.25;
         }
     }
 
@@ -168,28 +195,32 @@
 
     .customize-tab {
         width: 100%;
-        min-height: 0;
-        flex: 1 1 0;
-        min-height: 82px;
-        padding: 18px 28px;
-        text-align: left;
+        min-height: 54px;
+        padding: 14px 24px;
+        text-align: center;
         background: #FFFFFF;
-        border: 1px solid #EAEAEA;
+        border: 1px solid #D8D8D8;
+        border-radius: 0px;
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
-        font-size: 16px;
-        color: #333333;
+        font-size: 14px;
+        color: #222222;
         cursor: pointer;
         text-transform: uppercase;
-        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
     }
 
     .customize-tab.active,
     .customize-tab:hover,
     .customize-tab:focus-visible {
-        background: var(--primary-color);
-        color: #FFF;
-        border-color: var(--primary-color);
+        background: #8D4445;
+        color: #FFFFFF;
+        border-color: #8D4445;
     }
 
     .customize-content {
@@ -249,9 +280,27 @@
 
         .customize-sidebar {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            padding-bottom: 30px;
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 12px !important;
+            padding-bottom: 24px;
+            overflow-x: auto !important;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .customize-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .customize-tab {
+            width: auto !important;
+            flex: 0 0 auto !important;
+            min-height: 46px !important;
+            height: 46px !important;
+            padding: 10px 20px !important;
+            font-size: 13px !important;
+            white-space: nowrap !important;
         }
 
         .customize-content {
@@ -262,7 +311,7 @@
 
     @media (max-width: 576px) {
         .customize-section {
-            padding: 44px 0 40px;
+            padding: 36px 0 36px;
         }
         .customize-title {
             font-size: 22px;
@@ -274,38 +323,53 @@
             font-size: 13px;
             line-height: 1.35;
             text-align: center;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
         .customize-sidebar {
-            display: flex;
-            flex-direction: row;
-            grid-template-columns: none;
-            gap: 10px;
-            padding-bottom: 24px;
-            overflow-x: auto;
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 10px !important;
+            padding-bottom: 20px;
+            overflow-x: auto !important;
             scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         .customize-sidebar::-webkit-scrollbar {
             display: none;
         }
         .customize-tab {
-            flex: 0 0 129px;
-            min-height: 45px;
-            padding: 10px;
-            font-size: 10px;
+            width: auto !important;
+            flex: 0 0 auto !important;
+            height: 44px !important;
+            min-height: 0 !important;
+            padding: 10px 18px !important;
+            font-size: 12px !important;
+            font-weight: 700;
             text-align: center;
+            white-space: nowrap !important;
+            border-radius: 0px !important;
         }
         .customize-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 15px;
+            gap: 14px 12px;
         }
         .custom-card {
-            padding: 8px 8px 20px 8px;
+            padding: 12px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .custom-img-wrapper {
+            height: 130px;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
         .custom-card h4 {
-            font-size: 12px;
-            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #111;
+            text-align: left;
             padding-left: 0;
+            line-height: 1.3;
         }
     }
 
@@ -363,10 +427,10 @@
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
 
-                <!-- Card 5 (Repeated for 2nd row) -->
+                <!-- Card 5 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                        <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
@@ -374,7 +438,7 @@
                 <!-- Card 6 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
+                        <img src="{{ asset('uploads/category-collapsible-rigid-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
@@ -382,7 +446,7 @@
                 <!-- Card 7 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-custom-shaped-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
+                        <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
@@ -390,56 +454,36 @@
                 <!-- Card 8 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
-                    </div>
-                    <h3 class="box-title">Skincare Boxes</h3>
-                </div>
-
-                <!-- Row 3 (4 cards) -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
-                    </div>
-                    <h3 class="box-title">Lipstick Boxes</h3>
-                </div>
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-collapsible-rigid-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
-                    </div>
-                    <h3 class="box-title">Serum Boxes</h3>
-                </div>
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
-                    </div>
-                    <h3 class="box-title">Perfume Boxes</h3>
-                </div>
-                <div class="box-card">
-                    <div class="box-image-wrapper">
                         <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
                     </div>
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
 
-                <!-- Row 4 (4 cards) -->
+                <!-- Card 9 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
                         <img src="{{ asset('uploads/category-cardboard-boxes.webp') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
+
+                <!-- Card 10 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
                         <img src="{{ asset('uploads/category-grey-board-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
+
+                <!-- Card 11 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
                         <img src="{{ asset('uploads/category-bakery-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
+
+                <!-- Card 12 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
                         <img src="{{ asset('uploads/category-box-by-industry-banner.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
@@ -642,7 +686,11 @@
                 setCustomizeCardOrder(tab.dataset.customizeTab);
 
                 if (customizeSidebar) {
-                    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+                    try {
+                        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    } catch (e) {
+                        tab.scrollIntoView(false);
+                    }
                 }
             });
         });
