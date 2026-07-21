@@ -1,193 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmetics Packaging - The Rigid Boxes</title>
-    <!-- Import Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+@include('components.htmlboilerplate', ['title' => 'Cosmetics Packaging - The Rigid Boxes'])
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html, body {
-        overflow-x: hidden;
-        width: 100%;
-    }
-
-    body {
-        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background-color: var(--background-color);
-        color: #000000;
-        line-height: 1.6;
-    }
-
-    p {
-        font-family: 'DM Sans', sans-serif;
-        color: #000;
-        font-size: 16px;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Open Sans', sans-serif;
-        color: #000;
-        font-size: 24px;
-    }
-
-    .category-hero-wrapper {
-        width: 100%;
-        background: var(--header-gradient, linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%));
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .category-hero-wrapper::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    /* Diagonal artwork from the Figma hero. The image sits above this layer. */
-    .hero-line {
-        position: absolute;
-        width: 450px;
-        height: 0;
-        border-top: 0.2px solid rgba(255, 255, 255, 0.28);
-        transform-origin: left center;
-        /* CSS uses the opposite visual direction to Figma's exported angle. */
-        transform: rotate(52.86deg);
-        top: 103px;
-        pointer-events: none;
-        z-index: 1;
-    }
-    .hero-line-1 { left: calc(50% - 720px + 345px); }
-    .hero-line-2 { left: calc(50% - 720px + 422px); top: 104px; }
-    .hero-line-3 { left: calc(50% - 720px + 499px); top: 104px; }
-    .hero-line-4 { left: calc(50% - 720px + 576px); top: 104px; }
-    .hero-line-5 { left: calc(50% - 720px + 653px); top: 104px; }
-    .hero-line-6 { left: calc(50% - 720px + 730px); top: 104px; }
-
-    .hero-section {
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 8px 5% 0px 5%;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
-        align-items: center;
-        gap: 70px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero-content {
-        max-width: 560px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .breadcrumbs-container {
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 24px 5% 0 5%;
-        position: relative;
-        z-index: 2;
-    }
-
-    .breadcrumbs {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        color: rgba(255, 255, 255, 0.7);
-        text-transform: uppercase;
-        display: flex;
-        gap: 8px;
-    }
-
-    .breadcrumbs a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    .breadcrumbs a:hover {
-        color: #fff;
-    }
-
-    .breadcrumbs .current {
-        color: #fff;
-    }
-
-    .hero-title {
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 700;
-        font-size: 50px;
-        line-height: 65px;
-        letter-spacing: 0%;
-        text-transform: uppercase;
-        color: #fff;
-        margin-bottom: 14px;
-        overflow-wrap: break-word;
-    }
-
-    .hero-title .highlight {
-        color: #D4A872;
-    }
-
-    .hero-description {
-        font-family: 'DM Sans', sans-serif;
-        font-size: 16px;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 510px;
-        margin-bottom: 32px;
-        font-weight: 300;
-    }
-
-    .hero-btn {
-        display: inline-block;
-        background: #fff;
-        font-family: 'DM Sans', sans-serif;
-        color: var(--primary-color, #8D4445);
-        padding: 12px 20px;
-        font-size: 16px;
-        font-weight: 700;
-        border-radius: 4px;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s, transform 0.2s;
-    }
-
-    .hero-btn:hover {
-        background: var(--secondary-color, #F8EEEC);
-        transform: translateY(-2px);
-    }
-
-    .hero-image-wrapper {
-        display: flex;
-        justify-content: flex-end;
-        position: relative;
-        z-index: 3;
-    }
-
-    .hero-image-wrapper img {
-        width: 100%;
-        max-width: 456px;
-        height: 456px;
-        border-radius: 16px;
-        box-shadow: none;
-        background-color: transparent;
-        object-fit: contain;
-        object-position: center;
-    }
-
     /* Popular Boxes Section */
     .popular-boxes-section {
         background: #FFF;
@@ -265,47 +78,6 @@
 
     /* Mobile Responsive View */
     @media (max-width: 992px) {
-        .hero-line {
-            display: none;
-        }
-
-        .breadcrumbs-container {
-            padding: 30px 5% 0;
-        }
-
-        .hero-section {
-            flex-direction: column;
-            display: flex;
-            padding: 40px 5% 60px;
-            text-align: left;
-        }
-
-        .hero-content {
-            max-width: 100%;
-        }
-
-        .breadcrumbs {
-            justify-content: flex-start;
-        }
-
-        .hero-title {
-            font-size: 38px;
-            line-height: 1.3;
-        }
-
-        .hero-image-wrapper {
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .hero-image-wrapper img {
-            width: 100%;
-            height: auto;
-            max-width: 450px;
-            aspect-ratio: 1 / 1;
-        }
-
         .boxes-grid {
             grid-template-columns: repeat(2, 1fr);
         }
@@ -317,32 +89,6 @@
     }
 
     @media (max-width: 576px) {
-        .breadcrumbs-container {
-            padding: 25px 5% 0;
-        }
-
-        .hero-section {
-            padding: 30px 5% 40px;
-            text-align: left;
-        }
-
-        .hero-title {
-            font-size: 28px;
-            line-height: 1.3;
-            word-wrap: break-word;
-        }
-
-        .hero-description {
-            font-size: 13px;
-        }
-
-        .breadcrumbs {
-            font-size: 10px;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        }
-
-
         .popular-boxes-section {
             padding: 24px 0 0px;
         }
@@ -395,23 +141,26 @@
     }
 
     .customize-layout {
-        display: flex;
-        gap: 18px;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: minmax(170px, 23%) minmax(0, 1fr);
+        gap: 12px;
+        align-items: stretch;
     }
 
     .customize-sidebar {
-        width: 230px;
+        width: auto;
         display: flex;
         flex-direction: column;
         gap: 6px;
         padding-bottom: 0;
         flex-shrink: 0;
+        align-self: stretch;
     }
 
     .customize-tab {
         width: 100%;
-        min-height: 48px;
+        min-height: 0;
+        flex: 1 1 0;
         padding: 12px 14px;
         text-align: left;
         background: #FFFFFF;
@@ -468,7 +217,7 @@
     .custom-img-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
     }
 
@@ -484,6 +233,7 @@
 
     @media (max-width: 992px) {
         .customize-layout {
+            display: flex;
             flex-direction: column;
         }
 
@@ -560,41 +310,7 @@
     @include('components.header')
 
     <main>
-        <!-- Hero Banner with gradient -->
-        <div class="category-hero-wrapper">
-            <div class="hero-line hero-line-1" aria-hidden="true"></div>
-            <div class="hero-line hero-line-2" aria-hidden="true"></div>
-            <div class="hero-line hero-line-3" aria-hidden="true"></div>
-            <div class="hero-line hero-line-4" aria-hidden="true"></div>
-            <div class="hero-line hero-line-5" aria-hidden="true"></div>
-            <div class="hero-line hero-line-6" aria-hidden="true"></div>
-            <div class="breadcrumbs-container">
-                <div class="breadcrumbs">
-                    <a href="/">HOME</a> /
-                    <a href="#">BOXES BY INDUSTRY</a> /
-                    <span class="current">COSMETICS</span>
-                </div>
-            </div>
-
-            <section class="hero-section">
-
-                <div class="hero-content">
-                    <h1 class="hero-title">
-                        CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES
-                    </h1>
-
-                    <p class="hero-description">
-                        Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.
-                    </p>
-
-                    <a href="#" class="hero-btn">Design Custom Boxes</a>
-                </div>
-
-                <div class="hero-image-wrapper">
-                    <img src="{{ asset('uploads/home-banner.png') }}" alt="Custom Cosmetic Packaging Boxes" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
-                </div>
-            </section>
-        </div>
+        @include('components.herohome')
 
         @include('components.logo')
 
@@ -745,56 +461,56 @@
                         <div class="customize-grid">
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/Grey-Board-Boxes.webp') }}" alt="Duplex Chipboard" onerror="this.src='https://placehold.co/200x200/EEEEEE/888888?text=Duplex+Chipboard'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/Grey-Board-Boxes.webp" alt="Duplex Chipboard" onerror="this.src='https://placehold.co/200x200/EEEEEE/888888?text=Duplex+Chipboard'">
                                 </div>
                                 <h4>Duplex Chipboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/CardBoard-Boxes.webp') }}" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/CardBoard-Boxes.webp" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4>Grey Chipboard Cardboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/custom-luxury-box.jfif') }}" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/custom-luxury-box.jfif" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
                                 </div>
                                 <h4>Black-Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/premiuim-foil-custom-box.jfif') }}" alt="Holographic" onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/premiuim-foil-custom-box.jfif" alt="Holographic" onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
                                 <h4>Holographic</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/gold-inside-box.jfif') }}" alt="Metallic Paper" onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/gold-inside-box.jfif" alt="Metallic Paper" onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
                                 <h4>Metallic Paper</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/Bakery-Boxes.webp') }}" alt="Natural Brown Kraft" onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/Bakery-Boxes.webp" alt="Natural Brown Kraft" onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
                                 <h4>Natural Brown Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/rigid-plain-white-box.jfif') }}" alt="SBS C2S" onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/rigid-plain-white-box.jfif" alt="SBS C2S" onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
                                 </div>
                                 <h4>SBS C2S</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/Box-by-Material.webp') }}" alt="Textured" onerror="this.src='https://placehold.co/200x200/E8E8E8/888888?text=Textured'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/Box-by-Material.webp" alt="Textured" onerror="this.src='https://placehold.co/200x200/E8E8E8/888888?text=Textured'">
                                 </div>
                                 <h4>Textured</h4>
                             </div>
@@ -834,6 +550,39 @@
 
         const customizeCards = Array.from(document.querySelectorAll('.customize-grid .custom-card'));
         const customizeSidebar = document.querySelector('.customize-sidebar');
+        const customizeUploadsUrl = "{{ request()->getBaseUrl() }}/";
+        const customizeCardSets = {
+            materials: [
+                ['uploads/Grey-Board-Boxes.webp', 'Duplex Chipboard'], ['uploads/CardBoard-Boxes.webp', 'Grey Chipboard Cardboard'],
+                ['uploads/custom-luxury-box.jfif', 'Black-Kraft'], ['uploads/premiuim-foil-custom-box.jfif', 'Holographic'],
+                ['uploads/gold-inside-box.jfif', 'Metallic Paper'], ['uploads/Bakery-Boxes.webp', 'Natural Brown Kraft'],
+                ['uploads/rigid-plain-white-box.jfif', 'SBS C2S'], ['uploads/Box-by-Material.webp', 'Textured']
+            ],
+            printing: [
+                ['uploads/home-banner.png', 'Digital Printing'], ['uploads/Box-by-industry-Banner-.webp', 'Offset Printing'],
+                ['uploads/holographic.png', 'Foil Printing'], ['uploads/metallic-paper.png', 'Screen Printing'],
+                ['uploads/rigid-presentation-box.jfif', 'Embossed Printing'], ['uploads/custom-shaped-box.jfif', 'UV Printing'],
+                ['uploads/two-piece-box.jfif', 'Letterpress'], ['uploads/box-with-lid.jfif', 'Spot Colour']
+            ],
+            inks: [
+                ['uploads/black-kraft.png', 'Black Ink'], ['uploads/natural-brown-kraft.png', 'Soy Ink'],
+                ['uploads/holographic.png', 'Metallic Ink'], ['uploads/metallic-paper.png', 'White Ink'],
+                ['uploads/textured.png', 'Water-Based Ink'], ['uploads/sbs-c.png', 'Pantone Ink'],
+                ['uploads/grey-cardboard-chip.png', 'UV Ink'], ['uploads/Duplex-chip.png', 'CMYK Ink']
+            ],
+            finishing: [
+                ['uploads/gold-inside-box.jfif', 'Gold Foil'], ['uploads/holographic.png', 'Holographic Foil'],
+                ['uploads/textured.png', 'Soft-Touch Lamination'], ['uploads/metallic-paper.png', 'Gloss Lamination'],
+                ['uploads/black-kraft.png', 'Matte Lamination'], ['uploads/custom-luxury-box.jfif', 'Spot UV'],
+                ['uploads/rigid-presentation-box.jfif', 'Embossing'], ['uploads/box-with-lid.jfif', 'Debossing']
+            ],
+            addons: [
+                ['uploads/box-with-lid.jfif', 'Custom Inserts'], ['uploads/Collapsible-Rigid-Boxes.webp', 'Ribbon Closure'],
+                ['uploads/Maganetic-Closure-Boxes.webp', 'Magnetic Closure'], ['uploads/two-piece-box.jfif', 'Paper Sleeve'],
+                ['uploads/custom-shaped-box.jfif', 'Die-Cut Window'], ['uploads/Gift-Boxes.webp', 'Thank-You Card'],
+                ['uploads/rigid-plain-white-box.jfif', 'Tissue Paper'], ['uploads/custom-shoulder-box.jfif', 'Foam Insert']
+            ]
+        };
 
         function setCustomizeCardOrder(option) {
             const cardOrder = customizeCardOrders[option] || customizeCardOrders.materials;
@@ -844,8 +593,15 @@
             });
 
             setTimeout(() => {
+                const cardSet = customizeCardSets[option] || customizeCardSets.materials;
                 cardOrder.forEach(function(cardIndex, position) {
-                    customizeCards[cardIndex].style.order = position + 1;
+                    const card = customizeCards[cardIndex];
+                    const [imagePath, title] = cardSet[position];
+                    const image = card.querySelector('img');
+                    image.src = customizeUploadsUrl + imagePath;
+                    image.alt = title;
+                    card.querySelector('h4').textContent = title;
+                    card.style.order = position + 1;
                 });
 
                 requestAnimationFrame(() => {

@@ -170,6 +170,10 @@
         color: var(--primary-color, #8D4445);
     }
 
+    .faq-item.open .faq-question-text {
+        color: var(--primary-color, #8D4445);
+    }
+
     .faq-answer {
         max-height: 0;
         overflow: hidden;
