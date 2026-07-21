@@ -1,6 +1,8 @@
 @include('components.htmlboilerplate', ['title' => 'Cosmetics Packaging - The Rigid Boxes'])
 
 <style>
+    html, body { max-width: 100%; overflow-x: hidden; }
+
     /* Popular Boxes Section */
     .popular-boxes-section {
         background: #FFF;
@@ -10,7 +12,8 @@
     .popular-boxes-inner {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
         text-align: center;
         color: #333;
     }
@@ -31,14 +34,16 @@
     .boxes-grid {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 292px));
         gap: 40px 30px;
-        justify-items: center;
+        justify-content: space-between;
+        justify-items: stretch;
     }
 
     .box-card {
         width: 100%;
-        max-width: 284.17px;
+        max-width: 292px;
+        height: 437px;
         min-width: 200px;
         display: flex;
         flex-direction: column;
@@ -47,7 +52,8 @@
 
     .box-image-wrapper {
         width: 100%;
-        aspect-ratio: 284.17 / 322.09;
+        height: 322px;
+        aspect-ratio: auto;
         border-radius: 12px;
         overflow: hidden;
         background-color: #E8E8E8;
@@ -84,6 +90,7 @@
 
         .box-card {
             min-width: 0;
+            height: auto;
         }
 
     }
@@ -94,7 +101,7 @@
         }
 
         .popular-boxes-inner {
-            padding: 0 5%;
+            padding: 0 20px;
         }
 
         .boxes-grid {
@@ -104,6 +111,7 @@
 
         .box-card {
             min-width: 0;
+            height: auto;
         }
 
         .box-title {
@@ -114,19 +122,20 @@
     /* Customize Section */
     .customize-section {
         background: #FAFAFA;
-        padding: 20px 0;
+        padding: 48px 0 54px;
         font-family: 'Open Sans', sans-serif;
     }
 
     .customize-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
     }
 
     .customize-title {
         font-family: 'Open Sans', sans-serif;
-        font-size: 32px;
+        font-size: 36px;
         font-weight: 800;
         color: var(--section-text-color);
         margin-bottom: 12px;
@@ -134,7 +143,7 @@
 
     .customize-subtitle {
         font-family: 'Open Sans', sans-serif;
-        font-size: 16px;
+        font-size: 18px;
         color: var(--section-text-color);
         margin-bottom: 40px;
         line-height: 1.5;
@@ -142,8 +151,8 @@
 
     .customize-layout {
         display: grid;
-        grid-template-columns: minmax(170px, 23%) minmax(0, 1fr);
-        gap: 12px;
+        grid-template-columns: minmax(230px, 26%) minmax(0, 1fr);
+        gap: 38px;
         align-items: stretch;
     }
 
@@ -151,7 +160,7 @@
         width: auto;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 18px;
         padding-bottom: 0;
         flex-shrink: 0;
         align-self: stretch;
@@ -161,13 +170,14 @@
         width: 100%;
         min-height: 0;
         flex: 1 1 0;
-        padding: 12px 14px;
+        min-height: 82px;
+        padding: 18px 28px;
         text-align: left;
         background: #FFFFFF;
         border: 1px solid #EAEAEA;
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
-        font-size: 11px;
+        font-size: 16px;
         color: #333333;
         cursor: pointer;
         text-transform: uppercase;
@@ -191,13 +201,13 @@
     .customize-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
+        gap: 24px;
     }
 
     .custom-card {
         background: #FFF;
-        border-radius: 6px;
-        padding: 6px;
+        border-radius: 14px;
+        padding: 18px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         display: flex;
         flex-direction: column;
@@ -208,9 +218,9 @@
     .custom-img-wrapper {
         width: 100%;
         aspect-ratio: 1;
-        border-radius: 4px;
+        border-radius: 11px;
         overflow: hidden;
-        margin-bottom: 6px;
+        margin-bottom: 14px;
         background: #f7f7f7;
     }
 
@@ -223,11 +233,11 @@
 
     .custom-card h4 {
         font-family: 'Open Sans', sans-serif;
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--section-text-color);
         margin: 0;
-        padding: 0 2px 2px;
+        padding: 0 0 2px;
         line-height: 1.3;
     }
 
@@ -324,7 +334,7 @@
                 <!-- Card 1 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/rigid-plain-white-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                        <img src="{{ asset('uploads/industry-rigid-plain-white-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
@@ -332,7 +342,7 @@
                 <!-- Card 2 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/custom-shoulder-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
+                        <img src="{{ asset('uploads/industry-custom-shoulder-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
@@ -340,7 +350,7 @@
                 <!-- Card 3 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/premiuim-foil-custom-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
+                        <img src="{{ asset('uploads/addon-premium-foil-custom-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
@@ -348,7 +358,7 @@
                 <!-- Card 4 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/gold-inside-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
+                        <img src="{{ asset('uploads/addon-gold-inside-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
                     </div>
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
@@ -356,7 +366,7 @@
                 <!-- Card 5 (Repeated for 2nd row) -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/two-piece-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                        <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
@@ -364,7 +374,7 @@
                 <!-- Card 6 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/rigid-presentation-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
+                        <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
@@ -372,7 +382,7 @@
                 <!-- Card 7 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/custom-shaped-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
+                        <img src="{{ asset('uploads/category-custom-shaped-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
@@ -380,7 +390,7 @@
                 <!-- Card 8 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/custom-luxury-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
+                        <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
                     </div>
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
@@ -388,25 +398,25 @@
                 <!-- Row 3 (4 cards) -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/box-with-lid.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                        <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Collapsible-Rigid-Boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
+                        <img src="{{ asset('uploads/category-collapsible-rigid-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Maganetic-Closure-Boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
+                        <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Gift-Boxes.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
+                        <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
                     </div>
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
@@ -414,25 +424,25 @@
                 <!-- Row 4 (4 cards) -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/CardBoard-Boxes.webp') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                        <img src="{{ asset('uploads/category-cardboard-boxes.webp') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
                     </div>
                     <h3 class="box-title">Lipstick Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Grey-Board-Boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
+                        <img src="{{ asset('uploads/category-grey-board-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
                     </div>
                     <h3 class="box-title">Serum Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Bakery-Boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
+                        <img src="{{ asset('uploads/category-bakery-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
                     </div>
                     <h3 class="box-title">Perfume Boxes</h3>
                 </div>
                 <div class="box-card">
                     <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/Box-by-industry-Banner-.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
+                        <img src="{{ asset('uploads/category-box-by-industry-banner.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
                     </div>
                     <h3 class="box-title">Skincare Boxes</h3>
                 </div>
@@ -449,11 +459,11 @@
                 <div class="customize-layout">
                     <!-- Left Sidebar Tabs -->
                     <aside class="customize-sidebar">
-                        <button class="customize-tab active" data-customize-tab="materials">MATERIALS</button>
-                        <button class="customize-tab" data-customize-tab="printing">PRINTING METHODS</button>
-                        <button class="customize-tab" data-customize-tab="inks">INKS</button>
-                        <button class="customize-tab" data-customize-tab="finishing">FINISHING</button>
-                        <button class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
+                        <button type="button" class="customize-tab active" data-customize-tab="materials">MATERIALS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="printing">PRINTING METHODS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="inks">INKS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="finishing">FINISHING</button>
+                        <button type="button" class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
                     </aside>
 
                     <!-- Right Content Grid -->
@@ -461,56 +471,56 @@
                         <div class="customize-grid">
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/Grey-Board-Boxes.webp" alt="Duplex Chipboard" onerror="this.src='https://placehold.co/200x200/EEEEEE/888888?text=Duplex+Chipboard'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-grey-board-boxes.webp" alt="Duplex Chipboard" onerror="this.src='https://placehold.co/200x200/EEEEEE/888888?text=Duplex+Chipboard'">
                                 </div>
                                 <h4>Duplex Chipboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/CardBoard-Boxes.webp" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-cardboard-boxes.webp" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4>Grey Chipboard Cardboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/custom-luxury-box.jfif" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/industry-custom-luxury-box.jfif" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
                                 </div>
                                 <h4>Black-Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/premiuim-foil-custom-box.jfif" alt="Holographic" onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/addon-premium-foil-custom-box.jfif" alt="Holographic" onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
                                 <h4>Holographic</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/gold-inside-box.jfif" alt="Metallic Paper" onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/addon-gold-inside-box.jfif" alt="Metallic Paper" onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
                                 <h4>Metallic Paper</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/Bakery-Boxes.webp" alt="Natural Brown Kraft" onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-bakery-boxes.webp" alt="Natural Brown Kraft" onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
                                 <h4>Natural Brown Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/rigid-plain-white-box.jfif" alt="SBS C2S" onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/industry-rigid-plain-white-box.jfif" alt="SBS C2S" onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
                                 </div>
                                 <h4>SBS C2S</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/Box-by-Material.webp" alt="Textured" onerror="this.src='https://placehold.co/200x200/E8E8E8/888888?text=Textured'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-box-by-material.webp" alt="Textured" onerror="this.src='https://placehold.co/200x200/E8E8E8/888888?text=Textured'">
                                 </div>
                                 <h4>Textured</h4>
                             </div>
@@ -555,39 +565,41 @@
         const customizeUploadsUrl = "{{ request()->getBaseUrl() }}/";
         const customizeCardSets = {
             materials: [
-                ['uploads/Grey-Board-Boxes.webp', 'Duplex Chipboard'], ['uploads/CardBoard-Boxes.webp', 'Grey Chipboard Cardboard'],
-                ['uploads/custom-luxury-box.jfif', 'Black-Kraft'], ['uploads/premiuim-foil-custom-box.jfif', 'Holographic'],
-                ['uploads/gold-inside-box.jfif', 'Metallic Paper'], ['uploads/Bakery-Boxes.webp', 'Natural Brown Kraft'],
-                ['uploads/rigid-plain-white-box.jfif', 'SBS C2S'], ['uploads/Box-by-Material.webp', 'Textured']
+                ['uploads/category-grey-board-boxes.webp', 'Duplex Chipboard'], ['uploads/category-cardboard-boxes.webp', 'Grey Chipboard Cardboard'],
+                ['uploads/industry-custom-luxury-box.jfif', 'Black-Kraft'], ['uploads/addon-premium-foil-custom-box.jfif', 'Holographic'],
+                ['uploads/addon-gold-inside-box.jfif', 'Metallic Paper'], ['uploads/category-bakery-boxes.webp', 'Natural Brown Kraft'],
+                ['uploads/industry-rigid-plain-white-box.jfif', 'SBS C2S'], ['uploads/category-box-by-material.webp', 'Textured']
             ],
             printing: [
-                ['uploads/home-banner.png', 'Digital Printing'], ['uploads/Box-by-industry-Banner-.webp', 'Offset Printing'],
-                ['uploads/holographic.png', 'Foil Printing'], ['uploads/metallic-paper.png', 'Screen Printing'],
-                ['uploads/rigid-presentation-box.jfif', 'Embossed Printing'], ['uploads/custom-shaped-box.jfif', 'UV Printing'],
-                ['uploads/two-piece-box.jfif', 'Letterpress'], ['uploads/box-with-lid.jfif', 'Spot Colour']
+                ['uploads/hero-home-banner.png', 'Digital Printing'], ['uploads/category-box-by-industry-banner.webp', 'Offset Printing'],
+                ['uploads/category-holographic.png', 'Foil Printing'], ['uploads/category-metallic-paper.png', 'Screen Printing'],
+                ['uploads/industry-rigid-presentation-box.jfif', 'Embossed Printing'], ['uploads/category-custom-shaped-box.jfif', 'UV Printing'],
+                ['uploads/industry-two-piece-box.jfif', 'Letterpress'], ['uploads/industry-box-with-lid.jfif', 'Spot Colour']
             ],
             inks: [
-                ['uploads/black-kraft.png', 'Black Ink'], ['uploads/natural-brown-kraft.png', 'Soy Ink'],
-                ['uploads/holographic.png', 'Metallic Ink'], ['uploads/metallic-paper.png', 'White Ink'],
-                ['uploads/textured.png', 'Water-Based Ink'], ['uploads/sbs-c.png', 'Pantone Ink'],
-                ['uploads/grey-cardboard-chip.png', 'UV Ink'], ['uploads/Duplex-chip.png', 'CMYK Ink']
+                ['uploads/category-black-kraft.png', 'Black Ink'], ['uploads/category-natural-brown-kraft.png', 'Soy Ink'],
+                ['uploads/category-holographic.png', 'Metallic Ink'], ['uploads/category-metallic-paper.png', 'White Ink'],
+                ['uploads/category-textured.png', 'Water-Based Ink'], ['uploads/category-sbs-c.png', 'Pantone Ink'],
+                ['uploads/category-grey-cardboard-chip.png', 'UV Ink'], ['uploads/category-duplex-chip.png', 'CMYK Ink']
             ],
             finishing: [
-                ['uploads/gold-inside-box.jfif', 'Gold Foil'], ['uploads/holographic.png', 'Holographic Foil'],
-                ['uploads/textured.png', 'Soft-Touch Lamination'], ['uploads/metallic-paper.png', 'Gloss Lamination'],
-                ['uploads/black-kraft.png', 'Matte Lamination'], ['uploads/custom-luxury-box.jfif', 'Spot UV'],
-                ['uploads/rigid-presentation-box.jfif', 'Embossing'], ['uploads/box-with-lid.jfif', 'Debossing']
+                ['uploads/addon-gold-inside-box.jfif', 'Gold Foil'], ['uploads/category-holographic.png', 'Holographic Foil'],
+                ['uploads/category-textured.png', 'Soft-Touch Lamination'], ['uploads/category-metallic-paper.png', 'Gloss Lamination'],
+                ['uploads/category-black-kraft.png', 'Matte Lamination'], ['uploads/industry-custom-luxury-box.jfif', 'Spot UV'],
+                ['uploads/industry-rigid-presentation-box.jfif', 'Embossing'], ['uploads/industry-box-with-lid.jfif', 'Debossing']
             ],
             addons: [
-                ['uploads/box-with-lid.jfif', 'Custom Inserts'], ['uploads/Collapsible-Rigid-Boxes.webp', 'Ribbon Closure'],
-                ['uploads/Maganetic-Closure-Boxes.webp', 'Magnetic Closure'], ['uploads/two-piece-box.jfif', 'Paper Sleeve'],
-                ['uploads/custom-shaped-box.jfif', 'Die-Cut Window'], ['uploads/Gift-Boxes.webp', 'Thank-You Card'],
-                ['uploads/rigid-plain-white-box.jfif', 'Tissue Paper'], ['uploads/custom-shoulder-box.jfif', 'Foam Insert']
+                ['uploads/industry-box-with-lid.jfif', 'Custom Inserts'], ['uploads/category-collapsible-rigid-boxes.webp', 'Ribbon Closure'],
+                ['uploads/industry-magnetic-closure-boxes.webp', 'Magnetic Closure'], ['uploads/industry-two-piece-box.jfif', 'Paper Sleeve'],
+                ['uploads/category-custom-shaped-box.jfif', 'Die-Cut Window'], ['uploads/industry-gift-boxes.webp', 'Thank-You Card'],
+                ['uploads/industry-rigid-plain-white-box.jfif', 'Tissue Paper'], ['uploads/industry-custom-shoulder-box.jfif', 'Foam Insert']
             ]
         };
 
         function setCustomizeCardOrder(option) {
-            const cardOrder = customizeCardOrders[option] || customizeCardOrders.materials;
+            /* Keep the same eight starter images for every tab for now;
+               tab-specific artwork can be swapped in later without changing layout. */
+            const cardOrder = customizeCardOrders.materials;
 
             customizeCards.forEach(card => {
                 card.style.opacity = '0';
@@ -595,7 +607,7 @@
             });
 
             setTimeout(() => {
-                const cardSet = customizeCardSets[option] || customizeCardSets.materials;
+                const cardSet = customizeCardSets.materials;
                 cardOrder.forEach(function(cardIndex, position) {
                     const card = customizeCards[cardIndex];
                     const [imagePath, title] = cardSet[position];
@@ -616,6 +628,9 @@
         }
 
         document.querySelectorAll('.customize-tab').forEach(function(tab) {
+            tab.addEventListener('pointerdown', function(event) {
+                event.stopPropagation();
+            });
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.customize-tab').forEach(function(item) {
                     item.classList.remove('active');
@@ -627,7 +642,7 @@
                 setCustomizeCardOrder(tab.dataset.customizeTab);
 
                 if (customizeSidebar) {
-                    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
                 }
             });
         });

@@ -24,18 +24,37 @@
             color: #000000;
         }
 
+        .home-page,
+        .home-page > section {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
+        /* Shared canvas aligned with the header's centered 1440px container. */
+        .home-page > section > [class$="-container"],
+        .home-page > section > [class$="-inner"] {
+            width: 100%;
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 24px;
+            padding-right: 24px;
+            box-sizing: border-box;
+        }
+
         /* ─────────────────────────────────────────
            SECTION: CUSTOM BOXES FOR EVERY INDUSTRY
         ───────────────────────────────────────── */
         .custom-boxes-section {
-            background: #FFFFFF;
-            padding: 60px 0 70px;
+            background: #FAF8F8;
+            padding: 32px 0 70px;
         }
 
         .custom-boxes-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 24px;
             text-align: center;
         }
 
@@ -47,7 +66,7 @@
             letter-spacing: 0%;
             text-transform: capitalize;
             color: var(--section-text-color);
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
 
         .custom-boxes-container .section-desc {
@@ -59,7 +78,7 @@
             text-align: center;
             color: var(--section-text-color);
             max-width: 600px;
-            margin: 0 auto 48px;
+            margin: 0 auto 28px;
         }
 
         /* ─────────────────────────────────────────
@@ -67,17 +86,19 @@
         ───────────────────────────────────────── */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(4, 292px);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 24px;
-            justify-content: center;
+            justify-content: start;
+            max-width: 100%;
         }
 
         /* ─────────────────────────────────────────
            CARD  (exact Figma spec)
         ───────────────────────────────────────── */
         .industry-card {
-            width: 292px;
-            background: #FFFEFA;
+            width: 100%;
+            min-height: 456px;
+            background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0px 0px 10px 0px #00000029;
             overflow: hidden;
@@ -90,7 +111,7 @@
             display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 19px;
             line-height: 100%;
             letter-spacing: 0%;
             text-transform: capitalize;
@@ -105,10 +126,9 @@
 
         /* Image area — Figma: left:8px w:275 h:266 */
         .industry-card__image-wrap {
-            width: 275px;
+            width: calc(100% - 16px);
             height: 266px;
             margin: 0 auto;
-            border-bottom: 0.2px solid #e0e0e0;
             overflow: hidden;
             flex-shrink: 0;
         }
@@ -116,7 +136,7 @@
         .industry-card__image-wrap img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
             transition: transform 0.35s ease;
         }
@@ -140,6 +160,7 @@
             font-size: 14px;
             line-height: 1.5;
             color: #333;
+            text-align: left;
             flex: 1; /* pushes button down */
         }
 
@@ -150,9 +171,10 @@
             width: 200px;
             height: 46px;
             margin-top: 14px;
-            margin-left: 29px; /* (292 - 17padding - 200btn - 46offset) = centres within bottom area at Figma left:46 */
-            background: #8D4445;
-            color: #fff;
+            margin-left: auto;
+            margin-right: auto;
+            background: #FFFFFF;
+            color: #8D4445;
             font-family: 'DM Sans', sans-serif;
             font-weight: 700;
             font-size: 16px;
@@ -170,8 +192,8 @@
         }
 
         .industry-card__btn:hover {
-            background: #5F2D2F;
-            border-color: #5F2D2F;
+            background: #8D4445;
+            border-color: #8D4445;
             color: #fff;
         }
 
@@ -224,7 +246,7 @@
         .why-choose-container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 24px;
             text-align: center;
         }
 
@@ -253,20 +275,23 @@
            Total width: 4×299 + 3×14 = 1238px
         ───────────────────────────────────────── */
         .why-bento {
-            width: 1238px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
             text-align: left;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-rows: 242px 157px 242px;
+            gap: 14px;
         }
 
         /* each row is a flex row */
         .why-row {
-            display: flex;
-            flex-direction: row;
-            gap: 14px;
+            display: contents;
         }
 
         .why-row + .why-row {
-            margin-top: 14px;
+            margin-top: 0;
         }
 
         /* ── Base card ── */
@@ -309,11 +334,11 @@
             position: absolute;
             top: 173px;
             left: 63px;
-            width: 172px;
-            height: 208px;
+            width: 210px;
+            height: 210px;
             background: transparent;
             border-radius: 12px;
-            padding: 40px;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -326,7 +351,7 @@
         .why-card__img-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 12px;
         }
 
@@ -335,8 +360,10 @@
         ───────────────────────────────────────── */
         .wc-pink1 {
             background: #FDF0F6;
-            width: 299px;
+            width: 100%;
             height: 413px;
+            grid-column: 1;
+            grid-row: 1 / span 2;
         }
 
         /* ─────────────────────────────────────────
@@ -344,8 +371,10 @@
         ───────────────────────────────────────── */
         .wc-pink2 {
             background: #FCECEE;
-            width: 299px;
+            width: 100%;
             height: 413px;
+            grid-column: 2;
+            grid-row: 1 / span 2;
         }
 
         /* ─────────────────────────────────────────
@@ -353,22 +382,34 @@
         ───────────────────────────────────────── */
         .wc-blue {
             background: #EAF3FB;
-            width: 612px;
+            width: 100%;
             height: 242px;
             position: relative;
+            grid-column: 3 / span 2;
+            grid-row: 1;
         }
         .wc-blue .why-card__content {
             max-width: 55%;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+        .wc-blue .why-card__title,
+        .wc-blue .why-card__text,
+        .wc-yellow .why-card__title,
+        .wc-yellow .why-card__text {
+            text-align: left;
         }
         .wc-blue .why-card__illus {
             position: absolute;
-            bottom: 24px;
-            right: 24px;
+            bottom: 0;
+            right: 0;
             left: auto;
             top: auto;
-            width: 260px;
-            height: 260px;
-            object-fit: contain;
+            width: 58%;
+            height: 100%;
+            object-fit: cover;
+            object-position: right center;
         }
 
         /* ─────────────────────────────────────────
@@ -376,16 +417,28 @@
         ───────────────────────────────────────── */
         .wc-yellow {
             background: #FDF7E7;
-            width: 612px;
+            width: 100%;
             height: 242px;
+            grid-column: 1 / span 2;
+            grid-row: 3;
         }
         .wc-yellow .why-card__content {
             max-width: 55%;
+            position: relative;
+            z-index: 2;
         }
         .wc-yellow .why-card__img-box {
-            top: 17px;
+            top: 0;
             left: auto;
-            right: 24px;
+            right: 0;
+            width: 58%;
+            height: 100%;
+            border-radius: 0;
+        }
+        .wc-yellow .why-card__img-box img {
+            object-fit: cover;
+            object-position: right center;
+            border-radius: 0;
         }
 
         /* ─────────────────────────────────────────
@@ -393,8 +446,10 @@
         ───────────────────────────────────────── */
         .wc-green {
             background: #ECFBEF;
-            width: 299px;
+            width: 100%;
             height: 413px;
+            grid-column: 3;
+            grid-row: 2 / span 2;
         }
 
         /* ─────────────────────────────────────────
@@ -402,8 +457,10 @@
         ───────────────────────────────────────── */
         .wc-skin {
             background: #FDF3E9;
-            width: 299px;
+            width: 100%;
             height: 413px;
+            grid-column: 4;
+            grid-row: 2 / span 2;
         }
 
         /* ─────────────────────────────────────────
@@ -413,11 +470,14 @@
         /* Tablet: scale down to 2-col fluid */
         @media (max-width: 1300px) {
             .why-choose-container { padding: 0 40px; }
-            .why-bento { width: 100%; }
+            .why-bento { width: 100%; display: block; }
 
             .why-row {
+                display: flex;
                 flex-wrap: wrap;
             }
+
+            .why-row + .why-row { margin-top: 14px; }
 
             .wc-pink1,
             .wc-pink2  { width: calc(50% - 7px); height: 360px; }
@@ -521,17 +581,17 @@
         .premium-inner {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 100px;
+            padding: 0 24px;
             display: flex;
             flex-direction: row;
             align-items: flex-start;
-            gap: 0;
+            gap: 48px;
         }
 
         /* ── LEFT: two overlapping images ── */
         .premium-images {
             position: relative;
-            width: 640px;
+            width: 52%;
             height: 645px;
             flex-shrink: 0;
         }
@@ -540,7 +600,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 504px;
+            width: 80%;
             height: 464px;
             border-radius: 21.12px;
             object-fit: cover;
@@ -551,8 +611,8 @@
         .premium-img2 {
             position: absolute;
             top: 238px;
-            left: 240px;
-            width: 345px;
+            left: 38%;
+            width: 55%;
             height: 341px;
             border-radius: 15.51px;
             object-fit: cover;
@@ -562,8 +622,9 @@
 
         /* ── RIGHT: content col ── */
         .premium-content {
-            width: 479px;
-            flex-shrink: 0;
+            width: auto;
+            min-width: 0;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -578,7 +639,7 @@
             text-transform: capitalize;
             color: #fff;
             margin-bottom: 20px;
-            width: 469px;
+            width: 100%;
         }
 
         .premium-desc {
@@ -589,7 +650,7 @@
             letter-spacing: 0%;
             text-align: justify;
             color: rgba(255, 255, 255, 0.9);
-            width: 479px;
+            width: 100%;
             margin-bottom: 32px;
         }
 
@@ -694,7 +755,7 @@
         .bestseller-inner {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 99px;
+            padding: 0 24px;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -703,7 +764,7 @@
 
         /* Left content block — w:260 */
         .bestseller-left {
-            width: 260px;
+            width: 280px;
             flex-shrink: 0;
         }
 
@@ -738,6 +799,9 @@
         }
 
         .bestseller-dot {
+            appearance: none;
+            padding: 0;
+            cursor: pointer;
             width: 15px;
             height: 15px;
             border-radius: 50%;
@@ -751,29 +815,35 @@
             border-color: var(--primary-color, #8D4445);
         }
 
+        .bestseller-card--mobile-only { display: none !important; }
+
         /* Cards row */
         .bestseller-cards {
             display: flex;
             flex-direction: row;
             gap: 20px;
-            flex: 1;
+            flex: 0 0 auto;
+            min-width: 0;
         }
 
         .bestseller-card {
-            width: 284px;
-            height: 322px;
+            width: 330px;
+            min-width: 330px;
+            height: 370px;
+            flex: 0 0 330px;
             border-radius: 17.22px;
             overflow: hidden;
-            flex-shrink: 0;
+            flex-shrink: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #fff;
+            background: transparent;
         }
 
         .bestseller-card__img {
-            width: 284px;
-            height: 284px;
+            width: 330px;
+            height: 330px;
+            aspect-ratio: auto;
             border-radius: 17.22px;
             overflow: hidden;
             border: 1.08px solid #4A4E541A;
@@ -846,9 +916,11 @@
             }
             .bestseller-card {
                 width: calc(50% - 6px);
+                min-width: 0;
                 height: auto;
-                flex-shrink: 0;
+                flex: 0 0 calc(50% - 6px);
             }
+            .bestseller-card--mobile-only { display: flex !important; }
             .bestseller-card__img {
                 width: 100%;
                 height: auto;
@@ -866,7 +938,15 @@
             }
 
             .cards-grid {
-                grid-template-columns: repeat(2, 292px);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .industry-card {
+                width: 100%;
+            }
+
+            .industry-card__image-wrap {
+                width: calc(100% - 16px);
             }
         }
 
@@ -954,13 +1034,15 @@
         ───────────────────────────────────────── */
         .customize-detail-section {
             background: var(--background-color, #FAF8F8);
-            padding: 60px 0 70px;
+            padding: 48px 0 70px;
         }
 
         .customize-detail-inner {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 1320px;
             margin: 0 auto;
-            padding: 0 181px;
+            padding: 0 24px !important;
+            box-sizing: border-box;
         }
 
         /* Heading */
@@ -991,6 +1073,7 @@
         /* Options pill bar */
         .customize-detail-options {
             width: 100%;
+            max-width: none;
             margin: 0 0 20px 0;
             border: 1px solid var(--section-text-color, #000);
             border-radius: 100px;
@@ -998,7 +1081,8 @@
             flex-direction: row;
             align-items: center;
             padding: 5px 6px;
-            gap: 2px;
+            gap: 4px;
+            justify-content: space-between;
             overflow-x: auto;
             scrollbar-width: none;
             cursor: grab;
@@ -1011,7 +1095,7 @@
         .customize-detail-options.grabbing { cursor: grabbing; }
 
         .cdo-btn {
-            flex-shrink: 0;
+            flex: 1 1 auto;
             height: 40px;
             padding: 0 20px;
             border-radius: 100px;
@@ -1019,7 +1103,7 @@
             background: transparent;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--section-text-color);
             cursor: pointer;
             white-space: nowrap;
@@ -1038,9 +1122,10 @@
         /* Cards row */
         .customize-detail-cards {
             width: 100%;
+            max-width: none;
             display: flex;
             flex-direction: row;
-            gap: 14px;
+            gap: 10px;
         }
 
         /* Each card: equal flex, square-ish aspect ratio */
@@ -1067,7 +1152,7 @@
             left: 18px;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 20px;
             line-height: 1;
             color: var(--section-text-color, #000);
         }
@@ -1076,16 +1161,17 @@
            RESPONSIVE — Customize Detail
         ───────────────────────────────────────── */
         @media (max-width: 1200px) {
-            .customize-detail-inner { padding: 0 80px; }
+            .customize-detail-inner { padding: 0 24px; }
+            .cdo-btn { font-size: 14px; padding-inline: 14px; }
         }
 
         @media (max-width: 900px) {
-            .customize-detail-inner { padding: 0 40px; }
+            .customize-detail-inner { padding: 0 24px !important; }
         }
 
         @media (max-width: 768px) {
             .customize-detail-section { padding: 40px 0 50px; }
-            .customize-detail-inner   { padding: 0 20px; }
+            .customize-detail-inner   { padding: 0 20px !important; }
             .customize-detail-heading { font-size: 24px; }
             .customize-detail-desc    { font-size: 14px; max-width: 100%; }
             .cdo-btn                  { font-size: 13px; padding: 0 14px; height: 38px; }
@@ -1110,7 +1196,7 @@
         .sustainable-inner {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 0 101px;
+            padding: 0 24px;
         }
 
         /* heading */
@@ -1287,7 +1373,7 @@
            TESTIMONIAL
         ═══════════════════════════════════ */
         .testimonial-section { background: var(--secondary-color); padding: 20px 0; position: relative; overflow: visible; }
-        .testimonial-container { max-width: 1440px; margin: 0 auto; padding: 0 5%; overflow: visible; }
+        .testimonial-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; overflow: visible; }
         .testimonial-header { text-align: center; margin-bottom: 40px; }
         .testimonial-title { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 32px !important; line-height: 100%; text-transform: capitalize; color: #111; margin-bottom: 12px; }
         .testimonial-subtitle { font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.5; text-align: center; color: #333; max-width: 620px; margin: 0 auto; }
@@ -1325,7 +1411,7 @@
            CUSTOM QUOTE
         ═══════════════════════════════════ */
         .quote-section { background: var(--primary-color); width: 100%; padding: 20px 0 54px; position: relative; overflow: hidden; margin-top: 20px; }
-        .quote-container { max-width: 1440px; margin: 0 auto; padding: 0 5%; display: flex; align-items: stretch; gap: 40px; position: relative; z-index: 2; }
+        .quote-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; gap: 40px; position: relative; z-index: 2; }
         .quote-form-card { width: 739px; min-height: 712px; flex-shrink: 0; background: #fff; border-radius: 20px; padding: 46px; box-sizing: border-box; }
         .quote-form-title { font-family: 'Open Sans', sans-serif; font-size: 32px !important; font-weight: 800; color: var(--section-text-color); text-align: center; margin-bottom: 28px; }
         .form-section-label { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 15px; color: var(--primary-color); margin-bottom: 10px; margin-top: 22px; }
@@ -1365,7 +1451,7 @@
            TEXT CONTENT
         ═══════════════════════════════════ */
         .text-content-section { background: var(--background-color); padding: 25px 0; }
-        .text-content-container { max-width: 1440px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: center; }
+        .text-content-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; }
         .text-content-card { width: 100%; max-width: 1030px; background: #fff; border-radius: 40px; border: 1px solid var(--section-text-color); padding: 48px 20px 48px 56px; box-sizing: border-box; height: 787px; }
         .text-content-inner { height: 100%; overflow-y: auto; padding-right: 26px; scrollbar-width: thin; scrollbar-color: var(--primary-color) #F0F0F0; }
         .text-content-inner::-webkit-scrollbar { width: 10px; }
@@ -1388,6 +1474,7 @@
 
     <main class="home-page">
   @include('components.herohome')
+  @include('components.logo')
         <!-- Custom Printed Boxes for Every Industry Section -->
         <section class="custom-boxes-section">
             <div class="custom-boxes-container">
@@ -1401,7 +1488,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Rigid Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/custom-luxury-box.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                            <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1413,7 +1500,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Magnetic Closure Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/Maganetic-Closure-Boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
+                            <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1425,7 +1512,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Photo Presentation Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/rigid-presentation-box.jfif') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
+                            <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1437,7 +1524,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Book Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/rigid-plain-white-box.jfif') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
+                            <img src="{{ asset('uploads/industry-rigid-plain-white-box.jfif') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1449,7 +1536,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Magnetic Book Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/custom-shoulder-box.jfif') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
+                            <img src="{{ asset('uploads/industry-custom-shoulder-box.jfif') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1461,7 +1548,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Drawer Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/two-piece-box.jfif') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
+                            <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1473,7 +1560,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Gift Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/Gift-Boxes.webp') }}" alt="Gift Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Gift+Boxes'">
+                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Gift Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Gift+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1485,7 +1572,7 @@
                     <div class="industry-card">
                         <span class="industry-card__title">Rigid Boxes</span>
                         <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/box-with-lid.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                            <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
                         </div>
                         <div class="industry-card__bottom">
                             <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
@@ -1524,7 +1611,7 @@
                                 <p class="why-card__text">Get expert assistance with artwork, layouts, and packaging design at no extra cost.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/custom-luxury-box.jfif') }}" alt="Free Design Support">
+                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Packaging designer creating a custom box dieline">
                             </div>
                         </div>
 
@@ -1535,7 +1622,7 @@
                                 <p class="why-card__text">Built with high-strength materials that ensure durability, protection, and a premium feel.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/CardBoard-Boxes.webp') }}" alt="Premium Quality Materials">
+                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Premium rigid box materials and paper samples">
                             </div>
                         </div>
 
@@ -1545,7 +1632,7 @@
                                 <h3 class="why-card__title">Low MOQ</h3>
                                 <p class="why-card__text">Flexible minimum order quantities to help startups and growing brands order with confidence.</p>
                             </div>
-                            <img src="{{ asset('uploads/Box-by-industry-Banner-.webp') }}" alt="Low MOQ" class="why-card__illus" onerror="this.style.display='none'">
+                            <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Small business owner holding a manageable box order" class="why-card__illus">
                         </div>
 
                     </div><!-- /.why-row row-1 -->
@@ -1560,7 +1647,7 @@
                                 <p class="why-card__text">Our packaging specialists are here to guide you through every step of the process.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/profile-image.jfif') }}" alt="Dedicated Customer Service">
+                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Packaging customer-service specialist">
                             </div>
                         </div>
 
@@ -1571,7 +1658,7 @@
                                 <p class="why-card__text">Tailored packaging solutions crafted to match your product dimensions and brand identity.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/custom-shaped-box.jfif') }}" alt="Custom Sizes">
+                                <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Sizes and Designs">
                             </div>
                         </div>
 
@@ -1582,7 +1669,7 @@
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/Maganetic-Closure-Boxes.webp') }}" alt="Fast Production">
+                                <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast Production and Delivery">
                             </div>
                         </div>
 
@@ -1599,15 +1686,14 @@
         <section class="bestseller-section">
             <div class="bestseller-inner">
 
-                <!-- Left: heading + desc + dots -->
+                <!-- Left: heading + desc + clickable tabs -->
                 <div class="bestseller-left">
                     <h2 class="bestseller-heading">Best Seller Product</h2>
                     <p class="bestseller-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
-                    <div class="bestseller-dots">
-                        <span class="bestseller-dot active"></span>
-                        <span class="bestseller-dot"></span>
-                        <span class="bestseller-dot"></span>
-                        <span class="bestseller-dot"></span>
+                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
+                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 2"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 3"></button>
                     </div>
                 </div>
 
@@ -1619,6 +1705,14 @@
                             <img src="{{ asset('uploads/best-seller-p1.png') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Lipstick+Boxes'">
                         </div>
                         <p class="bestseller-card__title">Lipstick Boxes</p>
+                    </div>
+
+                    <!-- Fourth card is shown only in the mobile 2×2 layout. -->
+                    <div class="bestseller-card bestseller-card--mobile-only" aria-hidden="true">
+                        <div class="bestseller-card__img">
+                            <img src="{{ asset('uploads/best-seller-p2.png') }}" alt="Serum Boxes">
+                        </div>
+                        <p class="bestseller-card__title">Serum Boxes</p>
                     </div>
 
                     <div class="bestseller-card">
@@ -1648,8 +1742,8 @@
 
                 <!-- LEFT: two overlapping images -->
                 <div class="premium-images">
-                    <img class="premium-img1" src="{{ asset('uploads/image-frame.png') }}" alt="Premium Custom Rigid Boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
-                    <img class="premium-img2" src="{{ asset('uploads/image-frame2.png') }}" alt="Velora Box" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
+                    <img class="premium-img1" src="{{ asset('uploads/premium-image-frame.png') }}" alt="Premium Custom Rigid Boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
+                    <img class="premium-img2" src="{{ asset('uploads/premium-image-frame2.png') }}" alt="Velora Box" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
                 </div>
 
                 <!-- RIGHT: content col -->
@@ -1663,17 +1757,17 @@
                     <div class="premium-icons">
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/premiuim-quality.svg') }}" alt="Premium Quality" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=Q'">
+                            <img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="Premium Quality" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=Q'">
                             <span class="premium-icon-text">Premium Quality</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/custom-design.svg') }}" alt="Custom Designs" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=D'">
+                            <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Designs" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=D'">
                             <span class="premium-icon-text">Custom Designs</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/fast-delivery.svg') }}" alt="Fast & Reliable Delivery" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=F'">
+                            <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast & Reliable Delivery" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=F'">
                             <span class="premium-icon-text">Fast &amp; Reliable Delivery</span>
                         </div>
 
@@ -1697,29 +1791,29 @@
 
                 <!-- Options pill bar (scrollable, draggable) -->
                 <div class="customize-detail-options" id="cdoBar">
-                    <button class="cdo-btn active" data-cdo="foiling">Foiling</button>
-                    <button class="cdo-btn" data-cdo="embossing">Embossing/Debossing</button>
-                    <button class="cdo-btn" data-cdo="laminations">Laminations</button>
-                    <button class="cdo-btn" data-cdo="magnetic">Magnetic Closure</button>
-                    <button class="cdo-btn" data-cdo="inserts">Custom Inserts</button>
-                    <button class="cdo-btn" data-cdo="coating">Coating</button>
+                    <button type="button" class="cdo-btn active" data-cdo="foiling">Foiling</button>
+                    <button type="button" class="cdo-btn" data-cdo="embossing">Embossing/Debossing</button>
+                    <button type="button" class="cdo-btn" data-cdo="laminations">Laminations</button>
+                    <button type="button" class="cdo-btn" data-cdo="magnetic">Magnetic Closure</button>
+                    <button type="button" class="cdo-btn" data-cdo="inserts">Custom Inserts</button>
+                    <button type="button" class="cdo-btn" data-cdo="coating">Coating</button>
                 </div>
 
                 <!-- Cards -->
                 <div class="customize-detail-cards" id="cdoCards">
 
                     <div class="cdc-card cdc-card--gold">
-                        <img src="{{ asset('uploads/gold-foil.png') }}" alt="Gold Foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
+                        <img src="{{ asset('uploads/addon-gold-foil.png') }}" alt="Gold Foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
                         <span class="cdc-card__label" id="cdo-label-1">Gold Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/silver-foil.png') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
+                        <img src="{{ asset('uploads/addon-silver-foil.png') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--holo">
-                        <img src="{{ asset('uploads/holographic-foil.png') }}" alt="Holographic Foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
+                        <img src="{{ asset('uploads/addon-holographic-foil.png') }}" alt="Holographic Foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
                         <span class="cdc-card__label" id="cdo-label-3">Holographic Foil</span>
                     </div>
 
@@ -1741,7 +1835,7 @@
 
                     <!-- LEFT: big image with overlay -->
                     <div class="sustainable-left">
-                        <img src="{{ asset('uploads/go-green.png') }}" alt="Eco-Friendly Packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
+                        <img src="{{ asset('uploads/eco-go-green.png') }}" alt="Eco-Friendly Packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
@@ -1753,12 +1847,12 @@
                     <div class="sustainable-right">
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/fsc-img.png') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
+                            <img src="{{ asset('uploads/eco-fsc-certified.png') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
                             <span class="sustainable-right__label">FSC Image</span>
                         </div>
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/circular-packing.png') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
+                            <img src="{{ asset('uploads/eco-circular-packaging.png') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
                             <span class="sustainable-right__label">Circular Packaging Image</span>
                         </div>
 
@@ -1789,63 +1883,71 @@
         (function () {
             var cdoData = {
                 foiling:   [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'Gold Foil' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Silver Foil' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Holographic Foil' }
+                    { src: '{{ asset("uploads/addon-gold-foil.png") }}',         label: 'Gold Foil' },
+                    { src: '{{ asset("uploads/addon-silver-foil.png") }}',       label: 'Silver Foil' },
+                    { src: '{{ asset("uploads/addon-holographic-foil.png") }}',  label: 'Holographic Foil' }
                 ],
                 embossing: [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'Embossing' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Debossing' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Blind Emboss' }
+                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Embossing' },
+                    { src: '{{ asset("uploads/category-black-kraft.png") }}',       label: 'Debossing' },
+                    { src: '{{ asset("uploads/category-natural-brown-kraft.png") }}', label: 'Blind Emboss' }
                 ],
                 laminations: [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'Gloss Lamination' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Matte Lamination' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Soft-Touch' }
+                    { src: '{{ asset("uploads/category-holographic.png") }}',       label: 'Gloss Lamination' },
+                    { src: '{{ asset("uploads/addon-silver-foil.png") }}',       label: 'Matte Lamination' },
+                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Soft-Touch Lamination' }
                 ],
                 magnetic: [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'Magnetic Closure' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Snap Closure' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Ribbon Closure' }
+                    { src: '{{ asset("uploads/industry-magnetic-closure-boxes.webp") }}', label: 'Magnetic Closure' },
+                    { src: '{{ asset("uploads/industry-custom-luxury-box.jfif") }}', label: 'Luxury Magnetic Box' },
+                    { src: '{{ asset("uploads/industry-rigid-presentation-box.jfif") }}', label: 'Presentation Closure' }
                 ],
                 inserts: [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'Foam Insert' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Velvet Insert' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Paper Insert' }
+                    { src: '{{ asset("uploads/addon-gold-inside-box.jfif") }}',   label: 'Luxury Insert' },
+                    { src: '{{ asset("uploads/industry-box-with-lid.jfif") }}',      label: 'Custom Paper Insert' },
+                    { src: '{{ asset("uploads/industry-custom-shoulder-box.jfif") }}', label: 'Protective Insert' }
                 ],
                 coating: [
-                    { src: '{{ asset("uploads/gold-foil.png") }}',         label: 'UV Coating' },
-                    { src: '{{ asset("uploads/silver-foil.png") }}',       label: 'Aqueous Coating' },
-                    { src: '{{ asset("uploads/holographic-foil.png") }}',  label: 'Varnish' }
+                    { src: '{{ asset("uploads/category-holographic.png") }}',       label: 'UV Coating' },
+                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Aqueous Coating' },
+                    { src: '{{ asset("uploads/eco-circular-packaging.png") }}',  label: 'Protective Varnish' }
                 ]
             };
 
             var bar = document.getElementById('cdoBar');
 
-            /* option button click */
-            bar.querySelectorAll('.cdo-btn').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    bar.querySelectorAll('.cdo-btn').forEach(function (b) { b.classList.remove('active'); });
-                    btn.classList.add('active');
-                    var key = btn.dataset.cdo;
-                    var data = cdoData[key] || cdoData.foiling;
-                    data.forEach(function (item, i) {
-                        var img = document.getElementById('cdo-img-' + (i + 1));
-                        var lbl = document.getElementById('cdo-label-' + (i + 1));
-                        if (img) { img.src = item.src; img.alt = item.label; }
-                        if (lbl) { lbl.textContent = item.label; }
-                    });
+            window.switchCustomizeDetail = function (btn) {
+                if (!btn || !bar) return;
+                bar.querySelectorAll('.cdo-btn').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var data = cdoData[btn.dataset.cdo] || cdoData.foiling;
+                data.forEach(function (item, i) {
+                    var img = document.getElementById('cdo-img-' + (i + 1));
+                    var lbl = document.getElementById('cdo-label-' + (i + 1));
+                    if (img) { img.src = item.src; img.alt = item.label; }
+                    if (lbl) { lbl.textContent = item.label; }
                 });
-            });
+            };
 
             /* drag-to-scroll on options bar */
             var isDown = false, startX, scrollLeft;
             bar.addEventListener('pointerdown', function (e) {
+                if (e.target.closest('.cdo-btn')) return;
                 isDown = true;
                 bar.classList.add('grabbing');
                 startX = e.pageX - bar.offsetLeft;
                 scrollLeft = bar.scrollLeft;
                 bar.setPointerCapture(e.pointerId);
+            });
+
+            /* Buttons must remain normal clickable controls even though the
+               surrounding pill supports drag-to-scroll. */
+            bar.querySelectorAll('.cdo-btn').forEach(function (btn) {
+                btn.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.switchCustomizeDetail(btn);
+                });
             });
             bar.addEventListener('pointermove', function (e) {
                 if (!isDown) return;
@@ -1859,6 +1961,21 @@
                 });
             });
         }());
+    </script>
+
+    <script>
+        // Best Seller tabs: keep the starter images identical for now while
+        // preserving a working three-tab interaction for later replacements.
+        document.querySelectorAll('.bestseller-dot').forEach(function (dot) {
+            dot.addEventListener('click', function () {
+                document.querySelectorAll('.bestseller-dot').forEach(function (item) {
+                    item.classList.remove('active');
+                    item.setAttribute('aria-selected', 'false');
+                });
+                dot.classList.add('active');
+                dot.setAttribute('aria-selected', 'true');
+            });
+        });
     </script>
 
 </body>

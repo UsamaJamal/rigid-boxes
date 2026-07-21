@@ -974,28 +974,28 @@
                     <!-- Row 1 -->
                     <article class="industry-card apparel-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Vector (10).png') }}" alt="Apparel" class="card-image">
+                            <img src="{{ asset('images/industry-apparel-icon.png') }}" alt="Apparel" class="card-image">
                         </div>
                         <h3 class="heading-04">Apparel</h3>
                     </article>
 
                     <article class="industry-card cosmetics-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Vector (14).png') }}" alt="Cosmetics" class="card-image">
+                            <img src="{{ asset('images/industry-cosmetics-icon.png') }}" alt="Cosmetics" class="card-image">
                         </div>
                         <h3 class="heading-04">Cosmetics</h3>
                     </article>
 
                     <article class="industry-card food-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon.png') }}" alt="Food" class="card-image">
+                            <img src="{{ asset('images/industry-food-icon.png') }}" alt="Food" class="card-image">
                         </div>
                         <h3 class="heading-04">Food</h3>
                     </article>
 
                     <article class="industry-card gift-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon (1).png') }}" alt="Gift" class="card-image">
+                            <img src="{{ asset('images/industry-gift-icon.png') }}" alt="Gift" class="card-image">
                         </div>
                         <h3 class="heading-04">Gift</h3>
                     </article>
@@ -1014,7 +1014,7 @@
 
                     <article class="industry-card jewelry-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon (2).png') }}" alt="Jewelry" class="card-image">
+                            <img src="{{ asset('images/industry-jewelry-icon.png') }}" alt="Jewelry" class="card-image">
                         </div>
                         <h3 class="heading-04">Jewelry</h3>
                     </article>
@@ -1032,7 +1032,7 @@
 
                     <article class="industry-card personalcare-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon (5).png') }}" alt="Personal Care" class="card-image">
+                            <img src="{{ asset('images/industry-personal-care-icon.png') }}" alt="Personal Care" class="card-image">
                         </div>
                         <h3 class="heading-04">Personal Care</h3>
                     </article>
@@ -1040,7 +1040,7 @@
                     <!-- Row 3 -->
                     <article class="industry-card pet-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon (6).png') }}" alt="Pet" class="card-image">
+                            <img src="{{ asset('images/industry-pet-icon.png') }}" alt="Pet" class="card-image">
                         </div>
                         <h3 class="heading-04">Pet</h3>
                     </article>
@@ -1059,7 +1059,7 @@
 
                     <article class="industry-card tea-card">
                         <div class="card-icon">
-                            <img src="{{ asset('images/Icon (8).png') }}" alt="Tea" class="card-image">
+                            <img src="{{ asset('images/industry-tea-icon.png') }}" alt="Tea" class="card-image">
                         </div>
                         <h3 class="heading-04">Tea</h3>
                     </article>

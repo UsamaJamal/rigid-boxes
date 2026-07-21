@@ -7,7 +7,8 @@
     .brand-logos-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
         overflow: hidden;
     }
 
@@ -81,18 +82,18 @@
 
 @php
     $brandLogos = [
-        ['file' => 'true-girl.svg', 'alt' => 'TrueGirl'],
-        ['file' => 'jeeter-mart.svg', 'alt' => 'Jester Mart'],
-        ['file' => 'bass-pro-shop.svg', 'alt' => 'Bass Pro Shops'],
-        ['file' => 'hulu-motor.svg', 'alt' => 'The Hulu Motel'],
-        ['file' => 'red-bull-logo.png', 'alt' => 'Red Bull'],
-        ['file' => 'kinky.webp', 'alt' => 'Kinky'],
-        ['file' => 'voli-logo.webp', 'alt' => 'Voli'],
-        ['file' => 'burger-bar.svg', 'alt' => 'Burger Bar'],
-        ['file' => 'flowgardens-logo.webp', 'alt' => 'Flowgardens'],
-        ['file' => 'her-piece-peace-logo.webp', 'alt' => 'Her Piece Peace'],
-        ['file' => 'neat-logo.webp', 'alt' => 'Neat'],
-        ['file' => 'springtastic-logo.webp', 'alt' => 'Springtastic'],
+        ['file' => 'trusted-true-girl.svg', 'alt' => 'TrueGirl'],
+        ['file' => 'trusted-jeeter-mart.svg', 'alt' => 'Jester Mart'],
+        ['file' => 'trusted-bass-pro-shop.svg', 'alt' => 'Bass Pro Shops'],
+        ['file' => 'trusted-hulu-motor.svg', 'alt' => 'The Hulu Motel'],
+        ['file' => 'trusted-red-bull-logo.png', 'alt' => 'Red Bull'],
+        ['file' => 'trusted-kinky.webp', 'alt' => 'Kinky'],
+        ['file' => 'trusted-voli-logo.webp', 'alt' => 'Voli'],
+        ['file' => 'trusted-burger-bar.svg', 'alt' => 'Burger Bar'],
+        ['file' => 'trusted-flowgardens-logo.webp', 'alt' => 'Flowgardens'],
+        ['file' => 'trusted-her-piece-peace-logo.webp', 'alt' => 'Her Piece Peace'],
+        ['file' => 'trusted-neat-logo.webp', 'alt' => 'Neat'],
+        ['file' => 'trusted-springtastic-logo.webp', 'alt' => 'Springtastic'],
     ];
 @endphp
 

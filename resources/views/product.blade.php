@@ -23,8 +23,8 @@
             --color-border: #E5E5E5;
             --color-card-bg: #FFFFFF;
             
-            --container-width: 1400px;
-            --margin-sides: 20px;
+            --container-width: 1440px;
+            --margin-sides: 24px;
         }
 
         body, body * {
@@ -45,6 +45,7 @@
             color: var(--color-text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -54,9 +55,11 @@
         }
 
         .container {
+            width: 100%;
             max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 var(--margin-sides);
+            box-sizing: border-box;
         }
 
         /* Hero Section */
@@ -1125,7 +1128,7 @@
 
         /* Responsive Margins */
         @media (min-width: 1600px) {
-            :root { --margin-sides: 100px; }
+            :root { --margin-sides: 24px; }
             .hero-container {
                 gap: 50px;
             }
@@ -1134,10 +1137,10 @@
             }
         }
         @media (max-width: 1440px) {
-            :root { --margin-sides: 80px; }
+            :root { --margin-sides: 24px; }
         }
         @media (max-width: 1200px) and (min-width: 1025px) {
-            :root { --margin-sides: 60px; }
+            :root { --margin-sides: 24px; }
             .hero-container {
                 gap: 30px;
             }
@@ -1146,7 +1149,7 @@
             }
         }
         @media (max-width: 1024px) {
-            :root { --margin-sides: 60px; }
+            :root { --margin-sides: 24px; }
             .hero-container {
                 gap: 25px;
             }
@@ -1155,18 +1158,25 @@
             }
         }
         @media (max-width: 768px) {
-            :root { --margin-sides: 20px; }
+            :root { --margin-sides: 24px; }
             .hero-container {
                 gap: 20px;
             }
         }
         @media (max-width: 480px) {
-            :root { --margin-sides: 15px; }
+            :root { --margin-sides: 20px; }
         }
 
         @media (max-width: 991px) {
             .hero-container, .finishes-grid, .quote-grid {
                 flex-direction: column;
+            }
+            .hero-images,
+            .hero-form,
+            .hero-details {
+                width: 100%;
+                max-width: 100%;
+                flex: none;
             }
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1466,11 +1476,11 @@
                 color: #fff;
                 border-color: #8c4446;
             }
-            /* Extend the tab frame beyond the right edge, then clip it. */
+            /* Keep the full tab frame inside the shared page container. */
             .tabs-section .container {
-                width: 140% !important;
-                margin-left: 10px !important;
-                margin-right: 0 !important;
+                width: calc(100% - (var(--margin-sides) * 2)) !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
             .mobile-heading-break { display: block; }
 
@@ -1643,7 +1653,7 @@
 
             <div class="hero-form">
                 <h1>Lipstick Boxes</h1>
-                <p>Custom Lipstick Boxes are crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes. Fully customizable in size, style, and design, they help create a lasting impression and enhance your product's shelf appeal<span id="dotsLipstick">... </span><span id="readMoreBtnLipstick" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; margin-left: 6px; text-shadow: none; -webkit-text-stroke: 0;">READ MORE</span><span id="moreLipstick" style="display: none;"></span></p>
+                <p>Custom Lipstick Boxes are crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes. Fully customizable in size, style, and design, they help create a lasting impression and enhance your product's shelf appeal<span id="dotsLipstick">... </span><span id="moreLipstick" style="display: none;"> Choose from premium paper stocks, foil stamping, embossing, window cut-outs, custom inserts, and protective finishes to create lipstick packaging tailored to your brand and product requirements. </span><button type="button" id="readMoreBtnLipstick" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; margin-left: 6px; border: 0; padding: 0; background: transparent;">READ MORE</button></p>
                 
                 <form action="#">
                     <div class="form-section">
@@ -1749,6 +1759,7 @@
         
         <p>At KayPackaging, we believe every business — no matter the size — deserves packaging that reflects the quality of what's inside. Whether you're a solo founder shipping your first 10 orders or a growing brand sending thousands of packages per week, our custom box solutions are built to scale with you.</p>
 
+        <div id="moreDescription" style="display: none;">
         <h2 class="considerations-heading">What to consider when choosing custom packaging:</h2>
         <ul>
             <li>Box style — mailer, rigid, folding carton, or corrugated shipping box depending on product type and fragility</li>
@@ -1757,9 +1768,10 @@
             <li>Finish — matte gives a premium feel, gloss increases vibrancy, soft touch adds texture, foil elevates luxury perception</li>
             <li>Quantity — higher quantities dramatically reduce per-unit cost; order samples first to validate before bulk printing</li>
         </ul>
+        </div>
         
         <div style="text-align: left; margin-top: 20px; margin-left: 20px;">
-            <span id="readMoreBtn" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer;">READ MORE</span>
+            <button type="button" id="readMoreBtn" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; border: 0; padding: 0; background: transparent;">READ MORE</button>
         </div>
     </section>
 
@@ -2102,13 +2114,13 @@ function toggleFaq(element) {
         // READ MORE / READ LESS toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
             const readMoreBtn = document.getElementById('readMoreBtn');
-            if (readMoreBtn) {
+            const moreDescription = document.getElementById('moreDescription');
+            if (readMoreBtn && moreDescription) {
                 readMoreBtn.addEventListener('click', function() {
-                    if (this.textContent === 'READ MORE') {
-                        this.textContent = 'READ LESS';
-                    } else {
-                        this.textContent = 'READ MORE';
-                    }
+                    const isOpen = this.getAttribute('aria-expanded') === 'true';
+                    moreDescription.style.display = isOpen ? 'none' : 'block';
+                    this.setAttribute('aria-expanded', String(!isOpen));
+                    this.textContent = isOpen ? 'READ MORE' : 'READ LESS';
                 });
             }
             
@@ -2122,10 +2134,12 @@ function toggleFaq(element) {
                     if (dotsLipstick.style.display === 'none') {
                         dotsLipstick.style.display = 'inline';
                         moreLipstick.style.display = 'none';
+                        this.setAttribute('aria-expanded', 'false');
                         this.textContent = 'READ MORE';
                     } else {
                         dotsLipstick.style.display = 'none';
                         moreLipstick.style.display = 'inline';
+                        this.setAttribute('aria-expanded', 'true');
                         this.textContent = 'READ LESS';
                     }
                 });

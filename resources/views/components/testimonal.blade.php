@@ -10,7 +10,8 @@
         max-width: 1440px;
         margin: 0 auto;
         position: relative;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
         overflow: visible;
     }
     .testimonial-header {
@@ -204,7 +205,7 @@
     /* Mobile layout follows the supplied Figma single-card composition. */
     @media (max-width: 768px) {
         .testimonial-section { padding: 46px 0 36px; }
-        .testimonial-container { padding: 0 5.5%; }
+        .testimonial-container { padding: 0 24px; }
         .testimonial-header { margin-bottom: 67px; }
         .testimonial-title { font-size: 30px; line-height: 1.2; margin-bottom: 12px; }
         .testimonial-subtitle { max-width: 420px; font-size: 20px; line-height: 1.45; }
@@ -243,7 +244,7 @@
             <div class="testimonial-slider">
             <!-- Card 1 -->
             <div class="testimonial-card">
-                <img src="{{ asset('uploads/profile-image.jfif') }}" alt="Elisa Grant" class="testimonial-img">
+                <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="Elisa Grant" class="testimonial-img">
 
                 <div class="testimonial-content">
                     <div class="testimonial-stars">
@@ -261,7 +262,7 @@
 
             <!-- Card 2 -->
             <div class="testimonial-card desktop-only">
-                <img src="{{ asset('uploads/profile-image.jfif') }}" alt="Elisa Grant" class="testimonial-img">
+                <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="Elisa Grant" class="testimonial-img">
 
                 <div class="testimonial-content">
                     <div class="testimonial-stars">

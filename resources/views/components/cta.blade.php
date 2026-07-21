@@ -10,7 +10,8 @@
     .cta-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
     }
 
     .cta-banner {
@@ -219,8 +220,8 @@
     <div class="cta-container">
         <div class="cta-banner">
             <div class="cta-text-card">
-                <img src="{{ asset('uploads/Ellipse-793.png') }}" alt="" class="cta-ellipse cta-ellipse-1">
-                <img src="{{ asset('uploads/Ellipse-794.png') }}" alt="" class="cta-ellipse cta-ellipse-2">
+                <img src="{{ asset('uploads/cta-ellipse-1.png') }}" alt="" class="cta-ellipse cta-ellipse-1">
+                <img src="{{ asset('uploads/cta-ellipse-2.png') }}" alt="" class="cta-ellipse cta-ellipse-2">
                 <h2 class="cta-heading">Get Your Custom Packaging<br>Today</h2>
                 <p class="cta-desc">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
                 <a href="#" class="cta-btn">
@@ -231,7 +232,7 @@
                 </a>
             </div>
             <div class="cta-image-wrapper">
-                <img src="{{ asset('uploads/image-frame.png') }}" alt="Image Frame" onerror="this.src='https://placehold.co/512x355/2a2a2a/888888?text=Custom+Packaging'">
+                <img src="{{ asset('uploads/premium-image-frame.png') }}" alt="Image Frame" onerror="this.src='https://placehold.co/512x355/2a2a2a/888888?text=Custom+Packaging'">
             </div>
         </div>
     </div>

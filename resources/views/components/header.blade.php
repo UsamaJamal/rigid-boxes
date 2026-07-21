@@ -13,7 +13,7 @@
         width: 100%;
         border-bottom: 0.2px solid rgba(255, 255, 255, 0.2);
         color: #fff;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         position: sticky;
         top: 0;
         z-index: 1000;
@@ -25,9 +25,10 @@
 
     .header-top {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 20px 5% 10px 5%;
+        width: 100%;
+        min-height: 88px;
+        padding: 0 24px;
         max-width: 1440px;
         margin: 0 auto;
     }
@@ -40,16 +41,17 @@
     }
 
     .header-logo-img {
-        height: 52px;
+        height: 64px;
         width: auto;
         display: block;
     }
 
     .header-search {
-        width: 328px;
+        width: 330px;
         max-width: 100%;
         position: relative;
-        margin: 0 20px;
+        margin-left: clamp(35px, 4vw, 65px);
+        flex: 0 1 330px;
     }
 
     .header-search input {
@@ -57,12 +59,13 @@
         height: 44px;
         background: transparent;
         border: 0.6px solid rgba(255, 255, 255, 0.6);
-        border-radius: 6px;
-        padding: 0 15px 0 40px;
+        border-radius: 7px;
+        padding: 0 15px 0 48px;
         color: #fff;
         outline: none;
         transition: border-color 0.3s;
         font-family: inherit;
+        font-size: 15px;
     }
 
     .header-search input:focus {
@@ -75,29 +78,30 @@
 
     .header-search .search-icon {
         position: absolute;
-        left: 12px;
+        left: 16px;
         top: 50%;
         transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
+        width: 22px;
+        height: 22px;
         fill: rgba(255, 255, 255, 0.8);
     }
 
     .header-contact {
         display: flex;
         align-items: center;
-        gap: 30px;
+        gap: clamp(20px, 2vw, 30px);
+        margin-left: auto;
     }
 
     .contact-item {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
-    .contact-item svg {
-        width: 28px;
-        height: 28px;
+    .site-header .contact-item svg {
+        width: 34px;
+        height: 34px;
         fill: none;
         stroke: #fff;
         stroke-width: 1.5;
@@ -107,29 +111,36 @@
 
     .contact-item-text span {
         display: block;
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 400;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 700;
     }
 
     .contact-item-text strong {
         display: block;
-        font-size: 14px;
-        font-weight: 600;
-        margin-top: 2px;
-        letter-spacing: 0.5px;
+        font-size: 16px;
+        line-height: 1.35;
+        font-weight: 400;
+        margin-top: 1px;
+        letter-spacing: 0;
     }
 
     .get-quote-btn {
         background-color: #fff;
         color: var(--primary-color);
-        padding: 12px 24px;
-        border-radius: 4px;
+        width: 190px;
+        min-height: 48px;
+        padding: 0 16px;
+        border-radius: 6px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 16px;
         transition: background-color 0.3s, color 0.3s;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 5px rgba(55, 21, 22, .25);
     }
 
     .get-quote-btn:hover {
@@ -137,24 +148,27 @@
     }
 
     .header-bottom {
-        /* contains the nav */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .header-nav {
         display: flex;
         justify-content: center;
-        padding: 10px 5% 16px 5%;
+        width: 100%;
+        min-height: 48px;
+        padding: 0 24px;
         max-width: 1440px;
         margin: 0 auto;
         list-style: none;
-        gap: 40px;
+        gap: clamp(36px, 4vw, 62px);
+        align-items: center;
     }
 
     .header-nav li a {
         color: #fff;
         text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 16px;
+        font-weight: 700;
         transition: opacity 0.3s;
     }
 
@@ -292,14 +306,27 @@
         box-shadow: 0 3px 6px rgba(95,45,47,.25);
     }
     /* Desktop only items */
-    @media (min-width: 993px) {
+    @media (min-width: 1101px) {
         .mobile-actions, .mobile-overlay, .mobile-sidebar {
             display: none !important;
         }
     }
 
+    @media (min-width: 1101px) and (max-width: 1500px) {
+        .header-top { padding-inline: 24px; }
+        .header-logo-img { height: 64px; }
+        .header-search { width: 330px; flex-basis: 330px; margin-left: 45px; }
+        .header-contact { gap: 22px; }
+        .site-header .contact-item svg { width: 34px; height: 34px; }
+        .contact-item-text span { font-size: 14px; }
+        .contact-item-text strong { font-size: 16px; }
+        .get-quote-btn { width: 190px; font-size: 16px; }
+        .header-nav { gap: 45px; padding-inline: 24px; }
+        .header-nav li a { font-size: 16px; }
+    }
+
     /* Mobile Styles */
-    @media (max-width: 992px) {
+    @media (max-width: 1100px) {
         .header-top {
             height: 80px;
             padding: 0 5%;
@@ -471,7 +498,7 @@
             margin-bottom: 30px;
         }
 
-        .mobile-contact .contact-item svg {
+        .site-header .mobile-contact .contact-item svg {
             stroke: var(--primary-color);
         }
 
@@ -486,7 +513,7 @@
 
     @media (max-width: 576px) {
         .header-logo-img {
-            height: 40px;
+            height: 60px;
         }
         .mobile-search-btn {
             margin-right: 5px;
@@ -497,7 +524,7 @@
 <header class="site-header">
     <div class="header-top">
         <a href="/" class="header-logo">
-            <img src="{{ asset('uploads/rigid-boxes-logo.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
+            <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
         </a>
 
         <!-- Desktop Search -->
@@ -551,10 +578,10 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="/">Home</a></li>
-            <li><a href="/all-category">All Categories</a></li>
-            <li><a href="/category">Category</a></li>
-            <li><a href="/product">Product</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/all-category">Boxes By Industry</a></li>
+            <li><a href="/category">Boxes By Material</a></li>
+            <li><a href="/product">Boxes By Style</a></li>
+            <li><a href="/contact">Packaging Supplies</a></li>
             <li><a href="/blog">Blogs</a></li>
         </ul>
     </div>
@@ -573,7 +600,7 @@
     <div class="mobile-sidebar" id="mobileSidebar">
         <div class="mobile-sidebar-header">
             <a href="/" class="header-logo" style="margin: 0;">
-                <img src="{{ asset('uploads/rigid-boxes-logo.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
+                <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
             </a>
             <button class="close-menu-btn" onclick="toggleMobileMenu()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">

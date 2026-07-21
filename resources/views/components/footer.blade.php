@@ -28,19 +28,19 @@
                     </p>
                     <div class="social-links">
                         <a href="#" class="social-icon" aria-label="Facebook">
-                            <img src="{{ asset('images/Vector (19).png') }}" alt="Facebook" class="social-icon-img">
+                            <img src="{{ asset('images/social-facebook.png') }}" alt="Facebook" class="social-icon-img">
                         </a>
                         <a href="#" class="social-icon" aria-label="Instagram">
-                            <img src="{{ asset('images/Vector (20).png') }}" alt="Instagram" class="social-icon-img">
+                            <img src="{{ asset('images/social-instagram.png') }}" alt="Instagram" class="social-icon-img">
                         </a>
                         <a href="#" class="social-icon" aria-label="LinkedIn">
-                            <img src="{{ asset('images/Vector (21).png') }}" alt="LinkedIn" class="social-icon-img">
+                            <img src="{{ asset('images/social-linkedin.png') }}" alt="LinkedIn" class="social-icon-img">
                         </a>
                         <a href="#" class="social-icon" aria-label="Pinterest">
                             <img src="{{ asset('images/bi_pinterest.png') }}" alt="Pinterest" class="social-icon-img">
                         </a>
                         <a href="#" class="social-icon" aria-label="YouTube">
-                            <img src="{{ asset('images/Vector (22).png') }}" alt="YouTube" class="social-icon-img">
+                            <img src="{{ asset('images/social-youtube.png') }}" alt="YouTube" class="social-icon-img">
                         </a>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <h4 class="footer-heading">Company Info</h4>
                     <ul class="footer-contact">
                         <li class="contact-item">
-                            <img src="{{ asset('images/Vector (23).png') }}" alt="Email" class="contact-icon">
+                            <img src="{{ asset('images/contact-email.png') }}" alt="Email" class="contact-icon">
                             <a href="mailto:example@gmail.com">example@gmail.com</a>
                         </li>
                         <li class="contact-item">
@@ -82,7 +82,7 @@
                             <a href="tel:1800-315-8441">1800-315-8441</a>
                         </li>
                         <li class="contact-item">
-                            <img src="{{ asset('images/Vector (24).png') }}" alt="Address" class="contact-icon">
+                            <img src="{{ asset('images/contact-address.png') }}" alt="Address" class="contact-icon">
                             <span>4000 N Montrose Ave<br>550 Chicago, IL 60641</span>
                         </li>
                     </ul>

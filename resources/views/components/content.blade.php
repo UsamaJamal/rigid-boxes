@@ -10,7 +10,8 @@
     .text-content-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
     }

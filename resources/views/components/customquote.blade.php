@@ -12,7 +12,8 @@
     .quote-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
+        box-sizing: border-box;
         display: flex;
         align-items: stretch;
         gap: 40px;
@@ -374,7 +375,7 @@
     /* ── Responsive ── */
     @media (max-width: 1280px) {
         .quote-container {
-            padding: 0 40px;
+            padding: 0 24px;
             gap: 30px;
         }
         .quote-form-card {
@@ -393,7 +394,7 @@
         }
         .quote-container {
             flex-direction: column-reverse;
-            padding: 0 5%;
+            padding: 0 24px;
             align-items: stretch;
         }
         .quote-form-card {
@@ -418,7 +419,7 @@
             padding: 30px 0;
         }
         .quote-container {
-            padding: 0 9%;
+            padding: 0 20px;
         }
         .quote-form-card {
             padding: 10px 14px 16px;

@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .faq-section {
         background: var(--background-color, #FAF8F8);
-        padding: 20px 0;
+        padding: 42px 0 70px;
         width: 100%;
         display: block;
     }
@@ -12,20 +12,32 @@
     .faq-container {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 5%;
+        padding: 0 24px;
     }
 
     .faq-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+        align-items: start;
         gap: 60px;
         width: 100%;
     }
 
+    .faq-main-heading {
+        display: none;
+        margin: 0 0 24px;
+        color: #000;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 40px;
+        line-height: 1.2;
+        font-weight: 700;
+        text-align: center;
+    }
+
     /* Left Info Column */
     .faq-left {
-        width: 461px;
+        width: 100%;
+        max-width: 520px;
         height: 366px;
         display: flex;
         flex-direction: column;
@@ -34,8 +46,8 @@
     }
 
     .faq-left-heading {
-        width: 461px;
-        height: 120px;
+        width: 100%;
+        height: auto;
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
         font-size: 32px;
@@ -47,8 +59,8 @@
     }
 
     .faq-left-paragraph {
-        width: 457px;
-        height: 52px;
+        width: 100%;
+        height: auto;
         font-family: 'DM Sans', sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -74,7 +86,9 @@
     }
 
     .faq-left-button {
-        width: 371px;
+        width: 100%;
+        max-width: 435px;
+        margin-top: auto;
         height: 48px;
         border-radius: 8px;
         padding: 5px 28px;
@@ -102,8 +116,8 @@
 
     /* Right Accordion Column */
     .faq-right {
-        flex-grow: 1;
-        max-width: 718px;
+        width: 100%;
+        max-width: none;
     }
 
     .faq-list {
@@ -132,7 +146,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 24px;
+        min-height: 70px;
+        padding: 18px 28px;
         background: none;
         border: none;
         cursor: pointer;
@@ -142,7 +157,7 @@
 
     .faq-question-text {
         font-family: 'DM Sans', sans-serif;
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 500;
         color: #222222;
         line-height: 1.5;
@@ -166,12 +181,20 @@
     }
 
     .faq-item.open .faq-icon {
-        transform: rotate(45deg);
-        color: var(--primary-color, #8D4445);
+        transform: none;
+        color: #fff;
     }
 
     .faq-item.open .faq-question-text {
-        color: var(--primary-color, #8D4445);
+        color: #fff;
+    }
+
+    .faq-item.open .faq-question {
+        background: #944849;
+    }
+
+    .faq-item.open .faq-icon svg line:first-child {
+        display: none;
     }
 
     .faq-answer {
@@ -188,7 +211,7 @@
 
     .faq-answer p {
         font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
+        font-size: 18px;
         color: #555555;
         line-height: 1.65;
         margin: 0;
@@ -201,6 +224,7 @@
         }
 
         .faq-wrapper {
+            display: flex;
             flex-direction: column;
             align-items: center;
             gap: 40px;
@@ -233,11 +257,28 @@
         .faq-left-button {
             width: 100%;
             max-width: 371px;
+            margin-top: 0;
         }
 
         .faq-right {
             width: 100%;
         }
+
+        .faq-main-heading {
+            font-size: 32px;
+        }
+
+        .faq-question-text {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .faq-container { padding: 0 16px; }
+        .faq-main-heading { font-size: 27px; }
+        .faq-question { min-height: 64px; padding: 16px; }
+        .faq-question-text { font-size: 15px; }
+        .faq-answer p { font-size: 14px; }
     }
 </style>
 
@@ -247,10 +288,11 @@
             <div class="faq-left">
                 <h2 class="faq-left-heading">Don't see the answer to your question? Ask the packaging expert directly.</h2>
                 <p class="faq-left-paragraph">Check out the most common questions our customers asked. Still have questions ? <strong>Contact our customer support</strong>.</p>
-                <img src="{{ asset('uploads/frequently-asked-questions.png') }}" alt="Frequently Asked Questions" class="faq-left-image">
+                <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions" class="faq-left-image">
                 <a href="#" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">
+                <h2 class="faq-main-heading">Frequently Asked Questions</h2>
                 <div class="faq-list">
 
                     <div class="faq-item">
@@ -318,3 +360,19 @@
         </div>
     </div>
 </section>
+
+<script>
+    window.toggleFaq = function (button) {
+        const item = button.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+            openItem.classList.remove('open');
+            const openButton = openItem.querySelector('.faq-question');
+            if (openButton) openButton.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+            item.classList.add('open');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    };
+</script>

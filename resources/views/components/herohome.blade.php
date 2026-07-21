@@ -1,6 +1,8 @@
 <style>
     .category-hero-wrapper {
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
         background: var(--header-gradient, linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%));
         color: #fff;
         position: relative;
@@ -39,13 +41,14 @@
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        padding: 8px 5% 0px 5%;
+        padding: 8px 24px 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
         align-items: center;
         gap: 70px;
         position: relative;
         z-index: 2;
+        box-sizing: border-box;
     }
 
     .hero-content {
@@ -54,43 +57,12 @@
         z-index: 2;
     }
 
-    .breadcrumbs-container {
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 24px 5% 0 5%;
-        position: relative;
-        z-index: 2;
-    }
 
-    .breadcrumbs {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        color: rgba(255, 255, 255, 0.7);
-        text-transform: uppercase;
-        display: flex;
-        gap: 8px;
-    }
-
-    .breadcrumbs a {
-        color: inherit;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    .breadcrumbs a:hover {
-        color: #fff;
-    }
-
-    .breadcrumbs .current {
-        color: #fff;
-    }
 
     .hero-title {
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
-        font-size: 50px;
+        font-size: clamp(28px, 3.5vw, 50px);
         line-height: 65px;
         letter-spacing: 0%;
         text-transform: uppercase;
@@ -149,29 +121,38 @@
         object-position: center;
     }
 
-    @media (max-width: 992px) {
+    @media (max-width: 1500px) and (min-width: 993px) {
+        .hero-section {
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 38%);
+            gap: 32px;
+        }
+        .hero-image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+    }
+
+    @media (max-width: 1200px) {
         .hero-line {
             display: none;
         }
 
-        .breadcrumbs-container {
-            padding: 30px 5% 0;
-        }
+
 
         .hero-section {
             flex-direction: column;
             display: flex;
-            padding: 40px 5% 60px;
+            padding: 40px 24px 60px;
             text-align: left;
+            gap: 20px;
         }
 
         .hero-content {
             max-width: 100%;
         }
 
-        .breadcrumbs {
-            justify-content: flex-start;
-        }
+
 
         .hero-title {
             font-size: 38px;
@@ -181,7 +162,7 @@
         .hero-image-wrapper {
             justify-content: center;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .hero-image-wrapper img {
@@ -193,12 +174,10 @@
     }
 
     @media (max-width: 576px) {
-        .breadcrumbs-container {
-            padding: 25px 5% 0;
-        }
+
 
         .hero-section {
-            padding: 30px 5% 40px;
+            padding: 30px 24px 40px;
             text-align: left;
         }
 
@@ -212,11 +191,7 @@
             font-size: 13px;
         }
 
-        .breadcrumbs {
-            font-size: 10px;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-        }
+
     }
 </style>
 
@@ -228,13 +203,7 @@
     <div class="hero-line hero-line-4" aria-hidden="true"></div>
     <div class="hero-line hero-line-5" aria-hidden="true"></div>
     <div class="hero-line hero-line-6" aria-hidden="true"></div>
-    <div class="breadcrumbs-container">
-        <div class="breadcrumbs">
-            <a href="/">HOME</a> /
-            <a href="#">BOXES BY INDUSTRY</a> /
-            <span class="current">COSMETICS</span>
-        </div>
-    </div>
+
 
     <section class="hero-section">
 
@@ -251,7 +220,7 @@
         </div>
 
         <div class="hero-image-wrapper">
-            <img src="{{ asset('uploads/home-banner.png') }}" alt="Custom Cosmetic Packaging Boxes" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
+            <img src="{{ asset('uploads/hero-home-banner.png') }}" alt="Custom Cosmetic Packaging Boxes" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
         </div>
     </section>
 </div>
