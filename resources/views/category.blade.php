@@ -396,37 +396,8 @@
 
             <div class="boxes-grid">
                 <!-- Card 1 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-rigid-plain-white-box.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
-                    </div>
-                    <h3 class="box-title">Lipstick Boxes</h3>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-custom-shoulder-box.jfif') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
-                    </div>
-                    <h3 class="box-title">Serum Boxes</h3>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/addon-premium-foil-custom-box.jfif') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
-                    </div>
-                    <h3 class="box-title">Perfume Boxes</h3>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/addon-gold-inside-box.jfif') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
-                    </div>
-                    <h3 class="box-title">Skincare Boxes</h3>
-                </div>
-
+                
+               
                 <!-- Card 5 -->
                 <div class="box-card">
                     <div class="box-image-wrapper">
