@@ -1,4 +1,10 @@
-@include('components.htmlboilerplate', ['title' => 'Cosmetics Packaging - The Rigid Boxes'])
+@include('components.htmlboilerplate', [
+    'title' => $category['meta_title'] ?? (($category['title'] ?? 'Custom Packaging') . ' - The Rigid Boxes'),
+    'metaDescription' => $category['meta_description'] ?? '',
+    'metaKeywords' => $category['meta_keywords'] ?? '',
+    'robots' => $category['robots'] ?? 'index,follow',
+    'schema' => $category['schema'] ?? '',
+])
 
 <style>
     html, body { max-width: 100%; overflow-x: hidden; }

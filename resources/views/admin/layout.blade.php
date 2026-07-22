@@ -112,7 +112,7 @@
                 <span>Dashboard</span>
             </a>
             <a class="{{ request()->routeIs('admin.homepage.edit') ? 'active' : '' }}" href="{{ route('admin.homepage.edit') }}">
-                <i class="fa-solid fa-house-gear"></i>
+                <i class="fa-solid fa-house"></i>
                 <span>Home Page Settings</span>
             </a>
             <a class="{{ request()->route('module') === 'products' ? 'active' : '' }}" href="{{ route('admin.module.index', 'products') }}">

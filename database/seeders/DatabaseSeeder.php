@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ImportPremiumBoxesSeeder::class);
         $this->call(CategoryFaqsSeeder::class);
         $this->call(CategoryDescriptionsSeeder::class);
+        $this->call(CategorySeoSeeder::class);
+        $this->call(ProductFaqsSeeder::class);
     }
 }

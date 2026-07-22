@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Magnetic Closure Rigid Boxes - Product Page</title>
+    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
+    @if(!empty($product['meta_description']))
+        <meta name="description" content="{{ $product['meta_description'] }}">
+    @endif
+    @if(!empty($product['meta_keywords']))
+        <meta name="keywords" content="{{ $product['meta_keywords'] }}">
+    @endif
+    <meta name="robots" content="{{ $product['robots'] ?? 'index,follow' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -432,7 +439,9 @@
         }
 
         .trust-badges-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .trust-badges-image {
@@ -443,7 +452,9 @@
         }
 
         .features-badges-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .features-badges-image {
@@ -454,7 +465,9 @@
         }
 
         .shipping-badge-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .shipping-badge-image {
@@ -465,7 +478,9 @@
         }
 
         .fourth-badge-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .fourth-badge-image {
@@ -476,7 +491,18 @@
         }
 
         .badge-label {
-            display: none;
+            display: inline-block;
+            color: #4a4a4a;
+            font: 500 14px/1.35 'DM Sans', sans-serif;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .badge-icon-svg {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            color: #666;
         }
 
         /* Tabs Section */
@@ -1058,6 +1084,13 @@
             justify-content: center;
             font-size: 20px;
         }
+
+        .feature-icon img {
+            width: 139px;
+            height: 110px;
+            object-fit: contain;
+            display: block;
+        }
         
         .feature-item span {
             font-size: 12px;
@@ -1631,15 +1664,23 @@
             @php
                 $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
                 $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $pGallery = [];
+                if (!empty($product['images'])) {
+                    $pGallery = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
+                }
+                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGallery)));
             @endphp
             <div class="hero-images">
                 <div class="main-image">
-                    <img src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
+                    <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
                 <div class="thumbnails">
-                    <div class="thumb active">
-                        <img src="{{ asset($pMainImg) }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
+                    @foreach($pGallery as $galleryIndex => $galleryImage)
+                        @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
+                        <div class="thumb {{ $galleryIndex === 0 ? 'active' : '' }}" onclick="switchProductImage(this, '{{ asset($galleryImage) }}')">
+                            <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -1713,19 +1754,19 @@
         <div class="container">
             <div class="badges-horizontal">
                 <div class="trust-badges-wrapper">
-                    <img src="{{ asset('uploads/customer-service.png') }}" alt="No Die & Plate Charges" class="trust-badges-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="No Die and Plate Charges" role="img"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 32 34 14M16 16l16 16M21 13l14 14M13 25l10 10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     <span class="badge-label">No Die &amp; Plate<br>Charges</span>
                 </div>
                 <div class="features-badges-wrapper">
-                    <img src="{{ asset('uploads/why-design-support.png') }}" alt="Free Graphic Designing" class="features-badges-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Free Graphic Designing" role="img"><rect x="8" y="9" width="32" height="23" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 38h20M24 32v6M14 15h20M17 20h7M17 25h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="34" cy="23" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                     <span class="badge-label">Free Graphic<br>Designing</span>
                 </div>
                 <div class="shipping-badge-wrapper">
-                    <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Quick Turnaround Time" class="shipping-badge-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Quick Turnaround Time" role="img"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M24 14v11l7 4M10 24h-3M41 24h-3M24 7v-3M24 44v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                     <span class="badge-label">Quick Turnaround<br>Time</span>
                 </div>
                 <div class="fourth-badge-wrapper">
-                    <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Free Shipping" class="fourth-badge-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Free Shipping" role="img"><path d="M6 14h24v21H6zM30 22h7l6 7v6H30zM13 35a4 4 0 1 0 8 0M34 35a4 4 0 1 0 8 0M37 22v7h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 20h10M12 25h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                     <span class="badge-label">Free Shipping</span>
                 </div>
             </div>
@@ -1746,7 +1787,6 @@
 
     <!-- Content Section -->
     <section class="content-section container" id="content-description">
-        <h2>Everything you need to know about {{ $pTitle }}</h2>
         <div>
             {!! !empty($product['long_description']) ? $product['long_description'] : '<p>' . ($product['description'] ?? '') . '</p>' !!}
         </div>
@@ -1792,42 +1832,15 @@
 
     <!-- FAQs Section -->
     <section class="faqs-section" id="content-faqs" style="display: none;">
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>What type of retail boxes are best for luxury product packaging?</span>
-                <span class="faq-icon">+</span>
+        @foreach($faqs ?? [] as $faq)
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>{{ $faq['question'] ?? '' }}</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer"><p>{{ $faq['answer'] ?? '' }}</p></div>
             </div>
-            <div class="faq-answer">
-                <p>Rigid boxes and premium folding cartons are typically best for luxury products, offering high durability and a premium unboxing experience.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Which retail boxes offer the most protect for fragile items?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Corrugated boxes provide the best protection for fragile items due to their fluted inner layer which absorbs shocks.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Do retail boxes have customizable shapes and structures?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Yes! We can create custom die-cut shapes and unique structures tailored specifically to your product's dimensions.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>What printing customization are available for retail boxes?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>We offer full CMYK printing, Pantone matching, foil stamping, embossing, debossing, and UV spot treatments.</p>
-            </div>
-        </div>
+        @endforeach
     </section>
 
     <!-- Order Process Section -->
@@ -1964,13 +1977,13 @@
                 
                 <div class="features-list">
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery"></div>
                     </div>
                 </div>
             </div>
@@ -2429,6 +2442,14 @@ function toggleFaq(element) {
 </script>
     
     <script>
+        function switchProductImage(thumb, imageUrl) {
+            const mainImage = document.getElementById('product-main-image');
+            if (mainImage) mainImage.src = imageUrl;
+            document.querySelectorAll('.thumbnails .thumb').forEach(function (item) {
+                item.classList.toggle('active', item === thumb);
+            });
+        }
+
         document.addEventListener('click', function (event) {
             const formControlSelector = '.hero-form .form-control, .quote-form .form-control, .hero-form .custom-select-trigger, .quote-form .custom-select-trigger';
             const clickedControl = event.target.closest(formControlSelector);

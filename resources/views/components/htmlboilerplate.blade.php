@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'The Rigid Boxes' }}</title>
+    @if(!empty($metaDescription))
+        <meta name="description" content="{{ $metaDescription }}">
+    @endif
+    @if(!empty($metaKeywords))
+        <meta name="keywords" content="{{ $metaKeywords }}">
+    @endif
+    @if(!empty($robots))
+        <meta name="robots" content="{{ $robots }}">
+    @endif
+    @if(!empty($schema))
+        <script type="application/ld+json">{!! $schema !!}</script>
+    @endif
     <!-- Import Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 

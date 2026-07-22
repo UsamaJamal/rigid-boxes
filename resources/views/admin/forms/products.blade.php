@@ -3,12 +3,15 @@
 @section('heading', ($item ? 'Edit ' : 'Add ') . $meta['singular'])
 @section('content')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+
 @php
     $v = fn($key, $default = '') => old($key, $item[$key] ?? $default);
     $editing = (bool)$item;
     $resolveImg = fn($path) => empty($path) ? '' : (\Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/']) ? asset($path) : asset('storage/' . $path));
     $selectedCats = (array) old('categories', json_decode($item['categories'] ?? '[]', true) ?? []);
     $selectedRelated = (array) old('related', json_decode($item['related'] ?? '[]', true) ?? []);
+    $productFaqs = $productFaqs ?? [];
     // Also check pivot table if no categories stored on product itself
 @endphp
 
@@ -218,6 +221,7 @@
                         </div>
                     @endif
                 @endif
+                <input type="hidden" name="existing_images" value="{{ json_encode($imgs ?? []) }}">
                 <input type="file" name="images[]" accept="image/*" multiple>
             </div>
         </div>
@@ -241,11 +245,11 @@
             @for($i = 0; $i < 4; $i++)
                 <div class="field">
                     <label>Question {{ $i + 1 }}</label>
-                    <input name="faq_question[]" value="{{ $v('faq_question.' . $i) }}">
+                    <input name="faq_question[]" value="{{ old('faq_question.' . $i, $productFaqs[$i]['question'] ?? '') }}">
                 </div>
                 <div class="field">
                     <label>Answer {{ $i + 1 }}</label>
-                    <textarea name="faq_answer[]" style="min-height:70px">{{ $v('faq_answer.' . $i) }}</textarea>
+                    <textarea name="faq_answer[]" style="min-height:70px">{{ old('faq_answer.' . $i, $productFaqs[$i]['answer'] ?? '') }}</textarea>
                 </div>
             @endfor
         </div>
@@ -297,6 +301,21 @@
 </form>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.init({
+                selector: 'textarea[name="description"], textarea[name="long_description"]',
+                height: 420,
+                plugins: 'code advlist autolink lists link image charmap preview anchor searchreplace visualblocks fullscreen insertdatetime media table help wordcount',
+                toolbar: 'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code fullscreen preview',
+                block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6; Preformatted=pre',
+                branding: false,
+                promotion: false,
+                content_style: 'body { font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; }'
+            });
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         updateMultiselectDisplay('categoryMultiselect');
         updateMultiselectDisplay('productMultiselect');

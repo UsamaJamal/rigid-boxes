@@ -68,6 +68,17 @@ class AdminContentController extends Controller
             $formData['categoryFaqs'] = [];
         }
 
+        if ($module === 'products' && !empty($item['id'])) {
+            $formData['productFaqs'] = DB::table('admin_product_faqs')
+                ->where('product_id', $item['id'])
+                ->orderBy('id')
+                ->get()
+                ->map(fn($faq) => (array) $faq)
+                ->all();
+        } else {
+            $formData['productFaqs'] = [];
+        }
+
         return $formData;
     }
 
@@ -95,7 +106,7 @@ class AdminContentController extends Controller
         ][$module];
         $existing = ctype_digit((string)$id) ? DB::table($table)->where('id',(int)$id)->first() : null;
         $fields = $columns;
-        $payload = collect($request->except(['_token','_method','images','image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
+        $payload = collect($request->except(['_token','_method','images','existing_images','image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
 
         foreach (['show_home', 'show_in_nav'] as $checkboxField) {
@@ -113,8 +124,23 @@ class AdminContentController extends Controller
                 if (in_array($field, $fields)) $payload[$field] = $request->file($field)->store('admin', 'public');
             }
         }
-        if ($request->hasFile('images')) {
-            if (in_array('images',$fields)) $payload['images'] = json_encode(collect($request->file('images'))->map(fn ($file) => $file->store('admin', 'public'))->values()->all());
+        if (in_array('images', $fields, true)) {
+            $galleryFiles = array_filter((array) $request->file('images'), function ($file) {
+                return $file && $file->isValid();
+            });
+
+            if ($galleryFiles) {
+                $newImages = collect($galleryFiles)
+                    ->map(fn ($file) => $file->store('admin', 'public'))
+                    ->values()
+                    ->all();
+                $existingImages = json_decode((string) $request->input('existing_images', '[]'), true) ?: [];
+                if ($existing && !empty($existing->images)) {
+                    $dbImages = is_string($existing->images) ? (json_decode($existing->images, true) ?: []) : (array) $existing->images;
+                    $existingImages = array_values(array_unique(array_merge($existingImages, $dbImages)));
+                }
+                $payload['images'] = json_encode(array_values(array_merge($existingImages, $newImages)));
+            }
         }
         foreach (['images','related'] as $jsonField) if (array_key_exists($jsonField,$payload) && is_array($payload[$jsonField])) $payload[$jsonField] = json_encode($payload[$jsonField]);
         if ($existing) DB::table($table)->where('id',$existing->id)->update($payload); else { $payload['created_at']=now(); $id=DB::table($table)->insertGetId($payload); }
