@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Printed Boxes - The Rigid Boxes</title>
+    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes - The Rigid Boxes' }}</title>
+    <meta name="description" content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -1519,6 +1520,11 @@
 </head>
 
 <body>
+    @php
+        $settings = $settings ?? [];
+        $categories = $categories ?? [];
+        $products = $products ?? [];
+    @endphp
 
     @include('components.header')
 
@@ -1533,108 +1539,37 @@
                 <p class="section-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
 
                 <div class="cards-grid">
+                    @php 
+                        $featuredCatIds = (array) ($settings['featured_categories'] ?? []);
+                        $featuredCategories = collect($categories)->whereIn('id', $featuredCatIds)->all();
+                        if (empty($featuredCategories)) {
+                            $featuredCategories = array_slice($categories, 0, 8);
+                        }
+                    @endphp
 
-                    <!-- Card 1: Rigid Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Rigid Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                    @foreach($featuredCategories as $cat)
+                        @php 
+                            $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
+                            $catUrl = url('/category/' . $catSlug);
+                        @endphp
+                        <div class="industry-card">
+                            <a href="{{ $catUrl }}" style="text-decoration:none; color:inherit;">
+                                <span class="industry-card__title">{{ $cat['title'] }}</span>
+                            </a>
+                            <a href="{{ $catUrl }}" class="industry-card__image-wrap" style="display:block;">
+                                <img src="{{ !empty($cat['image']) ? asset('storage/' . $cat['image']) : asset('uploads/industry-gift-boxes.webp') }}" alt="{{ $cat['title'] }}" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text={{ urlencode($cat['title']) }}'">
+                            </a>
+                            <div class="industry-card__bottom">
+                                <p class="industry-card__text">{{ Str::limit($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.', 80) }}</p>
+                                <a href="{{ $catUrl }}" class="industry-card__btn">Explore Boxes</a>
+                            </div>
                         </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Magnetic Closure Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Magnetic Closure Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Photo Presentation Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Photo Presentation Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Book Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Book Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Magnetic Book Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Magnetic Book Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: Drawer Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Drawer Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 7: Gift Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Gift Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Gift Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Gift+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 8: Rigid Boxes (alt) -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Rigid Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div><!-- /.cards-grid -->
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="#" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/all-category') }}" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->
@@ -1749,38 +1684,28 @@
                     </div>
                 </div>
 
-                <!-- Right: 3 product cards -->
                 <div class="bestseller-cards">
+                    @php 
+                        $bestsellerProdIds = (array) ($settings['bestseller_products'] ?? []);
+                        $bestsellerProducts = collect($products)->whereIn('id', $bestsellerProdIds)->all();
+                        if (empty($bestsellerProducts)) {
+                            $bestsellerProducts = array_slice($products, 0, 4);
+                        }
+                    @endphp
 
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p1.png') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Lipstick+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Lipstick Boxes</p>
-                    </div>
-
-                    <!-- Fourth card is shown only in the mobile 2×2 layout. -->
-                    <div class="bestseller-card bestseller-card--mobile-only" aria-hidden="true">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p2.png') }}" alt="Serum Boxes">
-                        </div>
-                        <p class="bestseller-card__title">Serum Boxes</p>
-                    </div>
-
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p2.png') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Serum+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Serum Boxes</p>
-                    </div>
-
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p3.png') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Perfume+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Perfume Boxes</p>
-                    </div>
-
+                    @foreach($bestsellerProducts as $prod)
+                        @php 
+                            $prodSlug = $prod['slug'] ?? Str::slug($prod['title']);
+                            $prodUrl = url('/product/' . $prodSlug);
+                        @endphp
+                        <a href="{{ $prodUrl }}" class="bestseller-card" style="text-decoration:none; color:inherit;">
+                            <div class="bestseller-card__img">
+                                <img src="{{ !empty($prod['image']) ? asset('storage/' . $prod['image']) : asset('uploads/best-seller-p1.png') }}" alt="{{ $prod['title'] }}" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
+                            </div>
+                            <p class="bestseller-card__title">{{ $prod['title'] }}</p>
+                        </a>
+                    @endforeach
+                </div><!-- /.bestseller-cards -->
                 </div><!-- /.bestseller-cards -->
 
             </div><!-- /.bestseller-inner -->

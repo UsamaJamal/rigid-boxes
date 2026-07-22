@@ -111,6 +111,10 @@
                 <i class="fa-solid fa-gauge-high"></i>
                 <span>Dashboard</span>
             </a>
+            <a class="{{ request()->routeIs('admin.homepage.edit') ? 'active' : '' }}" href="{{ route('admin.homepage.edit') }}">
+                <i class="fa-solid fa-house-gear"></i>
+                <span>Home Page Settings</span>
+            </a>
             <a class="{{ request()->route('module') === 'products' ? 'active' : '' }}" href="{{ route('admin.module.index', 'products') }}">
                 <i class="fa-solid fa-box-open"></i>
                 <span>Products</span>

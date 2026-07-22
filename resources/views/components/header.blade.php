@@ -149,6 +149,7 @@
 
     .header-bottom {
         border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        position: relative;
     }
 
     .header-nav {
@@ -164,76 +165,58 @@
         align-items: center;
     }
 
+    .header-nav li {
+        position: relative;
+    }
+
     .header-nav li a {
         color: #fff;
         text-decoration: none;
         font-size: 16px;
         font-weight: 700;
         transition: opacity 0.3s;
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 0;
     }
 
     .header-nav li a:hover {
-        opacity: 0.8;
+        opacity: 0.85;
     }
-    .header-nav li.has-dropdown > a::after {
+
+    .header-nav li.has-mega > a::after {
         content: '';
         display: inline-block;
         width: 6px;
         height: 6px;
-        margin: 0 0 3px 7px;
+        margin: 0 0 2px 7px;
         border-right: 1.5px solid #fff;
         border-bottom: 1.5px solid #fff;
         transform: rotate(45deg);
+        transition: transform 0.2s ease;
     }
 
-    /* Figma-style desktop mega menu */
-    .header-nav li {
-        position: static;
+    .header-nav li.has-mega:hover > a::after,
+    .header-nav li.has-mega.active > a::after {
+        transform: rotate(225deg) translateY(-2px);
     }
 
-    .mega-trigger {
-        appearance: none;
-        border: 0;
-        padding: 0;
-        background: transparent;
-        color: #fff;
-        font: inherit;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .mega-trigger::after {
-        content: '';
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        margin: 0 0 3px 8px;
-        border-right: 1.5px solid currentColor;
-        border-bottom: 1.5px solid currentColor;
-        transform: rotate(45deg);
-        transition: transform .2s ease;
-    }
-
-    .mega-trigger[aria-expanded="true"]::after {
-        transform: translateY(3px) rotate(225deg);
-    }
-
+    /* Mega Menu Dropdown UI (Matching Screenshot Exactly) */
     .mega-menu {
         position: absolute;
-        z-index: 1100;
-        top: calc(100% - 2px);
+        z-index: 1200;
+        top: 100%;
         left: 50%;
-        width: min(760px, calc(100vw - 40px));
-        padding: 18px 22px;
-        background: var(--secondary-color);
-        border: 1px solid rgba(255,255,255,.38);
-        border-radius: 0 0 6px 6px;
-        box-shadow: 0 18px 35px rgba(45, 20, 20, .25);
+        width: min(1020px, calc(100vw - 32px));
+        padding: 26px 30px 20px;
+        background: #FAF2F0;
+        border: 1px solid #E8DCDA;
+        border-radius: 12px;
+        box-shadow: 0 18px 45px rgba(35, 15, 16, 0.22);
         opacity: 0;
         visibility: hidden;
-        transform: translate(-50%, -8px);
-        transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+        transform: translate(-50%, 8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
     }
 
     .mega-menu.is-open {
@@ -242,69 +225,95 @@
         transform: translate(-50%, 0);
     }
 
-    .mega-menu-title {
-        margin: 0 0 14px;
-        color: var(--primary-color);
-        font-size: 14px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
     .mega-menu-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px 18px;
+        gap: 16px 20px;
     }
 
-    .mega-menu-link {
+    .mega-menu-item {
         display: flex;
         align-items: center;
-        min-width: 0;
-        gap: 9px;
-        color: #333;
-        font-size: 13px;
-        font-weight: 600;
-        line-height: 1.25;
+        gap: 12px;
+        padding: 8px 10px;
+        border-radius: 8px;
         text-decoration: none;
+        color: #222222;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.35;
+        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
     }
 
-    .mega-menu-link:hover { color: var(--primary-color); }
+    .mega-menu-item:hover {
+        background: #F2E3E0;
+        color: var(--primary-color);
+        transform: translateX(2px);
+    }
 
-    .mega-menu-link img {
-        width: 23px;
-        height: 23px;
-        object-fit: contain;
-        flex: 0 0 auto;
+    .mega-menu-icon {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .mega-menu-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--primary-color);
+        fill: none;
     }
 
     .mega-menu-footer {
         display: flex;
         align-items: center;
-        gap: 11px;
-        margin-top: 18px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(141, 68, 69, .22);
-        color: #333;
-        font-size: 13px;
+        justify-content: space-between;
+        margin-top: 22px;
+        padding-top: 16px;
+        border-top: 1px solid #E5D5D3;
+    }
+
+    .mega-menu-footer-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #1a1a1a;
+        font-size: 15px;
         font-weight: 700;
     }
 
-    .mega-menu-footer img {
-        width: 24px;
-        height: 24px;
-        object-fit: contain;
+    .mega-menu-footer-icon {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
     }
 
     .mega-menu-cta {
-        margin-left: auto;
-        padding: 9px 20px;
-        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 24px;
+        border-radius: 6px;
         background: var(--primary-color);
-        color: #fff;
+        color: #ffffff !important;
         font-weight: 700;
+        font-size: 14px;
         text-decoration: none;
-        box-shadow: 0 3px 6px rgba(95,45,47,.25);
+        box-shadow: 0 4px 10px rgba(141, 68, 69, 0.22);
+        transition: background 0.2s ease, transform 0.2s ease;
     }
+
+    .mega-menu-cta:hover {
+        background: #733435;
+        transform: translateY(-1px);
+    }
+
     /* Desktop only items */
     @media (min-width: 1101px) {
         .mobile-actions, .mobile-overlay, .mobile-sidebar {
@@ -403,7 +412,7 @@
             position: fixed;
             top: 0;
             right: -80vw;
-            width: 80vw; /* 80vw width for the mobile sidebar */
+            width: 80vw;
             height: 100vh;
             background: var(--background-color);
             z-index: 999;
@@ -556,7 +565,7 @@
                 </div>
             </div>
 
-            <a href="#" class="get-quote-btn">Get Instant Quote</a>
+            <a href="/contact" class="get-quote-btn">Get Instant Quote</a>
         </div>
 
         <!-- Mobile Actions -->
@@ -578,23 +587,41 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="/">Home</a></li>
-            <li><a href="/all-category">Boxes By Industry</a></li>
-            <li><a href="/category">Boxes By Material</a></li>
-            <li><a href="/product">Boxes By Style</a></li>
-            <li><a href="/contact">Packaging Supplies</a></li>
+            <li class="has-mega" data-mega-type="industry">
+                <a href="/all-category" class="mega-trigger">Boxes By Industry</a>
+            </li>
+            <li class="has-mega" data-mega-type="material">
+                <a href="/category" class="mega-trigger">Boxes By Material</a>
+            </li>
+            <li class="has-mega" data-mega-type="style">
+                <a href="/product" class="mega-trigger">Boxes By Style</a>
+            </li>
+            <li class="has-mega" data-mega-type="supplies">
+                <a href="/contact" class="mega-trigger">Packaging Supplies</a>
+            </li>
             <li><a href="/blog">Blogs</a></li>
         </ul>
-    </div>
 
-    <div class="mega-menu" id="megaMenu" aria-hidden="true">
-        <p class="mega-menu-title" id="megaMenuTitle">Boxes By Industry</p>
-        <div class="mega-menu-grid" id="megaMenuGrid"></div>
-        <div class="mega-menu-footer">
-            <img src="{{ request()->getBaseUrl() }}/uploads/customer-service.png" alt="">
-            <span>Need a custom packaging solution?</span>
-            <a href="#" class="mega-menu-cta">Talk to us</a>
+        <!-- Mega Menu Panel -->
+        <div class="mega-menu" id="megaMenu">
+            <div class="mega-menu-grid" id="megaMenuGrid"></div>
+            
+            <div class="mega-menu-footer">
+                <div class="mega-menu-footer-left">
+                    <div class="mega-menu-footer-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8D4445" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                            <path d="M14 22h-4"></path>
+                        </svg>
+                    </div>
+                    <span>Need a custom packaging solution?</span>
+                </div>
+                <a href="/contact" class="mega-menu-cta">Talk to us</a>
+            </div>
         </div>
     </div>
+
     <!-- Mobile Sidebar -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-sidebar" id="mobileSidebar">
@@ -619,10 +646,10 @@
 
             <ul class="mobile-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/all-category">All Categories</a></li>
-                <li><a href="/category">Category</a></li>
-                <li><a href="/product">Product</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/all-category">Boxes By Industry</a></li>
+                <li><a href="/category">Boxes By Material</a></li>
+                <li><a href="/product">Boxes By Style</a></li>
+                <li><a href="/contact">Packaging Supplies</a></li>
                 <li><a href="/blog">Blogs</a></li>
             </ul>
 
@@ -647,56 +674,92 @@
                 </div>
             </div>
 
-            <a href="#" class="get-quote-btn" style="width: 100%;">Get Instant Quote</a>
+            <a href="/contact" class="get-quote-btn" style="width: 100%;">Get Instant Quote</a>
         </div>
     </div>
 </header>
 
 <script>
-    const megaMenuData = {
-        industry: { title: 'Boxes By Industry', items: ['Apparel Boxes', 'Chocolate Packaging', 'Electronics Packaging', 'Food Packaging', 'Cosmetic Packaging', 'Retail Packaging', 'Candle Boxes', 'Health Care Packaging'] },
-        material: { title: 'Boxes By Material', items: ['Cardboard Boxes', 'Kraft Paper Boxes', 'Rigid Boxes', 'Corrugated Boxes', 'Paperboard Boxes', 'Eco-Friendly Boxes', 'Grey Board Boxes', 'Textured Paper Boxes'] },
-        style: { title: 'Boxes By Style', items: ['Magnetic Closure Boxes', 'Two Piece Boxes', 'Drawer Boxes', 'Sleeve Boxes', 'Tuck Top Boxes', 'Gable Boxes', 'Pillow Boxes', 'Die Cut Boxes'] },
-        supplies: { title: 'Packaging Supplies', items: ['Custom Inserts', 'Tissue Paper', 'Packaging Sleeves', 'Shipping Boxes', 'Stickers & Labels', 'Thank You Cards', 'Ribbon & Twine', 'Protective Fill'] }
-    };
+    (function() {
+        const giftBoxSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="#8D4445" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+            <path d="M12 8v13"></path>
+            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+        </svg>`;
 
-    const megaMenu = document.getElementById('megaMenu');
-    const megaMenuTitle = document.getElementById('megaMenuTitle');
-    const megaMenuGrid = document.getElementById('megaMenuGrid');
-    const megaTriggers = document.querySelectorAll('.mega-trigger');
-    const megaAssetBase = "{{ request()->getBaseUrl() }}/uploads/";
+        const megaData = {
+            industry: [
+                'Apparel Boxes', 'Chocolate Packaging', 'Electronics Packaging', 'Apparel Boxes',
+                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes',
+                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes',
+                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes'
+            ],
+            material: [
+                'Cardboard Boxes', 'Kraft Paper Boxes', 'Rigid Boxes', 'Corrugated Boxes',
+                'Paperboard Boxes', 'Eco-Friendly Boxes', 'Grey Board Boxes', 'Textured Paper Boxes',
+                'Duplex Board Boxes', 'Metallic Paperboard', 'Soft-Touch Stock', 'Kraft Flute Boxes',
+                'Recycled Stock', 'Bux Board Boxes', 'Kraft Roll Boxes', 'Rigid Board Boxes'
+            ],
+            style: [
+                'Magnetic Closure Boxes', 'Two Piece Boxes', 'Drawer Boxes', 'Sleeve Boxes',
+                'Tuck Top Boxes', 'Gable Boxes', 'Pillow Boxes', 'Die Cut Boxes',
+                'Shoulder Rigid Boxes', 'Collapsible Rigid Boxes', 'Window Boxes', 'Book Style Boxes',
+                'Rigid Lid & Base', 'Setup Boxes', 'Custom Shaped Boxes', 'Display Boxes'
+            ],
+            supplies: [
+                'Custom Inserts', 'Tissue Paper', 'Packaging Sleeves', 'Shipping Boxes',
+                'Stickers & Labels', 'Thank You Cards', 'Ribbon & Twine', 'Protective Fill',
+                'Bubble Wrap', 'Custom Tape', 'Gift Bags', 'Poly Mailers',
+                'Void Fill', 'Corner Protectors', 'Custom Foil Stamps', 'Box Dividers'
+            ]
+        };
 
-    function closeMegaMenu() {
-        megaMenu.classList.remove('is-open');
-        megaMenu.setAttribute('aria-hidden', 'true');
-        megaTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
-    }
+        const megaMenu = document.getElementById('megaMenu');
+        const megaMenuGrid = document.getElementById('megaMenuGrid');
+        const hasMegaLis = document.querySelectorAll('.has-mega');
+        let activeType = null;
+        let hoverTimeout = null;
 
-    function openMegaMenu(menuKey, trigger) {
-        const menu = megaMenuData[menuKey];
-        if (!menu) return;
-        const wasOpen = megaMenu.classList.contains('is-open') && trigger.getAttribute('aria-expanded') === 'true';
-        closeMegaMenu();
-        if (wasOpen) return;
-        megaMenuTitle.textContent = menu.title;
-        megaMenuGrid.innerHTML = menu.items.map(item => `<a href="#" class="mega-menu-link"><img src="${megaAssetBase}gift-box.png" alt=""><span>${item}</span></a>`).join('');
-        megaMenu.classList.add('is-open');
-        megaMenu.setAttribute('aria-hidden', 'false');
-        trigger.setAttribute('aria-expanded', 'true');
-    }
+        function renderMegaGrid(type) {
+            const items = megaData[type] || megaData.industry;
+            megaMenuGrid.innerHTML = items.map(title => {
+                const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                return `<a href="/category/${slug}" class="mega-menu-item">
+                    <div class="mega-menu-icon">${giftBoxSvg}</div>
+                    <span>${title}</span>
+                </a>`;
+            }).join('');
+        }
 
-    megaTriggers.forEach(trigger => trigger.addEventListener('click', event => {
-        event.stopPropagation();
-        openMegaMenu(trigger.dataset.megaMenu, trigger);
-    }));
+        function openMenu(type, li) {
+            clearTimeout(hoverTimeout);
+            activeType = type;
+            hasMegaLis.forEach(l => l.classList.remove('active'));
+            li.classList.add('active');
+            renderMegaGrid(type);
+            megaMenu.classList.add('is-open');
+        }
 
-    document.addEventListener('click', event => {
-        if (!megaMenu.contains(event.target) && !event.target.closest('.mega-trigger')) closeMegaMenu();
-    });
+        function closeMenu() {
+            clearTimeout(hoverTimeout);
+            hoverTimeout = setTimeout(() => {
+                hasMegaLis.forEach(l => l.classList.remove('active'));
+                megaMenu.classList.remove('is-open');
+                activeType = null;
+            }, 120);
+        }
 
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closeMegaMenu();
-    });
+        hasMegaLis.forEach(li => {
+            const type = li.dataset.megaType;
+            li.addEventListener('mouseenter', () => openMenu(type, li));
+            li.addEventListener('mouseleave', () => closeMenu());
+        });
+
+        megaMenu.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+        megaMenu.addEventListener('mouseleave', () => closeMenu());
+    })();
+
     function toggleMobileMenu() {
         document.getElementById('mobileSidebar').classList.toggle('active');
         document.getElementById('mobileOverlay').classList.toggle('active');

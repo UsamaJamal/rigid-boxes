@@ -203,18 +203,18 @@
 
         <div class="hero-content">
             <h1 class="hero-title">
-                CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES
+                {!! !empty($settings['hero_title']) ? $settings['hero_title'] : 'CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES' !!}
             </h1>
 
             <p class="hero-description">
-                Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.
+                {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
             <a href="#" class="hero-btn">Design Custom Boxes</a>
         </div>
 
         <div class="hero-image-wrapper">
-            <img src="{{ asset('uploads/hero-home-banner.png') }}" alt="Custom Cosmetic Packaging Boxes" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
+            <img src="{{ !empty($settings['hero_image']) ? asset('storage/' . $settings['hero_image']) : asset('uploads/hero-home-banner.png') }}" alt="{{ strip_tags($settings['hero_title'] ?? 'Custom Cosmetic Packaging Boxes') }}" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
         </div>
     </section>
 </div>

@@ -14,20 +14,25 @@ use App\Http\Controllers\AdminContentController;
 |
 */
 
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', function () {
-    return view('homepage');
+    $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
+    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+    $products = DB::table('admin_products')->get()->map(fn($r)=>(array)$r)->all();
+    return view('homepage', compact('settings', 'categories', 'products'));
 });
 
-Route::get('/category', function () {
-    return view('category');
+Route::get('/category/{slug?}', function ($slug = null) {
+    return view('category', compact('slug'));
 });
 
 Route::get('/all-category', function () {
     return view('all-category');
 });
 
-Route::get('/product', function () {
-    return view('product');
+Route::get('/product/{slug?}', function ($slug = null) {
+    return view('product', compact('slug'));
 });
 
 Route::get('/contact', function () {
@@ -39,6 +44,7 @@ Route::get('/blog', function () {
 });
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminHomepageController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Auth Routes
@@ -49,6 +55,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Protected Admin Routes
     Route::middleware('admin.auth')->group(function () {
         Route::get('/', [AdminContentController::class, 'dashboard'])->name('dashboard');
+        Route::get('/homepage-settings', [AdminHomepageController::class, 'edit'])->name('homepage.edit');
+        Route::post('/homepage-settings', [AdminHomepageController::class, 'update'])->name('homepage.update');
         Route::get('/{module}', [AdminContentController::class, 'index'])->name('module.index');
         Route::get('/{module}/create', [AdminContentController::class, 'create'])->name('module.create');
         Route::post('/{module}', [AdminContentController::class, 'store'])->name('module.store');
