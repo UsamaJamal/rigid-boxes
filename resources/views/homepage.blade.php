@@ -1551,16 +1551,17 @@
                         @php 
                             $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
                             $catUrl = url('/category/' . $catSlug);
+                            $cImg = !empty($cat['image']) ? (\Illuminate\Support\Str::startsWith($cat['image'], ['storage/', 'uploads/', 'images/']) ? $cat['image'] : 'storage/' . $cat['image']) : 'uploads/Gift-Boxes.webp';
                         @endphp
                         <div class="industry-card">
                             <a href="{{ $catUrl }}" style="text-decoration:none; color:inherit;">
                                 <span class="industry-card__title">{{ $cat['title'] }}</span>
                             </a>
                             <a href="{{ $catUrl }}" class="industry-card__image-wrap" style="display:block;">
-                                <img src="{{ !empty($cat['image']) ? asset('storage/' . $cat['image']) : asset('uploads/industry-gift-boxes.webp') }}" alt="{{ $cat['title'] }}" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text={{ urlencode($cat['title']) }}'">
+                                <img src="{{ asset($cImg) }}" alt="{{ $cat['title'] }}" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text={{ urlencode($cat['title']) }}'">
                             </a>
                             <div class="industry-card__bottom">
-                                <p class="industry-card__text">{{ Str::limit($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.', 80) }}</p>
+                                <p class="industry-card__text">{{ Str::limit(strip_tags($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'), 80) }}</p>
                                 <a href="{{ $catUrl }}" class="industry-card__btn">Explore Boxes</a>
                             </div>
                         </div>
@@ -1569,7 +1570,7 @@
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="{{ url('/all-category') }}" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/categories') }}" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->
@@ -1604,10 +1605,10 @@
                         <div class="why-card wc-pink2">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Premium Quality Materials</h3>
-                                <p class="why-card__text">Built with high-strength materials that ensure durability, protection, and a premium feel.</p>
+                                <p class="why-card__text">Durable materials crafted to protect your products and elevate brand perception.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Premium rigid box materials and paper samples">
+                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Sample materials showing paper and cardstock swatches">
                             </div>
                         </div>
 
@@ -1615,26 +1616,26 @@
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Low MOQ</h3>
-                                <p class="why-card__text">Flexible minimum order quantities to help startups and growing brands order with confidence.</p>
+                                <p class="why-card__text">Order in quantities that suit your business size, starting from low minimums.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Low MOQ">
+                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Custom box sample representing low MOQ orders">
                             </div>
                         </div>
 
-                    </div><!-- /.why-row row-1 -->
+                    </div><!-- /.why-row -->
 
-                    <!-- ROW 2: yellow (612×242) | green (299×242) | skin (299×242) -->
+                    <!-- ROW 2 & 3: yellow (612×242) | green (299×413) | skin (299×413) -->
                     <div class="why-row">
 
-                        <!-- CARD 4 — yellow: Dedicated Customer Service (horizontal) -->
+                        <!-- CARD 4 — yellow: Dedicated Customer Service -->
                         <div class="why-card wc-yellow">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Dedicated Customer Service</h3>
-                                <p class="why-card__text">Our packaging specialists are here to guide you through every step of the process.</p>
+                                <p class="why-card__text">Our packaging specialists are here to guide you through every step of your order.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Packaging customer-service specialist">
+                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Customer service specialist with headset smiling">
                             </div>
                         </div>
 
@@ -1642,10 +1643,10 @@
                         <div class="why-card wc-green">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Custom Sizes &amp; Designs</h3>
-                                <p class="why-card__text">Tailored packaging solutions crafted to match your product dimensions and brand identity.</p>
+                                <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Custom Sizes and Designs">
+                                <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Custom shaped rigid packaging box">
                             </div>
                         </div>
 
@@ -1697,10 +1698,11 @@
                         @php 
                             $prodSlug = $prod['slug'] ?? Str::slug($prod['title']);
                             $prodUrl = url('/product/' . $prodSlug);
+                            $pImg = !empty($prod['image']) ? (\Illuminate\Support\Str::startsWith($prod['image'], ['storage/', 'uploads/', 'images/']) ? $prod['image'] : 'storage/' . $prod['image']) : 'uploads/best-seller-p1.png';
                         @endphp
                         <a href="{{ $prodUrl }}" class="bestseller-card" style="text-decoration:none; color:inherit;">
                             <div class="bestseller-card__img">
-                                <img src="{{ !empty($prod['image']) ? asset('storage/' . $prod['image']) : asset('uploads/best-seller-p1.png') }}" alt="{{ $prod['title'] }}" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
+                                <img src="{{ asset($pImg) }}" alt="{{ $prod['title'] }}" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
                             </div>
                             <p class="bestseller-card__title">{{ $prod['title'] }}</p>
                         </a>

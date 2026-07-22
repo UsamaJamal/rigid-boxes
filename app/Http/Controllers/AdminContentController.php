@@ -37,7 +37,7 @@ class AdminContentController extends Controller
     public function create(string $module)
     {
         abort_unless(isset($this->modules()[$module]), 404);
-        return view('admin.form', $this->formData($module, null));
+        return view("admin.forms.{$module}", $this->formData($module, null));
     }
 
     public function edit(string $module, string $id)
@@ -45,17 +45,30 @@ class AdminContentController extends Controller
         abort_unless(isset($this->modules()[$module]), 404);
         $item = collect($this->data()[$module])->firstWhere('id', $id);
         abort_unless($item, 404);
-        return view('admin.form', $this->formData($module, $item));
+        return view("admin.forms.{$module}", $this->formData($module, $item));
     }
 
     private function formData(string $module, ?array $item): array
     {
         $data = $this->data();
-        return compact('module', 'item') + [
+        $formData = compact('module', 'item') + [
             'meta' => $this->modules()[$module],
             'categories' => $data['categories'],
             'products' => $data['products'],
         ];
+
+        if ($module === 'categories' && !empty($item['id'])) {
+            $formData['categoryFaqs'] = DB::table('admin_category_faqs')
+                ->where('category_id', $item['id'])
+                ->orderBy('id')
+                ->get()
+                ->map(fn($faq) => (array) $faq)
+                ->all();
+        } else {
+            $formData['categoryFaqs'] = [];
+        }
+
+        return $formData;
     }
 
     public function store(Request $request, string $module)
@@ -84,6 +97,16 @@ class AdminContentController extends Controller
         $fields = $columns;
         $payload = collect($request->except(['_token','_method','images','image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
+
+        foreach (['show_home', 'show_in_nav'] as $checkboxField) {
+            if (in_array($checkboxField, $fields, true)) {
+                $payload[$checkboxField] = $request->boolean($checkboxField) ? 1 : 0;
+            }
+        }
+
+        if ($module === 'categories') {
+            $payload['parent_id'] = $request->filled('parent_id') ? $request->input('parent_id') : null;
+        }
 
         foreach (['image', 'hero_image', 'banner_image', 'icon'] as $field) {
             if ($request->hasFile($field)) {

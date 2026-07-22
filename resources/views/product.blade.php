@@ -1628,32 +1628,24 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-container">
+            @php
+                $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+            @endphp
             <div class="hero-images">
                 <div class="main-image">
-                    <img src="{{ asset('images/lipstick-box.png') }}" alt="Lipstick Box" style="width: 100%; height: auto; display: block;">
+                    <img src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
                 <div class="thumbnails">
                     <div class="thumb active">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                        <img src="{{ asset($pMainImg) }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
                     </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                </div>
-                <div style="margin-top: 15px;">
-                    <img src="{{ asset('images/Container (Customized Packaging Boxes for Skin Care Products - Box Agency).png') }}" alt="Reviews" style="width: 100%; height: auto;">
                 </div>
             </div>
 
             <div class="hero-form">
-                <h1>Lipstick Boxes</h1>
-                <p>Custom Lipstick Boxes are crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes. Fully customizable in size, style, and design, they help create a lasting impression and enhance your product's shelf appeal<span id="dotsLipstick">... </span><span id="moreLipstick" style="display: none;"> Choose from premium paper stocks, foil stamping, embossing, window cut-outs, custom inserts, and protective finishes to create lipstick packaging tailored to your brand and product requirements. </span><button type="button" id="readMoreBtnLipstick" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; margin-left: 6px; border: 0; padding: 0; background: transparent;">READ MORE</button></p>
+                <h1>{{ $pTitle }}</h1>
+                <p>{{ strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.') }}</p>
                 
                 <form action="#">
                     <div class="form-section">
@@ -1683,13 +1675,13 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             <select class="form-control" id="pref-box-style">
-                                <option>Select Box Style</option>
+                                <option>{{ $product['box_style'] ?? 'Custom Box Style' }}</option>
                             </select>
                             <select class="form-control" id="pref-paper-stock">
-                                <option>Select Paper Stock</option>
+                                <option>{{ $product['material'] ?? 'Custom Cardstock / Greyboard' }}</option>
                             </select>
                             <select class="form-control">
-                                <option>Select Color</option>
+                                <option>{{ $product['printing'] ?? 'CMYK / PMS Printing' }}</option>
                             </select>
                         </div>
                     </div>
@@ -1697,10 +1689,10 @@
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-2-upload">
-                            <input type="number" class="form-control" placeholder="Quantity">
+                            <input type="number" class="form-control" placeholder="Quantity (e.g. 100)">
                             <div class="file-upload-wrap">
-                                <input type="text" class="form-control" placeholder="No File Choosen" readonly>
-                                <button type="button" class="upload-btn">Upload</button>
+                                <input type="text" class="form-control" placeholder="No File Chosen" readonly>
+                                <button type="button" class="upload-btn">Upload Artwork</button>
                             </div>
                         </div>
                     </div>
@@ -1721,19 +1713,19 @@
         <div class="container">
             <div class="badges-horizontal">
                 <div class="trust-badges-wrapper">
-                    <img src="{{ asset('images/container (1).png') }}" alt="No Die & Plate Charges" class="trust-badges-image badge-icon">
+                    <img src="{{ asset('uploads/customer-service.png') }}" alt="No Die & Plate Charges" class="trust-badges-image badge-icon">
                     <span class="badge-label">No Die &amp; Plate<br>Charges</span>
                 </div>
                 <div class="features-badges-wrapper">
-                    <img src="{{ asset('images/container (2).png') }}" alt="Free Graphic Designing" class="features-badges-image badge-icon">
+                    <img src="{{ asset('uploads/why-design-support.png') }}" alt="Free Graphic Designing" class="features-badges-image badge-icon">
                     <span class="badge-label">Free Graphic<br>Designing</span>
                 </div>
                 <div class="shipping-badge-wrapper">
-                    <img src="{{ asset('images/container (3).png') }}" alt="Quick Turnaround Time" class="shipping-badge-image badge-icon">
+                    <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Quick Turnaround Time" class="shipping-badge-image badge-icon">
                     <span class="badge-label">Quick Turnaround<br>Time</span>
                 </div>
                 <div class="fourth-badge-wrapper">
-                    <img src="{{ asset('images/container (4).png') }}" alt="Free Shipping" class="fourth-badge-image badge-icon">
+                    <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Free Shipping" class="fourth-badge-image badge-icon">
                     <span class="badge-label">Free Shipping</span>
                 </div>
             </div>
@@ -1754,24 +1746,9 @@
 
     <!-- Content Section -->
     <section class="content-section container" id="content-description">
-        <h2>Everything you need to know about custom boxes</h2>
-        <p>Custom packaging is one of the most powerful tools a brand can use to create a lasting impression. Research shows that 72% of consumers say that packaging design influences their purchase decision, and 40% share photos of exciting unboxing experiences on social media.</p>
-        
-        <p>At KayPackaging, we believe every business — no matter the size — deserves packaging that reflects the quality of what's inside. Whether you're a solo founder shipping your first 10 orders or a growing brand sending thousands of packages per week, our custom box solutions are built to scale with you.</p>
-
-        <div id="moreDescription" style="display: none;">
-        <h2 class="considerations-heading">What to consider when choosing custom packaging:</h2>
-        <ul>
-            <li>Box style — mailer, rigid, folding carton, or corrugated shipping box depending on product type and fragility</li>
-            <li>Size — always measure your product first, then add 1-2cm clearance on each side for a snug fit</li>
-            <li>Material — E-flute corrugated for mailers, SBS paperboard for cosmetics, kraft for eco-friendly positioning</li>
-            <li>Finish — matte gives a premium feel, gloss increases vibrancy, soft touch adds texture, foil elevates luxury perception</li>
-            <li>Quantity — higher quantities dramatically reduce per-unit cost; order samples first to validate before bulk printing</li>
-        </ul>
-        </div>
-        
-        <div style="text-align: left; margin-top: 20px; margin-left: 20px;">
-            <button type="button" id="readMoreBtn" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; border: 0; padding: 0; background: transparent;">READ MORE</button>
+        <h2>Everything you need to know about {{ $pTitle }}</h2>
+        <div>
+            {!! !empty($product['long_description']) ? $product['long_description'] : '<p>' . ($product['description'] ?? '') . '</p>' !!}
         </div>
     </section>
 
@@ -1780,43 +1757,35 @@
         <table class="specs-table">
             <tr>
                 <td>Box Style</td>
-                <td>Lipstick Boxes</td>
+                <td>{{ $product['box_style'] ?? 'Custom Box Style' }}</td>
             </tr>
             <tr>
-                <td>Retail Boxes</td>
-                <td>All Custom Sizes & Shapes</td>
+                <td>Dimensions</td>
+                <td>{{ $product['dimensions'] ?? 'Custom Sizes Available' }}</td>
             </tr>
             <tr>
                 <td>MOQ</td>
-                <td>Starting from 100 Boxes</td>
+                <td>{{ $product['moq'] ?? '100 Units' }}</td>
             </tr>
             <tr>
-                <td>Paper Stock</td>
-                <td>10pt to 28pt (60lb to 400lb) Eco-Friendly Kraft, E-flute Corrugated, Bux Board, Cardstock</td>
+                <td>Material Stock</td>
+                <td>{{ $product['material'] ?? 'Premium Rigid Board / Cardstock' }}</td>
             </tr>
             <tr>
                 <td>Printing</td>
-                <td>Digital (Standard and HD Print), Lithography, CMYK, CMYK + 1 PMS color, CMYK + 2 PMS colors</td>
+                <td>{{ $product['printing'] ?? 'CMYK / PMS Color Printing' }}</td>
             </tr>
             <tr>
                 <td>Finishing</td>
-                <td>Gloss Lamination, Matte Lamination, Gloss AQ, Gloss UV, Matte UV, Spot UV, Embossing, Foiling</td>
+                <td>{{ $product['finishing'] ?? 'Soft-Touch Matte, Foil Stamping & Spot UV' }}</td>
             </tr>
             <tr>
                 <td>Included Options</td>
-                <td>Die Cutting, Gluing, Scored, Perforation</td>
-            </tr>
-            <tr>
-                <td>Proof</td>
-                <td>Flat View, 3D Mock-up, Physical Sampling (On request)</td>
+                <td>Die Cutting, Window Patching, Custom Inserts</td>
             </tr>
             <tr>
                 <td>Turnaround</td>
-                <td>12 - 16 days</td>
-            </tr>
-            <tr>
-                <td>Shipping</td>
-                <td>Flat</td>
+                <td>{{ $product['turnaround'] ?? '8 - 10 Business Days' }}</td>
             </tr>
         </table>
     </section>
@@ -2013,30 +1982,23 @@
         <div class="container">
             <h2>Related Products</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/listic-boxes.png') }}" alt="Lipstick Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                @php
+                    $rProds = !empty($relatedProducts) ? $relatedProducts : [];
+                @endphp
+                @foreach($rProds as $rp)
+                    @php
+                        $rpImg = !empty($rp['image']) ? (\Illuminate\Support\Str::startsWith($rp['image'], ['storage/', 'uploads/', 'images/']) ? $rp['image'] : 'storage/' . $rp['image']) : 'uploads/Gift-Boxes.webp';
+                        $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
+                    @endphp
+                    <div class="product-card">
+                        <a href="{{ url('/product/' . $rpSlug) }}" style="text-decoration:none; color:inherit;">
+                            <div class="product-image">
+                                <img src="{{ asset($rpImg) }}" alt="{{ $rp['title'] }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($rp['title']) }}'">
+                            </div>
+                            <h4>{{ $rp['title'] }}</h4>
+                        </a>
                     </div>
-                    <h4>Lipstick Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/Background_Border.png') }}" alt="Serum Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Serum Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/perfume-box.png') }}" alt="Perfume Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Perfume Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/skincare-box.png') }}" alt="Skincare Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Skincare Boxes</h4>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

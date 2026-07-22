@@ -384,83 +384,34 @@
     @include('components.header')
 
     <main>
-        @include('components.herohome')
+        @include('components.herohome', ['settings' => $category ?? []])
 
         @include('components.logo')
 
-        <!-- Popular Cosmetic Boxes Section -->
+        <!-- Popular Boxes Section -->
         <section class="popular-boxes-section">
             <div class="popular-boxes-inner">
-            <h2 class="section-title">Explore Our Popular Cosmetic Boxes</h2>
-            <p class="section-subtitle">Specialized structural solutions for every cosmetic silhouette.</p>
+            <h2 class="section-title">Explore Our {{ $category['title'] ?? 'Custom Packaging Boxes' }}</h2>
+            <p class="section-subtitle">Specialized structural packaging solutions engineered for maximum impact and protection.</p>
 
             <div class="boxes-grid">
-                <!-- Card 1 -->
-                
-               
-                <!-- Card 5 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
+                @php
+                    $catProducts = !empty($products) ? $products : [];
+                @endphp
+                @foreach($catProducts as $p)
+                    @php
+                        $pImg = !empty($p['image']) ? (\Illuminate\Support\Str::startsWith($p['image'], ['storage/', 'uploads/', 'images/']) ? $p['image'] : 'storage/' . $p['image']) : 'uploads/Gift-Boxes.webp';
+                        $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
+                    @endphp
+                    <div class="box-card">
+                        <a href="{{ url('/product/' . $pSlug) }}" style="text-decoration:none; color:inherit; width:100%; display:block;">
+                            <div class="box-image-wrapper">
+                                <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                            </div>
+                            <h3 class="box-title">{{ $p['title'] }}</h3>
+                        </a>
                     </div>
-                    <h3 class="box-title">Lipstick Boxes</h3>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-collapsible-rigid-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
-                    </div>
-                    <h3 class="box-title">Serum Boxes</h3>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
-                    </div>
-                    <h3 class="box-title">Perfume Boxes</h3>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
-                    </div>
-                    <h3 class="box-title">Skincare Boxes</h3>
-                </div>
-
-                <!-- Card 9 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-cardboard-boxes.webp') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text=Lipstick+Boxes'">
-                    </div>
-                    <h3 class="box-title">Lipstick Boxes</h3>
-                </div>
-
-                <!-- Card 10 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-grey-board-boxes.webp') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x322/eeeeee/555555?text=Serum+Boxes'">
-                    </div>
-                    <h3 class="box-title">Serum Boxes</h3>
-                </div>
-
-                <!-- Card 11 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-bakery-boxes.webp') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x322/333333/ffffff?text=Perfume+Boxes'">
-                    </div>
-                    <h3 class="box-title">Perfume Boxes</h3>
-                </div>
-
-                <!-- Card 12 -->
-                <div class="box-card">
-                    <div class="box-image-wrapper">
-                        <img src="{{ asset('uploads/category-box-by-industry-banner.webp') }}" alt="Skincare Boxes" onerror="this.src='https://placehold.co/284x322/7c9780/ffffff?text=Skincare+Boxes'">
-                    </div>
-                    <h3 class="box-title">Skincare Boxes</h3>
-                </div>
+                @endforeach
             </div>
             </div><!-- end .popular-boxes-inner -->
         </section>

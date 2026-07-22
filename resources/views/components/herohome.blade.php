@@ -214,7 +214,11 @@
         </div>
 
         <div class="hero-image-wrapper">
-            <img src="{{ !empty($settings['hero_image']) ? asset('storage/' . $settings['hero_image']) : asset('uploads/hero-home-banner.png') }}" alt="{{ strip_tags($settings['hero_title'] ?? 'Custom Cosmetic Packaging Boxes') }}" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
+            @php
+                $hImg = !empty($settings['hero_image']) ? $settings['hero_image'] : (!empty($category['hero_image']) ? $category['hero_image'] : 'uploads/Home-Banner.webp');
+                $hImgPath = \Illuminate\Support\Str::startsWith($hImg, ['storage/', 'uploads/', 'images/']) ? $hImg : 'storage/' . $hImg;
+            @endphp
+            <img src="{{ asset($hImgPath) }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'Custom Rigid Packaging Boxes')) }}" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
         </div>
     </section>
 </div>

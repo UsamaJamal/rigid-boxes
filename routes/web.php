@@ -24,16 +24,113 @@ Route::get('/', function () {
 });
 
 Route::get('/category/{slug?}', function ($slug = null) {
-    return view('category', compact('slug'));
+    $category = null;
+    if ($slug) {
+        $category = DB::table('admin_categories')->where('slug', $slug)->first();
+    }
+    if (!$category) {
+        $category = DB::table('admin_categories')->whereNotNull('parent_id')->first();
+    }
+    if (!$category) {
+        $category = DB::table('admin_categories')->first();
+    }
+    $categoryArr = $category ? (array) $category : [];
+    
+    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+    
+    $products = [];
+    $faqs = [];
+    if (!empty($categoryArr['id'])) {
+        $productIds = DB::table('admin_category_product')->where('category_id', $categoryArr['id'])->pluck('product_id');
+        $products = DB::table('admin_products')->whereIn('id', $productIds)->get()->map(fn($r)=>(array)$r)->all();
+        
+        $childIds = DB::table('admin_categories')->where('parent_id', $categoryArr['id'])->pluck('id');
+        if ($childIds->count() > 0) {
+            $childProductIds = DB::table('admin_category_product')->whereIn('category_id', $childIds)->pluck('product_id');
+            $moreProducts = DB::table('admin_products')->whereIn('id', $childProductIds)->get()->map(fn($r)=>(array)$r)->all();
+            $products = array_merge($products, $moreProducts);
+        }
+
+        $faqs = DB::table('admin_category_faqs')->where('category_id', $categoryArr['id'])->get()->map(fn($r)=>(array)$r)->all();
+    }
+    if (empty($products)) {
+        $products = DB::table('admin_products')->limit(8)->get()->map(fn($r)=>(array)$r)->all();
+    }
+
+    return view('category', [
+        'slug' => $slug,
+        'category' => $categoryArr,
+        'categories' => $categories,
+        'products' => $products,
+        'faqs' => $faqs
+    ]);
+});
+
+Route::get('/categories', function () {
+    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+    return view('all-category', compact('categories'));
 });
 
 Route::get('/all-category', function () {
-    return view('all-category');
+    return redirect('/categories', 301);
+});
+
+Route::get('/all-category/{slug}', function (string $slug) {
+    return redirect('/' . $slug, 301);
 });
 
 Route::get('/product/{slug?}', function ($slug = null) {
-    return view('product', compact('slug'));
+    $product = null;
+    if ($slug) {
+        $product = DB::table('admin_products')->where('slug', $slug)->first();
+    }
+    if (!$product) {
+        $product = DB::table('admin_products')->first();
+    }
+    $productArr = $product ? (array) $product : [];
+
+    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+    $faqs = [];
+    $relatedProducts = [];
+
+    if (!empty($productArr['id'])) {
+        $faqs = DB::table('admin_product_faqs')->where('product_id', $productArr['id'])->get()->map(fn($r)=>(array)$r)->all();
+        $relatedProducts = DB::table('admin_products')->where('id', '!=', $productArr['id'])->limit(4)->get()->map(fn($r)=>(array)$r)->all();
+    }
+
+    return view('product', [
+        'slug' => $slug,
+        'product' => $productArr,
+        'categories' => $categories,
+        'faqs' => $faqs,
+        'relatedProducts' => $relatedProducts
+    ]);
 });
+
+/* Parent-category landing pages use clean root-level URLs without a route catch-all. */
+$parentCategoryLanding = function (string $slug) {
+    $parentCategory = DB::table('admin_categories')
+        ->where('slug', $slug)
+        ->whereNull('parent_id')
+        ->first();
+
+    abort_unless($parentCategory, 404);
+
+    $categories = DB::table('admin_categories')
+        ->where('parent_id', $parentCategory->id)
+        ->get()
+        ->map(fn($r) => (array) $r)
+        ->all();
+
+    return view('all-category', [
+        'categories' => $categories,
+        'parentCategory' => (array) $parentCategory,
+    ]);
+};
+
+Route::get('/box-by-industry', $parentCategoryLanding);
+Route::get('/box-by-material', $parentCategoryLanding);
+Route::get('/box-by-style', $parentCategoryLanding);
 
 Route::get('/contact', function () {
     return view('contact');

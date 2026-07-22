@@ -156,9 +156,10 @@
     <div class="text-content-container">
         <div class="text-content-card">
             <div class="text-content-inner">
-                <h2 class="text-content-heading">Order Custom Boxes, Custom Packaging &amp; Shipping Boxes At Wholesale Rates</h2>
                 <div class="text-content-body">
-                    @if(!empty($settings['content_section']))
+                    @if(!empty($category['description']))
+                        {!! $category['description'] !!}
+                    @elseif(!empty($settings['content_section']))
                         {!! $settings['content_section'] !!}
                     @else
                         <p>Do You Have A Business? Big Or Small Doesn't Matter!</p>

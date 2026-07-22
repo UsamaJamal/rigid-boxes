@@ -6,7 +6,16 @@
         --footer-color: #5F2D2F;
         --header-gradient: linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%);
         --section-text-color: #000000;
+        --heading-h1-size: 32px;
+        --heading-h2-size: 28px;
+        --heading-h3-size: 24px;
+        --heading-h4-size: 20px;
     }
+
+    h1 { font-size: var(--heading-h1-size) !important; }
+    h2 { font-size: var(--heading-h2-size) !important; }
+    h3 { font-size: var(--heading-h3-size) !important; }
+    h4 { font-size: var(--heading-h4-size) !important; }
 
     .site-header {
         background: var(--header-gradient);
@@ -265,6 +274,13 @@
         height: 22px;
         stroke: var(--primary-color);
         fill: none;
+    }
+
+    .mega-menu-icon img {
+        width: 26px;
+        height: 26px;
+        display: block;
+        object-fit: contain;
     }
 
     .mega-menu-footer {
@@ -587,18 +603,14 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="/">Home</a></li>
-            <li class="has-mega" data-mega-type="industry">
-                <a href="/all-category" class="mega-trigger">Boxes By Industry</a>
+            @php
+                $navParentItems = isset($navCategories) ? array_values(array_filter($navCategories, fn($c) => empty($c['parent_id']))) : [];
+            @endphp
+            @foreach($navParentItems as $navParent)
+            <li class="has-mega" data-mega-type="{{ $navParent['slug'] }}">
+                <a href="{{ url('/' . $navParent['slug']) }}" class="mega-trigger">{{ $navParent['title'] }}</a>
             </li>
-            <li class="has-mega" data-mega-type="material">
-                <a href="/category" class="mega-trigger">Boxes By Material</a>
-            </li>
-            <li class="has-mega" data-mega-type="style">
-                <a href="/product" class="mega-trigger">Boxes By Style</a>
-            </li>
-            <li class="has-mega" data-mega-type="supplies">
-                <a href="/contact" class="mega-trigger">Packaging Supplies</a>
-            </li>
+            @endforeach
             <li><a href="/blog">Blogs</a></li>
         </ul>
 
@@ -646,10 +658,9 @@
 
             <ul class="mobile-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/all-category">Boxes By Industry</a></li>
-                <li><a href="/category">Boxes By Material</a></li>
-                <li><a href="/product">Boxes By Style</a></li>
-                <li><a href="/contact">Packaging Supplies</a></li>
+                @foreach($navParentItems as $navParent)
+                    <li><a href="{{ url('/' . $navParent['slug']) }}">{{ $navParent['title'] }}</a></li>
+                @endforeach
                 <li><a href="/blog">Blogs</a></li>
             </ul>
 
@@ -688,31 +699,43 @@
             <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
         </svg>`;
 
+        // Build megaData dynamically from DB categories
+        @php
+            $navCatsAll = $navCategories ?? [];
+            $navParents = array_filter($navCatsAll, fn($c) => empty($c['parent_id']));
+            $navChildren = array_filter($navCatsAll, fn($c) => !empty($c['parent_id']));
+            
+            // Map: parent_slug => [children]
+            $navByParentSlug = [];
+            foreach ($navParents as $parent) {
+                $slug = $parent['slug'];
+                $children = array_filter($navChildren, fn($c) => $c['parent_id'] == $parent['id']);
+                $navByParentSlug[$slug] = array_values($children);
+            }
+        @endphp
+
         const megaData = {
-            industry: [
-                'Apparel Boxes', 'Chocolate Packaging', 'Electronics Packaging', 'Apparel Boxes',
-                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes',
-                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes',
-                'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes', 'Apparel Boxes'
+            @foreach($navParents as $parent)
+            "{{ $parent['slug'] }}": [
+                @foreach($navByParentSlug[$parent['slug']] ?? [] as $child)
+                @php
+                    $childIcon = !empty($child['icon'])
+                        ? (\Illuminate\Support\Str::startsWith($child['icon'], ['storage/', 'uploads/', 'images/'])
+                            ? asset($child['icon'])
+                            : asset('storage/' . $child['icon']))
+                        : '';
+                @endphp
+                { title: @json($child['title']), slug: @json($child['slug']), icon: @json($childIcon) },
+                @endforeach
             ],
-            material: [
-                'Cardboard Boxes', 'Kraft Paper Boxes', 'Rigid Boxes', 'Corrugated Boxes',
-                'Paperboard Boxes', 'Eco-Friendly Boxes', 'Grey Board Boxes', 'Textured Paper Boxes',
-                'Duplex Board Boxes', 'Metallic Paperboard', 'Soft-Touch Stock', 'Kraft Flute Boxes',
-                'Recycled Stock', 'Bux Board Boxes', 'Kraft Roll Boxes', 'Rigid Board Boxes'
-            ],
-            style: [
-                'Magnetic Closure Boxes', 'Two Piece Boxes', 'Drawer Boxes', 'Sleeve Boxes',
-                'Tuck Top Boxes', 'Gable Boxes', 'Pillow Boxes', 'Die Cut Boxes',
-                'Shoulder Rigid Boxes', 'Collapsible Rigid Boxes', 'Window Boxes', 'Book Style Boxes',
-                'Rigid Lid & Base', 'Setup Boxes', 'Custom Shaped Boxes', 'Display Boxes'
-            ],
-            supplies: [
-                'Custom Inserts', 'Tissue Paper', 'Packaging Sleeves', 'Shipping Boxes',
-                'Stickers & Labels', 'Thank You Cards', 'Ribbon & Twine', 'Protective Fill',
-                'Bubble Wrap', 'Custom Tape', 'Gift Bags', 'Poly Mailers',
-                'Void Fill', 'Corner Protectors', 'Custom Foil Stamps', 'Box Dividers'
-            ]
+            @endforeach
+        };
+
+        // Map nav li data-mega-type to parent slug
+        const navMapping = {
+            @foreach($navParents as $parent)
+            "{{ $parent['slug'] }}": "{{ $parent['slug'] }}",
+            @endforeach
         };
 
         const megaMenu = document.getElementById('megaMenu');
@@ -722,11 +745,21 @@
         let hoverTimeout = null;
 
         function renderMegaGrid(type) {
-            const items = megaData[type] || megaData.industry;
-            megaMenuGrid.innerHTML = items.map(title => {
-                const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            // type can be the slug or a legacy type name like "industry"
+            const items = megaData[type] || [];
+            if (items.length === 0) {
+                megaMenuGrid.innerHTML = '<p style="color:#999;padding:12px;font-size:13px;">No subcategories found.</p>';
+                return;
+            }
+            megaMenuGrid.innerHTML = items.map(item => {
+                const title = typeof item === 'string' ? item : item.title;
+                const slug = typeof item === 'string' ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : item.slug;
+                const icon = typeof item === 'object' ? item.icon : '';
+                const iconHtml = icon
+                    ? `<img src="${icon}" alt="" loading="lazy">`
+                    : giftBoxSvg;
                 return `<a href="/category/${slug}" class="mega-menu-item">
-                    <div class="mega-menu-icon">${giftBoxSvg}</div>
+                    <div class="mega-menu-icon">${iconHtml}</div>
                     <span>${title}</span>
                 </a>`;
             }).join('');
@@ -765,4 +798,67 @@
         document.getElementById('mobileOverlay').classList.toggle('active');
         document.body.style.overflow = document.getElementById('mobileSidebar').classList.contains('active') ? 'hidden' : '';
     }
+</script>
+
+<script>
+    (function () {
+        function imageNameFromSrc(image) {
+            const source = image.currentSrc || image.getAttribute('src') || '';
+            if (!source || source.startsWith('data:') || source.startsWith('blob:')) return '';
+
+            try {
+                const pathname = new URL(source, window.location.href).pathname;
+                const filename = decodeURIComponent(pathname.split('/').pop() || '');
+                return filename.replace(/\.[a-z0-9]+$/i, '');
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function applyImageMetadata(image) {
+            const imageName = imageNameFromSrc(image);
+            if (!imageName) return;
+
+            const words = imageName
+                .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+                .replace(/[^a-zA-Z0-9]+/g, ' ')
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+            if (!words.length) return;
+
+            image.alt = words.map(word => word.toLowerCase()).join('-');
+            image.title = words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+        }
+
+        function applyToImages(root) {
+            if (root instanceof HTMLImageElement) applyImageMetadata(root);
+            if (root.querySelectorAll) root.querySelectorAll('img').forEach(applyImageMetadata);
+        }
+
+        function initializeImageMetadata() {
+            applyToImages(document);
+
+            document.addEventListener('load', event => {
+                if (event.target instanceof HTMLImageElement) applyImageMetadata(event.target);
+            }, true);
+
+            new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === Node.ELEMENT_NODE) applyToImages(node);
+                    });
+                });
+            }).observe(document.body, { childList: true, subtree: true });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeImageMetadata);
+        } else {
+            initializeImageMetadata();
+        }
+    })();
 </script>

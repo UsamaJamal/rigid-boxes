@@ -14,5 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminContentSeeder::class);
+        $this->call(ImportPremiumBoxesSeeder::class);
+        $this->call(CategoryFaqsSeeder::class);
+        $this->call(CategoryDescriptionsSeeder::class);
     }
 }

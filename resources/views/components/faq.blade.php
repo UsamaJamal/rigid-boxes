@@ -283,6 +283,11 @@
 </style>
 
 <section class="faq-section">
+    @php
+        $displayFaqs = !empty($faqs) && is_array($faqs)
+            ? $faqs
+            : ((($settings ?? [])['faqs'] ?? []) ?: []);
+    @endphp
     <div class="faq-container">
         <div class="faq-wrapper">
             <div class="faq-left">
@@ -294,8 +299,8 @@
             <div class="faq-right">
                 <h2 class="faq-main-heading">Frequently Asked Questions</h2>
                 <div class="faq-list">
-                    @if(!empty($settings['faqs']) && is_array($settings['faqs']) && count($settings['faqs']) > 0)
-                        @foreach($settings['faqs'] as $faq)
+                    @if(count($displayFaqs) > 0)
+                        @foreach($displayFaqs as $faq)
                             <div class="faq-item">
                                 <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                                     <span class="faq-question-text">{{ $faq['question'] ?? '' }}</span>
