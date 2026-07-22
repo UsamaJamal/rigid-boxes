@@ -3,6 +3,8 @@
 @section('heading', ($item ? 'Edit ' : 'Add ') . $meta['singular'])
 @section('content')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+
 @php
     $v = fn($key, $default = '') => old($key, $item[$key] ?? $default);
     $editing = (bool)$item;
@@ -69,7 +71,26 @@
             
             <div class="field">
                 <label>Category</label>
-                <input name="blog_category" value="{{ $v('blog_category') }}" placeholder="Design & Branding">
+                @php
+                    $blogCategory = strtolower(trim((string) $v('blog_category')));
+                    $blogCategory = [
+                        'packaging basics' => 'packaging',
+                        'marketing tips' => 'marketing',
+                        'sustainable packaging guide' => 'sustainability',
+                        'production & moq tips' => 'production',
+                        'design tips' => 'design',
+                        'industry specific studies' => 'industry',
+                    ][$blogCategory] ?? $blogCategory;
+                @endphp
+                <select name="blog_category">
+                    <option value="">Select a blog category</option>
+                    <option value="packaging" {{ $blogCategory === 'packaging' ? 'selected' : '' }}>Packaging Basics</option>
+                    <option value="marketing" {{ $blogCategory === 'marketing' ? 'selected' : '' }}>Marketing Tips</option>
+                    <option value="sustainability" {{ $blogCategory === 'sustainability' ? 'selected' : '' }}>Sustainable Packaging Guide</option>
+                    <option value="production" {{ $blogCategory === 'production' ? 'selected' : '' }}>Production &amp; MOQ Tips</option>
+                    <option value="design" {{ $blogCategory === 'design' ? 'selected' : '' }}>Design Tips</option>
+                    <option value="industry" {{ $blogCategory === 'industry' ? 'selected' : '' }}>Industry Specific Studies</option>
+                </select>
             </div>
             
             <div class="field">
@@ -147,4 +168,26 @@
         <button class="btn" type="submit">Save {{ $meta['singular'] }}</button>
     </div>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.init({
+                selector: 'textarea[name="content"], textarea[name="excerpt"], textarea[name="author_description"]',
+                height: 360,
+                plugins: 'code advlist autolink lists link image charmap preview anchor searchreplace visualblocks fullscreen insertdatetime media table help wordcount',
+                toolbar: 'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code fullscreen preview',
+                block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6; Preformatted=pre',
+                branding: false,
+                promotion: false,
+                content_style: 'body { font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; }'
+            });
+            // Keep the full article editor taller while the short rich-text fields stay compact.
+            ['excerpt', 'author_description'].forEach(function (name) {
+                const editor = tinymce.get(name);
+                if (editor) editor.theme.resizeTo(null, 260);
+            });
+        }
+    });
+</script>
 @endsection

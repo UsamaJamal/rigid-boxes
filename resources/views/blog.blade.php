@@ -6,17 +6,37 @@
 </style>
 <style>
 /* Figma Design Overrides */
+.hero {
+    background-image: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.58) 42%, rgba(0,0,0,.12) 77%), url('{{ asset('uploads/hero-home-banner.webp') }}');
+    background-position: center 52%;
+    background-size: cover;
+}
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.filter .filter-icon { flex: 0 0 20px; }
 .page {
     background: #FAF8F8;
+    overflow: visible;
+    width: 100%;
+    max-width: none;
 }
+.content { padding-bottom: 0; }
+.content > .cta-section { margin-top: 40px; padding-bottom: 24px; }
 .hero {
-    max-width: var(--section-width);
-    margin: 0 auto;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
 }
 /* Match the hero edges to every other page section at browser zoom levels. */
 .hero {
-    width: min(100%, var(--canvas-width));
-    max-width: var(--canvas-width);
+    width: 100vw;
+    max-width: none;
 }
 .hero .container {
     width: min(calc(100% - (var(--gutter) * 2)), var(--section-width));
@@ -32,8 +52,9 @@
 /* Keep the 1440px hero contained on narrower desktop viewports. */
 @media (max-width: 1255px) {
     .hero {
-        width: min(calc(100% - (var(--gutter) * 2)), var(--section-width));
-        max-width: var(--section-width);
+        width: 100vw;
+        max-width: none;
+        margin-left: calc(50% - 50vw);
         overflow: hidden;
     }
     .hero .container { width: min(calc(100% - (var(--gutter) * 2)), var(--section-width)); }
@@ -72,8 +93,9 @@
     display: none;
 }
 .filter {
-    flex: 0 0 169px;
-    width: 169px;
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 169px;
     height: 76px;
     display: flex;
     flex-direction: row;
@@ -91,7 +113,8 @@
     letter-spacing: 0%;
     text-align: center;
     text-transform: capitalize;
-    white-space: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 .filter br { display: block; }
@@ -335,7 +358,39 @@
 
 @media (max-width: 620px) {
     .category-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}</style>
+}
+@media (max-width: 600px) {
+    .hero { width: 100%; max-width: none; margin-left: 0; }
+    .hero .container { width: min(calc(100% - (var(--gutter) * 2)), var(--section-width)); }
+}
+@media (max-width: 1600px) {
+    .hero .container,
+    .categories,
+    .content,
+    .content > .cta-section .cta-container {
+        width: calc(100% - 56px);
+        max-width: none;
+        margin-left: 28px;
+        margin-right: 28px;
+    }
+    .hero .container { margin-left: 28px; margin-right: 28px; }
+    .categories, .content { margin-left: 28px; margin-right: 28px; }
+}
+/* Unified blog layout rules (kept in one place so sections share the same gutter). */
+html, body { overflow-x: hidden; }
+.page { width: 100%; max-width: none; overflow: visible; }
+.hero { width: 100%; max-width: none; margin: 0; }
+.hero .container, .categories, .content { width: min(calc(100% - 56px), 1440px); max-width: none; margin-left: auto; margin-right: auto; }
+.category-row { width: 100%; padding-left: 0; padding-right: 0; }
+.content { padding-bottom: 0; }
+.content > .cta-section { margin: 40px 0 0; padding-bottom: 24px; }
+@media (max-width: 600px) {
+    .hero .container, .categories, .content { width: calc(100% - 32px); }
+    .hero h1, .hero p { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
+    .feature, .grid, .feature > img, .card, .card img { max-width: 100%; }
+    .content > .cta-section { margin-top: 24px; }
+}
+</style>
 </head><body>
 @include('components.header')
 <div class="page"><main>
@@ -352,15 +407,6 @@
 <section class="container content"><article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2>The Weight of Prestige: Why Mass Matters in Rigid Construction</h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="#">Read More &rarr;</a></div></article>
 @php $posts=[['packaging','Frame 571 (1).png'],['printing','Frame 571 (1).png'],['materials','Frame 571 (1).png'],['design','Frame 571 (1).png'],['sustainability','Frame 571 (1).png'],['packaging','Frame 571 (1).png'],['materials','Frame 571 (1).png'],['printing','Frame 571 (1).png'],['design','Frame 571 (1).png']]; @endphp
 <div class="grid">@foreach($posts as [$category,$image])<article class="card" data-category="{{ $category }}"><img src="{{ asset('images/'.$image) }}" alt="Sustainable packaging"><div class="card-copy"><div class="meta"><span>Joe Danley</span><time>Nov 15, 2024</time></div><h3>Sustainable Packaging Trends For 2026</h3><p>Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p><a class="button" href="#">Read More &rarr;</a></div></article>@endforeach</div>
-<nav class="pages" aria-label="Blog pages">
-    <button class="text-btn">&larr; Previous</button>
-    <button class="active">1</button>
-    <button>2</button>
-    <button>3</button>
-    <button class="dots">...</button>
-    <button>12</button>
-    <button class="text-btn">Next &rarr;</button>
-</nav>
 <style>
 /* CTA Overrides */
 .cta {
@@ -482,11 +528,18 @@
     }
 }
 </style>
-<section class="cta"><img src="{{ asset('images/Image Frame.png') }}" alt="Custom packaging"><div class="cta-copy"><h2>Get Your Custom Packaging Today</h2><p>Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p><a class="button" href="#">Get Started Today &rarr;</a></div></section></section>
+@include('components.cta')
+</section>
 </main></div>
 <script>
 // Category Filter JS
-document.querySelectorAll('.filter').forEach(f=>f.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));f.classList.add('active');document.querySelectorAll('.card').forEach(c=>c.hidden=f.dataset.filter!=='all'&&c.dataset.category!==f.dataset.filter)}));
+document.querySelectorAll('.filter').forEach(f=>f.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
+    f.classList.add('active');
+    document.querySelectorAll('.card').forEach(c=>c.hidden=f.dataset.filter!=='all'&&c.dataset.category!==f.dataset.filter);
+    // Keep the selected category visible in the horizontal category strip.
+    f.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+}));
 
 // Pagination JS
 const pageButtons = document.querySelectorAll('.pages button:not(.dots):not(.text-btn)');
