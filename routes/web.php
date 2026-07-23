@@ -128,9 +128,9 @@ $parentCategoryLanding = function (string $slug) {
     ]);
 };
 
-Route::get('/box-by-industry', $parentCategoryLanding);
-Route::get('/box-by-material', $parentCategoryLanding);
-Route::get('/box-by-style', $parentCategoryLanding);
+Route::get('/box-by-industry', fn () => $parentCategoryLanding('box-by-industry'));
+Route::get('/box-by-material', fn () => $parentCategoryLanding('box-by-material'));
+Route::get('/box-by-style', fn () => $parentCategoryLanding('box-by-style'));
 
 Route::get('/contact', function () {
     return view('contact');
@@ -138,6 +138,14 @@ Route::get('/contact', function () {
 
 Route::get('/blog', function () {
     return view('blog');
+});
+
+Route::get('/blog-detail', function () {
+    return view('blog-detail');
+});
+
+Route::get('/blog/{slug}', function ($slug) {
+    return view('blog-detail');
 });
 
 use App\Http\Controllers\AdminAuthController;

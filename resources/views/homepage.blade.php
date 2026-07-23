@@ -36,12 +36,29 @@
         .home-page > section > [class$="-container"],
         .home-page > section > [class$="-inner"] {
             width: 100%;
-            max-width: 1440px;
+            max-width: 1280px !important;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 24px;
-            padding-right: 24px;
+            padding-left: 55px !important;
+            padding-right: 55px !important;
             box-sizing: border-box;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
         }
 
         /* ─────────────────────────────────────────
@@ -964,19 +981,40 @@
         }
         @media (max-width: 1280px) {
             .custom-boxes-container {
-                padding: 0 40px;
+                padding: 0 24px;
             }
 
             .cards-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 16px;
             }
 
             .industry-card {
                 width: 100%;
             }
 
+            .industry-card__title {
+                font-size: 16px;
+                padding: 16px 12px 8px;
+            }
+
             .industry-card__image-wrap {
-                width: calc(100% - 16px);
+                width: calc(100% - 12px);
+                height: 200px;
+            }
+
+            .industry-card__bottom {
+                padding: 12px;
+            }
+
+            .industry-card__text {
+                font-size: 13px;
+            }
+
+            .industry-card__btn {
+                height: 40px;
+                font-size: 14px;
+                margin-top: 10px;
             }
         }
 
