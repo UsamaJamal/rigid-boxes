@@ -49,6 +49,35 @@
             color: var(--section-text-color);
             font-size: 24px;
         }
+
+        /* Shared content boundary: keep every page section aligned to header. */
+        main > section > [class*="container"],
+        main > section > [class*="inner"] {
+            width: 100% !important;
+            max-width: 1280px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 55px !important;
+            padding-right: 55px !important;
+            box-sizing: border-box !important;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            main > section > [class*="container"],
+            main > section > [class*="inner"] {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main > section > [class*="container"],
+            main > section > [class*="inner"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+        }
     </style>
 </head>
 <body>

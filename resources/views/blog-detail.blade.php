@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond | The Rigid Boxes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8d4445;
+            --color-primary-dark: #692f31;
+            --color-primary-soft: #f8eeee;
+            --color-ink: #111827;
+            --color-copy: #374151;
+            --color-muted: #6b7280;
+            --color-line: #e5e7eb;
+            --color-page: #ffffff;
+            --font-heading: 'Open Sans', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --section-width: 1240px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-page);
+            color: var(--color-copy);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(calc(100% - 40px), var(--section-width));
+            margin: 0 auto;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-wrap {
+            padding: 24px 0 16px;
+        }
+
+        .breadcrumb {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--color-muted);
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-primary);
+        }
+
+        .breadcrumb span.sep {
+            color: #d1d5db;
+        }
+
+        .breadcrumb span.current {
+            color: var(--color-ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding-bottom: 24px;
+        }
+
+        .article-title {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--color-ink);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            max-width: 980px;
+        }
+
+        .article-subtitle {
+            font-size: 17px;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 13.5px;
+            color: var(--color-muted);
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar-sm {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--color-line);
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--color-ink);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--color-primary);
+        }
+
+        /* Featured Hero Image */
+        .featured-image-wrap {
+            margin-bottom: 44px;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Main 2-Column Layout */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 48px;
+            align-items: start;
+        }
+
+        /* Article Main Content */
+        .article-body {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        .article-body p {
+            margin-bottom: 22px;
+        }
+
+        .article-body h2 {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-top: 36px;
+            margin-bottom: 16px;
+            line-height: 1.35;
+        }
+
+        .article-body strong {
+            color: var(--color-ink);
+        }
+
+        /* Callout Box / Key Insight */
+        .callout-box {
+            background: #FAF5F5;
+            border-left: 4px solid var(--color-primary);
+            padding: 22px 26px;
+            border-radius: 0 12px 12px 0;
+            margin: 28px 0;
+        }
+
+        .callout-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .callout-content {
+            font-size: 15px;
+            color: #1f2937;
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        /* Quote Callout */
+        .quote-box {
+            border-left: 3px solid var(--color-primary);
+            padding-left: 20px;
+            margin: 32px 0;
+        }
+
+        .quote-text {
+            font-size: 17px;
+            font-style: italic;
+            color: #1f2937;
+            line-height: 1.65;
+            margin-bottom: 8px;
+        }
+
+        .quote-author {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--color-muted);
+            font-style: normal;
+        }
+
+        /* Author Biography Card */
+        .author-card {
+            background: #FAF8F8;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 48px;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            border: 1px solid #F0EAEB;
+        }
+
+        .author-card-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .author-card-details {
+            flex: 1;
+        }
+
+        .author-card-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+
+        .author-card-name {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-bottom: 8px;
+        }
+
+        .author-card-bio {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .widget {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 26px;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .widget-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 18px;
+        }
+
+        /* Table of Contents Widget */
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .toc-item a {
+            font-size: 14px;
+            color: #4b5563;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toc-item a:hover {
+            color: var(--color-primary);
+        }
+
+        .toc-item.active a {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* Recent Articles Widget */
+        .recent-articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .recent-article-item {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .recent-article-img {
+            width: 68px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .recent-article-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .recent-article-title {
+            font-family: var(--font-heading);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--color-ink);
+            line-height: 1.35;
+            transition: color 0.2s;
+        }
+
+        .recent-article-title:hover {
+            color: var(--color-primary);
+        }
+
+        .recent-article-date {
+            font-size: 11.5px;
+            color: var(--color-muted);
+        }
+
+        /* Newsletter Box Widget */
+        .newsletter-widget {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 30px 24px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .newsletter-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .newsletter-desc {
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+            letter-spacing: 0.05em;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-btn {
+            height: 44px;
+            background: #ffffff;
+            color: var(--color-primary);
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--color-primary-soft);
+        }
+
+        /* Share Blog Widget */
+        .share-widget {
+            padding: 22px 26px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--color-line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4b5563;
+            transition: all 0.2s;
+            background: #ffffff;
+        }
+
+        .social-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-soft);
+        }
+
+        /* Related Blogs Section */
+        .related-blogs-section {
+            margin-top: 64px;
+            margin-bottom: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--color-line);
+        }
+
+        .related-title {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-bottom: 28px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24.5px;
+        }
+
+        .related-card {
+            background: #ffffff;
+            border: 1px solid #EAEAEA;
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .related-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .related-card-body {
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .related-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-bottom: 10px;
+        }
+
+        .related-card-title {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-ink);
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .related-card-desc {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .related-card-btn {
+            margin-top: auto;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+
+        .related-card-btn:hover {
+            gap: 10px;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 1024px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .featured-image {
+                height: 380px;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .article-title {
+                font-size: 28px;
+            }
+
+            .article-subtitle {
+                font-size: 15px;
+            }
+
+            .featured-image {
+                height: 240px;
+                border-radius: 12px;
+            }
+
+            .author-card {
+                flex-direction: column;
+                padding: 22px;
+                gap: 16px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    @include('components.header')
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-wrap">
+            <div class="breadcrumb">
+                <a href="{{ url('/') }}">HOME</a>
+                <span class="sep">/</span>
+                <a href="{{ url('/blog') }}">BLOGS</a>
+                <span class="sep">/</span>
+                <span class="current">THE FUTURE OF LUXURY PACKAGING: 7 TRENDS DEFINING 2026 AND BEYOND</span>
+            </div>
+        </div>
+
+        <!-- Article Header -->
+        <header class="article-header">
+            <h1 class="article-title">The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</h1>
+            <p class="article-subtitle">From bio-based rigid board to augmented reality unboxing, discover the innovations reshaping premium packaging and how early adopters are capturing measurable brand lift.</p>
+            
+            <div class="article-meta">
+                <div class="author-info">
+                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="Ahmed Khan" class="author-avatar-sm">
+                    <span class="author-name">Ahmed Khan</span>
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>Mar 3, 2026</span>
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>4 min read</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Featured Hero Image -->
+        <div class="featured-image-wrap">
+            <img src="{{ asset('images/luxury-black-box.png') }}" alt="Luxury Black Rigid Box Packaging" class="featured-image">
+        </div>
+
+        <!-- Main Content & Sidebar Grid -->
+        <div class="article-layout">
+
+            <!-- Left Main Column -->
+            <article class="article-body">
+                <p>The luxury packaging landscape is shifting faster than ever. Between sustainability mandates, digital integration, and ever-rising consumer expectations, brands that adapt early aren't just surviving — they're capturing disproportionate market attention. Here are the seven trends that will define premium packaging through 2026 and beyond.</p>
+
+                <h2>1. Bio-Based Rigid Board Goes Mainstream</h2>
+                <p>For years, rigid boxes meant a trade-off: premium feel versus environmental impact. Today, FSC-certified papers combined with bio-based binders and recycled greyboard deliver the same structural integrity without the guilt. Early adopters like niche fragrance houses report that 68% of their customers actively notice and appreciate 'plastic-free' packaging labels — and that sentiment directly influences repeat purchases.</p>
+                <p>At LuxPack, we've transitioned over 50% of our rigid box production to fully recyclable, FSC-certified materials. The result? No compromise on embossing depth, no visible difference in foil adhesion — just a cleaner conscience for your brand and your customers.</p>
+
+                <div class="callout-box">
+                    <div class="callout-label">Key Insight</div>
+                    <div class="callout-content">74% of luxury shoppers say they would pay more for packaging with verifiable sustainability credentials. Bio-based rigid boxes maintain identical finishing capabilities — including deep embossing and foil stamping.</div>
+                </div>
+
+                <h2>2. The Rise of "Quiet Luxury" in Unboxing</h2>
+                <p>Minimalism isn't new, but the definition has evolved. Quiet luxury packaging isn't about sterile white boxes — it's about tactile richness and subtle detailing. Think uncoated papers with a velvety touch, blind embossing that reveals itself only under certain light, or monochromatic palettes that shift tone across layers of the unboxing experience.</p>
+
+                <div class="quote-box">
+                    <div class="quote-text">"The best luxury packaging doesn't shout — it whispers. It rewards close inspection. Every fold, every texture, every hidden detail should feel intentional."</div>
+                    <div class="quote-author">— Mia Lindström, Creative Director at Lindström Studio</div>
+                </div>
+
+                <p>Brands like The Row and Aesop have mastered this, and the B2B world is taking notice. Corporate gift sets, investor welcome-kits, and even tech unboxings are adopting the same restrained elegance that signals confidence rather than excess.</p>
+
+                <h2>3. Integrated Digital Experiences (AR, NFC, QR)</h2>
+                <p>Packaging is becoming a portal. Near-field communication (NFC) tags embedded under labels, augmented reality triggers printed invisibly on box lids, and dynamic QR codes that lead to exclusive brand content are no longer experimental. They're expected — especially by the 25–40 demographic that makes up the bulk of luxury consumers.</p>
+                <p>Imagine a whisky gift box where tapping a phone against the logo launches a virtual distillery tour. Or a skincare kit that uses AR to show application tutorials. These aren't gimmicks — they're measurable engagement tools that extend brand interaction well beyond the initial unboxing moment.</p>
+
+                <h2>4. Hyper-Customization at Scale</h2>
+                <p>Low MOQs and digital printing advancements mean that 'custom' no longer requires a 10,000-unit commitment. Variable data printing allows every box in a run to feature unique names, messages, or even regional artwork. This is particularly powerful for corporate gifting, limited-edition drops, and influencer seeding campaigns where personalization drives social sharing and word-of-mouth.</p>
+
+                <div class="callout-box">
+                    <div class="callout-label">Did You Know?</div>
+                    <div class="callout-content">Personalized packaging generates 3.2x more social media shares than generic unboxing experiences, according to a 2025 consumer behavior study by PackAgile Research.</div>
+                </div>
+
+                <h2>5. Modular, Multi-Use Packaging Systems</h2>
+                <p>Luxury consumers increasingly value packaging that earns a second life. Modular inserts that transform a shipping box into a keepsake drawer, or rigid sleeves that become elegant desk organizers, are gaining traction. This aligns with both sustainability goals and the 'gift that keeps giving' perception that elevates brand recall long after the initial purchase.</p>
+
+                <h2>6. Metallic Inks Over Plastic Laminates</h2>
+                <p>Soft-touch lamination has been a staple, but it's often plastic-based. In response, metallic inks and water-based coatings are stepping up. New formulations deliver a luminous, almost wet-look sheen without the environmental footprint. Combined with textured papers, the effect is both luxurious and fully recyclable — a genuine win-win for design and sustainability teams alike.</p>
+
+                <h2>7. Transparency as a Luxury Signal</h2>
+                <p>Today's buyers want to know where materials came from, who assembled the box, and what happens to it after disposal. Smart packaging with QR codes that trace the supply chain, or simply printed details about the box's recycled content, transform transparency into a brand strength. In a market saturated with noise, the brands that win are those that treat packaging not as a cost center, but as a strategic asset.</p>
+                <p>The trends above aren't predictions — they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
+
+                <!-- Author Bio Card -->
+                <div class="author-card">
+                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="Ahmed Khan" class="author-card-avatar">
+                    <div class="author-card-details">
+                        <div class="author-card-tag">WRITTEN BY</div>
+                        <div class="author-card-name">Ahmed Khan</div>
+                        <div class="author-card-bio">Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar">
+
+                <!-- Table of Contents Widget -->
+                <div class="widget">
+                    <div class="widget-title">TABLE OF CONTENTS</div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#">01. Defining the Foundation</a></li>
+                        <li class="toc-item"><a href="#">02. Materiality & Touch</a></li>
+                        <li class="toc-item"><a href="#">03. Expert Tips & Specs</a></li>
+                        <li class="toc-item active"><a href="#">04. Sustainability & Longevity</a></li>
+                    </ul>
+                </div>
+
+                <!-- Recent Articles Widget -->
+                <div class="widget">
+                    <div class="widget-title" style="font-size: 18px; font-family: var(--font-heading); color: var(--color-ink); text-transform: none; font-weight: 700; margin-bottom: 20px;">Recent Articles</div>
+                    <div class="recent-articles-list">
+                        
+                        <div class="recent-article-item">
+                            <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            <div class="recent-article-info">
+                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
+                                <span class="recent-article-date">June 23, 2026</span>
+                            </div>
+                        </div>
+
+                        <div class="recent-article-item">
+                            <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            <div class="recent-article-info">
+                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
+                                <span class="recent-article-date">June 23, 2026</span>
+                            </div>
+                        </div>
+
+                        <div class="recent-article-item">
+                            <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            <div class="recent-article-info">
+                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
+                                <span class="recent-article-date">June 23, 2026</span>
+                            </div>
+                        </div>
+
+                        <div class="recent-article-item">
+                            <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            <div class="recent-article-info">
+                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
+                                <span class="recent-article-date">June 23, 2026</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Newsletter Stay Inspired Widget -->
+                <div class="newsletter-widget">
+                    <h3 class="newsletter-title">Stay Inspired</h3>
+                    <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+                        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                    </form>
+                </div>
+
+                <!-- Share Blog Widget -->
+                <div class="widget share-widget">
+                    <div class="widget-title">SHARE BLOG</div>
+                    <div class="social-buttons">
+                        <a href="#" class="social-btn" aria-label="Facebook">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Instagram">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Email">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Bookmark">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- Related Blogs Section -->
+        <section class="related-blogs-section">
+            <h2 class="related-title">Related Blogs</h2>
+            <div class="related-grid">
+
+                <!-- Related Card 1 -->
+                <article class="related-card">
+                    <img src="{{ asset('images/luxury-black-box.png') }}" alt="Sustainable Packaging" class="related-card-img">
+                    <div class="related-card-body">
+                        <div class="related-card-meta">
+                            <span>Joe Danley</span>
+                            <span>Nov 15, 2024</span>
+                        </div>
+                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
+                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
+                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
+                            Read More &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Related Card 2 -->
+                <article class="related-card">
+                    <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Sustainable Packaging" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                    <div class="related-card-body">
+                        <div class="related-card-meta">
+                            <span>Joe Danley</span>
+                            <span>Nov 15, 2024</span>
+                        </div>
+                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
+                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
+                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
+                            Read More &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Related Card 3 -->
+                <article class="related-card">
+                    <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Sustainable Packaging" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                    <div class="related-card-body">
+                        <div class="related-card-meta">
+                            <span>Joe Danley</span>
+                            <span>Nov 15, 2024</span>
+                        </div>
+                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
+                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
+                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
+                            Read More &rarr;
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </div>
+
+    @include('components.footer')
+
+</body>
+</html>

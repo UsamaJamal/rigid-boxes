@@ -1,5 +1,7 @@
 <style>
     :root {
+        --site-container-width: 1280px;
+        --site-container-gutter: 55px;
         --primary-color: #8D4445;
         --secondary-color: #F8EEEC;
         --background-color: #FAF8F8;
@@ -10,6 +12,19 @@
         --heading-h2-size: 28px;
         --heading-h3-size: 24px;
         --heading-h4-size: 20px;
+    }
+
+    .header-container,
+    .header-top,
+    .header-nav {
+        width: 100% !important;
+        max-width: var(--site-container-width) !important;
+        padding-left: var(--site-container-gutter) !important;
+        padding-right: var(--site-container-gutter) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+        min-width: 0;
     }
 
     h1 { font-size: var(--heading-h1-size) !important; }
@@ -37,9 +52,6 @@
         align-items: center;
         width: 100%;
         min-height: 88px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
     }
 
     .header-logo {
@@ -166,12 +178,17 @@
         justify-content: center;
         width: 100%;
         min-height: 48px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
         list-style: none;
         gap: clamp(36px, 4vw, 62px);
         align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        :root { --site-container-gutter: 20px; }
+    }
+
+    @media (max-width: 480px) {
+        :root { --site-container-gutter: 16px; }
     }
 
     .header-nav li {
