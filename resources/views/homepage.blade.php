@@ -108,6 +108,7 @@
             gap: 24px;
             justify-content: start;
             max-width: 100%;
+            align-items: stretch;
         }
 
         /* ─────────────────────────────────────────
@@ -115,7 +116,8 @@
         ───────────────────────────────────────── */
         .industry-card {
             width: 100%;
-            min-height: 456px;
+            min-height: 0;
+            height: auto;
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0px 0px 10px 0px #00000029;
@@ -143,7 +145,7 @@
         /* Image area — Figma: left:8px w:275 h:266 */
         .industry-card__image-wrap {
             width: calc(100% - 16px);
-            height: 266px;
+            height: clamp(190px, 18vw, 230px);
             margin: 0 auto;
             overflow: hidden;
             flex-shrink: 0;
@@ -165,7 +167,7 @@
         .industry-card__bottom {
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: none;
             padding: 14px 17px 20px;
         }
 
@@ -488,9 +490,18 @@
            RESPONSIVE — Why Choose Us
         ───────────────────────────────────────── */
 
-        /* Tablet: scale down to 2-col fluid */
-        @media (max-width: 1300px) {
-            .why-choose-container { padding: 0 40px; }
+        /* Laptop container padding */
+        @media (max-width: 1300px) and (min-width: 993px) {
+            .why-choose-container { padding: 0 24px; }
+            .why-bento { gap: 10px; }
+            .why-card { padding: 24px 18px; }
+            .why-card__title { font-size: 16px; margin-bottom: 8px; }
+            .why-card__text { font-size: 13px; line-height: 1.45; }
+        }
+
+        /* Tablet: 2-col fluid stack below 992px */
+        @media (max-width: 992px) {
+            .why-choose-container { padding: 0 24px; }
             .why-bento { width: 100%; display: block; }
 
             .why-row {
@@ -979,7 +990,7 @@
                 height: 100%;
             }
         }
-        @media (max-width: 1280px) {
+        @media (min-width: 769px) and (max-width: 1920px) {
             .custom-boxes-container {
                 padding: 0 24px;
             }
@@ -991,30 +1002,38 @@
 
             .industry-card {
                 width: 100%;
+                min-height: 0;
+                height: auto;
             }
 
             .industry-card__title {
-                font-size: 16px;
-                padding: 16px 12px 8px;
+                font-size: 15px;
+                padding: 16px 10px 8px;
             }
 
             .industry-card__image-wrap {
                 width: calc(100% - 12px);
-                height: 200px;
+                height: clamp(150px, 19vw, 220px);
             }
 
             .industry-card__bottom {
                 padding: 12px;
+                flex: none;
             }
 
             .industry-card__text {
-                font-size: 13px;
+                font-size: 12px;
             }
 
             .industry-card__btn {
                 height: 40px;
                 font-size: 14px;
                 margin-top: 10px;
+                width: min(200px, 100%);
+            }
+
+            .view-all-wrap {
+                margin-top: 16px;
             }
         }
 
@@ -1200,7 +1219,7 @@
         }
 
         .cdo-btn.active {
-            background: var(--section-text-color, #000);
+            background: var(--primary-color, #8D4445);
             color: #fff;
         }
 

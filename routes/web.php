@@ -137,15 +137,25 @@ Route::get('/contact', function () {
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    $blogs = DB::table('admin_blogs')->where('status', 'published')->get()->map(fn($r) => (array) $r)->all();
+    return view('blog', compact('blogs'));
 });
 
 Route::get('/blog-detail', function () {
-    return view('blog-detail');
+    $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+    $blog = $blog ? (array) $blog : [];
+    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
 Route::get('/blog/{slug}', function ($slug) {
-    return view('blog-detail');
+    $blog = DB::table('admin_blogs')->where('slug', $slug)->first();
+    if (!$blog) {
+        $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+    }
+    $blog = $blog ? (array) $blog : [];
+    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
 use App\Http\Controllers\AdminAuthController;

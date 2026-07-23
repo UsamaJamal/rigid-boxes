@@ -407,8 +407,34 @@ html, body { overflow-x: hidden; }
 <button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt=""> Industry Specific Studies</button>
 </div></nav>
 <section class="container content"><article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2>The Weight of Prestige: Why Mass Matters in Rigid Construction</h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
-@php $posts=[['packaging','Frame 571 (1).png'],['printing','Frame 571 (1).png'],['materials','Frame 571 (1).png'],['design','Frame 571 (1).png'],['sustainability','Frame 571 (1).png'],['packaging','Frame 571 (1).png'],['materials','Frame 571 (1).png'],['printing','Frame 571 (1).png'],['design','Frame 571 (1).png']]; @endphp
-<div class="grid">@foreach($posts as [$category,$image])<article class="card" data-category="{{ $category }}"><img src="{{ asset('images/'.$image) }}" alt="Sustainable packaging"><div class="card-copy"><div class="meta"><span>Joe Danley</span><time>Nov 15, 2024</time></div><h3>Sustainable Packaging Trends For 2026</h3><p>Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>@endforeach</div>
+@php
+    $displayBlogs = !empty($blogs) ? $blogs : [
+        ['title' => 'Sustainable Packaging Trends For 2026', 'blog_category' => 'packaging', 'image' => 'images/Frame 571 (1).png', 'author_name' => 'Joe Danley', 'publish_date' => '2024-11-15', 'excerpt' => 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable', 'slug' => 'sustainable-packaging-trends'],
+    ];
+@endphp
+<div class="grid">
+@foreach($displayBlogs as $item)
+    @php
+        $bTitle = $item['title'] ?? 'Sustainable Packaging Trends For 2026';
+        $bCat = $item['blog_category'] ?? 'packaging';
+        $bAuthor = $item['author_name'] ?? 'Joe Danley';
+        $bDate = !empty($item['publish_date']) ? date('M d, Y', strtotime($item['publish_date'])) : 'Nov 15, 2024';
+        $bExcerpt = $item['excerpt'] ?? 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable';
+        $bSlug = $item['slug'] ?? 'blog-detail';
+        $bImg = !empty($item['image']) ? asset($item['image']) : asset('images/Frame 571 (1).png');
+        $bUrl = url('/blog/' . $bSlug);
+    @endphp
+    <article class="card" data-category="{{ $bCat }}">
+        <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <div class="card-copy">
+            <div class="meta"><span>{{ $bAuthor }}</span><time>{{ $bDate }}</time></div>
+            <h3>{{ $bTitle }}</h3>
+            <p>{{ Str::limit($bExcerpt, 90) }}</p>
+            <a class="button" href="{{ $bUrl }}">Read More &rarr;</a>
+        </div>
+    </article>
+@endforeach
+</div>
 <style>
 /* CTA Overrides */
 .cta {
