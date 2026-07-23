@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminContentController;
+use App\Http\Controllers\QuotationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,8 @@ Route::get('/blog/{slug}', function ($slug) {
     $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
     return view('blog-detail', compact('blog', 'recentBlogs'));
 });
+
+Route::get('/request-quote', [QuotationController::class, 'index']);
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
