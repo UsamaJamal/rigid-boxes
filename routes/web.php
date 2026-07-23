@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,9 +130,9 @@ $parentCategoryLanding = function (string $slug) {
     ]);
 };
 
-Route::get('/box-by-industry', $parentCategoryLanding);
-Route::get('/box-by-material', $parentCategoryLanding);
-Route::get('/box-by-style', $parentCategoryLanding);
+Route::get('/box-by-industry', fn() => $parentCategoryLanding('box-by-industry'));
+Route::get('/box-by-material', fn() => $parentCategoryLanding('box-by-material'));
+Route::get('/box-by-style', fn() => $parentCategoryLanding('box-by-style'));
 
 Route::get('/contact', function () {
     return view('contact');
@@ -142,6 +143,7 @@ Route::get('/blog', function () {
 });
 
 Route::get('/request-quote', [QuotationController::class, 'index']);
+Route::get('/sitemap', [SitemapController::class, 'index']);
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
