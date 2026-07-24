@@ -47,8 +47,23 @@
         }
 
         .container {
-            width: min(calc(100% - 40px), var(--section-width));
-            margin: 0 auto;
+            width: 100%;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 55px;
+            padding-right: 55px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1100px) {
+            .container { padding-left: 32px; padding-right: 32px; }
+        }
+        @media (max-width: 768px) {
+            .container { padding-left: 20px; padding-right: 20px; }
+        }
+        @media (max-width: 600px) {
+            .container { padding-left: 16px; padding-right: 16px; }
         }
 
         /* Breadcrumb */
@@ -592,6 +607,10 @@
         }
 
         @media (max-width: 640px) {
+            .breadcrumb-wrap {
+                display: none;
+            }
+
             .article-title {
                 font-size: 28px;
             }

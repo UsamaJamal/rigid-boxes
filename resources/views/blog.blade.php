@@ -126,14 +126,14 @@
     width: 24px;
     height: 24px;
     object-fit: contain;
+    filter: brightness(0); /* Make icon black when unselected */
 }
 .filter.active .filter-icon {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1); /* Make icon white when active */
 }
 /* Keep the desktop composition intact when browser zoom reduces the CSS viewport. */
 @media (max-width: 1240px) and (min-width: 901px) {
-    .filter { flex: 1 1 0; width: auto; min-width: 0; height: 76px; padding: 8px 6px; gap: 5px; font-size: clamp(11px, 1.28vw, 16px); line-height: 1.25; overflow-wrap: anywhere; }
-    .filter-icon { width: clamp(17px, 2vw, 24px); height: clamp(17px, 2vw, 24px); flex: 0 0 auto; }
+    /* Buttons should not shrink/crop, let them scroll horizontally */
     .category-row { gap: clamp(6px, 1.5vw, 24px); }
     .feature { min-height: 470px; }
     .feature > img { height: 470px; }
@@ -349,7 +349,7 @@
 @media (max-width: 900px) {
     .categories { overflow: visible; }
     .category-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 20px var(--gutter); overflow: visible; }
-    .filter { width: 100%; min-width: 0; height: auto; min-height: 62px; flex: none; font-size: 13px; line-height: 1.25; padding: 7px; }
+    .filter { width: 100%; min-width: 0; height: auto; min-height: 62px; flex: none; font-size: 13px; line-height: 1.25; padding: 7px; white-space: normal; }
     .filter-icon { width: 20px; height: 20px; flex: 0 0 auto; }
     .feature { min-height: auto; margin-bottom: 55px; }
     .feature > img { height: 300px; }
@@ -359,36 +359,39 @@
 @media (max-width: 620px) {
     .category-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-@media (max-width: 600px) {
-    .hero { width: 100%; max-width: none; margin-left: 0; }
-    .hero .container { width: min(calc(100% - (var(--gutter) * 2)), var(--section-width)); }
-}
-@media (max-width: 1600px) {
-    .hero .container,
-    .categories,
-    .content,
-    .content > .cta-section .cta-container {
-        width: calc(100% - 56px);
-        max-width: none;
-        margin-left: 28px;
-        margin-right: 28px;
-    }
-    .hero .container { margin-left: 28px; margin-right: 28px; }
-    .categories, .content { margin-left: 28px; margin-right: 28px; }
-}
-/* Unified blog layout rules (kept in one place so sections share the same gutter). */
+/* ═══════════════════════════════════════════════════
+   UNIFIED BLOG LAYOUT — aligned with site header
+   max-width: 1280px | gutter: 55px (matches header)
+   ═══════════════════════════════════════════════════ */
 html, body { overflow-x: hidden; }
 .page { width: 100%; max-width: none; overflow: visible; }
 .hero { width: 100%; max-width: none; margin: 0; }
-.hero .container, .categories, .content { width: 100%; max-width: 1440px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; box-sizing: border-box; }
+.hero .container,
+.categories,
+.content {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 55px;
+    padding-right: 55px;
+    box-sizing: border-box;
+}
 .category-row { width: 100%; padding-left: 0; padding-right: 0; }
 .content { padding-bottom: 0; }
 .content > .cta-section { margin: 40px 0 0; padding-bottom: 24px; }
+@media (max-width: 1100px) {
+    .hero .container, .categories, .content { padding-left: 32px; padding-right: 32px; }
+}
+@media (max-width: 768px) {
+    .hero .container, .categories, .content { padding-left: 20px; padding-right: 20px; }
+}
 @media (max-width: 600px) {
-    .hero .container, .categories, .content { width: 100%; padding-left: 16px; padding-right: 16px; margin-left: 0; margin-right: 0; }
+    .hero .container, .categories, .content { padding-left: 16px; padding-right: 16px; }
     .hero h1, .hero p { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
     .feature, .grid, .feature > img, .card, .card img { max-width: 100%; }
     .content > .cta-section { margin-top: 24px; }
+    .breadcrumb { display: none; }
 }
 </style>
 </head><body>
