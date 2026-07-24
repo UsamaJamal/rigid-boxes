@@ -39,9 +39,9 @@
 
     .hero-section {
         width: 100%;
-        max-width: 1440px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 8px 24px 0;
+        padding: 8px 55px 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
         align-items: center;
@@ -141,7 +141,7 @@
         .hero-section {
             flex-direction: column;
             display: flex;
-            padding: 30px 24px 24px;
+            padding: 30px 55px 24px;
             text-align: left;
             gap: 20px;
         }
@@ -172,7 +172,7 @@
     @media (max-width: 576px) {
 
         .hero-section {
-            padding: 24px 20px 16px;
+            padding: 24px 16px 16px;
             text-align: left;
         }
 
@@ -186,6 +186,13 @@
             font-size: 13px;
         }
 
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+        .hero-section {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
 </style>
 
@@ -210,7 +217,7 @@
                 {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
-            <a href="#" class="hero-btn">Design Custom Boxes</a>
+            <a href="/request-quote" class="hero-btn">Get Instant Quote</a>
         </div>
 
         <div class="hero-image-wrapper">

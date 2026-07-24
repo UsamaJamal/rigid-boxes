@@ -36,12 +36,29 @@
         .home-page > section > [class$="-container"],
         .home-page > section > [class$="-inner"] {
             width: 100%;
-            max-width: 1440px;
+            max-width: 1280px !important;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 24px;
-            padding-right: 24px;
+            padding-left: 55px !important;
+            padding-right: 55px !important;
             box-sizing: border-box;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
         }
 
         /* ─────────────────────────────────────────
@@ -91,6 +108,7 @@
             gap: 24px;
             justify-content: start;
             max-width: 100%;
+            align-items: stretch;
         }
 
         /* ─────────────────────────────────────────
@@ -98,7 +116,8 @@
         ───────────────────────────────────────── */
         .industry-card {
             width: 100%;
-            min-height: 456px;
+            min-height: 0;
+            height: auto;
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0px 0px 10px 0px #00000029;
@@ -126,7 +145,7 @@
         /* Image area — Figma: left:8px w:275 h:266 */
         .industry-card__image-wrap {
             width: calc(100% - 16px);
-            height: 266px;
+            height: clamp(190px, 18vw, 230px);
             margin: 0 auto;
             overflow: hidden;
             flex-shrink: 0;
@@ -148,7 +167,7 @@
         .industry-card__bottom {
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: none;
             padding: 14px 17px 20px;
         }
 
@@ -241,7 +260,7 @@
         ───────────────────────────────────────── */
         .why-choose-section {
             background: var(--background-color, #FAF8F8);
-            padding: 30px 0 70px;
+            padding: 10px 0 30px;
         }
 
         .why-choose-container {
@@ -471,9 +490,18 @@
            RESPONSIVE — Why Choose Us
         ───────────────────────────────────────── */
 
-        /* Tablet: scale down to 2-col fluid */
-        @media (max-width: 1300px) {
-            .why-choose-container { padding: 0 40px; }
+        /* Laptop container padding */
+        @media (max-width: 1300px) and (min-width: 993px) {
+            .why-choose-container { padding: 0 24px; }
+            .why-bento { gap: 10px; }
+            .why-card { padding: 24px 18px; }
+            .why-card__title { font-size: 16px; margin-bottom: 8px; }
+            .why-card__text { font-size: 13px; line-height: 1.45; }
+        }
+
+        /* Tablet: 2-col fluid stack below 992px */
+        @media (max-width: 992px) {
+            .why-choose-container { padding: 0 24px; }
             .why-bento { width: 100%; display: block; }
 
             .why-row {
@@ -962,21 +990,50 @@
                 height: 100%;
             }
         }
-        @media (max-width: 1280px) {
+        @media (min-width: 769px) and (max-width: 1920px) {
             .custom-boxes-container {
-                padding: 0 40px;
+                padding: 0 24px;
             }
 
             .cards-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 16px;
             }
 
             .industry-card {
                 width: 100%;
+                min-height: 0;
+                height: auto;
+            }
+
+            .industry-card__title {
+                font-size: 15px;
+                padding: 16px 10px 8px;
             }
 
             .industry-card__image-wrap {
-                width: calc(100% - 16px);
+                width: calc(100% - 12px);
+                height: clamp(150px, 19vw, 220px);
+            }
+
+            .industry-card__bottom {
+                padding: 12px;
+                flex: none;
+            }
+
+            .industry-card__text {
+                font-size: 12px;
+            }
+
+            .industry-card__btn {
+                height: 40px;
+                font-size: 14px;
+                margin-top: 10px;
+                width: min(200px, 100%);
+            }
+
+            .view-all-wrap {
+                margin-top: 16px;
             }
         }
 
@@ -1162,7 +1219,7 @@
         }
 
         .cdo-btn.active {
-            background: var(--section-text-color, #000);
+            background: var(--primary-color, #8D4445);
             color: #fff;
         }
 
@@ -1752,7 +1809,7 @@
 
                     </div><!-- /.premium-icons -->
 
-                    <a href="#" class="premium-btn">Order Now</a>
+                    <a href="/request-quote" class="premium-btn">Order Now</a>
 
                 </div><!-- /.premium-content -->
 
@@ -1952,24 +2009,55 @@
     </script>
 
     <script>
-        // Best Seller tabs: keep the starter images identical for now while
-        // preserving a working three-tab interaction for later replacements.
-        document.querySelectorAll('.bestseller-dot').forEach(function (dot, index) {
-            dot.addEventListener('click', function () {
-                document.querySelectorAll('.bestseller-dot').forEach(function (item) {
+        (function() {
+            var dots = document.querySelectorAll('.bestseller-dot');
+            if (dots.length === 0) return;
+            
+            var currentIndex = 0;
+            var autoPlayInterval;
+            
+            function goToDot(index) {
+                dots.forEach(function (item) {
                     item.classList.remove('active');
                     item.setAttribute('aria-selected', 'false');
                 });
-                dot.classList.add('active');
-                dot.setAttribute('aria-selected', 'true');
+                dots[index].classList.add('active');
+                dots[index].setAttribute('aria-selected', 'true');
+                
                 var cardsContainer = document.querySelector('.bestseller-cards');
                 if (cardsContainer) {
                     var firstCard = cardsContainer.querySelector('.bestseller-card');
                     var cardWidth = firstCard ? firstCard.offsetWidth : 275;
-                    cardsContainer.scrollTo({ left: index * (cardWidth + 20), behavior: 'smooth' });
+                    // Scroll by 3 cards at a time for desktop, or let it scroll based on index
+                    var isMobile = window.innerWidth <= 768;
+                    var scrollMultiplier = isMobile ? 1 : 3;
+                    cardsContainer.scrollTo({ left: index * (cardWidth + 20) * scrollMultiplier, behavior: 'smooth' });
                 }
+            }
+
+            dots.forEach(function (dot, index) {
+                dot.addEventListener('click', function () {
+                    currentIndex = index;
+                    goToDot(index);
+                    resetAutoPlay();
+                });
             });
-        });
+
+            function nextSlide() {
+                currentIndex++;
+                if (currentIndex >= dots.length) {
+                    currentIndex = 0;
+                }
+                goToDot(currentIndex);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 3500); // Auto-play every 3.5 seconds
+            }
+
+            resetAutoPlay();
+        })();
     </script>
 
 </body>

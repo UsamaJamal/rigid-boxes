@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminContentController;
-use App\Http\Controllers\QuotationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +14,9 @@ use App\Http\Controllers\QuotationController;
 */
 
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\WhyChooseUsController;
+use App\Http\Controllers\FrequentlyAskedQuestionController;
+use App\Http\Controllers\AboutUsController;
 
 Route::get('/', function () {
     $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
@@ -129,16 +130,34 @@ $parentCategoryLanding = function (string $slug) {
     ]);
 };
 
-Route::get('/box-by-industry', $parentCategoryLanding);
-Route::get('/box-by-material', $parentCategoryLanding);
-Route::get('/box-by-style', $parentCategoryLanding);
+Route::get('/box-by-industry', fn () => $parentCategoryLanding('box-by-industry'));
+Route::get('/box-by-material', fn () => $parentCategoryLanding('box-by-material'));
+Route::get('/box-by-style', fn () => $parentCategoryLanding('box-by-style'));
 
 Route::get('/contact', function () {
     return view('contact');
 });
 
 Route::get('/blog', function () {
-    return view('blog');
+    $blogs = DB::table('admin_blogs')->where('status', 'published')->get()->map(fn($r) => (array) $r)->all();
+    return view('blog', compact('blogs'));
+});
+
+Route::get('/blog-detail', function () {
+    $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+    $blog = $blog ? (array) $blog : [];
+    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    return view('blog-detail', compact('blog', 'recentBlogs'));
+});
+
+Route::get('/blog/{slug}', function ($slug) {
+    $blog = DB::table('admin_blogs')->where('slug', $slug)->first();
+    if (!$blog) {
+        $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+    }
+    $blog = $blog ? (array) $blog : [];
+    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
 Route::get('/author', function () {
@@ -146,6 +165,7 @@ Route::get('/author', function () {
 });
 
 Route::get('/request-quote', [QuotationController::class, 'index']);
+Route::get('/sitemap', [SitemapController::class, 'index']);
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
@@ -169,3 +189,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/{module}/{id}', [AdminContentController::class, 'destroy'])->name('module.destroy');
     });
 });
+
+Route::get('/whyChooseUs',[WhyChooseUsController::class, 'index']);
+
+Route::get('/frequentlyAskedQuestions',[FrequentlyAskedQuestionController::class,'index']);
+
+Route::get('/aboutUs',[AboutUsController::class,'index']);

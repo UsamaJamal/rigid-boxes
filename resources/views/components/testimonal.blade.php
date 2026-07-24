@@ -1,7 +1,7 @@
 <style>
     .testimonial-section {
         background: var(--secondary-color, #FAF8F8);
-        padding: 50px 0 60px;
+        padding: 20px 0 30px;
         position: relative;
         font-family: 'DM Sans', sans-serif;
         overflow: hidden;
@@ -17,7 +17,7 @@
 
     .testimonial-header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
     }
 
     .testimonial-title {
@@ -328,7 +328,7 @@
                     <!-- Slide 1 -->
                     <div class="testimonial-card-wrap">
                         <div class="testimonial-card">
-                            <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="Elisa Grant" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/333/fff?text=Elisa'">
+                            <img src="{{ asset('uploads/elisa_grant.png') }}" alt="Elisa Grant" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/333/fff?text=Elisa'">
                             <div class="testimonial-content">
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
@@ -346,7 +346,7 @@
                     <!-- Slide 2 -->
                     <div class="testimonial-card-wrap">
                         <div class="testimonial-card">
-                            <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="Marcus Vance" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/444/fff?text=Marcus'">
+                            <img src="{{ asset('uploads/marcus_vance.png') }}" alt="Marcus Vance" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/444/fff?text=Marcus'">
                             <div class="testimonial-content">
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
@@ -364,7 +364,7 @@
                     <!-- Slide 3 -->
                     <div class="testimonial-card-wrap">
                         <div class="testimonial-card">
-                            <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="Sophia Loren" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/555/fff?text=Sophia'">
+                            <img src="{{ asset('uploads/sophia_loren.png') }}" alt="Sophia Loren" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/555/fff?text=Sophia'">
                             <div class="testimonial-content">
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
@@ -382,7 +382,7 @@
                     <!-- Slide 4 -->
                     <div class="testimonial-card-wrap">
                         <div class="testimonial-card">
-                            <img src="{{ asset('uploads/testimonial-profile-image.jfif') }}" alt="David Miller" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/666/fff?text=David'">
+                            <img src="{{ asset('uploads/david_miller.png') }}" alt="David Miller" class="testimonial-img" onerror="this.src='https://placehold.co/160x230/666/fff?text=David'">
                             <div class="testimonial-content">
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>

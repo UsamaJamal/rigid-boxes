@@ -1,5 +1,7 @@
 <style>
     :root {
+        --site-container-width: 1280px;
+        --site-container-gutter: 55px;
         --primary-color: #8D4445;
         --secondary-color: #F8EEEC;
         --background-color: #FAF8F8;
@@ -10,6 +12,19 @@
         --heading-h2-size: 28px;
         --heading-h3-size: 24px;
         --heading-h4-size: 20px;
+    }
+
+    .header-container,
+    .header-top,
+    .header-nav {
+        width: 100% !important;
+        max-width: var(--site-container-width) !important;
+        padding-left: var(--site-container-gutter) !important;
+        padding-right: var(--site-container-gutter) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+        min-width: 0;
     }
 
     h1 { font-size: var(--heading-h1-size) !important; }
@@ -37,9 +52,6 @@
         align-items: center;
         width: 100%;
         min-height: 88px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
     }
 
     .header-logo {
@@ -69,7 +81,7 @@
         background: transparent;
         border: 0.6px solid rgba(255, 255, 255, 0.6);
         border-radius: 7px;
-        padding: 0 15px 0 48px;
+        padding: 0 35px 0 48px;
         color: #fff;
         outline: none;
         transition: border-color 0.3s;
@@ -93,6 +105,22 @@
         width: 22px;
         height: 22px;
         fill: rgba(255, 255, 255, 0.8);
+    }
+
+    .header-search .clear-icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        fill: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: fill 0.2s;
+    }
+
+    .header-search .clear-icon:hover {
+        fill: rgba(255, 255, 255, 1);
     }
 
     .header-contact {
@@ -166,12 +194,17 @@
         justify-content: center;
         width: 100%;
         min-height: 48px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
         list-style: none;
         gap: clamp(36px, 4vw, 62px);
         align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        :root { --site-container-gutter: 20px; }
+    }
+
+    @media (max-width: 480px) {
+        :root { --site-container-gutter: 16px; }
     }
 
     .header-nav li {
@@ -480,7 +513,7 @@
 
         .mobile-search input {
             width: 100%;
-            padding: 12px 15px 12px 40px;
+            padding: 12px 35px 12px 40px;
             border: 1px solid #ddd;
             border-radius: 4px;
             outline: none;
@@ -495,6 +528,17 @@
             width: 18px;
             height: 18px;
             fill: #888;
+        }
+
+        .mobile-search .clear-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: #aaa;
+            cursor: pointer;
         }
 
         .mobile-nav {
@@ -557,7 +601,10 @@
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
-            <input type="text" placeholder="Search products...">
+            <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+            <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
         </div>
 
         <!-- Desktop Contact -->
@@ -581,7 +628,7 @@
                 </div>
             </div>
 
-            <a href="/contact" class="get-quote-btn">Get Instant Quote</a>
+            <a href="/request-quote/" class="get-quote-btn">Get Instant Quote</a>
         </div>
 
         <!-- Mobile Actions -->
@@ -653,7 +700,10 @@
                 <svg class="search-icon" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
-                <input type="text" placeholder="Search products...">
+                <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+                <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
             </div>
 
             <ul class="mobile-nav">

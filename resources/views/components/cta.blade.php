@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .cta-section {
         background: var(--background-color);
-        padding: 0 0 80px;
+        padding: 20px 0 50px;
     }
 
     .cta-container {
@@ -211,7 +211,7 @@
 
     @media (max-width: 576px) {
         .cta-section {
-            padding: 0 0 50px;
+            padding: 20px 0 50px;
         }
     }
 </style>

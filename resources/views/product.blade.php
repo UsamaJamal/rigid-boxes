@@ -30,8 +30,8 @@
             --color-border: #E5E5E5;
             --color-card-bg: #FFFFFF;
             
-            --container-width: 1440px;
-            --margin-sides: 24px;
+            --container-width: 1280px;
+            --margin-sides: 55px;
         }
 
         body, body * {
@@ -1161,7 +1161,7 @@
 
         /* Responsive Margins */
         @media (min-width: 1600px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 50px;
             }
@@ -1170,10 +1170,10 @@
             }
         }
         @media (max-width: 1440px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
         }
         @media (max-width: 1200px) and (min-width: 1025px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 30px;
             }
@@ -1182,7 +1182,7 @@
             }
         }
         @media (max-width: 1024px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 25px;
             }
@@ -1191,13 +1191,13 @@
             }
         }
         @media (max-width: 768px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 20px; }
             .hero-container {
                 gap: 20px;
             }
         }
         @media (max-width: 480px) {
-            :root { --margin-sides: 20px; }
+            :root { --margin-sides: 16px; }
         }
 
         @media (max-width: 991px) {
