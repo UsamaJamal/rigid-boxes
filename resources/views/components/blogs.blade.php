@@ -82,6 +82,7 @@
         display: flex;
         flex-direction: column;
         transition: box-shadow 0.3s, transform 0.3s;
+        position: relative;
     }
 
     .blog-card:hover {
@@ -120,9 +121,17 @@
         line-height: 1.3;
         margin-bottom: 12px;
         text-decoration: none;
+        transition: color 0.3s;
     }
 
-    .blog-card__title:hover {
+    .blog-card__title::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .blog-card:hover .blog-card__title {
         color: var(--primary-color, #8D4445);
     }
 
@@ -152,9 +161,11 @@
         color: var(--primary-color, #8D4445);
         text-decoration: none;
         transition: color 0.3s;
+        position: relative;
+        z-index: 2;
     }
 
-    .blog-card__readmore:hover {
+    .blog-card:hover .blog-card__readmore {
         color: #5F2D2F;
     }
 

@@ -507,17 +507,17 @@
             <!-- Contact Information -->
             <p class="form-section-label">Contact Information</p>
             <div class="form-row">
-                <input type="text" placeholder="Enter your name">
+                <input type="text" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
                 <input type="email" placeholder="Enter your email">
-                <input type="tel" placeholder="Enter your number">
+                <input type="tel" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '')">
             </div>
 
             <!-- Box Specifications -->
             <p class="form-section-label">Box Specifications</p>
             <div class="specs-row">
-                <input type="number" placeholder="Width">
-                <input type="number" placeholder="Length">
-                <input type="number" placeholder="Depth">
+                <input type="number" placeholder="Width" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                <input type="number" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                <input type="number" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
                 <div class="specs-unit">
                     <select>
                         <option value="mm">mm</option>
@@ -531,40 +531,54 @@
             <p class="form-section-label">Packaging Preferences</p>
             <div class="preferences-grid">
                 <div class="select-wrapper">
+                    @php
+                        $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
+                        $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
+                    @endphp
                     <select>
                         <option value="" disabled selected>Select Your Box Style</option>
-                        <option>Rigid Box</option>
-                        <option>Folding Carton</option>
-                        <option>Mailer Box</option>
-                        <option>Drawer Box</option>
-                        <option>Sleeve Box</option>
+                        @foreach($boxStyles as $style)
+                            <option value="{{ $style->title }}">{{ $style->title }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select Paper Stock</option>
-                        <option>350gsm Art Card</option>
-                        <option>400gsm Duplex Board</option>
-                        <option>300gsm Kraft</option>
-                        <option>2mm Grey Board</option>
+                        <option>12pt Cardboard Stock</option>
+                        <option>14pt Cardboard Stock</option>
+                        <option>16pt Cardboard Stock</option>
+                        <option>18pt Cardboard Stock</option>
+                        <option>20pt Cardboard Stock</option>
+                        <option>22pt Cardboard Stock</option>
+                        <option>24pt Cardboard Stock</option>
+                        <option>Kraft Stock</option>
+                        <option>Recycled BuxBoard</option>
+                        <option>Corrugated Stock</option>
+                        <option>No Printing Required</option>
                     </select>
                 </div>
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select Color</option>
-                        <option>CMYK Full Color</option>
-                        <option>Pantone</option>
-                        <option>White</option>
-                        <option>Kraft Natural</option>
+                        <option>1 color</option>
+                        <option>2 color</option>
+                        <option>3 color</option>
+                        <option>4 color</option>
+                        <option>4/1 color</option>
+                        <option>4/2 color</option>
+                        <option>4/3 color</option>
+                        <option>4/4 color</option>
                     </select>
                 </div>
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select Paper Coating</option>
-                        <option>Gloss Lamination</option>
-                        <option>Matte Lamination</option>
-                        <option>Soft Touch</option>
-                        <option>No Coating</option>
+                        <option>Aqueous Coating</option>
+                        <option>Semi Gloss</option>
+                        <option>Gloss UV</option>
+                        <option>Matte UV</option>
+                        <option>Semi Matte</option>
                     </select>
                 </div>
                 <div class="select-wrapper">

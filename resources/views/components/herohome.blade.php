@@ -217,7 +217,7 @@
                 {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
-            <a href="#" class="hero-btn">Design Custom Boxes</a>
+            <a href="/request-quote" class="hero-btn">Get Instant Quote</a>
         </div>
 
         <div class="hero-image-wrapper">

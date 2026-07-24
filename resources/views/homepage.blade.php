@@ -260,7 +260,7 @@
         ───────────────────────────────────────── */
         .why-choose-section {
             background: var(--background-color, #FAF8F8);
-            padding: 30px 0 70px;
+            padding: 10px 0 30px;
         }
 
         .why-choose-container {
@@ -1809,7 +1809,7 @@
 
                     </div><!-- /.premium-icons -->
 
-                    <a href="#" class="premium-btn">Order Now</a>
+                    <a href="/request-quote" class="premium-btn">Order Now</a>
 
                 </div><!-- /.premium-content -->
 
@@ -2009,24 +2009,55 @@
     </script>
 
     <script>
-        // Best Seller tabs: keep the starter images identical for now while
-        // preserving a working three-tab interaction for later replacements.
-        document.querySelectorAll('.bestseller-dot').forEach(function (dot, index) {
-            dot.addEventListener('click', function () {
-                document.querySelectorAll('.bestseller-dot').forEach(function (item) {
+        (function() {
+            var dots = document.querySelectorAll('.bestseller-dot');
+            if (dots.length === 0) return;
+            
+            var currentIndex = 0;
+            var autoPlayInterval;
+            
+            function goToDot(index) {
+                dots.forEach(function (item) {
                     item.classList.remove('active');
                     item.setAttribute('aria-selected', 'false');
                 });
-                dot.classList.add('active');
-                dot.setAttribute('aria-selected', 'true');
+                dots[index].classList.add('active');
+                dots[index].setAttribute('aria-selected', 'true');
+                
                 var cardsContainer = document.querySelector('.bestseller-cards');
                 if (cardsContainer) {
                     var firstCard = cardsContainer.querySelector('.bestseller-card');
                     var cardWidth = firstCard ? firstCard.offsetWidth : 275;
-                    cardsContainer.scrollTo({ left: index * (cardWidth + 20), behavior: 'smooth' });
+                    // Scroll by 3 cards at a time for desktop, or let it scroll based on index
+                    var isMobile = window.innerWidth <= 768;
+                    var scrollMultiplier = isMobile ? 1 : 3;
+                    cardsContainer.scrollTo({ left: index * (cardWidth + 20) * scrollMultiplier, behavior: 'smooth' });
                 }
+            }
+
+            dots.forEach(function (dot, index) {
+                dot.addEventListener('click', function () {
+                    currentIndex = index;
+                    goToDot(index);
+                    resetAutoPlay();
+                });
             });
-        });
+
+            function nextSlide() {
+                currentIndex++;
+                if (currentIndex >= dots.length) {
+                    currentIndex = 0;
+                }
+                goToDot(currentIndex);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 3500); // Auto-play every 3.5 seconds
+            }
+
+            resetAutoPlay();
+        })();
     </script>
 
 </body>
