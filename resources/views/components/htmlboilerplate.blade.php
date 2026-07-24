@@ -28,7 +28,7 @@
 
         p {
             font-family: 'DM Sans', sans-serif;
-            color: #000;
+            color: var(--section-text-color);
             font-size: 16px;
         }
 

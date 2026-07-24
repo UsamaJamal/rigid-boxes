@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WhyChooseUsController;
+use App\Http\Controllers\FrequentlyAskedQuestionController;
+use App\Http\Controllers\AboutUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,10 +40,8 @@ Route::get('/blog', function () {
     return view('blog');
 });
 
-Route::get('/whyChooseUs', function () {
-    return view('whyChooseUs');
-});
+Route::get('/whyChooseUs',[WhyChooseUsController::class, 'index']);
 
-Route::get('/faqpage', function () {
-    return view('faqpage');
-});
+Route::get('/frequentlyAskedQuestions',[FrequentlyAskedQuestionController::class,'index']);
+
+Route::get('/aboutUs',[AboutUsController::class,'index']);

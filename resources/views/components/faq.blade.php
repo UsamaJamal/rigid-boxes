@@ -65,7 +65,7 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 25.6px;
-        color: #333333;
+        color: var(--section-text-color);
         margin: 0 0 37px 0;
         padding: 0;
         text-align: left;
@@ -73,7 +73,7 @@
 
     .faq-left-paragraph strong {
         font-weight: 700;
-        color: #000000;
+        color:var(--section-text-color);
     }
 
     .faq-left-image {
@@ -159,7 +159,7 @@
         font-family: 'DM Sans', sans-serif;
         font-size: 18px;
         font-weight: 500;
-        color: #222222;
+        color: var(--section-text-color);
         line-height: 1.5;
     }
 
@@ -170,7 +170,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #333333;
+        color: var(--section-text-color);
         transition: transform 0.3s ease, color 0.3s ease;
     }
 
@@ -190,7 +190,7 @@
     }
 
     .faq-item.open .faq-question {
-        background: #944849;
+        background: var(--primary-color);
     }
 
     .faq-item.open .faq-icon svg line:first-child {
@@ -265,6 +265,7 @@
         }
 
         .faq-main-heading {
+            display: block;
             font-size: 32px;
         }
 

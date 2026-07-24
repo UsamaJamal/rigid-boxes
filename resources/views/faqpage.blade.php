@@ -1,8 +1,19 @@
-@include('components.header')
+@include('components.htmlboilerplate')
 <style>
+    /* .faq-page{
+        width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    } */
+    .faq-hero, .faq-container {
+        font-family: 'DM Sans', sans-serif;
+    }
+    .faq-hero h1, .faq-section-title, .faq-filter-title {
+        font-family: 'Open Sans', sans-serif;
+    }
     .faq-hero {
         background-color: #ffffff;
-        padding: 60px 20px;
+        padding: 60px 24px;
         text-align: center;
         border-bottom: 1px solid #eaeaea;
     }
@@ -13,18 +24,18 @@
         margin-bottom: 20px;
         color: #666;
         text-align: left;
-        max-width: 1200px;
-        margin: 0 auto 40px auto;
+        max-width: 1440px;
+        margin: 0 auto 10px auto;
     }
     .faq-breadcrumb span {
         font-weight: 700;
-        color: #333;
+        color: var(--section-text-color);
     }
     .faq-hero h1 {
         font-size: 42px;
         font-weight: 700;
         margin-bottom: 15px;
-        color: #111;
+        color: var(--section-text-color, #111);
     }
     .faq-hero p {
         font-size: 16px;
@@ -35,11 +46,11 @@
     }
 
     .faq-container {
-        max-width: 1200px;
+        max-width: 1440px;
         margin: 60px auto;
-        padding: 0 20px;
+        padding: 0 24px;
         display: flex;
-        gap: 40px;
+        gap: 60px;
         align-items: flex-start;
     }
 
@@ -52,14 +63,15 @@
         font-size: 20px;
         font-weight: 700;
         margin-bottom: 20px;
-        color: #111;
+        color: var(--section-text-color, #111);
         padding-bottom: 15px;
-        border-bottom: 1px solid #eaeaea;
+        border-bottom: 0.2px solid #00000099;
     }
     .faq-categories {
         list-style: none;
-        padding: 0;
+        padding: 0 0 20px 0;
         margin: 0 0 40px 0;
+        border-bottom: 0.2px solid #00000099;
     }
     .faq-categories li {
         margin-bottom: 5px;
@@ -83,7 +95,7 @@
     }
 
     .faq-contact-box {
-        background-color: #f5f5f5;
+        background-color: #F0F0F0;
         padding: 30px 25px;
         border-radius: 8px;
     }
@@ -125,7 +137,7 @@
     .faq-section-title {
         font-size: 24px;
         font-weight: 700;
-        color: #111;
+        color: var(--section-text-color);
         margin-bottom: 25px;
         position: relative;
         padding-bottom: 10px;
@@ -148,6 +160,7 @@
         border: 1px solid #ddd;
         border-radius: 6px;
         overflow: hidden;
+        transition: all 0.3s ease;
     }
     .faq-item-header {
         background-color: #fff;
@@ -170,8 +183,13 @@
         color: #111;
         transition: transform 0.3s;
     }
+    .faq-item.active .faq-item-header {
+        background-color: var(--primary-color, #8D4445);
+        color: #fff;
+    }
     .faq-item.active .faq-item-icon {
-        transform: rotate(45deg);
+        color: #fff;
+        transform: none;
     }
     .faq-item-body {
         background-color: #fff;
@@ -191,29 +209,48 @@
         margin: 0;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 1100px) {
+        .faq-hero {
+            padding: 40px 5%;
+        }
+        .faq-hero h1 {
+            font-size: 34px;
+        }
+        .faq-hero p {
+            font-size: 14px;
+        }
         .faq-container {
             flex-direction: column;
+            margin: 40px auto;
+            padding: 0 5%;
         }
         .faq-sidebar {
+            display: none;
+        }
+        .faq-content {
             width: 100%;
         }
-        .faq-categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .faq-section {
+            display: block !important;
         }
-        .faq-categories li {
-            margin-bottom: 0;
-            flex: 1 1 auto;
+    }
+
+    @media (max-width: 767px) {
+        .faq-hero h1 {
+            font-size: 28px;
         }
-        .faq-categories button {
-            text-align: center;
+        .faq-container {
+            margin: 30px auto;
+        }
+        .faq-item-header {
+            font-size: 14px;
+            padding: 15px 20px;
         }
     }
 </style>
 
 <main class="faq-page">
+    @include('components.header')
     <div class="faq-hero">
         <div class="faq-breadcrumb">
             HOME / <span>FAQ's</span>
@@ -331,11 +368,47 @@
                 <div class="faq-accordion">
                     <div class="faq-item">
                         <div class="faq-item-header">
-                            How do I contact the sales team?
+                            What type of retail boxes are best for luxury product packaging?
                             <span class="faq-item-icon">+</span>
                         </div>
                         <div class="faq-item-body">
-                            <p>You can reach our sales team via the Contact Us page, by calling our toll-free number, or by emailing us directly at example@gmail.com.</p>
+                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Which retail boxes offer the most protect for fragile items?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Do retail boxes have customizable shapes and structures?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
                         </div>
                     </div>
                 </div>
@@ -346,11 +419,47 @@
                 <div class="faq-accordion">
                     <div class="faq-item">
                         <div class="faq-item-header">
-                            What are your shipping options?
+                            What type of retail boxes are best for luxury product packaging?
                             <span class="faq-item-icon">+</span>
                         </div>
                         <div class="faq-item-body">
-                            <p>We offer standard and expedited shipping options. Shipping costs are calculated based on order volume and destination.</p>
+                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Which retail boxes offer the most protect for fragile items?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Do retail boxes have customizable shapes and structures?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
                         </div>
                     </div>
                 </div>
@@ -361,11 +470,47 @@
                 <div class="faq-accordion">
                     <div class="faq-item">
                         <div class="faq-item-header">
-                            How do I get custom support for my order?
+                            What type of retail boxes are best for luxury product packaging?
                             <span class="faq-item-icon">+</span>
                         </div>
                         <div class="faq-item-body">
-                            <p>Our dedicated support team is available 24/7. Please provide your order number when contacting us for faster assistance.</p>
+                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Which retail boxes offer the most protect for fragile items?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            Do retail boxes have customizable shapes and structures?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-item-header">
+                            What printing customization are available for retail boxes?
+                            <span class="faq-item-icon">+</span>
+                        </div>
+                        <div class="faq-item-body">
+                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
                         </div>
                     </div>
                 </div>
@@ -373,6 +518,9 @@
 
         </div>
     </div>
+@include('components.cta')
+@include('components.footer')
+
 </main>
 
 <script>
@@ -388,11 +536,13 @@
                 const section = item.closest('.faq-section');
                 section.querySelectorAll('.faq-item').forEach(i => {
                     i.classList.remove('active');
+                    i.querySelector('.faq-item-icon').textContent = '+';
                 });
                 
                 // Toggle current item
                 if (!wasActive) {
                     item.classList.add('active');
+                    item.querySelector('.faq-item-icon').textContent = '-';
                 }
             });
         });
@@ -431,5 +581,4 @@
         }
     });
 </script>
-@include('components.cta')
-@include('components.footer')
+

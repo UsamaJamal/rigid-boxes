@@ -1,8 +1,8 @@
 @php
     $breadcrumb = 'ABOUT US';
     $subTitle = 'ABOUT US';
-    $mainTitle = 'Welcome to The Rigid Boxes';
-    $description = 'We are a premier packaging company dedicated to providing high-quality custom boxes tailored to your brand needs.';
+    $mainTitle = 'More Than Boxes,We Build Experiences.';
+    $description = "At The Rigid Boxes, we believe packaging is more than protection <br> it's the first impression, the unboxing moment, and the story <br> behind every brand.";
 
     if (isset($page) && $page == 'whyChooseUs') {
         $breadcrumb = 'WHY CHOOSE US';
@@ -16,13 +16,16 @@
 
 <style>
     .inner-hero-section {
+        background: var(--header-gradient, #8D4445);
         background-image: url('{{ $desktopBg }}');
-        background-size: cover;
+        background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
         position: relative;
         color: #FFFFFF;
         font-family: 'Open Sans', sans-serif;
+        max-width: 1440px;
+        margin: 0 auto;
     }
 
     .inner-hero-section * {
@@ -33,7 +36,7 @@
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        padding: 80px 5%;
+        padding: 80px 24px;
         min-height: 400px;
         display: flex;
         align-items: center;
@@ -49,7 +52,8 @@
         font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
+        /* margin-top: 5px; */
         color: #FFFFFF;
     }
 
@@ -84,12 +88,16 @@
         color: #f0f0f0;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 1100px) {
         .inner-hero-section {
+            background-image: none !important;
+            background: #6C2223;
+        }
+        
+        .inner-hero-container {
             background-image: url('{{ $mobileBg }}') !important;
             background-position: bottom center !important;
             background-size: 100% auto !important;
-            background-color: #6C2223;
             background-repeat: no-repeat;
         }
 
@@ -109,7 +117,7 @@
         }
 
         .inner-hero-breadcrumb {
-            margin-bottom: 15px;
+            display: none;
         }
     }
 </style>
@@ -133,7 +141,7 @@
                 <h1 class="inner-hero-title">{!! $mainTitle !!}</h1>
             @endif
 
-            <p class="inner-hero-desc">{{ $description }}</p>
+            <p class="inner-hero-desc">{!! $description !!}</p>
 
         </div>
     </div>

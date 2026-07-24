@@ -1,5 +1,4 @@
-@include('components.header')
-@include('components.inner-hero', ['page' => 'whyChooseUs'])
+@include('components.htmlboilerplate')
 <style>
     /* =========================================
        Global Box Sizing (Fixes 100% overflow)
@@ -285,7 +284,7 @@
     /* =========================================
        Responsive Styles
        ========================================= */
-    @media (max-width: 991px) {
+    @media (max-width: 1100px) {
         .why-us-content, .sustainable-wrapper {
             flex-direction: column;
             text-align: left;
@@ -320,40 +319,26 @@
         }
 
         .trust-us-container {
-            padding: 0 7.25%;
+            padding: 0 5%;
         }
 
         .trust-us-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .trust-card {
-            width: 100%;
-            aspect-ratio: 352.23 / 200.55;
-            margin: 0 auto;
-            border-radius: 13.25px;
-            border-width: 0.47px;
-            padding: 26.5px 20.82px 24.6px 20.82px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-    @media (max-width: 680px) {
-        .trust-us-grid {
-            grid-template-columns: 1fr !important;
-            gap: 16px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
     }
 
     @media (max-width: 767px) {
-        /* Section 2: stack image + text, prevent overflow */
+        .why-us-section,
+        .trust-us-section,
+        .sustainable-section {
+            padding: 40px 0;
+        }
+
         .why-us-section .container,
-        .sustainable-section .container {
-            padding: 0 5%;
-            overflow: hidden;
+        .sustainable-section .container,
+        .trust-us-container {
+            padding: 0 20px;
         }
 
         .why-us-content {
@@ -388,17 +373,17 @@
         .why-us-text p {
             font-size: 15px;
             line-height: 24px;
-            text-align: justify; /* Figma paragraph might be justified or left, usually paragraph looks better left/justify */
+            text-align: left;
         }
 
-        /* Trust cards: 1 per row */
         .trust-us-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr;
             gap: 16px;
         }
 
         .trust-us-header h2 {
             font-size: 24px;
+            margin-bottom: 10px;
         }
 
         .trust-us-header p {
@@ -406,18 +391,25 @@
         }
 
         .trust-card {
-            /* Inherit exact dimensions and padding from 991px */
+            width: 100%;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .trust-icon {
-            width: 76px;
-            height: 76px;
-            margin-bottom: 20px;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 16px;
         }
 
         .trust-icon img {
-            max-width: 40px;
-            max-height: 40px;
+            max-width: 35px;
+            max-height: 35px;
         }
 
         .trust-card h3 {
@@ -437,7 +429,6 @@
             display: none;
         }
 
-        /* Section 3: sustainable */
         .sustainable-wrapper {
             gap: 32px;
         }
@@ -449,6 +440,7 @@
 
         .sustainable-content h2 {
             font-size: 24px;
+            margin-bottom: 16px;
         }
 
         .sustainable-content p {
@@ -468,11 +460,16 @@
         }
 
         .why-us-text h2,
-        .sustainable-content h2 {
+        .sustainable-content h2,
+        .trust-us-header h2 {
             font-size: 22px;
         }
     }
 </style>
+<main class="why-choose-us">
+
+@include('components.header')
+@include('components.inner-hero', ['page' => 'whyChooseUs'])
 <!-- Section 1: Craftsmanship -->
 <section class="why-us-section">
     <div class="container">
@@ -574,3 +571,5 @@
 @include('components.faq')
 @include('components.cta')
 @include('components.footer')
+
+</main>
