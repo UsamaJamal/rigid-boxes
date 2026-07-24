@@ -22,10 +22,11 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 20px;
-        color: #666;
+        color: var(--section-text-color);
         text-align: left;
-        max-width: 1440px;
+        max-width: var(--site-container-width, 1280px);
         margin: 0 auto 10px auto;
+        padding: 0 var(--site-container-gutter, 55px);
     }
     .faq-breadcrumb span {
         font-weight: 700;
@@ -46,9 +47,9 @@
     }
 
     .faq-container {
-        max-width: 1440px;
+        max-width: var(--site-container-width, 1280px);
         margin: 60px auto;
-        padding: 0 24px;
+        padding: 0 var(--site-container-gutter, 55px);
         display: flex;
         gap: 60px;
         align-items: flex-start;
@@ -84,7 +85,7 @@
         border: none;
         font-size: 15px;
         font-weight: 600;
-        color: #333;
+        color: var(--section-text-color);
         cursor: pointer;
         border-radius: 4px;
         transition: all 0.3s;
@@ -255,7 +256,7 @@
         <div class="faq-breadcrumb">
             HOME / <span>FAQ's</span>
         </div>
-        <h1>Frequently Asked Questions</h1>
+        <h1>{{ $settings['faq_page_title'] ?? 'Frequently Asked Questions' }}</h1>
         <p>Find clear answers to common questions about our luxury packaging services, processes, and policies.</p>
     </div>
 
@@ -264,11 +265,15 @@
             <h2 class="faq-filter-title">Filter By Category</h2>
             <ul class="faq-categories">
                 <li><button class="active" data-filter="all">All</button></li>
-                <li><button data-filter="design-artwork">Design & Artwork</button></li>
-                <li><button data-filter="order-prices">Order & Prices</button></li>
-                <li><button data-filter="sales">Sales</button></li>
-                <li><button data-filter="shipping">Shipping</button></li>
-                <li><button data-filter="custom-support">Custom Support</button></li>
+                @php
+                    $sections = $settings['faq_page_sections'] ?? [];
+                @endphp
+                @foreach($sections as $index => $section)
+                    @php 
+                        $slug = \Illuminate\Support\Str::slug($section['heading']);
+                    @endphp
+                    <li><button data-filter="{{ $slug }}">{{ $section['heading'] }}</button></li>
+                @endforeach
             </ul>
 
             <div class="faq-contact-box">
@@ -279,243 +284,32 @@
         </aside>
 
         <div class="faq-content">
-            <div class="faq-section" data-category="design-artwork">
-                <h2 class="faq-section-title">Design & Artwork</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What type of retail boxes are best for luxury product packaging?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Rigid boxes are considered the gold standard for luxury packaging. They are thick, durable, and offer a premium unboxing experience. We also offer high-end folding cartons with special finishes like foil stamping or embossing for a luxurious look.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Which retail boxes offer the most protect for fragile items?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Corrugated boxes provide the best protection for fragile items due to their fluted inner layer. We can customize corrugated boxes with foam or custom inserts to ensure your products remain secure during transit.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Do retail boxes have customizable shapes and structures?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Yes, absolutely! We can create custom die-cut shapes, windows, and unique structural designs to make your packaging stand out on the retail shelf and perfectly fit your product.</p>
+            @if(empty($sections))
+                <p style="color: #666; font-size: 16px;">No FAQs have been added yet.</p>
+            @else
+                @foreach($sections as $index => $section)
+                    @php 
+                        $slug = \Illuminate\Support\Str::slug($section['heading']);
+                        $faqs = $section['faqs'] ?? [];
+                    @endphp
+                    <div class="faq-section" data-category="{{ $slug }}" {!! $index > 0 ? 'style="display: none;"' : '' !!}>
+                        <h2 class="faq-section-title">{{ $section['heading'] }}</h2>
+                        <div class="faq-accordion">
+                            @foreach($faqs as $faq)
+                                <div class="faq-item">
+                                    <div class="faq-item-header">
+                                        {{ $faq['question'] }}
+                                        <span class="faq-item-icon">+</span>
+                                    </div>
+                                    <div class="faq-item-body">
+                                        <p>{!! nl2br(e($faq['answer'])) !!}</p>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer full-color offset and digital printing, Pantone color matching, UV coating, soft-touch lamination, foil stamping, embossing, and debossing to make your artwork pop.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-section" data-category="order-prices">
-                <h2 class="faq-section-title">Order & Prices</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What type of retail boxes are best for luxury product packaging?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Which retail boxes offer the most protect for fragile items?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Do retail boxes have customizable shapes and structures?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-section" data-category="sales" style="display: none;">
-                <h2 class="faq-section-title">Sales</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What type of retail boxes are best for luxury product packaging?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Which retail boxes offer the most protect for fragile items?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Do retail boxes have customizable shapes and structures?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-section" data-category="shipping" style="display: none;">
-                <h2 class="faq-section-title">Shipping</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What type of retail boxes are best for luxury product packaging?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Which retail boxes offer the most protect for fragile items?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Do retail boxes have customizable shapes and structures?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-section" data-category="custom-support" style="display: none;">
-                <h2 class="faq-section-title">Custom Support</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What type of retail boxes are best for luxury product packaging?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Rigid boxes and premium folding cartons with special finishes are typically best for luxury products. Our sales team can help you balance luxury appeal with your budget.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Which retail boxes offer the most protect for fragile items?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>For maximum protection, corrugated boxes with custom foam inserts are recommended. The cost will depend on the thickness of the board and the complexity of the insert.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            Do retail boxes have customizable shapes and structures?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>Yes, structural customization is available. Custom shapes may require a one-time die plate fee, which our pricing team will outline in your quote.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-item-header">
-                            What printing customization are available for retail boxes?
-                            <span class="faq-item-icon">+</span>
-                        </div>
-                        <div class="faq-item-body">
-                            <p>We offer a wide range of printing options. Keep in mind that special finishes like foil stamping and UV coating may increase the unit price.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                @endforeach
+            @endif
         </div>
     </div>
 @include('components.cta')
