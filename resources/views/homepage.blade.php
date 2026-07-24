@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Printed Boxes - The Rigid Boxes</title>
+    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes - The Rigid Boxes' }}</title>
+    <meta name="description" content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -35,12 +36,29 @@
         .home-page > section > [class$="-container"],
         .home-page > section > [class$="-inner"] {
             width: 100%;
-            max-width: 1440px;
+            max-width: 1280px !important;
             margin-left: auto;
             margin-right: auto;
-            padding-left: 24px;
-            padding-right: 24px;
+            padding-left: 55px !important;
+            padding-right: 55px !important;
             box-sizing: border-box;
+            min-width: 0;
+        }
+
+        @media (max-width: 768px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-page > section > [class$="-container"],
+            .home-page > section > [class$="-inner"] {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
         }
 
         /* ─────────────────────────────────────────
@@ -90,6 +108,7 @@
             gap: 24px;
             justify-content: start;
             max-width: 100%;
+            align-items: stretch;
         }
 
         /* ─────────────────────────────────────────
@@ -97,7 +116,8 @@
         ───────────────────────────────────────── */
         .industry-card {
             width: 100%;
-            min-height: 456px;
+            min-height: 0;
+            height: auto;
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0px 0px 10px 0px #00000029;
@@ -125,7 +145,7 @@
         /* Image area — Figma: left:8px w:275 h:266 */
         .industry-card__image-wrap {
             width: calc(100% - 16px);
-            height: 266px;
+            height: clamp(190px, 18vw, 230px);
             margin: 0 auto;
             overflow: hidden;
             flex-shrink: 0;
@@ -147,7 +167,7 @@
         .industry-card__bottom {
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex: none;
             padding: 14px 17px 20px;
         }
 
@@ -240,7 +260,7 @@
         ───────────────────────────────────────── */
         .why-choose-section {
             background: var(--background-color, #FAF8F8);
-            padding: 30px 0 70px;
+            padding: 10px 0 30px;
         }
 
         .why-choose-container {
@@ -470,9 +490,18 @@
            RESPONSIVE — Why Choose Us
         ───────────────────────────────────────── */
 
-        /* Tablet: scale down to 2-col fluid */
-        @media (max-width: 1300px) {
-            .why-choose-container { padding: 0 40px; }
+        /* Laptop container padding */
+        @media (max-width: 1300px) and (min-width: 993px) {
+            .why-choose-container { padding: 0 24px; }
+            .why-bento { gap: 10px; }
+            .why-card { padding: 24px 18px; }
+            .why-card__title { font-size: 16px; margin-bottom: 8px; }
+            .why-card__text { font-size: 13px; line-height: 1.45; }
+        }
+
+        /* Tablet: 2-col fluid stack below 992px */
+        @media (max-width: 992px) {
+            .why-choose-container { padding: 0 24px; }
             .why-bento { width: 100%; display: block; }
 
             .why-row {
@@ -608,8 +637,8 @@
         /* ── LEFT: two overlapping images ── */
         .premium-images {
             position: relative;
-            width: 52%;
-            height: 645px;
+            width: 50%;
+            height: 460px;
             flex-shrink: 0;
         }
 
@@ -617,20 +646,20 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 80%;
-            height: 464px;
+            width: 78%;
+            height: 350px;
             border-radius: 21.12px;
             object-fit: cover;
             display: block;
         }
 
-        /* img2 offset relative to img1: top:304.59-66=238 | left:385.9-100=286 */
+        /* img2 offset relative to img1 */
         .premium-img2 {
             position: absolute;
-            top: 238px;
-            left: 38%;
+            top: 180px;
+            left: 36%;
             width: 55%;
-            height: 341px;
+            height: 260px;
             border-radius: 15.51px;
             object-fit: cover;
             display: block;
@@ -728,9 +757,9 @@
         /* RESPONSIVE — Premium Section */
         @media (max-width: 1200px) {
             .premium-inner   { padding: 0 40px; gap: 40px; }
-            .premium-images  { width: 480px; height: 560px; }
-            .premium-img1    { width: 420px; height: 390px; }
-            .premium-img2    { top: 210px; left: 200px; width: 300px; height: 276px; }
+            .premium-images  { width: 440px; height: 420px; }
+            .premium-img1    { width: 380px; height: 320px; }
+            .premium-img2    { top: 160px; left: 160px; width: 260px; height: 240px; }
             .premium-content { width: auto; flex: 1; }
             .premium-heading,
             .premium-desc    { width: 100%; }
@@ -738,16 +767,16 @@
 
         @media (max-width: 900px) {
             .premium-inner   { flex-direction: column; padding: 0 24px; gap: 32px; }
-            .premium-images  { width: 100%; height: 420px; }
-            .premium-img1    { width: 80%; height: 340px; }
-            .premium-img2    { top: 150px; left: 38%; width: 56%; height: auto; aspect-ratio: 370/341; }
+            .premium-images  { width: 100%; height: 340px; }
+            .premium-img1    { width: 75%; height: 260px; }
+            .premium-img2    { top: 120px; left: 36%; width: 55%; height: auto; aspect-ratio: 370/341; }
             .premium-content { width: 100%; }
             .premium-heading,
             .premium-desc    { width: 100%; }
         }
 
         @media (max-width: 480px) {
-            .premium-section  { padding: 20px 0 40px; }
+            .premium-section  { padding: 20px 0 30px; }
             .premium-inner    { flex-direction: column; padding: 0 16px; gap: 24px; }
             .premium-heading  { font-size: 22px; line-height: 28px; width: 100%; }
             .premium-desc     { width: 100%; font-size: 14px; }
@@ -755,9 +784,9 @@
             .premium-icon-item { width: 70px; }
             .premium-icon-text { font-size: 12px; }
             .premium-content  { width: 100%; }
-            .premium-images   { width: 100%; height: 320px; }
-            .premium-img1     { width: 78%; height: 250px; top: 0; left: 0; }
-            .premium-img2     { width: 55%; height: auto; aspect-ratio: 370/341; top: 130px; left: 40%; }
+            .premium-images   { width: 100%; height: 260px; }
+            .premium-img1     { width: 75%; height: 200px; top: 0; left: 0; }
+            .premium-img2     { width: 52%; height: auto; aspect-ratio: 370/341; top: 100px; left: 40%; }
         }
 
         /* ─────────────────────────────────────────
@@ -961,21 +990,50 @@
                 height: 100%;
             }
         }
-        @media (max-width: 1280px) {
+        @media (min-width: 769px) and (max-width: 1920px) {
             .custom-boxes-container {
-                padding: 0 40px;
+                padding: 0 24px;
             }
 
             .cards-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 16px;
             }
 
             .industry-card {
                 width: 100%;
+                min-height: 0;
+                height: auto;
+            }
+
+            .industry-card__title {
+                font-size: 15px;
+                padding: 16px 10px 8px;
             }
 
             .industry-card__image-wrap {
-                width: calc(100% - 16px);
+                width: calc(100% - 12px);
+                height: clamp(150px, 19vw, 220px);
+            }
+
+            .industry-card__bottom {
+                padding: 12px;
+                flex: none;
+            }
+
+            .industry-card__text {
+                font-size: 12px;
+            }
+
+            .industry-card__btn {
+                height: 40px;
+                font-size: 14px;
+                margin-top: 10px;
+                width: min(200px, 100%);
+            }
+
+            .view-all-wrap {
+                margin-top: 16px;
             }
         }
 
@@ -1161,7 +1219,7 @@
         }
 
         .cdo-btn.active {
-            background: var(--section-text-color, #000);
+            background: var(--primary-color, #8D4445);
             color: #fff;
         }
 
@@ -1519,6 +1577,11 @@
 </head>
 
 <body>
+    @php
+        $settings = $settings ?? [];
+        $categories = $categories ?? [];
+        $products = $products ?? [];
+    @endphp
 
     @include('components.header')
 
@@ -1533,108 +1596,38 @@
                 <p class="section-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
 
                 <div class="cards-grid">
+                    @php 
+                        $featuredCatIds = (array) ($settings['featured_categories'] ?? []);
+                        $featuredCategories = collect($categories)->whereIn('id', $featuredCatIds)->all();
+                        if (empty($featuredCategories)) {
+                            $featuredCategories = array_slice($categories, 0, 8);
+                        }
+                    @endphp
 
-                    <!-- Card 1: Rigid Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Rigid Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
+                    @foreach($featuredCategories as $cat)
+                        @php 
+                            $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
+                            $catUrl = url('/category/' . $catSlug);
+                            $cImg = !empty($cat['image']) ? (\Illuminate\Support\Str::startsWith($cat['image'], ['storage/', 'uploads/', 'images/']) ? $cat['image'] : 'storage/' . $cat['image']) : 'uploads/Gift-Boxes.webp';
+                        @endphp
+                        <div class="industry-card">
+                            <a href="{{ $catUrl }}" style="text-decoration:none; color:inherit;">
+                                <span class="industry-card__title">{{ $cat['title'] }}</span>
+                            </a>
+                            <a href="{{ $catUrl }}" class="industry-card__image-wrap" style="display:block;">
+                                <img src="{{ asset($cImg) }}" alt="{{ $cat['title'] }}" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text={{ urlencode($cat['title']) }}'">
+                            </a>
+                            <div class="industry-card__bottom">
+                                <p class="industry-card__text">{{ Str::limit(strip_tags($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'), 80) }}</p>
+                                <a href="{{ $catUrl }}" class="industry-card__btn">Explore Boxes</a>
+                            </div>
                         </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Magnetic Closure Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Magnetic Closure Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Closure Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Closure'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Photo Presentation Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Photo Presentation Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Photo Presentation Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Photo+Presentation'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Book Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Book Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Book+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Magnetic Book Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Magnetic Book Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Magnetic Book Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Magnetic+Book'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: Drawer Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Drawer Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Drawer Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Drawer+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 7: Gift Boxes -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Gift Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Gift Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Gift+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 8: Rigid Boxes (alt) -->
-                    <div class="industry-card">
-                        <span class="industry-card__title">Rigid Boxes</span>
-                        <div class="industry-card__image-wrap">
-                            <img src="{{ asset('uploads/industry-gift-boxes.webp') }}" alt="Rigid Boxes" onerror="this.src='https://placehold.co/275x266/dddddd/555555?text=Rigid+Boxes'">
-                        </div>
-                        <div class="industry-card__bottom">
-                            <p class="industry-card__text">Premium packaging with a luxury feel and durable structure.</p>
-                            <a href="#" class="industry-card__btn">Explore Boxes</a>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div><!-- /.cards-grid -->
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="#" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/categories') }}" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->
@@ -1669,10 +1662,10 @@
                         <div class="why-card wc-pink2">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Premium Quality Materials</h3>
-                                <p class="why-card__text">Built with high-strength materials that ensure durability, protection, and a premium feel.</p>
+                                <p class="why-card__text">Durable materials crafted to protect your products and elevate brand perception.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Premium rigid box materials and paper samples">
+                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Sample materials showing paper and cardstock swatches">
                             </div>
                         </div>
 
@@ -1680,26 +1673,26 @@
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Low MOQ</h3>
-                                <p class="why-card__text">Flexible minimum order quantities to help startups and growing brands order with confidence.</p>
+                                <p class="why-card__text">Order in quantities that suit your business size, starting from low minimums.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Low MOQ">
+                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Custom box sample representing low MOQ orders">
                             </div>
                         </div>
 
-                    </div><!-- /.why-row row-1 -->
+                    </div><!-- /.why-row -->
 
-                    <!-- ROW 2: yellow (612×242) | green (299×242) | skin (299×242) -->
+                    <!-- ROW 2 & 3: yellow (612×242) | green (299×413) | skin (299×413) -->
                     <div class="why-row">
 
-                        <!-- CARD 4 — yellow: Dedicated Customer Service (horizontal) -->
+                        <!-- CARD 4 — yellow: Dedicated Customer Service -->
                         <div class="why-card wc-yellow">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Dedicated Customer Service</h3>
-                                <p class="why-card__text">Our packaging specialists are here to guide you through every step of the process.</p>
+                                <p class="why-card__text">Our packaging specialists are here to guide you through every step of your order.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Packaging customer-service specialist">
+                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Customer service specialist with headset smiling">
                             </div>
                         </div>
 
@@ -1707,10 +1700,10 @@
                         <div class="why-card wc-green">
                             <div class="why-card__content">
                                 <h3 class="why-card__title">Custom Sizes &amp; Designs</h3>
-                                <p class="why-card__text">Tailored packaging solutions crafted to match your product dimensions and brand identity.</p>
+                                <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Custom Sizes and Designs">
+                                <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Custom shaped rigid packaging box">
                             </div>
                         </div>
 
@@ -1749,38 +1742,29 @@
                     </div>
                 </div>
 
-                <!-- Right: 3 product cards -->
                 <div class="bestseller-cards">
+                    @php 
+                        $bestsellerProdIds = (array) ($settings['bestseller_products'] ?? []);
+                        $bestsellerProducts = collect($products)->whereIn('id', $bestsellerProdIds)->all();
+                        if (empty($bestsellerProducts)) {
+                            $bestsellerProducts = array_slice($products, 0, 4);
+                        }
+                    @endphp
 
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p1.png') }}" alt="Lipstick Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Lipstick+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Lipstick Boxes</p>
-                    </div>
-
-                    <!-- Fourth card is shown only in the mobile 2×2 layout. -->
-                    <div class="bestseller-card bestseller-card--mobile-only" aria-hidden="true">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p2.png') }}" alt="Serum Boxes">
-                        </div>
-                        <p class="bestseller-card__title">Serum Boxes</p>
-                    </div>
-
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p2.png') }}" alt="Serum Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Serum+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Serum Boxes</p>
-                    </div>
-
-                    <div class="bestseller-card">
-                        <div class="bestseller-card__img">
-                            <img src="{{ asset('uploads/best-seller-p3.png') }}" alt="Perfume Boxes" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text=Perfume+Boxes'">
-                        </div>
-                        <p class="bestseller-card__title">Perfume Boxes</p>
-                    </div>
-
+                    @foreach($bestsellerProducts as $prod)
+                        @php 
+                            $prodSlug = $prod['slug'] ?? Str::slug($prod['title']);
+                            $prodUrl = url('/product/' . $prodSlug);
+                            $pImg = !empty($prod['image']) ? (\Illuminate\Support\Str::startsWith($prod['image'], ['storage/', 'uploads/', 'images/']) ? $prod['image'] : 'storage/' . $prod['image']) : 'uploads/best-seller-p1.png';
+                        @endphp
+                        <a href="{{ $prodUrl }}" class="bestseller-card" style="text-decoration:none; color:inherit;">
+                            <div class="bestseller-card__img">
+                                <img src="{{ asset($pImg) }}" alt="{{ $prod['title'] }}" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
+                            </div>
+                            <p class="bestseller-card__title">{{ $prod['title'] }}</p>
+                        </a>
+                    @endforeach
+                </div><!-- /.bestseller-cards -->
                 </div><!-- /.bestseller-cards -->
 
             </div><!-- /.bestseller-inner -->
@@ -1825,7 +1809,7 @@
 
                     </div><!-- /.premium-icons -->
 
-                    <a href="#" class="premium-btn">Order Now</a>
+                    <a href="/request-quote" class="premium-btn">Order Now</a>
 
                 </div><!-- /.premium-content -->
 
@@ -2025,24 +2009,55 @@
     </script>
 
     <script>
-        // Best Seller tabs: keep the starter images identical for now while
-        // preserving a working three-tab interaction for later replacements.
-        document.querySelectorAll('.bestseller-dot').forEach(function (dot, index) {
-            dot.addEventListener('click', function () {
-                document.querySelectorAll('.bestseller-dot').forEach(function (item) {
+        (function() {
+            var dots = document.querySelectorAll('.bestseller-dot');
+            if (dots.length === 0) return;
+            
+            var currentIndex = 0;
+            var autoPlayInterval;
+            
+            function goToDot(index) {
+                dots.forEach(function (item) {
                     item.classList.remove('active');
                     item.setAttribute('aria-selected', 'false');
                 });
-                dot.classList.add('active');
-                dot.setAttribute('aria-selected', 'true');
+                dots[index].classList.add('active');
+                dots[index].setAttribute('aria-selected', 'true');
+                
                 var cardsContainer = document.querySelector('.bestseller-cards');
                 if (cardsContainer) {
                     var firstCard = cardsContainer.querySelector('.bestseller-card');
                     var cardWidth = firstCard ? firstCard.offsetWidth : 275;
-                    cardsContainer.scrollTo({ left: index * (cardWidth + 20), behavior: 'smooth' });
+                    // Scroll by 3 cards at a time for desktop, or let it scroll based on index
+                    var isMobile = window.innerWidth <= 768;
+                    var scrollMultiplier = isMobile ? 1 : 3;
+                    cardsContainer.scrollTo({ left: index * (cardWidth + 20) * scrollMultiplier, behavior: 'smooth' });
                 }
+            }
+
+            dots.forEach(function (dot, index) {
+                dot.addEventListener('click', function () {
+                    currentIndex = index;
+                    goToDot(index);
+                    resetAutoPlay();
+                });
             });
-        });
+
+            function nextSlide() {
+                currentIndex++;
+                if (currentIndex >= dots.length) {
+                    currentIndex = 0;
+                }
+                goToDot(currentIndex);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 3500); // Auto-play every 3.5 seconds
+            }
+
+            resetAutoPlay();
+        })();
     </script>
 
 </body>

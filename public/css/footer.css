@@ -23,11 +23,25 @@
 /* Keep every footer row inside the same centered canvas as the site header. */
 .main-footer .container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1280px;
     margin-inline: auto;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 55px;
+    padding-right: 55px;
     box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .main-footer .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-footer .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
 
 .main-footer *,
@@ -419,12 +433,12 @@
 
     /* Footer Content */
     .footer-content {
-        padding: 40px 0;
+        padding: 24px 0 16px;
     }
 
     .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 20px;
         text-align: center;
     }
 
@@ -434,20 +448,21 @@
 
     .footer-logo {
         justify-content: center;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .logo-image {
-        width: 150px;
+        width: 130px;
         height: auto;
     }
 
     .brand-description {
-        margin-top: -15px;
+        margin-top: -10px;
         text-align: center;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
         width: 97%;
         height: auto;
+        line-height: 20px;
     }
 
     .social-links {
@@ -456,20 +471,20 @@
     }
 
     .social-icon {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
     }
 
     .social-icon-img {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
     }
 
     /* Footer Columns Side by Side */
     .footer-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 32px;
+        gap: 24px 20px;
     }
 
     .brand-column {
@@ -486,12 +501,12 @@
     }
 
     .footer-heading {
-        font-size: 18px;
-        margin-bottom: 16px;
+        font-size: 17px;
+        margin-bottom: 10px;
     }
 
     .footer-links {
-        gap: 12px;
+        gap: 6px;
         padding-left: 0;
     }
 
@@ -499,6 +514,7 @@
     .contact-item a,
     .contact-item span {
         font-size: 14px;
+        line-height: 20px;
     }
 
     /* Company Info Section Centered */
@@ -511,9 +527,13 @@
     }
 
     /* Footer Bottom */
+    .footer-bottom {
+        padding: 16px 0;
+    }
+
     .footer-bottom-content {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         text-align: center;
     }
 
@@ -528,7 +548,7 @@
 
 @media (max-width: 480px) {
     .newsletter-section {
-        padding: 24px 12px;
+        padding: 20px 12px;
     }
 
     .newsletter-content {
@@ -537,12 +557,12 @@
 
     .newsletter-text h3 {
         width: 100%;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 15px;
+        line-height: 22px;
     }
 
     .newsletter-form {
-        max-height: 61px;
+        max-height: 54px;
         flex-direction: row;
         gap: 0;
         max-width: 100%;
@@ -552,23 +572,25 @@
     .newsletter-input {
         font-size: 14px;
         padding: 10px 12px;
+        height: 50px;
     }
 
     .newsletter-button {
         width: auto;
-        padding: 14px 20px;
+        padding: 12px 18px;
         font-size: 14px;
-        min-width: 100px;
+        min-width: 90px;
+        height: 50px;
     }
 
     .footer-content {
-        padding: 32px 12px;
+        padding: 20px 12px 10px;
     }
 
     .footer-column:not(.brand-column) {
         width: 100%;
         text-align: center;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
     .footer-links,
@@ -578,6 +600,7 @@
 
     .contact-item {
         justify-content: center;
+        margin-bottom: 8px;
     }
 
     .payment-methods {

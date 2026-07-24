@@ -82,6 +82,7 @@
         display: flex;
         flex-direction: column;
         transition: box-shadow 0.3s, transform 0.3s;
+        position: relative;
     }
 
     .blog-card:hover {
@@ -120,9 +121,17 @@
         line-height: 1.3;
         margin-bottom: 12px;
         text-decoration: none;
+        transition: color 0.3s;
     }
 
-    .blog-card__title:hover {
+    .blog-card__title::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .blog-card:hover .blog-card__title {
         color: var(--primary-color, #8D4445);
     }
 
@@ -152,9 +161,11 @@
         color: var(--primary-color, #8D4445);
         text-decoration: none;
         transition: color 0.3s;
+        position: relative;
+        z-index: 2;
     }
 
-    .blog-card__readmore:hover {
+    .blog-card:hover .blog-card__readmore {
         color: #5F2D2F;
     }
 
@@ -304,10 +315,10 @@
                         <span class="blog-card__author">Joe Danley</span>
                         <span class="blog-card__date">Nov 15, 2024</span>
                     </div>
-                    <a href="#" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
+                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
                     <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
                     <div>
-                        <a href="#" class="blog-card__readmore">
+                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
                             Read More
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
@@ -323,10 +334,10 @@
                         <span class="blog-card__author">Joe Danley</span>
                         <span class="blog-card__date">Nov 15, 2024</span>
                     </div>
-                    <a href="#" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
+                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
                     <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
                     <div>
-                        <a href="#" class="blog-card__readmore">
+                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
                             Read More
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
@@ -342,10 +353,10 @@
                         <span class="blog-card__author">Joe Danley</span>
                         <span class="blog-card__date">Nov 15, 2024</span>
                     </div>
-                    <a href="#" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
+                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
                     <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
                     <div>
-                        <a href="#" class="blog-card__readmore">
+                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
                             Read More
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>

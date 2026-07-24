@@ -217,8 +217,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('{{ asset('images/Gift-boxes.webp') }}') no-repeat center center / cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)),
+                              var(--card-banner, url('{{ asset('images/Gift-boxes.webp') }}'));
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 1;
@@ -394,6 +397,7 @@
         }
 
         .option-title {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-size: 16px;
             font-weight: 700;
@@ -961,8 +965,8 @@
         <section class="hero-section">
             <div class="container">
                 <header class="hero-header">
-                    <h1 class="heading-01">Packaging Solutions for Every Industry</h1>
-                    <p class="hero-body">Custom packaging solutions designed to meet the unique demands of every industry, helping businesses protect products, strengthen branding, and create memorable customer experiences.</p>
+                    <h1 class="heading-01">{{ !empty($parentCategory['title']) ? $parentCategory['title'] : 'Packaging Solutions for Every Industry' }}</h1>
+                    <p class="hero-body">{{ !empty($parentCategory['hero_description']) ? $parentCategory['hero_description'] : 'Custom packaging solutions designed to meet the unique demands of every industry, helping businesses protect products, strengthen branding, and create memorable customer experiences.' }}</p>
                 </header>
             </div>
         </section>
@@ -971,101 +975,37 @@
         <section class="industries-section">
             <div class="container">
                 <div class="industries-grid">
-                    <!-- Row 1 -->
-                    <article class="industry-card apparel-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-apparel-icon.png') }}" alt="Apparel" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Apparel</h3>
-                    </article>
-
-                    <article class="industry-card cosmetics-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-cosmetics-icon.png') }}" alt="Cosmetics" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Cosmetics</h3>
-                    </article>
-
-                    <article class="industry-card food-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-food-icon.png') }}" alt="Food" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Food</h3>
-                    </article>
-
-                    <article class="industry-card gift-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-gift-icon.png') }}" alt="Gift" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Gift</h3>
-                    </article>
-
-                    <!-- Row 2 -->
-                    <article class="industry-card ecommerce-card">
-                        <div class="card-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor">
-                                <rect x="6" y="14" width="28" height="20" rx="2" stroke-width="1.5"/>
-                                <path d="M22 14V8C22 6.9 21.1 6 20 6C18.9 6 18 6.9 18 8V14" stroke-width="1.5"/>
-                                <circle cx="20" cy="24" r="2" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3 class="heading-04">E-Commerce</h3>
-                    </article>
-
-                    <article class="industry-card jewelry-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-jewelry-icon.png') }}" alt="Jewelry" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Jewelry</h3>
-                    </article>
-
-                    <article class="industry-card perfume-card">
-                        <div class="card-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor">
-                                <rect x="12" y="18" width="16" height="16" rx="2" stroke-width="1.5"/>
-                                <path d="M16 18V12C16 8.7 17.8 6 20 6C22.2 6 24 8.7 24 12V18" stroke-width="1.5"/>
-                                <circle cx="20" cy="26" r="2" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3 class="heading-04">Perfume</h3>
-                    </article>
-
-                    <article class="industry-card personalcare-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-personal-care-icon.png') }}" alt="Personal Care" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Personal Care</h3>
-                    </article>
-
-                    <!-- Row 3 -->
-                    <article class="industry-card pet-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-pet-icon.png') }}" alt="Pet" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Pet</h3>
-                    </article>
-
-                    <article class="industry-card retail-card">
-                        <div class="card-icon">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor">
-                                <rect x="6" y="10" width="28" height="24" rx="2" stroke-width="1.5"/>
-                                <path d="M6 18L34 18" stroke-width="1.5"/>
-                                <rect x="12" y="22" width="16" height="8" rx="1" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-                        <h3 class="heading-04">Retail</h3>
-                    </article>
-
-
-                    <article class="industry-card tea-card">
-                        <div class="card-icon">
-                            <img src="{{ asset('images/industry-tea-icon.png') }}" alt="Tea" class="card-image">
-                        </div>
-                        <h3 class="heading-04">Tea</h3>
-                    </article>
-
-
-                    
+                    @php
+                        $allCats = !empty($categories) ? $categories : [];
+                    @endphp
+                    @foreach($allCats as $cat)
+                        @php
+                            $resolveCategoryAsset = function ($path, $fallback = '') {
+                                if (empty($path)) return $fallback;
+                                return \Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/'])
+                                    ? $path
+                                    : 'storage/' . $path;
+                            };
+                            $cIcon = $resolveCategoryAsset($cat['icon'] ?? '', '');
+                            $cBanner = $resolveCategoryAsset($cat['banner_image'] ?? '', $resolveCategoryAsset($cat['image'] ?? '', 'uploads/Gift-Boxes.webp'));
+                            $cSlug = $cat['slug'] ?? \Illuminate\Support\Str::slug($cat['title']);
+                        @endphp
+                        <a href="{{ url('/category/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
+                            <article class="industry-card" style="--card-banner: url('{{ asset($cBanner) }}');">
+                                <div class="card-icon" aria-hidden="true">
+                                    @if($cIcon)
+                                        <img class="card-image" src="{{ asset($cIcon) }}" alt="">
+                                    @else
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="8" width="18" height="13" rx="2"></rect>
+                                            <path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 1 1 4.5-1.5V8M16.5 8A2.5 2.5 0 1 0 12 6.5V8"></path>
+                                        </svg>
+                                    @endif
+                                </div>
+                                <h3 class="heading-04">{{ $cat['title'] }}</h3>
+                            </article>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -1086,22 +1026,22 @@
                         
                         <div class="options-grid">
                             <div class="option-card">
-                                <h3 class="option-title">Fsc-Certified Materials</h3>
+                                <span class="option-title">Fsc-Certified Materials</span>
                                 <p class="option-text">Sourced from responsibly managed forests for sustainable packaging.</p>
                             </div>
                             
                             <div class="option-card">
-                                <h3 class="option-title">Recyclable Packaging Options</h3>
+                                <span class="option-title">Recyclable Packaging Options</span>
                                 <p class="option-text">Designed for easy recycling to reduce environmental waste.</p>
                             </div>
                             
                             <div class="option-card">
-                                <h3 class="option-title">PCR (Post-Consumer Recycled) Materials</h3>
+                                <span class="option-title">PCR (Post-Consumer Recycled) Materials</span>
                                 <p class="option-text">Made using recycled content to support a circular economy.</p>
                             </div>
                             
                             <div class="option-card">
-                                <h3 class="option-title">Eco-Conscious Production Methods</h3>
+                                <span class="option-title">Eco-Conscious Production Methods</span>
                                 <p class="option-text">Manufactured with reduced energy use and lower environmental impact.</p>
                             </div>
                         </div>

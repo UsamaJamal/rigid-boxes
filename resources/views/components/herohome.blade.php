@@ -39,9 +39,9 @@
 
     .hero-section {
         width: 100%;
-        max-width: 1440px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 8px 24px 0;
+        padding: 8px 55px 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
         align-items: center;
@@ -141,7 +141,7 @@
         .hero-section {
             flex-direction: column;
             display: flex;
-            padding: 30px 24px 24px;
+            padding: 30px 55px 24px;
             text-align: left;
             gap: 20px;
         }
@@ -172,7 +172,7 @@
     @media (max-width: 576px) {
 
         .hero-section {
-            padding: 24px 20px 16px;
+            padding: 24px 16px 16px;
             text-align: left;
         }
 
@@ -186,6 +186,13 @@
             font-size: 13px;
         }
 
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+        .hero-section {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
 </style>
 
@@ -203,18 +210,22 @@
 
         <div class="hero-content">
             <h1 class="hero-title">
-                CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES
+                {!! !empty($settings['hero_title']) ? $settings['hero_title'] : 'CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES' !!}
             </h1>
 
             <p class="hero-description">
-                Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.
+                {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
-            <a href="#" class="hero-btn">Design Custom Boxes</a>
+            <a href="/request-quote" class="hero-btn">Get Instant Quote</a>
         </div>
 
         <div class="hero-image-wrapper">
-            <img src="{{ asset('uploads/hero-home-banner.png') }}" alt="Custom Cosmetic Packaging Boxes" onerror="this.src='https://placehold.co/600x500/222222/555555?text=Cosmetic+Boxes'">
+            @php
+                $hImg = !empty($settings['hero_image']) ? $settings['hero_image'] : (!empty($category['hero_image']) ? $category['hero_image'] : 'uploads/Home-Banner.webp');
+                $hImgPath = \Illuminate\Support\Str::startsWith($hImg, ['storage/', 'uploads/', 'images/']) ? $hImg : 'storage/' . $hImg;
+            @endphp
+            <img src="{{ asset($hImgPath) }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'Custom Rigid Packaging Boxes')) }}" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
         </div>
     </section>
 </div>

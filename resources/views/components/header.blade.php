@@ -1,12 +1,36 @@
 <style>
     :root {
+        --site-container-width: 1280px;
+        --site-container-gutter: 55px;
         --primary-color: #8D4445;
         --secondary-color: #F8EEEC;
         --background-color: #FAF8F8;
         --footer-color: #5F2D2F;
         --header-gradient: linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%);
         --section-text-color: #000000;
+        --heading-h1-size: 32px;
+        --heading-h2-size: 28px;
+        --heading-h3-size: 24px;
+        --heading-h4-size: 20px;
     }
+
+    .header-container,
+    .header-top,
+    .header-nav {
+        width: 100% !important;
+        max-width: var(--site-container-width) !important;
+        padding-left: var(--site-container-gutter) !important;
+        padding-right: var(--site-container-gutter) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+        min-width: 0;
+    }
+
+    h1 { font-size: var(--heading-h1-size) !important; }
+    h2 { font-size: var(--heading-h2-size) !important; }
+    h3 { font-size: var(--heading-h3-size) !important; }
+    h4 { font-size: var(--heading-h4-size) !important; }
 
     .site-header {
         background: var(--header-gradient);
@@ -28,9 +52,6 @@
         align-items: center;
         width: 100%;
         min-height: 88px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
     }
 
     .header-logo {
@@ -60,7 +81,7 @@
         background: transparent;
         border: 0.6px solid rgba(255, 255, 255, 0.6);
         border-radius: 7px;
-        padding: 0 15px 0 48px;
+        padding: 0 35px 0 48px;
         color: #fff;
         outline: none;
         transition: border-color 0.3s;
@@ -84,6 +105,22 @@
         width: 22px;
         height: 22px;
         fill: rgba(255, 255, 255, 0.8);
+    }
+
+    .header-search .clear-icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        fill: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: fill 0.2s;
+    }
+
+    .header-search .clear-icon:hover {
+        fill: rgba(255, 255, 255, 1);
     }
 
     .header-contact {
@@ -149,6 +186,7 @@
 
     .header-bottom {
         border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        position: relative;
     }
 
     .header-nav {
@@ -156,12 +194,21 @@
         justify-content: center;
         width: 100%;
         min-height: 48px;
-        padding: 0 24px;
-        max-width: 1440px;
-        margin: 0 auto;
         list-style: none;
         gap: clamp(36px, 4vw, 62px);
         align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        :root { --site-container-gutter: 20px; }
+    }
+
+    @media (max-width: 480px) {
+        :root { --site-container-gutter: 16px; }
+    }
+
+    .header-nav li {
+        position: relative;
     }
 
     .header-nav li a {
@@ -170,70 +217,48 @@
         font-size: 16px;
         font-weight: 700;
         transition: opacity 0.3s;
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 0;
     }
 
     .header-nav li a:hover {
-        opacity: 0.8;
+        opacity: 0.85;
     }
-    .header-nav li.has-dropdown > a::after {
+
+    .header-nav li.has-mega > a::after {
         content: '';
         display: inline-block;
         width: 6px;
         height: 6px;
-        margin: 0 0 3px 7px;
+        margin: 0 0 2px 7px;
         border-right: 1.5px solid #fff;
         border-bottom: 1.5px solid #fff;
         transform: rotate(45deg);
+        transition: transform 0.2s ease;
     }
 
-    /* Figma-style desktop mega menu */
-    .header-nav li {
-        position: static;
+    .header-nav li.has-mega:hover > a::after,
+    .header-nav li.has-mega.active > a::after {
+        transform: rotate(225deg) translateY(-2px);
     }
 
-    .mega-trigger {
-        appearance: none;
-        border: 0;
-        padding: 0;
-        background: transparent;
-        color: #fff;
-        font: inherit;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    .mega-trigger::after {
-        content: '';
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        margin: 0 0 3px 8px;
-        border-right: 1.5px solid currentColor;
-        border-bottom: 1.5px solid currentColor;
-        transform: rotate(45deg);
-        transition: transform .2s ease;
-    }
-
-    .mega-trigger[aria-expanded="true"]::after {
-        transform: translateY(3px) rotate(225deg);
-    }
-
+    /* Mega Menu Dropdown UI (Matching Screenshot Exactly) */
     .mega-menu {
         position: absolute;
-        z-index: 1100;
-        top: calc(100% - 2px);
+        z-index: 1200;
+        top: 100%;
         left: 50%;
-        width: min(760px, calc(100vw - 40px));
-        padding: 18px 22px;
-        background: var(--secondary-color);
-        border: 1px solid rgba(255,255,255,.38);
-        border-radius: 0 0 6px 6px;
-        box-shadow: 0 18px 35px rgba(45, 20, 20, .25);
+        width: min(1020px, calc(100vw - 32px));
+        padding: 26px 30px 20px;
+        background: #FAF2F0;
+        border: 1px solid #E8DCDA;
+        border-radius: 12px;
+        box-shadow: 0 18px 45px rgba(35, 15, 16, 0.22);
         opacity: 0;
         visibility: hidden;
-        transform: translate(-50%, -8px);
-        transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+        transform: translate(-50%, 8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
     }
 
     .mega-menu.is-open {
@@ -242,69 +267,102 @@
         transform: translate(-50%, 0);
     }
 
-    .mega-menu-title {
-        margin: 0 0 14px;
-        color: var(--primary-color);
-        font-size: 14px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
     .mega-menu-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px 18px;
+        gap: 16px 20px;
     }
 
-    .mega-menu-link {
+    .mega-menu-item {
         display: flex;
         align-items: center;
-        min-width: 0;
-        gap: 9px;
-        color: #333;
-        font-size: 13px;
-        font-weight: 600;
-        line-height: 1.25;
+        gap: 12px;
+        padding: 8px 10px;
+        border-radius: 8px;
         text-decoration: none;
+        color: #222222;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.35;
+        transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
     }
 
-    .mega-menu-link:hover { color: var(--primary-color); }
+    .mega-menu-item:hover {
+        background: #F2E3E0;
+        color: var(--primary-color);
+        transform: translateX(2px);
+    }
 
-    .mega-menu-link img {
-        width: 23px;
-        height: 23px;
+    .mega-menu-icon {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .mega-menu-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--primary-color);
+        fill: none;
+    }
+
+    .mega-menu-icon img {
+        width: 26px;
+        height: 26px;
+        display: block;
         object-fit: contain;
-        flex: 0 0 auto;
     }
 
     .mega-menu-footer {
         display: flex;
         align-items: center;
-        gap: 11px;
-        margin-top: 18px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(141, 68, 69, .22);
-        color: #333;
-        font-size: 13px;
+        justify-content: space-between;
+        margin-top: 22px;
+        padding-top: 16px;
+        border-top: 1px solid #E5D5D3;
+    }
+
+    .mega-menu-footer-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #1a1a1a;
+        font-size: 15px;
         font-weight: 700;
     }
 
-    .mega-menu-footer img {
-        width: 24px;
-        height: 24px;
-        object-fit: contain;
+    .mega-menu-footer-icon {
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
     }
 
     .mega-menu-cta {
-        margin-left: auto;
-        padding: 9px 20px;
-        border-radius: 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 24px;
+        border-radius: 6px;
         background: var(--primary-color);
-        color: #fff;
+        color: #ffffff !important;
         font-weight: 700;
+        font-size: 14px;
         text-decoration: none;
-        box-shadow: 0 3px 6px rgba(95,45,47,.25);
+        box-shadow: 0 4px 10px rgba(141, 68, 69, 0.22);
+        transition: background 0.2s ease, transform 0.2s ease;
     }
+
+    .mega-menu-cta:hover {
+        background: #733435;
+        transform: translateY(-1px);
+    }
+
     /* Desktop only items */
     @media (min-width: 1101px) {
         .mobile-actions, .mobile-overlay, .mobile-sidebar {
@@ -403,7 +461,7 @@
             position: fixed;
             top: 0;
             right: -80vw;
-            width: 80vw; /* 80vw width for the mobile sidebar */
+            width: 80vw;
             height: 100vh;
             background: var(--background-color);
             z-index: 999;
@@ -455,7 +513,7 @@
 
         .mobile-search input {
             width: 100%;
-            padding: 12px 15px 12px 40px;
+            padding: 12px 35px 12px 40px;
             border: 1px solid #ddd;
             border-radius: 4px;
             outline: none;
@@ -470,6 +528,17 @@
             width: 18px;
             height: 18px;
             fill: #888;
+        }
+
+        .mobile-search .clear-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            fill: #aaa;
+            cursor: pointer;
         }
 
         .mobile-nav {
@@ -532,7 +601,10 @@
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
-            <input type="text" placeholder="Search products...">
+            <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+            <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
         </div>
 
         <!-- Desktop Contact -->
@@ -556,7 +628,7 @@
                 </div>
             </div>
 
-            <a href="#" class="get-quote-btn">Get Instant Quote</a>
+            <a href="/request-quote/" class="get-quote-btn">Get Instant Quote</a>
         </div>
 
         <!-- Mobile Actions -->
@@ -578,23 +650,37 @@
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="/">Home</a></li>
-            <li><a href="/all-category">Boxes By Industry</a></li>
-            <li><a href="/category">Boxes By Material</a></li>
-            <li><a href="/product">Boxes By Style</a></li>
-            <li><a href="/contact">Packaging Supplies</a></li>
+            @php
+                $navParentItems = isset($navCategories) ? array_values(array_filter($navCategories, fn($c) => empty($c['parent_id']))) : [];
+            @endphp
+            @foreach($navParentItems as $navParent)
+            <li class="has-mega" data-mega-type="{{ $navParent['slug'] }}">
+                <a href="{{ url('/' . $navParent['slug']) }}" class="mega-trigger">{{ $navParent['title'] }}</a>
+            </li>
+            @endforeach
             <li><a href="/blog">Blogs</a></li>
         </ul>
-    </div>
 
-    <div class="mega-menu" id="megaMenu" aria-hidden="true">
-        <p class="mega-menu-title" id="megaMenuTitle">Boxes By Industry</p>
-        <div class="mega-menu-grid" id="megaMenuGrid"></div>
-        <div class="mega-menu-footer">
-            <img src="{{ request()->getBaseUrl() }}/uploads/customer-service.png" alt="">
-            <span>Need a custom packaging solution?</span>
-            <a href="#" class="mega-menu-cta">Talk to us</a>
+        <!-- Mega Menu Panel -->
+        <div class="mega-menu" id="megaMenu">
+            <div class="mega-menu-grid" id="megaMenuGrid"></div>
+            
+            <div class="mega-menu-footer">
+                <div class="mega-menu-footer-left">
+                    <div class="mega-menu-footer-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8D4445" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                            <path d="M14 22h-4"></path>
+                        </svg>
+                    </div>
+                    <span>Need a custom packaging solution?</span>
+                </div>
+                <a href="/contact" class="mega-menu-cta">Talk to us</a>
+            </div>
         </div>
     </div>
+
     <!-- Mobile Sidebar -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-sidebar" id="mobileSidebar">
@@ -614,15 +700,17 @@
                 <svg class="search-icon" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
-                <input type="text" placeholder="Search products...">
+                <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+                <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
+                    <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
             </div>
 
             <ul class="mobile-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/all-category">All Categories</a></li>
-                <li><a href="/category">Category</a></li>
-                <li><a href="/product">Product</a></li>
-                <li><a href="/contact">Contact</a></li>
+                @foreach($navParentItems as $navParent)
+                    <li><a href="{{ url('/' . $navParent['slug']) }}">{{ $navParent['title'] }}</a></li>
+                @endforeach
                 <li><a href="/blog">Blogs</a></li>
             </ul>
 
@@ -647,59 +735,180 @@
                 </div>
             </div>
 
-            <a href="#" class="get-quote-btn" style="width: 100%;">Get Instant Quote</a>
+            <a href="/contact" class="get-quote-btn" style="width: 100%;">Get Instant Quote</a>
         </div>
     </div>
 </header>
 
 <script>
-    const megaMenuData = {
-        industry: { title: 'Boxes By Industry', items: ['Apparel Boxes', 'Chocolate Packaging', 'Electronics Packaging', 'Food Packaging', 'Cosmetic Packaging', 'Retail Packaging', 'Candle Boxes', 'Health Care Packaging'] },
-        material: { title: 'Boxes By Material', items: ['Cardboard Boxes', 'Kraft Paper Boxes', 'Rigid Boxes', 'Corrugated Boxes', 'Paperboard Boxes', 'Eco-Friendly Boxes', 'Grey Board Boxes', 'Textured Paper Boxes'] },
-        style: { title: 'Boxes By Style', items: ['Magnetic Closure Boxes', 'Two Piece Boxes', 'Drawer Boxes', 'Sleeve Boxes', 'Tuck Top Boxes', 'Gable Boxes', 'Pillow Boxes', 'Die Cut Boxes'] },
-        supplies: { title: 'Packaging Supplies', items: ['Custom Inserts', 'Tissue Paper', 'Packaging Sleeves', 'Shipping Boxes', 'Stickers & Labels', 'Thank You Cards', 'Ribbon & Twine', 'Protective Fill'] }
-    };
+    (function() {
+        const giftBoxSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="#8D4445" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+            <path d="M12 8v13"></path>
+            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+        </svg>`;
 
-    const megaMenu = document.getElementById('megaMenu');
-    const megaMenuTitle = document.getElementById('megaMenuTitle');
-    const megaMenuGrid = document.getElementById('megaMenuGrid');
-    const megaTriggers = document.querySelectorAll('.mega-trigger');
-    const megaAssetBase = "{{ request()->getBaseUrl() }}/uploads/";
+        // Build megaData dynamically from DB categories
+        @php
+            $navCatsAll = $navCategories ?? [];
+            $navParents = array_filter($navCatsAll, fn($c) => empty($c['parent_id']));
+            $navChildren = array_filter($navCatsAll, fn($c) => !empty($c['parent_id']));
+            
+            // Map: parent_slug => [children]
+            $navByParentSlug = [];
+            foreach ($navParents as $parent) {
+                $slug = $parent['slug'];
+                $children = array_filter($navChildren, fn($c) => $c['parent_id'] == $parent['id']);
+                $navByParentSlug[$slug] = array_values($children);
+            }
+        @endphp
 
-    function closeMegaMenu() {
-        megaMenu.classList.remove('is-open');
-        megaMenu.setAttribute('aria-hidden', 'true');
-        megaTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
-    }
+        const megaData = {
+            @foreach($navParents as $parent)
+            "{{ $parent['slug'] }}": [
+                @foreach($navByParentSlug[$parent['slug']] ?? [] as $child)
+                @php
+                    $childIcon = !empty($child['icon'])
+                        ? (\Illuminate\Support\Str::startsWith($child['icon'], ['storage/', 'uploads/', 'images/'])
+                            ? asset($child['icon'])
+                            : asset('storage/' . $child['icon']))
+                        : '';
+                @endphp
+                { title: @json($child['title']), slug: @json($child['slug']), icon: @json($childIcon) },
+                @endforeach
+            ],
+            @endforeach
+        };
 
-    function openMegaMenu(menuKey, trigger) {
-        const menu = megaMenuData[menuKey];
-        if (!menu) return;
-        const wasOpen = megaMenu.classList.contains('is-open') && trigger.getAttribute('aria-expanded') === 'true';
-        closeMegaMenu();
-        if (wasOpen) return;
-        megaMenuTitle.textContent = menu.title;
-        megaMenuGrid.innerHTML = menu.items.map(item => `<a href="#" class="mega-menu-link"><img src="${megaAssetBase}gift-box.png" alt=""><span>${item}</span></a>`).join('');
-        megaMenu.classList.add('is-open');
-        megaMenu.setAttribute('aria-hidden', 'false');
-        trigger.setAttribute('aria-expanded', 'true');
-    }
+        // Map nav li data-mega-type to parent slug
+        const navMapping = {
+            @foreach($navParents as $parent)
+            "{{ $parent['slug'] }}": "{{ $parent['slug'] }}",
+            @endforeach
+        };
 
-    megaTriggers.forEach(trigger => trigger.addEventListener('click', event => {
-        event.stopPropagation();
-        openMegaMenu(trigger.dataset.megaMenu, trigger);
-    }));
+        const megaMenu = document.getElementById('megaMenu');
+        const megaMenuGrid = document.getElementById('megaMenuGrid');
+        const hasMegaLis = document.querySelectorAll('.has-mega');
+        let activeType = null;
+        let hoverTimeout = null;
 
-    document.addEventListener('click', event => {
-        if (!megaMenu.contains(event.target) && !event.target.closest('.mega-trigger')) closeMegaMenu();
-    });
+        function renderMegaGrid(type) {
+            // type can be the slug or a legacy type name like "industry"
+            const items = megaData[type] || [];
+            if (items.length === 0) {
+                megaMenuGrid.innerHTML = '<p style="color:#999;padding:12px;font-size:13px;">No subcategories found.</p>';
+                return;
+            }
+            megaMenuGrid.innerHTML = items.map(item => {
+                const title = typeof item === 'string' ? item : item.title;
+                const slug = typeof item === 'string' ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : item.slug;
+                const icon = typeof item === 'object' ? item.icon : '';
+                const iconHtml = icon
+                    ? `<img src="${icon}" alt="" loading="lazy">`
+                    : giftBoxSvg;
+                return `<a href="/category/${slug}" class="mega-menu-item">
+                    <div class="mega-menu-icon">${iconHtml}</div>
+                    <span>${title}</span>
+                </a>`;
+            }).join('');
+        }
 
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closeMegaMenu();
-    });
+        function openMenu(type, li) {
+            clearTimeout(hoverTimeout);
+            activeType = type;
+            hasMegaLis.forEach(l => l.classList.remove('active'));
+            li.classList.add('active');
+            renderMegaGrid(type);
+            megaMenu.classList.add('is-open');
+        }
+
+        function closeMenu() {
+            clearTimeout(hoverTimeout);
+            hoverTimeout = setTimeout(() => {
+                hasMegaLis.forEach(l => l.classList.remove('active'));
+                megaMenu.classList.remove('is-open');
+                activeType = null;
+            }, 120);
+        }
+
+        hasMegaLis.forEach(li => {
+            const type = li.dataset.megaType;
+            li.addEventListener('mouseenter', () => openMenu(type, li));
+            li.addEventListener('mouseleave', () => closeMenu());
+        });
+
+        megaMenu.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+        megaMenu.addEventListener('mouseleave', () => closeMenu());
+    })();
+
     function toggleMobileMenu() {
         document.getElementById('mobileSidebar').classList.toggle('active');
         document.getElementById('mobileOverlay').classList.toggle('active');
         document.body.style.overflow = document.getElementById('mobileSidebar').classList.contains('active') ? 'hidden' : '';
     }
+</script>
+
+<script>
+    (function () {
+        function imageNameFromSrc(image) {
+            const source = image.currentSrc || image.getAttribute('src') || '';
+            if (!source || source.startsWith('data:') || source.startsWith('blob:')) return '';
+
+            try {
+                const pathname = new URL(source, window.location.href).pathname;
+                const filename = decodeURIComponent(pathname.split('/').pop() || '');
+                return filename.replace(/\.[a-z0-9]+$/i, '');
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function applyImageMetadata(image) {
+            const imageName = imageNameFromSrc(image);
+            if (!imageName) return;
+
+            const words = imageName
+                .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+                .replace(/[^a-zA-Z0-9]+/g, ' ')
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+            if (!words.length) return;
+
+            image.alt = words.map(word => word.toLowerCase()).join('-');
+            image.title = words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+        }
+
+        function applyToImages(root) {
+            if (root instanceof HTMLImageElement) applyImageMetadata(root);
+            if (root.querySelectorAll) root.querySelectorAll('img').forEach(applyImageMetadata);
+        }
+
+        function initializeImageMetadata() {
+            applyToImages(document);
+
+            document.addEventListener('load', event => {
+                if (event.target instanceof HTMLImageElement) applyImageMetadata(event.target);
+            }, true);
+
+            new MutationObserver(mutations => {
+                mutations.forEach(mutation => {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.nodeType === Node.ELEMENT_NODE) applyToImages(node);
+                    });
+                });
+            }).observe(document.body, { childList: true, subtree: true });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeImageMetadata);
+        } else {
+            initializeImageMetadata();
+        }
+    })();
 </script>

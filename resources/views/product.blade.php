@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Magnetic Closure Rigid Boxes - Product Page</title>
+    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
+    @if(!empty($product['meta_description']))
+        <meta name="description" content="{{ $product['meta_description'] }}">
+    @endif
+    @if(!empty($product['meta_keywords']))
+        <meta name="keywords" content="{{ $product['meta_keywords'] }}">
+    @endif
+    <meta name="robots" content="{{ $product['robots'] ?? 'index,follow' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,8 +30,8 @@
             --color-border: #E5E5E5;
             --color-card-bg: #FFFFFF;
             
-            --container-width: 1440px;
-            --margin-sides: 24px;
+            --container-width: 1280px;
+            --margin-sides: 55px;
         }
 
         body, body * {
@@ -432,7 +439,9 @@
         }
 
         .trust-badges-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .trust-badges-image {
@@ -443,7 +452,9 @@
         }
 
         .features-badges-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .features-badges-image {
@@ -454,7 +465,9 @@
         }
 
         .shipping-badge-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .shipping-badge-image {
@@ -465,7 +478,9 @@
         }
 
         .fourth-badge-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .fourth-badge-image {
@@ -476,7 +491,18 @@
         }
 
         .badge-label {
-            display: none;
+            display: inline-block;
+            color: #4a4a4a;
+            font: 500 14px/1.35 'DM Sans', sans-serif;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .badge-icon-svg {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            color: #666;
         }
 
         /* Tabs Section */
@@ -1058,6 +1084,13 @@
             justify-content: center;
             font-size: 20px;
         }
+
+        .feature-icon img {
+            width: 139px;
+            height: 110px;
+            object-fit: contain;
+            display: block;
+        }
         
         .feature-item span {
             font-size: 12px;
@@ -1128,7 +1161,7 @@
 
         /* Responsive Margins */
         @media (min-width: 1600px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 50px;
             }
@@ -1137,10 +1170,10 @@
             }
         }
         @media (max-width: 1440px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
         }
         @media (max-width: 1200px) and (min-width: 1025px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 30px;
             }
@@ -1149,7 +1182,7 @@
             }
         }
         @media (max-width: 1024px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 55px; }
             .hero-container {
                 gap: 25px;
             }
@@ -1158,13 +1191,13 @@
             }
         }
         @media (max-width: 768px) {
-            :root { --margin-sides: 24px; }
+            :root { --margin-sides: 20px; }
             .hero-container {
                 gap: 20px;
             }
         }
         @media (max-width: 480px) {
-            :root { --margin-sides: 20px; }
+            :root { --margin-sides: 16px; }
         }
 
         @media (max-width: 991px) {
@@ -1628,32 +1661,32 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-container">
+            @php
+                $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $pGallery = [];
+                if (!empty($product['images'])) {
+                    $pGallery = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
+                }
+                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGallery)));
+            @endphp
             <div class="hero-images">
                 <div class="main-image">
-                    <img src="{{ asset('images/lipstick-box.png') }}" alt="Lipstick Box" style="width: 100%; height: auto; display: block;">
+                    <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
                 <div class="thumbnails">
-                    <div class="thumb active">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                    <div class="thumb">
-                        <img src="{{ asset('images/lipstick-box.png') }}" alt="Thumbnail" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
-                    </div>
-                </div>
-                <div style="margin-top: 15px;">
-                    <img src="{{ asset('images/Container (Customized Packaging Boxes for Skin Care Products - Box Agency).png') }}" alt="Reviews" style="width: 100%; height: auto;">
+                    @foreach($pGallery as $galleryIndex => $galleryImage)
+                        @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
+                        <div class="thumb {{ $galleryIndex === 0 ? 'active' : '' }}" onclick="switchProductImage(this, '{{ asset($galleryImage) }}')">
+                            <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
             <div class="hero-form">
-                <h1>Lipstick Boxes</h1>
-                <p>Custom Lipstick Boxes are crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes. Fully customizable in size, style, and design, they help create a lasting impression and enhance your product's shelf appeal<span id="dotsLipstick">... </span><span id="moreLipstick" style="display: none;"> Choose from premium paper stocks, foil stamping, embossing, window cut-outs, custom inserts, and protective finishes to create lipstick packaging tailored to your brand and product requirements. </span><button type="button" id="readMoreBtnLipstick" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; margin-left: 6px; border: 0; padding: 0; background: transparent;">READ MORE</button></p>
+                <h1>{{ $pTitle }}</h1>
+                <p>{{ strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.') }}</p>
                 
                 <form action="#">
                     <div class="form-section">
@@ -1683,13 +1716,13 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             <select class="form-control" id="pref-box-style">
-                                <option>Select Box Style</option>
+                                <option>{{ $product['box_style'] ?? 'Custom Box Style' }}</option>
                             </select>
                             <select class="form-control" id="pref-paper-stock">
-                                <option>Select Paper Stock</option>
+                                <option>{{ $product['material'] ?? 'Custom Cardstock / Greyboard' }}</option>
                             </select>
                             <select class="form-control">
-                                <option>Select Color</option>
+                                <option>{{ $product['printing'] ?? 'CMYK / PMS Printing' }}</option>
                             </select>
                         </div>
                     </div>
@@ -1697,10 +1730,10 @@
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-2-upload">
-                            <input type="number" class="form-control" placeholder="Quantity">
+                            <input type="number" class="form-control" placeholder="Quantity (e.g. 100)">
                             <div class="file-upload-wrap">
-                                <input type="text" class="form-control" placeholder="No File Choosen" readonly>
-                                <button type="button" class="upload-btn">Upload</button>
+                                <input type="text" class="form-control" placeholder="No File Chosen" readonly>
+                                <button type="button" class="upload-btn">Upload Artwork</button>
                             </div>
                         </div>
                     </div>
@@ -1721,19 +1754,19 @@
         <div class="container">
             <div class="badges-horizontal">
                 <div class="trust-badges-wrapper">
-                    <img src="{{ asset('images/container (1).png') }}" alt="No Die & Plate Charges" class="trust-badges-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="No Die and Plate Charges" role="img"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 32 34 14M16 16l16 16M21 13l14 14M13 25l10 10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M20 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     <span class="badge-label">No Die &amp; Plate<br>Charges</span>
                 </div>
                 <div class="features-badges-wrapper">
-                    <img src="{{ asset('images/container (2).png') }}" alt="Free Graphic Designing" class="features-badges-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Free Graphic Designing" role="img"><rect x="8" y="9" width="32" height="23" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 38h20M24 32v6M14 15h20M17 20h7M17 25h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="34" cy="23" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
                     <span class="badge-label">Free Graphic<br>Designing</span>
                 </div>
                 <div class="shipping-badge-wrapper">
-                    <img src="{{ asset('images/container (3).png') }}" alt="Quick Turnaround Time" class="shipping-badge-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Quick Turnaround Time" role="img"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M24 14v11l7 4M10 24h-3M41 24h-3M24 7v-3M24 44v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                     <span class="badge-label">Quick Turnaround<br>Time</span>
                 </div>
                 <div class="fourth-badge-wrapper">
-                    <img src="{{ asset('images/container (4).png') }}" alt="Free Shipping" class="fourth-badge-image badge-icon">
+                    <svg class="badge-icon-svg" viewBox="0 0 48 48" aria-label="Free Shipping" role="img"><path d="M6 14h24v21H6zM30 22h7l6 7v6H30zM13 35a4 4 0 1 0 8 0M34 35a4 4 0 1 0 8 0M37 22v7h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 20h10M12 25h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                     <span class="badge-label">Free Shipping</span>
                 </div>
             </div>
@@ -1754,24 +1787,8 @@
 
     <!-- Content Section -->
     <section class="content-section container" id="content-description">
-        <h2>Everything you need to know about custom boxes</h2>
-        <p>Custom packaging is one of the most powerful tools a brand can use to create a lasting impression. Research shows that 72% of consumers say that packaging design influences their purchase decision, and 40% share photos of exciting unboxing experiences on social media.</p>
-        
-        <p>At KayPackaging, we believe every business — no matter the size — deserves packaging that reflects the quality of what's inside. Whether you're a solo founder shipping your first 10 orders or a growing brand sending thousands of packages per week, our custom box solutions are built to scale with you.</p>
-
-        <div id="moreDescription" style="display: none;">
-        <h2 class="considerations-heading">What to consider when choosing custom packaging:</h2>
-        <ul>
-            <li>Box style — mailer, rigid, folding carton, or corrugated shipping box depending on product type and fragility</li>
-            <li>Size — always measure your product first, then add 1-2cm clearance on each side for a snug fit</li>
-            <li>Material — E-flute corrugated for mailers, SBS paperboard for cosmetics, kraft for eco-friendly positioning</li>
-            <li>Finish — matte gives a premium feel, gloss increases vibrancy, soft touch adds texture, foil elevates luxury perception</li>
-            <li>Quantity — higher quantities dramatically reduce per-unit cost; order samples first to validate before bulk printing</li>
-        </ul>
-        </div>
-        
-        <div style="text-align: left; margin-top: 20px; margin-left: 20px;">
-            <button type="button" id="readMoreBtn" aria-expanded="false" style="font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 700; color: #000000; cursor: pointer; border: 0; padding: 0; background: transparent;">READ MORE</button>
+        <div>
+            {!! !empty($product['long_description']) ? $product['long_description'] : '<p>' . ($product['description'] ?? '') . '</p>' !!}
         </div>
     </section>
 
@@ -1780,85 +1797,50 @@
         <table class="specs-table">
             <tr>
                 <td>Box Style</td>
-                <td>Lipstick Boxes</td>
+                <td>{{ $product['box_style'] ?? 'Custom Box Style' }}</td>
             </tr>
             <tr>
-                <td>Retail Boxes</td>
-                <td>All Custom Sizes & Shapes</td>
+                <td>Dimensions</td>
+                <td>{{ $product['dimensions'] ?? 'Custom Sizes Available' }}</td>
             </tr>
             <tr>
                 <td>MOQ</td>
-                <td>Starting from 100 Boxes</td>
+                <td>{{ $product['moq'] ?? '100 Units' }}</td>
             </tr>
             <tr>
-                <td>Paper Stock</td>
-                <td>10pt to 28pt (60lb to 400lb) Eco-Friendly Kraft, E-flute Corrugated, Bux Board, Cardstock</td>
+                <td>Material Stock</td>
+                <td>{{ $product['material'] ?? 'Premium Rigid Board / Cardstock' }}</td>
             </tr>
             <tr>
                 <td>Printing</td>
-                <td>Digital (Standard and HD Print), Lithography, CMYK, CMYK + 1 PMS color, CMYK + 2 PMS colors</td>
+                <td>{{ $product['printing'] ?? 'CMYK / PMS Color Printing' }}</td>
             </tr>
             <tr>
                 <td>Finishing</td>
-                <td>Gloss Lamination, Matte Lamination, Gloss AQ, Gloss UV, Matte UV, Spot UV, Embossing, Foiling</td>
+                <td>{{ $product['finishing'] ?? 'Soft-Touch Matte, Foil Stamping & Spot UV' }}</td>
             </tr>
             <tr>
                 <td>Included Options</td>
-                <td>Die Cutting, Gluing, Scored, Perforation</td>
-            </tr>
-            <tr>
-                <td>Proof</td>
-                <td>Flat View, 3D Mock-up, Physical Sampling (On request)</td>
+                <td>Die Cutting, Window Patching, Custom Inserts</td>
             </tr>
             <tr>
                 <td>Turnaround</td>
-                <td>12 - 16 days</td>
-            </tr>
-            <tr>
-                <td>Shipping</td>
-                <td>Flat</td>
+                <td>{{ $product['turnaround'] ?? '8 - 10 Business Days' }}</td>
             </tr>
         </table>
     </section>
 
     <!-- FAQs Section -->
     <section class="faqs-section" id="content-faqs" style="display: none;">
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>What type of retail boxes are best for luxury product packaging?</span>
-                <span class="faq-icon">+</span>
+        @foreach($faqs ?? [] as $faq)
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>{{ $faq['question'] ?? '' }}</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer"><p>{{ $faq['answer'] ?? '' }}</p></div>
             </div>
-            <div class="faq-answer">
-                <p>Rigid boxes and premium folding cartons are typically best for luxury products, offering high durability and a premium unboxing experience.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Which retail boxes offer the most protect for fragile items?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Corrugated boxes provide the best protection for fragile items due to their fluted inner layer which absorbs shocks.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Do retail boxes have customizable shapes and structures?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>Yes! We can create custom die-cut shapes and unique structures tailored specifically to your product's dimensions.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <span>What printing customization are available for retail boxes?</span>
-                <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-answer">
-                <p>We offer full CMYK printing, Pantone matching, foil stamping, embossing, debossing, and UV spot treatments.</p>
-            </div>
-        </div>
+        @endforeach
     </section>
 
     <!-- Order Process Section -->
@@ -1995,13 +1977,13 @@
                 
                 <div class="features-list">
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery" style="width: 139px; height: 104px;"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery"></div>
                     </div>
                 </div>
             </div>
@@ -2013,30 +1995,23 @@
         <div class="container">
             <h2>Related Products</h2>
             <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/listic-boxes.png') }}" alt="Lipstick Boxes" style="width: 100%; height: 100%; object-fit: cover;">
+                @php
+                    $rProds = !empty($relatedProducts) ? $relatedProducts : [];
+                @endphp
+                @foreach($rProds as $rp)
+                    @php
+                        $rpImg = !empty($rp['image']) ? (\Illuminate\Support\Str::startsWith($rp['image'], ['storage/', 'uploads/', 'images/']) ? $rp['image'] : 'storage/' . $rp['image']) : 'uploads/Gift-Boxes.webp';
+                        $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
+                    @endphp
+                    <div class="product-card">
+                        <a href="{{ url('/product/' . $rpSlug) }}" style="text-decoration:none; color:inherit;">
+                            <div class="product-image">
+                                <img src="{{ asset($rpImg) }}" alt="{{ $rp['title'] }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($rp['title']) }}'">
+                            </div>
+                            <h4>{{ $rp['title'] }}</h4>
+                        </a>
                     </div>
-                    <h4>Lipstick Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/Background_Border.png') }}" alt="Serum Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Serum Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/perfume-box.png') }}" alt="Perfume Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Perfume Boxes</h4>
-                </div>
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/skincare-box.png') }}" alt="Skincare Boxes" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h4>Skincare Boxes</h4>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -2467,6 +2442,14 @@ function toggleFaq(element) {
 </script>
     
     <script>
+        function switchProductImage(thumb, imageUrl) {
+            const mainImage = document.getElementById('product-main-image');
+            if (mainImage) mainImage.src = imageUrl;
+            document.querySelectorAll('.thumbnails .thumb').forEach(function (item) {
+                item.classList.toggle('active', item === thumb);
+            });
+        }
+
         document.addEventListener('click', function (event) {
             const formControlSelector = '.hero-form .form-control, .quote-form .form-control, .hero-form .custom-select-trigger, .quote-form .custom-select-trigger';
             const clickedControl = event.target.closest(formControlSelector);

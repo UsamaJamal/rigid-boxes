@@ -284,6 +284,11 @@
 </style>
 
 <section class="faq-section">
+    @php
+        $displayFaqs = !empty($faqs) && is_array($faqs)
+            ? $faqs
+            : ((($settings ?? [])['faqs'] ?? []) ?: []);
+    @endphp
     <div class="faq-container">
         <div class="faq-wrapper">
             <div class="faq-left">
@@ -295,67 +300,57 @@
             <div class="faq-right">
                 <h2 class="faq-main-heading">Frequently Asked Questions</h2>
                 <div class="faq-list">
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                            <span class="faq-question-text">What type of retail boxes are best for luxury product packaging?</span>
-                            <span class="faq-icon">
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Rigid boxes with premium finishes such as soft-touch lamination, foil stamping, or embossing are ideal for luxury product packaging. They offer structural strength and an elevated unboxing experience that reinforces brand prestige.</p>
+                    @if(count($displayFaqs) > 0)
+                        @foreach($displayFaqs as $faq)
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                                    <span class="faq-question-text">{{ $faq['question'] ?? '' }}</span>
+                                    <span class="faq-icon">
+                                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                    </span>
+                                </button>
+                                <div class="faq-answer">
+                                    <p>{{ $faq['answer'] ?? '' }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                                <span class="faq-question-text">What type of retail boxes are best for luxury product packaging?</span>
+                                <span class="faq-icon">
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                </span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Rigid boxes with premium finishes such as soft-touch lamination, foil stamping, or embossing are ideal for luxury product packaging. They offer structural strength and an elevated unboxing experience that reinforces brand prestige.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                            <span class="faq-question-text">Which retail boxes offer the most protection for fragile items?</span>
-                            <span class="faq-icon">
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Rigid set-up boxes with custom foam or cardboard inserts provide the highest level of protection for fragile items. The thick chipboard walls absorb impact while inserts keep products from shifting during transit.</p>
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                                <span class="faq-question-text">Which retail boxes offer the most protection for fragile items?</span>
+                                <span class="faq-icon">
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                </span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Rigid set-up boxes with custom foam or cardboard inserts provide the highest level of protection for fragile items. The thick chipboard walls absorb impact while inserts keep products from shifting during transit.</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                            <span class="faq-question-text">Do retail boxes have customizable shapes and structures?</span>
-                            <span class="faq-icon">
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, retail boxes can be fully customized in shape, size, and structure. Options include tuck-end, sleeve, magnetic closure, drawer, and die-cut window styles, each tailored to your product dimensions and branding.</p>
+                        <div class="faq-item">
+                            <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+                                <span class="faq-question-text">Do retail boxes have customizable shapes and structures?</span>
+                                <span class="faq-icon">
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                </span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes, retail boxes can be fully customized in shape, size, and structure. Options include tuck-end, sleeve, magnetic closure, drawer, and die-cut window styles, each tailored to your product dimensions and branding.</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                            <span class="faq-question-text">What printing customization options are available for retail boxes?</span>
-                            <span class="faq-icon">
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We offer CMYK and Pantone full-color printing, foil stamping (gold, silver, holographic), embossing, debossing, spot UV, and matte or gloss lamination — giving your packaging a truly bespoke finish.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                            <span class="faq-question-text">What is the minimum order quantity for custom retail boxes?</span>
-                            <span class="faq-icon">
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
-                            </span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Our minimum order quantity starts at just 100 units, making us accessible for startups and small businesses while also offering competitive wholesale pricing for larger volume orders of 1,000 units and above.</p>
-                        </div>
-                    </div>
-
+                    @endif
                 </div>
             </div>
         </div>
