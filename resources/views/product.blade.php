@@ -1715,14 +1715,40 @@
                     <div class="form-section">
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
+                            @php
+                                $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
+                                $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
+                            @endphp
                             <select class="form-control" id="pref-box-style">
-                                <option>{{ $product['box_style'] ?? 'Custom Box Style' }}</option>
+                                <option value="" disabled selected>Select Your Box Style</option>
+                                @foreach($boxStyles as $style)
+                                    <option value="{{ $style->title }}">{{ $style->title }}</option>
+                                @endforeach
                             </select>
                             <select class="form-control" id="pref-paper-stock">
-                                <option>{{ $product['material'] ?? 'Custom Cardstock / Greyboard' }}</option>
+                                <option value="" disabled selected>Select Paper Stock</option>
+                                <option>12pt Cardboard Stock</option>
+                                <option>14pt Cardboard Stock</option>
+                                <option>16pt Cardboard Stock</option>
+                                <option>18pt Cardboard Stock</option>
+                                <option>20pt Cardboard Stock</option>
+                                <option>22pt Cardboard Stock</option>
+                                <option>24pt Cardboard Stock</option>
+                                <option>Kraft Stock</option>
+                                <option>Recycled BuxBoard</option>
+                                <option>Corrugated Stock</option>
+                                <option>No Printing Required</option>
                             </select>
                             <select class="form-control">
-                                <option>{{ $product['printing'] ?? 'CMYK / PMS Printing' }}</option>
+                                <option value="" disabled selected>Select Color</option>
+                                <option>1 color</option>
+                                <option>2 color</option>
+                                <option>3 color</option>
+                                <option>4 color</option>
+                                <option>4/1 color</option>
+                                <option>4/2 color</option>
+                                <option>4/3 color</option>
+                                <option>4/4 color</option>
                             </select>
                         </div>
                     </div>
