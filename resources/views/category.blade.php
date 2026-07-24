@@ -450,14 +450,14 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-cardboard-boxes.webp" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4>Grey Chipboard Cardboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/industry-custom-luxury-box.jfif" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
+                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-black-kraft.png" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
                                 </div>
                                 <h4>Black-Kraft</h4>
                             </div>
@@ -538,7 +538,7 @@
         const customizeCardSets = {
             materials: [
                 ['uploads/category-grey-board-boxes.webp', 'Duplex Chipboard'], ['uploads/category-cardboard-boxes.webp', 'Grey Chipboard Cardboard'],
-                ['uploads/industry-custom-luxury-box.jfif', 'Black-Kraft'], ['uploads/addon-premium-foil-custom-box.jfif', 'Holographic'],
+                ['uploads/category-black-kraft.png', 'Black-Kraft'], ['uploads/addon-premium-foil-custom-box.jfif', 'Holographic'],
                 ['uploads/addon-gold-inside-box.jfif', 'Metallic Paper'], ['uploads/category-bakery-boxes.webp', 'Natural Brown Kraft'],
                 ['uploads/industry-rigid-plain-white-box.jfif', 'SBS C2S'], ['uploads/category-box-by-material.webp', 'Textured']
             ],
