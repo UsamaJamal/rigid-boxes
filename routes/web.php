@@ -141,6 +141,10 @@ Route::get('/blog', function () {
     return view('blog');
 });
 
+Route::get('/author', function () {
+    return view('author');
+});
+
 Route::get('/request-quote', [QuotationController::class, 'index']);
 
 use App\Http\Controllers\AdminAuthController;
