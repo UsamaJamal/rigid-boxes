@@ -53,8 +53,8 @@
             --space-64: 64px;
             
             /* Grid System */
-            --container-width: 1400px;
-            --margin-sides: 20px;
+            --container-width: 1280px;
+            --margin-sides: 55px;
             --gutter: 24px;
         }
 
@@ -136,10 +136,12 @@
            ========================================================================== */
 
         .container {
+            width: 100%;
             max-width: var(--container-width);
             margin: 0 auto;
             padding-left: var(--margin-sides);
             padding-right: var(--margin-sides);
+            min-width: 0;
         }
 
         /* ==========================================================================
@@ -203,7 +205,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            min-width: 200px;
+            min-width: 0;
             aspect-ratio: 1;
             position: relative;
             overflow: hidden;
@@ -473,14 +475,14 @@
         /* Responsive Design */
         @media (max-width: 1440px) {
             :root {
-                --margin-sides: 80px;
+                --margin-sides: 55px;
             }
         }
 
         /* Medium Desktop - Keep 4 columns */
         @media (max-width: 1200px) and (min-width: 1025px) {
             :root {
-                --margin-sides: 60px;
+                --margin-sides: 55px;
             }
             
             .industries-grid {
@@ -496,7 +498,7 @@
         /* Medium Desktop - 3 columns */
         @media (max-width: 1024px) {
             :root {
-                --margin-sides: 60px;
+                --margin-sides: 55px;
             }
             
             .industries-grid {
@@ -507,7 +509,7 @@
         /* Tablet */
         @media (max-width: 768px) {
             :root {
-                --margin-sides: 40px;
+                --margin-sides: 20px;
             }
             
             .heading-01 {
@@ -607,19 +609,19 @@
         /* Mobile */
         @media (max-width: 480px) {
             :root {
-                --margin-sides: 25px;
+                --margin-sides: 16px;
             }
             
             .hero-section .container,
             .industries-section .container,
             .bulk-packaging-section .container {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
             }
             
             .cta-section .container {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 16px;
+                padding-right: 16px;
             }
             
             .heading-01 {
