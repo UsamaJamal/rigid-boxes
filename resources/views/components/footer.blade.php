@@ -5,11 +5,17 @@
             <div class="newsletter-content">
                 <div class="newsletter-text">
                     <h3>Sign Up For Exclusive Offers And Updates!</h3>
+                    @if(session('success'))
+                        <div style="background-color: #d4edda; color: #155724; padding: 5px 10px; border-radius: 5px; margin-top: 10px; font-size: 14px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                 </div>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Email" class="newsletter-input">
+                <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                    @csrf
+                    <input type="email" name="email" placeholder="Email" class="newsletter-input" required>
                     <button type="submit" class="newsletter-button">Subscribe</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
