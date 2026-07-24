@@ -617,14 +617,14 @@
                 </svg>
                 <div class="contact-item-text">
                     <span>Call Us 24/7</span>
-                    <strong>1800-518-9441</strong>
+                    <strong>{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</strong>
                 </div>
             </div>
 
             <div class="contact-item">
                 <div class="contact-item-text">
                     <span>Email</span>
-                    <strong>example@gmail.com</strong>
+                    <strong>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
                 </div>
             </div>
 
@@ -723,14 +723,14 @@
                     </svg>
                     <div class="contact-item-text">
                         <span>Call Us 24/7</span>
-                        <strong>1800-518-9441</strong>
+                        <strong>{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</strong>
                     </div>
                 </div>
 
                 <div class="contact-item">
                     <div class="contact-item-text">
                         <span>Email</span>
-                        <strong>example@gmail.com</strong>
+                        <strong>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
                     </div>
                 </div>
             </div>

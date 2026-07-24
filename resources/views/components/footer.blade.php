@@ -49,11 +49,26 @@
                 <div class="footer-column">
                     <h4 class="footer-heading">Categories</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Super Boxes</a></li>
-                        <li><a href="#">Rigid Boxes</a></li>
-                        <li><a href="#">Mailer Boxes</a></li>
-                        <li><a href="#">Jewelry Boxes</a></li>
-                        <li><a href="#">Hang Tags</a></li>
+                        @php
+                            $footerCatIds = $siteSettings['footer_categories'] ?? [];
+                            $footerCats = [];
+                            if (!empty($footerCatIds)) {
+                                $footerCats = \Illuminate\Support\Facades\DB::table('admin_categories')
+                                    ->whereIn('id', $footerCatIds)
+                                    ->get();
+                            }
+                        @endphp
+                        @if(empty($footerCatIds) || count($footerCats) == 0)
+                            <li><a href="#">Super Boxes</a></li>
+                            <li><a href="#">Rigid Boxes</a></li>
+                            <li><a href="#">Mailer Boxes</a></li>
+                            <li><a href="#">Jewelry Boxes</a></li>
+                            <li><a href="#">Hang Tags</a></li>
+                        @else
+                            @foreach($footerCats as $cat)
+                                <li><a href="{{ url('/' . $cat->slug) }}">{{ $cat->title ?? $cat->name }}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
 
@@ -61,11 +76,20 @@
                 <div class="footer-column">
                     <h4 class="footer-heading">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Get A Free Quote</a></li>
-                        <li><a href="#">Refund & Exchange Policy</a></li>
-                        <li><a href="#">Blogs</a></li>
+                        @php
+                            $quickLinks = $siteSettings['footer_quick_links'] ?? [];
+                        @endphp
+                        @if(empty($quickLinks))
+                            <li><a href="/aboutUs">About Us</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/request-quote">Get A Free Quote</a></li>
+                            <li><a href="#">Refund & Exchange Policy</a></li>
+                            <li><a href="/blog">Blogs</a></li>
+                        @else
+                            @foreach($quickLinks as $link)
+                                <li><a href="{{ $link['url'] }}">{{ $link['name'] }}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
 
@@ -75,15 +99,15 @@
                     <ul class="footer-contact">
                         <li class="contact-item">
                             <img src="{{ asset('images/contact-email.png') }}" alt="Email" class="contact-icon">
-                            <a href="mailto:example@gmail.com">example@gmail.com</a>
+                            <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</a>
                         </li>
                         <li class="contact-item">
                             <img src="{{ asset('images/material-symbols_call-sharp.png') }}" alt="Phone" class="contact-icon">
-                            <a href="tel:1800-315-8441">1800-315-8441</a>
+                            <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}">{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</a>
                         </li>
                         <li class="contact-item">
                             <img src="{{ asset('images/contact-address.png') }}" alt="Address" class="contact-icon">
-                            <span>4000 N Montrose Ave<br>550 Chicago, IL 60641</span>
+                            <span>{!! $siteSettings['company_address'] ?? '4000 N Montrose Ave<br>550 Chicago, IL 60641' !!}</span>
                         </li>
                     </ul>
                 </div>

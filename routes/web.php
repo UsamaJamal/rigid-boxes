@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\WhyChooseUsController;
 use App\Http\Controllers\FrequentlyAskedQuestionController;
 use App\Http\Controllers\AboutUsController;
-
+use App\Http\Controllers\AdminContentController;
 Route::get('/', function () {
     $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
     $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
@@ -169,6 +169,8 @@ Route::get('/sitemap', [SitemapController::class, 'index']);
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
+use App\Http\Controllers\AdminFooterController;
+use App\Http\Controllers\AdminFaqPageController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Auth Routes
@@ -181,6 +183,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminContentController::class, 'dashboard'])->name('dashboard');
         Route::get('/homepage-settings', [AdminHomepageController::class, 'edit'])->name('homepage.edit');
         Route::post('/homepage-settings', [AdminHomepageController::class, 'update'])->name('homepage.update');
+        Route::get('/footer-settings', [AdminFooterController::class, 'edit'])->name('footer.edit');
+        Route::post('/footer-settings', [AdminFooterController::class, 'update'])->name('footer.update');
+        Route::get('/faq-page-settings', [AdminFaqPageController::class, 'edit'])->name('faqpage.edit');
+        Route::post('/faq-page-settings', [AdminFaqPageController::class, 'update'])->name('faqpage.update');
         Route::get('/{module}', [AdminContentController::class, 'index'])->name('module.index');
         Route::get('/{module}/create', [AdminContentController::class, 'create'])->name('module.create');
         Route::post('/{module}', [AdminContentController::class, 'store'])->name('module.store');
@@ -192,6 +198,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::get('/whyChooseUs',[WhyChooseUsController::class, 'index']);
 
-Route::get('/frequentlyAskedQuestions',[FrequentlyAskedQuestionController::class,'index']);
+try {
+    $faqRow = DB::table('homepage_contents')->where('section', 'faq_page')->where('field_key', 'faq_page_slug')->first();
+    $faqSlug = $faqRow ? $faqRow->value : 'frequentlyAskedQuestions';
+} catch (\Exception $e) {
+    $faqSlug = 'frequentlyAskedQuestions';
+}
+Route::get('/' . ltrim($faqSlug, '/'), [FrequentlyAskedQuestionController::class, 'index']);
 
 Route::get('/aboutUs',[AboutUsController::class,'index']);

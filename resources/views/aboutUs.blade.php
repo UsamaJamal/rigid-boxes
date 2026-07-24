@@ -99,13 +99,15 @@
         gap: 24px;
         max-width: 1440px;
         width: 100%;
+        width: 100%;
         justify-content: center;
-        flex-wrap: wrap;
         padding: 0 24px;
     }
 
     .mv-card {
-        width: 594px;
+        width: 100%;
+        max-width: 594px;
+        flex: 1 1 0;
         height: 326.14px;
         background: #FAF8F8;
         border: 1px solid var(--primary-color);
@@ -144,9 +146,14 @@
         color: var(--section-text-color);
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 768px) {
+        .mission-vision-container {
+            flex-direction: column;
+            align-items: center;
+        }
         .mv-card {
             width: 100%;
+            max-width: 100%;
             height: auto;
         }
     }

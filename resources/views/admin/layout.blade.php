@@ -115,6 +115,14 @@
                 <i class="fa-solid fa-house"></i>
                 <span>Home Page Settings</span>
             </a>
+            <a class="{{ request()->routeIs('admin.footer.edit') ? 'active' : '' }}" href="{{ route('admin.footer.edit') }}">
+                <i class="fa-solid fa-gear"></i>
+                <span>Footer & Company</span>
+            </a>
+            <a class="{{ request()->routeIs('admin.faqpage.edit') ? 'active' : '' }}" href="{{ route('admin.faqpage.edit') }}">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>FAQ Page</span>
+            </a>
             <a class="{{ request()->route('module') === 'products' ? 'active' : '' }}" href="{{ route('admin.module.index', 'products') }}">
                 <i class="fa-solid fa-box-open"></i>
                 <span>Products</span>
