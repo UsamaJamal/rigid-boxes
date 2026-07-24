@@ -1,5 +1,5 @@
 @include('components.htmlboilerplate', [
-    'title' => $category['meta_title'] ?? (($category['title'] ?? 'Custom Packaging') . ' - The Rigid Boxes'),
+    'title' => $category['meta_title'] ?? ($category['title'] ?? 'Custom Packaging') . ' - The Rigid Boxes',
     'metaDescription' => $category['meta_description'] ?? '',
     'metaKeywords' => $category['meta_keywords'] ?? '',
     'robots' => $category['robots'] ?? 'index,follow',
@@ -7,7 +7,11 @@
 ])
 
 <style>
-    html, body { max-width: 100%; overflow-x: hidden; }
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 
     /* Popular Boxes Section */
     .popular-boxes-section {
@@ -16,9 +20,9 @@
     }
 
     .popular-boxes-inner {
-        max-width: 1440px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 55px;
         box-sizing: border-box;
         text-align: center;
         color: #333;
@@ -65,7 +69,7 @@
         background-color: #E8E8E8;
         margin-bottom: 18px;
         /* Default subtle shadow like the figma design */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     }
 
     .box-image-wrapper img {
@@ -160,10 +164,21 @@
     }
 
     .customize-container {
-        max-width: 1440px;
+        max-width: 1280px;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 55px;
         box-sizing: border-box;
+    }
+
+    /* Unified Container Responsive Padding */
+    @media (max-width: 1100px) {
+        .popular-boxes-inner, .customize-container { padding-left: 32px; padding-right: 32px; }
+    }
+    @media (max-width: 768px) {
+        .popular-boxes-inner, .customize-container { padding-left: 20px; padding-right: 20px; }
+    }
+    @media (max-width: 576px) {
+        .popular-boxes-inner, .customize-container { padding-left: 16px; padding-right: 16px; }
     }
 
     .customize-title {
@@ -245,7 +260,7 @@
         background: #FFF;
         border-radius: 14px;
         padding: 18px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         display: flex;
         flex-direction: column;
         transition: opacity 0.2s ease, transform 0.2s ease;
@@ -271,7 +286,7 @@
     .custom-card h4 {
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--section-text-color);
         margin: 0;
         padding: 0 0 2px;
@@ -319,18 +334,21 @@
         .customize-section {
             padding: 36px 0 36px;
         }
+
         .customize-title {
             font-size: 22px;
             line-height: 1.25;
             text-align: center;
             margin-bottom: 8px;
         }
+
         .customize-subtitle {
             font-size: 13px;
             line-height: 1.35;
             text-align: center;
             margin-bottom: 24px;
         }
+
         .customize-sidebar {
             display: flex !important;
             flex-direction: row !important;
@@ -340,9 +358,11 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
+
         .customize-sidebar::-webkit-scrollbar {
             display: none;
         }
+
         .customize-tab {
             width: auto !important;
             flex: 0 0 auto !important;
@@ -355,36 +375,36 @@
             white-space: nowrap !important;
             border-radius: 0px !important;
         }
+
         .customize-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 14px 12px;
         }
+
         .custom-card {
             padding: 12px;
             border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
+
         .custom-img-wrapper {
             height: 130px;
             border-radius: 10px;
             margin-bottom: 10px;
         }
+
         .custom-card h4 {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             color: #111;
             text-align: left;
             padding-left: 0;
             line-height: 1.3;
         }
     }
-
-
-
-
-
 </style>
 </head>
+
 <body>
 
     @include('components.header')
@@ -397,28 +417,35 @@
         <!-- Popular Boxes Section -->
         <section class="popular-boxes-section">
             <div class="popular-boxes-inner">
-            <h2 class="section-title">Explore Our {{ $category['title'] ?? 'Custom Packaging Boxes' }}</h2>
-            <p class="section-subtitle">Specialized structural packaging solutions engineered for maximum impact and protection.</p>
+                <h2 class="section-title">Explore Our {{ $category['title'] ?? 'Custom Packaging Boxes' }}</h2>
+                <p class="section-subtitle">Specialized structural packaging solutions engineered for maximum impact and
+                    protection.</p>
 
-            <div class="boxes-grid">
-                @php
-                    $catProducts = !empty($products) ? $products : [];
-                @endphp
-                @foreach($catProducts as $p)
+                <div class="boxes-grid">
                     @php
-                        $pImg = !empty($p['image']) ? (\Illuminate\Support\Str::startsWith($p['image'], ['storage/', 'uploads/', 'images/']) ? $p['image'] : 'storage/' . $p['image']) : 'uploads/Gift-Boxes.webp';
-                        $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
+                        $catProducts = !empty($products) ? $products : [];
                     @endphp
-                    <div class="box-card">
-                        <a href="{{ url('/product/' . $pSlug) }}" style="text-decoration:none; color:inherit; width:100%; display:block;">
-                            <div class="box-image-wrapper">
-                                <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
-                            </div>
-                            <h3 class="box-title">{{ $p['title'] }}</h3>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+                    @foreach ($catProducts as $p)
+                        @php
+                            $pImg = !empty($p['image'])
+                                ? (\Illuminate\Support\Str::startsWith($p['image'], ['storage/', 'uploads/', 'images/'])
+                                    ? $p['image']
+                                    : 'storage/' . $p['image'])
+                                : 'uploads/Gift-Boxes.webp';
+                            $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
+                        @endphp
+                        <div class="box-card">
+                            <a href="{{ url('/product/' . $pSlug) }}"
+                                style="text-decoration:none; color:inherit; width:100%; display:block;">
+                                <div class="box-image-wrapper">
+                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}"
+                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                </div>
+                                <h3 class="box-title">{{ $p['title'] }}</h3>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div><!-- end .popular-boxes-inner -->
         </section>
 
@@ -426,13 +453,16 @@
         <section class="customize-section">
             <div class="customize-container">
                 <h2 class="customize-title">Customize Every Detail Of Your Packaging</h2>
-                <p class="customize-subtitle">Choose from premium materials, vibrant printing, luxury finishes, and custom inserts to create packaging that perfectly reflects your brand.</p>
+                <p class="customize-subtitle">Choose from premium materials, vibrant printing, luxury finishes, and
+                    custom inserts to create packaging that perfectly reflects your brand.</p>
 
                 <div class="customize-layout">
                     <!-- Left Sidebar Tabs -->
                     <aside class="customize-sidebar">
-                        <button type="button" class="customize-tab active" data-customize-tab="materials">MATERIALS</button>
-                        <button type="button" class="customize-tab" data-customize-tab="printing">PRINTING METHODS</button>
+                        <button type="button" class="customize-tab active"
+                            data-customize-tab="materials">MATERIALS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="printing">PRINTING
+                            METHODS</button>
                         <button type="button" class="customize-tab" data-customize-tab="inks">INKS</button>
                         <button type="button" class="customize-tab" data-customize-tab="finishing">FINISHING</button>
                         <button type="button" class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
@@ -443,56 +473,67 @@
                         <div class="customize-grid">
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-grey-board-boxes.webp" alt="Duplex Chipboard" onerror="this.src='https://placehold.co/200x200/EEEEEE/888888?text=Duplex+Chipboard'">
+                                    <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard">
+
                                 </div>
                                 <h4>Duplex Chipboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/" alt="Grey Chipboard Cardboard" onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
+                                    <img src="{{ asset('uploads/grey-board.webp') }}"
+                                        alt="Grey Chipboard Cardboard"
+                                        onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4>Grey Chipboard Cardboard</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-black-kraft.png" alt="Black-Kraft" onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
+                                    <img src="{{ asset('uploads/black-kraft.webp') }}" alt="Black-Kraft"
+                                        onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
                                 </div>
                                 <h4>Black-Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/addon-premium-foil-custom-box.jfif" alt="Holographic" onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
+                                    <img src="{{ asset('uploads/holographic.webp') }}" alt="Holographic"
+                                        onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
                                 <h4>Holographic</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/addon-gold-inside-box.jfif" alt="Metallic Paper" onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
+                                    <img src="{{ asset('uploads/metallic-paper.webp') }}"
+                                        alt="Metallic Paper"
+                                        onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
                                 <h4>Metallic Paper</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-bakery-boxes.webp" alt="Natural Brown Kraft" onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
+                                    <img src="{{ asset('uploads/natural-brown-.webp') }}"
+                                        alt="Natural Brown Kraft"
+                                        onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
                                 <h4>Natural Brown Kraft</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/industry-rigid-plain-white-box.jfif" alt="SBS C2S" onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
+                                    <img src="{{ asset('uploads/sbs-c2s.webp') }}" alt="SBS C2S"
+                                        onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
                                 </div>
                                 <h4>SBS C2S</h4>
                             </div>
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ request()->getBaseUrl() }}/uploads/category-box-by-material.webp" alt="Textured" onerror="this.src='https://placehold.co/200x200/E8E8E8/888888?text=Textured'">
+                                    <img src="{{ asset('uploads/textured-.webp') }}" alt="Textured"
+                                        onerror="this.src='https://placehold.co/200x200/CCBBAA/333?text=Textured'">
                                 </div>
                                 <h4>Textured</h4>
                             </div>
@@ -520,7 +561,7 @@
         @include('components.cta')
 
     </main>
-    
+
     @include('components.footer')
 
     <script>
@@ -534,37 +575,57 @@
 
         const customizeCards = Array.from(document.querySelectorAll('.customize-grid .custom-card'));
         const customizeSidebar = document.querySelector('.customize-sidebar');
-        const customizeUploadsUrl = "{{ request()->getBaseUrl() }}/";
+        const customizeUploadsUrl = "{{ asset('') }}";
         const customizeCardSets = {
             materials: [
-                ['uploads/category-grey-board-boxes.webp', 'Duplex Chipboard'], ['uploads/category-cardboard-boxes.webp', 'Grey Chipboard Cardboard'],
-                ['uploads/category-black-kraft.png', 'Black-Kraft'], ['uploads/addon-premium-foil-custom-box.jfif', 'Holographic'],
-                ['uploads/addon-gold-inside-box.jfif', 'Metallic Paper'], ['uploads/category-bakery-boxes.webp', 'Natural Brown Kraft'],
-                ['uploads/industry-rigid-plain-white-box.jfif', 'SBS C2S'], ['uploads/category-box-by-material.webp', 'Textured']
+                ['uploads/duplex-chipboard.webp', 'Duplex Chipboard'],
+                ['uploads/grey-board.webp', 'Grey Chipboard Cardboard'],
+                ['uploads/black-kraft.webp', 'Black-Kraft'],
+                ['uploads/holographic.webp', 'Holographic'],
+                ['uploads/metallic-paper.webp', 'Metallic Paper'],
+                ['uploads/natural-brown-.webp', 'Natural Brown Kraft'],
+                ['uploads/sbs-c2s.webp', 'SBS C2S'],
+                ['uploads/textured-.webp', 'Textured']
             ],
             printing: [
-                ['uploads/hero-home-banner.png', 'Digital Printing'], ['uploads/category-box-by-industry-banner.webp', 'Offset Printing'],
-                ['uploads/category-holographic.png', 'Foil Printing'], ['uploads/category-metallic-paper.png', 'Screen Printing'],
-                ['uploads/industry-rigid-presentation-box.jfif', 'Embossed Printing'], ['uploads/category-custom-shaped-box.jfif', 'UV Printing'],
-                ['uploads/industry-two-piece-box.jfif', 'Letterpress'], ['uploads/industry-box-with-lid.jfif', 'Spot Colour']
+                ['uploads/hero-home-banner.png', 'Digital Printing'],
+                ['uploads/category-box-by-industry-banner.webp', 'Offset Printing'],
+                ['uploads/category-holographic.png', 'Foil Printing'],
+                ['uploads/category-metallic-paper.png', 'Screen Printing'],
+                ['uploads/industry-rigid-presentation-box.jfif', 'Embossed Printing'],
+                ['uploads/category-custom-shaped-box.jfif', 'UV Printing'],
+                ['uploads/industry-two-piece-box.jfif', 'Letterpress'],
+                ['uploads/industry-box-with-lid.jfif', 'Spot Colour']
             ],
             inks: [
-                ['uploads/category-black-kraft.png', 'Black Ink'], ['uploads/category-natural-brown-kraft.png', 'Soy Ink'],
-                ['uploads/category-holographic.png', 'Metallic Ink'], ['uploads/category-metallic-paper.png', 'White Ink'],
-                ['uploads/category-textured.png', 'Water-Based Ink'], ['uploads/category-sbs-c.png', 'Pantone Ink'],
-                ['uploads/category-grey-cardboard-chip.png', 'UV Ink'], ['uploads/category-duplex-chip.png', 'CMYK Ink']
+                ['uploads/black-kraft.webp', 'Black Ink'],
+                ['uploads/natural-brown-.webp', 'Soy Ink'],
+                ['uploads/holographic.webp', 'Metallic Ink'],
+                ['uploads/metallic-paper.webp', 'White Ink'],
+                ['uploads/textured-.webp', 'Water-Based Ink'],
+                ['uploads/sbs-c2s.webp', 'Pantone Ink'],
+                ['uploads/grey-board.webp', 'UV Ink'],
+                ['uploads/duplex-chipboard.webp', 'CMYK Ink']
             ],
             finishing: [
-                ['uploads/addon-gold-inside-box.jfif', 'Gold Foil'], ['uploads/category-holographic.png', 'Holographic Foil'],
-                ['uploads/category-textured.png', 'Soft-Touch Lamination'], ['uploads/category-metallic-paper.png', 'Gloss Lamination'],
-                ['uploads/category-black-kraft.png', 'Matte Lamination'], ['uploads/industry-custom-luxury-box.jfif', 'Spot UV'],
-                ['uploads/industry-rigid-presentation-box.jfif', 'Embossing'], ['uploads/industry-box-with-lid.jfif', 'Debossing']
+                ['uploads/metallic-paper.webp', 'Gold Foil'],
+                ['uploads/holographic.webp', 'Holographic Foil'],
+                ['uploads/textured-.webp', 'Soft-Touch Lamination'],
+                ['uploads/sbs-c2s.webp', 'Gloss Lamination'],
+                ['uploads/black-kraft.webp', 'Matte Lamination'],
+                ['uploads/industry-custom-luxury-box.jfif', 'Spot UV'],
+                ['uploads/industry-rigid-presentation-box.jfif', 'Embossing'],
+                ['uploads/industry-box-with-lid.jfif', 'Debossing']
             ],
             addons: [
-                ['uploads/industry-box-with-lid.jfif', 'Custom Inserts'], ['uploads/category-collapsible-rigid-boxes.webp', 'Ribbon Closure'],
-                ['uploads/industry-magnetic-closure-boxes.webp', 'Magnetic Closure'], ['uploads/industry-two-piece-box.jfif', 'Paper Sleeve'],
-                ['uploads/category-custom-shaped-box.jfif', 'Die-Cut Window'], ['uploads/industry-gift-boxes.webp', 'Thank-You Card'],
-                ['uploads/industry-rigid-plain-white-box.jfif', 'Tissue Paper'], ['uploads/industry-custom-shoulder-box.jfif', 'Foam Insert']
+                ['uploads/industry-box-with-lid.jfif', 'Custom Inserts'],
+                ['uploads/Collapsible-Rigid-Boxes.webp', 'Ribbon Closure'],
+                ['uploads/industry-magnetic-closure-boxes.webp', 'Magnetic Closure'],
+                ['uploads/industry-two-piece-box.jfif', 'Paper Sleeve'],
+                ['uploads/category-custom-shaped-box.jfif', 'Die-Cut Window'],
+                ['uploads/industry-gift-boxes.webp', 'Thank-You Card'],
+                ['uploads/industry-rigid-plain-white-box.jfif', 'Tissue Paper'],
+                ['uploads/industry-custom-shoulder-box.jfif', 'Foam Insert']
             ]
         };
 
@@ -615,7 +676,11 @@
 
                 if (customizeSidebar) {
                     try {
-                        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        tab.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
                     } catch (e) {
                         tab.scrollIntoView(false);
                     }
@@ -664,4 +729,5 @@
     </script>
 
 </body>
+
 </html>
