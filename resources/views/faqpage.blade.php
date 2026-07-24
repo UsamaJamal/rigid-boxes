@@ -240,6 +240,9 @@
         .faq-hero h1 {
             font-size: 28px;
         }
+        .faq-breadcrumb {
+            display: none;
+        }
         .faq-container {
             margin: 30px auto;
         }

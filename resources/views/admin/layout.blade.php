@@ -135,6 +135,10 @@
                 <i class="fa-solid fa-newspaper"></i>
                 <span>Blog Posts</span>
             </a>
+            <a class="{{ request()->route('module') === 'authors' ? 'active' : '' }}" href="{{ route('admin.module.index', 'authors') }}">
+                <i class="fa-solid fa-users"></i>
+                <span>Authors</span>
+            </a>
             <a class="{{ request()->route('module') === 'pages' ? 'active' : '' }}" href="{{ route('admin.module.index', 'pages') }}">
                 <i class="fa-regular fa-file-lines"></i>
                 <span>Static Pages</span>

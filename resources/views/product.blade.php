@@ -782,6 +782,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
+            opacity: 1 !important;
+            filter: none !important;
         }
         
         .carousel-dots {
@@ -1505,8 +1508,8 @@
                 box-sizing: border-box;
             }
             .finishes-bottom-nav span.active-nav {
-                background-color: #8c4446;
-                color: #fff;
+                background-color: #f8eeee;
+                color: #8D4445;
                 border-color: #8c4446;
             }
             /* Keep the full tab frame inside the shared page container. */
@@ -1688,23 +1691,29 @@
                 <h1>{{ $pTitle }}</h1>
                 <p>{{ strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.') }}</p>
                 
-                <form action="#">
+                <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @if(session('success'))
+                        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="form-section">
                         <span class="section-label">Contact Information</span>
                         <div class="form-grid-3">
-                            <input type="text" class="form-control" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                            <input type="email" class="form-control" placeholder="Enter your email">
-                            <input type="tel" class="form-control" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')">
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                            <input type="tel" name="phone" class="form-control" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')" required>
                         </div>
                     </div>
 
                     <div class="form-section">
                         <span class="section-label">Box Specifications</span>
                         <div class="form-grid-4">
-                            <input type="number" class="form-control" placeholder="Width">
-                            <input type="number" class="form-control" placeholder="Length">
-                            <input type="number" class="form-control" placeholder="Depth">
-                            <select class="form-control">
+                            <input type="number" name="width" class="form-control" placeholder="Width" required>
+                            <input type="number" name="length" class="form-control" placeholder="Length" required>
+                            <input type="number" name="depth" class="form-control" placeholder="Depth" required>
+                            <select name="units" class="form-control" required>
                                 <option>mm</option>
                                 <option>cm</option>
                                 <option>inch</option>
@@ -1715,14 +1724,40 @@
                     <div class="form-section">
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
-                            <select class="form-control" id="pref-box-style">
-                                <option>{{ $product['box_style'] ?? 'Custom Box Style' }}</option>
+                            @php
+                                $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
+                                $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
+                            @endphp
+                            <select name="box_style" class="form-control" id="pref-box-style">
+                                <option value="" disabled selected>Select Your Box Style</option>
+                                @foreach($boxStyles as $style)
+                                    <option value="{{ $style->title }}">{{ $style->title }}</option>
+                                @endforeach
                             </select>
-                            <select class="form-control" id="pref-paper-stock">
-                                <option>{{ $product['material'] ?? 'Custom Cardstock / Greyboard' }}</option>
+                            <select name="material" class="form-control" id="pref-paper-stock">
+                                <option value="" disabled selected>Select Paper Stock</option>
+                                <option>12pt Cardboard Stock</option>
+                                <option>14pt Cardboard Stock</option>
+                                <option>16pt Cardboard Stock</option>
+                                <option>18pt Cardboard Stock</option>
+                                <option>20pt Cardboard Stock</option>
+                                <option>22pt Cardboard Stock</option>
+                                <option>24pt Cardboard Stock</option>
+                                <option>Kraft Stock</option>
+                                <option>Recycled BuxBoard</option>
+                                <option>Corrugated Stock</option>
+                                <option>No Printing Required</option>
                             </select>
-                            <select class="form-control">
-                                <option>{{ $product['printing'] ?? 'CMYK / PMS Printing' }}</option>
+                            <select name="color" class="form-control">
+                                <option value="" disabled selected>Select Color</option>
+                                <option>1 color</option>
+                                <option>2 color</option>
+                                <option>3 color</option>
+                                <option>4 color</option>
+                                <option>4/1 color</option>
+                                <option>4/2 color</option>
+                                <option>4/3 color</option>
+                                <option>4/4 color</option>
                             </select>
                         </div>
                     </div>
@@ -1730,20 +1765,19 @@
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-2-upload">
-                            <input type="number" class="form-control" placeholder="Quantity (e.g. 100)">
+                            <input type="number" name="quantity" class="form-control" placeholder="Quantity (e.g. 100)" required>
                             <div class="file-upload-wrap">
-                                <input type="text" class="form-control" placeholder="No File Chosen" readonly>
-                                <button type="button" class="upload-btn">Upload Artwork</button>
+                                <input type="file" name="quote_file" class="form-control" style="border-radius: 6px;">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-section">
                         <span class="section-label">Additional Details</span>
-                        <textarea class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                        <textarea name="message" class="form-control" rows="3" placeholder="Enter your message"></textarea>
                     </div>
 
-                    <button type="button" class="btn-primary">Get a Quote</button>
+                    <button type="submit" class="btn-primary">Get a Quote</button>
                 </form>
             </div>
         </div>
@@ -1874,7 +1908,7 @@
         <h2 class="finishes-header">Custom Finishes <br class="mobile-heading-break">For Premium Feel</h2>
         <div class="finishes-grid">
             <div class="finishes-image-container">
-                <img src="{{ asset('images/Container (5).png') }}" alt="Custom Finishes">
+                <img src="{{ asset('uploads/finish-material-grey-board.webp') }}" alt="Grey Board Material">
                 <div class="carousel-dots">
                     <div class="carousel-dot active"></div>
                     <div class="carousel-dot"></div>
@@ -1884,11 +1918,11 @@
                 </div>
             </div>
             <div class="finishes-details-box">
-                <div class="finishes-top-text">Finishes We Offer</div>
+                <div class="finishes-top-text">Materials We Offer</div>
                 <div class="finishes-middle-list">
-                    <div class="finish-item-light">Matte Lamination</div>
-                    <div class="finish-item-dark">Drip Off</div>
-                    <div class="finish-item-light">Spot Gloss</div>
+                    <div class="finish-item-light">Duplex Chipboard</div>
+                    <div class="finish-item-dark">Grey Board</div>
+                    <div class="finish-item-light">Holographic</div>
                 </div>
                 <div class="finishes-bottom-nav">
                     <span class="active-nav">Materials</span>
@@ -1913,57 +1947,69 @@
                     </div>
                 </div>
                 
-                <form action="#">
+                <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @if(session('success'))
+                        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="form-row">
                         <div class="form-group">
                             <label>Name *</label>
-                            <input type="text" class="form-control" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+                            <input type="text" name="name" class="form-control" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
                         </div>
                         <div class="form-group">
                             <label>Email Address *</label>
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <label>Phone *</label>
-                            <input type="tel" class="form-control" placeholder="Phone number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')">
+                            <input type="tel" name="phone" class="form-control" placeholder="Phone number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')" required>
+                            
+                            <!-- Hidden inputs for required fields from backend validation -->
+                            <input type="hidden" name="width" value="N/A">
+                            <input type="hidden" name="length" value="N/A">
+                            <input type="hidden" name="depth" value="N/A">
+                            <input type="hidden" name="units" value="N/A">
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label>Company Name</label>
-                            <input type="text" class="form-control" placeholder="Company">
+                            <input type="text" name="company_name" class="form-control" placeholder="Company">
                         </div>
                         <div class="form-group">
                             <label>Website</label>
-                            <input type="text" class="form-control" placeholder="Website">
+                            <input type="text" name="website" class="form-control" placeholder="Website">
                         </div>
                         <div class="form-group">
                             <label>Physical Address</label>
-                            <input type="text" class="form-control" placeholder="Address">
+                            <input type="text" name="physical_address" class="form-control" placeholder="Address">
                         </div>
                     </div>
                     
                     <div class="form-row form-row-2col">
                         <div class="form-group" style="flex: 1.5;">
                             <label>Box Style *</label>
-                            <select class="form-control" id="quote-box-style">
-                                <option>Select style</option>
+                            <select name="box_style" class="form-control" id="quote-box-style">
+                                <option value="">Select style</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Quantity *</label>
-                            <input type="number" class="form-control" placeholder="Enter quantity">
+                            <input type="number" name="quantity" class="form-control" placeholder="Enter quantity" required>
                         </div>
                     </div>
                     
                     <div class="form-group" style="margin-bottom: 20px;">
                         <label>Message</label>
-                        <textarea class="form-control" rows="4" placeholder="Enter your message"></textarea>
+                        <textarea name="message" class="form-control" rows="4" placeholder="Enter your message"></textarea>
                     </div>
                     
                     <div style="text-align: center;">
-                        <button type="button" class="btn-submit-quote">Get Free Quote</button>
+                        <button type="submit" class="btn-submit-quote">Get Free Quote</button>
                     </div>
                 </form>
             </div>
@@ -2129,51 +2175,62 @@ function toggleFaq(element) {
             'Materials': {
                 title: 'Materials We Offer',
                 items: [
-                    { name: 'Cardboard', active: false, image: '{{ asset("images/Background+Border.png") }}' },
-                    { name: 'Corrugated', active: false, image: '{{ asset("images/Group 1000006173.png") }}' },
-                    { name: 'Kraft Paper', active: true, image: '{{ asset("images/perfume-box.png") }}' },
-                    { name: 'Rigid Board', active: false, image: '{{ asset("images/Container (4).png") }}' },
-                    { name: 'Art Paper', active: false, image: '{{ asset("images/lipstick-box.png") }}' }
+                    { name: 'Black Kraft', active: false, image: '{{ asset("uploads/finish-material-black-kraft.webp") }}' },
+                    { name: 'Duplex Chipboard', active: false, image: '{{ asset("uploads/finish-material-duplex-chipboard.webp") }}' },
+                    { name: 'Grey Board', active: true, image: '{{ asset("uploads/finish-material-grey-board.webp") }}' },
+                    { name: 'Holographic', active: false, image: '{{ asset("uploads/finish-material-holographic.webp") }}' },
+                    { name: 'Metallic Paper', active: false, image: '{{ asset("uploads/finish-material-metallic-paper.webp") }}' },
+                    { name: 'Natural Brown Kraft', active: false, image: '{{ asset("uploads/finish-material-natural-brown.webp") }}' },
+                    { name: 'SBS C2S', active: false, image: '{{ asset("uploads/finish-material-sbs-c2s.webp") }}' },
+                    { name: 'Textured Paper', active: false, image: '{{ asset("uploads/finish-material-textured.webp") }}' }
                 ]
             },
             'Printing Methods': {
                 title: 'Printing Methods',
                 items: [
-                    { name: 'Offset Printing', active: false, image: '{{ asset("images/Container (5).png") }}' },
-                    { name: 'Digital Printing', active: true, image: '{{ asset("images/Gift-Boxes.webp") }}' },
-                    { name: 'Screen Printing', active: false, image: '{{ asset("images/Container (1).png") }}' },
-                    { name: 'Flexography', active: false, image: '{{ asset("images/Container (2).png") }}' },
-                    { name: 'Letterpress', active: false, image: '{{ asset("images/Figure.png") }}' }
+                    { name: 'Digital Printing', active: false, image: '{{ asset("uploads/finish-print-digital.webp") }}' },
+                    { name: 'Flexographic Printing', active: false, image: '{{ asset("uploads/finish-print-flexographic.webp") }}' },
+                    { name: 'Gravure Printing', active: true, image: '{{ asset("uploads/finish-print-gravure.webp") }}' },
+                    { name: 'Offset Printing', active: false, image: '{{ asset("uploads/finish-print-offset.webp") }}' },
+                    { name: 'Rotogravure Printing', active: false, image: '{{ asset("uploads/finish-print-rotogravure.webp") }}' },
+                    { name: 'Scodix Digital', active: false, image: '{{ asset("uploads/finish-print-scodix-digital.webp") }}' },
+                    { name: 'Screen Printing', active: false, image: '{{ asset("uploads/finish-print-screen.webp") }}' },
+                    { name: 'UV Printing', active: false, image: '{{ asset("uploads/finish-print-uv.webp") }}' }
                 ]
             },
             'Inks': {
                 title: 'Inks Available',
                 items: [
-                    { name: 'CMYK', active: false, image: '{{ asset("images/Container (3).png") }}' },
-                    { name: 'Pantone (PMS)', active: true, image: '{{ asset("images/Container.png") }}' },
-                    { name: 'Metallic Inks', active: false, image: '{{ asset("images/Background+Border (2).png") }}' },
-                    { name: 'Soy-Based Ink', active: false, image: '{{ asset("images/Group 1000006247.png") }}' },
-                    { name: 'UV Inks', active: false, image: '{{ asset("images/Jul 3, 2026, 03_38_53 PM 1.png") }}' }
+                    { name: 'CMYK', active: false, image: '{{ asset("uploads/finish-print-digital.webp") }}' },
+                    { name: 'Pantone (PMS)', active: true, image: '{{ asset("uploads/finish-print-offset.webp") }}' },
+                    { name: 'Metallic Inks', active: false, image: '{{ asset("uploads/finish-material-metallic-paper.webp") }}' },
+                    { name: 'Soy-Based Ink', active: false, image: '{{ asset("uploads/finish-print-flexographic.webp") }}' },
+                    { name: 'UV Inks', active: false, image: '{{ asset("uploads/finish-print-uv.webp") }}' }
                 ]
             },
             'Finishing': {
                 title: 'Finishing Options',
                 items: [
-                    { name: 'Matte Lamination', active: false, image: '{{ asset("images/Rectangle 8395.png") }}' },
-                    { name: 'Drip Off', active: true, image: '{{ asset("images/Container (5).png") }}' },
-                    { name: 'Spot Gloss', active: false, image: '{{ asset("images/Container (Customized Packaging Boxes for Skin Care Products - Box Agency).png") }}' },
-                    { name: 'Aqueous Coating', active: false, image: '{{ asset("images/Container (1).png") }}' },
-                    { name: 'Soft Touch', active: false, image: '{{ asset("images/Container (2).png") }}' }
+                    { name: 'Gloss Lamination', active: false, image: '{{ asset("uploads/gloss-lamination.webp") }}' },
+                    { name: 'Matte Lamination', active: true, image: '{{ asset("uploads/matte-lamination.webp") }}' },
+                    { name: 'Soft-Touch Lamination', active: false, image: '{{ asset("uploads/soft-touch-lamination.webp") }}' },
+                    { name: 'UV Coating', active: false, image: '{{ asset("uploads/uv-coating.webp") }}' },
+                    { name: 'Aqueous Coating', active: false, image: '{{ asset("uploads/aqueous-coating.webp") }}' },
+                    { name: 'Protective Varnish', active: false, image: '{{ asset("uploads/protective-varnish.webp") }}' }
                 ]
             },
             'Add-ons': {
                 title: 'Add-ons Available',
                 items: [
-                    { name: 'Foil Stamping', active: false, image: '{{ asset("images/Container (3).png") }}' },
-                    { name: 'Embossing', active: true, image: '{{ asset("images/Container (4).png") }}' },
-                    { name: 'Debossing', active: false, image: '{{ asset("images/Figure.png") }}' },
-                    { name: 'Die Cutting', active: false, image: '{{ asset("images/Gift-Boxes.webp") }}' },
-                    { name: 'Window Patching', active: false, image: '{{ asset("images/Background+Border.png") }}' }
+                    { name: 'Embossing', active: false, image: '{{ asset("uploads/embossing.webp") }}' },
+                    { name: 'Debossing', active: true, image: '{{ asset("uploads/debossing.webp") }}' },
+                    { name: 'Blind Emboss', active: false, image: '{{ asset("uploads/blind-emboss.webp") }}' },
+                    { name: 'Magnetic Closure', active: false, image: '{{ asset("uploads/magnetic-closure.webp") }}' },
+                    { name: 'Luxury Magnetic Box', active: false, image: '{{ asset("uploads/luxury-magnetic-box.webp") }}' },
+                    { name: 'Presentation Closure', active: false, image: '{{ asset("uploads/presentation-closure.webp") }}' },
+                    { name: 'Luxury Insert', active: false, image: '{{ asset("uploads/luxury-insert.webp") }}' },
+                    { name: 'Paper Insert', active: false, image: '{{ asset("uploads/paper-insert.webp") }}' },
+                    { name: 'Protective Insert', active: false, image: '{{ asset("uploads/protective-insert.webp") }}' }
                 ]
             }
         };
@@ -2185,19 +2242,36 @@ function toggleFaq(element) {
             const titleElement = document.querySelector('.finishes-top-text');
             const itemsContainer = document.querySelector('.finishes-middle-list');
             const carouselImage = document.querySelector('.finishes-image-container img');
-            const carouselDots = document.querySelectorAll('.carousel-dot');
+            const carouselDotsContainer = document.querySelector('.carousel-dots');
+            let carouselDots = document.querySelectorAll('.carousel-dot');
             const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons'];
             let currentTabIndex = 0;
             let currentItemIndex = 2; // Start with middle item active
 
+            function renderCarouselDots(count) {
+                if (!carouselDotsContainer) return;
+                carouselDotsContainer.innerHTML = '';
+                for (let index = 0; index < count; index++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'carousel-dot' + (index === currentItemIndex ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Show image ' + (index + 1));
+                    dot.addEventListener('click', () => {
+                        currentItemIndex = index;
+                        updateTabContent(currentTabIndex);
+                        clearInterval(autoplayTimer);
+                        autoplayTimer = setInterval(advanceCarousel, 3000);
+                    });
+                    carouselDotsContainer.appendChild(dot);
+                }
+                carouselDots = carouselDotsContainer.querySelectorAll('.carousel-dot');
+            }
+
             // Function to update image based on active product
             function updateProductImage(imageUrl, dotIndex = null) {
                 if (carouselImage && imageUrl) {
-                    carouselImage.style.opacity = '0';
-                    setTimeout(() => {
-                        carouselImage.src = imageUrl;
-                        carouselImage.style.opacity = '1';
-                    }, 500);
+                    carouselImage.src = imageUrl;
+                    carouselImage.style.opacity = '1';
                 }
 
                 // Update dots if index provided
@@ -2220,7 +2294,7 @@ function toggleFaq(element) {
                 // Add active class to current tab
                 navItems[tabIndex].classList.add('active-nav');
                 navItems[tabIndex].style.fontWeight = '700';
-                navItems[tabIndex].style.color = '#fff';
+                navItems[tabIndex].style.color = '#8D4445';
                 if (navContainer) {
                     navContainer.scrollTo({
                         left: navItems[tabIndex].offsetLeft - ((navContainer.clientWidth - navItems[tabIndex].offsetWidth) / 2),
@@ -2256,16 +2330,16 @@ function toggleFaq(element) {
                         item.active = (idx === currentItemIndex);
                     });
 
+                    renderCarouselDots(data.items.length);
+
                     // Update the product image for active item
                     const activeItem = data.items[currentItemIndex];
                     if (activeItem && activeItem.image) {
                         updateProductImage(activeItem.image, currentItemIndex);
                     }
 
-                    // Update items with animation
-                    itemsContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        itemsContainer.innerHTML = '';
+                    // Update labels immediately so they remain crisp and readable.
+                    itemsContainer.innerHTML = '';
                         
                         // Show only 3 items at a time (before, current, after)
                         const visibleItems = [];
@@ -2276,8 +2350,8 @@ function toggleFaq(element) {
                             visibleIndexes.push(index);
                         }
                         
-                        visibleItems.forEach((item, relativeIndex) => {
-                            const itemDiv = document.createElement('div');
+                    visibleItems.forEach((item, relativeIndex) => {
+                        const itemDiv = document.createElement('div');
                             // Only the middle item (index 1) should be dark
                             itemDiv.className = (relativeIndex === 1) ? 'finish-item-dark' : 'finish-item-light';
                             itemDiv.textContent = item.name;
@@ -2295,11 +2369,10 @@ function toggleFaq(element) {
                                 autoplayTimer = setInterval(advanceCarousel, 3000);
                             });
                             
-                            itemsContainer.appendChild(itemDiv);
-                        });
-                        
-                        itemsContainer.style.opacity = '1';
-                    }, 500);
+                        itemsContainer.appendChild(itemDiv);
+                    });
+
+                    itemsContainer.style.opacity = '1';
                 }
                 
                 currentTabIndex = tabIndex;
@@ -2339,16 +2412,8 @@ function toggleFaq(element) {
                 itemsContainer.addEventListener('mouseleave', () => autoplayTimer = setInterval(advanceCarousel, 3000));
             }
 
-            // Manual dot click to change product directly
-            carouselDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    const tabName = tabNames[currentTabIndex];
-                    if (finishesData[tabName] && finishesData[tabName].items[index]) {
-                        currentItemIndex = index;
-                        updateTabContent(currentTabIndex);
-                    }
-                });
-            });
+            // Render the correct number of dots and load the initial final image.
+            updateTabContent(currentTabIndex);
 
             // Add smooth transition for items and image
             if (itemsContainer) {

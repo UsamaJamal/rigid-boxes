@@ -48,9 +48,10 @@
         }
 
         .iq-page-hero {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 30px 24px 20px;
+            padding: 30px 55px 20px 55px;
             text-align: center;
             box-sizing: border-box;
         }
@@ -92,9 +93,10 @@
         }
 
         .iq-page-container {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px 60px;
+            padding: 0 55px 60px 55px;
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
@@ -198,7 +200,7 @@
         }
 
         .iq-sidebar-card {
-            background-color: #FFFFFF;
+            background-color: #F0F0F0;
             padding: 24px;
             border-radius: 12px;
             border: 1px solid #E8E2DF;
@@ -231,13 +233,13 @@
 
         @media (max-width: 600px) {
             .iq-page-hero {
-                padding: 20px 16px 16px;
+                padding: 20px 20px 16px;
             }
             .iq-breadcrumb {
                 margin-bottom: 16px;
             }
             .iq-page-container {
-                padding: 0 16px 40px;
+                padding: 0 20px 40px;
                 gap: 20px;
             }
             .iq-page-form-card {
@@ -279,16 +281,22 @@
             <!-- Left form section -->
             <div class="iq-page-form-card">
                 <h2>Instant Quotes, Quick Service!</h2>
-                <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 16px;">
+                @if(session('success'))
+                    <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 16px;">
+                    @csrf
                     <!-- Row 1 -->
                     <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Name *</label>
-                            <input type="text" placeholder="Enter your name" oninput="this.value = this.value.replace(/[0-9]/g, '')" required>
+                            <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[0-9]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Email Address *</label>
-                            <input type="email" placeholder="Enter your email" required>
+                            <input type="email" name="email" placeholder="Enter your email" required>
                         </div>
                     </div>
 
@@ -296,11 +304,11 @@
                     <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Phone *</label>
-                            <input type="tel" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\- ]/g, '')" required>
+                            <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\- ]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Physical Address</label>
-                            <input type="text" placeholder="Enter your address">
+                            <input type="text" name="physical_address" placeholder="Enter your address">
                         </div>
                     </div>
 
@@ -308,19 +316,19 @@
                     <div class="iq-grid-4">
                         <div class="iq-form-group">
                             <label>Width *</label>
-                            <input type="text" placeholder="Width" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                            <input type="text" name="width" placeholder="Width" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Length *</label>
-                            <input type="text" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                            <input type="text" name="length" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Depth *</label>
-                            <input type="text" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                            <input type="text" name="depth" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Units *</label>
-                            <select required>
+                            <select name="units" required>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                                 <option value="inches">inches</option>
@@ -332,7 +340,7 @@
                     <div class="iq-grid-3">
                         <div class="iq-form-group">
                             <label>Select Material</label>
-                            <select>
+                            <select name="material">
                                 <option value="">Choose option</option>
                                 <option value="Rigid Board">Rigid Board</option>
                                 <option value="Cardboard">Cardboard</option>
@@ -342,7 +350,7 @@
                         </div>
                         <div class="iq-form-group">
                             <label>Color Options</label>
-                            <select>
+                            <select name="color">
                                 <option value="">Color Options</option>
                                 <option value="1 Color">1 Color</option>
                                 <option value="2 Colors">2 Colors</option>
@@ -352,7 +360,7 @@
                         </div>
                         <div class="iq-form-group">
                             <label>Turn Around Time</label>
-                            <select>
+                            <select name="turn_around_time">
                                 <option value="">Choose option</option>
                                 <option value="Standard (8-10 Days)">Standard (8-10 Days)</option>
                                 <option value="Rush (4-6 Days)">Rush (4-6 Days)</option>
@@ -364,12 +372,12 @@
                     <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Quantity *</label>
-                            <input type="number" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                            <input type="number" name="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Upload File Here</label>
                             <div style="display: flex; align-items: center; border: 1px solid #E2D9D5; border-radius: 8px; overflow: hidden; background: #FFFFFF; height: 44px;">
-                                <input type="file" id="quote-file-input" style="display: none;" onchange="document.getElementById('quote-file-name').value = this.files[0] ? this.files[0].name : ''">
+                                <input type="file" name="quote_file" id="quote-file-input" style="display: none;" onchange="document.getElementById('quote-file-name').value = this.files[0] ? this.files[0].name : ''">
                                 <input type="text" id="quote-file-name" placeholder="No file chosen" readonly style="flex: 1; padding: 0 14px; border: none; font-size: 14px; background: transparent; outline: none; color: #666; height: 100%;">
                                 <button type="button" onclick="document.getElementById('quote-file-input').click()" style="background-color: var(--primary-color, #8D4445); color: white; border: none; padding: 0 20px; font-size: 14px; font-weight: 600; cursor: pointer; height: 100%; font-family: 'DM Sans', sans-serif;">Upload</button>
                             </div>
@@ -379,7 +387,7 @@
                     <!-- Row 6: Message -->
                     <div class="iq-form-group">
                         <label>Message</label>
-                        <textarea rows="4" placeholder="Enter your message"></textarea>
+                        <textarea name="message" rows="4" placeholder="Enter your message"></textarea>
                     </div>
                     
                     <!-- Submit button -->

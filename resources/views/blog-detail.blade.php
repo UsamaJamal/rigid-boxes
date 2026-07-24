@@ -728,14 +728,17 @@
                 <p>The trends above aren't predictions — they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
 
                 <!-- Author Bio Card -->
+                @if(!empty($blog['joined_author_name']))
                 <div class="author-card">
-                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="Ahmed Khan" class="author-card-avatar">
+                    @php $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); @endphp
+                    <img src="{{ $authorImg }}" alt="{{ $blog['joined_author_name'] }}" class="author-card-avatar">
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
-                        <div class="author-card-name">Ahmed Khan</div>
-                        <div class="author-card-bio">Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.</div>
+                        <a href="{{ url('/author/' . $blog['joined_author_slug']) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $blog['joined_author_name'] }}</a>
+                        <div class="author-card-bio">{{ $blog['joined_author_desc'] }}</div>
                     </div>
                 </div>
+                @endif
             </article>
 
             <!-- Right Sidebar -->
@@ -756,48 +759,30 @@
                 <div class="widget">
                     <div class="widget-title" style="font-size: 18px; font-family: var(--font-heading); color: var(--color-ink); text-transform: none; font-weight: 700; margin-bottom: 20px;">Recent Articles</div>
                     <div class="recent-articles-list">
-                        
+                        @foreach($recentBlogs as $rb)
                         <div class="recent-article-item">
-                            <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/below-hero.png'); @endphp
+                            <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                             <div class="recent-article-info">
-                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
-                                <span class="recent-article-date">June 23, 2026</span>
+                                <a href="{{ url('/blog/' . $rb->slug) }}" class="recent-article-title">{{ $rb->title }}</a>
+                                <span class="recent-article-date">{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                             </div>
                         </div>
-
-                        <div class="recent-article-item">
-                            <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                            <div class="recent-article-info">
-                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
-                                <span class="recent-article-date">June 23, 2026</span>
-                            </div>
-                        </div>
-
-                        <div class="recent-article-item">
-                            <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                            <div class="recent-article-info">
-                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
-                                <span class="recent-article-date">June 23, 2026</span>
-                            </div>
-                        </div>
-
-                        <div class="recent-article-item">
-                            <img src="{{ asset('uploads/industry-two-piece-box.jfif') }}" alt="Article" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                            <div class="recent-article-info">
-                                <a href="#" class="recent-article-title">Sustainable Doesn't Mean Boring: Eco-Luxury Wins</a>
-                                <span class="recent-article-date">June 23, 2026</span>
-                            </div>
-                        </div>
-
-                    </div>
+                        @endforeach
                 </div>
 
                 <!-- Newsletter Stay Inspired Widget -->
                 <div class="newsletter-widget">
                     <h3 class="newsletter-title">Stay Inspired</h3>
                     <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault();">
-                        <input type="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+                    <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                        @csrf
+                        @if(session('success'))
+                            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 13px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <input type="email" name="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
                         <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>
                 </div>
@@ -830,54 +815,27 @@
             <h2 class="related-title">Related Blogs</h2>
             <div class="related-grid">
 
-                <!-- Related Card 1 -->
+                @foreach($recentBlogs as $rb)
                 <article class="related-card">
-                    <img src="{{ asset('images/luxury-black-box.png') }}" alt="Sustainable Packaging" class="related-card-img">
+                    @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
+                    <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                     <div class="related-card-body">
                         <div class="related-card-meta">
-                            <span>Joe Danley</span>
-                            <span>Nov 15, 2024</span>
+                            @if(!empty($rb->author_slug))
+                                <a href="{{ url('/author/' . $rb->author_slug) }}" style="color:inherit;text-decoration:none;"><span>{{ $rb->author_name ?? 'Admin' }}</span></a>
+                            @else
+                                <span>{{ $rb->author_name ?? 'Admin' }}</span>
+                            @endif
+                            <span>{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                         </div>
-                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
-                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
+                        <h3 class="related-card-title">{{ $rb->title }}</h3>
+                        <p class="related-card-desc">{{ Str::limit($rb->excerpt ?? $rb->content, 90) }}</p>
+                        <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn">
                             Read More &rarr;
                         </a>
                     </div>
                 </article>
-
-                <!-- Related Card 2 -->
-                <article class="related-card">
-                    <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Sustainable Packaging" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                    <div class="related-card-body">
-                        <div class="related-card-meta">
-                            <span>Joe Danley</span>
-                            <span>Nov 15, 2024</span>
-                        </div>
-                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
-                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
-                            Read More &rarr;
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Related Card 3 -->
-                <article class="related-card">
-                    <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Sustainable Packaging" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                    <div class="related-card-body">
-                        <div class="related-card-meta">
-                            <span>Joe Danley</span>
-                            <span>Nov 15, 2024</span>
-                        </div>
-                        <h3 class="related-card-title">Sustainable Packaging Trends For 2026</h3>
-                        <p class="related-card-desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                        <a href="{{ url('/blog-detail') }}" class="related-card-btn">
-                            Read More &rarr;
-                        </a>
-                    </div>
-                </article>
-
+                @endforeach
             </div>
         </section>
 

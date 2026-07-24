@@ -1234,6 +1234,7 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
+            justify-content: center;
         }
 
         /* Each card: equal flex, square-ish aspect ratio */
@@ -1241,28 +1242,24 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            flex: 1 1 0;
+            flex: 0 1 350px;
+            width: 100%;
+            max-width: 350px;
             min-width: 0;
-            aspect-ratio: 350 / 340;
+            aspect-ratio: 350 / 406;
             background: #e8e8e8;
         }
 
         .cdc-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             display: block;
         }
 
         .cdc-card__label {
-            position: absolute;
-            top: 16px;
-            left: 18px;
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 1;
-            color: var(--section-text-color, #000);
+            display: none;
         }
 
         /* ─────────────────────────────────────────
@@ -1289,7 +1286,9 @@
             .cdc-card {
                 flex: none;
                 width: 100%;
-                aspect-ratio: 350 / 300;
+                max-width: 350px;
+                aspect-ratio: 350 / 406;
+                align-self: center;
             }
         }
 
@@ -1703,7 +1702,7 @@
                                 <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/industry-box-with-lid.jfif') }}" alt="Custom shaped rigid packaging box">
+                                <img src="{{ asset('uploads/custom-sizes-and-designs.webp') }}" alt="Custom Sizes and Designs">
                             </div>
                         </div>
 
@@ -1714,7 +1713,7 @@
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Fast Production and Delivery">
+                                <img src="{{ asset('uploads/fast-production-management.webp') }}" alt="Fast Production Management">
                             </div>
                         </div>
 
@@ -1778,8 +1777,8 @@
 
                 <!-- LEFT: two overlapping images -->
                 <div class="premium-images">
-                    <img class="premium-img1" src="{{ asset('uploads/premium-image-frame.png') }}" alt="Premium Custom Rigid Boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
-                    <img class="premium-img2" src="{{ asset('uploads/premium-image-frame2.png') }}" alt="Velora Box" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
+                    <img class="premium-img1" src="{{ asset('uploads/premium-rigid-boxes-showcase.webp') }}" alt="Premium Custom Rigid Boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
+                    <img class="premium-img2" src="{{ asset('uploads/luxury-rigid-box-detail.webp') }}" alt="Luxury Rigid Box Detail" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
                 </div>
 
                 <!-- RIGHT: content col -->
@@ -1871,7 +1870,7 @@
 
                     <!-- LEFT: big image with overlay -->
                     <div class="sustainable-left">
-                        <img src="{{ asset('uploads/eco-go-green.png') }}" alt="Eco-Friendly Packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
+                        <img src="{{ asset('uploads/eco-friendly-packaging.webp') }}" alt="Eco-Friendly Packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
@@ -1883,12 +1882,12 @@
                     <div class="sustainable-right">
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/eco-fsc-certified.png') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
+                            <img src="{{ asset('uploads/fsc-certified-packaging.webp') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
                             <span class="sustainable-right__label">FSC Image</span>
                         </div>
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/eco-circular-packaging.png') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
+                            <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
                             <span class="sustainable-right__label">Circular Packaging Image</span>
                         </div>
 
@@ -1924,29 +1923,29 @@
                     { src: '{{ asset("uploads/addon-holographic-foil.png") }}',  label: 'Holographic Foil' }
                 ],
                 embossing: [
-                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Embossing' },
-                    { src: '{{ asset("uploads/category-black-kraft.png") }}',       label: 'Debossing' },
-                    { src: '{{ asset("uploads/category-natural-brown-kraft.png") }}', label: 'Blind Emboss' }
+                    { src: '{{ asset("uploads/embossing.webp") }}',     label: 'Embossing' },
+                    { src: '{{ asset("uploads/debossing.webp") }}',     label: 'Debossing' },
+                    { src: '{{ asset("uploads/blind-emboss.webp") }}',  label: 'Blind Emboss' }
                 ],
                 laminations: [
-                    { src: '{{ asset("uploads/category-holographic.png") }}',       label: 'Gloss Lamination' },
-                    { src: '{{ asset("uploads/addon-silver-foil.png") }}',       label: 'Matte Lamination' },
-                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Soft-Touch Lamination' }
+                    { src: '{{ asset("uploads/gloss-lamination.webp") }}',       label: 'Gloss Lamination' },
+                    { src: '{{ asset("uploads/matte-lamination.webp") }}',       label: 'Matte Lamination' },
+                    { src: '{{ asset("uploads/soft-touch-lamination.webp") }}',  label: 'Soft-Touch Lamination' }
                 ],
                 magnetic: [
-                    { src: '{{ asset("uploads/industry-magnetic-closure-boxes.webp") }}', label: 'Magnetic Closure' },
-                    { src: '{{ asset("uploads/industry-custom-luxury-box.jfif") }}', label: 'Luxury Magnetic Box' },
-                    { src: '{{ asset("uploads/industry-rigid-presentation-box.jfif") }}', label: 'Presentation Closure' }
+                    { src: '{{ asset("uploads/magnetic-closure.webp") }}',      label: 'Magnetic Closure' },
+                    { src: '{{ asset("uploads/luxury-magnetic-box.webp") }}',   label: 'Luxury Magnetic Box' },
+                    { src: '{{ asset("uploads/presentation-closure.webp") }}',  label: 'Presentation Closure' }
                 ],
                 inserts: [
-                    { src: '{{ asset("uploads/addon-gold-inside-box.jfif") }}',   label: 'Luxury Insert' },
-                    { src: '{{ asset("uploads/industry-box-with-lid.jfif") }}',      label: 'Custom Paper Insert' },
-                    { src: '{{ asset("uploads/industry-custom-shoulder-box.jfif") }}', label: 'Protective Insert' }
+                    { src: '{{ asset("uploads/luxury-insert.webp") }}',      label: 'Luxury Insert' },
+                    { src: '{{ asset("uploads/paper-insert.webp") }}',       label: 'Custom Paper Insert' },
+                    { src: '{{ asset("uploads/protective-insert.webp") }}',  label: 'Protective Insert' }
                 ],
                 coating: [
-                    { src: '{{ asset("uploads/category-holographic.png") }}',       label: 'UV Coating' },
-                    { src: '{{ asset("uploads/category-textured.png") }}',          label: 'Aqueous Coating' },
-                    { src: '{{ asset("uploads/eco-circular-packaging.png") }}',  label: 'Protective Varnish' }
+                    { src: '{{ asset("uploads/uv-coating.webp") }}',          label: 'UV Coating' },
+                    { src: '{{ asset("uploads/aqueous-coating.webp") }}',     label: 'Aqueous Coating' },
+                    { src: '{{ asset("uploads/protective-varnish.webp") }}',  label: 'Protective Varnish' }
                 ]
             };
 

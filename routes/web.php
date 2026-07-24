@@ -18,11 +18,28 @@ use App\Http\Controllers\WhyChooseUsController;
 use App\Http\Controllers\FrequentlyAskedQuestionController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminContentController;
+use App\Http\Controllers\QuotationController;
 Route::get('/', function () {
     $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
     $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
     $products = DB::table('admin_products')->get()->map(fn($r)=>(array)$r)->all();
-    return view('homepage', compact('settings', 'categories', 'products'));
+    $recentBlogs = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.slug as author_slug')
+        ->where('admin_blogs.status', 'published')->limit(4)->get();
+    return view('homepage', compact('settings', 'categories', 'products', 'recentBlogs'));
+});
+
+Route::get('/search', function (\Illuminate\Http\Request $request) {
+    $q = $request->input('q');
+    $products = [];
+    if ($q) {
+        $products = DB::table('admin_products')
+            ->where('title', 'like', "%{$q}%")
+            ->orWhere('description', 'like', "%{$q}%")
+            ->get()->map(fn($r)=>(array)$r)->all();
+    }
+    return view('search', compact('q', 'products'));
 });
 
 Route::get('/category/{slug?}', function ($slug = null) {
@@ -139,29 +156,61 @@ Route::get('/contact', function () {
 });
 
 Route::get('/blog', function () {
-    $blogs = DB::table('admin_blogs')->where('status', 'published')->get()->map(fn($r) => (array) $r)->all();
+    $blogs = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.image as author_image', 'admin_authors.slug as author_slug')
+        ->where('admin_blogs.status', 'published')
+        ->get()->map(fn($r) => (array) $r)->all();
     return view('blog', compact('blogs'));
 });
 
 Route::get('/blog-detail', function () {
-    $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+    $blog = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.image as author_image', 'admin_authors.description as author_description', 'admin_authors.facebook as author_facebook', 'admin_authors.twitter as author_twitter', 'admin_authors.linkedin as author_linkedin', 'admin_authors.slug as author_slug')
+        ->where('admin_blogs.status', 'published')->first();
     $blog = $blog ? (array) $blog : [];
-    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    $recentBlogs = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.slug as author_slug')
+        ->where('admin_blogs.status', 'published')->limit(4)->get();
     return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
 Route::get('/blog/{slug}', function ($slug) {
-    $blog = DB::table('admin_blogs')->where('slug', $slug)->first();
+    $blog = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.image as joined_author_image', 'admin_authors.description as joined_author_desc', 'admin_authors.facebook as joined_author_facebook', 'admin_authors.twitter as joined_author_twitter', 'admin_authors.linkedin as joined_author_linkedin', 'admin_authors.slug as joined_author_slug')
+        ->where('admin_blogs.slug', $slug)->first();
     if (!$blog) {
-        $blog = DB::table('admin_blogs')->where('status', 'published')->first();
+        $blog = DB::table('admin_blogs')
+            ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+            ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.image as joined_author_image', 'admin_authors.description as joined_author_desc', 'admin_authors.facebook as joined_author_facebook', 'admin_authors.twitter as joined_author_twitter', 'admin_authors.linkedin as joined_author_linkedin', 'admin_authors.slug as joined_author_slug')
+            ->where('admin_blogs.status', 'published')->first();
     }
     $blog = $blog ? (array) $blog : [];
-    $recentBlogs = DB::table('admin_blogs')->where('status', 'published')->limit(4)->get()->map(fn($r) => (array) $r)->all();
+    $recentBlogs = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.slug as joined_author_slug')
+        ->where('admin_blogs.status', 'published')->limit(4)->get();
     return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
-Route::get('/author', function () {
-    return view('author');
+Route::get('/author/{slug?}', function ($slug = null) {
+    if ($slug) {
+        $author = DB::table('admin_authors')->where('slug', $slug)->first();
+    } else {
+        $author = DB::table('admin_authors')->first();
+    }
+    if (!$author) abort(404);
+    $author = (array) $author;
+    $blogs = DB::table('admin_blogs')
+        ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
+        ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.image as author_image', 'admin_authors.slug as author_slug')
+        ->where('admin_blogs.author_id', $author['id'])
+        ->where('admin_blogs.status', 'published')
+        ->get()->map(fn($r) => (array) $r)->all();
+    return view('author', compact('author', 'blogs'));
 });
 
 Route::get('/request-quote', [QuotationController::class, 'index']);
@@ -207,3 +256,8 @@ try {
 Route::get('/' . ltrim($faqSlug, '/'), [FrequentlyAskedQuestionController::class, 'index']);
 
 Route::get('/aboutUs',[AboutUsController::class,'index']);
+
+use App\Http\Controllers\FormSubmitController;
+Route::post('/submit-contact', [FormSubmitController::class, 'submitContact']);
+Route::post('/submit-quote', [FormSubmitController::class, 'submitQuote']);
+Route::post('/submit-newsletter', [FormSubmitController::class, 'submitNewsletter']);

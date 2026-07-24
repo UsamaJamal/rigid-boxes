@@ -597,15 +597,15 @@
         </a>
 
         <!-- Desktop Search -->
-        <div class="header-search">
+        <form action="/search" method="GET" class="header-search">
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
-            <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+            <input type="text" name="q" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
             <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
                 <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
             </svg>
-        </div>
+        </form>
 
         <!-- Desktop Contact -->
         <div class="header-contact">
@@ -633,7 +633,7 @@
 
         <!-- Mobile Actions -->
         <div class="mobile-actions">
-            <button class="mobile-search-btn">
+            <button class="mobile-search-btn" onclick="toggleMobileSearch()">
                 <svg viewBox="0 0 24 24">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
@@ -644,6 +644,18 @@
                 </svg>
             </button>
         </div>
+    </div>
+
+    <!-- Mobile Search Dropdown -->
+    <div class="mobile-search-dropdown" id="mobileSearchDropdown" style="display: none; padding: 12px 20px; background: #FAF8F8; border-bottom: 1px solid rgba(0,0,0,0.1);">
+        <form action="/search" method="GET" style="display: flex; position: relative; width: 100%;">
+            <input type="text" name="q" placeholder="Search products..." style="width: 100%; padding: 10px 40px 10px 15px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 15px; color: #333;">
+            <button type="button" onclick="toggleMobileSearch()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8D4445; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </form>
     </div>
 
     <!-- Desktop Navigation -->
@@ -696,15 +708,15 @@
         </div>
 
         <div class="mobile-sidebar-content">
-            <div class="mobile-search">
+            <form action="/search" method="GET" class="mobile-search">
                 <svg class="search-icon" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
-                <input type="text" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
+                <input type="text" name="q" placeholder="Search products..." oninput="this.nextElementSibling.style.display = this.value ? 'block' : 'none';">
                 <svg class="clear-icon" viewBox="0 0 24 24" style="display: none;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
                     <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                 </svg>
-            </div>
+            </form>
 
             <ul class="mobile-nav">
                 <li><a href="/">Home</a></li>
@@ -847,6 +859,16 @@
         document.getElementById('mobileSidebar').classList.toggle('active');
         document.getElementById('mobileOverlay').classList.toggle('active');
         document.body.style.overflow = document.getElementById('mobileSidebar').classList.contains('active') ? 'hidden' : '';
+    }
+
+    function toggleMobileSearch() {
+        const dropdown = document.getElementById('mobileSearchDropdown');
+        if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+            dropdown.style.display = 'block';
+            dropdown.querySelector('input').focus();
+        } else {
+            dropdown.style.display = 'none';
+        }
     }
 </script>
 
