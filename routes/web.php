@@ -160,6 +160,10 @@ Route::get('/blog/{slug}', function ($slug) {
     return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
+Route::get('/author', function () {
+    return view('author');
+});
+
 Route::get('/request-quote', [QuotationController::class, 'index']);
 Route::get('/sitemap', [SitemapController::class, 'index']);
 

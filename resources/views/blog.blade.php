@@ -380,14 +380,12 @@
 html, body { overflow-x: hidden; }
 .page { width: 100%; max-width: none; overflow: visible; }
 .hero { width: 100%; max-width: none; margin: 0; }
-.hero .container, .categories, .content { width: min(calc(100% - 56px), 1440px); max-width: none; margin-left: auto; margin-right: auto; }
-.hero .container, .content { overflow: hidden; }
-.hero h1, .hero p { width: 100%; max-width: 660px; white-space: normal; overflow-wrap: anywhere; }
+.hero .container, .categories, .content { width: 100%; max-width: 1440px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; box-sizing: border-box; }
 .category-row { width: 100%; padding-left: 0; padding-right: 0; }
 .content { padding-bottom: 0; }
 .content > .cta-section { margin: 40px 0 0; padding-bottom: 24px; }
 @media (max-width: 600px) {
-    .hero .container, .categories, .content { width: calc(100% - 32px); }
+    .hero .container, .categories, .content { width: 100%; padding-left: 16px; padding-right: 16px; margin-left: 0; margin-right: 0; }
     .hero h1, .hero p { max-width: 100%; overflow-wrap: anywhere; word-break: normal; }
     .feature, .grid, .feature > img, .card, .card img { max-width: 100%; }
     .content > .cta-section { margin-top: 24px; }
