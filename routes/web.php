@@ -36,3 +36,11 @@ Route::get('/contact', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
+
+Route::get('/whyChooseUs', function () {
+    return view('whyChooseUs');
+});
+
+Route::get('/faqpage', function () {
+    return view('faqpage');
+});
