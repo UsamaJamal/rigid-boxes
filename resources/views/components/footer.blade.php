@@ -27,19 +27,19 @@
                         The Rigid Boxes is a leading custom packaging manufacturer, delivering premium boxes and packaging solutions tailored to your brand. From design to delivery, we ensure unmatched quality, style, and customer service.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-icon" aria-label="Facebook">
+                        <a href="javascript:void(0)" class="social-icon" aria-label="Facebook">
                             <img src="{{ asset('images/social-facebook.png') }}" alt="Facebook" class="social-icon-img">
                         </a>
-                        <a href="#" class="social-icon" aria-label="Instagram">
+                        <a href="javascript:void(0)" class="social-icon" aria-label="Instagram">
                             <img src="{{ asset('images/social-instagram.png') }}" alt="Instagram" class="social-icon-img">
                         </a>
-                        <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <a href="javascript:void(0)" class="social-icon" aria-label="LinkedIn">
                             <img src="{{ asset('images/social-linkedin.png') }}" alt="LinkedIn" class="social-icon-img">
                         </a>
-                        <a href="#" class="social-icon" aria-label="Pinterest">
+                        <a href="javascript:void(0)" class="social-icon" aria-label="Pinterest">
                             <img src="{{ asset('images/bi_pinterest.png') }}" alt="Pinterest" class="social-icon-img">
                         </a>
-                        <a href="#" class="social-icon" aria-label="YouTube">
+                        <a href="javascript:void(0)" class="social-icon" aria-label="YouTube">
                             <img src="{{ asset('images/social-youtube.png') }}" alt="YouTube" class="social-icon-img">
                         </a>
                     </div>
@@ -59,11 +59,11 @@
                             }
                         @endphp
                         @if(empty($footerCatIds) || count($footerCats) == 0)
-                            <li><a href="#">Super Boxes</a></li>
-                            <li><a href="#">Rigid Boxes</a></li>
-                            <li><a href="#">Mailer Boxes</a></li>
-                            <li><a href="#">Jewelry Boxes</a></li>
-                            <li><a href="#">Hang Tags</a></li>
+                            <li><a href="/category/super-boxes">Super Boxes</a></li>
+                            <li><a href="/category/rigid-boxes">Rigid Boxes</a></li>
+                            <li><a href="/category/mailer-boxes">Mailer Boxes</a></li>
+                            <li><a href="/category/jewelry-boxes">Jewelry Boxes</a></li>
+                            <li><a href="/category/hang-tags">Hang Tags</a></li>
                         @else
                             @foreach($footerCats as $cat)
                                 <li><a href="{{ url('/' . $cat->slug) }}">{{ $cat->title ?? $cat->name }}</a></li>
@@ -83,7 +83,7 @@
                             <li><a href="/aboutUs">About Us</a></li>
                             <li><a href="/contact">Contact Us</a></li>
                             <li><a href="/request-quote">Get A Free Quote</a></li>
-                            <li><a href="#">Refund & Exchange Policy</a></li>
+                            <li><a href="/contact">Refund & Exchange Policy</a></li>
                             <li><a href="/blog">Blogs</a></li>
                         @else
                             @foreach($quickLinks as $link)

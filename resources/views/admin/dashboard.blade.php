@@ -8,22 +8,25 @@
         'products' => 'fa-box-open',
         'categories' => 'fa-layer-group',
         'blogs' => 'fa-newspaper',
-        'pages' => 'fa-file-lines'
+        'pages' => 'fa-file-lines',
+        'authors' => 'fa-users'
     ];
 
     $productCount = count($data['products'] ?? []);
     $categoryCount = count($data['categories'] ?? []);
     $blogCount = count($data['blogs'] ?? []);
     $pageCount = count($data['pages'] ?? []);
+    $authorCount = count($data['authors'] ?? []);
 
-    $totalItems = $productCount + $categoryCount + $blogCount + $pageCount;
+    $totalItems = $productCount + $categoryCount + $blogCount + $pageCount + $authorCount;
 
     // Published counts
     $publishedProducts = collect($data['products'] ?? [])->where('status', 'published')->count();
     $publishedCategories = collect($data['categories'] ?? [])->where('status', 'published')->count();
     $publishedBlogs = collect($data['blogs'] ?? [])->where('status', 'published')->count();
     $publishedPages = collect($data['pages'] ?? [])->where('status', 'published')->count();
-    $totalPublished = $publishedProducts + $publishedCategories + $publishedBlogs + $publishedPages;
+    $publishedAuthors = collect($data['authors'] ?? [])->where('status', 'published')->count();
+    $totalPublished = $publishedProducts + $publishedCategories + $publishedBlogs + $publishedPages + $publishedAuthors;
 
     $publishRate = $totalItems > 0 ? round(($totalPublished / $totalItems) * 100) : 100;
 @endphp
@@ -225,6 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoryCount = {{ $categoryCount }};
     const blogCount = {{ $blogCount }};
     const pageCount = {{ $pageCount }};
+    const authorCount = {{ $authorCount }};
 
     const timeframeData = {
         '6m': {
@@ -233,7 +237,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Products', data: [Math.max(1, productCount - 4), Math.max(2, productCount - 3), Math.max(3, productCount - 2), Math.max(4, productCount - 1), Math.max(4, productCount), productCount] },
                 { name: 'Categories', data: [Math.max(1, categoryCount - 2), Math.max(1, categoryCount - 1), categoryCount, categoryCount, categoryCount, categoryCount] },
                 { name: 'Blog Posts', data: [0, 0, Math.max(0, blogCount - 1), blogCount, blogCount, blogCount] },
-                { name: 'Static Pages', data: [0, 1, 1, pageCount, pageCount, pageCount] }
+                { name: 'Static Pages', data: [0, 1, 1, pageCount, pageCount, pageCount] },
+                { name: 'Authors', data: [0, 0, 0, Math.max(0, authorCount - 1), authorCount, authorCount] }
             ]
         },
         '30d': {
@@ -242,7 +247,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Products', data: [Math.max(1, productCount - 3), Math.max(2, productCount - 2), Math.max(3, productCount - 1), productCount] },
                 { name: 'Categories', data: [Math.max(1, categoryCount - 1), categoryCount, categoryCount, categoryCount] },
                 { name: 'Blog Posts', data: [0, 0, blogCount, blogCount] },
-                { name: 'Static Pages', data: [0, pageCount, pageCount, pageCount] }
+                { name: 'Static Pages', data: [0, pageCount, pageCount, pageCount] },
+                { name: 'Authors', data: [0, 0, Math.max(0, authorCount - 1), authorCount] }
             ]
         },
         '7d': {
@@ -251,7 +257,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 { name: 'Products', data: [productCount, productCount, productCount, productCount, productCount, productCount, productCount] },
                 { name: 'Categories', data: [categoryCount, categoryCount, categoryCount, categoryCount, categoryCount, categoryCount, categoryCount] },
                 { name: 'Blog Posts', data: [blogCount, blogCount, blogCount, blogCount, blogCount, blogCount, blogCount] },
-                { name: 'Static Pages', data: [pageCount, pageCount, pageCount, pageCount, pageCount, pageCount, pageCount] }
+                { name: 'Static Pages', data: [pageCount, pageCount, pageCount, pageCount, pageCount, pageCount, pageCount] },
+                { name: 'Authors', data: [authorCount, authorCount, authorCount, authorCount, authorCount, authorCount, authorCount] }
             ]
         }
     };
@@ -269,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             toolbar: { show: false },
             zoom: { enabled: false }
         },
-        colors: ['#8d4445', '#c16a6b', '#34272d', '#e7a2a3'],
+        colors: ['#8d4445', '#c16a6b', '#34272d', '#e7a2a3', '#a38d97'],
         fill: {
             type: 'gradient',
             gradient: {
@@ -318,9 +325,9 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 230,
             fontFamily: "'DM Sans', sans-serif"
         },
-        series: [productCount, categoryCount, blogCount, pageCount],
-        labels: ['Products', 'Categories', 'Blog Posts', 'Static Pages'],
-        colors: ['#8d4445', '#c16a6b', '#34272d', '#e7a2a3'],
+        series: [productCount, categoryCount, blogCount, pageCount, authorCount],
+        labels: ['Products', 'Categories', 'Blog Posts', 'Static Pages', 'Authors'],
+        colors: ['#8d4445', '#c16a6b', '#34272d', '#e7a2a3', '#a38d97'],
         plotOptions: {
             pie: {
                 donut: {

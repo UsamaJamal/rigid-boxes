@@ -15,12 +15,13 @@ class AdminContentController extends Controller
             'categories' => ['title' => 'Categories', 'singular' => 'Category'],
             'blogs' => ['title' => 'Blog Posts', 'singular' => 'Blog Post'],
             'pages' => ['title' => 'Static Pages', 'singular' => 'Page'],
+            'authors' => ['title' => 'Authors', 'singular' => 'Author'],
         ];
     }
 
     private function data(): array
     {
-        return ['products' => DB::table('admin_products')->get()->map(fn($r)=>(array)$r)->all(), 'categories' => DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all(), 'blogs' => DB::table('admin_blogs')->get()->map(fn($r)=>(array)$r)->all(), 'pages' => DB::table('admin_pages')->get()->map(fn($r)=>(array)$r)->all()];
+        return ['products' => DB::table('admin_products')->get()->map(fn($r)=>(array)$r)->all(), 'categories' => DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all(), 'blogs' => DB::table('admin_blogs')->get()->map(fn($r)=>(array)$r)->all(), 'pages' => DB::table('admin_pages')->get()->map(fn($r)=>(array)$r)->all(), 'authors' => DB::table('admin_authors')->get()->map(fn($r)=>(array)$r)->all()];
     }
 
     public function dashboard()
@@ -55,6 +56,7 @@ class AdminContentController extends Controller
             'meta' => $this->modules()[$module],
             'categories' => $data['categories'],
             'products' => $data['products'],
+            'authors' => $data['authors'],
         ];
 
         if ($module === 'categories' && !empty($item['id'])) {
@@ -97,16 +99,18 @@ class AdminContentController extends Controller
     private function persist(Request $request, string $module, string $id)
     {
         $request->validate(['title' => 'required|string|max:255', 'slug' => 'nullable|string|max:255']);
-        $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages'][$module];
+        $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module];
         $columns = [
             'products' => ['title','slug','status','show_home','image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
             'categories' => ['title','slug','status','parent_id','show_in_nav','show_home','image','icon','hero_image','banner_image','hero_title','hero_badge','hero_description','description','products_heading','products_description','feature_title','why_choose_title','why_choose_description','meta_title','meta_description','meta_keywords','robots','schema'],
-            'blogs' => ['title','slug','status','show_home','image','author_name','publish_date','blog_category','tags','excerpt','content','author_description','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
+            'blogs' => ['title','slug','status','show_home','image','author_id','author_name','publish_date','blog_category','tags','excerpt','content','author_description','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
             'pages' => ['title','slug','status','show_home','image','heading','content','position','appearance','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
+            'authors' => ['title','slug','status','description','image','facebook','twitter','linkedin'],
         ][$module];
         $existing = ctype_digit((string)$id) ? DB::table($table)->where('id',(int)$id)->first() : null;
         $fields = $columns;
         $payload = collect($request->except(['_token','_method','images','existing_images','image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
+        \Log::info('AdminContentController payload for ' . $module, $payload);
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
 
         foreach (['show_home', 'show_in_nav'] as $checkboxField) {

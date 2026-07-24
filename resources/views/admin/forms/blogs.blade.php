@@ -39,9 +39,9 @@
             <div class="field">
                 <label>Status</label>
                 <select name="status">
-                    <option value="draft" @selected($v('status') === 'draft')>Draft</option>
-                    <option value="published" @selected($v('status') === 'published')>Published</option>
-                    <option value="inactive" @selected($v('status') === 'inactive')>Inactive</option>
+                    <option value="draft" {{ strtolower(trim($v('status'))) == 'draft' ? 'selected' : '' }}>Draft</option>
+                    <option value="published" {{ strtolower(trim($v('status'))) == 'published' ? 'selected' : '' }}>Published</option>
+                    <option value="inactive" {{ strtolower(trim($v('status'))) == 'inactive' ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
             
@@ -60,8 +60,13 @@
         <h3>Article Details</h3>
         <div class="form-grid">
             <div class="field">
-                <label>Author Name</label>
-                <input name="author_name" value="{{ $v('author_name') }}">
+                <label>Author</label>
+                <select name="author_id">
+                    <option value="">Select an Author</option>
+                    @foreach($authors as $author)
+                        <option value="{{ $author['id'] }}" {{ $v('author_id') == $author['id'] ? 'selected' : '' }}>{{ $author['title'] }}</option>
+                    @endforeach
+                </select>
             </div>
             
             <div class="field">
@@ -108,11 +113,7 @@
                 <textarea name="content" style="min-height:300px">{{ $v('content') }}</textarea>
             </div>
             
-            <div class="field full">
-                <label>Author Description</label>
-                <textarea name="author_description">{{ $v('author_description') }}</textarea>
-            </div>
-            
+
             <div class="field">
                 <label>Image Alt Text</label>
                 <input name="alt_text" value="{{ $v('alt_text') }}">

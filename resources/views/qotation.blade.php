@@ -48,9 +48,10 @@
         }
 
         .iq-page-hero {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 30px 24px 20px;
+            padding: 30px 55px 20px 55px;
             text-align: center;
             box-sizing: border-box;
         }
@@ -92,9 +93,10 @@
         }
 
         .iq-page-container {
-            max-width: 1440px;
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 24px 60px;
+            padding: 0 55px 60px 55px;
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
@@ -198,7 +200,7 @@
         }
 
         .iq-sidebar-card {
-            background-color: #FFFFFF;
+            background-color: #F0F0F0;
             padding: 24px;
             border-radius: 12px;
             border: 1px solid #E8E2DF;
@@ -231,13 +233,13 @@
 
         @media (max-width: 600px) {
             .iq-page-hero {
-                padding: 20px 16px 16px;
+                padding: 20px 20px 16px;
             }
             .iq-breadcrumb {
                 margin-bottom: 16px;
             }
             .iq-page-container {
-                padding: 0 16px 40px;
+                padding: 0 20px 40px;
                 gap: 20px;
             }
             .iq-page-form-card {

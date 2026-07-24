@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author - Ahmed Khan - Rigid Boxes</title>
+    <title>Author - {{ $author['title'] }} - Rigid Boxes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -39,8 +39,8 @@
             --color-link-hover: #5F2D2F;
 
             /* Spacing */
-            --container-max-width: 1440px;
-            --container-padding: 24px;
+            --container-max-width: 1240px;
+            --container-padding: 20px;
             --section-spacing: 64px;
             --card-gap: 30px;
         }
@@ -64,11 +64,8 @@
            ========================================================================== */
 
         .container {
-            max-width: var(--container-max-width);
+            width: min(calc(100% - 40px), var(--container-max-width));
             margin: 0 auto;
-            padding-left: var(--container-padding);
-            padding-right: var(--container-padding);
-            width: 100%;
         }
 
         /* ==========================================================================
@@ -667,32 +664,43 @@
                 <nav class="breadcrumb" aria-label="Breadcrumb">
                     <a href="/">HOME</a>
                     <span>/</span>
-                    <span aria-current="page">AUTHOR</span>
+                    <span aria-current="page" style="text-transform: uppercase;">{{ $author['title'] }}</span>
                 </nav>
 
                 <div class="hero-content">
                     <div class="author-image-wrapper">
-                        <img src="{{ asset('uploads/author-hero.png') }}" alt="Ahmed Khan" class="author-image">
-
+                        @if(!empty($author['image']))
+                            @php $img = \Illuminate\Support\Str::startsWith($author['image'], ['http', 'storage/', 'uploads/', 'images/']) ? asset($author['image']) : asset('storage/'.$author['image']); @endphp
+                            <img src="{{ $img }}" alt="{{ $author['title'] }}" class="author-image" onerror="this.style.display='none'">
+                        @endif
                     </div>
                     <div class="author-info">
-                        <h1 class="author-name">Ahmed Khan</h1>
-                        <p class="author-title">Packaging Specialist & Content Writer</p>
+                        <h1 class="author-name">{{ $author['title'] }}</h1>
                         <p class="author-bio">
-                            Ahmed Khan is a Senior Packaging Consultant with over 10 years of experience in custom
-                            packaging. He specializes in creating innovative, sustainable packaging solutions that
-                            strengthen brand identity and enhance customer experience. With deep industry knowledge and
-                            a focus on quality, Ahmed helps businesses turn their packaging ideas into impactful,
-                            market-ready solutions.
+                            {{ $author['description'] }}
                         </p>
                         <div class="author-social">
-                            <a href="#" class="social-link" aria-label="LinkedIn Profile">
+                            @if(!empty($author['linkedin']))
+                            <a href="{{ $author['linkedin'] }}" class="social-link" aria-label="LinkedIn Profile" target="_blank">
                                 <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                                     <path
                                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                 </svg>
                                 LinkedIn
                             </a>
+                            @endif
+                            @if(!empty($author['twitter']))
+                            <a href="{{ $author['twitter'] }}" class="social-link" aria-label="Twitter Profile" target="_blank">
+                                <i class="fa-brands fa-twitter social-icon"></i>
+                                Twitter
+                            </a>
+                            @endif
+                            @if(!empty($author['facebook']))
+                            <a href="{{ $author['facebook'] }}" class="social-link" aria-label="Facebook Profile" target="_blank">
+                                <i class="fa-brands fa-facebook social-icon"></i>
+                                Facebook
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -703,251 +711,25 @@
         <section class="blog-section">
             <div class="container">
                 <h2 class="section-title">Blog Posts By This Author</h2>
-                <div class="blog-grid">
-                    <!-- Blog Card 1 -->
-                    <a href="#" class="blog-card">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
+                @if(isset($blogs) && count($blogs) > 0)
+                    <div class="blog-grid">
+                        @foreach($blogs as $item)
+                        <article class="blog-card">
+                            <div class="card-image-wrapper">
+                                @php $blogImg = !empty($item['image']) ? (\Illuminate\Support\Str::startsWith($item['image'], ['http', 'storage/', 'uploads/', 'images/']) ? asset($item['image']) : asset('storage/'.$item['image'])) : asset('images/below-hero.png'); @endphp
+                                <img src="{{ $blogImg }}" alt="{{ $item['title'] }}" class="card-image" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                             </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 2 -->
-                    <a href="#" class="blog-card">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
+                            <div class="card-content">
+                                <h3 class="card-heading">{{ $item['title'] }}</h3>
+                                <p class="card-description">{{ Str::limit(strip_tags($item['excerpt'] ?: $item['content']), 120) }}</p>
+                                <a href="{{ url('/blog/' . $item['slug']) }}" class="read-more">Read Full Article</a>
                             </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 3 -->
-                    <a href="#" class="blog-card">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 4 -->
-                    <a href="#" class="blog-card">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 5 -->
-                    <a href="#" class="blog-card hide-on-mobile">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 6 -->
-                    <a href="#" class="blog-card hide-on-mobile">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 7 -->
-                    <a href="#" class="blog-card hide-on-mobile">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 8 -->
-                    <a href="#" class="blog-card hide-on-mobile">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                    <!-- Blog Card 9 -->
-                    <a href="#" class="blog-card hide-on-mobile">
-                        <div class="card-image-wrapper">
-                            <img src="{{ asset('uploads/author-cards-img.svg') }}"
-                                alt="Sustainable Packaging Trends For 2026" class="card-image">
-                        </div>
-                        <div class="card-content">
-                            <div class="card-meta">
-                                <span class="card-author">Joe Damiley</span>
-                                <span>•</span>
-                                <span class="card-date">May 15, 2024</span>
-                            </div>
-                            <h3 class="card-heading">Sustainable Packaging Trends For 2026</h3>
-                            <p class="card-description">
-                                Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable
-                                materials and responsible production methods.
-                            </p>
-                            <span class="read-more">
-                                Read More
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </span>
-                        </div>
-                    </a>
-
-                </div>
+                        </article>
+                        @endforeach
+                    </div>
+                @else
+                    <p style="font-family: 'Open Sans', sans-serif; font-size: 16px; color: #555;">No published blogs found for this author yet.</p>
+                @endif
             </div>
         </section>
     </main>

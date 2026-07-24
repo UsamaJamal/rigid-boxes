@@ -425,7 +425,14 @@ html, body { overflow-x: hidden; }
     <article class="card" data-category="{{ $bCat }}">
         <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
         <div class="card-copy">
-            <div class="meta"><span>{{ $bAuthor }}</span><time>{{ $bDate }}</time></div>
+            <div class="meta">
+                @if(!empty($item['author_slug']))
+                    <a href="{{ url('/author/' . $item['author_slug']) }}" style="color:inherit;text-decoration:none;"><span>{{ $bAuthor }}</span></a>
+                @else
+                    <span>{{ $bAuthor }}</span>
+                @endif
+                <time>{{ $bDate }}</time>
+            </div>
             <h3>{{ $bTitle }}</h3>
             <p>{{ Str::limit($bExcerpt, 90) }}</p>
             <a class="button" href="{{ $bUrl }}">Read More &rarr;</a>
