@@ -407,15 +407,45 @@ html, body { overflow-x: hidden; }
 <button class="filter" data-filter="design"><img src="{{ asset('images/blog-filter-design.png') }}" class="filter-icon" alt=""> Design Tips</button>
 <button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt=""> Industry Specific Studies</button>
 </div></nav>
-<section class="container content"><article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2>The Weight of Prestige: Why Mass Matters in Rigid Construction</h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
+<section class="container content">
 @php
-    $displayBlogs = !empty($blogs) ? $blogs : [
+    $featuredBlog = null;
+    $displayBlogs = [
         ['title' => 'Sustainable Packaging Trends For 2026', 'blog_category' => 'packaging', 'image' => 'images/Frame 571 (1).png', 'author_name' => 'Joe Danley', 'publish_date' => '2024-11-15', 'excerpt' => 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable', 'slug' => 'sustainable-packaging-trends'],
     ];
+    if (!empty($blogs) && count($blogs) > 0) {
+        $blogsArray = json_decode(json_encode($blogs), true);
+        $featuredBlog = $blogsArray[0];
+        $displayBlogs = array_slice($blogsArray, 1);
+    }
 @endphp
+
+@if($featuredBlog)
+    @php
+        $fTitle = $featuredBlog['title'] ?? '';
+        $fCat = str_replace('-', ' ', $featuredBlog['blog_category'] ?? 'Category');
+        $fExcerpt = $featuredBlog['excerpt'] ?? '';
+        $fSlug = $featuredBlog['slug'] ?? '';
+        $fImg = !empty($featuredBlog['image']) ? asset($featuredBlog['image']) : asset('images/below-hero.png');
+        $fUrl = url('/blog/' . $fSlug);
+    @endphp
+    <article class="feature">
+        <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <div class="feature-copy">
+            <p class="eyebrow">{{ $fCat }}</p>
+            <h2><a href="{{ $fUrl }}" style="color:inherit; text-decoration:none;">{{ $fTitle }}</a></h2>
+            <p>{{ Str::limit(strip_tags($fExcerpt), 150) }}</p>
+            <a class="button" href="{{ $fUrl }}">Read More &rarr;</a>
+        </div>
+    </article>
+@else
+    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
+@endif
+
 <div class="grid">
 @foreach($displayBlogs as $item)
     @php
+        $item = (array) $item;
         $bTitle = $item['title'] ?? 'Sustainable Packaging Trends For 2026';
         $bCat = $item['blog_category'] ?? 'packaging';
         $bAuthor = $item['author_name'] ?? 'Joe Danley';
@@ -436,8 +466,8 @@ html, body { overflow-x: hidden; }
                 @endif
                 <time>{{ $bDate }}</time>
             </div>
-            <h3>{{ $bTitle }}</h3>
-            <p>{{ Str::limit($bExcerpt, 90) }}</p>
+            <h3><a href="{{ $bUrl }}" style="color:inherit; text-decoration:none;">{{ $bTitle }}</a></h3>
+            <p>{{ Str::limit(strip_tags($bExcerpt), 90) }}</p>
             <a class="button" href="{{ $bUrl }}">Read More &rarr;</a>
         </div>
     </article>

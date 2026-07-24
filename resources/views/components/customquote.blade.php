@@ -119,6 +119,25 @@
         appearance: none;
         -webkit-appearance: none;
     }
+    .pref-input {
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+        border: 1px solid var(--primary-color);
+        border-radius: 6px;
+        padding: 0 14px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        color: #333;
+        background: #FAFAFA;
+        outline: none;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+    }
+    .pref-input:focus {
+        border-color: var(--primary-color);
+        background: #fff;
+    }
 
     .select-wrapper::after {
         content: '';
@@ -206,7 +225,7 @@
 
     .preferences-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         width: 100%;
     }
@@ -452,7 +471,7 @@
             width: 100%;
         }
         .preferences-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: minmax(0, 1fr);
             gap: 11px 8px;
         }
         .form-row input,
@@ -584,20 +603,12 @@
                 <div class="select-wrapper">
                     <select>
                         <option value="" disabled selected>Select CAD Sample</option>
-                        <option>Digital Proof</option>
-                        <option>Physical Sample</option>
-                        <option>No Sample</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
-                <div class="select-wrapper">
-                    <select>
-                        <option value="" disabled selected>Select Units</option>
-                        <option>100</option>
-                        <option>250</option>
-                        <option>500</option>
-                        <option>1,000</option>
-                        <option>5,000+</option>
-                    </select>
+                <div class="input-wrapper" style="flex: 1; min-width: 0;">
+                    <input type="number" class="pref-input" placeholder="Enter Units" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </div>
             </div>
 
