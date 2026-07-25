@@ -230,16 +230,6 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.06);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.10);
 }
 .card img {
     height: 233px !important;
@@ -465,7 +455,7 @@ html, body { overflow-x: hidden; }
         $bImg = !empty($item['image']) ? asset($item['image']) : asset('images/Frame 571 (1).png');
         $bUrl = url('/blog/' . $bSlug);
     @endphp
-    <a class="card" href="{{ $bUrl }}" data-category="{{ $bCat }}" aria-label="{{ $bTitle }}">
+    <article class="card" data-category="{{ $bCat }}">
         <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
         <div class="card-copy">
             <div class="meta">
@@ -480,7 +470,7 @@ html, body { overflow-x: hidden; }
             <p>{{ Str::limit(strip_tags($bExcerpt), 90) }}</p>
             <a class="button" href="{{ $bUrl }}">Read More &rarr;</a>
         </div>
-    </a>
+    </article>
 @endforeach
 </div>
 <style>
