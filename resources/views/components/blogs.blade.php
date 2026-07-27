@@ -299,7 +299,7 @@
 
         <div class="blogs-header">
             <div class="blogs-header-text">
-                <h2 class="blogs-title">Packaging Insights &amp; Industry Trends</h2>
+                <span class="blogs-title" style="display: block;">Packaging Insights &amp; Industry Trends</span>
                 <p class="blogs-subtitle">Stay updated with packaging trends, design ideas, and expert tips to make smarter packaging decisions.</p>
             </div>
             <a href="/blog" class="view-all-blogs-btn desktop-btn">View All Blogs</a>

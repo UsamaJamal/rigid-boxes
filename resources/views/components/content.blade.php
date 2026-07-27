@@ -74,27 +74,32 @@
         margin-bottom: 0;
     }
 
-    .text-content-body ul {
-        list-style: none;
-        padding: 0;
+    .text-content-body ul,
+    .text-content-body ol {
+        padding-left: 2rem;
         margin: 0 0 14px 0;
     }
 
-    .text-content-body ul li {
+    .text-content-body ul {
+        list-style-type: disc;
+    }
+
+    .text-content-body ol {
+        list-style-type: decimal;
+    }
+
+    .text-content-body li {
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
         color: #333;
         line-height: 1.7;
-        padding-left: 20px;
-        position: relative;
+        padding-left: 4px;
         margin-bottom: 4px;
     }
 
-    .text-content-body ul li::before {
-        content: '•';
-        position: absolute;
-        left: 4px;
+    .text-content-body li::marker {
         color: #333;
+        font-weight: 600;
     }
 
     .text-content-body a {
@@ -141,7 +146,7 @@
             margin-bottom: 14px;
         }
         .text-content-body p,
-        .text-content-body ul li {
+        .text-content-body li {
             font-size: 13.5px;
             line-height: 1.55;
             margin-bottom: 10px;

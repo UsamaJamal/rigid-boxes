@@ -313,7 +313,7 @@
 <section class="testimonial-section">
     <div class="testimonial-container">
         <div class="testimonial-header">
-            <h2 class="testimonial-title">What Our Clients Say</h2>
+            <span class="testimonial-title" style="display: block;">What Our Clients Say</span>
             <p class="testimonial-subtitle">Trusted by brands that value premium quality, reliable production, and luxury packaging that leaves a lasting impression.</p>
         </div>
 

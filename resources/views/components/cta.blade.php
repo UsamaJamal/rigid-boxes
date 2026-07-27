@@ -222,7 +222,7 @@
             <div class="cta-text-card">
                 <img src="{{ asset('uploads/cta-ellipse-1.png') }}" alt="" class="cta-ellipse cta-ellipse-1">
                 <img src="{{ asset('uploads/cta-ellipse-2.png') }}" alt="" class="cta-ellipse cta-ellipse-2">
-                <h2 class="cta-heading">Get Your Custom Packaging<br>Today</h2>
+                <span class="cta-heading" style="display: block;">Get Your Custom Packaging<br>Today</span>
                 <p class="cta-desc">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
                 <a href="/request-quote" class="cta-btn">
                     Get Started Today

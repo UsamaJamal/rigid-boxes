@@ -215,6 +215,30 @@
             color: var(--color-ink);
         }
 
+        .article-body ul,
+        .article-body ol {
+            margin: 0 0 22px;
+            padding-left: 2rem;
+        }
+
+        .article-body ul {
+            list-style-type: disc;
+        }
+
+        .article-body ol {
+            list-style-type: decimal;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        .article-body li::marker {
+            color: var(--color-ink);
+            font-weight: 600;
+        }
+
         /* Callout Box / Key Insight */
         .callout-box {
             background: #FAF5F5;
@@ -864,6 +888,9 @@
 
             <!-- Left Main Column -->
             <article class="article-body">
+                @if(!empty($blog['content']))
+                    {!! $blog['content'] !!}
+                @else
                 <p>The luxury packaging landscape is shifting faster than ever. Between sustainability mandates, digital integration, and ever-rising consumer expectations, brands that adapt early aren't just surviving — they're capturing disproportionate market attention. Here are the seven trends that will define premium packaging through 2026 and beyond.</p>
 
                 <h2>1. Bio-Based Rigid Board Goes Mainstream</h2>
@@ -906,6 +933,7 @@
                 <h2>7. Transparency as a Luxury Signal</h2>
                 <p>Today's buyers want to know where materials came from, who assembled the box, and what happens to it after disposal. Smart packaging with QR codes that trace the supply chain, or simply printed details about the box's recycled content, transform transparency into a brand strength. In a market saturated with noise, the brands that win are those that treat packaging not as a cost center, but as a strategic asset.</p>
                 <p>The trends above aren't predictions — they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
+                @endif
 
                 <hr class="author-divider">
 

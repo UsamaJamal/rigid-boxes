@@ -96,6 +96,24 @@ class AdminContentController extends Controller
         return $this->persist($request, $module, $id);
     }
 
+    public function uploadTinyMceMedia(Request $request)
+    {
+        $request->validate([
+            'file' => [
+                'required',
+                'file',
+                'max:51200',
+                'mimetypes:image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm,video/ogg',
+            ],
+        ]);
+
+        $path = $request->file('file')->store('admin/tinymce', 'public');
+
+        return response()->json([
+            'location' => asset('storage/' . $path),
+        ]);
+    }
+
     private function persist(Request $request, string $module, string $id)
     {
         $request->validate(['title' => 'required|string|max:255', 'slug' => 'nullable|string|max:255']);

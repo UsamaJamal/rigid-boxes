@@ -520,15 +520,10 @@
     <div class="quote-container">
 
         <!-- Left: Form Card -->
-        <form class="quote-form-card" action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        <div class="quote-form-card">
+            <form action="{{ url('/submit-quote') }}" method="POST">
+                @csrf
             <h2 class="quote-form-title">Get Custom Quote</h2>
-            
-            @if(session('success'))
-                <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             <!-- Contact Information -->
             <p class="form-section-label">Contact Information</p>
@@ -629,7 +624,8 @@
             <div class="quote-btn-wrap">
                 <button type="submit" class="quote-submit-btn">Get Free Quote</button>
             </div>
-        </form>
+            </form>
+        </div>
 
         <!-- Right: Steps -->
         <div class="quote-steps">
