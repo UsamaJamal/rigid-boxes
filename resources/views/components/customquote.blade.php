@@ -8,6 +8,16 @@
         overflow: hidden;
         margin-top: 20px;
     }
+    
+    /* Remove number input spinners */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 
     .quote-container {
         max-width: 1440px;
@@ -119,6 +129,10 @@
         appearance: none;
         -webkit-appearance: none;
     }
+    .select-wrapper select option:checked {
+        background: var(--primary-color) linear-gradient(0deg, var(--primary-color) 0%, var(--primary-color) 100%);
+        color: #fff;
+    }
     .pref-input {
         width: 100%;
         min-width: 0;
@@ -207,6 +221,11 @@
         appearance: none;
         -webkit-appearance: none;
         box-sizing: border-box;
+    }
+    
+    .specs-unit select option:checked {
+        background: var(--primary-color) linear-gradient(0deg, var(--primary-color) 0%, var(--primary-color) 100%);
+        color: #fff;
     }
 
     .specs-unit::after {
@@ -471,7 +490,7 @@
             width: 100%;
         }
         .preferences-grid {
-            grid-template-columns: minmax(0, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 11px 8px;
         }
         .form-row input,
@@ -523,6 +542,7 @@
         <div class="quote-form-card">
             <form action="{{ url('/submit-quote') }}" method="POST">
                 @csrf
+
             <h2 class="quote-form-title">Get Custom Quote</h2>
 
             <!-- Contact Information -->
@@ -557,7 +577,7 @@
                         $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
                     @endphp
                     <select name="box_style">
-                        <option value="" disabled selected>Select Your Box Style</option>
+                        <option value="" disabled selected>Box Style</option>
                         @foreach($boxStyles as $style)
                             <option value="{{ $style->title }}">{{ $style->title }}</option>
                         @endforeach
@@ -609,8 +629,8 @@
                         <option value="No">No</option>
                     </select>
                 </div>
-                <div class="input-wrapper" style="flex: 1; min-width: 0;">
-                    <input type="number" name="quantity" class="pref-input" placeholder="Enter Units (Quantity)" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                <div class="pref-input-wrapper">
+                    <input type="number" name="quantity" class="pref-input" placeholder="Quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 </div>
             </div>
 

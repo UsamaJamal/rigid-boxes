@@ -27,7 +27,7 @@
     max-width: none;
 }
 .content { padding-bottom: 0; }
-.content > .cta-section { margin-top: 40px; padding-bottom: 24px; }
+.content > .cta-section { margin-top: 15px; padding-bottom: 24px; }
 .hero {
     width: 100vw;
     max-width: none;
@@ -42,6 +42,9 @@
     width: min(calc(100% - (var(--gutter) * 2)), var(--section-width));
 }
 /* Give the breadcrumb clearer separation from the hero title. */
+.hero .container > div {
+    margin-top: -40px;
+}
 .hero .breadcrumb {
     position: relative;
     top: -8px;

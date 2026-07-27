@@ -76,7 +76,7 @@
     font-size: clamp(16px, 2vw, 24px);
     font-weight: 600;
     font-style: normal;
-    line-height: 34px;
+    line-height: 42px;
     letter-spacing: 0%;
     margin-bottom: 4px;
     color: #FFFFFF;
@@ -388,7 +388,7 @@
         font-size: 18px;
         font-weight: 600;
         font-style: normal;
-        line-height: 26px;
+        line-height: 32px;
         letter-spacing: 0%;
         color: #FFFFFF;
         margin-bottom: 0;
@@ -558,7 +558,7 @@
     .newsletter-text h3 {
         width: 100%;
         font-size: 15px;
-        line-height: 22px;
+        line-height: 28px;
     }
 
     .newsletter-form {
@@ -625,7 +625,7 @@
 
     .newsletter-text h3 {
         font-size: 14px;
-        line-height: 20px;
+        line-height: 26px;
     }
 
     .newsletter-form {

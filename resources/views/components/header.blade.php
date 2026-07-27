@@ -463,7 +463,7 @@
             right: -80vw;
             width: 80vw;
             height: 100vh;
-            background: var(--background-color);
+            background: var(--secondary-color);
             z-index: 999;
             transition: right 0.3s ease;
             box-shadow: -2px 0 10px rgba(0,0,0,0.1);
@@ -726,28 +726,34 @@
                 <li><a href="/blog">Blogs</a></li>
             </ul>
 
-            <div class="mobile-contact">
-                <div class="contact-item">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-                        <path d="M14 22h-4"></path>
+            <a href="/contact" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
+
+            <div class="mobile-contact" style="margin-top: 0; gap: 0; display: flex; flex-direction: column;">
+                <h3 style="font-family: 'DM Sans', sans-serif; font-size: 18px; margin-bottom: 20px; color: #000;">Get In Touch</h3>
+                
+                <div class="contact-item" style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; padding-left: 30px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
-                    <div class="contact-item-text">
-                        <span>Call Us 24/7</span>
-                        <strong>{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</strong>
-                    </div>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400;">{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</span>
                 </div>
 
-                <div class="contact-item">
-                    <div class="contact-item-text">
-                        <span>Email</span>
-                        <strong>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
-                    </div>
+                <div class="contact-item" style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; padding-left: 30px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400;">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</span>
+                </div>
+
+                <div class="contact-item" style="display: flex; align-items: flex-start; gap: 15px; padding-left: 30px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400;">{!! strip_tags(str_replace('<br>', ' ', $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd Suite 207 Houston, TX 77077')) !!}</span>
                 </div>
             </div>
-
-            <a href="/contact" class="get-quote-btn" style="width: 100%;">Get Instant Quote</a>
         </div>
     </div>
 </header>

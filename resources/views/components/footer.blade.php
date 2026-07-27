@@ -4,7 +4,7 @@
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <h3>Sign Up For Exclusive Offers And Updates!</h3>
+                    <h3>Sign Up For Exclusive Offers<br>And Updates!</h3>
                 </div>
                 <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
                     @csrf
@@ -130,3 +130,130 @@
 </footer>
 
 <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+
+
+<div id="successPopup" class="success-popup-overlay" style="display: none;">
+    <div class="success-popup-box">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+        <h2>Thank You!</h2>
+        <p>{{ session('success') }}</p>
+        <button onclick="document.getElementById('successPopup').style.display='none'">Close</button>
+    </div>
+</div>
+<style>
+.success-popup-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+}
+.success-popup-box {
+    background: #fff; padding: 30px; border-radius: 12px;
+    text-align: center; max-width: 400px; width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: popIn 0.4s ease;
+}
+.success-icon {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #e8f5e9; color: #4caf50;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 15px;
+}
+.success-icon svg { width: 35px; height: 35px; }
+.success-popup-box h2 { color: #333; margin-bottom: 10px; font-family: 'Open Sans', sans-serif; }
+.success-popup-box p { color: #666; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
+.success-popup-box button {
+    background: #8D4445; color: #fff; border: none;
+    padding: 10px 30px; border-radius: 6px; font-size: 16px;
+    cursor: pointer; font-weight: 600; transition: background 0.2s;
+}
+.success-popup-box button:hover { background: #6b3334; }
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
+<script>
+    setTimeout(function() {
+        var popup = document.getElementById('successPopup');
+        if(popup) { popup.style.display = 'none'; }
+    }, 6000);
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ajaxForms = document.querySelectorAll('form[action*="/submit-quote"], form[action*="/submit-newsletter"], form[action*="/submit-contact"]');
+    
+    ajaxForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+            if(submitBtn) submitBtn.innerHTML = 'Submitting...';
+            
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(submitBtn) submitBtn.innerHTML = originalBtnText;
+                
+                // Show Global Popup
+                const popup = document.getElementById('successPopup');
+                if(popup) {
+                    popup.querySelector('p').innerText = data.success || 'Submitted successfully!';
+                    popup.style.display = 'flex';
+                }
+                
+                // Handle Inline Message
+                let inlineMsg = form.querySelector('.ajax-inline-success');
+                if(!inlineMsg) {
+                    inlineMsg = document.createElement('div');
+                    inlineMsg.className = 'ajax-inline-success';
+                    inlineMsg.style.backgroundColor = '#d4edda';
+                    inlineMsg.style.color = '#155724';
+                    inlineMsg.style.padding = '10px';
+                    inlineMsg.style.borderRadius = '5px';
+                    inlineMsg.style.marginBottom = '20px';
+                    inlineMsg.style.fontSize = '14px';
+                    inlineMsg.style.transition = 'opacity 0.5s';
+                    
+                    // Insert at the top of the form
+                    form.insertBefore(inlineMsg, form.firstChild);
+                }
+                inlineMsg.innerText = data.success || 'Submitted successfully!';
+                inlineMsg.style.display = 'block';
+                inlineMsg.style.opacity = '1';
+                
+                // Reset form
+                form.reset();
+                
+                // Hide after 20 seconds
+                setTimeout(() => {
+                    if(popup) popup.style.display = 'none';
+                    if(inlineMsg) {
+                        inlineMsg.style.opacity = '0';
+                        setTimeout(() => inlineMsg.style.display = 'none', 500);
+                    }
+                }, 20000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                if(submitBtn) submitBtn.innerHTML = originalBtnText;
+                alert('An error occurred. Please try again.');
+            });
+        });
+    });
+});
+</script>

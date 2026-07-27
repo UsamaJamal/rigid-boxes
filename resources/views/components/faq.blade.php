@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .faq-section {
         background: var(--background-color, #FAF8F8);
-        padding: 42px 0 70px;
+        padding: 0px 0 70px;
         width: 100%;
         display: block;
     }
@@ -231,9 +231,7 @@
         }
 
         .faq-left {
-            width: 100%;
-            max-width: 461px;
-            height: auto;
+            display: none;
         }
 
         .faq-left-heading {
@@ -298,7 +296,7 @@
                 <a href="/contact" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">
-                <span class="faq-main-heading" style="display: block;">Frequently Asked Questions</span>
+                <span class="faq-main-heading">Frequently Asked Questions</span>
                 <div class="faq-list">
                     @if(count($displayFaqs) > 0)
                         @foreach($displayFaqs as $faq)

@@ -31,7 +31,7 @@ class QuoteFormMail extends Mailable
     public function build()
     {
         $mail = $this->subject('New Quote Request')
-                     ->markdown('emails.quote');
+                     ->view('emails.quote');
                      
         if (!empty($this->data['quote_file_path'])) {
             $mail->attach(storage_path('app/public/' . $this->data['quote_file_path']));

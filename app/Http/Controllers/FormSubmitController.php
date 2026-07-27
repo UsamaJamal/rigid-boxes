@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FormSubmitController extends Controller
 {
-    private $adminEmail = 'asadhafiz485@gmail.com';
+    private $adminEmail = 'quote@therigidbox.com';
 
     public function submitContact(Request $request)
     {
@@ -25,6 +25,9 @@ class FormSubmitController extends Controller
 
         Mail::to($this->adminEmail)->send(new ContactFormMail($validated));
 
+        if ($request->expectsJson()) {
+            return response()->json(['success' => 'Thank you for contacting us! Your message has been sent successfully.']);
+        }
         return back()->with('success', 'Thank you for contacting us! Your message has been sent successfully.');
     }
 
@@ -59,6 +62,9 @@ class FormSubmitController extends Controller
 
         Mail::to($this->adminEmail)->send(new QuoteFormMail($validated));
 
+        if ($request->expectsJson()) {
+            return response()->json(['success' => 'Thank you! Your request for a quote has been submitted successfully.']);
+        }
         return back()->with('success', 'Thank you! Your request for a quote has been submitted successfully.');
     }
 
@@ -70,6 +76,9 @@ class FormSubmitController extends Controller
 
         Mail::to($this->adminEmail)->send(new NewsletterMail($validated['email']));
 
+        if ($request->expectsJson()) {
+            return response()->json(['success' => 'Thank you for subscribing to our newsletter!']);
+        }
         return back()->with('success', 'Thank you for subscribing to our newsletter!');
     }
 }

@@ -17,6 +17,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <style>
+        /* Remove number input spinners globally */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
         :root {
             --primary-color: #8D4445;
             --secondary-color: #F8EEEC;
@@ -306,6 +316,9 @@
             user-select: none;
             text-align: left;
             color: var(--color-text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .custom-select-trigger::after {
@@ -704,7 +717,8 @@
             flex: 1;
             min-width: 250px;
             max-width: 325px;
-            height: 220px;
+            height: auto;
+            min-height: 220px;
             background-color: #F8EEEC;
             border-radius: 8px;
             padding: 25px 18px;
@@ -1263,40 +1277,9 @@
                 margin-right: auto;
             }
             .finishes-grid {
-                gap: 20px;
-            }
-            .finishes-details-box {
-                order: -1;
-                flex: none;
-                width: 100%;
-                height: auto;
-                padding: 0;
-                background: transparent;
-                border-radius: 0;
-            }
-            .finishes-top-text,
-            .finishes-middle-list {
-                display: none;
-            }
-            .finishes-bottom-nav {
                 display: flex;
-                flex-direction: row;
-                gap: 6px;
-                width: 100%;
-                margin: 0;
-                overflow-x: auto;
-                padding: 0 0 2px;
-                scrollbar-width: none;
-            }
-            .finishes-bottom-nav::-webkit-scrollbar {
-                display: none;
-            }
-            .finishes-bottom-nav span {
-                flex: 0 0 142px;
-                width: 142px;
-                padding: 11px 10px;
-                font-size: 12px;
-                line-height: 14px;
+                flex-direction: column;
+                gap: 16px;
             }
             .finishes-image-container {
                 order: 1;
@@ -1305,6 +1288,86 @@
                 aspect-ratio: 1.34;
                 height: auto;
                 border-radius: 16px;
+                position: relative;
+                overflow: hidden;
+            }
+            .finishes-details-box {
+                order: 2;
+                flex: none;
+                width: 100%;
+                height: auto;
+                padding: 24px 18px;
+                background: #FAF4F2;
+                border-radius: 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                box-sizing: border-box;
+            }
+            .finishes-top-text {
+                display: block !important;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 18px;
+                font-weight: 700;
+                color: #000000;
+            }
+            .finishes-middle-list {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                width: 100%;
+                overflow-x: auto;
+                padding: 4px 0;
+                scrollbar-width: none;
+            }
+            .finish-item-light {
+                font-size: 14px;
+                color: #999999;
+                font-weight: 500;
+                white-space: nowrap;
+            }
+            .finish-item-dark {
+                font-size: 16px;
+                color: #000000;
+                font-weight: 700;
+                border-bottom: 2px solid #8C3A3A;
+                padding-bottom: 4px;
+                white-space: nowrap;
+            }
+            .finishes-bottom-nav {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+            .finishes-bottom-nav span {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 12px 14px;
+                border: 1px solid #E5D5D5;
+                border-radius: 6px;
+                background-color: #FAF4F2;
+                font-weight: 600;
+                font-size: 12px;
+                color: #333333;
+                text-transform: uppercase;
+                box-sizing: border-box;
+                flex: none;
+            }
+            .finishes-bottom-nav span.active-nav,
+            .finishes-bottom-nav span[style*="font-weight: 700"] {
+                background-color: #8C3A3A !important;
+                color: #FFFFFF !important;
+                border-color: #8C3A3A !important;
+                font-weight: 700 !important;
             }
             .carousel-dots {
                 bottom: 10px;
@@ -1347,6 +1410,10 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 15px;
+            }
+            .form-control option:checked {
+                background: var(--primary-color) linear-gradient(0deg, var(--primary-color) 0%, var(--primary-color) 100%);
+                color: #fff;
             }
             .form-row-2col {
                 grid-template-columns: 1fr 1fr;
@@ -1538,51 +1605,40 @@
             }
             .mobile-heading-break { display: block; }
 
-            /* Figma mobile finishes layout */
+            /* Mobile finishes layout override */
             .finishes-details-box {
-                order: -1;
-                flex: none;
+                order: 2;
                 width: 100%;
-                padding: 0;
-                background: transparent;
-                border-radius: 0;
+                padding: 24px 18px;
+                background: #FAF4F2;
+                border-radius: 16px;
             }
-            .finishes-top-text,
+            .finishes-top-text {
+                display: block !important;
+            }
             .finishes-middle-list {
-                display: none !important;
+                display: flex !important;
+                flex-direction: row !important;
             }
             .finishes-bottom-nav {
-                display: flex;
-                flex-direction: row;
-                gap: 6px;
-                width: 100%;
-                margin: 0;
-                overflow-x: auto;
-                padding: 0 0 2px;
-                scrollbar-width: none;
-            }
-            .finishes-bottom-nav::-webkit-scrollbar {
-                display: none;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 8px;
             }
             .finishes-bottom-nav span {
-                flex: 0 0 142px;
-                width: 142px;
-                padding: 11px 10px;
-                font-size: 12px;
-                line-height: 14px;
+                flex: none;
+                width: 100%;
+                display: block;
             }
             .finishes-image-container {
                 order: 1;
-                flex: none;
                 width: 100%;
-                aspect-ratio: 1.34;
-                height: auto;
                 border-radius: 16px;
             }
             .carousel-dots {
-                bottom: 10px;
-                left: 25px;
-                gap: 3px;
+                bottom: 12px;
+                left: 20px;
+                gap: 5px;
             }
             .carousel-dot {
                 width: 7px;
@@ -1711,11 +1767,7 @@
                 
                 <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @if(session('success'))
-                        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+
                     <div class="form-section">
                         <span class="section-label">Contact Information</span>
                         <div class="form-grid-3">
@@ -1747,7 +1799,7 @@
                                 $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
                             @endphp
                             <select name="box_style" class="form-control" id="pref-box-style">
-                                <option value="" disabled selected>Select Your Box Style</option>
+                                <option value="" disabled selected>Box Style</option>
                                 @foreach($boxStyles as $style)
                                     <option value="{{ $style->title }}">{{ $style->title }}</option>
                                 @endforeach
@@ -1783,9 +1835,11 @@
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-2-upload">
-                            <input type="number" name="quantity" class="form-control" placeholder="Quantity (e.g. 100)" required>
-                            <div class="file-upload-wrap">
-                                <input type="file" name="quote_file" class="form-control" style="border-radius: 6px;">
+                            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
+                            <div class="file-upload-wrap" style="position: relative;">
+                                <input type="file" name="quote_file" id="quote_file_input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="document.getElementById('quote_file_text').value = this.files.length > 0 ? this.files[0].name : ''">
+                                <input type="text" id="quote_file_text" class="form-control" placeholder="No File Choosen" readonly style="pointer-events: none;">
+                                <button type="button" class="upload-btn" style="pointer-events: none;">Upload</button>
                             </div>
                         </div>
                     </div>
@@ -2013,6 +2067,7 @@
                             <label>Box Style *</label>
                             <select name="box_style" class="form-control" id="quote-box-style">
                                 <option value="">Select style</option>
+                                <option value="{{ $product['title'] ?? 'Custom Box' }}" selected>{{ $product['title'] ?? 'Custom Box' }}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -2278,7 +2333,7 @@ function toggleFaq(element) {
                         currentItemIndex = index;
                         updateTabContent(currentTabIndex);
                         clearInterval(autoplayTimer);
-                        autoplayTimer = setInterval(advanceCarousel, 3000);
+                        autoplayTimer = setInterval(advanceCarousel, 4000);
                     });
                     carouselDotsContainer.appendChild(dot);
                 }
@@ -2384,7 +2439,7 @@ function toggleFaq(element) {
                                 
                                 // Reset autoplay timer
                                 clearInterval(autoplayTimer);
-                                autoplayTimer = setInterval(advanceCarousel, 3000);
+                                autoplayTimer = setInterval(advanceCarousel, 4000);
                             });
                             
                         itemsContainer.appendChild(itemDiv);
@@ -2421,13 +2476,13 @@ function toggleFaq(element) {
             }
 
             // Start auto play
-            autoplayTimer = setInterval(advanceCarousel, 3000);
+            autoplayTimer = setInterval(advanceCarousel, 4000);
             
             // Pause on hover
             const heroFormElement = document.querySelector('.hero-form');
             if (itemsContainer) {
                 itemsContainer.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
-                itemsContainer.addEventListener('mouseleave', () => autoplayTimer = setInterval(advanceCarousel, 3000));
+                itemsContainer.addEventListener('mouseleave', () => autoplayTimer = setInterval(advanceCarousel, 4000));
             }
 
             // Render the correct number of dots and load the initial final image.

@@ -180,6 +180,11 @@
             color: #333;
             text-align: left;
             flex: 1; /* pushes button down */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Button — Figma: left:46px w:200 h:46
@@ -410,6 +415,8 @@
             position: relative;
             grid-column: 3 / span 2;
             grid-row: 1;
+            display: flex;
+            align-items: center;
         }
         .wc-blue .why-card__content {
             max-width: 55%;
@@ -447,6 +454,8 @@
             height: 242px;
             grid-column: 1 / span 2;
             grid-row: 3;
+            display: flex;
+            align-items: center;
         }
         .wc-yellow .why-card__content {
             max-width: 55%;
@@ -779,14 +788,16 @@
             .premium-desc    { width: 100%; }
         }
 
+        @media (max-width: 768px) {
+            .premium-icons { display: none; }
+        }
+
         @media (max-width: 480px) {
             .premium-section  { padding: 20px 0 30px; }
             .premium-inner    { flex-direction: column; padding: 0 16px; gap: 24px; }
             .premium-heading  { font-size: 22px; line-height: 28px; width: 100%; }
             .premium-desc     { width: 100%; font-size: 14px; }
-            .premium-icons    { gap: 16px; flex-wrap: wrap; }
-            .premium-icon-item { width: 70px; }
-            .premium-icon-text { font-size: 12px; }
+            .premium-icons    { display: none; }
             .premium-content  { width: 100%; }
             .premium-images   { width: 100%; height: 260px; }
             .premium-img1     { width: 75%; height: 200px; top: 0; left: 0; }
@@ -846,6 +857,15 @@
         }
 
         /* Dots — 4 circles, total width ~76.5px */
+        .bestseller-right {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+        }
+
         .bestseller-dots {
             display: flex;
             flex-direction: row;
@@ -877,7 +897,7 @@
             display: flex;
             flex-direction: row;
             gap: 20px;
-            flex: 1;
+            width: 100%;
             min-width: 0;
             overflow-x: auto;
             scrollbar-width: none;
@@ -1147,7 +1167,7 @@
         ───────────────────────────────────────── */
         .customize-detail-section {
             background: var(--background-color, #FAF8F8);
-            padding: 48px 0 70px;
+            padding: 48px 0 25px;
         }
 
         .customize-detail-inner {
@@ -1287,11 +1307,22 @@
             .customize-detail-desc    { font-size: 14px; max-width: 100%; }
             .cdo-btn                  { font-size: 13px; padding: 0 14px; height: 38px; }
 
-            /* single column */
-            .customize-detail-cards { flex-direction: column; gap: 14px; }
+            /* horizontal scroll */
+            .customize-detail-cards { 
+                flex-direction: row; 
+                gap: 14px; 
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-behavior: smooth;
+            }
+            .customize-detail-cards::-webkit-scrollbar {
+                display: none;
+            }
             .cdc-card {
-                flex: none;
-                width: 100%;
+                flex: 0 0 80vw;
+                width: 80vw;
                 max-width: 350px;
                 aspect-ratio: 350 / 406;
                 align-self: center;
@@ -1467,9 +1498,20 @@
             .sustainable-heading       { font-size: 24px; line-height: 1.2; }
             .sustainable-desc          { font-size: 14px; max-width: 100%; }
 
-            /* single column — only left card visible, right cards stack below */
-            .sustainable-grid          { flex-direction: column; gap: 14px; }
-            .sustainable-left          { width: 100%; height: 420px; flex-shrink: 0; }
+            /* horizontal scroll */
+            .sustainable-grid          { 
+                flex-direction: row; 
+                gap: 14px; 
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                scroll-behavior: smooth;
+            }
+            .sustainable-grid::-webkit-scrollbar {
+                display: none;
+            }
+            .sustainable-left          { width: 85vw; height: 380px; flex: 0 0 85vw; }
 
             /* overlay adjustments */
             .sustainable-left__overlay { left: 20px; right: 20px; bottom: 28px; }
@@ -1477,9 +1519,9 @@
             .sustainable-tagline       { font-size: 22px; line-height: 1.25; margin-bottom: 16px; }
             .sustainable-btn           { width: 170px; height: 44px; font-size: 14px; }
 
-            /* right column: stack vertically, each card equal height */
-            .sustainable-right         { flex-direction: column; gap: 14px; }
-            .sustainable-right__card   { height: 200px; flex: none; }
+            /* right column: make it row too to continue the scroll */
+            .sustainable-right         { flex-direction: row; gap: 14px; height: auto; flex: none; }
+            .sustainable-right__card   { width: 85vw; height: 380px; flex: 0 0 85vw; }
             .sustainable-right__label  { font-size: 18px; white-space: normal; text-align: center; width: 90%; }
         }
 
@@ -1737,18 +1779,14 @@
         <section class="bestseller-section">
             <div class="bestseller-inner">
 
-                <!-- Left: heading + desc + clickable tabs -->
+                <!-- Left: heading + desc -->
                 <div class="bestseller-left">
                     <span class="bestseller-heading">Best Seller Product</span>
                     <p class="bestseller-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
-                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
-                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 2"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 3"></button>
-                    </div>
                 </div>
 
-                <div class="bestseller-cards">
+                <div class="bestseller-right">
+                    <div class="bestseller-cards">
                     @php 
                         $bestsellerProdIds = (array) ($settings['bestseller_products'] ?? []);
                         $bestsellerProducts = collect($products)->whereIn('id', $bestsellerProdIds)->all();
@@ -1771,7 +1809,13 @@
                         </a>
                     @endforeach
                 </div><!-- /.bestseller-cards -->
-                </div><!-- /.bestseller-cards -->
+                    
+                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
+                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 2"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 3"></button>
+                    </div>
+                </div><!-- /.bestseller-right -->
 
             </div><!-- /.bestseller-inner -->
         </section>
@@ -1845,17 +1889,17 @@
                 <div class="customize-detail-cards" id="cdoCards">
 
                     <div class="cdc-card cdc-card--gold">
-                        <img src="{{ asset('uploads/addon-gold-foil.png') }}" alt="Gold Foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
+                        <img src="{{ asset('uploads/addon-gold-foil.webp') }}" alt="Gold Foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
                         <span class="cdc-card__label" id="cdo-label-1">Gold Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/addon-silver-foil.png') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
+                        <img src="{{ asset('uploads/addon-silver-foil.webp') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--holo">
-                        <img src="{{ asset('uploads/addon-holographic-foil.png') }}" alt="Holographic Foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
+                        <img src="{{ asset('uploads/addon-Holographic.webp') }}" alt="Holographic Foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
                         <span class="cdc-card__label" id="cdo-label-3">Holographic Foil</span>
                     </div>
 
@@ -1925,9 +1969,9 @@
         (function () {
             var cdoData = {
                 foiling:   [
-                    { src: '{{ asset("uploads/addon-gold-foil.png") }}',         label: 'Gold Foil' },
-                    { src: '{{ asset("uploads/addon-silver-foil.png") }}',       label: 'Silver Foil' },
-                    { src: '{{ asset("uploads/addon-holographic-foil.png") }}',  label: 'Holographic Foil' }
+                    { src: '{{ asset("uploads/addon-gold-foil.webp") }}',         label: 'Gold Foil' },
+                    { src: '{{ asset("uploads/addon-silver-foil.webp") }}',       label: 'Silver Foil' },
+                    { src: '{{ asset("uploads/addon-Holographic.webp") }}',  label: 'Holographic Foil' }
                 ],
                 embossing: [
                     { src: '{{ asset("uploads/embossing.webp") }}',     label: 'Embossing' },

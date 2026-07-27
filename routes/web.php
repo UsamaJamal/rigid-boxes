@@ -262,3 +262,23 @@ use App\Http\Controllers\FormSubmitController;
 Route::post('/submit-contact', [FormSubmitController::class, 'submitContact']);
 Route::post('/submit-quote', [FormSubmitController::class, 'submitQuote']);
 Route::post('/submit-newsletter', [FormSubmitController::class, 'submitNewsletter']);
+
+// Temporary route to preview email design
+Route::get('/preview-email', function () {
+    $data = [
+        'name' => 'John Doe',
+        'email' => 'john@example.com',
+        'phone' => '1234567890',
+        'company_name' => 'Acme Corp',
+        'width' => '10',
+        'length' => '15',
+        'depth' => '5',
+        'units' => 'cm',
+        'box_style' => 'Mailer Box',
+        'material' => 'Kraft',
+        'color' => '4/0',
+        'quantity' => '500',
+        'message' => 'This is a test message to preview the email design.'
+    ];
+    return new \App\Mail\QuoteFormMail($data);
+});
