@@ -521,6 +521,8 @@
 
         <!-- Left: Form Card -->
         <div class="quote-form-card">
+            <form action="{{ url('/submit-quote') }}" method="POST">
+                @csrf
             <h2 class="quote-form-title">Get Custom Quote</h2>
 
             <!-- Contact Information -->
@@ -622,7 +624,8 @@
             <div class="quote-btn-wrap">
                 <button type="submit" class="quote-submit-btn">Get Free Quote</button>
             </div>
-        </form>
+            </form>
+        </div>
 
         <!-- Right: Steps -->
         <div class="quote-steps">
