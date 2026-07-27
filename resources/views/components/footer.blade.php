@@ -4,12 +4,13 @@
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <span style="display: block; font-size: 1.17em; font-weight: bold; margin-top: 1em; margin-bottom: 1em;">Sign Up For Exclusive Offers And Updates!</span>
+                    <h3>Sign Up For Exclusive Offers And Updates!</h3>
                 </div>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Email" class="newsletter-input">
+                <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                    @csrf
+                    <input type="email" name="email" placeholder="Email" class="newsletter-input" required>
                     <button type="submit" class="newsletter-button">Subscribe</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

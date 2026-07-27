@@ -521,24 +521,24 @@
 
         <!-- Left: Form Card -->
         <div class="quote-form-card">
-            <span class="quote-form-title" style="display: block;">Get Custom Quote</span>
+            <h2 class="quote-form-title">Get Custom Quote</h2>
 
             <!-- Contact Information -->
             <p class="form-section-label">Contact Information</p>
             <div class="form-row">
-                <input type="text" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
-                <input type="email" placeholder="Enter your email">
-                <input type="tel" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '')">
+                <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '')" required>
             </div>
 
             <!-- Box Specifications -->
             <p class="form-section-label">Box Specifications</p>
             <div class="specs-row">
-                <input type="number" placeholder="Width" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
-                <input type="number" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
-                <input type="number" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+                <input type="number" name="width" placeholder="Width" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                <input type="number" name="length" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
+                <input type="number" name="depth" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                 <div class="specs-unit">
-                    <select>
+                    <select name="units" required>
                         <option value="mm">mm</option>
                         <option value="cm">cm</option>
                         <option value="in">in</option>
@@ -554,7 +554,7 @@
                         $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
                         $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
                     @endphp
-                    <select>
+                    <select name="box_style">
                         <option value="" disabled selected>Select Your Box Style</option>
                         @foreach($boxStyles as $style)
                             <option value="{{ $style->title }}">{{ $style->title }}</option>
@@ -562,7 +562,7 @@
                     </select>
                 </div>
                 <div class="select-wrapper">
-                    <select>
+                    <select name="material">
                         <option value="" disabled selected>Select Paper Stock</option>
                         <option>12pt Cardboard Stock</option>
                         <option>14pt Cardboard Stock</option>
@@ -578,7 +578,7 @@
                     </select>
                 </div>
                 <div class="select-wrapper">
-                    <select>
+                    <select name="color">
                         <option value="" disabled selected>Select Color</option>
                         <option>1 color</option>
                         <option>2 color</option>
@@ -591,7 +591,7 @@
                     </select>
                 </div>
                 <div class="select-wrapper">
-                    <select>
+                    <select name="paper_coating">
                         <option value="" disabled selected>Select Paper Coating</option>
                         <option>Aqueous Coating</option>
                         <option>Semi Gloss</option>
@@ -601,28 +601,28 @@
                     </select>
                 </div>
                 <div class="select-wrapper">
-                    <select>
+                    <select name="cad_sample">
                         <option value="" disabled selected>Select CAD Sample</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
                 </div>
                 <div class="input-wrapper" style="flex: 1; min-width: 0;">
-                    <input type="number" class="pref-input" placeholder="Enter Units" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <input type="number" name="quantity" class="pref-input" placeholder="Enter Units (Quantity)" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 </div>
             </div>
 
             <!-- Additional Details -->
             <p class="form-section-label">Additional Details</p>
             <div class="textarea-row">
-                <textarea placeholder="Enter your message"></textarea>
+                <textarea name="message" placeholder="Enter your message"></textarea>
             </div>
 
             <!-- Submit -->
             <div class="quote-btn-wrap">
-                <button class="quote-submit-btn">Get Free Quote</button>
+                <button type="submit" class="quote-submit-btn">Get Free Quote</button>
             </div>
-        </div>
+        </form>
 
         <!-- Right: Steps -->
         <div class="quote-steps">

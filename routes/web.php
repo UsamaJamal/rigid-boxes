@@ -256,3 +256,8 @@ try {
 Route::get('/' . ltrim($faqSlug, '/'), [FrequentlyAskedQuestionController::class, 'index']);
 
 Route::get('/aboutUs',[AboutUsController::class,'index']);
+
+use App\Http\Controllers\FormSubmitController;
+Route::post('/submit-contact', [FormSubmitController::class, 'submitContact']);
+Route::post('/submit-quote', [FormSubmitController::class, 'submitQuote']);
+Route::post('/submit-newsletter', [FormSubmitController::class, 'submitNewsletter']);

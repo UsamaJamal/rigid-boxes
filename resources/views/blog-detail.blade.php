@@ -775,8 +775,14 @@
                 <div class="newsletter-widget">
                     <h3 class="newsletter-title">Stay Inspired</h3>
                     <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault();">
-                        <input type="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+                    <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                        @csrf
+                        @if(session('success'))
+                            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 13px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <input type="email" name="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
                         <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>
                 </div>

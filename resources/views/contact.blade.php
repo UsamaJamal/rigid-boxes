@@ -316,7 +316,12 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
                             <address class="detail-item contact-address"><img src="{{ asset('images/marker 1.png') }}" alt="" class="detail-icon"><span class="address-desktop">{!! $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd<br>Suite 207 Houston, TX<br>77077' !!}</span><span class="address-mobile">{!! strip_tags($siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd Suite 207 Houston, TX 77077') !!}</span></address>
                         </div>
                     </div>
-                    <form class="contact-form" action="#" method="post">
+                    @if(session('success'))
+                        <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    <form class="contact-form" action="{{ url('/submit-contact') }}" method="post">
                         @csrf
                         <label for="name">Name <em>*</em></label><input id="name" name="name" type="text" placeholder="Name" pattern="[A-Za-z' -]+" title="Name can contain letters only." required>
                         <label for="email">Email Address <em>*</em></label><input id="email" name="email" type="email" placeholder="Email" required>

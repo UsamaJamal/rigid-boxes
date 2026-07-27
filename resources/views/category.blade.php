@@ -90,6 +90,7 @@
         color: #222;
         text-align: center;
         word-wrap: break-word;
+        display: block; /* Ensures span behaves like block element */
     }
 
     /* Mobile Responsive View */
@@ -293,6 +294,17 @@
         line-height: 1.3;
     }
 
+    .custom-card .custom-card-title {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--section-text-color);
+        margin: 0;
+        padding: 0 0 2px;
+        line-height: 1.3;
+        display: block;
+    }
+
     @media (max-width: 992px) {
         .customize-layout {
             display: flex;
@@ -401,6 +413,16 @@
             padding-left: 0;
             line-height: 1.3;
         }
+
+        .custom-card .custom-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111;
+            text-align: left;
+            padding-left: 0;
+            line-height: 1.3;
+            display: block;
+        }
     }
 </style>
 </head>
@@ -441,7 +463,7 @@
                                     <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}"
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
                                 </div>
-                                <span class="box-title" style="display: block;">{{ $p['title'] }}</span>
+                                <h3 class="box-title">{{ $p['title'] }}</h3>
                             </a>
                         </div>
                     @endforeach
@@ -476,7 +498,7 @@
                                     <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard">
 
                                 </div>
-                                <span class="h4-style" style="display: block;">Duplex Chipboard</span>
+                                <h4>Duplex Chipboard</h4>
                             </div>
 
                             <div class="custom-card">
@@ -485,7 +507,7 @@
                                         alt="Grey Chipboard Cardboard"
                                         onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Grey Chipboard Cardboard</span>
+                                <h4>Grey Chipboard Cardboard</h4>
                             </div>
 
                             <div class="custom-card">
@@ -493,7 +515,7 @@
                                     <img src="{{ asset('uploads/black-kraft.webp') }}" alt="Black-Kraft"
                                         onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Black-Kraft</span>
+                                <h4>Black-Kraft</h4>
                             </div>
 
                             <div class="custom-card">
@@ -501,7 +523,7 @@
                                     <img src="{{ asset('uploads/holographic.webp') }}" alt="Holographic"
                                         onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Holographic</span>
+                                <h4>Holographic</h4>
                             </div>
 
                             <div class="custom-card">
@@ -510,7 +532,7 @@
                                         alt="Metallic Paper"
                                         onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Metallic Paper</span>
+                                <h4>Metallic Paper</h4>
                             </div>
 
                             <div class="custom-card">
@@ -519,7 +541,7 @@
                                         alt="Natural Brown Kraft"
                                         onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Natural Brown Kraft</span>
+                                <h4>Natural Brown Kraft</h4>
                             </div>
 
                             <div class="custom-card">
@@ -527,7 +549,7 @@
                                     <img src="{{ asset('uploads/sbs-c2s.webp') }}" alt="SBS C2S"
                                         onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
                                 </div>
-                                <span class="h4-style" style="display: block;">SBS C2S</span>
+                                <h4>SBS C2S</h4>
                             </div>
 
                             <div class="custom-card">
@@ -535,7 +557,7 @@
                                     <img src="{{ asset('uploads/textured-.webp') }}" alt="Textured"
                                         onerror="this.src='https://placehold.co/200x200/CCBBAA/333?text=Textured'">
                                 </div>
-                                <span class="h4-style" style="display: block;">Textured</span>
+                                <h4>Textured</h4>
                             </div>
                         </div>
                     </div>
@@ -588,34 +610,34 @@
                 ['uploads/textured-.webp', 'Textured']
             ],
             printing: [
-                ['uploads/hero-home-banner.png', 'Digital Printing'],
-                ['uploads/category-box-by-industry-banner.webp', 'Offset Printing'],
-                ['uploads/category-holographic.png', 'Foil Printing'],
-                ['uploads/category-metallic-paper.png', 'Screen Printing'],
-                ['uploads/industry-rigid-presentation-box.jfif', 'Embossed Printing'],
-                ['uploads/category-custom-shaped-box.jfif', 'UV Printing'],
-                ['uploads/industry-two-piece-box.jfif', 'Letterpress'],
-                ['uploads/industry-box-with-lid.jfif', 'Spot Colour']
+                ['uploads/Digital Print.webp', 'Digital Print'],
+                ['uploads/Flexographic Printing.webp', 'Flexographic Printing'],
+                ['uploads/gravure printing.webp', 'Gravure Printing'],
+                ['uploads/Offset Print.webp', 'Offset Print'],
+                ['uploads/Rotogravure Printing.webp', 'Rotogravure Printing'],
+                ['uploads/Scodixe Digital.webp', 'Scodixe Digital'],
+                ['uploads/Screen Printing.webp', 'Screen Printing'],
+                ['uploads/UV Print.webp', 'UV Print']
             ],
             inks: [
-                ['uploads/black-kraft.webp', 'Black Ink'],
-                ['uploads/natural-brown-.webp', 'Soy Ink'],
-                ['uploads/holographic.webp', 'Metallic Ink'],
-                ['uploads/metallic-paper.webp', 'White Ink'],
-                ['uploads/textured-.webp', 'Water-Based Ink'],
-                ['uploads/sbs-c2s.webp', 'Pantone Ink'],
-                ['uploads/grey-board.webp', 'UV Ink'],
-                ['uploads/duplex-chipboard.webp', 'CMYK Ink']
+                ['uploads/Fluorescent Color Inks.webp', 'Fluorescent Color Inks'],
+                ['uploads/Oil Based Inks.webp', 'Oil Based Inks'],
+                ['uploads/Pantone Metallic.webp', 'Pantone Metallic'],
+                ['uploads/Pantone.webp', 'Pantone'],
+                ['uploads/Soy Vegetable Based Inks.webp', 'Soy Vegetable Based Inks'],
+                ['uploads/Water Based Inks.webp', 'Water Based Inks'],
+                ['uploads/metallic-paper.webp', 'Metallic Inks'],
+                ['uploads/duplex-chipboard.webp', 'CMYK Inks']
             ],
             finishing: [
-                ['uploads/metallic-paper.webp', 'Gold Foil'],
-                ['uploads/holographic.webp', 'Holographic Foil'],
-                ['uploads/textured-.webp', 'Soft-Touch Lamination'],
-                ['uploads/sbs-c2s.webp', 'Gloss Lamination'],
-                ['uploads/black-kraft.webp', 'Matte Lamination'],
-                ['uploads/industry-custom-luxury-box.jfif', 'Spot UV'],
-                ['uploads/industry-rigid-presentation-box.jfif', 'Embossing'],
-                ['uploads/industry-box-with-lid.jfif', 'Debossing']
+                ['uploads/Anti-scratch-Lamination-.webp', 'Anti-scratch Lamination'],
+                ['uploads/Aqueous-Coating-.webp', 'Aqueous Coating'],
+                ['uploads/Lamination.webp', 'Lamination'],
+                ['uploads/Soft-Touch-Coating-.webp', 'Soft-Touch Coating'],
+                ['uploads/Soft-Touch-Silk-Lamination-.webp', 'Soft-Touch Silk Lamination'],
+                ['uploads/Spot-Gloss-UV.webp', 'Spot Gloss UV'],
+                ['uploads/Spot-Gloss-UV-2.webp', 'Spot Gloss UV-2'],
+                ['uploads/UV-Coating-.webp', 'UV Coating']
             ],
             addons: [
                 ['uploads/industry-box-with-lid.jfif', 'Custom Inserts'],
@@ -630,9 +652,8 @@
         };
 
         function setCustomizeCardOrder(option) {
-            /* Keep the same eight starter images for every tab for now;
-               tab-specific artwork can be swapped in later without changing layout. */
-            const cardOrder = customizeCardOrders.materials;
+            const cardSet = customizeCardSets[option] || customizeCardSets.materials;
+            const cardOrder = customizeCardOrders[option] || customizeCardOrders.materials;
 
             customizeCards.forEach(card => {
                 card.style.opacity = '0';
@@ -640,14 +661,13 @@
             });
 
             setTimeout(() => {
-                const cardSet = customizeCardSets.materials;
                 cardOrder.forEach(function(cardIndex, position) {
                     const card = customizeCards[cardIndex];
                     const [imagePath, title] = cardSet[position];
                     const image = card.querySelector('img');
                     image.src = customizeUploadsUrl + imagePath;
                     image.alt = title;
-                    card.querySelector('.h4-style').textContent = title;
+                    card.querySelector('h4').textContent = title;
                     card.style.order = position + 1;
                 });
 
