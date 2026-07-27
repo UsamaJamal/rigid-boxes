@@ -579,15 +579,33 @@
             text-align: justify;
         }
         
-        .content-section ul {
+        .content-section ul,
+        .content-section ol {
             font-family: 'DM Sans', sans-serif;
             font-weight: 400;
             font-size: 16px;
-            list-style: disc;
-            margin-left: 20px;
+            margin: 0 0 15px;
+            padding-left: 2rem;
             color: var(--color-text-secondary);
             line-height: 40px;
             text-align: justify;
+        }
+
+        .content-section ul {
+            list-style-type: disc;
+        }
+
+        .content-section ol {
+            list-style-type: decimal;
+        }
+
+        .content-section li {
+            padding-left: 4px;
+        }
+
+        .content-section li::marker {
+            color: var(--color-text);
+            font-weight: 600;
         }
 
         /* Specs Section */
