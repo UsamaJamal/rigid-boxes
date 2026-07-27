@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') · Rigid Boxes Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -94,6 +95,64 @@
             .content{padding:20px 14px;}
         }
     </style>
+    <script>
+        window.tinyMceUploadConfig = {
+            automatic_uploads: true,
+            paste_data_images: true,
+            file_picker_types: 'image media',
+            images_upload_handler: function (blobInfo) {
+                const data = new FormData();
+                data.append('file', blobInfo.blob(), blobInfo.filename());
+
+                return window.uploadTinyMceFile(data);
+            },
+            file_picker_callback: function (callback, value, meta) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = meta.filetype === 'media'
+                    ? 'video/mp4,video/webm,video/ogg'
+                    : 'image/jpeg,image/png,image/gif,image/webp';
+
+                input.addEventListener('change', async function () {
+                    const file = input.files && input.files[0];
+                    if (!file) return;
+
+                    const data = new FormData();
+                    data.append('file', file, file.name);
+
+                    try {
+                        const location = await window.uploadTinyMceFile(data);
+                        callback(location, { title: file.name });
+                    } catch (error) {
+                        window.alert(error.message || 'Upload failed.');
+                    }
+                });
+
+                input.click();
+            }
+        };
+
+        window.uploadTinyMceFile = async function (data) {
+            const response = await fetch(@json(route('admin.tinymce.upload')), {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: data
+            });
+            const result = await response.json().catch(function () { return {}; });
+
+            if (!response.ok || !result.location) {
+                const validationMessage = result.errors && result.errors.file
+                    ? result.errors.file[0]
+                    : result.message;
+                throw new Error(validationMessage || 'Upload failed.');
+            }
+
+            return result.location;
+        };
+    </script>
 </head>
 <body>
 <div class="shell">

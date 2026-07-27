@@ -236,6 +236,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/footer-settings', [AdminFooterController::class, 'update'])->name('footer.update');
         Route::get('/faq-page-settings', [AdminFaqPageController::class, 'edit'])->name('faqpage.edit');
         Route::post('/faq-page-settings', [AdminFaqPageController::class, 'update'])->name('faqpage.update');
+        Route::post('/tinymce/upload', [AdminContentController::class, 'uploadTinyMceMedia'])->name('tinymce.upload');
         Route::get('/{module}', [AdminContentController::class, 'index'])->name('module.index');
         Route::get('/{module}/create', [AdminContentController::class, 'create'])->name('module.create');
         Route::post('/{module}', [AdminContentController::class, 'store'])->name('module.store');

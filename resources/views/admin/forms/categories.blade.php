@@ -206,6 +206,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof tinymce !== 'undefined') {
             tinymce.init({
+                ...window.tinyMceUploadConfig,
                 selector: 'textarea[name="description"]',
                 height: 420,
                 plugins: 'code advlist autolink lists link image charmap preview anchor searchreplace visualblocks fullscreen insertdatetime media table help wordcount',
