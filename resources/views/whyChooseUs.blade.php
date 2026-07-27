@@ -332,7 +332,7 @@
         .why-us-section,
         .trust-us-section,
         .sustainable-section {
-            padding: 40px 0;
+            padding: 25px 0;
         }
 
         .why-us-section .container,

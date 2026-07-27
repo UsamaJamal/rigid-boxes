@@ -209,6 +209,36 @@
     <section class="hero-section">
 
         <div class="hero-content">
+            @if(!request()->is('/'))
+            <style>
+                .hero-breadcrumb {
+                    display: block;
+                    text-align: left;
+                    margin-bottom: 14px;
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: rgba(255, 255, 255, 0.8);
+                }
+                .hero-breadcrumb a {
+                    color: inherit;
+                    text-decoration: none;
+                }
+                .hero-breadcrumb a:hover {
+                    color: #fff;
+                    text-decoration: underline;
+                }
+                @media (max-width: 768px) {
+                    .hero-breadcrumb {
+                        display: none !important;
+                    }
+                }
+            </style>
+            <div class="hero-breadcrumb">
+                <a href="/">HOME</a> / BOXES BY INDUSTRY / <strong>{{ !empty($settings['title']) ? strtoupper($settings['title']) : (!empty($category['title']) ? strtoupper($category['title']) : 'CATEGORY') }}</strong>
+            </div>
+            @endif
             <h1 class="hero-title">
                 {!! !empty($settings['hero_title']) ? $settings['hero_title'] : 'CUSTOM <span class="highlight">COSMETIC</span><br>PACKAGING BOXES' !!}
             </h1>

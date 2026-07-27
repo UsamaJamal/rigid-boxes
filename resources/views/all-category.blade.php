@@ -149,7 +149,6 @@
            ========================================================================== */
 
         .industries-main {
-            min-height: 100vh;
         }
 
         /* Hero Section */
@@ -335,7 +334,7 @@
         /* Sustainable Container (Left) */
         .sustainable-container {
             width: 100%;
-            flex: 1 1 60%;
+            flex: 1 1 65%;
             min-width: 0;
             min-height: 484px;
             background-color: var(--secondary-color);
@@ -425,9 +424,9 @@
         .bulk-info-container {
             margin-top: 244px;
 
-            flex: 1 1 40%;
+            flex: 1 1 35%;
             min-width: 0;
-            margin-left: -15%;
+            margin-left: -10%;
             
             width: 100%;
             /* min-height: 390px; */
@@ -438,13 +437,13 @@
 
         @media (max-width: 1400px) {
             .bulk-info-container {
-                margin-left: -12%;
+                margin-left: -8%;
             }
         }
 
         @media (max-width: 1200px) {
             .bulk-info-container {
-                margin-left: -10%;
+                margin-left: -5%;
             }
         }
 
@@ -633,7 +632,7 @@
             }
             
             .hero-section {
-                padding-top: var(--space-48);
+                padding-top: 25px;
                 padding-bottom: var(--space-8);
             }
             
@@ -737,7 +736,7 @@
         .cta-wrapper {
             display: flex;
             align-items: center;
-            gap: 0;
+            gap: 40px;
             position: relative;
             max-width: 100%;
         }
@@ -810,7 +809,6 @@
             border-radius: 0px;
             overflow: hidden;
             position: relative;
-            margin-left: -40px;
             z-index: 10;
             display: flex;
             align-items: center;
@@ -830,7 +828,6 @@
             }
             
             .cta-image {
-                margin-left: -30px;
                 max-width: 450px;
             }
         }
@@ -841,7 +838,6 @@
             }
             
             .cta-image {
-                margin-left: -20px;
                 max-width: 400px;
                 height: 280px;
             }
@@ -966,6 +962,33 @@
         <!-- Header Section -->
         <section class="hero-section">
             <div class="container">
+                <style>
+                    .desktop-breadcrumb {
+                        display: block;
+                        text-align: left;
+                        margin-bottom: 14px;
+                        font-family: 'Open Sans', sans-serif;
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        color: var(--section-text-color, #191919);
+                    }
+                    .desktop-breadcrumb a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                    .desktop-breadcrumb a:hover {
+                        text-decoration: underline;
+                    }
+                    @media (max-width: 768px) {
+                        .desktop-breadcrumb {
+                            display: none !important;
+                        }
+                    }
+                </style>
+                <div class="desktop-breadcrumb">
+                    <a href="/">HOME</a> / <strong>{{ !empty($parentCategory['title']) ? strtoupper($parentCategory['title']) : 'ALL CATEGORIES' }}</strong>
+                </div>
                 <header class="hero-header">
                     <h1 class="heading-01">{{ !empty($parentCategory['title']) ? $parentCategory['title'] : 'Packaging Solutions for Every Industry' }}</h1>
                     <p class="hero-body">{{ !empty($parentCategory['hero_description']) ? $parentCategory['hero_description'] : 'Custom packaging solutions designed to meet the unique demands of every industry, helping businesses protect products, strengthen branding, and create memorable customer experiences.' }}</p>
