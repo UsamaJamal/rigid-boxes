@@ -3,7 +3,7 @@
     .about-passion-section {
         display: flex;
         justify-content: center;
-        padding: 80px 0;
+        padding: 30px 0;
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
@@ -31,7 +31,7 @@
         font-size: 32px;
         line-height: 44px;
         color: var(--section-text-color);
-        margin-bottom: 22px;
+        margin-bottom: 12px;
     }
 
     .passion-paragraph {
@@ -63,14 +63,14 @@
         left: -32px;
         width: 187.59px;
         height: 124px;
-        padding: 32px;
+        padding: 12px;
         background-color: #f4f4f4;
         box-sizing: border-box;
     }
 
     @media (max-width: 1024px) {
         .passion-container {
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
         }
         .passion-images {
@@ -88,7 +88,7 @@
     .mission-vision-section {
         display: flex;
         justify-content: center;
-        padding: 0 0 80px 0;
+        padding: 0 0 30px 0;
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
@@ -108,11 +108,11 @@
         width: 100%;
         max-width: 594px;
         flex: 1 1 0;
-        height: 326.14px;
+        height: 270px;
         background: #FAF8F8;
         border: 1px solid var(--primary-color);
         border-radius: 16px;
-        padding: 48px 48px 74px 48px;
+        padding: 15px 48px 74px 48px;
         box-shadow: 0px 2px 4px 0px #0000002E;
         box-sizing: border-box;
         display: flex;
@@ -143,7 +143,7 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 26px;
-        color: var(--section-text-color);
+        color: #444748;
     }
 
     @media (max-width: 768px) {
@@ -153,8 +153,19 @@
         }
         .mv-card {
             width: 100%;
-            max-width: 100%;
-            height: auto;
+            max-width: 364px;
+            height: 260px;
+            padding: 20px 24px;
+        }
+        .mv-heading {
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        .mv-text {
+            text-align: justify;
+            font-size: 14px;
+            line-height: 22px;
         }
     }
 
@@ -162,7 +173,7 @@
     .packaging-excellence {
         background-color: var(--primary-color);
         color: #FFFFFF;
-        padding: 80px 0;
+        padding: 30px 0;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -213,7 +224,7 @@
     .pe-col-text {
         font-family: 'DM Sans', sans-serif;
         font-weight: 400;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 22px;
         opacity: 0.9;
         color: #FFFFFF;
@@ -228,14 +239,24 @@
         }
     }
     @media (max-width: 600px) {
+        .pe-heading {
+            font-size: 24px;
+        }
+        .pe-heading::after {
+            margin-top: 16px;
+        }
         .pe-grid {
             grid-template-columns: 1fr;
+            margin-top: 40px;
+            gap: 32px;
         }
         .pe-column {
             border-right: none;
+            border-bottom: none;
             padding-right: 0;
-            padding-bottom: 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            padding-left: 20px;
         }
         .pe-column:last-child {
             border-bottom: none;
@@ -244,7 +265,7 @@
 
     /* Section 2: Trusted Brands */
     .trusted-brands-section {
-        padding: 80px 0;
+        padding: 30px 0;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -261,19 +282,20 @@
     .tb-heading {
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 16px;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: #666;
+        color: #444748;
         margin-bottom: 40px;
     }
+
     .tb-logos {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 60px;
         flex-wrap: wrap;
-        margin-bottom: 80px;
+        margin-bottom: 30px;
     }
     .tb-logos img {
         max-height: 40px;
@@ -311,7 +333,7 @@
     .circular-future-section {
         display: flex;
         justify-content: center;
-        padding: 80px 0;
+        padding: 30px 0;
         width: 100%;
         background-color: #FAF8F8;
         max-width: 1440px;
@@ -397,11 +419,13 @@
     <div class="passion-container">
         <div class="passion-content">
             <h2 class="passion-heading">Born from a Passion for Premium Packaging</h2>
-            <p class="passion-paragraph">
+            <p class="passion-paragraph" style="margin-bottom: 12px;">
                 Every exceptional product deserves packaging that reflects its quality,
                 craftsmanship, and identity. We believe packaging is more than
                 protection—it’s the first impression of your brand and an essential part of
-                the customer experience.<br><br>
+                the customer experience.
+            </p>
+            <p class="passion-paragraph">
                 Combining creative design with advanced manufacturing, we craft
                 premium custom packaging solutions that blend durability, functionality,
                 and luxury. From concept to production, our team helps brands create

@@ -1,8 +1,8 @@
 @php
     $breadcrumb = 'ABOUT US';
     $subTitle = 'ABOUT US';
-    $mainTitle = 'More Than Boxes,We Build Experiences.';
-    $description = "At The Rigid Boxes, we believe packaging is more than protection <br> it's the first impression, the unboxing moment, and the story <br> behind every brand.";
+    $mainTitle = 'More Than Boxes,<br><span class="gold-text">We Build Experiences.</span>';
+    $description = "At The Rigid Boxes, we believe packaging is more than protection <br class=\"desktop-br\"> it's the first impression, the unboxing moment, and the story <br class=\"desktop-br\"> behind every brand.";
 
     if (isset($page) && $page == 'whyChooseUs') {
         $breadcrumb = 'WHY CHOOSE US';
@@ -114,6 +114,10 @@
         .inner-hero-content {
             text-align: center;
             margin: 0 auto;
+        }
+
+        br.desktop-br {
+            display: none;
         }
 
         .inner-hero-breadcrumb {

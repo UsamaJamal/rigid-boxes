@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-:root { --contact-primary:#8d4445; --contact-dark:#2d2d2d; --contact-muted:#5d5d5d; --contact-pale:#f8eeee; --contact-page:#faf8f8; --container-width:1400px; --margin-sides:20px; }
+:root { --contact-primary:#8d4445; --contact-dark:#2d2d2d; --contact-muted:#5d5d5d; --contact-pale:#f8eeee; --contact-page:#faf8f8; --container-width:1280px; --margin-sides:55px; }
 * { box-sizing:border-box; } html { scroll-behavior:smooth; }
 body.contact-page { margin:0; color:var(--contact-dark); background:var(--contact-page); font-family:'DM Sans',sans-serif; }
 /* Uses the same outer container as the Product page hero. */
@@ -23,9 +23,14 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .contact-hero { padding:68px 0 40px; }
 .contact-hero .contact-container,
 .map-section .contact-container,
-.faq-section .contact-container { max-width:1240px; }
-.contact-page .main-footer .container { max-width:1240px; }
+.faq-section .contact-container { max-width:var(--container-width); }
+.contact-page .main-footer .container { max-width:var(--container-width); }
 .contact-grid { display:grid; grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr); align-items:center; gap:90px; }
+.contact-breadcrumb { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #000; margin-top: 40px; margin-bottom: 40px; font-family: 'Open Sans', sans-serif; }
+@media (max-width: 768px) { .contact-breadcrumb { display: none; } }
+.contact-breadcrumb a { color: #666; text-decoration: none; }
+.contact-breadcrumb .sep { padding: 0 8px; color: #999; }
+.contact-breadcrumb .current { color: #000; font-weight: 700; }
 .eyebrow { margin:0 0 18px; color:var(--contact-primary); font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
 .contact-intro h1,.faq-section h2 { margin:0; color:#242424; font-family:'Open Sans',sans-serif; font-weight:800; }
 .contact-intro h1 { max-width:590px; font-size:clamp(30px,3vw,44px); line-height:1.24; }
@@ -66,7 +71,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 
 @media (max-width: 480px) {
     .eyebrow {
-        margin: 0 0 8px !important;
+        margin: 0 0 20px !important;
         font-size: 16px !important;
         line-height: 12px !important;
         letter-spacing: 3px !important;
@@ -160,7 +165,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     font-family:'Open Sans', sans-serif;
     font-size:32px;
     font-weight:700;
-    line-height:43.2px;
+    line-height:1.35;
     letter-spacing:0;
 }
 /* Figma typography for the contact-page intro copy. */
@@ -208,7 +213,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     font-family:'Open Sans', sans-serif;
     font-size:32px;
     font-weight:700;
-    line-height:32px;
+    line-height:1.2;
     letter-spacing:0;
 }
 /* Figma typography for FAQ question titles. */
@@ -227,11 +232,11 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 /* Compact one-column mobile layout from the Contact Us design. */
 @media (max-width:480px) {
     :root { --margin-sides:20px; }
-    .contact-hero { padding:24px 0 0; }
+    .contact-hero { padding:48px 0 0; }
     .contact-grid { grid-template-columns:1fr; gap:24px; padding-right:0; }
     .contact-intro { padding-top:0; }
-    .eyebrow { margin:0 0 8px; font-size:10px; line-height:12px; letter-spacing:1.5px; }
-    .contact-intro h1 { width:auto; max-width:100%; font-size:24px; line-height:28.8px; }
+    .eyebrow { margin:0 0 20px; font-size:10px; line-height:12px; letter-spacing:1.5px; }
+    .contact-intro h1 { width:auto; max-width:100%; font-size:24px; line-height:1.3; }
     .intro-copy { max-width:374px; margin:6px 0 16px; font-size:16px; line-height:25.6px; letter-spacing:.23px; text-align:justify; }
     .mobile-copy-break { display:block; }
     .contact-details { grid-template-columns:1fr; row-gap:16px; column-gap:0; max-width:none; }
@@ -258,11 +263,11 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     .map-section { padding:24px 0 22px; }
     .map-frame { height:372px; border-radius:4px; }
     .faq-section { padding:0 0 32px; }
-    .faq-section h2 { margin-bottom:16px; font-size:24px; line-height:30px; }
+    .faq-section h2 { margin-bottom:16px; font-size:20px !important; line-height:1.3; white-space:nowrap; }
     .contact-faq { margin-bottom:6px; border-radius:4px; }
     .contact-faq button { min-height:55px; padding:10px 12px; font-size:16px; line-height:22px; }
     .contact-faq button i { font-size:12px; }
-    .contact-faq p { padding:0 12px 14px; font-size:12px; line-height:16px; }
+    .contact-faq p { padding:0 12px 14px; font-size:16px; line-height:25.6px; text-align:justify; }
 }
 /* Match the Product page accordion design on Contact Us. */
 .contact-faq {
@@ -304,6 +309,11 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     <main>
         <section class="contact-hero">
             <div class="container contact-container">
+                <div class="contact-breadcrumb">
+                    <a href="{{ url('/') }}">HOME</a>
+                    <span class="sep">/</span>
+                    <span class="current">CONTACT US</span>
+                </div>
                 <div class="contact-grid">
                     <div class="contact-intro">
                         <p class="eyebrow">Live Support</p>
@@ -313,7 +323,13 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
                             <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}" class="detail-item"><img src="{{ asset('images/contact-phone-icon.png') }}" alt="" class="detail-icon"><span>{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}</span></a>
                             <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}" class="detail-item"><img src="{{ asset('images/envelope 2.png') }}" alt="" class="detail-icon"><span>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</span></a>
                             <div class="detail-item"><img src="{{ asset('images/calendar 1.png') }}" alt="" class="detail-icon"><span>Monday - Sunday</span></div>
-                            <address class="detail-item contact-address"><img src="{{ asset('images/marker 1.png') }}" alt="" class="detail-icon"><span class="address-desktop">{!! $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd<br>Suite 207 Houston, TX<br>77077' !!}</span><span class="address-mobile">{!! strip_tags($siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd Suite 207 Houston, TX 77077') !!}</span></address>
+                            @php
+                                $rawAddress = $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd<br>Suite 207 Houston, TX<br>77077';
+                                $cleanAddress = strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' ', $rawAddress));
+                                $mobileAddress = str_replace('Suite 207', 'Suite<br>207', $cleanAddress);
+                                $mobileAddress = str_replace([' Chicago', ', Chicago'], ['<br>Chicago', '<br>Chicago'], $mobileAddress);
+                            @endphp
+                            <address class="detail-item contact-address"><img src="{{ asset('images/marker 1.png') }}" alt="" class="detail-icon"><span class="address-desktop">{!! $rawAddress !!}</span><span class="address-mobile">{!! $mobileAddress !!}</span></address>
                         </div>
                     </div>
                     @if(session('success'))

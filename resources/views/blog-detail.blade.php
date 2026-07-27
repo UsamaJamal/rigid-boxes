@@ -22,13 +22,13 @@
             --section-width: 1240px;
         }
 
-        * {
+        .blog-detail-page * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        body {
+        .blog-detail-page {
             background-color: var(--color-page);
             color: var(--color-copy);
             font-family: var(--font-body);
@@ -36,17 +36,17 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        a {
+        .blog-detail-page a {
             color: inherit;
             text-decoration: none;
         }
 
-        img {
+        .blog-detail-page img {
             display: block;
             max-width: 100%;
         }
 
-        .container {
+        .blog-detail-page .container {
             width: 100%;
             max-width: 1280px;
             margin-left: auto;
@@ -57,18 +57,18 @@
         }
 
         @media (max-width: 1100px) {
-            .container { padding-left: 32px; padding-right: 32px; }
+            .blog-detail-page .container { padding-left: 32px; padding-right: 32px; }
         }
         @media (max-width: 768px) {
-            .container { padding-left: 20px; padding-right: 20px; }
+            .blog-detail-page .container { padding-left: 20px; padding-right: 20px; }
         }
         @media (max-width: 600px) {
-            .container { padding-left: 16px; padding-right: 16px; }
+            .blog-detail-page .container { padding-left: 16px; padding-right: 16px; }
         }
 
         /* Breadcrumb */
         .breadcrumb-wrap {
-            padding: 24px 0 16px;
+            padding: 16px 0 12px;
         }
 
         .breadcrumb {
@@ -106,7 +106,7 @@
 
         /* Article Header */
         .article-header {
-            padding-bottom: 24px;
+            padding-bottom: 16px;
         }
 
         .article-title {
@@ -116,15 +116,15 @@
             color: var(--color-ink);
             line-height: 1.2;
             letter-spacing: -0.02em;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             max-width: 980px;
         }
 
         .article-subtitle {
             font-size: 17px;
-            color: #4b5563;
+            color: #000000;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             max-width: 900px;
         }
 
@@ -170,7 +170,7 @@
 
         /* Featured Hero Image */
         .featured-image-wrap {
-            margin-bottom: 44px;
+            margin-bottom: 28px;
         }
 
         .featured-image {
@@ -185,7 +185,7 @@
         .article-layout {
             display: grid;
             grid-template-columns: 1fr 340px;
-            gap: 48px;
+            gap: 32px;
             align-items: start;
         }
 
@@ -197,7 +197,8 @@
         }
 
         .article-body p {
-            margin-bottom: 22px;
+            color: #000000;
+            margin-bottom: 16px;
         }
 
         .article-body h2 {
@@ -205,8 +206,8 @@
             font-size: 22px;
             font-weight: 700;
             color: var(--color-ink);
-            margin-top: 36px;
-            margin-bottom: 16px;
+            margin-top: 24px;
+            margin-bottom: 12px;
             line-height: 1.35;
         }
 
@@ -218,9 +219,9 @@
         .callout-box {
             background: #FAF5F5;
             border-left: 4px solid var(--color-primary);
-            padding: 22px 26px;
+            padding: 18px 22px;
             border-radius: 0 12px 12px 0;
-            margin: 28px 0;
+            margin: 20px 0;
         }
 
         .callout-label {
@@ -233,17 +234,17 @@
         }
 
         .callout-content {
-            font-size: 15px;
-            color: #1f2937;
+            font-size: 16px;
+            color: #000000;
             line-height: 1.65;
-            font-style: italic;
+            /* font-style: italic; */
         }
 
         /* Quote Callout */
         .quote-box {
             border-left: 3px solid var(--color-primary);
             padding-left: 20px;
-            margin: 32px 0;
+            margin: 20px 0;
         }
 
         .quote-text {
@@ -263,14 +264,23 @@
 
         /* Author Biography Card */
         .author-card {
+            margin-bottom: -20px;
             background: #FAF8F8;
             border-radius: 16px;
-            padding: 32px;
-            margin-top: 48px;
+            padding: 24px;
+            margin-top: 0;
             display: flex;
             gap: 24px;
             align-items: flex-start;
             border: 1px solid #F0EAEB;
+            width: 100%;
+        }
+
+        .author-divider {
+            border: 0;
+            border-top: 1px solid #EAEAEA;
+            margin: 40px 0 24px 0;
+            width: 100%;
         }
 
         .author-card-avatar {
@@ -288,8 +298,8 @@
         }
 
         .author-card-tag {
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--color-primary);
@@ -305,8 +315,9 @@
         }
 
         .author-card-bio {
-            font-size: 14px;
-            color: #4b5563;
+            font-weight: 400;
+            font-size: 16px;
+            color: #000000;
             line-height: 1.6;
         }
 
@@ -314,13 +325,13 @@
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 20px;
         }
 
         .widget {
             background: #ffffff;
             border-radius: 16px;
-            padding: 26px;
+            padding: 20px;
             border: 1px solid #EAEAEA;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
@@ -416,28 +427,28 @@
             border: none;
         }
 
-        .newsletter-title {
+.newsletter-widget .newsletter-title {
             font-family: var(--font-heading);
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 10px;
             color: #ffffff;
-        }
+    }
 
-        .newsletter-desc {
+        .newsletter-widget .newsletter-desc {
             font-size: 13.5px;
             line-height: 1.55;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
         }
 
-        .newsletter-form {
+        .newsletter-widget .newsletter-form {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .newsletter-input {
+        .newsletter-widget .newsletter-input {
             width: 100%;
             height: 44px;
             padding: 0 16px;
@@ -451,11 +462,11 @@
             letter-spacing: 0.05em;
         }
 
-        .newsletter-input::placeholder {
+        .newsletter-widget .newsletter-input::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .newsletter-btn {
+        .newsletter-widget .newsletter-btn {
             height: 44px;
             background: #ffffff;
             color: var(--color-primary);
@@ -468,7 +479,7 @@
             transition: background 0.2s, transform 0.2s;
         }
 
-        .newsletter-btn:hover {
+        .newsletter-widget .newsletter-btn:hover {
             background: var(--color-primary-soft);
         }
 
@@ -503,10 +514,9 @@
 
         /* Related Blogs Section */
         .related-blogs-section {
-            margin-top: 64px;
-            margin-bottom: 64px;
-            padding-top: 48px;
-            border-top: 1px solid var(--color-line);
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding-top: 0;
         }
 
         .related-title {
@@ -514,7 +524,7 @@
             font-size: 26px;
             font-weight: 700;
             color: var(--color-ink);
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
 
         .related-grid {
@@ -569,8 +579,9 @@
         }
 
         .related-card-desc {
-            font-size: 14px;
-            color: #4b5563;
+
+            font-size: 16px;
+            color: #000000;
             line-height: 1.5;
             margin-bottom: 20px;
         }
@@ -594,7 +605,7 @@
         @media (max-width: 1024px) {
             .article-layout {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 24px;
             }
 
             .featured-image {
@@ -607,21 +618,152 @@
         }
 
         @media (max-width: 640px) {
+            .author-card {
+                display: block;
+                padding: 20px;
+            }
+            .author-card-avatar {
+                float: left;
+                margin-right: 16px;
+                margin-bottom: 8px;
+                width: 64px;
+                height: 64px;
+            }
+            .author-card-details {
+                display: block;
+            }
+            .author-card-tag {
+                padding-top: 4px;
+            }
+            .author-card-bio {
+                clear: left;
+                display: block;
+                padding-top: 8px;
+            }
+            .author-divider {
+                margin: 24px 0 16px 0;
+            }
+            .related-blogs-section {
+                margin-top: 24px;
+            }
             .breadcrumb-wrap {
                 display: none;
             }
 
             .article-title {
+                font-family: 'Open Sans', sans-serif;
                 font-size: 28px;
+                font-weight: 700;
+                line-height: 34px;
+                letter-spacing: 0px;
+                color: #000000;
+                margin-top: 32px;
+                margin-bottom: 14px;
+                vertical-align: middle;
             }
 
             .article-subtitle {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                letter-spacing: 0px;
+                color: #000000;
+                text-align: justify;
+                vertical-align: middle;
+            }
+
+            .article-meta {
+                gap: 10px;
                 font-size: 15px;
+                color: #000000;
+                margin-top: 20px;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+            }
+
+            .meta-item {
+                gap: 0;
+            }
+
+            .meta-item svg {
+                display: none;
+            }
+
+            .article-body p {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 30px;
+                letter-spacing: 0%;
+                text-align: justify;
+                margin-bottom: 22px;
+                color: #000000;
+            }
+
+            .article-body h2 {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 30px;
+                letter-spacing: 0%;
+                text-align: justify;
+                margin-top: 36px;
+                margin-bottom: 16px;
+                color: #000000;
+            }
+
+            .callout-box {
+                display: none;
+            }
+
+            .quote-box {
+                display: none;
+            }
+
+            .article-body h2:nth-of-type(n+4),
+            .article-body h2:nth-of-type(n+4) ~ p,
+            .article-body h2:nth-of-type(n+4) ~ ul,
+            .article-body h2:nth-of-type(n+4) ~ ol,
+            .article-body h2:nth-of-type(n+4) ~ .callout-box,
+            .article-body h2:nth-of-type(n+4) ~ .quote-box {
+                display: none;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .author-name {
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                font-size: 12px;
+                color: #000000;
+            }
+
+            .author-avatar-sm {
+                width: 32px;
+                height: 32px;
+            }
+
+            .author-info::after,
+            .article-meta .meta-item:nth-of-type(1)::after {
+                content: "|";
+                color: #9ca3af;
+                margin-left: 10px;
+                font-weight: 300;
+            }
+
+            .featured-image-wrap {
+                margin-left: -16px;
+                margin-right: -16px;
             }
 
             .featured-image {
-                height: 240px;
-                border-radius: 12px;
+                height: 392px;
+                width: 412px;
+                border-radius: 0;
+                object-fit: cover;
             }
 
             .author-card {
@@ -631,7 +773,44 @@
             }
 
             .related-grid {
-                grid-template-columns: 1fr;
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                gap: 16px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 10px;
+            }
+
+            .related-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .related-card {
+                flex: 0 0 100%;
+                min-width: 100%;
+                scroll-snap-align: start;
+            }
+
+            .related-card-title {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 18px;
+                font-weight: 700;
+                line-height: 28px;
+                letter-spacing: 0%;
+                color: #000000;
+                text-transform: capitalize;
+            }
+
+            .related-card-desc {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 19px;
+                letter-spacing: 0%;
+                color: #000000;
+                text-align: justify;
             }
         }
     </style>
@@ -640,6 +819,7 @@
 
     @include('components.header')
 
+    <main class="blog-detail-page">
     <div class="container">
 
         <!-- Breadcrumb -->
@@ -727,18 +907,23 @@
                 <p>Today's buyers want to know where materials came from, who assembled the box, and what happens to it after disposal. Smart packaging with QR codes that trace the supply chain, or simply printed details about the box's recycled content, transform transparency into a brand strength. In a market saturated with noise, the brands that win are those that treat packaging not as a cost center, but as a strategic asset.</p>
                 <p>The trends above aren't predictions — they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
 
+                <hr class="author-divider">
+
                 <!-- Author Bio Card -->
-                @if(!empty($blog['joined_author_name']))
                 <div class="author-card">
-                    @php $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); @endphp
-                    <img src="{{ $authorImg }}" alt="{{ $blog['joined_author_name'] }}" class="author-card-avatar">
+                    @php 
+                        $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : 'Ahmed Khan';
+                        $authorSlug = !empty($blog['joined_author_slug']) ? $blog['joined_author_slug'] : 'ahmed-khan';
+                        $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
+                        $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
+                    @endphp
+                    <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar">
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
-                        <a href="{{ url('/author/' . $blog['joined_author_slug']) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $blog['joined_author_name'] }}</a>
-                        <div class="author-card-bio">{{ $blog['joined_author_desc'] }}</div>
+                        <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $authorName }}</a>
+                        <div class="author-card-bio">{{ $authorDesc }}</div>
                     </div>
                 </div>
-                @endif
             </article>
 
             <!-- Right Sidebar -->
@@ -818,7 +1003,9 @@
                 @foreach($recentBlogs as $rb)
                 <article class="related-card">
                     @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
-                    <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                    <a href="{{ url('/blog/' . $rb->slug) }}" style="display:block;">
+                        <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                    </a>
                     <div class="related-card-body">
                         <div class="related-card-meta">
                             @if(!empty($rb->author_slug))
@@ -828,7 +1015,9 @@
                             @endif
                             <span>{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                         </div>
-                        <h3 class="related-card-title">{{ $rb->title }}</h3>
+                        <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;">
+                            <h3 class="related-card-title">{{ $rb->title }}</h3>
+                        </a>
                         <p class="related-card-desc">{{ Str::limit($rb->excerpt ?? $rb->content, 90) }}</p>
                         <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn">
                             Read More &rarr;
@@ -840,8 +1029,8 @@
         </section>
 
     </div>
-
-    @include('components.footer')
+</main>
+@include('components.footer')
 
 </body>
 </html>
