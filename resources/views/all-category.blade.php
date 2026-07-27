@@ -1004,7 +1004,7 @@
                                         </svg>
                                     @endif
                                 </div>
-                                <h3 class="heading-04">{{ $cat['title'] }}</h3>
+                                <span class="heading-04" style="display: block;">{{ $cat['title'] }}</span>
                             </article>
                         </a>
                     @endforeach
@@ -1051,7 +1051,7 @@
 
                     <!-- Second Container - Bulk Packaging Info -->
                     <div class="bulk-info-container">
-                        <h2 class="bulk-info-title">Bulk Packaging Solutions For Enterprises And Growing Brands</h2>
+                        <span class="bulk-info-title" style="display: block;">Bulk Packaging Solutions For Enterprises And Growing Brands</span>
                         <p class="bulk-info-description">
                             Looking for a packaging partner that can support your growth? Our bulk packaging solutions combine wholesale pricing, premium quality, fast production, and full customization to help brands streamline their supply chains, boost profitability, maintain consistency, and meet large-scale demand with confidence.
                         </p>
@@ -1065,7 +1065,7 @@
             <div class="container">
                 <div class="cta-wrapper">
                     <div class="cta-content">
-                        <h2 class="cta-title">Get Your Custom Packaging Today</h2>
+                        <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>
                         <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
                         <a href="/request-quote" class="cta-button">
                             Get Started Today

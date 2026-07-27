@@ -292,13 +292,13 @@
     <div class="faq-container">
         <div class="faq-wrapper">
             <div class="faq-left">
-                <h2 class="faq-left-heading">Don't see the answer to your question? Ask the packaging expert directly.</h2>
+                <span class="faq-left-heading" style="display: block;">Don't see the answer to your question? Ask the packaging expert directly.</span>
                 <p class="faq-left-paragraph">Check out the most common questions our customers asked. Still have questions ? <strong>Contact our customer support</strong>.</p>
                 <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions" class="faq-left-image">
                 <a href="/contact" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">
-                <h2 class="faq-main-heading">Frequently Asked Questions</h2>
+                <span class="faq-main-heading" style="display: block;">Frequently Asked Questions</span>
                 <div class="faq-list">
                     @if(count($displayFaqs) > 0)
                         @foreach($displayFaqs as $faq)

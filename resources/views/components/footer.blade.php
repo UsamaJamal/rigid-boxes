@@ -4,7 +4,7 @@
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <h3>Sign Up For Exclusive Offers And Updates!</h3>
+                    <span style="display: block; font-size: 1.17em; font-weight: bold; margin-top: 1em; margin-bottom: 1em;">Sign Up For Exclusive Offers And Updates!</span>
                 </div>
                 <div class="newsletter-form">
                     <input type="email" placeholder="Email" class="newsletter-input">
@@ -47,7 +47,7 @@
 
                 <!-- Categories Column -->
                 <div class="footer-column">
-                    <h4 class="footer-heading">Categories</h4>
+                    <span class="footer-heading" style="display: block;">Categories</span>
                     <ul class="footer-links">
                         @php
                             $footerCatIds = $siteSettings['footer_categories'] ?? [];
@@ -74,7 +74,7 @@
 
                 <!-- Quick Links Column -->
                 <div class="footer-column">
-                    <h4 class="footer-heading">Quick Links</h4>
+                    <span class="footer-heading" style="display: block;">Quick Links</span>
                     <ul class="footer-links">
                         @php
                             $quickLinks = $siteSettings['footer_quick_links'] ?? [];
@@ -95,7 +95,7 @@
 
                 <!-- Company Info Column -->
                 <div class="footer-column">
-                    <h4 class="footer-heading">Company Info</h4>
+                    <span class="footer-heading" style="display: block;">Company Info</span>
                     <ul class="footer-contact">
                         <li class="contact-item">
                             <img src="{{ asset('images/contact-email.png') }}" alt="Email" class="contact-icon">

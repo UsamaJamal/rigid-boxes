@@ -270,7 +270,9 @@
             text-align: center;
         }
 
-        .why-choose-container h2 {
+        .why-choose-container h2,
+        .why-choose-container .h2-heading {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 32px;
@@ -327,6 +329,7 @@
         }
 
         .why-card__title {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 18px;
@@ -677,6 +680,7 @@
         }
 
         .premium-heading {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 32px;
@@ -819,6 +823,7 @@
         }
 
         .bestseller-heading {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 32px;
@@ -1155,6 +1160,7 @@
 
         /* Heading */
         .customize-detail-heading {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 32px;
@@ -1308,6 +1314,7 @@
 
         /* heading */
         .sustainable-heading {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 32px;
@@ -1638,7 +1645,7 @@
         <section class="why-choose-section">
             <div class="why-choose-container">
 
-                <h2>Why Choose Us</h2>
+                <span class="h2-heading">Why Choose Us</span>
                 <p class="why-desc">From premium materials to expert support, we provide everything you need for exceptional custom packaging.</p>
 
                 <div class="why-bento">
@@ -1649,7 +1656,7 @@
                         <!-- CARD 1 — pink-1: Free Design Support -->
                         <div class="why-card wc-pink1">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Free Design Support</h3>
+                                <span class="why-card__title">Free Design Support</span>
                                 <p class="why-card__text">Get expert assistance with artwork, layouts, and packaging design at no extra cost.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1660,7 +1667,7 @@
                         <!-- CARD 2 — pink-2: Premium Quality Materials -->
                         <div class="why-card wc-pink2">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Premium Quality Materials</h3>
+                                <span class="why-card__title">Premium Quality Materials</span>
                                 <p class="why-card__text">Durable materials crafted to protect your products and elevate brand perception.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1671,7 +1678,7 @@
                         <!-- CARD 3 — blue: Low MOQ -->
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Low MOQ</h3>
+                                <span class="why-card__title">Low MOQ</span>
                                 <p class="why-card__text">Order in quantities that suit your business size, starting from low minimums.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1687,7 +1694,7 @@
                         <!-- CARD 4 — yellow: Dedicated Customer Service -->
                         <div class="why-card wc-yellow">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Dedicated Customer Service</h3>
+                                <span class="why-card__title">Dedicated Customer Service</span>
                                 <p class="why-card__text">Our packaging specialists are here to guide you through every step of your order.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1698,7 +1705,7 @@
                         <!-- CARD 5 — green: Custom Sizes & Designs -->
                         <div class="why-card wc-green">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Custom Sizes &amp; Designs</h3>
+                                <span class="why-card__title">Custom Sizes &amp; Designs</span>
                                 <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1709,7 +1716,7 @@
                         <!-- CARD 6 — skin: Fast Production Time -->
                         <div class="why-card wc-skin">
                             <div class="why-card__content">
-                                <h3 class="why-card__title">Fast Production Time</h3>
+                                <span class="why-card__title">Fast Production Time</span>
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
@@ -1732,7 +1739,7 @@
 
                 <!-- Left: heading + desc + clickable tabs -->
                 <div class="bestseller-left">
-                    <h2 class="bestseller-heading">Best Seller Product</h2>
+                    <span class="bestseller-heading">Best Seller Product</span>
                     <p class="bestseller-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
                     <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
                         <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
@@ -1784,7 +1791,7 @@
                 <!-- RIGHT: content col -->
                 <div class="premium-content">
 
-                    <h2 class="premium-heading">Premium Custom Rigid Boxes</h2>
+                    <span class="premium-heading">Premium Custom Rigid Boxes</span>
 
                     <p class="premium-desc">Custom printed rigid packaging boxes offer the perfect combination of luxury, durability, and sophistication. Crafted from sturdy, high-quality materials, these boxes provide exceptional protection for fragile and premium products while enhancing their overall presentation. Elegant finishes and refined detailing create a high-end look that reflects your brand's value. Our luxury black rigid boxes are especially suited for delicate, expensive, and gift-worthy items. With endless customization possibilities, they can be tailored for branding, retail display, and special occasions, helping you create a memorable unboxing experience and leave a lasting impression on your customers.</p>
 
@@ -1821,7 +1828,7 @@
         <section class="customize-detail-section">
             <div class="customize-detail-inner">
 
-                <h2 class="customize-detail-heading">Customize Every Detail</h2>
+                <span class="customize-detail-heading">Customize Every Detail</span>
                 <p class="customize-detail-desc">Choose from premium materials, luxury finishes, custom inserts, and unique box styles to create packaging that perfectly represents your brand.</p>
 
                 <!-- Options pill bar (scrollable, draggable) -->
@@ -1863,7 +1870,7 @@
         <section class="sustainable-section">
             <div class="sustainable-inner">
 
-                <h2 class="sustainable-heading">Sustainable Packaging Solutions</h2>
+                <span class="sustainable-heading">Sustainable Packaging Solutions</span>
                 <p class="sustainable-desc">Packaging designed to reduce environmental impact without compromising on quality, durability, or presentation.</p>
 
                 <div class="sustainable-grid">

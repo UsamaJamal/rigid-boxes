@@ -521,7 +521,7 @@
 
         <!-- Left: Form Card -->
         <div class="quote-form-card">
-            <h2 class="quote-form-title">Get Custom Quote</h2>
+            <span class="quote-form-title" style="display: block;">Get Custom Quote</span>
 
             <!-- Contact Information -->
             <p class="form-section-label">Contact Information</p>
