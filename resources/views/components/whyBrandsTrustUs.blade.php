@@ -121,7 +121,7 @@
             <!-- Card 1 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="no die & plate charges">
+                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="No Die & Plate Charges">
                 </span>
                 <h3>No Die & Plate Charges</h3>
                 <p>No added tooling fees, just straightforward pricing</p>
@@ -130,7 +130,7 @@
             <!-- Card 2 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="customer satisfaction">
+                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="Customer Satisfaction">
                 </span>
                 <h3>Customer Satisfaction</h3>
                 <p>Built on trust, quality, and long term partnerships.</p>
@@ -139,7 +139,7 @@
             <!-- Card 3 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="low minimum order quantity">
+                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="Low Minimum Order Quantity">
                 </span>
                 <h3>Low Minimum Order Quantity</h3>
                 <p>Flexible quantities to suit every business stage.</p>
@@ -148,7 +148,7 @@
             <!-- Card 4 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="free shipping">
+                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="Free Shipping">
                 </span>
                 <h3>Free Shipping</h3>
                 <p>No shipping costs, no last-minute surprises.</p>
@@ -157,7 +157,7 @@
             <!-- Card 5 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/free-graphic-design.svg') }}" alt="free graphic design">
+                    <img src="{{ asset('uploads/free-graphic-design.svg') }}" alt="Free Graphic Design">
                 </span>
                 <h3>Free Graphic Design</h3>
                 <p>Professional designs at no extra cost.</p>
@@ -166,7 +166,7 @@
             <!-- Card 6 -->
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/fast-turn-around.svg') }}" alt="fast turnaround time">
+                    <img src="{{ asset('uploads/fast-turn-around.svg') }}" alt="Fast Turnaround Time">
                 </span>
                 <h3>Fast Turnaround Time</h3>
                 <p>Quick production with consistent quality.</p>

@@ -292,7 +292,7 @@
             <div class="faq-left">
                 <span class="faq-left-heading" style="display: block;">Don't see the answer to your question? Ask the packaging expert directly.</span>
                 <p class="faq-left-paragraph">Check out the most common questions our customers asked. Still have questions ? <strong>Contact our customer support</strong>.</p>
-                <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="frequently asked questions" class="faq-left-image">
+                <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions" class="faq-left-image">
                 <a href="/contact" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">

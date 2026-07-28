@@ -309,7 +309,7 @@
 
             <!-- Card 1 -->
             <article class="blog-card">
-                <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="sustainable packaging trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
                 <div class="blog-card__content">
                     <div class="blog-card__meta">
                         <span class="blog-card__author">Joe Danley</span>
@@ -328,7 +328,7 @@
 
             <!-- Card 2 -->
             <article class="blog-card">
-                <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="sustainable packaging trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
                 <div class="blog-card__content">
                     <div class="blog-card__meta">
                         <span class="blog-card__author">Joe Danley</span>
@@ -347,7 +347,7 @@
 
             <!-- Card 3 -->
             <article class="blog-card">
-                <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="sustainable packaging trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
                 <div class="blog-card__content">
                     <div class="blog-card__meta">
                         <span class="blog-card__author">Joe Danley</span>

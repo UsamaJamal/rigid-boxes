@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
@@ -418,4 +418,3 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     </script>
 </body>
 </html>
-

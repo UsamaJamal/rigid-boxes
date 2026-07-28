@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
@@ -62,9 +62,9 @@
             }
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            SECTION: CUSTOM BOXES FOR EVERY INDUSTRY
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .custom-boxes-section {
             background: #FAF8F8;
             padding: 32px 0 30px;
@@ -100,9 +100,9 @@
             margin: 0 auto 28px;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            CARDS GRID
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -112,9 +112,9 @@
             align-items: stretch;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            CARD  (exact Figma spec)
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .industry-card {
             width: 100%;
             min-height: 0;
@@ -127,7 +127,7 @@
             flex-direction: column;
         }
 
-        /* Card title â€” single line, never wraps */
+        /* Card title — single line, never wraps */
         .industry-card__title {
             display: block;
             font-family: 'Open Sans', sans-serif;
@@ -143,7 +143,7 @@
             flex-shrink: 0;
         }
 
-        /* Image area â€” Figma: left:8px w:275 h:266 */
+        /* Image area — Figma: left:8px w:275 h:266 */
         .industry-card__image-wrap {
             width: calc(100% - 16px);
             height: clamp(190px, 18vw, 230px);
@@ -164,7 +164,7 @@
             transform: scale(1.05);
         }
 
-        /* Bottom content area â€” grows to push button to same level across all cards */
+        /* Bottom content area — grows to push button to same level across all cards */
         .industry-card__bottom {
             display: flex;
             flex-direction: column;
@@ -172,7 +172,7 @@
             padding: 14px 17px 20px;
         }
 
-        /* Text area â€” Figma: w:247 h:42 */
+        /* Text area — Figma: w:247 h:42 */
         .industry-card__text {
             font-family: 'DM Sans', sans-serif;
             font-weight: 400;
@@ -188,7 +188,7 @@
             text-overflow: ellipsis;
         }
 
-        /* Button â€” Figma: left:46px w:200 h:46
+        /* Button — Figma: left:46px w:200 h:46
            border-radius:4px, border:1px, padding:12px 20px */
         .industry-card__btn {
             display: flex;
@@ -223,11 +223,11 @@
             color: #fff;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            VIEW ALL CATEGORIES BUTTON
            Figma: w:200 h:46, border-radius:4px,
                   padding:12/20/12/20, centered
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .view-all-wrap {
             margin-top: 28px;
             display: flex;
@@ -261,9 +261,9 @@
             color: #fff;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            WHY CHOOSE US SECTION
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .why-choose-section {
             background: var(--background-color, #FAF8F8);
             padding: 10px 0 30px;
@@ -298,10 +298,10 @@
             margin-bottom: 36px;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            BENTO WRAPPER
-           Total width: 4Ã—299 + 3Ã—14 = 1238px
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+           Total width: 4×299 + 3×14 = 1238px
+        ───────────────────────────────────────── */
         .why-bento {
             width: 100%;
             max-width: 100%;
@@ -322,7 +322,7 @@
             margin-top: 0;
         }
 
-        /* â”€â”€ Base card â”€â”€ */
+        /* ── Base card ── */
         .why-card {
             border-radius: 16px;
             padding: 32px 24px;
@@ -358,7 +358,7 @@
             width: 100%;
         }
 
-        /* â”€â”€ Image box â”€â”€ */
+        /* ── Image box ── */
         .why-card__img-box {
             position: absolute;
             top: 173px;
@@ -384,9 +384,9 @@
             border-radius: 12px;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 1 â€” pink-1: Free Design Support
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 1 — pink-1: Free Design Support
+        ───────────────────────────────────────── */
         .wc-pink1 {
             background: #FDF0F6;
             width: 100%;
@@ -395,9 +395,9 @@
             grid-row: 1 / span 2;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 2 â€” pink-2: Premium Quality Materials
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 2 — pink-2: Premium Quality Materials
+        ───────────────────────────────────────── */
         .wc-pink2 {
             background: #FCECEE;
             width: 100%;
@@ -406,9 +406,9 @@
             grid-row: 1 / span 2;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 3 â€” blue: Low MOQ
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 3 — blue: Low MOQ
+        ───────────────────────────────────────── */
         .wc-blue {
             background: #EAF3FB;
             width: 100%;
@@ -446,9 +446,9 @@
             border-radius: 0;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 4 â€” yellow: Dedicated Customer Service
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 4 — yellow: Dedicated Customer Service
+        ───────────────────────────────────────── */
         .wc-yellow {
             background: #FDF7E7;
             width: 100%;
@@ -477,9 +477,9 @@
             border-radius: 0;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 5 â€” green: Custom Sizes & Designs
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 5 — green: Custom Sizes & Designs
+        ───────────────────────────────────────── */
         .wc-green {
             background: #ECFBEF;
             width: 100%;
@@ -488,9 +488,9 @@
             grid-row: 2 / span 2;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           CARD 6 â€” skin: Fast Production Time
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           CARD 6 — skin: Fast Production Time
+        ───────────────────────────────────────── */
         .wc-skin {
             background: #FDF3E9;
             width: 100%;
@@ -499,9 +499,9 @@
             grid-row: 2 / span 2;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           RESPONSIVE â€” Why Choose Us
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           RESPONSIVE — Why Choose Us
+        ───────────────────────────────────────── */
 
         /* Laptop container padding */
         @media (max-width: 1300px) and (min-width: 993px) {
@@ -628,9 +628,9 @@
             }
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            PREMIUM CUSTOM RIGID BOXES SECTION
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .premium-section {
             background: var(--primary-color, #8D4445);
             padding: 40px 0 20px;
@@ -647,7 +647,7 @@
             gap: 48px;
         }
 
-        /* â”€â”€ LEFT: two overlapping images â”€â”€ */
+        /* ── LEFT: two overlapping images ── */
         .premium-images {
             position: relative;
             width: 50%;
@@ -679,7 +679,7 @@
             z-index: 2;
         }
 
-        /* â”€â”€ RIGHT: content col â”€â”€ */
+        /* ── RIGHT: content col ── */
         .premium-content {
             width: auto;
             min-width: 0;
@@ -768,7 +768,7 @@
             background: var(--secondary-color, #F8EEEC);
         }
 
-        /* RESPONSIVE â€” Premium Section */
+        /* RESPONSIVE — Premium Section */
         @media (max-width: 1200px) {
             .premium-inner   { padding: 0 40px; gap: 40px; }
             .premium-images  { width: 440px; height: 420px; }
@@ -805,9 +805,9 @@
             .premium-img2     { width: 52%; height: auto; aspect-ratio: 370/341; top: 100px; left: 40%; }
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            BEST SELLER SECTION
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .bestseller-section {
             background: var(--secondary-color, #F8EEEC);
             padding: 60px 0;
@@ -828,7 +828,7 @@
             overflow: hidden;
         }
 
-        /* Left content block â€” w:260 */
+        /* Left content block — w:260 */
         .bestseller-left {
             width: 260px;
             flex-shrink: 0;
@@ -857,7 +857,7 @@
             margin-bottom: 24px;
         }
 
-        /* Dots â€” 4 circles, total width ~76.5px */
+        /* Dots — 4 circles, total width ~76.5px */
         .bestseller-right {
             display: flex;
             flex-direction: column;
@@ -952,9 +952,9 @@
             padding: 10px 8px 0;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           RESPONSIVE â€” Best Seller
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           RESPONSIVE — Best Seller
+        ───────────────────────────────────────── */
         @media (max-width: 1200px) {
             .bestseller-inner {
                 padding: 0 40px;
@@ -989,7 +989,7 @@
             .bestseller-dots {
                 justify-content: center;
             }
-            /* 2Ã—2 card grid */
+            /* 2×2 card grid */
             .bestseller-cards {
                 width: 100%;
                 display: flex;
@@ -1163,9 +1163,9 @@
             }
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            CUSTOMIZE EVERY DETAIL SECTION
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .customize-detail-section {
             background: var(--background-color, #FAF8F8);
             padding: 48px 0 25px;
@@ -1289,9 +1289,9 @@
             display: none;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           RESPONSIVE â€” Customize Detail
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           RESPONSIVE — Customize Detail
+        ───────────────────────────────────────── */
         @media (max-width: 1200px) {
             .customize-detail-inner { padding: 0 24px; }
             .cdo-btn { font-size: 14px; padding-inline: 14px; }
@@ -1330,9 +1330,9 @@
             }
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        /* ─────────────────────────────────────────
            SUSTAINABLE PACKAGING SOLUTIONS SECTION
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        ───────────────────────────────────────── */
         .sustainable-section {
             background: #FFFFFF;
             padding: 20px 0 20px;
@@ -1379,7 +1379,7 @@
             align-items: stretch;
         }
 
-        /* â”€â”€ LEFT: big image with overlay text + button â”€â”€ */
+        /* ── LEFT: big image with overlay text + button ── */
         .sustainable-left {
             width: 606px;
             height: 600px;
@@ -1447,7 +1447,7 @@
             background: var(--footer-color, #5F2D2F);
         }
 
-        /* â”€â”€ RIGHT: two stacked images â”€â”€ */
+        /* ── RIGHT: two stacked images ── */
         .sustainable-right {
             flex: 1;
             display: flex;
@@ -1485,9 +1485,9 @@
             white-space: nowrap;
         }
 
-        /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-           RESPONSIVE â€” Sustainable
-        â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+        /* ─────────────────────────────────────────
+           RESPONSIVE — Sustainable
+        ───────────────────────────────────────── */
         @media (max-width: 1200px) {
             .sustainable-inner { padding: 0 40px; }
             .sustainable-left  { width: 48%; }
@@ -1526,9 +1526,9 @@
             .sustainable-right__label  { font-size: 18px; white-space: normal; text-align: center; width: 90%; }
         }
 
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        /* ═══════════════════════════════════
            TESTIMONIAL
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+        ═══════════════════════════════════ */
         .testimonial-section { background: var(--secondary-color); padding: 20px 0; position: relative; overflow: visible; }
         .testimonial-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; overflow: visible; }
         .testimonial-header { text-align: center; margin-bottom: 40px; }
@@ -1564,9 +1564,9 @@
             .pagination-dots { margin-top: 34px; }
         }
 
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        /* ═══════════════════════════════════
            CUSTOM QUOTE
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+        ═══════════════════════════════════ */
         .quote-section { background: var(--primary-color); width: 100%; padding: 20px 0 54px; position: relative; overflow: hidden; margin-top: 20px; }
         .quote-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; gap: 40px; position: relative; z-index: 2; }
         .quote-form-card { width: 739px; min-height: 712px; flex-shrink: 0; background: #fff; border-radius: 20px; padding: 46px; box-sizing: border-box; }
@@ -1604,9 +1604,9 @@
         @media (max-width: 992px) { .quote-section { padding: 40px 0 50px; margin-top: 0; } .quote-container { flex-direction: column-reverse; padding: 0 5%; } .quote-form-card { width: 100%; min-height: unset; } .quote-steps { padding-top: 0; padding-bottom: 40px; } }
         @media (max-width: 576px) { .quote-container { padding: 0 5%; } .quote-form-card { padding: 20px; border-radius: 18px; } .quote-form-title { font-size: 20px !important; } .form-row { flex-direction: column; gap: 10px; } .preferences-grid { grid-template-columns: repeat(2, 1fr); } .quote-submit-btn { width: 90%; } }
 
-        /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        /* ═══════════════════════════════════
            TEXT CONTENT
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+        ═══════════════════════════════════ */
         .text-content-section { background: var(--background-color); padding: 25px 0; }
         .text-content-container { max-width: 1440px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; }
         .text-content-card { width: 100%; max-width: 1030px; background: #fff; border-radius: 40px; border: 1px solid var(--section-text-color); padding: 48px 20px 48px 56px; box-sizing: border-box; height: 787px; }
@@ -1618,7 +1618,7 @@
         .text-content-body p { font-family: 'Open Sans', sans-serif; font-size: 16px; color: #000; line-height: 1.7; margin-bottom: 14px; }
         .text-content-body ul { list-style: none; padding: 0; margin: 0 0 14px; }
         .text-content-body ul li { font-size: 16px; color: #333; line-height: 1.7; padding-left: 20px; position: relative; margin-bottom: 4px; }
-        .text-content-body ul li::before { content: 'â€¢'; position: absolute; left: 4px; color: #333; }
+        .text-content-body ul li::before { content: '•'; position: absolute; left: 4px; color: #333; }
         .text-content-body a { color: #333; text-decoration: underline; }
         @media (max-width: 992px) { .text-content-card { padding: 36px 32px; height: auto; } .text-content-inner { height: auto; overflow-y: visible; padding-right: 0; } }
         @media (max-width: 576px) { .text-content-section { padding: 20px 0; } .text-content-card { padding: 28px 20px; border-radius: 20px; height: auto; } .text-content-heading { font-size: 20px !important; } .text-content-body p, .text-content-body ul li { font-size: 14px; } }
@@ -1682,9 +1682,9 @@
             </div><!-- /.custom-boxes-container -->
         </section>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- ═══════════════════════════════════════
              WHY CHOOSE US SECTION
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        ═══════════════════════════════════════ -->
         <section class="why-choose-section">
             <div class="why-choose-container">
 
@@ -1693,77 +1693,77 @@
 
                 <div class="why-bento">
 
-                    <!-- ROW 1: pink1 (299Ã—413) | pink2 (299Ã—413) | blue (612Ã—413) -->
+                    <!-- ROW 1: pink1 (299×413) | pink2 (299×413) | blue (612×413) -->
                     <div class="why-row">
 
-                        <!-- CARD 1 â€” pink-1: Free Design Support -->
+                        <!-- CARD 1 — pink-1: Free Design Support -->
                         <div class="why-card wc-pink1">
                             <div class="why-card__content">
                                 <span class="why-card__title">Free Design Support</span>
                                 <p class="why-card__text">Get expert assistance with artwork, layouts, and packaging design at no extra cost.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="packaging designer creating a custom box dieline">
+                                <img src="{{ asset('uploads/why-design-support.png') }}" alt="Packaging designer creating a custom box dieline">
                             </div>
                         </div>
 
-                        <!-- CARD 2 â€” pink-2: Premium Quality Materials -->
+                        <!-- CARD 2 — pink-2: Premium Quality Materials -->
                         <div class="why-card wc-pink2">
                             <div class="why-card__content">
                                 <span class="why-card__title">Premium Quality Materials</span>
                                 <p class="why-card__text">Durable materials crafted to protect your products and elevate brand perception.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="sample materials showing paper and cardstock swatches">
+                                <img src="{{ asset('uploads/why-premium-materials.png') }}" alt="Sample materials showing paper and cardstock swatches">
                             </div>
                         </div>
 
-                        <!-- CARD 3 â€” blue: Low MOQ -->
+                        <!-- CARD 3 — blue: Low MOQ -->
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
                                 <span class="why-card__title">Low MOQ</span>
                                 <p class="why-card__text">Order in quantities that suit your business size, starting from low minimums.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="custom box sample representing low moq orders">
+                                <img src="{{ asset('uploads/why-low-moq.png') }}" alt="Custom box sample representing low MOQ orders">
                             </div>
                         </div>
 
                     </div><!-- /.why-row -->
 
-                    <!-- ROW 2 & 3: yellow (612Ã—242) | green (299Ã—413) | skin (299Ã—413) -->
+                    <!-- ROW 2 & 3: yellow (612×242) | green (299×413) | skin (299×413) -->
                     <div class="why-row">
 
-                        <!-- CARD 4 â€” yellow: Dedicated Customer Service -->
+                        <!-- CARD 4 — yellow: Dedicated Customer Service -->
                         <div class="why-card wc-yellow">
                             <div class="why-card__content">
                                 <span class="why-card__title">Dedicated Customer Service</span>
                                 <p class="why-card__text">Our packaging specialists are here to guide you through every step of your order.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="customer service specialist with headset smiling">
+                                <img src="{{ asset('uploads/why-customer-service.png') }}" alt="Customer service specialist with headset smiling">
                             </div>
                         </div>
 
-                        <!-- CARD 5 â€” green: Custom Sizes & Designs -->
+                        <!-- CARD 5 — green: Custom Sizes & Designs -->
                         <div class="why-card wc-green">
                             <div class="why-card__content">
                                 <span class="why-card__title">Custom Sizes &amp; Designs</span>
                                 <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/custom-sizes-and-designs.webp') }}" alt="custom sizes and designs">
+                                <img src="{{ asset('uploads/custom-sizes-and-designs.webp') }}" alt="Custom Sizes and Designs">
                             </div>
                         </div>
 
-                        <!-- CARD 6 â€” skin: Fast Production Time -->
+                        <!-- CARD 6 — skin: Fast Production Time -->
                         <div class="why-card wc-skin">
                             <div class="why-card__content">
                                 <span class="why-card__title">Fast Production Time</span>
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/fast-production-management.webp') }}" alt="fast production management">
+                                <img src="{{ asset('uploads/fast-production-management.webp') }}" alt="Fast Production Management">
                             </div>
                         </div>
 
@@ -1774,9 +1774,9 @@
             </div><!-- /.why-choose-container -->
         </section>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- ═══════════════════════════════════════
              BEST SELLER SECTION
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        ═══════════════════════════════════════ -->
         <section class="bestseller-section">
             <div class="bestseller-inner">
 
@@ -1821,16 +1821,16 @@
             </div><!-- /.bestseller-inner -->
         </section>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- ═══════════════════════════════════════
              PREMIUM CUSTOM RIGID BOXES SECTION
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        ═══════════════════════════════════════ -->
         <section class="premium-section">
             <div class="premium-inner">
 
                 <!-- LEFT: two overlapping images -->
                 <div class="premium-images">
-                    <img class="premium-img1" src="{{ asset('uploads/premium-rigid-boxes-showcase.webp') }}" alt="premium custom rigid boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
-                    <img class="premium-img2" src="{{ asset('uploads/luxury-rigid-box-detail.webp') }}" alt="luxury rigid box detail" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
+                    <img class="premium-img1" src="{{ asset('uploads/premium-rigid-boxes-showcase.webp') }}" alt="Premium Custom Rigid Boxes" onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
+                    <img class="premium-img2" src="{{ asset('uploads/luxury-rigid-box-detail.webp') }}" alt="Luxury Rigid Box Detail" onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
                 </div>
 
                 <!-- RIGHT: content col -->
@@ -1844,17 +1844,17 @@
                     <div class="premium-icons">
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="premium quality" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=Q'">
+                            <img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="Premium Quality" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=Q'">
                             <span class="premium-icon-text">Premium Quality</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="custom designs" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=D'">
+                            <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Designs" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=D'">
                             <span class="premium-icon-text">Custom Designs</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="fast & reliable delivery" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=F'">
+                            <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast & Reliable Delivery" onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=F'">
                             <span class="premium-icon-text">Fast &amp; Reliable Delivery</span>
                         </div>
 
@@ -1867,9 +1867,9 @@
             </div><!-- /.premium-inner -->
         </section>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- ═══════════════════════════════════════
              CUSTOMIZE EVERY DETAIL SECTION
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        ═══════════════════════════════════════ -->
         <section class="customize-detail-section">
             <div class="customize-detail-inner">
 
@@ -1890,17 +1890,17 @@
                 <div class="customize-detail-cards" id="cdoCards">
 
                     <div class="cdc-card cdc-card--gold">
-                        <img src="{{ asset('uploads/addon-gold-foil.webp') }}" alt="gold foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
+                        <img src="{{ asset('uploads/addon-gold-foil.webp') }}" alt="Gold Foil" id="cdo-img-1" onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
                         <span class="cdc-card__label" id="cdo-label-1">Gold Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/addon-silver-foil.webp') }}" alt="silver foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
+                        <img src="{{ asset('uploads/addon-silver-foil.webp') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--holo">
-                        <img src="{{ asset('uploads/addon-Holographic.webp') }}" alt="holographic foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
+                        <img src="{{ asset('uploads/addon-Holographic.webp') }}" alt="Holographic Foil" id="cdo-img-3" onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
                         <span class="cdc-card__label" id="cdo-label-3">Holographic Foil</span>
                     </div>
 
@@ -1909,9 +1909,9 @@
             </div><!-- /.customize-detail-inner -->
         </section>
 
-        <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        <!-- ═══════════════════════════════════════
              SUSTAINABLE PACKAGING SOLUTIONS SECTION
-        â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+        ═══════════════════════════════════════ -->
         <section class="sustainable-section">
             <div class="sustainable-inner">
 
@@ -1922,7 +1922,7 @@
 
                     <!-- LEFT: big image with overlay -->
                     <div class="sustainable-left">
-                        <img src="{{ asset('uploads/eco-friendly-packaging.webp') }}" alt="eco friendly packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
+                        <img src="{{ asset('uploads/eco-friendly-packaging.webp') }}" alt="Eco-Friendly Packaging" onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
@@ -1934,12 +1934,12 @@
                     <div class="sustainable-right">
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/fsc-certified-packaging.webp') }}" alt="fsc certified packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
+                            <img src="{{ asset('uploads/fsc-certified-packaging.webp') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
                             <span class="sustainable-right__label">FSC Image</span>
                         </div>
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="circular packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
+                            <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
                             <span class="sustainable-right__label">Circular Packaging Image</span>
                         </div>
 
@@ -1966,7 +1966,7 @@
             document.body.style.overflow = document.getElementById('mobileSidebar').classList.contains('active') ? 'hidden' : '';
         }
 
-        /* â”€â”€ Customize Every Detail â€” option switch + drag scroll â”€â”€ */
+        /* ── Customize Every Detail — option switch + drag scroll ── */
         (function () {
             var cdoData = {
                 foiling:   [
@@ -2113,4 +2113,3 @@
 
 </body>
 </html>
-

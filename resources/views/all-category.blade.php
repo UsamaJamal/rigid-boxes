@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
@@ -1043,7 +1043,7 @@
                     <!-- First Container - Sustainable Options -->
                     <div class="sustainable-container">
                         <div class="sustainable-header">
-                            <img src="{{ asset('images/sustainable-packaging-icon.png') }}" alt="sustainable" class="sustainable-icon">
+                            <img src="{{ asset('images/sustainable-packaging-icon.png') }}" alt="Sustainable" class="sustainable-icon">
                             <h2 class="sustainable-title">Sustainable Bulk Packaging Options</h2>
                         </div>
                         <p class="sustainable-description">
@@ -1099,7 +1099,7 @@
                         </a>
                     </div>
                     <div class="cta-image">
-                        <img src="{{ asset('images/figure.png') }}" alt="custom packaging box" class="cta-box-image">
+                        <img src="{{ asset('images/figure.png') }}" alt="Custom Packaging Box" class="cta-box-image">
                     </div>
                 </div>
             </div>
@@ -1110,4 +1110,3 @@
     @include('components.footer')
 </body>
 </html>
-
