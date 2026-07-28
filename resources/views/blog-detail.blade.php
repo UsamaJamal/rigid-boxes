@@ -865,10 +865,22 @@
             <p class="article-subtitle">From bio-based rigid board to augmented reality unboxing, discover the innovations reshaping premium packaging and how early adopters are capturing measurable brand lift.</p>
             
             <div class="article-meta">
-                <div class="author-info">
-                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="Ahmed Khan" class="author-avatar-sm">
-                    <span class="author-name">Ahmed Khan</span>
-                </div>
+                @php 
+                    $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : 'Ahmed Khan';
+                    $authorSlug = $blog['joined_author_slug'] ?? null;
+                    $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
+                @endphp
+                @if($authorSlug)
+                    <a href="{{ url('/author/' . $authorSlug) }}" class="author-info" style="text-decoration:none; color:inherit;">
+                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                        <span class="author-name">{{ $authorName }}</span>
+                    </a>
+                @else
+                    <div class="author-info">
+                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                        <span class="author-name">{{ $authorName }}</span>
+                    </div>
+                @endif
                 <div class="meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                     <span>Mar 3, 2026</span>
@@ -942,16 +954,19 @@
                 <!-- Author Bio Card -->
                 <div class="author-card">
                     @php 
-                        $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : 'Ahmed Khan';
-                        $authorSlug = $blog['joined_author_slug'] ?? null;
                         $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
-                        $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
                     @endphp
-                    <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar">
+                    @if($authorSlug)
+                        <a href="{{ url('/author/' . $authorSlug) }}" style="text-decoration:none; color:inherit; display:flex;">
+                            <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                        </a>
+                    @else
+                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                    @endif
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
                         @if($authorSlug)
-                            <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $authorName }}</a>
+                            <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit; display:inline-block;">{{ $authorName }}</a>
                         @else
                             <span class="author-card-name">{{ $authorName }}</span>
                         @endif

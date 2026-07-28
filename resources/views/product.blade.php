@@ -888,6 +888,8 @@
         
         .finishes-bottom-nav {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 15px;
             font-family: 'Open Sans', sans-serif;
             font-size: 16px;
@@ -896,6 +898,15 @@
             letter-spacing: 0px;
             text-align: center;
             color: #000000;
+        }
+        
+        .finishes-bottom-nav span {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .finishes-bottom-nav span:hover {
+            color: var(--primary-color, #8C3A3A);
         }
         
         .finishes-bottom-nav span {
@@ -1282,6 +1293,8 @@
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
+                position: relative;
+                padding-top: 60px;
             }
             .finishes-image-container {
                 order: 1;
@@ -1342,33 +1355,50 @@
             }
             .finishes-bottom-nav {
                 display: flex !important;
-                flex-direction: column !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
                 gap: 8px;
                 width: 100%;
                 margin: 0;
                 padding: 0;
                 border: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            .finishes-bottom-nav::-webkit-scrollbar {
+                display: none;
             }
             .finishes-bottom-nav span {
-                display: block;
-                width: 100%;
+                display: inline-block;
                 text-align: center;
                 padding: 12px 14px;
                 border: 1px solid #E5D5D5;
                 border-radius: 6px;
-                background-color: #FAF4F2;
+                background-color: #FFFFFF;
                 font-weight: 600;
                 font-size: 12px;
                 color: #333333;
                 text-transform: uppercase;
                 box-sizing: border-box;
-                flex: none;
+                flex: 0 0 auto;
+                white-space: nowrap;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            .finishes-bottom-nav span:hover {
+                background-color: var(--primary-color, #8C3A3A);
+                color: #FFFFFF !important;
+                border-color: var(--primary-color, #8C3A3A);
             }
             .finishes-bottom-nav span.active-nav,
             .finishes-bottom-nav span[style*="font-weight: 700"] {
-                background-color: #8C3A3A !important;
+                background-color: var(--primary-color, #8C3A3A) !important;
                 color: #FFFFFF !important;
-                border-color: #8C3A3A !important;
+                border-color: var(--primary-color, #8C3A3A) !important;
                 font-weight: 700 !important;
             }
             .carousel-dots {
@@ -1761,6 +1791,48 @@
                         </div>
                     @endforeach
                 </div>
+                
+                <!-- Desktop Only Review Section -->
+                <style>
+                    @media (max-width: 767px) {
+                        .desktop-only-reviews {
+                            display: none !important;
+                        }
+                    }
+                </style>
+                <div class="trust-badges-container desktop-only-reviews">
+                    <div class="trust-badge">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Rating" style="width:40px;height:40px; border:0.5px solid #6A6A6A; border-radius:10px; padding: 6px; background:transparent; object-fit: contain;">
+                        <div>
+                            <div style="font-weight:600;font-size:12px;line-height:1.2;color:#111;">Google Rating</div>
+                            <div style="display:flex;align-items:center;gap:3px;font-size:11px;color:#F59E0B;margin-top:4px;">
+                                <span style="font-weight:700;color:#F59E0B;">5.0</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trust-badge" style="border-left: 1px solid #E5E7EB; padding-left: 20px;">
+                        <img src="{{ asset('uploads/trust-pilot.svg') }}" alt="trust pilot" style="width:40px;height:40px; border:0.5px solid #6A6A6A; border-radius:10px; padding: 6px; background:transparent; object-fit: contain;">
+                        <div>
+                            <div style="font-weight:600;font-size:12px;line-height:1.2;color:#111;">Trustpilot</div>
+                            <div style="font-size:10px;color:#555;margin-top:2px;"><span style="font-weight:700;color:#111;">4.6</span> out of 5</div>
+                            <div style="display:flex;align-items:center;gap:2px;margin-top:3px;">
+                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+                                    <div style="position:absolute; top:0; right:0; width:40%; height:100%; background:#DFE1E5;"></div>
+                                    <svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor" style="position:relative; z-index:1;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="hero-form">
@@ -2004,6 +2076,7 @@
                     <span>Inks</span>
                     <span>Finishing</span>
                     <span>Add-ons</span>
+                    <span>Addition Options</span>
                 </div>
             </div>
         </div>
@@ -2305,7 +2378,18 @@ function toggleFaq(element) {
                     { name: 'Presentation Closure', active: false, image: '{{ asset("uploads/presentation-closure.webp") }}' },
                     { name: 'Luxury Insert', active: false, image: '{{ asset("uploads/luxury-insert.webp") }}' },
                     { name: 'Paper Insert', active: false, image: '{{ asset("uploads/paper-insert.webp") }}' },
-                    { name: 'Protective Insert', active: false, image: '{{ asset("uploads/protective-insert.webp") }}' }
+                ]
+            },
+            'Addition Options': {
+                title: 'Addition Options',
+                items: [
+                    { name: 'Hot Foil Stamping', active: true, image: '{{ asset("uploads/hot-foil-stamping.png") }}' },
+                    { name: 'Cold Foil Stamping', active: false, image: '{{ asset("uploads/cold-foil-stamping.png") }}' },
+                    { name: 'Blind Embossing', active: false, image: '{{ asset("uploads/blind-embossing.png") }}' },
+                    { name: 'Blind Debossing', active: false, image: '{{ asset("uploads/blind-debossing.png") }}' },
+                    { name: 'Registered Embossing', active: false, image: '{{ asset("uploads/registered-embossing.png") }}' },
+                    { name: 'Combination Embossing', active: false, image: '{{ asset("uploads/combination-embossing.png") }}' },
+                    { name: 'Window Patching', active: false, image: '{{ asset("uploads/window-patching.png") }}' }
                 ]
             }
         };
@@ -2319,7 +2403,7 @@ function toggleFaq(element) {
             const carouselImage = document.querySelector('.finishes-image-container img');
             const carouselDotsContainer = document.querySelector('.carousel-dots');
             let carouselDots = document.querySelectorAll('.carousel-dot');
-            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons'];
+            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons', 'Addition Options'];
             let currentTabIndex = 0;
             let currentItemIndex = 2; // Start with middle item active
 
