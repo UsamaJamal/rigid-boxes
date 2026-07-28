@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Allow SSL/domain validation files to remain accessible from the project root.
+    RewriteRule ^\.well-known/ - [L]
+
+    # Prevent a rewrite loop after handing the request to Laravel's public folder.
+    RewriteRule ^public/ - [L]
+
+    # Use the public directory as the web root on shared hosting.
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^(.+)$ public/$1 [L]
+</IfModule>
+
+# Block direct web access to application and environment files.
+<FilesMatch "(^\.env|^artisan$|^composer\.(json|lock)$|^package(-lock)?\.json$|^phpunit\.xml$)">
+    Require all denied
+</FilesMatch>
