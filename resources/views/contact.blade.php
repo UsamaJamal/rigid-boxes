@@ -37,7 +37,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .contact-intro h1,.faq-section h2 { margin:0; color:#242424; font-family:'Open Sans',sans-serif; font-weight:800; }
 .contact-intro h1 { max-width:590px; font-size:clamp(30px,3vw,44px); line-height:1.24; }
 .intro-copy { max-width:550px; margin:23px 0 32px; color:var(--contact-muted); font-size:15px; line-height:1.7; }
-.contact-details { display:grid; grid-template-columns:1fr 1fr; max-width:545px; gap:20px 32px; }
+.contact-details { display:grid; grid-template-columns:1fr; max-width:545px; gap:20px; }
 .detail-item { display:flex; align-items:flex-start; gap:12px; color:#3e3e3e; font-size:14px; font-style:normal; line-height:1.45; text-decoration:none; }
 .detail-item i { width:18px; padding-top:2px; color:var(--contact-primary); font-size:17px; text-align:center; }
 .detail-icon { flex:0 0 18px; width:18px; height:18px; margin-top:1px; object-fit:contain; }

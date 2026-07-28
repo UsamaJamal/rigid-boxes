@@ -1741,18 +1741,36 @@
     <section class="hero-section">
         <div class="container hero-container">
             @php
-                $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
-                $pTitle = $product['title'] ?? 'Custom Packaging Box';
-                $pGallery = [];
+                $pGalleryRaw = [];
                 if (!empty($product['images'])) {
-                    $pGallery = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
+                    $pGalleryRaw = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
                 }
-                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGallery)));
+                
+                $pMainImg = '';
+                if (!empty($product['image'])) {
+                    $pMainImg = $product['image'];
+                } elseif (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
+                    $pMainImg = $pGalleryRaw[0];
+                } else {
+                    $pMainImg = 'uploads/Gift-Boxes.webp';
+                }
+
+                $normalizeImg = function($img) {
+                    if (empty($img)) return '';
+                    return \Illuminate\Support\Str::startsWith($img, ['storage/', 'uploads/', 'images/']) ? $img : 'storage/' . $img;
+                };
+
+                $pMainImg = $normalizeImg($pMainImg);
+                $pGalleryRaw = array_map($normalizeImg, $pGalleryRaw);
+
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGalleryRaw)));
             @endphp
             <div class="hero-images">
                 <div class="main-image">
                     <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
+                @if(count($pGallery) > 1)
                 <div class="thumbnails">
                     @foreach($pGallery as $galleryIndex => $galleryImage)
                         @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
@@ -1761,6 +1779,7 @@
                         </div>
                     @endforeach
                 </div>
+                @endif
             </div>
 
             <div class="hero-form">
@@ -2094,7 +2113,7 @@
                 <div class="quote-title-line"></div>
                 
                 <!-- Using the specific image requested by user -->
-                <img src="{{ asset('images/Jul 3, 2026, 03_38_53 PM 1.png') }}" alt="Premium Box">
+                <img src="{{ asset('uploads/product-cta.png') }}" alt="Premium Box">
                 
                 <div class="features-list">
                     <div class="feature-item">
@@ -2121,7 +2140,24 @@
                 @endphp
                 @foreach($rProds as $rp)
                     @php
-                        $rpImg = !empty($rp['image']) ? (\Illuminate\Support\Str::startsWith($rp['image'], ['storage/', 'uploads/', 'images/']) ? $rp['image'] : 'storage/' . $rp['image']) : 'uploads/Gift-Boxes.webp';
+                        $rpImg = '';
+                        if (!empty($rp['image'])) {
+                            $rpImg = $rp['image'];
+                        } else {
+                            $rpGalleryRaw = [];
+                            if (!empty($rp['images'])) {
+                                $rpGalleryRaw = is_string($rp['images']) ? (json_decode($rp['images'], true) ?: []) : (array) $rp['images'];
+                            }
+                            if (!empty($rpGalleryRaw) && count($rpGalleryRaw) > 0) {
+                                $rpImg = $rpGalleryRaw[0];
+                            } else {
+                                $rpImg = 'uploads/Gift-Boxes.webp';
+                            }
+                        }
+                        $rpImg = \Illuminate\Support\Str::startsWith($rpImg, ['storage/', 'uploads/', 'images/'])
+                            ? $rpImg
+                            : 'storage/' . $rpImg;
+                        
                         $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
                     @endphp
                     <div class="product-card">

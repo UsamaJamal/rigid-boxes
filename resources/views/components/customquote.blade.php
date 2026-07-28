@@ -244,7 +244,7 @@
 
     .preferences-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 12px;
         width: 100%;
     }
@@ -585,7 +585,7 @@
                 </div>
                 <div class="select-wrapper">
                     <select name="material">
-                        <option value="" disabled selected>Select Paper Stock</option>
+                        <option value="" disabled selected>Paper Stock</option>
                         <option>12pt Cardboard Stock</option>
                         <option>14pt Cardboard Stock</option>
                         <option>16pt Cardboard Stock</option>
@@ -601,7 +601,7 @@
                 </div>
                 <div class="select-wrapper">
                     <select name="color">
-                        <option value="" disabled selected>Select Color</option>
+                        <option value="" disabled selected>Color</option>
                         <option>1 color</option>
                         <option>2 color</option>
                         <option>3 color</option>
@@ -614,7 +614,7 @@
                 </div>
                 <div class="select-wrapper">
                     <select name="paper_coating">
-                        <option value="" disabled selected>Select Paper Coating</option>
+                        <option value="" disabled selected>Paper Coating</option>
                         <option>Aqueous Coating</option>
                         <option>Semi Gloss</option>
                         <option>Gloss UV</option>
@@ -624,7 +624,7 @@
                 </div>
                 <div class="select-wrapper">
                     <select name="cad_sample">
-                        <option value="" disabled selected>Select CAD Sample</option>
+                        <option value="" disabled selected>CAD Sample</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>

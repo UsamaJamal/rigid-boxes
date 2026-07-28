@@ -99,7 +99,8 @@ class AdminHomepageController extends Controller
         $settings['hero_description'] = $request->input('hero_description');
 
         if ($request->hasFile('hero_image')) {
-            $path = $request->file('hero_image')->store('admin/homepage', 'public');
+            $file = $request->file('hero_image');
+            $path = $file->storeAs('admin/homepage', $file->getClientOriginalName(), 'public');
             $settings['hero_image'] = $path;
         }
 

@@ -645,37 +645,9 @@
             
             .industries-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
+                gap: 16px;
                 padding: 0;
                 margin: 0;
-            }
-            
-            .industry-card {
-                padding: 8px 6px;
-                min-height: auto;
-                min-width: 0;
-                width: 100%;
-                aspect-ratio: 1;
-                background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('{{ asset('images/Gift-boxes.webp') }}') no-repeat center center / cover;
-                border: none;
-                box-sizing: border-box;
-            }
-            
-            .industry-card .heading-04 {
-                font-size: 11px;
-                color: #FFFFFF;
-            }
-            
-            .industry-card .card-icon,
-            .industry-card .card-image,
-            .card-icon,
-            .card-image {
-                display: none !important;
-                opacity: 0 !important;
-                visibility: hidden !important;
-                width: 0 !important;
-                height: 0 !important;
-                overflow: hidden !important;
             }
         }
 
@@ -1089,6 +1061,9 @@
         <section class="cta-section">
             <div class="container">
                 <div class="cta-wrapper">
+                    <div class="cta-image">
+                        <img src="{{ asset('uploads/allcategory-cta.png') }}" alt="Custom Packaging Box" class="cta-box-image">
+                    </div>
                     <div class="cta-content">
                         <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>
                         <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
@@ -1098,9 +1073,6 @@
                                 <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
-                    </div>
-                    <div class="cta-image">
-                        <img src="{{ asset('images/Figure.png') }}" alt="Custom Packaging Box" class="cta-box-image">
                     </div>
                 </div>
             </div>
