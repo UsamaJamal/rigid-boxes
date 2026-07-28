@@ -22,26 +22,26 @@
                 <!-- Brand Column -->
                 <div class="footer-column brand-column">
                     <div class="footer-logo">
-                        <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="the rigid boxes logo" class="logo-image">
+                        <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="The Rigid Boxes Logo" class="logo-image">
                     </div>
                     <p class="brand-description">
                         The Rigid Boxes is a leading custom packaging manufacturer, delivering premium boxes and packaging solutions tailored to your brand. From design to delivery, we ensure unmatched quality, style, and customer service.
                     </p>
                     <div class="social-links">
                         <a href="javascript:void(0)" class="social-icon" aria-label="Facebook">
-                            <img src="{{ asset('images/social-facebook.png') }}" alt="facebook" class="social-icon-img">
+                            <img src="{{ asset('images/social-facebook.png') }}" alt="Facebook" class="social-icon-img">
                         </a>
                         <a href="javascript:void(0)" class="social-icon" aria-label="Instagram">
-                            <img src="{{ asset('images/social-instagram.png') }}" alt="instagram" class="social-icon-img">
+                            <img src="{{ asset('images/social-instagram.png') }}" alt="Instagram" class="social-icon-img">
                         </a>
                         <a href="javascript:void(0)" class="social-icon" aria-label="LinkedIn">
-                            <img src="{{ asset('images/social-linkedin.png') }}" alt="linkedin" class="social-icon-img">
+                            <img src="{{ asset('images/social-linkedin.png') }}" alt="LinkedIn" class="social-icon-img">
                         </a>
                         <a href="javascript:void(0)" class="social-icon" aria-label="Pinterest">
-                            <img src="{{ asset('images/bi_pinterest.png') }}" alt="pinterest" class="social-icon-img">
+                            <img src="{{ asset('images/bi_pinterest.png') }}" alt="Pinterest" class="social-icon-img">
                         </a>
                         <a href="javascript:void(0)" class="social-icon" aria-label="YouTube">
-                            <img src="{{ asset('images/social-youtube.png') }}" alt="youtube" class="social-icon-img">
+                            <img src="{{ asset('images/social-youtube.png') }}" alt="YouTube" class="social-icon-img">
                         </a>
                     </div>
                 </div>
@@ -99,15 +99,15 @@
                     <span class="footer-heading" style="display: block;">Company Info</span>
                     <ul class="footer-contact">
                         <li class="contact-item">
-                            <img src="{{ asset('images/contact-email.png') }}" alt="email" class="contact-icon">
+                            <img src="{{ asset('images/contact-email.png') }}" alt="Email" class="contact-icon">
                             <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</a>
                         </li>
                         <li class="contact-item">
-                            <img src="{{ asset('images/material-symbols_call-sharp.png') }}" alt="phone" class="contact-icon">
+                            <img src="{{ asset('images/material-symbols_call-sharp.png') }}" alt="Phone" class="contact-icon">
                             <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}">{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</a>
                         </li>
                         <li class="contact-item">
-                            <img src="{{ asset('images/contact-address.png') }}" alt="address" class="contact-icon">
+                            <img src="{{ asset('images/contact-address.png') }}" alt="Address" class="contact-icon">
                             <span>{!! $siteSettings['company_address'] ?? '4000 N Montrose Ave<br>550 Chicago, IL 60641' !!}</span>
                         </li>
                     </ul>
@@ -122,7 +122,7 @@
             <div class="footer-bottom-content">
                 <p class="copyright">© 2025 The Rigid Boxes. All rights reserved.</p>
                 <div class="payment-methods">
-                    <img src="{{ asset('images/group 1000006247.png') }}" alt="payment methods" class="payment-group">
+                    <img src="{{ asset('images/group 1000006247.png') }}" alt="Payment Methods" class="payment-group">
                 </div>
             </div>
         </div>
@@ -185,6 +185,35 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Keep meaningful image alt text consistent without changing decorative alt="" images.
+    const normalizeImageAlt = function(image) {
+        const alt = image.getAttribute('alt');
+        if (alt === null || alt.trim() === '') return;
+
+        image.setAttribute(
+            'alt',
+            alt
+                .trim()
+                .replace(/[-_]+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .toLowerCase()
+        );
+    };
+
+    document.querySelectorAll('img[alt]').forEach(normalizeImageAlt);
+
+    // Normalize images added later by sliders, AJAX content, or other components.
+    const imageObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (!(node instanceof Element)) return;
+                if (node.matches('img[alt]')) normalizeImageAlt(node);
+                node.querySelectorAll('img[alt]').forEach(normalizeImageAlt);
+            });
+        });
+    });
+    imageObserver.observe(document.body, { childList: true, subtree: true });
+
     const ajaxForms = document.querySelectorAll('form[action*="/submit-quote"], form[action*="/submit-newsletter"], form[action*="/submit-contact"]');
     
     ajaxForms.forEach(form => {

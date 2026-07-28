@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login Â· Rigid Boxes</title>
+    <title>Admin Login · Rigid Boxes</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
@@ -256,7 +256,7 @@
 <div class="login-wrapper">
     <div class="login-card">
         <div class="login-header">
-            <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="rigid boxes logo" class="brand-logo">
+            <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="Rigid Boxes Logo" class="brand-logo">
             <h1>Admin Portal</h1>
             <p>Sign in to manage Rigid Boxes website content</p>
         </div>
@@ -296,7 +296,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-wrapper">
-                    <input type="password" id="password" name="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" value="admin123" required>
+                    <input type="password" id="password" name="password" placeholder="••••••••" value="admin123" required>
                     <i class="fa-solid fa-lock prefix-icon"></i>
                     <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
                         <i class="fa-regular fa-eye" id="toggleIcon"></i>
@@ -347,4 +347,3 @@
 
 </body>
 </html>
-

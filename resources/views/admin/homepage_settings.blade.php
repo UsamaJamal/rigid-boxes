@@ -192,7 +192,7 @@
                     <label for="hero_image">Hero Image</label>
                     @if(!empty($settings['hero_image']))
                         <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 12px; background: var(--soft); padding: 10px 14px; border-radius: 10px; width: fit-content;">
-                            <img src="{{ asset('storage/' . $settings['hero_image']) }}" alt="current hero image" style="height: 60px; object-fit: contain; border-radius: 6px;">
+                            <img src="{{ asset('storage/' . $settings['hero_image']) }}" alt="Current Hero Image" style="height: 60px; object-fit: contain; border-radius: 6px;">
                             <span style="font-size: 12px; color: var(--muted); font-weight: 600;">Current Hero Image</span>
                         </div>
                     @endif

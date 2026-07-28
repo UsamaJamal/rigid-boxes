@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en"><head>
-    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blog | The Rigid Boxes</title>
+<!DOCTYPE html>
+<html lang="en"><head><link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">@include('components.canonical')<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Blog | The Rigid Boxes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--color-primary:#8d4445;--color-primary-dark:#692f31;--color-primary-soft:#f8eeee;--color-ink:#1f1f1f;--color-copy:#333;--color-muted:#6d6d6d;--color-line:#ddd6d5;--color-page:#faf8f8;--color-surface:#fff;--font-heading:'Open Sans',sans-serif;--font-body:'DM Sans',sans-serif;--text-xs:11px;--text-sm:12px;--text-base:14px;--heading-xl:40px;--heading-lg:27px;--canvas-width:1440px;--section-width:1240px;--gutter:20px}*{box-sizing:border-box}body{margin:0;background:var(--color-page);color:var(--color-copy);font-family:var(--font-body)}a{color:inherit;text-decoration:none}button{font:inherit}img{display:block;max-width:100%}.page{width:min(100%,var(--canvas-width));margin:auto;background:var(--color-surface);overflow:hidden}.container{width:min(calc(100% - var(--gutter)*2),var(--section-width));margin:auto}.hero{height:390px;padding:0;color:var(--color-surface);background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.58) 42%,rgba(0,0,0,.12) 77%),url('{{ asset('images/Gift-Boxes.webp') }}') center 52%/cover,#171717}.hero .container{display:flex;align-items:center;height:100%}.hero h1{max-width:660px;margin:22px 0 0;font:700 var(--heading-xl)/1.18 var(--font-heading);letter-spacing:-.03em}.hero p{max-width:590px;margin:14px 0 0;font-size:var(--text-base);line-height:1.65;color:rgba(255,255,255,.9)}.breadcrumb{font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.86)}.breadcrumb span{padding:0 8px;color:rgba(255,255,255,.55)}.categories{overflow:hidden;border-bottom:1px solid var(--color-line)}.category-row{display:flex;min-height:73px;align-items:center;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-behavior:smooth;scroll-snap-type:x proximity;scrollbar-width:none}.category-row::-webkit-scrollbar{display:none}.filter{flex:0 0 calc(15.3846% - 11.08px);min-height:46px;padding:7px 14px;border:0;background:var(--color-primary-soft);color:var(--color-ink);cursor:pointer;text-align:left;font-size:var(--text-xs);font-weight:700;scroll-snap-align:start}.filter small{display:block;margin-top:4px;font-size:10px;font-weight:500}.filter.active{color:var(--color-surface);background:var(--color-primary)}.content{padding:38px 0 54px}.feature{display:grid;grid-template-columns:1.13fr .87fr;min-height:330px;margin-bottom:35px}.feature>img{width:100%;height:100%;min-height:330px;object-fit:cover;background:var(--color-primary-dark)}.feature-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:38px 47px;border:3px solid var(--color-primary);border-left:0}.eyebrow{margin:0 0 9px;color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.12em;text-transform:uppercase}.feature h2{max-width:370px;margin:0;color:var(--color-ink);font:700 var(--heading-lg)/1.2 var(--font-heading);letter-spacing:-.025em}.feature p:not(.eyebrow){margin:13px 0 19px;color:var(--color-muted);font-size:var(--text-sm);line-height:1.6}.button{display:inline-flex;align-items:center;min-height:31px;padding:0 14px;border:1px solid var(--color-primary);color:var(--color-primary);background:var(--color-surface);font-size:var(--text-xs);font-weight:700}.button:hover{color:var(--color-surface);background:var(--color-primary)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.card{display:flex;flex-direction:column;border:1px solid var(--color-line);background:var(--color-surface);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:0 10px 23px rgba(62,32,32,.11)}.card[hidden]{display:none}.card img{width:100%;height:170px;object-fit:cover;background:var(--color-primary-dark)}.card-copy{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px}.meta{display:flex;justify-content:space-between;gap:7px;margin-bottom:8px;color:var(--color-muted);font-size:10px}.card h3{min-height:37px;margin:0;color:var(--color-ink);font:700 var(--text-base)/1.35 var(--font-heading)}.card p{margin:9px 0 13px;color:var(--color-muted);font-size:var(--text-xs);line-height:1.5}.card .button{min-height:auto;margin-top:auto;padding:0;border:0}.card .button:hover{background:transparent;color:var(--color-primary-dark);text-decoration:underline}.pages{display:flex;justify-content:center;gap:8px;margin:34px 0 47px}.pages button{display:grid;width:27px;height:27px;place-items:center;border:0;background:transparent;color:var(--color-muted);cursor:pointer}.pages .active{color:var(--color-surface);background:var(--color-primary)}.cta{display:grid;grid-template-columns:1.03fr .97fr;min-height:210px;overflow:hidden;border-radius:12px;color:var(--color-surface);background:linear-gradient(120deg,var(--color-primary-dark),var(--color-primary))}.cta img{width:100%;height:100%;object-fit:cover;opacity:.8}.cta-copy{align-self:center;padding:34px 48px;background:radial-gradient(circle at 87% 89%,rgba(255,255,255,.17) 0 15%,transparent 15.5%)}.cta h2{margin:0;font:700 20px/1.25 var(--font-heading)}.cta p{margin:10px 0 18px;font-size:var(--text-sm);line-height:1.55;color:rgba(255,255,255,.88)}.cta .button{border-color:var(--color-surface);color:var(--color-primary)}@media(max-width:1250px){:root{--gutter:28px}.hero{height:350px}}@media(max-width:900px){:root{--gutter:22px;--heading-xl:35px}.feature{grid-template-columns:1fr}.feature>img{min-height:270px}.feature-copy{border:3px solid var(--color-primary);border-top:0}.grid{grid-template-columns:repeat(2,1fr)}.cta{grid-template-columns:1fr 1fr}}@media(max-width:600px){:root{--gutter:16px;--heading-xl:29px;--heading-lg:23px}.hero{height:270px;padding:0}.hero .container{height:100%}.hero h1{margin-top:16px}.category-row{margin:0 -16px;padding:0 16px}.content{padding-top:24px}.feature>img{min-height:200px}.feature-copy{padding:24px 20px}.grid{grid-template-columns:1fr;gap:14px}.card{display:grid;grid-template-columns:42% 58%}.card img{height:100%;min-height:146px}.card-copy{padding:13px}.card h3{min-height:0}.card p{display:none}.pages{margin:27px 0 34px}.cta{grid-template-columns:1fr}.cta img{height:150px}.cta-copy{padding:27px 22px}}
@@ -363,10 +362,10 @@
 @media (max-width: 620px) {
     .category-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   UNIFIED BLOG LAYOUT â€” aligned with site header
+/* ═══════════════════════════════════════════════════
+   UNIFIED BLOG LAYOUT — aligned with site header
    max-width: 1280px | gutter: 55px (matches header)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════ */
 html, body { overflow-x: hidden; }
 .page { width: 100%; max-width: none; overflow: visible; }
 .hero { width: 100%; max-width: none; margin: 0; }
@@ -434,7 +433,7 @@ html, body { overflow-x: hidden; }
         $fUrl = url('/blog/' . $fSlug);
     @endphp
     <article class="feature">
-        <img src="{{ $fImg }}" alt="{{ $ftitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
         <div class="feature-copy">
             <p class="eyebrow">{{ $fCat }}</p>
             <h2><a href="{{ $fUrl }}" style="color:inherit; text-decoration:none;">{{ $fTitle }}</a></h2>
@@ -443,7 +442,7 @@ html, body { overflow-x: hidden; }
         </div>
     </article>
 @else
-    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
+    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
 @endif
 
 <div class="grid">
@@ -460,7 +459,7 @@ html, body { overflow-x: hidden; }
         $bUrl = url('/blog/' . $bSlug);
     @endphp
     <article class="card" data-category="{{ $bCat }}">
-        <img src="{{ $bImg }}" alt="{{ $btitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
         <div class="card-copy">
             <div class="meta">
                 @if(!empty($item['author_slug']))
@@ -704,4 +703,3 @@ nextBtn.addEventListener('click', () => {
 </style>
 @include('components.footer')
 </body></html>
-
