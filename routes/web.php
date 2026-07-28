@@ -19,6 +19,7 @@ use App\Http\Controllers\FrequentlyAskedQuestionController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\SitemapController;
 Route::get('/', function () {
     $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
     $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();

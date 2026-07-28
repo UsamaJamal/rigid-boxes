@@ -5,3 +5,4 @@
         : rtrim(url('/' . $canonicalPath), '/') . '/';
 @endphp
 <link rel="canonical" href="{{ $canonicalUrl }}">
+@include('components.schemas')

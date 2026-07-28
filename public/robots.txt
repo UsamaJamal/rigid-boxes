@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /
+Disallow: /admin/
+Disallow: /search
+Disallow: /submit-contact
+Disallow: /submit-quote
+Disallow: /submit-newsletter
