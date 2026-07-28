@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # Redirect directly requested /public URLs to their clean public equivalent.
+    # THE_REQUEST ensures Laravel's internal rewrite does not trigger this redirect.
+    RewriteCond %{THE_REQUEST} \s/+public(?:[/?\s]) [NC]
+    RewriteRule ^public(?:/(.*))?$ /$1 [R=301,L,NE]
+
     # Allow SSL/domain validation files to remain accessible from the project root.
     RewriteRule ^\.well-known/ - [L]
 
