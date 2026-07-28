@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,14 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Shared hosts sometimes point APP_URL at "/public". Keep generated
+        // links, assets, canonicals and schemas on the clean domain instead.
+        $configuredUrl = rtrim((string) config('app.url'), '/');
+        $cleanUrl = preg_replace('#/public$#i', '', $configuredUrl);
+        if ($cleanUrl && $cleanUrl !== $configuredUrl) {
+            URL::forceRootUrl($cleanUrl);
+        }
+
         // Share all categories with every view so the header nav dropdown works dynamically
         View::composer('*', function ($view) {
             try {
