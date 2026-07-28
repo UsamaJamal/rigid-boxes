@@ -3,6 +3,7 @@
 
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
+    @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Author - {{ $author['title'] }} - Rigid Boxes</title>
