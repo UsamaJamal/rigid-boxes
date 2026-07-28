@@ -488,6 +488,7 @@
                         <button type="button" class="customize-tab" data-customize-tab="inks">INKS</button>
                         <button type="button" class="customize-tab" data-customize-tab="finishing">FINISHING</button>
                         <button type="button" class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="additional">ADDITIONAL OPTIONS</button>
                     </aside>
 
                     <!-- Right Content Grid -->
@@ -592,7 +593,8 @@
             printing: [1, 0, 2, 3, 7, 5, 6, 4],
             inks: [2, 3, 0, 1, 6, 7, 4, 5],
             finishing: [4, 5, 6, 7, 0, 1, 2, 3],
-            addons: [7, 6, 5, 4, 3, 2, 1, 0]
+            addons: [7, 6, 5, 4, 3, 2, 1, 0],
+            additional: [0, 1, 2, 3, 4, 5, 6, 7]
         };
 
         const customizeCards = Array.from(document.querySelectorAll('.customize-grid .custom-card'));
@@ -640,14 +642,24 @@
                 ['uploads/UV-Coating-.webp', 'UV Coating']
             ],
             addons: [
-                ['uploads/industry-box-with-lid.jfif', 'Custom Inserts'],
-                ['uploads/Collapsible-Rigid-Boxes.webp', 'Ribbon Closure'],
-                ['uploads/industry-magnetic-closure-boxes.webp', 'Magnetic Closure'],
-                ['uploads/industry-two-piece-box.jfif', 'Paper Sleeve'],
-                ['uploads/category-custom-shaped-box.jfif', 'Die-Cut Window'],
-                ['uploads/industry-gift-boxes.webp', 'Thank-You Card'],
-                ['uploads/industry-rigid-plain-white-box.jfif', 'Tissue Paper'],
-                ['uploads/industry-custom-shoulder-box.jfif', 'Foam Insert']
+                ['uploads/corrugated-divider.webp', 'Corrugated Divider'],
+                ['uploads/folding-divider.webp', 'Folding Divider'],
+                ['uploads/hips-insert.webp', 'HIPS Insert'],
+                ['uploads/kraft-corrugated.webp', 'Kraft Corrugated'],
+                ['uploads/kraft-paperboard.webp', 'Kraft Paperboard'],
+                ['uploads/petg-insert.webp', 'PETG Insert'],
+                ['uploads/pvc-insert.webp', 'PVC Insert'],
+                ['uploads/white-corrugated.webp', 'White Corrugated']
+            ],
+            additional: [
+                ['uploads/blind-deboss.webp', 'Blind Debossing'],
+                ['uploads/blind-embossing.webp', 'Blind Embossing'],
+                ['uploads/cold-foil.webp', 'Cold Foil Printing'],
+                ['uploads/combo-emboss.webp', 'Combination Embossing'],
+                ['uploads/hot-foil.webp', 'Hot Foil Stamping'],
+                ['uploads/registered-emboss.webp', 'Registered Embossing'],
+                ['uploads/window-patch.webp', 'Window Patching'],
+                ['uploads/embossing.webp', 'Embossing']
             ]
         };
 
