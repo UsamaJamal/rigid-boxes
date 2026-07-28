@@ -286,7 +286,7 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #444748;
-        margin-bottom: 40px;
+        margin-bottom: -8px;
     }
 
     .tb-logos {

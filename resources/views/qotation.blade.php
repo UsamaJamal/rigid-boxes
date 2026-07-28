@@ -239,7 +239,7 @@
             }
             .iq-breadcrumb {
                 margin-bottom: 16px;
-            }
+            } 
             .iq-page-container {
                 padding: 0 20px 40px;
                 gap: 20px;
@@ -261,7 +261,7 @@
 
         @media (max-width: 400px) {
             .iq-grid-4 {
-                grid-template-columns: 1fr;
+                grid-template-columns: ;
             }
         }
     </style>
