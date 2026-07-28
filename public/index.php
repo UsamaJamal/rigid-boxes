@@ -5,6 +5,19 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Some shared-hosting configurations expose this front controller at
+// /public while also serving clean URLs. Permanently normalize direct
+// /public requests before Laravel generates a response.
+$requestedUri = $_SERVER['REQUEST_URI'] ?? '/';
+$requestedPath = parse_url($requestedUri, PHP_URL_PATH) ?: '/';
+
+if (preg_match('#^/public(?:/|$)#i', $requestedPath)) {
+    $cleanPath = preg_replace('#^/public#i', '', $requestedPath) ?: '/';
+    $query = parse_url($requestedUri, PHP_URL_QUERY);
+    header('Location: '.$cleanPath.($query !== null ? '?'.$query : ''), true, 301);
+    exit;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
