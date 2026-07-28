@@ -98,9 +98,14 @@ class AdminHomepageController extends Controller
         $settings['hero_title'] = $request->input('hero_title');
         $settings['hero_description'] = $request->input('hero_description');
 
+        if ($request->input('remove_hero_image') == '1') {
+            $settings['hero_image'] = null;
+        }
         if ($request->hasFile('hero_image')) {
-            $path = $request->file('hero_image')->store('admin/homepage', 'public');
-            $settings['hero_image'] = $path;
+            $file = $request->file('hero_image');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+            $settings['hero_image'] = 'uploads/' . $fileName;
         }
 
         $settings['featured_categories'] = array_map('intval', (array) $request->input('featured_categories', []));

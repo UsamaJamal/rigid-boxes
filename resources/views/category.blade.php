@@ -16,7 +16,7 @@
     /* Popular Boxes Section */
     .popular-boxes-section {
         background: #FFF;
-        padding: 0px;
+        padding: 20px;
     }
 
     .popular-boxes-inner {
@@ -53,7 +53,7 @@
     .box-card {
         width: 100%;
         max-width: 292px;
-        height: 437px;
+        height: auto;
         min-width: 200px;
         display: flex;
         flex-direction: column;
@@ -67,7 +67,7 @@
         border-radius: 12px;
         overflow: hidden;
         background-color: #E8E8E8;
-        margin-bottom: 18px;
+        margin-bottom: 26px;
         /* Default subtle shadow like the figma design */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     }
@@ -75,7 +75,7 @@
     .box-image-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
         transition: transform 0.4s ease;
     }
@@ -449,11 +449,24 @@
                     @endphp
                     @foreach ($catProducts as $p)
                         @php
-                            $pImg = !empty($p['image'])
-                                ? (\Illuminate\Support\Str::startsWith($p['image'], ['storage/', 'uploads/', 'images/'])
-                                    ? $p['image']
-                                    : 'storage/' . $p['image'])
-                                : 'uploads/Gift-Boxes.webp';
+                            $pImg = '';
+                            if (!empty($p['image'])) {
+                                $pImg = $p['image'];
+                            } else {
+                                $pGalleryRaw = [];
+                                if (!empty($p['images'])) {
+                                    $pGalleryRaw = is_string($p['images']) ? (json_decode($p['images'], true) ?: []) : (array) $p['images'];
+                                }
+                                if (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
+                                    $pImg = $pGalleryRaw[0];
+                                } else {
+                                    $pImg = 'uploads/Gift-Boxes.webp';
+                                }
+                            }
+                            $pImg = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/'])
+                                ? $pImg
+                                : 'storage/' . $pImg;
+                                
                             $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
                         @endphp
                         <div class="box-card">
@@ -521,7 +534,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/holographic.webp') }}" alt="Holographic"
+                                    <img src="{{ asset('uploads/finish-material-holographic.webp') }}" alt="Holographic"
                                         onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
                                 <h4 class="custom-card-title">Holographic</h4>
@@ -591,10 +604,10 @@
         const customizeCardOrders = {
             materials: [0, 1, 2, 3, 4, 5, 6, 7],
             printing: [1, 0, 2, 3, 7, 5, 6, 4],
-            inks: [2, 3, 0, 1, 6, 7, 4, 5],
+            inks: [2, 3, 0, 1, 6, 7],
             finishing: [4, 5, 6, 7, 0, 1, 2, 3],
             addons: [7, 6, 5, 4, 3, 2, 1, 0],
-            additional: [0, 1, 2, 3, 4, 5, 6, 7]
+            additional: [0, 1, 2, 3, 4, 5, 6]
         };
 
         const customizeCards = Array.from(document.querySelectorAll('.customize-grid .custom-card'));
@@ -605,7 +618,7 @@
                 ['uploads/duplex-chipboard.webp', 'Duplex Chipboard'],
                 ['uploads/grey-board.webp', 'Grey Chipboard Cardboard'],
                 ['uploads/black-kraft.webp', 'Black-Kraft'],
-                ['uploads/holographic.webp', 'Holographic'],
+                ['uploads/finish-material-holographic.webp', 'Holographic'],
                 ['uploads/metallic-paper.webp', 'Metallic Paper'],
                 ['uploads/natural-brown-.webp', 'Natural Brown Kraft'],
                 ['uploads/sbs-c2s.webp', 'SBS C2S'],
@@ -627,9 +640,7 @@
                 ['uploads/Pantone Metallic.webp', 'Pantone Metallic'],
                 ['uploads/Pantone.webp', 'Pantone'],
                 ['uploads/Soy Vegetable Based Inks.webp', 'Soy Vegetable Based Inks'],
-                ['uploads/Water Based Inks.webp', 'Water Based Inks'],
-                ['uploads/metallic-paper.webp', 'Metallic Inks'],
-                ['uploads/duplex-chipboard.webp', 'CMYK Inks']
+                ['uploads/Water Based Inks.webp', 'Water Based Inks']
             ],
             finishing: [
                 ['uploads/Anti-scratch-Lamination-.webp', 'Anti-scratch Lamination'],
@@ -658,8 +669,7 @@
                 ['uploads/combo-emboss.webp', 'Combination Embossing'],
                 ['uploads/hot-foil.webp', 'Hot Foil Stamping'],
                 ['uploads/registered-emboss.webp', 'Registered Embossing'],
-                ['uploads/window-patch.webp', 'Window Patching'],
-                ['uploads/embossing.webp', 'Embossing']
+                ['uploads/window-patch.webp', 'Window Patching']
             ]
         };
 
@@ -673,7 +683,10 @@
             });
 
             setTimeout(() => {
+                customizeCards.forEach(card => card.style.display = 'none');
+
                 cardOrder.forEach(function(cardIndex, position) {
+                    if (!cardSet[position]) return;
                     const card = customizeCards[cardIndex];
                     const [imagePath, title] = cardSet[position];
                     const image = card.querySelector('img');
@@ -681,6 +694,7 @@
                     image.alt = title;
                     card.querySelector('h4').textContent = title;
                     card.style.order = position + 1;
+                    card.style.display = 'flex';
                 });
 
                 requestAnimationFrame(() => {

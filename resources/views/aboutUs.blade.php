@@ -517,7 +517,7 @@
 <section class="circular-future-section">
     <div class="cf-container">
         <div class="cf-image-wrapper">
-            <img src="{{ asset('uploads/building-circular-future.png') }}" alt="Circular Future" class="cf-image">
+            <img src="{{ asset('uploads/circular-future.png') }}" alt="Circular Future" class="cf-image">
         </div>
         <div class="cf-content">
             <h2 class="cf-heading">Building a Circular Future</h2>

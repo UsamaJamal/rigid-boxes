@@ -218,7 +218,7 @@
 
         .form-grid-pref {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 12px;
         }
@@ -1741,18 +1741,36 @@
     <section class="hero-section">
         <div class="container hero-container">
             @php
-                $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
-                $pTitle = $product['title'] ?? 'Custom Packaging Box';
-                $pGallery = [];
+                $pGalleryRaw = [];
                 if (!empty($product['images'])) {
-                    $pGallery = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
+                    $pGalleryRaw = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
                 }
-                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGallery)));
+                
+                $pMainImg = '';
+                if (!empty($product['image'])) {
+                    $pMainImg = $product['image'];
+                } elseif (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
+                    $pMainImg = $pGalleryRaw[0];
+                } else {
+                    $pMainImg = 'uploads/Gift-Boxes.webp';
+                }
+
+                $normalizeImg = function($img) {
+                    if (empty($img)) return '';
+                    return \Illuminate\Support\Str::startsWith($img, ['storage/', 'uploads/', 'images/']) ? $img : 'storage/' . $img;
+                };
+
+                $pMainImg = $normalizeImg($pMainImg);
+                $pGalleryRaw = array_map($normalizeImg, $pGalleryRaw);
+
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGalleryRaw)));
             @endphp
             <div class="hero-images">
                 <div class="main-image">
                     <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
+                @if(count($pGallery) > 1)
                 <div class="thumbnails">
                     @foreach($pGallery as $galleryIndex => $galleryImage)
                         @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
@@ -1761,6 +1779,7 @@
                         </div>
                     @endforeach
                 </div>
+                @endif
             </div>
 
             <div class="hero-form">
@@ -1831,13 +1850,13 @@
                                 <option>4/3 color</option>
                                 <option>4/4 color</option>
                             </select>
+                            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
                         </div>
                     </div>
                     
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
-                        <div class="form-grid-2-upload">
-                            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
+                        <div class="form-grid-2-upload" style="grid-template-columns: 1fr;">
                             <div class="file-upload-wrap" style="position: relative;">
                                 <input type="file" name="quote_file" id="quote_file_input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="document.getElementById('quote_file_text').value = this.files.length > 0 ? this.files[0].name : ''">
                                 <input type="text" id="quote_file_text" class="form-control" placeholder="No File Choosen" readonly style="pointer-events: none;">
@@ -1982,7 +2001,7 @@
         <h2 class="finishes-header">Custom Finishes <br class="mobile-heading-break">For Premium Feel</h2>
         <div class="finishes-grid">
             <div class="finishes-image-container">
-                <img src="{{ asset('uploads/finish-material-grey-board.webp') }}" alt="Grey Board Material">
+                <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard">
                 <div class="carousel-dots">
                     <div class="carousel-dot active"></div>
                     <div class="carousel-dot"></div>
@@ -1994,9 +2013,9 @@
             <div class="finishes-details-box">
                 <div class="finishes-top-text">Materials We Offer</div>
                 <div class="finishes-middle-list">
-                    <div class="finish-item-light">Duplex Chipboard</div>
-                    <div class="finish-item-dark">Grey Board</div>
-                    <div class="finish-item-light">Holographic</div>
+                    <div class="finish-item-dark">Duplex Chipboard</div>
+                    <div class="finish-item-light">Grey Chipboard Cardboard</div>
+                    <div class="finish-item-light">Black-Kraft</div>
                 </div>
                 <div class="finishes-bottom-nav">
                     <span class="active-nav">Materials</span>
@@ -2004,6 +2023,7 @@
                     <span>Inks</span>
                     <span>Finishing</span>
                     <span>Add-ons</span>
+                    <span>Additional Options</span>
                 </div>
             </div>
         </div>
@@ -2094,7 +2114,7 @@
                 <div class="quote-title-line"></div>
                 
                 <!-- Using the specific image requested by user -->
-                <img src="{{ asset('images/Jul 3, 2026, 03_38_53 PM 1.png') }}" alt="Premium Box">
+                <img src="{{ asset('uploads/product-cta.png') }}" alt="Premium Box">
                 
                 <div class="features-list">
                     <div class="feature-item">
@@ -2121,7 +2141,24 @@
                 @endphp
                 @foreach($rProds as $rp)
                     @php
-                        $rpImg = !empty($rp['image']) ? (\Illuminate\Support\Str::startsWith($rp['image'], ['storage/', 'uploads/', 'images/']) ? $rp['image'] : 'storage/' . $rp['image']) : 'uploads/Gift-Boxes.webp';
+                        $rpImg = '';
+                        if (!empty($rp['image'])) {
+                            $rpImg = $rp['image'];
+                        } else {
+                            $rpGalleryRaw = [];
+                            if (!empty($rp['images'])) {
+                                $rpGalleryRaw = is_string($rp['images']) ? (json_decode($rp['images'], true) ?: []) : (array) $rp['images'];
+                            }
+                            if (!empty($rpGalleryRaw) && count($rpGalleryRaw) > 0) {
+                                $rpImg = $rpGalleryRaw[0];
+                            } else {
+                                $rpImg = 'uploads/Gift-Boxes.webp';
+                            }
+                        }
+                        $rpImg = \Illuminate\Support\Str::startsWith($rpImg, ['storage/', 'uploads/', 'images/'])
+                            ? $rpImg
+                            : 'storage/' . $rpImg;
+                        
                         $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
                     @endphp
                     <div class="product-card">
@@ -2250,62 +2287,76 @@ function toggleFaq(element) {
             'Materials': {
                 title: 'Materials We Offer',
                 items: [
-                    { name: 'Black Kraft', active: false, image: '{{ asset("uploads/finish-material-black-kraft.webp") }}' },
-                    { name: 'Duplex Chipboard', active: false, image: '{{ asset("uploads/finish-material-duplex-chipboard.webp") }}' },
-                    { name: 'Grey Board', active: true, image: '{{ asset("uploads/finish-material-grey-board.webp") }}' },
+                    { name: 'Duplex Chipboard', active: true, image: '{{ asset("uploads/duplex-chipboard.webp") }}' },
+                    { name: 'Grey Chipboard Cardboard', active: false, image: '{{ asset("uploads/grey-board.webp") }}' },
+                    { name: 'Black-Kraft', active: false, image: '{{ asset("uploads/black-kraft.webp") }}' },
                     { name: 'Holographic', active: false, image: '{{ asset("uploads/finish-material-holographic.webp") }}' },
-                    { name: 'Metallic Paper', active: false, image: '{{ asset("uploads/finish-material-metallic-paper.webp") }}' },
-                    { name: 'Natural Brown Kraft', active: false, image: '{{ asset("uploads/finish-material-natural-brown.webp") }}' },
-                    { name: 'SBS C2S', active: false, image: '{{ asset("uploads/finish-material-sbs-c2s.webp") }}' },
-                    { name: 'Textured Paper', active: false, image: '{{ asset("uploads/finish-material-textured.webp") }}' }
+                    { name: 'Metallic Paper', active: false, image: '{{ asset("uploads/metallic-paper.webp") }}' },
+                    { name: 'Natural Brown Kraft', active: false, image: '{{ asset("uploads/natural-brown-.webp") }}' },
+                    { name: 'SBS C2S', active: false, image: '{{ asset("uploads/sbs-c2s.webp") }}' },
+                    { name: 'Textured', active: false, image: '{{ asset("uploads/textured-.webp") }}' }
                 ]
             },
             'Printing Methods': {
                 title: 'Printing Methods',
                 items: [
-                    { name: 'Digital Printing', active: false, image: '{{ asset("uploads/finish-print-digital.webp") }}' },
-                    { name: 'Flexographic Printing', active: false, image: '{{ asset("uploads/finish-print-flexographic.webp") }}' },
-                    { name: 'Gravure Printing', active: true, image: '{{ asset("uploads/finish-print-gravure.webp") }}' },
-                    { name: 'Offset Printing', active: false, image: '{{ asset("uploads/finish-print-offset.webp") }}' },
-                    { name: 'Rotogravure Printing', active: false, image: '{{ asset("uploads/finish-print-rotogravure.webp") }}' },
-                    { name: 'Scodix Digital', active: false, image: '{{ asset("uploads/finish-print-scodix-digital.webp") }}' },
-                    { name: 'Screen Printing', active: false, image: '{{ asset("uploads/finish-print-screen.webp") }}' },
-                    { name: 'UV Printing', active: false, image: '{{ asset("uploads/finish-print-uv.webp") }}' }
+                    { name: 'Digital Print', active: false, image: '{{ asset("uploads/Digital Print.webp") }}' },
+                    { name: 'Flexographic Printing', active: false, image: '{{ asset("uploads/Flexographic Printing.webp") }}' },
+                    { name: 'Gravure Printing', active: false, image: '{{ asset("uploads/gravure printing.webp") }}' },
+                    { name: 'Offset Print', active: false, image: '{{ asset("uploads/Offset Print.webp") }}' },
+                    { name: 'Rotogravure Printing', active: false, image: '{{ asset("uploads/Rotogravure Printing.webp") }}' },
+                    { name: 'Scodixe Digital', active: false, image: '{{ asset("uploads/Scodixe Digital.webp") }}' },
+                    { name: 'Screen Printing', active: false, image: '{{ asset("uploads/Screen Printing.webp") }}' },
+                    { name: 'UV Print', active: false, image: '{{ asset("uploads/UV Print.webp") }}' }
                 ]
             },
             'Inks': {
                 title: 'Inks Available',
                 items: [
-                    { name: 'CMYK', active: false, image: '{{ asset("uploads/finish-print-digital.webp") }}' },
-                    { name: 'Pantone (PMS)', active: true, image: '{{ asset("uploads/finish-print-offset.webp") }}' },
-                    { name: 'Metallic Inks', active: false, image: '{{ asset("uploads/finish-material-metallic-paper.webp") }}' },
-                    { name: 'Soy-Based Ink', active: false, image: '{{ asset("uploads/finish-print-flexographic.webp") }}' },
-                    { name: 'UV Inks', active: false, image: '{{ asset("uploads/finish-print-uv.webp") }}' }
+                    { name: 'Fluorescent Color Inks', active: false, image: '{{ asset("uploads/Fluorescent Color Inks.webp") }}' },
+                    { name: 'Oil Based Inks', active: false, image: '{{ asset("uploads/Oil Based Inks.webp") }}' },
+                    { name: 'Pantone Metallic', active: false, image: '{{ asset("uploads/Pantone Metallic.webp") }}' },
+                    { name: 'Pantone', active: false, image: '{{ asset("uploads/Pantone.webp") }}' },
+                    { name: 'Soy Vegetable Based Inks', active: false, image: '{{ asset("uploads/Soy Vegetable Based Inks.webp") }}' },
+                    { name: 'Water Based Inks', active: false, image: '{{ asset("uploads/Water Based Inks.webp") }}' }
                 ]
             },
             'Finishing': {
                 title: 'Finishing Options',
                 items: [
-                    { name: 'Gloss Lamination', active: false, image: '{{ asset("uploads/gloss-lamination.webp") }}' },
-                    { name: 'Matte Lamination', active: true, image: '{{ asset("uploads/matte-lamination.webp") }}' },
-                    { name: 'Soft-Touch Lamination', active: false, image: '{{ asset("uploads/soft-touch-lamination.webp") }}' },
-                    { name: 'UV Coating', active: false, image: '{{ asset("uploads/uv-coating.webp") }}' },
-                    { name: 'Aqueous Coating', active: false, image: '{{ asset("uploads/aqueous-coating.webp") }}' },
-                    { name: 'Protective Varnish', active: false, image: '{{ asset("uploads/protective-varnish.webp") }}' }
+                    { name: 'Anti-scratch Lamination', active: false, image: '{{ asset("uploads/Anti-scratch-Lamination-.webp") }}' },
+                    { name: 'Aqueous Coating', active: false, image: '{{ asset("uploads/Aqueous-Coating-.webp") }}' },
+                    { name: 'Lamination', active: false, image: '{{ asset("uploads/Lamination.webp") }}' },
+                    { name: 'Soft-Touch Coating', active: false, image: '{{ asset("uploads/Soft-Touch-Coating-.webp") }}' },
+                    { name: 'Soft-Touch Silk Lamination', active: false, image: '{{ asset("uploads/Soft-Touch-Silk-Lamination-.webp") }}' },
+                    { name: 'Spot Gloss UV', active: false, image: '{{ asset("uploads/Spot-Gloss-UV.webp") }}' },
+                    { name: 'Spot Gloss UV-2', active: false, image: '{{ asset("uploads/Spot-Gloss-UV-2.webp") }}' },
+                    { name: 'UV Coating', active: false, image: '{{ asset("uploads/UV-Coating-.webp") }}' }
                 ]
             },
             'Add-ons': {
                 title: 'Add-ons Available',
                 items: [
-                    { name: 'Embossing', active: false, image: '{{ asset("uploads/embossing.webp") }}' },
-                    { name: 'Debossing', active: true, image: '{{ asset("uploads/debossing.webp") }}' },
-                    { name: 'Blind Emboss', active: false, image: '{{ asset("uploads/blind-emboss.webp") }}' },
-                    { name: 'Magnetic Closure', active: false, image: '{{ asset("uploads/magnetic-closure.webp") }}' },
-                    { name: 'Luxury Magnetic Box', active: false, image: '{{ asset("uploads/luxury-magnetic-box.webp") }}' },
-                    { name: 'Presentation Closure', active: false, image: '{{ asset("uploads/presentation-closure.webp") }}' },
-                    { name: 'Luxury Insert', active: false, image: '{{ asset("uploads/luxury-insert.webp") }}' },
-                    { name: 'Paper Insert', active: false, image: '{{ asset("uploads/paper-insert.webp") }}' },
-                    { name: 'Protective Insert', active: false, image: '{{ asset("uploads/protective-insert.webp") }}' }
+                    { name: 'Corrugated Divider', active: false, image: '{{ asset("uploads/corrugated-divider.webp") }}' },
+                    { name: 'Folding Divider', active: false, image: '{{ asset("uploads/folding-divider.webp") }}' },
+                    { name: 'HIPS Insert', active: false, image: '{{ asset("uploads/hips-insert.webp") }}' },
+                    { name: 'Kraft Corrugated', active: false, image: '{{ asset("uploads/kraft-corrugated.webp") }}' },
+                    { name: 'Kraft Paperboard', active: false, image: '{{ asset("uploads/kraft-paperboard.webp") }}' },
+                    { name: 'PETG Insert', active: false, image: '{{ asset("uploads/petg-insert.webp") }}' },
+                    { name: 'PVC Insert', active: false, image: '{{ asset("uploads/pvc-insert.webp") }}' },
+                    { name: 'White Corrugated', active: false, image: '{{ asset("uploads/white-corrugated.webp") }}' }
+                ]
+            },
+            'Additional Options': {
+                title: 'Additional Options',
+                items: [
+                    { name: 'Blind Debossing', active: false, image: '{{ asset("uploads/blind-deboss.webp") }}' },
+                    { name: 'Blind Embossing', active: false, image: '{{ asset("uploads/blind-embossing.webp") }}' },
+                    { name: 'Cold Foil Printing', active: false, image: '{{ asset("uploads/cold-foil.webp") }}' },
+                    { name: 'Combination Embossing', active: false, image: '{{ asset("uploads/combo-emboss.webp") }}' },
+                    { name: 'Hot Foil Stamping', active: false, image: '{{ asset("uploads/hot-foil.webp") }}' },
+                    { name: 'Registered Embossing', active: false, image: '{{ asset("uploads/registered-emboss.webp") }}' },
+                    { name: 'Window Patching', active: false, image: '{{ asset("uploads/window-patch.webp") }}' }
                 ]
             }
         };
@@ -2319,9 +2370,9 @@ function toggleFaq(element) {
             const carouselImage = document.querySelector('.finishes-image-container img');
             const carouselDotsContainer = document.querySelector('.carousel-dots');
             let carouselDots = document.querySelectorAll('.carousel-dot');
-            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons'];
+            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons', 'Additional Options'];
             let currentTabIndex = 0;
-            let currentItemIndex = 2; // Start with middle item active
+            let currentItemIndex = 0; // Start with middle item active
 
             function renderCarouselDots(count) {
                 if (!carouselDotsContainer) return;
