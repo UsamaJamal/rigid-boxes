@@ -18,6 +18,7 @@ class AdminHomepageController extends Controller
         $defaults = [
             'meta_title' => 'Custom Printed Boxes & Packaging - The Rigid Boxes',
             'meta_description' => 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.',
+            'schema' => '',
             'hero_title' => 'Custom Printed Boxes & Packaging Manufacturer',
             'hero_description' => 'Get premium custom rigid boxes and packaging solutions designed for your brand.',
             'hero_image' => '',
@@ -78,6 +79,7 @@ class AdminHomepageController extends Controller
         $request->validate([
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
+            'schema' => 'nullable|json',
             'hero_title' => 'nullable|string|max:255',
             'hero_description' => 'nullable|string',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:5120',
@@ -92,6 +94,7 @@ class AdminHomepageController extends Controller
 
         $settings['meta_title'] = $request->input('meta_title');
         $settings['meta_description'] = $request->input('meta_description');
+        $settings['schema'] = $request->input('schema');
         $settings['hero_title'] = $request->input('hero_title');
         $settings['hero_description'] = $request->input('hero_description');
 
@@ -124,7 +127,7 @@ class AdminHomepageController extends Controller
             $valueType = 'text';
             $section = 'general';
 
-            if (in_array($key, ['meta_title', 'meta_description'])) {
+            if (in_array($key, ['meta_title', 'meta_description', 'schema'])) {
                 $section = 'seo';
             } elseif (in_array($key, ['hero_title', 'hero_description', 'hero_image'])) {
                 $section = 'hero';

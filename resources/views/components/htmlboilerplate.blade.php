@@ -15,9 +15,6 @@
     @if(!empty($robots))
         <meta name="robots" content="{{ $robots }}">
     @endif
-    @if(!empty($schema))
-        <script type="application/ld+json">{!! $schema !!}</script>
-    @endif
     <!-- Import Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 

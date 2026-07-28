@@ -317,6 +317,22 @@
         '@context' => 'https://schema.org',
         '@graph' => $schemaGraph,
     ];
+
+    $schemaCustomRaw = $schemaProduct['schema']
+        ?? $schemaCategory['schema']
+        ?? $schemaBlog['schema']
+        ?? (($settings ?? [])['schema'] ?? null)
+        ?? ($schema ?? null);
+    $schemaCustomPayload = null;
+
+    if (is_array($schemaCustomRaw)) {
+        $schemaCustomPayload = $schemaCustomRaw;
+    } elseif (is_string($schemaCustomRaw) && trim($schemaCustomRaw) !== '') {
+        $schemaCustomDecoded = json_decode($schemaCustomRaw, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($schemaCustomDecoded)) {
+            $schemaCustomPayload = $schemaCustomDecoded;
+        }
+    }
 @endphp
 <script type="application/ld+json">
 {!! json_encode(
@@ -324,3 +340,11 @@
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
+@if($schemaCustomPayload !== null)
+<script type="application/ld+json">
+{!! json_encode(
+    $schemaCustomPayload,
+    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+) !!}
+</script>
+@endif

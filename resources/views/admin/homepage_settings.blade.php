@@ -166,6 +166,12 @@
                     <textarea id="meta_description" name="meta_description" rows="3" placeholder="e.g. Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging." maxlength="1000">{{ old('meta_description', $settings['meta_description'] ?? '') }}</textarea>
                     <small>Recommended length: 150-160 characters describing your homepage content.</small>
                 </div>
+
+                <div class="field full">
+                    <label for="schema">Homepage Schema JSON-LD</label>
+                    <textarea id="schema" name="schema" rows="12" placeholder='{"@context":"https://schema.org","@type":"WebPage"}'>{{ old('schema', $settings['schema'] ?? '') }}</textarea>
+                    <small>Optional custom schema. Enter valid JSON-LD; it will be added to the homepage frontend.</small>
+                </div>
             </div>
         </div>
     </div>

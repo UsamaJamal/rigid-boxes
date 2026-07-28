@@ -116,7 +116,11 @@ class AdminContentController extends Controller
 
     private function persist(Request $request, string $module, string $id)
     {
-        $request->validate(['title' => 'required|string|max:255', 'slug' => 'nullable|string|max:255']);
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+            'schema' => 'nullable|json',
+        ]);
         $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module];
         $columns = [
             'products' => ['title','slug','status','show_home','image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
