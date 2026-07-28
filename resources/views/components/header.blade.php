@@ -38,8 +38,7 @@
         border-bottom: 0.2px solid rgba(255, 255, 255, 0.2);
         color: #fff;
         font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        position: sticky;
-        top: 0;
+        position: relative;
         z-index: 1000;
     }
 
