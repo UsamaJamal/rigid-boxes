@@ -37,7 +37,9 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            // Writing through public/storage works both with Laravel's normal
+            // symlink and on shared hosts where symlink() is disabled.
+            'root' => public_path('storage'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

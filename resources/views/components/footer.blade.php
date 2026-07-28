@@ -122,7 +122,7 @@
             <div class="footer-bottom-content">
                 <p class="copyright">© 2025 The Rigid Boxes. All rights reserved.</p>
                 <div class="payment-methods">
-                    <img src="{{ asset('images/group 1000006247.png') }}" alt="Payment Methods" class="payment-group">
+                    <img src="{{ asset('images/Group 1000006247.png') }}" alt="Payment Methods" class="payment-group">
                 </div>
             </div>
         </div>

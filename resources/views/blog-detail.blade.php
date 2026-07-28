@@ -943,14 +943,18 @@
                 <div class="author-card">
                     @php 
                         $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : 'Ahmed Khan';
-                        $authorSlug = !empty($blog['joined_author_slug']) ? $blog['joined_author_slug'] : 'ahmed-khan';
+                        $authorSlug = $blog['joined_author_slug'] ?? null;
                         $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
                         $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
                     @endphp
                     <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar">
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
-                        <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $authorName }}</a>
+                        @if($authorSlug)
+                            <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $authorName }}</a>
+                        @else
+                            <span class="author-card-name">{{ $authorName }}</span>
+                        @endif
                         <div class="author-card-bio">{{ $authorDesc }}</div>
                     </div>
                 </div>

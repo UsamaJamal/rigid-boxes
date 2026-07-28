@@ -1100,7 +1100,7 @@
                         </a>
                     </div>
                     <div class="cta-image">
-                        <img src="{{ asset('images/figure.png') }}" alt="Custom Packaging Box" class="cta-box-image">
+                        <img src="{{ asset('images/Figure.png') }}" alt="Custom Packaging Box" class="cta-box-image">
                     </div>
                 </div>
             </div>

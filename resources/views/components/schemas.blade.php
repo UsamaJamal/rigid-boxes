@@ -15,10 +15,16 @@
         if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://'])) {
             return $path;
         }
-        if (\Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/'])) {
+        $path = ltrim($path, '/');
+        if (\Illuminate\Support\Str::startsWith($path, ['storage/', 'images/'])) {
             return asset($path);
         }
-        return asset('storage/' . ltrim($path, '/'));
+        if (\Illuminate\Support\Str::startsWith($path, 'uploads/')) {
+            return file_exists(public_path($path))
+                ? asset($path)
+                : asset('storage/' . $path);
+        }
+        return asset('storage/' . $path);
     };
 
     $schemaProduct = isset($product) ? (array) $product : [];
