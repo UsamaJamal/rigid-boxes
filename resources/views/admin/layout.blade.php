@@ -1,10 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
+    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') · Rigid Boxes Admin</title>
+    <title>@yield('title') Â· Rigid Boxes Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -158,7 +159,7 @@
 <div class="shell">
     <aside class="side">
         <div class="brand">
-            <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="Rigid Boxes">
+            <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="rigid boxes">
             <div>
                 <strong>Rigid Boxes</strong>
                 <small>Administration</small>
@@ -246,3 +247,4 @@
 </div>
 </body>
 </html>
+

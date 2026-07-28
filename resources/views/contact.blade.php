@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contact The Rigid Boxes for premium custom packaging solutions.">
@@ -417,3 +418,4 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     </script>
 </body>
 </html>
+

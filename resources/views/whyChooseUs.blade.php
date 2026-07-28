@@ -475,7 +475,7 @@
     <div class="container">
         <div class="why-us-content">
             <div class="why-us-image">
-                <img src="{{ asset('uploads/craftmenship.png') }}" alt="Why Us">
+                <img src="{{ asset('uploads/craftmenship.png') }}" alt="craftsmanship">
             </div>
             <div class="why-us-text">
                 <h2>Craftsmanship Meets Scalable Precision</h2>
@@ -495,7 +495,7 @@
         <div class="trust-us-grid">
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="No Die & Plate Charges">
+                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="no die & plate charges">
                 </span>
                 <h3>No Die & Plate Charges</h3>
                 <p>No added tooling fees, just straightforward pricing</p>
@@ -503,7 +503,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="Customer Satisfaction">
+                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="customer satisfaction">
                 </span>
                 <h3>Customer Satisfaction</h3>
                 <p>Built on trust, quality, and long term partnerships.</p>
@@ -511,7 +511,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="Low Minimum Order Quantity">
+                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="low minimum order quantity">
                 </span>
                 <h3>Low Minimum Order Quantity</h3>
                 <p>Flexible quantities to suit every business stage.</p>
@@ -519,7 +519,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="Free Shipping">
+                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="free shipping">
                 </span>
                 <h3>Free Shipping</h3>
                 <p>No shipping costs, no last-minute surprises.</p>
@@ -527,7 +527,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/free-graphic-design.svg') }}" alt="Free Graphic Design">
+                    <img src="{{ asset('uploads/free-graphic-design.svg') }}" alt="free graphic design">
                 </span>
                 <h3>Free Graphic Design</h3>
                 <p>Professional designs at no extra cost.</p>
@@ -535,7 +535,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/fast-turn-around.svg') }}" alt="Fast Turnaround Time">
+                    <img src="{{ asset('uploads/fast-turn-around.svg') }}" alt="fast turnaround time">
                 </span>
                 <h3>Fast Turnaround Time</h3>
                 <p>Quick production with consistent quality.</p>
@@ -550,7 +550,7 @@
         <div class="sustainable-wrapper">
             <div class="sustainable-content">
                 <div class="sustainable-badge">
-                    <img src="{{ asset('uploads/ethically-manufactured.svg') }}" alt="Ethically Manufactured" width="20" height="20">
+                    <img src="{{ asset('uploads/ethically-manufactured.svg') }}" alt="ethically manufactured" width="20" height="20">
                     <span>ETHICALLY MANUFACTURED</span>
                 </div>
                 <h2>Sustainable Packaging</h2>
@@ -562,7 +562,7 @@
                 </div>
             </div>
             <div class="sustainable-image">
-                <img src="{{ asset('uploads/sustainable-packaging.png') }}" alt="Sustainable Packaging">
+                <img src="{{ asset('uploads/sustainable-packaging.png') }}" alt="sustainable packaging">
             </div>
         </div>
     </div>

@@ -153,7 +153,7 @@
                     @endphp
                     <a href="{{ url('/product/' . $prodSlug) }}" class="box-card">
                         <div class="box-image-wrapper">
-                            <img src="{{ $prodImg }}" alt="{{ $prodTitle }}">
+                            <img src="{{ $prodImg }}" alt="{{ $prodtitle }}">
                         </div>
                         <div class="box-title">{{ $prodTitle }}</div>
                     </a>

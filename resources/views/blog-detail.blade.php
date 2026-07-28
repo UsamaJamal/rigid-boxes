@@ -1,6 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond | The Rigid Boxes</title>
@@ -864,7 +865,7 @@
             
             <div class="article-meta">
                 <div class="author-info">
-                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="Ahmed Khan" class="author-avatar-sm">
+                    <img src="{{ asset('images/ahmed-khan.png') }}" alt="ahmed khan" class="author-avatar-sm">
                     <span class="author-name">Ahmed Khan</span>
                 </div>
                 <div class="meta-item">
@@ -880,7 +881,7 @@
 
         <!-- Featured Hero Image -->
         <div class="featured-image-wrap">
-            <img src="{{ asset('images/luxury-black-box.png') }}" alt="Luxury Black Rigid Box Packaging" class="featured-image">
+            <img src="{{ asset('images/luxury-black-box.png') }}" alt="luxury black rigid box packaging" class="featured-image">
         </div>
 
         <!-- Main Content & Sidebar Grid -->
@@ -891,30 +892,30 @@
                 @if(!empty($blog['content']))
                     {!! $blog['content'] !!}
                 @else
-                <p>The luxury packaging landscape is shifting faster than ever. Between sustainability mandates, digital integration, and ever-rising consumer expectations, brands that adapt early aren't just surviving — they're capturing disproportionate market attention. Here are the seven trends that will define premium packaging through 2026 and beyond.</p>
+                <p>The luxury packaging landscape is shifting faster than ever. Between sustainability mandates, digital integration, and ever-rising consumer expectations, brands that adapt early aren't just surviving â€” they're capturing disproportionate market attention. Here are the seven trends that will define premium packaging through 2026 and beyond.</p>
 
                 <h2>1. Bio-Based Rigid Board Goes Mainstream</h2>
-                <p>For years, rigid boxes meant a trade-off: premium feel versus environmental impact. Today, FSC-certified papers combined with bio-based binders and recycled greyboard deliver the same structural integrity without the guilt. Early adopters like niche fragrance houses report that 68% of their customers actively notice and appreciate 'plastic-free' packaging labels — and that sentiment directly influences repeat purchases.</p>
-                <p>At LuxPack, we've transitioned over 50% of our rigid box production to fully recyclable, FSC-certified materials. The result? No compromise on embossing depth, no visible difference in foil adhesion — just a cleaner conscience for your brand and your customers.</p>
+                <p>For years, rigid boxes meant a trade-off: premium feel versus environmental impact. Today, FSC-certified papers combined with bio-based binders and recycled greyboard deliver the same structural integrity without the guilt. Early adopters like niche fragrance houses report that 68% of their customers actively notice and appreciate 'plastic-free' packaging labels â€” and that sentiment directly influences repeat purchases.</p>
+                <p>At LuxPack, we've transitioned over 50% of our rigid box production to fully recyclable, FSC-certified materials. The result? No compromise on embossing depth, no visible difference in foil adhesion â€” just a cleaner conscience for your brand and your customers.</p>
 
                 <div class="callout-box">
                     <div class="callout-label">Key Insight</div>
-                    <div class="callout-content">74% of luxury shoppers say they would pay more for packaging with verifiable sustainability credentials. Bio-based rigid boxes maintain identical finishing capabilities — including deep embossing and foil stamping.</div>
+                    <div class="callout-content">74% of luxury shoppers say they would pay more for packaging with verifiable sustainability credentials. Bio-based rigid boxes maintain identical finishing capabilities â€” including deep embossing and foil stamping.</div>
                 </div>
 
                 <h2>2. The Rise of "Quiet Luxury" in Unboxing</h2>
-                <p>Minimalism isn't new, but the definition has evolved. Quiet luxury packaging isn't about sterile white boxes — it's about tactile richness and subtle detailing. Think uncoated papers with a velvety touch, blind embossing that reveals itself only under certain light, or monochromatic palettes that shift tone across layers of the unboxing experience.</p>
+                <p>Minimalism isn't new, but the definition has evolved. Quiet luxury packaging isn't about sterile white boxes â€” it's about tactile richness and subtle detailing. Think uncoated papers with a velvety touch, blind embossing that reveals itself only under certain light, or monochromatic palettes that shift tone across layers of the unboxing experience.</p>
 
                 <div class="quote-box">
-                    <div class="quote-text">"The best luxury packaging doesn't shout — it whispers. It rewards close inspection. Every fold, every texture, every hidden detail should feel intentional."</div>
-                    <div class="quote-author">— Mia Lindström, Creative Director at Lindström Studio</div>
+                    <div class="quote-text">"The best luxury packaging doesn't shout â€” it whispers. It rewards close inspection. Every fold, every texture, every hidden detail should feel intentional."</div>
+                    <div class="quote-author">â€” Mia LindstrÃ¶m, Creative Director at LindstrÃ¶m Studio</div>
                 </div>
 
                 <p>Brands like The Row and Aesop have mastered this, and the B2B world is taking notice. Corporate gift sets, investor welcome-kits, and even tech unboxings are adopting the same restrained elegance that signals confidence rather than excess.</p>
 
                 <h2>3. Integrated Digital Experiences (AR, NFC, QR)</h2>
-                <p>Packaging is becoming a portal. Near-field communication (NFC) tags embedded under labels, augmented reality triggers printed invisibly on box lids, and dynamic QR codes that lead to exclusive brand content are no longer experimental. They're expected — especially by the 25–40 demographic that makes up the bulk of luxury consumers.</p>
-                <p>Imagine a whisky gift box where tapping a phone against the logo launches a virtual distillery tour. Or a skincare kit that uses AR to show application tutorials. These aren't gimmicks — they're measurable engagement tools that extend brand interaction well beyond the initial unboxing moment.</p>
+                <p>Packaging is becoming a portal. Near-field communication (NFC) tags embedded under labels, augmented reality triggers printed invisibly on box lids, and dynamic QR codes that lead to exclusive brand content are no longer experimental. They're expected â€” especially by the 25â€“40 demographic that makes up the bulk of luxury consumers.</p>
+                <p>Imagine a whisky gift box where tapping a phone against the logo launches a virtual distillery tour. Or a skincare kit that uses AR to show application tutorials. These aren't gimmicks â€” they're measurable engagement tools that extend brand interaction well beyond the initial unboxing moment.</p>
 
                 <h2>4. Hyper-Customization at Scale</h2>
                 <p>Low MOQs and digital printing advancements mean that 'custom' no longer requires a 10,000-unit commitment. Variable data printing allows every box in a run to feature unique names, messages, or even regional artwork. This is particularly powerful for corporate gifting, limited-edition drops, and influencer seeding campaigns where personalization drives social sharing and word-of-mouth.</p>
@@ -928,11 +929,11 @@
                 <p>Luxury consumers increasingly value packaging that earns a second life. Modular inserts that transform a shipping box into a keepsake drawer, or rigid sleeves that become elegant desk organizers, are gaining traction. This aligns with both sustainability goals and the 'gift that keeps giving' perception that elevates brand recall long after the initial purchase.</p>
 
                 <h2>6. Metallic Inks Over Plastic Laminates</h2>
-                <p>Soft-touch lamination has been a staple, but it's often plastic-based. In response, metallic inks and water-based coatings are stepping up. New formulations deliver a luminous, almost wet-look sheen without the environmental footprint. Combined with textured papers, the effect is both luxurious and fully recyclable — a genuine win-win for design and sustainability teams alike.</p>
+                <p>Soft-touch lamination has been a staple, but it's often plastic-based. In response, metallic inks and water-based coatings are stepping up. New formulations deliver a luminous, almost wet-look sheen without the environmental footprint. Combined with textured papers, the effect is both luxurious and fully recyclable â€” a genuine win-win for design and sustainability teams alike.</p>
 
                 <h2>7. Transparency as a Luxury Signal</h2>
                 <p>Today's buyers want to know where materials came from, who assembled the box, and what happens to it after disposal. Smart packaging with QR codes that trace the supply chain, or simply printed details about the box's recycled content, transform transparency into a brand strength. In a market saturated with noise, the brands that win are those that treat packaging not as a cost center, but as a strategic asset.</p>
-                <p>The trends above aren't predictions — they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
+                <p>The trends above aren't predictions â€” they're already unfolding across the industry. The question is whether your brand will lead or follow. At LuxPack, we're already helping forward-thinking brands implement every one of these innovations, from bio-based materials to NFC integration, without compromising the tactile luxury their customers expect.</p>
                 @endif
 
                 <hr class="author-divider">
@@ -945,7 +946,7 @@
                         $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
                         $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
                     @endphp
-                    <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar">
+                    <img src="{{ $authorImg }}" alt="{{ $authorname }}" class="author-card-avatar">
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
                         <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit;">{{ $authorName }}</a>
@@ -975,7 +976,7 @@
                         @foreach($recentBlogs as $rb)
                         <div class="recent-article-item">
                             @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/below-hero.png'); @endphp
-                            <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                            <img src="{{ $rbImg }}" alt="{{ $rb >title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                             <div class="recent-article-info">
                                 <a href="{{ url('/blog/' . $rb->slug) }}" class="recent-article-title">{{ $rb->title }}</a>
                                 <span class="recent-article-date">{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
@@ -1032,7 +1033,7 @@
                 <article class="related-card">
                     @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
                     <a href="{{ url('/blog/' . $rb->slug) }}" style="display:block;">
-                        <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                        <img src="{{ $rbImg }}" alt="{{ $rb >title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                     </a>
                     <div class="related-card-body">
                         <div class="related-card-meta">
@@ -1062,3 +1063,4 @@
 
 </body>
 </html>
+

@@ -232,7 +232,7 @@
                 </a>
             </div>
             <div class="cta-image-wrapper">
-                <img src="{{ asset('uploads/premium-image-frame.png') }}" alt="Image Frame" onerror="this.src='https://placehold.co/512x355/2a2a2a/888888?text=Custom+Packaging'">
+                <img src="{{ asset('uploads/premium-image-frame.png') }}" alt="image frame" onerror="this.src='https://placehold.co/512x355/2a2a2a/888888?text=Custom+Packaging'">
             </div>
         </div>
     </div>

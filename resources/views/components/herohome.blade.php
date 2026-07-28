@@ -255,7 +255,7 @@
                 $hImg = !empty($settings['hero_image']) ? $settings['hero_image'] : (!empty($category['hero_image']) ? $category['hero_image'] : 'uploads/Home-Banner.webp');
                 $hImgPath = \Illuminate\Support\Str::startsWith($hImg, ['storage/', 'uploads/', 'images/']) ? $hImg : 'storage/' . $hImg;
             @endphp
-            <img src="{{ asset($hImgPath) }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'Custom Rigid Packaging Boxes')) }}" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
+            <img src="{{ asset($hImgPath) }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'custom rigid packaging boxes')) }}" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
         </div>
     </section>
 </div>
