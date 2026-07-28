@@ -1916,7 +1916,7 @@
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/addon-silver-foil.jpeg') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
+                        <img src="{{ asset('uploads/silver-Foiling.webp') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
@@ -2009,9 +2009,9 @@
                     { src: '{{ asset("uploads/presentation-closure.webp") }}',  label: 'Presentation Closure' }
                 ],
                 inserts: [
-                    { src: '{{ asset("uploads/luxury-insert.webp") }}',      label: 'Luxury Insert' },
-                    { src: '{{ asset("uploads/paper-insert.webp") }}',       label: 'Custom Paper Insert' },
-                    { src: '{{ asset("uploads/protective-insert.webp") }}',  label: 'Protective Insert' }
+                    { src: '{{ asset("uploads/foam-Insert.webp") }}',      label: 'Foam Insert' },
+                    { src: '{{ asset("uploads/paper-insert.webp") }}',       label: 'Paper Insert' },
+                    { src: '{{ asset("uploads/corrugated-insert.webp") }}',  label: 'Corrugated Insert' }
                 ],
                 coating: [
                     { src: '{{ asset("uploads/uv-coating.webp") }}',          label: 'UV Coating' },
