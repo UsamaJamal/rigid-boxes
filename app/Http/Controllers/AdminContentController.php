@@ -147,10 +147,15 @@ class AdminContentController extends Controller
         }
 
         foreach (['image', 'hero_image', 'banner_image', 'icon'] as $field) {
+            if (in_array($field, $fields) && $request->input('remove_' . $field) == '1') {
+                $payload[$field] = null;
+            }
             if ($request->hasFile($field)) {
                 if (in_array($field, $fields)) {
                     $file = $request->file($field);
-                    $payload[$field] = $file->storeAs('admin', $file->getClientOriginalName(), 'public');
+                    $fileName = $file->getClientOriginalName();
+                    $file->move(public_path('uploads'), $fileName);
+                    $payload[$field] = 'uploads/' . $fileName;
                 }
             }
         }
@@ -164,7 +169,11 @@ class AdminContentController extends Controller
             $newImages = [];
             if ($galleryFiles) {
                 $newImages = collect($galleryFiles)
-                    ->map(fn ($file) => $file->storeAs('admin', $file->getClientOriginalName(), 'public'))
+                    ->map(function ($file) {
+                        $fileName = $file->getClientOriginalName();
+                        $file->move(public_path('uploads'), $fileName);
+                        return 'uploads/' . $fileName;
+                    })
                     ->values()
                     ->all();
             }

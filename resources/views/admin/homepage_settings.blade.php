@@ -197,9 +197,10 @@
                 <div class="field full">
                     <label for="hero_image">Hero Image</label>
                     @if(!empty($settings['hero_image']))
-                        <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 12px; background: var(--soft); padding: 10px 14px; border-radius: 10px; width: fit-content;">
+                        <div class="single-image-wrapper" style="margin-bottom: 10px; display: flex; align-items: center; gap: 12px; background: var(--soft); padding: 10px 14px; border-radius: 10px; width: fit-content; position:relative;">
                             <img src="{{ asset('storage/' . $settings['hero_image']) }}" alt="Current Hero Image" style="height: 60px; object-fit: contain; border-radius: 6px;">
-                            <span style="font-size: 12px; color: var(--muted); font-weight: 600;">Current Hero Image</span>
+                            <span style="font-size: 12px; color: var(--muted); font-weight: 600; margin-right:20px;">Current Hero Image</span>
+                            <span onclick="removeSingleImage(this, 'hero_image')" style="position:absolute; top:-6px; right:-6px; background:#e74c3c; color:white; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.3); line-height:1;" title="Remove Image">&times;</span>
                         </div>
                     @endif
                     <input type="file" id="hero_image" name="hero_image" accept="image/*">
@@ -464,4 +465,20 @@
     }
 </script>
 
+<script>
+    function removeSingleImage(btn, fieldName) {
+        if (!confirm('Are you sure you want to remove this image?')) return;
+        const wrapper = btn.closest('.single-image-wrapper');
+        const form = wrapper.closest('form');
+        let hidden = form.querySelector('input[name="remove_' + fieldName + '"]');
+        if (!hidden) {
+            hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'remove_' + fieldName;
+            form.appendChild(hidden);
+        }
+        hidden.value = '1';
+        wrapper.style.display = 'none';
+    }
+</script>
 @endsection

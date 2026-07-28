@@ -73,9 +73,9 @@ Route::get('/category/{slug?}', function ($slug = null) {
 
         $faqs = DB::table('admin_category_faqs')->where('category_id', $categoryArr['id'])->get()->map(fn($r)=>(array)$r)->all();
     }
-    if (empty($products)) {
-        $products = DB::table('admin_products')->limit(8)->get()->map(fn($r)=>(array)$r)->all();
-    }
+    // if (empty($products)) {
+    //     $products = DB::table('admin_products')->limit(8)->get()->map(fn($r)=>(array)$r)->all();
+    // }
 
     return view('category', [
         'slug' => $slug,

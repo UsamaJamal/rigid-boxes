@@ -1062,7 +1062,7 @@
             <div class="container">
                 <div class="cta-wrapper">
                     <div class="cta-image">
-                        <img src="{{ asset('uploads/allcategory-cta.png') }}" alt="Custom Packaging Box" class="cta-box-image">
+                        <img src="{{ asset('uploads/allcategory-cta.webp') }}" alt="Custom Packaging Box" class="cta-box-image">
                     </div>
                     <div class="cta-content">
                         <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>

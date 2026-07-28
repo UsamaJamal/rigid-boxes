@@ -97,8 +97,9 @@
             <div class="field">
                 <label>Featured Image</label>
                 @if($editing && !empty($item['image']))
-                    <div style="margin-bottom:8px">
-                        <img src="{{ $resolveImg($item['image']) }}" style="height:60px; border-radius:4px; border:1px solid #ddd">
+                    <div class="single-image-wrapper" style="margin-bottom:8px; position:relative; display:inline-block;">
+                        <img src="{{ $resolveImg($item['image']) }}" style="height:60px; border-radius:4px; border:1px solid #ddd; display:block;">
+                        <span onclick="removeSingleImage(this, 'image')" style="position:absolute; top:-6px; right:-6px; background:#e74c3c; color:white; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.3); line-height:1;" title="Remove Image">&times;</span>
                     </div>
                 @endif
                 <input type="file" name="image" accept="image/*">
@@ -390,6 +391,21 @@
             input.value = JSON.stringify(existing);
             wrapper.remove();
         }
+    }
+
+    function removeSingleImage(btn, fieldName) {
+        if (!confirm('Are you sure you want to remove this image?')) return;
+        const wrapper = btn.closest('.single-image-wrapper');
+        const form = wrapper.closest('form');
+        let hidden = form.querySelector('input[name="remove_' + fieldName + '"]');
+        if (!hidden) {
+            hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'remove_' + fieldName;
+            form.appendChild(hidden);
+        }
+        hidden.value = '1';
+        wrapper.style.display = 'none';
     }
 </script>
 

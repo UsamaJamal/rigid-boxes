@@ -537,6 +537,17 @@
             transform: translateY(-50%);
             width: 18px;
             height: 18px;
+            fill: #888;
+            cursor: pointer;
+        }
+
+        .mobile-search .clear-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
             fill: #aaa;
             cursor: pointer;
         }
@@ -649,8 +660,15 @@
     <!-- Mobile Search Dropdown -->
     <div class="mobile-search-dropdown" id="mobileSearchDropdown" style="display: none; padding: 12px 20px; background: #FAF8F8; border-bottom: 1px solid rgba(0,0,0,0.1);">
         <form action="/search" method="GET" style="display: flex; position: relative; width: 100%;">
-            <input type="text" name="q" placeholder="Search products..." style="width: 100%; padding: 10px 40px 10px 15px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 15px; color: #333;">
-            <button type="button" onclick="toggleMobileSearch()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8D4445; padding: 0; display: flex; align-items: center; justify-content: center;">
+            <input type="text" name="q" placeholder="Search products..." style="width: 100%; padding: 10px 75px 10px 15px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 15px; color: #333;" oninput="this.nextElementSibling.style.display = this.value ? 'flex' : 'none';">
+            
+            <!-- Clear text icon -->
+            <svg viewBox="0 0 24 24" style="display: none; position: absolute; right: 45px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; cursor: pointer; color: #888;" onclick="this.previousElementSibling.value=''; this.style.display='none'; this.previousElementSibling.focus();">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+
+            <!-- Close dropdown icon -->
+            <button type="button" onclick="toggleMobileSearch()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8D4445; padding: 0; display: flex; align-items: center; justify-content: center; border-left: 1px solid #eee; padding-left: 10px; height: 24px;">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
