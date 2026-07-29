@@ -64,7 +64,7 @@
             color: var(--color-text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -2308,7 +2308,7 @@
                         $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
                     @endphp
                     <div class="product-card">
-                        <a href="{{ url('/product/' . $rpSlug) }}" style="text-decoration:none; color:inherit;">
+                        <a href="{{ url('/' . $rpSlug) }}/" style="text-decoration:none; color:inherit;">
                             <div class="product-image">
                                 <img src="{{ asset($rpImg) }}" alt="{{ $rp['title'] }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($rp['title']) }}'">
                             </div>

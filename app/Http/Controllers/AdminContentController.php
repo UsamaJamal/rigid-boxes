@@ -124,7 +124,7 @@ class AdminContentController extends Controller
         ]);
         $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module];
         $columns = [
-            'products' => ['title','slug','status','show_home','image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
+            'products' => ['title','slug','status','show_home','image','hover_image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
             'categories' => ['title','slug','status','parent_id','show_in_nav','show_home','image','icon','hero_image','banner_image','hero_title','hero_badge','hero_description','description','products_heading','products_description','feature_title','why_choose_title','why_choose_description','meta_title','meta_description','meta_keywords','robots','schema'],
             'blogs' => ['title','slug','status','show_home','image','author_id','author_name','publish_date','blog_category','tags','excerpt','content','author_description','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
             'pages' => ['title','slug','status','show_home','image','heading','content','position','appearance','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
@@ -132,7 +132,7 @@ class AdminContentController extends Controller
         ][$module];
         $existing = ctype_digit((string)$id) ? DB::table($table)->where('id',(int)$id)->first() : null;
         $fields = $columns;
-        $payload = collect($request->except(['_token','_method','images','existing_images','image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
+        $payload = collect($request->except(['_token','_method','images','existing_images','image','hover_image','hero_image','banner_image','icon','categories','related','faq_question','faq_answer']))->only($fields)->all();
         \Log::info('AdminContentController payload for ' . $module, $payload);
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
 
@@ -146,7 +146,7 @@ class AdminContentController extends Controller
             $payload['parent_id'] = $request->filled('parent_id') ? $request->input('parent_id') : null;
         }
 
-        foreach (['image', 'hero_image', 'banner_image', 'icon'] as $field) {
+        foreach (['image', 'hover_image', 'hero_image', 'banner_image', 'icon'] as $field) {
             if (in_array($field, $fields) && $request->input('remove_' . $field) == '1') {
                 $payload[$field] = null;
             }

@@ -38,7 +38,8 @@
     .faq-left {
         width: 100%;
         max-width: 520px;
-        height: 366px;
+        height: auto;
+        min-height: 366px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -66,14 +67,14 @@
         font-size: 16px;
         line-height: 25.6px;
         color: var(--section-text-color);
-        margin: 0 0 37px 0;
+        margin: 0 0 80px 0;
         padding: 0;
         text-align: left;
     }
 
     .faq-left-paragraph strong {
         font-weight: 700;
-        color:var(--section-text-color);
+        color: var(--section-text-color);
     }
 
     .faq-left-image {
@@ -206,7 +207,7 @@
 
     .faq-item.open .faq-answer {
         max-height: 300px;
-        padding: 0 24px 20px;
+        padding: 24px 24px 24px 24px;
     }
 
     .faq-answer p {
@@ -273,38 +274,58 @@
     }
 
     @media (max-width: 576px) {
-        .faq-container { padding: 0 16px; }
-        .faq-main-heading { font-size: 27px; }
-        .faq-question { min-height: 64px; padding: 16px; }
-        .faq-question-text { font-size: 15px; }
-        .faq-answer p { font-size: 14px; }
+        .faq-container {
+            padding: 0 16px;
+        }
+
+        .faq-main-heading {
+            font-size: 27px;
+        }
+
+        .faq-question {
+            min-height: 64px;
+            padding: 16px;
+        }
+
+        .faq-question-text {
+            font-size: 15px;
+        }
+
+        .faq-answer p {
+            font-size: 14px;
+        }
     }
 </style>
 
 <section class="faq-section">
     @php
-        $displayFaqs = !empty($faqs) && is_array($faqs)
-            ? $faqs
-            : ((($settings ?? [])['faqs'] ?? []) ?: []);
+        $displayFaqs = !empty($faqs) && is_array($faqs) ? $faqs : (($settings ?? [])['faqs'] ?? [] ?: []);
     @endphp
     <div class="faq-container">
         <div class="faq-wrapper">
             <div class="faq-left">
-                <span class="faq-left-heading" style="display: block;">Don't see the answer to your question? Ask the packaging expert directly.</span>
-                <p class="faq-left-paragraph">Check out the most common questions our customers asked. Still have questions ? <strong>Contact our customer support</strong>.</p>
-                <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions" class="faq-left-image">
-                <a href="/contact" class="faq-left-button">Ask a Question</a>
+                <span class="faq-left-heading" style="display: block;">Don't see the answer to your question? Ask the
+                    packaging expert directly.</span>
+                <p class="faq-left-paragraph">Check out the most common questions our customers asked. Still have
+                    questions ? <strong>Contact our customer support</strong>.</p>
+                <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions"
+                    class="faq-left-image">
+                <a href="/contact-us/" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">
                 <span class="faq-main-heading">Frequently Asked Questions</span>
                 <div class="faq-list">
-                    @if(count($displayFaqs) > 0)
-                        @foreach($displayFaqs as $faq)
+                    @if (count($displayFaqs) > 0)
+                        @foreach ($displayFaqs as $faq)
                             <div class="faq-item">
                                 <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
                                     <span class="faq-question-text">{{ $faq['question'] ?? '' }}</span>
                                     <span class="faq-icon">
-                                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round">
+                                            <line x1="6" y1="1" x2="6" y2="11" />
+                                            <line x1="1" y1="6" x2="11" y2="6" />
+                                        </svg>
                                     </span>
                                 </button>
                                 <div class="faq-answer">
@@ -315,37 +336,58 @@
                     @else
                         <div class="faq-item">
                             <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                                <span class="faq-question-text">What type of retail boxes are best for luxury product packaging?</span>
+                                <span class="faq-question-text">What type of retail boxes are best for luxury product
+                                    packaging?</span>
                                 <span class="faq-icon">
-                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round">
+                                        <line x1="6" y1="1" x2="6" y2="11" />
+                                        <line x1="1" y1="6" x2="11" y2="6" />
+                                    </svg>
                                 </span>
                             </button>
                             <div class="faq-answer">
-                                <p>Rigid boxes with premium finishes such as soft-touch lamination, foil stamping, or embossing are ideal for luxury product packaging. They offer structural strength and an elevated unboxing experience that reinforces brand prestige.</p>
+                                <p>Rigid boxes with premium finishes such as soft-touch lamination, foil stamping, or
+                                    embossing are ideal for luxury product packaging. They offer structural strength and
+                                    an elevated unboxing experience that reinforces brand prestige.</p>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                                <span class="faq-question-text">Which retail boxes offer the most protection for fragile items?</span>
+                                <span class="faq-question-text">Which retail boxes offer the most protection for fragile
+                                    items?</span>
                                 <span class="faq-icon">
-                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round">
+                                        <line x1="6" y1="1" x2="6" y2="11" />
+                                        <line x1="1" y1="6" x2="11" y2="6" />
+                                    </svg>
                                 </span>
                             </button>
                             <div class="faq-answer">
-                                <p>Rigid set-up boxes with custom foam or cardboard inserts provide the highest level of protection for fragile items. The thick chipboard walls absorb impact while inserts keep products from shifting during transit.</p>
+                                <p>Rigid set-up boxes with custom foam or cardboard inserts provide the highest level of
+                                    protection for fragile items. The thick chipboard walls absorb impact while inserts
+                                    keep products from shifting during transit.</p>
                             </div>
                         </div>
 
                         <div class="faq-item">
                             <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
-                                <span class="faq-question-text">Do retail boxes have customizable shapes and structures?</span>
+                                <span class="faq-question-text">Do retail boxes have customizable shapes and
+                                    structures?</span>
                                 <span class="faq-icon">
-                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round">
+                                        <line x1="6" y1="1" x2="6" y2="11" />
+                                        <line x1="1" y1="6" x2="11" y2="6" />
+                                    </svg>
                                 </span>
                             </button>
                             <div class="faq-answer">
-                                <p>Yes, retail boxes can be fully customized in shape, size, and structure. Options include tuck-end, sleeve, magnetic closure, drawer, and die-cut window styles, each tailored to your product dimensions and branding.</p>
+                                <p>Yes, retail boxes can be fully customized in shape, size, and structure. Options
+                                    include tuck-end, sleeve, magnetic closure, drawer, and die-cut window styles, each
+                                    tailored to your product dimensions and branding.</p>
                             </div>
                         </div>
                     @endif
@@ -356,10 +398,10 @@
 </section>
 
 <script>
-    window.toggleFaq = function (button) {
+    window.toggleFaq = function(button) {
         const item = button.closest('.faq-item');
         const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+        document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
             openItem.classList.remove('open');
             const openButton = openItem.querySelector('.faq-question');
             if (openButton) openButton.setAttribute('aria-expanded', 'false');

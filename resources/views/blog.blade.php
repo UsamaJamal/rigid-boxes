@@ -366,7 +366,7 @@
    UNIFIED BLOG LAYOUT — aligned with site header
    max-width: 1280px | gutter: 55px (matches header)
    ═══════════════════════════════════════════════════ */
-html, body { overflow-x: hidden; }
+html, body { overflow-x: clip; }
 .page { width: 100%; max-width: none; overflow: visible; }
 .hero { width: 100%; max-width: none; margin: 0; }
 .hero .container,

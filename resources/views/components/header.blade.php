@@ -38,7 +38,8 @@
         border-bottom: 0.2px solid rgba(255, 255, 255, 0.2);
         color: #fff;
         font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        position: relative;
+        position: sticky;
+        top: 0;
         z-index: 1000;
     }
 
@@ -684,7 +685,7 @@
             @endphp
             @foreach($navParentItems as $navParent)
             <li class="has-mega" data-mega-type="{{ $navParent['slug'] }}">
-                <a href="{{ url('/' . $navParent['slug']) }}" class="mega-trigger">{{ $navParent['title'] }}</a>
+                <a href="{{ url('/' . $navParent['slug']) }}/" class="mega-trigger">{{ $navParent['title'] }}</a>
             </li>
             @endforeach
             <li><a href="/blog">Blogs</a></li>
@@ -705,7 +706,7 @@
                     </div>
                     <span>Need a custom packaging solution?</span>
                 </div>
-                <a href="/contact" class="mega-menu-cta">Talk to us</a>
+                <a href="/contact-us/" class="mega-menu-cta">Talk to us</a>
             </div>
         </div>
     </div>
@@ -738,12 +739,12 @@
             <ul class="mobile-nav">
                 <li><a href="/">Home</a></li>
                 @foreach($navParentItems as $navParent)
-                    <li><a href="{{ url('/' . $navParent['slug']) }}">{{ $navParent['title'] }}</a></li>
+                    <li><a href="{{ url('/' . $navParent['slug']) }}/">{{ $navParent['title'] }}</a></li>
                 @endforeach
                 <li><a href="/blog">Blogs</a></li>
             </ul>
 
-            <a href="/contact" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
+            <a href="/contact-us/" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
 
             <div class="mobile-contact" style="margin-top: 0; gap: 0; display: flex; flex-direction: column; align-items: flex-start;">
                 <h3 style="font-family: 'DM Sans', sans-serif; font-size: 18px; margin-bottom: 20px; color: #000; text-align: left;">Get In Touch</h3>
@@ -843,7 +844,7 @@
                 const iconHtml = icon
                     ? `<img src="${icon}" alt="" loading="lazy">`
                     : giftBoxSvg;
-                return `<a href="/category/${slug}" class="mega-menu-item">
+                return `<a href="/${slug}" class="mega-menu-item">
                     <div class="mega-menu-icon">${iconHtml}</div>
                     <span>${title}</span>
                 </a>`;

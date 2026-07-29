@@ -174,6 +174,40 @@
         </div>
 
         <div style="margin-bottom:30px;">
+            <h3 style="font-size:18px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #eaeaea;">1. Social Media Links</h3>
+            
+            <div class="form-group">
+                <label class="form-label">Facebook URL</label>
+                <input type="url" name="social_facebook" class="form-input" value="{{ old('social_facebook', $settings['social_facebook'] ?? '') }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Twitter URL</label>
+                <input type="url" name="social_twitter" class="form-input" value="{{ old('social_twitter', $settings['social_twitter'] ?? '') }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Instagram URL</label>
+                <input type="url" name="social_instagram" class="form-input" value="{{ old('social_instagram', $settings['social_instagram'] ?? '') }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Pinterest URL</label>
+                <input type="url" name="social_pinterest" class="form-input" value="{{ old('social_pinterest', $settings['social_pinterest'] ?? '') }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">LinkedIn URL</label>
+                <input type="url" name="social_linkedin" class="form-input" value="{{ old('social_linkedin', $settings['social_linkedin'] ?? '') }}">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">YouTube URL</label>
+                <input type="url" name="social_youtube" class="form-input" value="{{ old('social_youtube', $settings['social_youtube'] ?? '') }}">
+            </div>
+        </div>
+
+        <div style="margin-bottom:30px;">
             <h3 style="font-size:18px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #eaeaea;">Footer Settings</h3>
             
             <div class="form-group">
@@ -216,14 +250,14 @@
                     @if(empty($quickLinks))
                         <div class="quick-link-row" style="display:flex; gap:10px; margin-bottom:10px;">
                             <input type="text" name="footer_quick_links_names[]" class="form-input" placeholder="Link Name (e.g. About Us)">
-                            <input type="text" name="footer_quick_links_urls[]" class="form-input" placeholder="URL (e.g. /aboutUs)">
+                            <input type="text" name="footer_quick_links_urls[]" class="form-input" placeholder="URL (e.g. /about-us)">
                             <button type="button" class="btn btn-danger remove-link-btn" style="padding:0 15px;">&times;</button>
                         </div>
                     @else
                         @foreach($quickLinks as $link)
                         <div class="quick-link-row" style="display:flex; gap:10px; margin-bottom:10px;">
                             <input type="text" name="footer_quick_links_names[]" class="form-input" value="{{ $link['name'] ?? '' }}" placeholder="Link Name (e.g. About Us)">
-                            <input type="text" name="footer_quick_links_urls[]" class="form-input" value="{{ $link['url'] ?? '' }}" placeholder="URL (e.g. /aboutUs)">
+                            <input type="text" name="footer_quick_links_urls[]" class="form-input" value="{{ $link['url'] ?? '' }}" placeholder="URL (e.g. /about-us)">
                             <button type="button" class="btn btn-danger remove-link-btn" style="padding:0 15px;">&times;</button>
                         </div>
                         @endforeach
@@ -254,7 +288,7 @@
                 row.style = 'display:flex; gap:10px; margin-bottom:10px;';
                 row.innerHTML = `
                     <input type="text" name="footer_quick_links_names[]" class="form-input" placeholder="Link Name (e.g. About Us)">
-                    <input type="text" name="footer_quick_links_urls[]" class="form-input" placeholder="URL (e.g. /aboutUs)">
+                    <input type="text" name="footer_quick_links_urls[]" class="form-input" placeholder="URL (e.g. /about-us)">
                     <button type="button" class="btn btn-danger remove-link-btn" style="padding:0 15px;">&times;</button>
                 `;
                 container.appendChild(row);

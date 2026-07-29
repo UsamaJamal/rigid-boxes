@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     @include('components.canonical')
@@ -8,7 +9,9 @@
     <title>All Categories of Industries - Rigid Boxes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         /* ==========================================================================
            ALL CATEGORIES OF INDUSTRIES - DESIGN SYSTEM IMPLEMENTATION
@@ -34,17 +37,17 @@
             --background-color: #FAF8F8;
             --footer-color: #5F2D2F;
             --header-gradient: linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%);
-            
+
             /* Typography Colors */
             --color-text-primary: #2D2D2D;
             --color-text-secondary: #666666;
             --color-text-tertiary: #999999;
-            
+
             /* UI Colors */
             --color-border: #E5E5E5;
             --color-card-bg: #FFFFFF;
             --color-card-hover: #F5F0EF;
-            
+
             /* Spacing Scale */
             --space-4: 4px;
             --space-8: 8px;
@@ -53,7 +56,7 @@
             --space-32: 32px;
             --space-48: 48px;
             --space-64: 64px;
-            
+
             /* Grid System */
             --container-width: 1280px;
             --margin-sides: 55px;
@@ -150,8 +153,7 @@
            MAIN LAYOUT COMPONENTS
            ========================================================================== */
 
-        .industries-main {
-        }
+        .industries-main {}
 
         /* Hero Section */
         .hero-section {
@@ -190,119 +192,71 @@
         }
 
         /* ==========================================================================
-           03. UI COMPONENTS - CARD ARCHITECTURE (8PX RADIUS)
+           03. UI COMPONENTS - CARD ARCHITECTURE (IMAGE FIRST)
            ========================================================================== */
 
         .industry-card {
-            background-color: var(--secondary-color);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: var(--space-48) var(--space-32);
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
             text-align: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             width: 100%;
             min-width: 0;
-            aspect-ratio: 1;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Hover Background Image */
-        .industry-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Card Image Wrapper */
+        .card-img-wrapper {
+            width: 100%;
+            height: 322px;
+            aspect-ratio: auto;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--color-card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            margin-bottom: 26px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card-img-wrapper img {
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.58)),
-                              var(--card-banner, url('{{ asset('images/Gift-boxes.webp') }}'));
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1;
-        }
-
-        .industry-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Card Content */
-        .card-icon,
-        .heading-04 {
-            position: relative;
-            z-index: 2;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 0.4s ease;
         }
 
         /* Card Hover State */
-        .industry-card:hover {
-            transform: translateY(-2px);
+        .industry-card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .industry-card:hover .card-img-wrapper {
             box-shadow: 0 8px 24px rgba(141, 68, 69, 0.12);
-            border-color: rgba(141, 68, 69, 0.2);
-        }
-
-        .industry-card:hover .card-icon svg {
-            color: #FFFFFF;
-            transform: scale(1.05);
-        }
-
-        .industry-card:hover .card-icon .card-image {
-            filter: brightness(0) invert(1);
-        }
-
-        .industry-card:hover .heading-04 {
-            color: #FFFFFF;
-        }
-
-        /* Card Icon */
-        .card-icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: var(--space-24);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-            transition: opacity 0.3s ease;
-        }
-
-        .card-icon svg {
-            color: var(--color-text-secondary);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-image {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .industry-card:hover .card-icon {
-            opacity: 0;
-            display: none;
-        }
-
-        .industry-card:hover .card-image {
-            transform: scale(1.05);
         }
 
         /* Card Typography */
         .industry-card .heading-04 {
             position: relative;
             z-index: 2;
+            transition: color 0.3s ease;
+            font-size: 19px !important;
+            font-weight: 700;
+            color: var(--section-text-color, #191919);
+            text-align: center;
+            word-wrap: break-word;
+            display: block;
         }
 
         .industry-card:hover .heading-04 {
-            color: #FFFFFF;
+            color: var(--primary-color);
         }
 
         /* ==========================================================================
@@ -429,7 +383,7 @@
             flex: 1 1 35%;
             min-width: 0;
             margin-left: -10%;
-            
+
             width: 100%;
             /* min-height: 390px; */
             background-color: var(--primary-color);
@@ -485,12 +439,12 @@
             :root {
                 --margin-sides: 55px;
             }
-            
+
             .industries-grid {
                 grid-template-columns: repeat(4, 1fr);
                 gap: 20px;
             }
-            
+
             .industry-card {
                 padding: var(--space-32) var(--space-24);
             }
@@ -501,7 +455,7 @@
             :root {
                 --margin-sides: 55px;
             }
-            
+
             .industries-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -512,83 +466,75 @@
             :root {
                 --margin-sides: 20px;
             }
-            
+
             .heading-01 {
                 font-size: 36px;
             }
-            
+
             .hero-body {
                 font-size: 16px;
             }
-            
+
             .industries-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: var(--space-16);
             }
-            
+
             .industry-card {
-                padding: var(--space-32) var(--space-24);
-                min-height: 150px;
+                width: 100%;
+                max-width: 100%;
                 min-width: 0;
-                width: auto;
                 height: auto;
             }
-            
+
+            .card-img-wrapper {
+                height: 220px;
+            }
+
             .sustainable-single {
                 display: none;
             }
-            
-            .card-icon {
-                width: 48px;
-                height: 48px;
-                margin-bottom: var(--space-16);
-            }
-            
-            .card-icon svg {
-                width: 32px;
-                height: 32px;
-            }
-            
+
             .options-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .sustainable-container,
             .bulk-info-container {
                 padding: 24px;
             }
-            
+
             .sustainable-description {
                 height: auto;
                 font-size: 14px;
                 margin-bottom: 24px;
             }
-            
+
             .sustainable-title {
                 font-size: 18px;
             }
-            
+
             .option-card {
                 padding: 16px;
             }
-            
+
             .options-grid {
                 gap: 16px;
             }
-            
+
             .bulk-packaging-wrapper {
                 flex-direction: column;
             }
-            
+
             .bulk-info-container {
                 display: none;
             }
-            
+
             .sustainable-container,
             .bulk-info-container {
                 width: 100%;
             }
-            
+
             .cta-wrapper {
                 flex-direction: column-reverse;
                 align-items: stretch;
@@ -598,7 +544,7 @@
                 width: 100%;
                 flex: 1 1 auto;
             }
-            
+
             .cta-image {
                 width: 100%;
                 flex: 1 1 auto;
@@ -612,42 +558,48 @@
             :root {
                 --margin-sides: 16px;
             }
-            
+
             .hero-section .container,
             .industries-section .container,
             .bulk-packaging-section .container {
                 padding-left: 16px;
                 padding-right: 16px;
             }
-            
+
             .cta-section .container {
                 padding-left: 16px;
                 padding-right: 16px;
             }
-            
+
             .heading-01 {
                 font-size: 28px;
             }
-            
+
             .hero-body {
                 font-size: 14px;
             }
-            
+
             .hero-section {
                 padding-top: 25px;
                 padding-bottom: var(--space-8);
             }
-            
+
             .industries-section {
                 padding-top: var(--space-8);
                 padding-bottom: var(--space-48);
             }
-            
+
             .industries-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
                 padding: 0;
                 margin: 0;
+            }
+
+            .card-img-wrapper {
+                height: 165px;
+                border-radius: 10px;
+                margin-bottom: 8px;
             }
         }
 
@@ -663,6 +615,7 @@
 
         /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
+
             *,
             *::before,
             *::after {
@@ -715,7 +668,7 @@
             max-width: 100%;
         }
 
-        /* CTA Content (Left) */
+        /* CTA Content (Right) */
         .cta-content {
             height: 398px;
             flex: 1 1 60%;
@@ -774,8 +727,9 @@
             transform: translateX(4px);
         }
 
-        /* CTA Image (Right) */
+        /* CTA Image (Left) */
         .cta-image {
+            margin-left: -64px;
             flex: 1 1 40%;
             min-width: 0;
             max-width: 500px;
@@ -800,7 +754,7 @@
             .cta-content {
                 padding: 50px;
             }
-            
+
             .cta-image {
                 max-width: 450px;
             }
@@ -810,7 +764,7 @@
             .cta-content {
                 padding: 40px;
             }
-            
+
             .cta-image {
                 max-width: 400px;
                 height: 280px;
@@ -839,7 +793,7 @@
             .cta-wrapper {
                 padding: 0;
             }
-            
+
             .cta-image {
                 margin-left: 0;
                 max-width: 100%;
@@ -930,6 +884,7 @@
         }
     </style>
 </head>
+
 <body>
     @include('components.header')
     <main class="industries-main">
@@ -947,13 +902,16 @@
                         letter-spacing: 1px;
                         color: var(--section-text-color, #191919);
                     }
+
                     .desktop-breadcrumb a {
                         color: inherit;
                         text-decoration: none;
                     }
+
                     .desktop-breadcrumb a:hover {
                         text-decoration: underline;
                     }
+
                     @media (max-width: 768px) {
                         .desktop-breadcrumb {
                             display: none !important;
@@ -961,11 +919,16 @@
                     }
                 </style>
                 <div class="desktop-breadcrumb">
-                    <a href="/">HOME</a> / <strong>{{ !empty($parentCategory['title']) ? strtoupper($parentCategory['title']) : 'ALL CATEGORIES' }}</strong>
+                    <a href="/">HOME</a> /
+                    <strong>{{ !empty($parentCategory['title']) ? strtoupper($parentCategory['title']) : 'ALL CATEGORIES' }}</strong>
                 </div>
                 <header class="hero-header">
-                    <h1 class="heading-01">{{ !empty($parentCategory['title']) ? $parentCategory['title'] : 'Packaging Solutions for Every Industry' }}</h1>
-                    <p class="hero-body">{{ !empty($parentCategory['hero_description']) ? $parentCategory['hero_description'] : 'Custom packaging solutions designed to meet the unique demands of every industry, helping businesses protect products, strengthen branding, and create memorable customer experiences.' }}</p>
+                    <h1 class="heading-01">
+                        {{ !empty($parentCategory['title']) ? $parentCategory['title'] : 'Packaging Solutions for Every Industry' }}
+                    </h1>
+                    <p class="hero-body">
+                        {{ !empty($parentCategory['hero_description']) ? $parentCategory['hero_description'] : 'Custom packaging solutions designed to meet the unique demands of every industry, helping businesses protect products, strengthen branding, and create memorable customer experiences.' }}
+                    </p>
                 </header>
             </div>
         </section>
@@ -977,29 +940,30 @@
                     @php
                         $allCats = !empty($categories) ? $categories : [];
                     @endphp
-                    @foreach($allCats as $cat)
+                    @foreach ($allCats as $cat)
                         @php
                             $resolveCategoryAsset = function ($path, $fallback = '') {
-                                if (empty($path)) return $fallback;
-                                return \Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/'])
+                                if (empty($path)) {
+                                    return $fallback;
+                                }
+                                return \Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/', 'http://', 'https://'])
                                     ? $path
                                     : 'storage/' . $path;
                             };
-                            $cIcon = $resolveCategoryAsset($cat['icon'] ?? '', '');
-                            $cBanner = $resolveCategoryAsset($cat['banner_image'] ?? '', $resolveCategoryAsset($cat['image'] ?? '', 'uploads/Gift-Boxes.webp'));
+                            $cBanner = $resolveCategoryAsset(
+                                $cat['banner_image'] ?? '',
+                                $resolveCategoryAsset(
+                                    $cat['image'] ?? '',
+                                    'uploads/Gift-Boxes.webp'
+                                )
+                            );
                             $cSlug = $cat['slug'] ?? \Illuminate\Support\Str::slug($cat['title']);
                         @endphp
-                        <a href="{{ url('/category/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
-                            <article class="industry-card" style="--card-banner: url('{{ asset($cBanner) }}');">
-                                <div class="card-icon" aria-hidden="true">
-                                    @if($cIcon)
-                                        <img class="card-image" src="{{ asset($cIcon) }}" alt="">
-                                    @else
-                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="8" width="18" height="13" rx="2"></rect>
-                                            <path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 1 1 4.5-1.5V8M16.5 8A2.5 2.5 0 1 0 12 6.5V8"></path>
-                                        </svg>
-                                    @endif
+                        <a href="{{ url('/' . $cSlug) }}/" style="text-decoration:none; color:inherit;">
+                            <article class="industry-card">
+                                <div class="card-img-wrapper">
+                                    <img src="{{ asset($cBanner) }}" alt="{{ $cat['title'] }}" loading="lazy"
+                                        onerror="this.onerror=null;this.src='{{ asset('uploads/Gift-Boxes.webp') }}';">
                                 </div>
                                 <span class="heading-04" style="display: block;">{{ $cat['title'] }}</span>
                             </article>
@@ -1016,41 +980,49 @@
                     <!-- First Container - Sustainable Options -->
                     <div class="sustainable-container">
                         <div class="sustainable-header">
-                            <img src="{{ asset('images/sustainable-packaging-icon.png') }}" alt="Sustainable" class="sustainable-icon">
+                            <img src="{{ asset('images/sustainable-packaging-icon.png') }}" alt="Sustainable"
+                                class="sustainable-icon">
                             <h2 class="sustainable-title">Sustainable Bulk Packaging Options</h2>
                         </div>
                         <p class="sustainable-description">
-                            Sustainable bulk packaging options using eco-friendly materials and responsible production methods for reduced environmental impact.
+                            Sustainable bulk packaging options using eco-friendly materials and responsible production
+                            methods for reduced environmental impact.
                         </p>
-                        
+
                         <div class="options-grid">
                             <div class="option-card">
                                 <span class="option-title">Fsc-Certified Materials</span>
-                                <p class="option-text">Sourced from responsibly managed forests for sustainable packaging.</p>
+                                <p class="option-text">Sourced from responsibly managed forests for sustainable
+                                    packaging.</p>
                             </div>
-                            
+
                             <div class="option-card">
                                 <span class="option-title">Recyclable Packaging Options</span>
                                 <p class="option-text">Designed for easy recycling to reduce environmental waste.</p>
                             </div>
-                            
+
                             <div class="option-card">
                                 <span class="option-title">PCR (Post-Consumer Recycled) Materials</span>
                                 <p class="option-text">Made using recycled content to support a circular economy.</p>
                             </div>
-                            
+
                             <div class="option-card">
                                 <span class="option-title">Eco-Conscious Production Methods</span>
-                                <p class="option-text">Manufactured with reduced energy use and lower environmental impact.</p>
+                                <p class="option-text">Manufactured with reduced energy use and lower environmental
+                                    impact.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Second Container - Bulk Packaging Info -->
                     <div class="bulk-info-container">
-                        <span class="bulk-info-title" style="display: block;">Bulk Packaging Solutions For Enterprises And Growing Brands</span>
+                        <span class="bulk-info-title" style="display: block;">Bulk Packaging Solutions For Enterprises
+                            And Growing Brands</span>
                         <p class="bulk-info-description">
-                            Looking for a packaging partner that can support your growth? Our bulk packaging solutions combine wholesale pricing, premium quality, fast production, and full customization to help brands streamline their supply chains, boost profitability, maintain consistency, and meet large-scale demand with confidence.
+                            Looking for a packaging partner that can support your growth? Our bulk packaging solutions
+                            combine wholesale pricing, premium quality, fast production, and full customization to help
+                            brands streamline their supply chains, boost profitability, maintain consistency, and meet
+                            large-scale demand with confidence.
                         </p>
                     </div>
                 </div>
@@ -1061,18 +1033,21 @@
         <section class="cta-section">
             <div class="container">
                 <div class="cta-wrapper">
-                    <div class="cta-image">
-                        <img src="{{ asset('uploads/allcategory-cta.webp') }}" alt="Custom Packaging Box" class="cta-box-image">
-                    </div>
                     <div class="cta-content">
                         <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>
-                        <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
+                        <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience
+                            with fully customized rigid box solutions.</p>
                         <a href="/request-quote" class="cta-button">
                             Get Started Today
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
+                    </div>
+                    <div class="cta-image">
+                        <img src="{{ asset('uploads/allcategory-cta.webp') }}" alt="Custom Packaging Box"
+                            class="cta-box-image">
                     </div>
                 </div>
             </div>
@@ -1082,4 +1057,5 @@
     <!-- Footer Component -->
     @include('components.footer')
 </body>
+
 </html>

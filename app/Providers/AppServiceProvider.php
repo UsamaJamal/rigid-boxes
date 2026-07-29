@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 ];
                 
                 $rows = DB::table('homepage_contents')
-                    ->whereIn('section', ['footer', 'company_info'])
+                    ->whereIn('section', ['footer', 'company_info', 'social_links'])
                     ->get();
                     
                 $settings = [];

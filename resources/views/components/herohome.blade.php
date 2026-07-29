@@ -22,7 +22,7 @@
         position: absolute;
         width: 450px;
         height: 0;
-        border-top: 0.2px solid rgba(255, 255, 255, 0.28);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
         transform-origin: left center;
         /* CSS uses the opposite visual direction to Figma's exported angle. */
         transform: rotate(52.86deg);
@@ -63,7 +63,7 @@
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
         font-size: clamp(28px, 3.5vw, 50px);
-        line-height: 65px;
+        line-height: 50px;
         letter-spacing: 0%;
         text-transform: uppercase;
         color: #fff;

@@ -8,10 +8,12 @@
         $breadcrumb = 'WHY CHOOSE US';
         $subTitle = 'WHY CHOOSE US';
         $description = 'From premium materials to precision craftsmanship, every box is designed to protect your products, strengthen your brand, and create unforgettable unboxing experiences.';
+        $desktopBg = asset('uploads/whychoose-us-banner.png');
+        $mobileBg  = asset('uploads/whychoose-us-banner-mobile-view.png');
+    } else {
+        $desktopBg = asset('uploads/about-us-banner.webp');
+        $mobileBg  = asset('uploads/about-us-banner.webp');
     }
-
-    $desktopBg = asset('uploads/whychoose-us-banner.png');
-    $mobileBg  = asset('uploads/whychoose-us-banner-mobile-view.png');
 @endphp
 
 <style>

@@ -19,12 +19,18 @@ class AdminFooterController extends Controller
             'company_phone' => '1800-315-8441',
             'company_address' => '4000 N Montrose Ave<br>550 Chicago, IL 60641',
             'footer_categories' => [],
-            'footer_quick_links' => []
+            'footer_quick_links' => [],
+            'social_facebook' => 'https://www.facebook.com/premiumboxesusa',
+            'social_twitter' => '',
+            'social_instagram' => 'https://www.instagram.com/premiumboxes.usa/',
+            'social_pinterest' => 'https://www.pinterest.com/premiumboxesusa/',
+            'social_linkedin' => 'https://www.linkedin.com/company/premium-boxes-usa/',
+            'social_youtube' => ''
         ];
 
         try {
             $rows = DB::table('homepage_contents')
-                ->whereIn('section', ['footer', 'company_info'])
+                ->whereIn('section', ['footer', 'company_info', 'social_links'])
                 ->get();
                 
             if ($rows->count() > 0) {
@@ -74,6 +80,12 @@ class AdminFooterController extends Controller
             'footer_categories' => 'nullable|array',
             'footer_quick_links_names' => 'nullable|array',
             'footer_quick_links_urls' => 'nullable|array',
+            'social_facebook' => 'nullable|url|max:255',
+            'social_twitter' => 'nullable|url|max:255',
+            'social_instagram' => 'nullable|url|max:255',
+            'social_pinterest' => 'nullable|url|max:255',
+            'social_linkedin' => 'nullable|url|max:255',
+            'social_youtube' => 'nullable|url|max:255',
         ]);
 
         $settings = $this->getSettings();
@@ -81,6 +93,12 @@ class AdminFooterController extends Controller
         $settings['company_email'] = $request->input('company_email');
         $settings['company_phone'] = $request->input('company_phone');
         $settings['company_address'] = $request->input('company_address');
+        $settings['social_facebook'] = $request->input('social_facebook');
+        $settings['social_twitter'] = $request->input('social_twitter');
+        $settings['social_instagram'] = $request->input('social_instagram');
+        $settings['social_pinterest'] = $request->input('social_pinterest');
+        $settings['social_linkedin'] = $request->input('social_linkedin');
+        $settings['social_youtube'] = $request->input('social_youtube');
         $settings['footer_categories'] = array_map('intval', (array) $request->input('footer_categories', []));
 
         $quickLinks = [];
@@ -105,6 +123,8 @@ class AdminFooterController extends Controller
                 $section = 'footer';
                 $valueType = 'json';
                 $value = json_encode($value);
+            } elseif (str_starts_with($key, 'social_')) {
+                $section = 'social_links';
             }
 
             DB::table('homepage_contents')->updateOrInsert(

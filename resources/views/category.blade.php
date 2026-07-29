@@ -10,7 +10,7 @@
     html,
     body {
         max-width: 100%;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
 
     /* Popular Boxes Section */
@@ -62,7 +62,7 @@
 
     .box-image-wrapper {
         width: 100%;
-        height: 322px;
+        height: auto;
         aspect-ratio: auto;
         border-radius: 12px;
         overflow: hidden;
@@ -70,18 +70,38 @@
         margin-bottom: 26px;
         /* Default subtle shadow like the figma design */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        position: relative;
     }
 
     .box-image-wrapper img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
+        display: block;
+        object-fit: contain;
         object-position: center;
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
-    .box-card:hover .box-image-wrapper img {
+    .box-image-wrapper .hover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    .box-card:hover .box-image-wrapper img:not(.hover-img) {
         transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper .hover-img {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper:has(.hover-img) .main-img {
+        opacity: 0;
     }
 
     .box-title {
@@ -90,7 +110,8 @@
         color: var(--section-text-color);
         text-align: center;
         word-wrap: break-word;
-        display: block; /* Ensures span behaves like block element */
+        display: block;
+        /* Ensures span behaves like block element */
     }
 
     /* Mobile Responsive View */
@@ -108,7 +129,7 @@
         }
 
         .box-image-wrapper {
-            height: 220px;
+            height: auto;
         }
     }
 
@@ -145,7 +166,7 @@
 
         .box-image-wrapper {
             width: 100%;
-            height: 165px;
+            height: auto;
             border-radius: 16px;
             margin-bottom: 8px;
         }
@@ -173,13 +194,30 @@
 
     /* Unified Container Responsive Padding */
     @media (max-width: 1100px) {
-        .popular-boxes-inner, .customize-container { padding-left: 32px; padding-right: 32px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
     }
+
     @media (max-width: 768px) {
-        .popular-boxes-inner, .customize-container { padding-left: 20px; padding-right: 20px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
+
     @media (max-width: 576px) {
-        .popular-boxes-inner, .customize-container { padding-left: 16px; padding-right: 16px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
     }
 
     .customize-title {
@@ -218,6 +256,7 @@
     .customize-tab {
         width: 100%;
         min-height: 54px;
+        flex: 1;
         padding: 14px 24px;
         text-align: center;
         background: #FFFFFF;
@@ -450,31 +489,55 @@
                     @foreach ($catProducts as $p)
                         @php
                             $pImg = '';
+                            $pGalleryRaw = [];
+                            if (!empty($p['images'])) {
+                                $pGalleryRaw = is_string($p['images'])
+                                    ? (json_decode($p['images'], true) ?:
+                                    [])
+                                    : (array) $p['images'];
+                            }
+                            
                             if (!empty($p['image'])) {
                                 $pImg = $p['image'];
                             } else {
-                                $pGalleryRaw = [];
-                                if (!empty($p['images'])) {
-                                    $pGalleryRaw = is_string($p['images']) ? (json_decode($p['images'], true) ?: []) : (array) $p['images'];
-                                }
                                 if (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
                                     $pImg = $pGalleryRaw[0];
                                 } else {
                                     $pImg = 'uploads/Gift-Boxes.webp';
                                 }
                             }
+                            
+                            $pHoverImg = '';
+                            if (!empty($p['hover_image'])) {
+                                $pHoverImg = $p['hover_image'];
+                            } elseif (count($pGalleryRaw) > 1) {
+                                $pHoverImg = $pGalleryRaw[1];
+                            } elseif (count($pGalleryRaw) > 0 && $pImg != $pGalleryRaw[0]) {
+                                $pHoverImg = $pGalleryRaw[0];
+                            } else {
+                                $pHoverImg = $pImg;
+                            }
+
                             $pImg = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/'])
                                 ? $pImg
                                 : 'storage/' . $pImg;
                                 
+                            $pHoverImg = \Illuminate\Support\Str::startsWith($pHoverImg, ['storage/', 'uploads/', 'images/'])
+                                ? $pHoverImg
+                                : 'storage/' . $pHoverImg;
+
                             $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
                         @endphp
                         <div class="box-card">
-                            <a href="{{ url('/product/' . $pSlug) }}"
+                            <a href="{{ url('/' . $pSlug) }}/"
                                 style="text-decoration:none; color:inherit; width:100%; display:block;">
                                 <div class="box-image-wrapper">
-                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}"
+                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" class="main-img"
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                    @if($pHoverImg && $pHoverImg !== $pImg)
+                                    <img src="{{ asset($pHoverImg) }}" alt="{{ $p['title'] }} Hover" class="hover-img"
+                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                    @endif
                                 </div>
                                 <h3 class="box-title">{{ $p['title'] }}</h3>
                             </a>
@@ -501,7 +564,8 @@
                         <button type="button" class="customize-tab" data-customize-tab="inks">INKS</button>
                         <button type="button" class="customize-tab" data-customize-tab="finishing">FINISHING</button>
                         <button type="button" class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
-                        <button type="button" class="customize-tab" data-customize-tab="additional">ADDITIONAL OPTIONS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="additional">ADDITIONAL
+                            OPTIONS</button>
                     </aside>
 
                     <!-- Right Content Grid -->
@@ -517,8 +581,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/grey-board.webp') }}"
-                                        alt="Grey Chipboard Cardboard"
+                                    <img src="{{ asset('uploads/grey-board.webp') }}" alt="Grey Chipboard Cardboard"
                                         onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4 class="custom-card-title">Grey Chipboard Cardboard</h4>
@@ -542,8 +605,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/metallic-paper.webp') }}"
-                                        alt="Metallic Paper"
+                                    <img src="{{ asset('uploads/metallic-paper.webp') }}" alt="Metallic Paper"
                                         onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
                                 <h4 class="custom-card-title">Metallic Paper</h4>
@@ -551,8 +613,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/natural-brown-.webp') }}"
-                                        alt="Natural Brown Kraft"
+                                    <img src="{{ asset('uploads/natural-brown-.webp') }}" alt="Natural Brown Kraft"
                                         onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
                                 <h4 class="custom-card-title">Natural Brown Kraft</h4>
