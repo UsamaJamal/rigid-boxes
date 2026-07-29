@@ -62,7 +62,7 @@
 
     .box-image-wrapper {
         width: 100%;
-        height: 322px;
+        height: auto;
         aspect-ratio: auto;
         border-radius: 12px;
         overflow: hidden;
@@ -74,8 +74,9 @@
 
     .box-image-wrapper img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
+        display: block;
+        object-fit: contain;
         object-position: center;
         transition: transform 0.4s ease;
     }
@@ -90,7 +91,8 @@
         color: var(--section-text-color);
         text-align: center;
         word-wrap: break-word;
-        display: block; /* Ensures span behaves like block element */
+        display: block;
+        /* Ensures span behaves like block element */
     }
 
     /* Mobile Responsive View */
@@ -108,7 +110,7 @@
         }
 
         .box-image-wrapper {
-            height: 220px;
+            height: auto;
         }
     }
 
@@ -145,7 +147,7 @@
 
         .box-image-wrapper {
             width: 100%;
-            height: 165px;
+            height: auto;
             border-radius: 16px;
             margin-bottom: 8px;
         }
@@ -173,13 +175,30 @@
 
     /* Unified Container Responsive Padding */
     @media (max-width: 1100px) {
-        .popular-boxes-inner, .customize-container { padding-left: 32px; padding-right: 32px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
     }
+
     @media (max-width: 768px) {
-        .popular-boxes-inner, .customize-container { padding-left: 20px; padding-right: 20px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
+
     @media (max-width: 576px) {
-        .popular-boxes-inner, .customize-container { padding-left: 16px; padding-right: 16px; }
+
+        .popular-boxes-inner,
+        .customize-container {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
     }
 
     .customize-title {
@@ -455,7 +474,10 @@
                             } else {
                                 $pGalleryRaw = [];
                                 if (!empty($p['images'])) {
-                                    $pGalleryRaw = is_string($p['images']) ? (json_decode($p['images'], true) ?: []) : (array) $p['images'];
+                                    $pGalleryRaw = is_string($p['images'])
+                                        ? (json_decode($p['images'], true) ?:
+                                        [])
+                                        : (array) $p['images'];
                                 }
                                 if (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
                                     $pImg = $pGalleryRaw[0];
@@ -466,7 +488,7 @@
                             $pImg = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/'])
                                 ? $pImg
                                 : 'storage/' . $pImg;
-                                
+
                             $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
                         @endphp
                         <div class="box-card">
@@ -501,7 +523,8 @@
                         <button type="button" class="customize-tab" data-customize-tab="inks">INKS</button>
                         <button type="button" class="customize-tab" data-customize-tab="finishing">FINISHING</button>
                         <button type="button" class="customize-tab" data-customize-tab="addons">ADD-ONS</button>
-                        <button type="button" class="customize-tab" data-customize-tab="additional">ADDITIONAL OPTIONS</button>
+                        <button type="button" class="customize-tab" data-customize-tab="additional">ADDITIONAL
+                            OPTIONS</button>
                     </aside>
 
                     <!-- Right Content Grid -->
@@ -517,8 +540,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/grey-board.webp') }}"
-                                        alt="Grey Chipboard Cardboard"
+                                    <img src="{{ asset('uploads/grey-board.webp') }}" alt="Grey Chipboard Cardboard"
                                         onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
                                 </div>
                                 <h4 class="custom-card-title">Grey Chipboard Cardboard</h4>
@@ -542,8 +564,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/metallic-paper.webp') }}"
-                                        alt="Metallic Paper"
+                                    <img src="{{ asset('uploads/metallic-paper.webp') }}" alt="Metallic Paper"
                                         onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
                                 <h4 class="custom-card-title">Metallic Paper</h4>
@@ -551,8 +572,7 @@
 
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/natural-brown-.webp') }}"
-                                        alt="Natural Brown Kraft"
+                                    <img src="{{ asset('uploads/natural-brown-.webp') }}" alt="Natural Brown Kraft"
                                         onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
                                 <h4 class="custom-card-title">Natural Brown Kraft</h4>
