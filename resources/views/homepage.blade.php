@@ -2918,7 +2918,7 @@
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
-                            <a href="/category" class="sustainable-btn">Browse Products</a>
+                            <a href="/kraft-paper-boxes/" class="sustainable-btn">Browse Products</a>
                         </div>
                     </div>
 
