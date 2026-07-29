@@ -4,7 +4,7 @@
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
     @include('components.canonical')
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
     <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
     @if(!empty($product['meta_description']))
         <meta name="description" content="{{ $product['meta_description'] }}">
@@ -190,8 +190,10 @@
 
         .hero-form h1 {
             font-size: 32px;
+            margin-top: -8px;
             margin-bottom: 10px;
             color: #000;
+            line-height: 1.2;
         }
         
         .hero-form > p {
@@ -561,7 +563,7 @@
         }
         
         .tab-item:not(.active) {
-            color: #000000;
+            color: var(--section-text-color);
             background: transparent;
         }
         
@@ -1257,7 +1259,7 @@
             .hero-details {
                 width: 100%;
                 max-width: 100%;
-                flex: none;
+                flex: 1 1 100%;
             }
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1282,7 +1284,7 @@
             .mobile-heading-break { display: none; }
 
         .finishes-header {
-                margin: 24px 0 18px;
+                margin: 24px 0 30px;
                 font-size: 20px;
                 line-height: 24px;
                 max-width: 260px;
@@ -1357,6 +1359,7 @@
                 display: flex !important;
                 flex-direction: row !important;
                 flex-wrap: nowrap !important;
+                justify-content: flex-start !important;
                 gap: 8px;
                 width: 100%;
                 margin: 0;
@@ -1522,9 +1525,9 @@
             }
             /* Final mobile tab styling */
             .tabs-section .container {
-                border: 1px solid #8A8A8A;
-                border-radius: 28px;
-                background: #FFFFFF;
+                border: none;
+                border-radius: 0;
+                background: transparent;
             }
             .tabs-list .tab-item.active {
                 background: #8D4445;
@@ -1540,23 +1543,11 @@
                 margin: 0 auto;
                 padding: 0;
                 overflow-x: auto;
-                border: 2px solid #8d4445;
-                border-radius: 50px;
+                border: none;
                 scrollbar-width: none;
             }
             .tabs-section .container::-webkit-scrollbar {
                 display: none;
-            }
-            .tabs-list {
-                border: 0;
-                border-radius: 0;
-                background: transparent;
-            }
-            .tabs-section::-webkit-scrollbar {
-                display: none;
-            }
-            .tabs-section .container {
-                padding: 0;
             }
             .tabs-list {
                 display: inline-flex;
@@ -1566,6 +1557,12 @@
                 width: max-content;
                 margin: 0;
                 gap: 8px;
+                border: 2px solid #8d4445;
+                border-radius: 50px;
+                background: #FFFFFF;
+            }
+            .tabs-section::-webkit-scrollbar {
+                display: none;
             }
             .tabs-list::-webkit-scrollbar {
                 display: none;
@@ -1603,32 +1600,7 @@
             .finishes-image-container, .finishes-details-box {
                 height: auto;
             }
-            .finishes-bottom-nav {
-                flex-direction: column;
-                gap: 10px;
-                border-top: none;
-                padding-top: 0;
-                margin-top: 10px;
-            }
-            .finishes-bottom-nav span {
-                display: block;
-                width: 100%;
-                text-align: center;
-                padding: 12px;
-                border: 1px solid #e0d0d0;
-                border-radius: 6px;
-                background-color: transparent;
-                font-weight: 600;
-                font-size: 12px;
-                color: #333;
-                text-transform: uppercase;
-                box-sizing: border-box;
-            }
-            .finishes-bottom-nav span.active-nav {
-                background-color: #f8eeee;
-                color: #8D4445;
-                border-color: #8c4446;
-            }
+            /* Removed conflicting column layout for mobile */
             /* Keep the full tab frame inside the shared page container. */
             .tabs-section .container {
                 width: calc(100% - (var(--margin-sides) * 2)) !important;
@@ -1651,16 +1623,6 @@
             .finishes-middle-list {
                 display: flex !important;
                 flex-direction: row !important;
-            }
-            .finishes-bottom-nav {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 8px;
-            }
-            .finishes-bottom-nav span {
-                flex: none;
-                width: 100%;
-                display: block;
             }
             .finishes-image-container {
                 order: 1;
@@ -1762,6 +1724,112 @@
             }
         }
 
+
+        /* Review Section */
+        .review-section-container {
+            background-color: #EFEFEF;
+            border: 0.67px solid #E6E6E6;
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .review-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .review-icon-box {
+            width: 52px;
+            height: 52px;
+            background-color: #FFFFFF;
+            border: 1px solid #E6E6E6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .review-text-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .review-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            line-height: 1.2;
+        }
+
+        .review-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rating-number {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .google-color {
+            color: #FEA500;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 12px;
+        }
+
+        .review-rating-tp {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            color: #000000;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .rating-stars-tp {
+            display: flex;
+            gap: 2px;
+        }
+
+        .tp-star {
+            width: 16px;
+            height: 16px;
+            background-color: #219653;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+        }
+
+        .tp-star i {
+            color: #FFFFFF;
+            font-size: 10px;
+        }
+        
+        .tp-star-half {
+            background: linear-gradient(to right, #219653 50%, #DCDCE6 50%);
+        }
+
+        @media (max-width: 767px) {
+            .review-section-container {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1810,6 +1878,54 @@
                     @endforeach
                 </div>
                 @endif
+                
+                <div class="review-section-container">
+                    <div class="review-item">
+                        <div class="review-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                                <path fill="none" d="M0 0h48v48H0z"></path>
+                            </svg>
+                        </div>
+                        <div class="review-text-box">
+                            <div class="review-title">Google Rating</div>
+                            <div class="review-rating">
+                                <span class="rating-number google-color">5.0</span>
+                                <span class="rating-stars google-color">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-icon-box">
+                            <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M512 201.242H316.592L255.976 11.084l-60.59 190.158H0l158.296 114.93-60.493 190.17 158.173-115.028 158.196 115.028-60.493-190.17L512 201.242z" fill="#219653"/>
+                            </svg>
+                        </div>
+                        <div class="review-text-box">
+                            <div class="review-title">Trustpilot</div>
+                            <div class="review-rating-tp">
+                                <strong>4.6</strong> out of 5
+                            </div>
+                            <div class="rating-stars-tp">
+                                <div class="tp-star"><i class="fas fa-star"></i></div>
+                                <div class="tp-star"><i class="fas fa-star"></i></div>
+                                <div class="tp-star"><i class="fas fa-star"></i></div>
+                                <div class="tp-star"><i class="fas fa-star"></i></div>
+                                <div class="tp-star tp-star-half"><i class="fas fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="hero-form">
@@ -2053,7 +2169,7 @@
                     <span>Inks</span>
                     <span>Finishing</span>
                     <span>Add-ons</span>
-                    <span>Addition Options</span>
+                    <span>Additional Options</span>
                 </div>
             </div>
         </div>
@@ -2343,36 +2459,50 @@ function toggleFaq(element) {
             'Inks': {
                 title: 'Inks Available',
                 items: [
-                    { name: 'CMYK', active: false, image: '{{ asset("uploads/finish-print-digital.webp") }}' },
-                    { name: 'Pantone (PMS)', active: true, image: '{{ asset("uploads/finish-print-offset.webp") }}' },
-                    { name: 'Metallic Inks', active: false, image: '{{ asset("uploads/finish-material-metallic-paper.webp") }}' },
-                    { name: 'Soy-Based Ink', active: false, image: '{{ asset("uploads/finish-print-flexographic.webp") }}' },
-                    { name: 'UV Inks', active: false, image: '{{ asset("uploads/finish-print-uv.webp") }}' }
+                    { name: 'Oil Based Inks', active: false, image: '{{ asset("uploads/oil-based-inks.webp") }}' },
+                    { name: 'Pantone', active: true, image: '{{ asset("uploads/patone.webp") }}' },
+                    { name: 'Pantone metallic', active: false, image: '{{ asset("uploads/pantone-metallic.webp") }}' },
+                    { name: 'Soy Vegetable Based Inks', active: false, image: '{{ asset("uploads/soy-vegetable-based-inks.webp") }}' },
+                    { name: 'Water Based Inks', active: false, image: '{{ asset("uploads/water-based-inks.webp") }}' },
+                    { name: 'Fluorescent Color Inks', active: false, image: '{{ asset("uploads/fluorescent-color-inks.webp") }}' }
                 ]
             },
             'Finishing': {
                 title: 'Finishing Options',
                 items: [
-                    { name: 'Gloss Lamination', active: false, image: '{{ asset("uploads/gloss-lamination.webp") }}' },
-                    { name: 'Matte Lamination', active: true, image: '{{ asset("uploads/matte-lamination.webp") }}' },
-                    { name: 'Soft-Touch Lamination', active: false, image: '{{ asset("uploads/soft-touch-lamination.webp") }}' },
-                    { name: 'UV Coating', active: false, image: '{{ asset("uploads/uv-coating.webp") }}' },
-                    { name: 'Aqueous Coating', active: false, image: '{{ asset("uploads/aqueous-coating.webp") }}' },
-                    { name: 'Protective Varnish', active: false, image: '{{ asset("uploads/protective-varnish.webp") }}' }
+                    { name: 'Anti-scratch Lamination', active: false, image: '{{ asset("uploads/Anti-scratch-Lamination-.webp") }}' },
+                    { name: 'Aqueous Coating', active: false, image: '{{ asset("uploads/Aqueous-Coating-.webp") }}' },
+                    { name: 'Lamination', active: true, image: '{{ asset("uploads/Lamination.webp") }}' },
+                    { name: 'Soft-Touch Coating', active: false, image: '{{ asset("uploads/Soft-Touch-Coating-.webp") }}' },
+                    { name: 'Soft-Touch Silk Lamination', active: false, image: '{{ asset("uploads/Soft-Touch-Silk-Lamination-.webp") }}' },
+                    { name: 'Spot Gloss UV', active: false, image: '{{ asset("uploads/Spot-Gloss-UV.webp") }}' },
+                    { name: 'Spot Gloss UV-2', active: false, image: '{{ asset("uploads/Spot-Gloss-UV-2.webp") }}' },
+                    { name: 'UV Coating', active: false, image: '{{ asset("uploads/UV-Coating-.webp") }}' }
                 ]
             },
             'Add-ons': {
                 title: 'Add-ons Available',
                 items: [
-                    { name: 'Embossing', active: false, image: '{{ asset("uploads/embossing.webp") }}' },
-                    { name: 'Debossing', active: true, image: '{{ asset("uploads/debossing.webp") }}' },
-                    { name: 'Blind Emboss', active: false, image: '{{ asset("uploads/blind-emboss.webp") }}' },
-                    { name: 'Magnetic Closure', active: false, image: '{{ asset("uploads/magnetic-closure.webp") }}' },
-                    { name: 'Luxury Magnetic Box', active: false, image: '{{ asset("uploads/luxury-magnetic-box.webp") }}' },
-                    { name: 'Presentation Closure', active: false, image: '{{ asset("uploads/presentation-closure.webp") }}' },
-                    { name: 'Luxury Insert', active: false, image: '{{ asset("uploads/luxury-insert.webp") }}' },
-                    { name: 'Paper Insert', active: false, image: '{{ asset("uploads/paper-insert.webp") }}' },
-                    { name: 'Protective Insert', active: false, image: '{{ asset("uploads/protective-insert.webp") }}' }
+                    { name: 'Corrugated Box Bivider Inserts', alt: 'corrugated box bivider inserts', active: false, image: '{{ asset("uploads/corrugated-box-bivider-inserts.webp") }}' },
+                    { name: 'Folding Carton Box Divider Inserts', alt: 'folding carton box divider inserts', active: true, image: '{{ asset("uploads/folding-carton-box-divider-inserts.webp") }}' },
+                    { name: 'Hips Blister Insert', alt: 'hips blister insert', active: false, image: '{{ asset("uploads/hips-blister-insert.webp") }}' },
+                    { name: 'Natural Kraft Corrugated Insert', alt: 'natural kraft corrugated insert', active: false, image: '{{ asset("uploads/natural-kraft-corrugated-insert.webp") }}' },
+                    { name: 'Natural Kraft Paperboard Insert', alt: 'natural kraft paperboard insert', active: false, image: '{{ asset("uploads/natural-kraft-paperboard-insert.webp") }}' },
+                    { name: 'Petg Blister Insert', alt: 'petg blister insert', active: false, image: '{{ asset("uploads/petg-blister-insert.webp") }}' },
+                    { name: 'Pvc Blister Insert', alt: 'pvc blister insert', active: false, image: '{{ asset("uploads/pvc-blister-insert.webp") }}' },
+                    { name: 'Standard White Corrugated Insert', alt: 'standard white corrugated insert', active: false, image: '{{ asset("uploads/standard-white-corrugated-insert.webp") }}' }
+                ]
+            },
+            'Additional Options': {
+                title: 'Additional Options',
+                items: [
+                    { name: 'Hot Foil Stamping', active: true, image: '{{ asset("uploads/hot-foil.webp") }}' },
+                    { name: 'Cold Foil Printing', active: false, image: '{{ asset("uploads/cold-foil.webp") }}' },
+                    { name: 'Blind Embossing', active: false, image: '{{ asset("uploads/blind-emboss.webp") }}' },
+                    { name: 'Blind Debossing', active: false, image: '{{ asset("uploads/blind-deboss.webp") }}' },
+                    { name: 'Registered Embossing', active: false, image: '{{ asset("uploads/registered-emboss.webp") }}' },
+                    { name: 'Combination Embossing', active: false, image: '{{ asset("uploads/combo-emboss.webp") }}' },
+                    { name: 'Window Patching', active: false, image: '{{ asset("uploads/window-patch.webp") }}' }
                 ]
             }
         };
@@ -2386,7 +2516,7 @@ function toggleFaq(element) {
             const carouselImage = document.querySelector('.finishes-image-container img');
             const carouselDotsContainer = document.querySelector('.carousel-dots');
             let carouselDots = document.querySelectorAll('.carousel-dot');
-            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons', 'Addition Options'];
+            const tabNames = ['Materials', 'Printing Methods', 'Inks', 'Finishing', 'Add-ons', 'Additional Options'];
             let currentTabIndex = 0;
             let currentItemIndex = 2; // Start with middle item active
 
@@ -2410,9 +2540,10 @@ function toggleFaq(element) {
             }
 
             // Function to update image based on active product
-            function updateProductImage(imageUrl, dotIndex = null) {
+            function updateProductImage(imageUrl, altText = '', dotIndex = null) {
                 if (carouselImage && imageUrl) {
                     carouselImage.src = imageUrl;
+                    carouselImage.alt = altText;
                     carouselImage.style.opacity = '1';
                 }
 
@@ -2477,7 +2608,7 @@ function toggleFaq(element) {
                     // Update the product image for active item
                     const activeItem = data.items[currentItemIndex];
                     if (activeItem && activeItem.image) {
-                        updateProductImage(activeItem.image, currentItemIndex);
+                        updateProductImage(activeItem.image, activeItem.alt || activeItem.name, currentItemIndex);
                     }
 
                     // Update labels immediately so they remain crisp and readable.
@@ -2668,6 +2799,7 @@ function toggleFaq(element) {
             clickedControl.style.setProperty('border', '1px solid #8d4445', 'important');
         }, true);
     </script>
+
     @include('components.footer')
 </body>
 </html>

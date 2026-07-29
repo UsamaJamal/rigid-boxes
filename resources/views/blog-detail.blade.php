@@ -24,6 +24,12 @@
             --section-width: 1240px;
         }
 
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
         .blog-detail-page * {
             box-sizing: border-box;
             margin: 0;
@@ -704,8 +710,8 @@
                 font-size: 15px;
                 color: #000000;
                 margin-top: 20px;
-                flex-wrap: nowrap;
-                white-space: nowrap;
+                flex-wrap: wrap;
+                white-space: normal;
             }
 
             .meta-item {
@@ -787,7 +793,7 @@
 
             .featured-image {
                 height: 392px;
-                width: 412px;
+                width: 100%;
                 border-radius: 0;
                 object-fit: cover;
             }
@@ -1067,7 +1073,7 @@
                         <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;">
                             <h3 class="related-card-title">{{ $rb->title }}</h3>
                         </a>
-                        <p class="related-card-desc">{{ Str::limit($rb->excerpt ?? $rb->content, 90) }}</p>
+                        <p class="related-card-desc">{{ Str::limit(strip_tags($rb->excerpt ?? $rb->content), 90) }}</p>
                         <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn">
                             Read More &rarr;
                         </a>
