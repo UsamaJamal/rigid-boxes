@@ -1809,6 +1809,7 @@
                         </div>
                     @endforeach
                 </div>
+                @endif
             </div>
 
             <div class="hero-form">
