@@ -116,9 +116,9 @@
     ];
 
     $schemaWebPageType = 'WebPage';
-    if (request()->is('contact')) {
+    if (request()->is('contact-us')) {
         $schemaWebPageType = 'ContactPage';
-    } elseif (request()->is('aboutUs')) {
+    } elseif (request()->is('about-us')) {
         $schemaWebPageType = 'AboutPage';
     } elseif (request()->is('search')) {
         $schemaWebPageType = 'SearchResultsPage';
@@ -217,7 +217,7 @@
                 if ($schemaCollectionKind === 'blog') {
                     $itemUrl = url('/blog/' . $slug) . '/';
                 } elseif ($schemaCollectionKind === 'product') {
-                    $itemUrl = url('/product/' . $slug) . '/';
+                    $itemUrl = url('/' . $slug) . '/';
                 } else {
                     $itemUrl = url('/' . $slug) . '/';
                 }

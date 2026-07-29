@@ -28,21 +28,41 @@
                         The Rigid Boxes is a leading custom packaging manufacturer, delivering premium boxes and packaging solutions tailored to your brand. From design to delivery, we ensure unmatched quality, style, and customer service.
                     </p>
                     <div class="social-links">
-                        <a href="javascript:void(0)" class="social-icon" aria-label="Facebook">
+                        @if(!empty($siteSettings['social_facebook']))
+                        <a href="{{ $siteSettings['social_facebook'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
                             <img src="{{ asset('images/social-facebook.png') }}" alt="Facebook" class="social-icon-img">
                         </a>
-                        <a href="javascript:void(0)" class="social-icon" aria-label="Instagram">
+                        @endif
+                        
+                        @if(!empty($siteSettings['social_twitter']))
+                        <a href="{{ $siteSettings['social_twitter'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter">
+                            <i class="fa-brands fa-x-twitter" style="color: white; font-size: 20px;"></i>
+                        </a>
+                        @endif
+                        
+                        @if(!empty($siteSettings['social_instagram']))
+                        <a href="{{ $siteSettings['social_instagram'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
                             <img src="{{ asset('images/social-instagram.png') }}" alt="Instagram" class="social-icon-img">
                         </a>
-                        <a href="javascript:void(0)" class="social-icon" aria-label="LinkedIn">
+                        @endif
+                        
+                        @if(!empty($siteSettings['social_linkedin']))
+                        <a href="{{ $siteSettings['social_linkedin'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
                             <img src="{{ asset('images/social-linkedin.png') }}" alt="LinkedIn" class="social-icon-img">
                         </a>
-                        <a href="javascript:void(0)" class="social-icon" aria-label="Pinterest">
+                        @endif
+                        
+                        @if(!empty($siteSettings['social_pinterest']))
+                        <a href="{{ $siteSettings['social_pinterest'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="Pinterest">
                             <img src="{{ asset('images/bi_pinterest.png') }}" alt="Pinterest" class="social-icon-img">
                         </a>
-                        <a href="javascript:void(0)" class="social-icon" aria-label="YouTube">
+                        @endif
+                        
+                        @if(!empty($siteSettings['social_youtube']))
+                        <a href="{{ $siteSettings['social_youtube'] }}" target="_blank" rel="noopener" class="social-icon" aria-label="YouTube">
                             <img src="{{ asset('images/social-youtube.png') }}" alt="YouTube" class="social-icon-img">
                         </a>
+                        @endif
                     </div>
                 </div>
 
@@ -67,7 +87,7 @@
                             <li><a href="/hang-tags">Hang Tags</a></li>
                         @else
                             @foreach($footerCats as $cat)
-                                <li><a href="{{ url('/' . $cat->slug) }}">{{ $cat->title ?? $cat->name }}</a></li>
+                                <li><a href="{{ url('/' . $cat->slug) }}/">{{ $cat->title ?? $cat->name }}</a></li>
                             @endforeach
                         @endif
                     </ul>
@@ -81,10 +101,10 @@
                             $quickLinks = $siteSettings['footer_quick_links'] ?? [];
                         @endphp
                         @if(empty($quickLinks))
-                            <li><a href="/aboutUs">About Us</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/about-us/">About Us</a></li>
+                            <li><a href="/contact-us/">Contact Us</a></li>
                             <li><a href="/request-quote">Get A Free Quote</a></li>
-                            <li><a href="/contact">Refund & Exchange Policy</a></li>
+                            <li><a href="/contact-us/">Refund & Exchange Policy</a></li>
                             <li><a href="/blog">Blogs</a></li>
                         @else
                             @foreach($quickLinks as $link)

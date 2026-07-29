@@ -354,9 +354,20 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .newsletter-content { gap: 24px; }
-    .newsletter-text h3 { font-size: clamp(18px, 2.35vw, 24px); line-height: 1.35; }
-    .newsletter-button { min-width: 110px; padding-inline: 16px; }
+    .newsletter-content {
+        gap: 24px;
+    }
+
+    .newsletter-text h3 {
+        font-size: clamp(18px, 2.35vw, 24px);
+        line-height: 1.35;
+    }
+
+    .newsletter-button {
+        min-width: 110px;
+        padding-inline: 16px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 40px;
@@ -375,6 +386,7 @@
         margin-left: auto;
         margin-right: auto;
     }
+
     .newsletter-content {
         flex-direction: column;
         text-align: center;
@@ -407,7 +419,7 @@
     .newsletter-input {
         flex: 1;
         width: 100%;
-    min-width: 0;
+        min-width: 0;
         height: 60px;
         font-size: 16px;
         border: none;
@@ -425,7 +437,7 @@
         background-color: #FFFFFF;
         color: var(--footer-color);
     }
-    
+
     .newsletter-button:hover,
     .newsletter-button:active {
         transform: none;
@@ -458,7 +470,7 @@
 
     .brand-description {
         margin-top: -10px;
-        text-align: center;
+        text-align: justify;
         margin-bottom: 16px;
         width: 97%;
         height: auto;
@@ -597,7 +609,7 @@
     .footer-links {
         text-align: center;
     }
-    
+
     .footer-contact {
         display: inline-block;
         text-align: left;
@@ -671,3 +683,13 @@
         font-size: 13px;
     }
 }
+ @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
+         . d e s k t o p - b r   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   } 
+         . n e w s l e t t e r - t e x t   h 3   { 
+                 m a x - w i d t h :   1 0 0 %   ! i m p o r t a n t ; 
+                 f o n t - s i z e :   c l a m p ( 1 4 p x ,   4 v w ,   1 8 p x )   ! i m p o r t a n t ; 
+                 w h i t e - s p a c e :   n o w r a p   ! i m p o r t a n t ; 
+         } 
+ } 
+  
+ 

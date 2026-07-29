@@ -10,7 +10,7 @@
     html,
     body {
         max-width: 100%;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
 
     /* Popular Boxes Section */
@@ -70,6 +70,7 @@
         margin-bottom: 26px;
         /* Default subtle shadow like the figma design */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        position: relative;
     }
 
     .box-image-wrapper img {
@@ -78,11 +79,29 @@
         display: block;
         object-fit: contain;
         object-position: center;
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
-    .box-card:hover .box-image-wrapper img {
+    .box-image-wrapper .hover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    .box-card:hover .box-image-wrapper img:not(.hover-img) {
         transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper .hover-img {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper:has(.hover-img) .main-img {
+        opacity: 0;
     }
 
     .box-title {
@@ -237,6 +256,7 @@
     .customize-tab {
         width: 100%;
         min-height: 54px;
+        flex: 1;
         padding: 14px 24px;
         text-align: center;
         background: #FFFFFF;
@@ -469,34 +489,55 @@
                     @foreach ($catProducts as $p)
                         @php
                             $pImg = '';
+                            $pGalleryRaw = [];
+                            if (!empty($p['images'])) {
+                                $pGalleryRaw = is_string($p['images'])
+                                    ? (json_decode($p['images'], true) ?:
+                                    [])
+                                    : (array) $p['images'];
+                            }
+                            
                             if (!empty($p['image'])) {
                                 $pImg = $p['image'];
                             } else {
-                                $pGalleryRaw = [];
-                                if (!empty($p['images'])) {
-                                    $pGalleryRaw = is_string($p['images'])
-                                        ? (json_decode($p['images'], true) ?:
-                                        [])
-                                        : (array) $p['images'];
-                                }
                                 if (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
                                     $pImg = $pGalleryRaw[0];
                                 } else {
                                     $pImg = 'uploads/Gift-Boxes.webp';
                                 }
                             }
+                            
+                            $pHoverImg = '';
+                            if (!empty($p['hover_image'])) {
+                                $pHoverImg = $p['hover_image'];
+                            } elseif (count($pGalleryRaw) > 1) {
+                                $pHoverImg = $pGalleryRaw[1];
+                            } elseif (count($pGalleryRaw) > 0 && $pImg != $pGalleryRaw[0]) {
+                                $pHoverImg = $pGalleryRaw[0];
+                            } else {
+                                $pHoverImg = $pImg;
+                            }
+
                             $pImg = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/'])
                                 ? $pImg
                                 : 'storage/' . $pImg;
+                                
+                            $pHoverImg = \Illuminate\Support\Str::startsWith($pHoverImg, ['storage/', 'uploads/', 'images/'])
+                                ? $pHoverImg
+                                : 'storage/' . $pHoverImg;
 
                             $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
                         @endphp
                         <div class="box-card">
-                            <a href="{{ url('/product/' . $pSlug) }}"
+                            <a href="{{ url('/' . $pSlug) }}/"
                                 style="text-decoration:none; color:inherit; width:100%; display:block;">
                                 <div class="box-image-wrapper">
-                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}"
+                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" class="main-img"
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                    @if($pHoverImg && $pHoverImg !== $pImg)
+                                    <img src="{{ asset($pHoverImg) }}" alt="{{ $p['title'] }} Hover" class="hover-img"
+                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                    @endif
                                 </div>
                                 <h3 class="box-title">{{ $p['title'] }}</h3>
                             </a>

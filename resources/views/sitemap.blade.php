@@ -85,7 +85,7 @@
                     <div class="list-group">
                         <ul class="sitemap-list">
                             <li><a href="/">Home</a></li>
-                            <li><a href="/contact">Contact Us</a></li>
+                            <li><a href="/contact-us/">Contact Us</a></li>
                             <li><a href="/request-quote">Get Instant Quote</a></li>
                             <li><a href="/blog">Blogs</a></li>
                             <li><a href="/categories">All Categories</a></li>
@@ -106,10 +106,10 @@
                         @if(count($data['subcategories']) > 0)
                             @foreach($data['subcategories'] as $sub)
                                 <div class="list-group">
-                                    <div class="list-title"><a href="/{{ $sub['category']->slug }}">{{ $sub['category']->title }}</a></div>
+                                    <div class="list-title"><a href="/{{ $sub['category']->slug }}/">{{ $sub['category']->title }}</a></div>
                                     <ul class="sitemap-list">
                                         @foreach($sub['products'] as $product)
-                                            <li><a href="/product/{{ $product->slug }}">{{ $product->title }}</a></li>
+                                            <li><a href="/{{ $product->slug }}/">{{ $product->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
@@ -126,7 +126,7 @@
                                 <div class="list-group">
                                     <ul class="sitemap-list">
                                         @foreach($chunk as $product)
-                                            <li><a href="/product/{{ $product->slug }}">{{ $product->title }}</a></li>
+                                            <li><a href="/{{ $product->slug }}/">{{ $product->title }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

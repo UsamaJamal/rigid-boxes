@@ -5,7 +5,7 @@
 ])
 
 <style>
-    html, body { max-width: 100%; overflow-x: hidden; }
+    html, body { max-width: 100%; overflow-x: clip; }
 
     /* Search Header Section */
     .search-hero {
@@ -68,6 +68,7 @@
         background-color: #E8E8E8;
         margin-bottom: 18px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        position: relative;
     }
 
     .box-image-wrapper img {
@@ -75,11 +76,29 @@
         height: 100%;
         object-fit: contain;
         object-position: center;
-        transition: transform 0.4s ease;
+        transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
-    .box-card:hover .box-image-wrapper img {
+    .box-image-wrapper .hover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+
+    .box-card:hover .box-image-wrapper img:not(.hover-img) {
         transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper .hover-img {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .box-card:hover .box-image-wrapper:has(.hover-img) .main-img {
+        opacity: 0;
     }
 
     .box-title {
@@ -145,15 +164,49 @@
                     @php 
                         $prodSlug = $product['slug'] ?? '';
                         $prodTitle = $product['title'] ?? ($product['name'] ?? 'Custom Box');
-                        $prodImg = !empty($product['image'])
-                            ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) 
-                                ? asset($product['image']) 
-                                : asset('storage/' . $product['image']))
-                            : asset('images/placeholder.jpg');
+                        
+                        $pImg = '';
+                        $pGalleryRaw = [];
+                        if (!empty($product['images'])) {
+                            $pGalleryRaw = is_string($product['images'])
+                                ? (json_decode($product['images'], true) ?: [])
+                                : (array) $product['images'];
+                        }
+                        if (!empty($product['image'])) {
+                            $pImg = $product['image'];
+                        } else {
+                            if (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
+                                $pImg = $pGalleryRaw[0];
+                            } else {
+                                $pImg = 'images/placeholder.jpg';
+                            }
+                        }
+                        
+                        $pHoverImg = '';
+                        if (!empty($product['hover_image'])) {
+                            $pHoverImg = $product['hover_image'];
+                        } elseif (count($pGalleryRaw) > 1) {
+                            $pHoverImg = $pGalleryRaw[1];
+                        } elseif (count($pGalleryRaw) > 0 && $pImg != $pGalleryRaw[0]) {
+                            $pHoverImg = $pGalleryRaw[0];
+                        } else {
+                            $pHoverImg = $pImg;
+                        }
+
+                        $prodImg = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/']) 
+                            ? asset($pImg) 
+                            : asset('storage/' . $pImg);
+                            
+                        $prodHoverImg = \Illuminate\Support\Str::startsWith($pHoverImg, ['storage/', 'uploads/', 'images/']) 
+                            ? asset($pHoverImg) 
+                            : asset('storage/' . $pHoverImg);
                     @endphp
-                    <a href="{{ url('/product/' . $prodSlug) }}" class="box-card">
+                    <a href="{{ url('/' . $prodSlug) }}/" class="box-card">
                         <div class="box-image-wrapper">
-                            <img src="{{ $prodImg }}" alt="{{ $prodTitle }}">
+                            <img src="{{ $prodImg }}" alt="{{ $prodTitle }}" class="main-img">
+                            @if($prodHoverImg && $prodHoverImg !== $prodImg)
+                            <img src="{{ $prodHoverImg }}" alt="{{ $prodTitle }} Hover" class="hover-img">
+                            @endif
                         </div>
                         <div class="box-title">{{ $prodTitle }}</div>
                     </a>

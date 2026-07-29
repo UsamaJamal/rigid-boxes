@@ -23,7 +23,7 @@
 
         html,
         body {
-            overflow-x: hidden;
+            overflow-x: clip;
             width: 100%;
         }
 
@@ -322,7 +322,6 @@
 
         /* ─────────────────────────────────────────
            BENTO WRAPPER
-           Total width: 4×299 + 3×14 = 1238px
         ───────────────────────────────────────── */
         .why-bento {
             width: 100%;
@@ -331,7 +330,7 @@
             text-align: left;
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            grid-template-rows: 242px 157px 242px;
+            grid-template-rows: 160px 100px 160px;
             gap: 14px;
         }
 
@@ -347,7 +346,7 @@
         /* ── Base card ── */
         .why-card {
             border-radius: 16px;
-            padding: 32px 24px;
+            padding: 20px 16px;
             display: block;
             position: relative;
             overflow: hidden;
@@ -360,33 +359,36 @@
             display: block;
             font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            font-size: 18px;
-            line-height: 1.3;
+            font-size: 15px;
+            line-height: 1.2;
             color: var(--section-text-color);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
         .why-card__text {
             font-family: 'DM Sans', sans-serif;
             font-weight: 400;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 12.5px;
+            line-height: 1.4;
             color: var(--section-text-color);
             text-align: center;
         }
 
         .why-card__content {
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         /* ── Image box ── */
         .why-card__img-box {
             position: absolute;
-            top: 173px;
-            left: 63px;
-            width: 210px;
-            height: 210px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 140px;
             background: transparent;
             border-radius: 12px;
             padding: 0;
@@ -412,7 +414,7 @@
         .wc-pink1 {
             background: #FDF0F6;
             width: 100%;
-            height: 413px;
+            height: 274px;
             grid-column: 1;
             grid-row: 1 / span 2;
         }
@@ -423,7 +425,7 @@
         .wc-pink2 {
             background: #FCECEE;
             width: 100%;
-            height: 413px;
+            height: 274px;
             grid-column: 2;
             grid-row: 1 / span 2;
         }
@@ -434,7 +436,7 @@
         .wc-blue {
             background: #EAF3FB;
             width: 100%;
-            height: 242px;
+            height: 160px;
             position: relative;
             grid-column: 3 / span 2;
             grid-row: 1;
@@ -461,14 +463,15 @@
             top: 0;
             right: 0;
             left: auto;
+            transform: none;
             width: 58%;
             height: 100%;
             border-radius: 0;
         }
 
         .wc-blue .why-card__img-box img {
-            object-fit: cover;
-            object-position: right center;
+            object-fit: contain;
+            object-position: right bottom;
             border-radius: 0;
         }
 
@@ -478,7 +481,7 @@
         .wc-yellow {
             background: #FDF7E7;
             width: 100%;
-            height: 242px;
+            height: 160px;
             grid-column: 1 / span 2;
             grid-row: 3;
             display: flex;
@@ -495,14 +498,15 @@
             top: 0;
             left: auto;
             right: 0;
+            transform: none;
             width: 58%;
             height: 100%;
             border-radius: 0;
         }
 
         .wc-yellow .why-card__img-box img {
-            object-fit: cover;
-            object-position: right center;
+            object-fit: contain;
+            object-position: right bottom;
             border-radius: 0;
         }
 
@@ -512,7 +516,7 @@
         .wc-green {
             background: #ECFBEF;
             width: 100%;
-            height: 413px;
+            height: 274px;
             grid-column: 3;
             grid-row: 2 / span 2;
         }
@@ -523,7 +527,7 @@
         .wc-skin {
             background: #FDF3E9;
             width: 100%;
-            height: 413px;
+            height: 274px;
             grid-column: 4;
             grid-row: 2 / span 2;
         }
@@ -667,6 +671,7 @@
                 align-items: center;
                 justify-content: center;
                 flex-shrink: 0;
+                transform: none !important;
             }
 
             .why-card__img-box img,
@@ -2615,7 +2620,7 @@
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="{{ url('/categories') }}" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/categories') }}/" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->
@@ -2739,13 +2744,8 @@
                         beauty, or electronics, we create packaging that fits your industry's style and requirements.
                     </p>
 
-                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
-                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true"
-                            aria-label="Best seller tab 1"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false"
-                            aria-label="Best seller tab 2"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false"
-                            aria-label="Best seller tab 3"></button>
+                    <div class="bestseller-dots" id="bestsellerDots" role="tablist" aria-label="Best seller products">
+                        <!-- Dots will be generated dynamically by JS -->
                     </div>
                 </div>
 
@@ -2755,14 +2755,14 @@
                             $bestsellerProdIds = (array) ($settings['bestseller_products'] ?? []);
                             $bestsellerProducts = collect($products)->whereIn('id', $bestsellerProdIds)->all();
                             if (empty($bestsellerProducts)) {
-                                $bestsellerProducts = array_slice($products, 0, 4);
+                                $bestsellerProducts = array_slice($products, 0, 6);
                             }
                         @endphp
 
                         @foreach ($bestsellerProducts as $prod)
                             @php
                                 $prodSlug = $prod['slug'] ?? Str::slug($prod['title']);
-                                $prodUrl = url('/product/' . $prodSlug);
+                                $prodUrl = url('/' . $prodSlug) . '/';
                                 $pImg = !empty($prod['image'])
                                     ? (\Illuminate\Support\Str::startsWith($prod['image'], [
                                         'storage/',
@@ -3117,43 +3117,74 @@
 
     <script>
         (function() {
-            var dots = document.querySelectorAll('.bestseller-dot');
-            if (dots.length === 0) return;
+            var cardsContainer = document.querySelector('.bestseller-cards');
+            var dotsContainer = document.getElementById('bestsellerDots');
+            if (!cardsContainer || !dotsContainer) return;
+
+            var cards = cardsContainer.querySelectorAll('.bestseller-card');
+            if (cards.length === 0) return;
 
             var currentIndex = 0;
             var autoPlayInterval;
+            var dots = [];
+
+            function renderDots() {
+                var isMobile = window.innerWidth <= 768;
+                var scrollMultiplier = isMobile ? 1 : 3;
+                var numDots = Math.ceil(cards.length / scrollMultiplier);
+
+                // Don't show dots if only 1 page
+                if (numDots <= 1) {
+                    dotsContainer.innerHTML = '';
+                    dots = [];
+                    return;
+                }
+
+                dotsContainer.innerHTML = '';
+                dots = [];
+                for (var i = 0; i < numDots; i++) {
+                    var btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = (i === currentIndex) ? 'bestseller-dot active' : 'bestseller-dot';
+                    btn.setAttribute('role', 'tab');
+                    btn.setAttribute('aria-selected', (i === currentIndex) ? 'true' : 'false');
+                    btn.setAttribute('aria-label', 'Best seller tab ' + (i + 1));
+                    dotsContainer.appendChild(btn);
+                    dots.push(btn);
+
+                    (function(index) {
+                        btn.addEventListener('click', function() {
+                            currentIndex = index;
+                            goToDot(index);
+                            resetAutoPlay();
+                        });
+                    })(i);
+                }
+            }
 
             function goToDot(index) {
+                if (dots.length === 0) return;
                 dots.forEach(function(item) {
                     item.classList.remove('active');
                     item.setAttribute('aria-selected', 'false');
                 });
-                dots[index].classList.add('active');
-                dots[index].setAttribute('aria-selected', 'true');
-
-                var cardsContainer = document.querySelector('.bestseller-cards');
-                if (cardsContainer) {
-                    var firstCard = cardsContainer.querySelector('.bestseller-card');
-                    var cardWidth = firstCard ? firstCard.offsetWidth : 275;
-                    // Scroll by 3 cards at a time for desktop, or let it scroll based on index
-                    var isMobile = window.innerWidth <= 768;
-                    var scrollMultiplier = isMobile ? 1 : 3;
-                    cardsContainer.scrollTo({
-                        left: index * (cardWidth + 20) * scrollMultiplier,
-                        behavior: 'smooth'
-                    });
+                if (dots[index]) {
+                    dots[index].classList.add('active');
+                    dots[index].setAttribute('aria-selected', 'true');
                 }
+
+                var firstCard = cards[0];
+                var cardWidth = firstCard ? firstCard.offsetWidth : 275;
+                var isMobile = window.innerWidth <= 768;
+                var scrollMultiplier = isMobile ? 1 : 3;
+                cardsContainer.scrollTo({
+                    left: index * (cardWidth + 20) * scrollMultiplier,
+                    behavior: 'smooth'
+                });
             }
 
-            dots.forEach(function(dot, index) {
-                dot.addEventListener('click', function() {
-                    currentIndex = index;
-                    goToDot(index);
-                    resetAutoPlay();
-                });
-            });
-
             function nextSlide() {
+                if (dots.length <= 1) return;
                 currentIndex++;
                 if (currentIndex >= dots.length) {
                     currentIndex = 0;
@@ -3163,10 +3194,25 @@
 
             function resetAutoPlay() {
                 clearInterval(autoPlayInterval);
-                autoPlayInterval = setInterval(nextSlide, 3500); // Auto-play every 3.5 seconds
+                if (dots.length > 1) {
+                    autoPlayInterval = setInterval(nextSlide, 3500); // Auto-play every 3.5 seconds
+                }
             }
 
+            // Initial render
+            renderDots();
             resetAutoPlay();
+
+            // Re-render on resize
+            window.addEventListener('resize', function() {
+                var oldDotsCount = dots.length;
+                renderDots();
+                if (dots.length !== oldDotsCount) {
+                    currentIndex = 0;
+                    goToDot(0);
+                    resetAutoPlay();
+                }
+            });
         })();
     </script>
 

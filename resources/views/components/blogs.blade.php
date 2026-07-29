@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .blogs-section {
         background: var(--background-color, #FAF8F8);
-        padding: 40px 0;
+        padding: 35px 0;
         font-family: 'DM Sans', sans-serif;
     }
 

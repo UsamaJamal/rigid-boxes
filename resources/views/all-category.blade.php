@@ -218,7 +218,8 @@
             aspect-ratio: auto;
             border-radius: 12px;
             overflow: hidden;
-            background-color: transparent;
+            background-color: var(--color-card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.06);
             margin-bottom: 26px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             transition: box-shadow 0.3s ease;
@@ -945,28 +946,24 @@
                                 if (empty($path)) {
                                     return $fallback;
                                 }
-                                return \Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/'])
+                                return \Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/', 'http://', 'https://'])
                                     ? $path
                                     : 'storage/' . $path;
                             };
-                            $cIcon = $resolveCategoryAsset($cat['icon'] ?? '', '');
                             $cBanner = $resolveCategoryAsset(
                                 $cat['banner_image'] ?? '',
-                                $resolveCategoryAsset($cat['image'] ?? '', 'uploads/Gift-Boxes.webp'),
+                                $resolveCategoryAsset(
+                                    $cat['image'] ?? '',
+                                    'uploads/Gift-Boxes.webp'
+                                )
                             );
                             $cSlug = $cat['slug'] ?? \Illuminate\Support\Str::slug($cat['title']);
                         @endphp
-                        <a href="{{ url('/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
-                            <article class="industry-card" style="--card-banner: url('{{ asset($cBanner) }}');">
-                                <div class="card-icon" aria-hidden="true">
-                                    @if($cIcon)
-                                        <img class="card-image" src="{{ asset($cIcon) }}" alt="">
-                                    @else
-                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <rect x="3" y="8" width="18" height="13" rx="2"></rect>
-                                            <path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 1 1 4.5-1.5V8M16.5 8A2.5 2.5 0 1 0 12 6.5V8"></path>
-                                        </svg>
-                                    @endif
+                        <a href="{{ url('/' . $cSlug) }}/" style="text-decoration:none; color:inherit;">
+                            <article class="industry-card">
+                                <div class="card-img-wrapper">
+                                    <img src="{{ asset($cBanner) }}" alt="{{ $cat['title'] }}" loading="lazy"
+                                        onerror="this.onerror=null;this.src='{{ asset('uploads/Gift-Boxes.webp') }}';">
                                 </div>
                                 <span class="heading-04" style="display: block;">{{ $cat['title'] }}</span>
                             </article>
