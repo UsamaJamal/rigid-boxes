@@ -1249,7 +1249,7 @@
             }
 
             .view-all-wrap {
-                margin-top: 16px;
+                margin-top: 35px;
             }
         }
 
@@ -1764,9 +1764,9 @@
             }
 
             .sustainable-left {
-                width: 85vw;
+                width: 100%;
                 height: 380px;
-                flex: 0 0 85vw;
+                flex: 1;
             }
 
             /* overlay adjustments */
@@ -1793,12 +1793,9 @@
                 font-size: 14px;
             }
 
-            /* right column: make it row too to continue the scroll */
+            /* right column: hide on mobile as requested */
             .sustainable-right {
-                flex-direction: row;
-                gap: 14px;
-                height: auto;
-                flex: none;
+                display: none;
             }
 
             .sustainable-right__card {
