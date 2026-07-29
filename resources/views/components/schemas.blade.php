@@ -219,7 +219,7 @@
                 } elseif ($schemaCollectionKind === 'product') {
                     $itemUrl = url('/product/' . $slug) . '/';
                 } else {
-                    $itemUrl = url('/category/' . $slug) . '/';
+                    $itemUrl = url('/' . $slug) . '/';
                 }
                 return [
                     '@type' => 'ListItem',

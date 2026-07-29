@@ -989,7 +989,7 @@
                             $cBanner = $resolveCategoryAsset($cat['banner_image'] ?? '', $resolveCategoryAsset($cat['image'] ?? '', 'uploads/Gift-Boxes.webp'));
                             $cSlug = $cat['slug'] ?? \Illuminate\Support\Str::slug($cat['title']);
                         @endphp
-                        <a href="{{ url('/category/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
+                        <a href="{{ url('/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
                             <article class="industry-card" style="--card-banner: url('{{ asset($cBanner) }}');">
                                 <div class="card-icon" aria-hidden="true">
                                     @if($cIcon)

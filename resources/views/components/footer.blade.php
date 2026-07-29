@@ -60,11 +60,11 @@
                             }
                         @endphp
                         @if(empty($footerCatIds) || count($footerCats) == 0)
-                            <li><a href="/category/super-boxes">Super Boxes</a></li>
-                            <li><a href="/category/rigid-boxes">Rigid Boxes</a></li>
-                            <li><a href="/category/mailer-boxes">Mailer Boxes</a></li>
-                            <li><a href="/category/jewelry-boxes">Jewelry Boxes</a></li>
-                            <li><a href="/category/hang-tags">Hang Tags</a></li>
+                            <li><a href="/super-boxes">Super Boxes</a></li>
+                            <li><a href="/rigid-boxes">Rigid Boxes</a></li>
+                            <li><a href="/mailer-boxes">Mailer Boxes</a></li>
+                            <li><a href="/jewelry-boxes">Jewelry Boxes</a></li>
+                            <li><a href="/hang-tags">Hang Tags</a></li>
                         @else
                             @foreach($footerCats as $cat)
                                 <li><a href="{{ url('/' . $cat->slug) }}">{{ $cat->title ?? $cat->name }}</a></li>

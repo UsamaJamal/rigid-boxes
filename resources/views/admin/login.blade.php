@@ -288,7 +288,7 @@
             <div class="form-group">
                 <label for="email">Admin Email</label>
                 <div class="input-wrapper">
-                    <input type="email" id="email" name="email" value="{{ old('email', 'admin@rigidboxes.com') }}" placeholder="admin@rigidboxes.com" required autofocus>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter admin email" required autofocus>
                     <i class="fa-solid fa-envelope prefix-icon"></i>
                 </div>
             </div>
@@ -296,7 +296,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="input-wrapper">
-                    <input type="password" id="password" name="password" placeholder="••••••••" value="admin123" required>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required>
                     <i class="fa-solid fa-lock prefix-icon"></i>
                     <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
                         <i class="fa-regular fa-eye" id="toggleIcon"></i>
@@ -317,10 +317,7 @@
             </button>
         </form>
 
-        <div class="credentials-hint">
-            <i class="fa-solid fa-key" style="margin-right: 4px; color: var(--primary);"></i> 
-            Default Admin: <strong>admin@rigidboxes.com</strong> &bull; <strong>admin123</strong>
-        </div>
+
     </div>
 
     <div class="footer-copy">

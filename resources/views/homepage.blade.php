@@ -1673,7 +1673,7 @@
                     @foreach($featuredCategories as $cat)
                         @php 
                             $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
-                            $catUrl = url('/category/' . $catSlug);
+                            $catUrl = url('/' . $catSlug);
                             $cImg = !empty($cat['image']) ? (\Illuminate\Support\Str::startsWith($cat['image'], ['storage/', 'uploads/', 'images/']) ? $cat['image'] : 'storage/' . $cat['image']) : 'uploads/Gift-Boxes.webp';
                         @endphp
                         <div class="industry-card">

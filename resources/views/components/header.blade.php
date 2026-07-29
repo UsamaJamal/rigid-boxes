@@ -843,7 +843,7 @@
                 const iconHtml = icon
                     ? `<img src="${icon}" alt="" loading="lazy">`
                     : giftBoxSvg;
-                return `<a href="/category/${slug}" class="mega-menu-item">
+                return `<a href="/${slug}" class="mega-menu-item">
                     <div class="mega-menu-icon">${iconHtml}</div>
                     <span>${title}</span>
                 </a>`;

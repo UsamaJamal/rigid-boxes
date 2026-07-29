@@ -106,7 +106,7 @@
                         @if(count($data['subcategories']) > 0)
                             @foreach($data['subcategories'] as $sub)
                                 <div class="list-group">
-                                    <div class="list-title"><a href="/category/{{ $sub['category']->slug }}">{{ $sub['category']->title }}</a></div>
+                                    <div class="list-title"><a href="/{{ $sub['category']->slug }}">{{ $sub['category']->title }}</a></div>
                                     <ul class="sitemap-list">
                                         @foreach($sub['products'] as $product)
                                             <li><a href="/product/{{ $product->slug }}">{{ $product->title }}</a></li>

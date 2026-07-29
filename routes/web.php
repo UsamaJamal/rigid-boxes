@@ -43,47 +43,8 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
     return view('search', compact('q', 'products'));
 });
 
-Route::get('/category/{slug?}', function ($slug = null) {
-    $category = null;
-    if ($slug) {
-        $category = DB::table('admin_categories')->where('slug', $slug)->first();
-    }
-    if (!$category) {
-        $category = DB::table('admin_categories')->whereNotNull('parent_id')->first();
-    }
-    if (!$category) {
-        $category = DB::table('admin_categories')->first();
-    }
-    $categoryArr = $category ? (array) $category : [];
-    
-    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
-    
-    $products = [];
-    $faqs = [];
-    if (!empty($categoryArr['id'])) {
-        $productIds = DB::table('admin_category_product')->where('category_id', $categoryArr['id'])->pluck('product_id');
-        $products = DB::table('admin_products')->whereIn('id', $productIds)->get()->map(fn($r)=>(array)$r)->all();
-        
-        $childIds = DB::table('admin_categories')->where('parent_id', $categoryArr['id'])->pluck('id');
-        if ($childIds->count() > 0) {
-            $childProductIds = DB::table('admin_category_product')->whereIn('category_id', $childIds)->pluck('product_id');
-            $moreProducts = DB::table('admin_products')->whereIn('id', $childProductIds)->get()->map(fn($r)=>(array)$r)->all();
-            $products = array_merge($products, $moreProducts);
-        }
-
-        $faqs = DB::table('admin_category_faqs')->where('category_id', $categoryArr['id'])->get()->map(fn($r)=>(array)$r)->all();
-    }
-    // if (empty($products)) {
-    //     $products = DB::table('admin_products')->limit(8)->get()->map(fn($r)=>(array)$r)->all();
-    // }
-
-    return view('category', [
-        'slug' => $slug,
-        'category' => $categoryArr,
-        'categories' => $categories,
-        'products' => $products,
-        'faqs' => $faqs
-    ]);
+Route::get('/category', function () {
+    return redirect('/categories', 301);
 });
 
 Route::get('/categories', function () {
@@ -282,4 +243,39 @@ Route::get('/preview-email', function () {
         'message' => 'This is a test message to preview the email design.'
     ];
     return new \App\Mail\QuoteFormMail($data);
+});
+
+// Catch-all route for categories
+Route::get('/{slug}', function ($slug) {
+    $category = DB::table('admin_categories')->where('slug', $slug)->first();
+    if (!$category) {
+        abort(404);
+    }
+    
+    $categoryArr = (array) $category;
+    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+    
+    $products = [];
+    $faqs = [];
+    if (!empty($categoryArr['id'])) {
+        $productIds = DB::table('admin_category_product')->where('category_id', $categoryArr['id'])->pluck('product_id');
+        $products = DB::table('admin_products')->whereIn('id', $productIds)->get()->map(fn($r)=>(array)$r)->all();
+        
+        $childIds = DB::table('admin_categories')->where('parent_id', $categoryArr['id'])->pluck('id');
+        if ($childIds->count() > 0) {
+            $childProductIds = DB::table('admin_category_product')->whereIn('category_id', $childIds)->pluck('product_id');
+            $moreProducts = DB::table('admin_products')->whereIn('id', $childProductIds)->get()->map(fn($r)=>(array)$r)->all();
+            $products = array_merge($products, $moreProducts);
+        }
+
+        $faqs = DB::table('admin_category_faqs')->where('category_id', $categoryArr['id'])->get()->map(fn($r)=>(array)$r)->all();
+    }
+
+    return view('category', [
+        'slug' => $slug,
+        'category' => $categoryArr,
+        'categories' => $categories,
+        'products' => $products,
+        'faqs' => $faqs
+    ]);
 });
