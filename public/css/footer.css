@@ -286,7 +286,7 @@
     flex-shrink: 0;
     width: 25px;
     height: 20px;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-right: 2.5px;
 }
 
@@ -294,7 +294,7 @@
     flex-shrink: 0;
     width: 25px;
     height: 20px;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-right: 2.5px;
     object-fit: contain;
 }
@@ -519,11 +519,12 @@
 
     /* Company Info Section Centered */
     .footer-column:nth-child(4) .footer-contact {
-        align-items: center;
+        display: inline-block;
+        text-align: left;
     }
 
     .footer-column:nth-child(4) .contact-item {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     /* Footer Bottom */
@@ -593,13 +594,17 @@
         margin-bottom: 18px;
     }
 
-    .footer-links,
-    .footer-contact {
+    .footer-links {
         text-align: center;
+    }
+    
+    .footer-contact {
+        display: inline-block;
+        text-align: left;
     }
 
     .contact-item {
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 8px;
     }
 

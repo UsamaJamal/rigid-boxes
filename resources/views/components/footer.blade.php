@@ -22,7 +22,7 @@
                 <!-- Brand Column -->
                 <div class="footer-column brand-column">
                     <div class="footer-logo">
-                        <img src="{{ asset('images/The Rigid Boxes Logo 1.png') }}" alt="The Rigid Boxes Logo" class="logo-image">
+                        <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes Logo" class="logo-image">
                     </div>
                     <p class="brand-description">
                         The Rigid Boxes is a leading custom packaging manufacturer, delivering premium boxes and packaging solutions tailored to your brand. From design to delivery, we ensure unmatched quality, style, and customer service.

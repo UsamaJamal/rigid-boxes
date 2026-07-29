@@ -107,7 +107,8 @@ class AdminContentController extends Controller
             ],
         ]);
 
-        $path = $request->file('file')->store('admin/tinymce', 'public');
+        $file = $request->file('file');
+        $path = $file->storeAs('admin/tinymce', $file->getClientOriginalName(), 'public');
 
         return response()->json([
             'location' => asset('storage/' . $path),
@@ -146,27 +147,38 @@ class AdminContentController extends Controller
         }
 
         foreach (['image', 'hero_image', 'banner_image', 'icon'] as $field) {
+            if (in_array($field, $fields) && $request->input('remove_' . $field) == '1') {
+                $payload[$field] = null;
+            }
             if ($request->hasFile($field)) {
-                if (in_array($field, $fields)) $payload[$field] = $request->file($field)->store('admin', 'public');
+                if (in_array($field, $fields)) {
+                    $file = $request->file($field);
+                    $fileName = $file->getClientOriginalName();
+                    $file->move(public_path('uploads'), $fileName);
+                    $payload[$field] = 'uploads/' . $fileName;
+                }
             }
         }
         if (in_array('images', $fields, true)) {
+            $existingImages = json_decode((string) $request->input('existing_images', '[]'), true) ?: [];
+            
             $galleryFiles = array_filter((array) $request->file('images'), function ($file) {
                 return $file && $file->isValid();
             });
 
+            $newImages = [];
             if ($galleryFiles) {
                 $newImages = collect($galleryFiles)
-                    ->map(fn ($file) => $file->store('admin', 'public'))
+                    ->map(function ($file) {
+                        $fileName = $file->getClientOriginalName();
+                        $file->move(public_path('uploads'), $fileName);
+                        return 'uploads/' . $fileName;
+                    })
                     ->values()
                     ->all();
-                $existingImages = json_decode((string) $request->input('existing_images', '[]'), true) ?: [];
-                if ($existing && !empty($existing->images)) {
-                    $dbImages = is_string($existing->images) ? (json_decode($existing->images, true) ?: []) : (array) $existing->images;
-                    $existingImages = array_values(array_unique(array_merge($existingImages, $dbImages)));
-                }
-                $payload['images'] = json_encode(array_values(array_merge($existingImages, $newImages)));
             }
+            
+            $payload['images'] = json_encode(array_values(array_merge($existingImages, $newImages)));
         }
         foreach (['images','related'] as $jsonField) if (array_key_exists($jsonField,$payload) && is_array($payload[$jsonField])) $payload[$jsonField] = json_encode($payload[$jsonField]);
         if ($existing) DB::table($table)->where('id',$existing->id)->update($payload); else { $payload['created_at']=now(); $id=DB::table($table)->insertGetId($payload); }

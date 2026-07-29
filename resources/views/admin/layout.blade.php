@@ -14,13 +14,13 @@
         *{box-sizing:border-box}
         body{margin:0;background:var(--bg);color:var(--text);font:14px 'DM Sans',sans-serif}
         .shell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
-        .side{position:sticky;top:0;height:100vh;padding:0 16px 22px;background:linear-gradient(180deg,var(--sidebar),#1e171a);color:#fff;box-shadow:8px 0 30px rgba(20,12,15,.1);z-index:20}
-        .brand{height:88px;display:flex;align-items:center;gap:12px;padding:0 8px;border-bottom:1px solid rgba(255,255,255,.09)}
+        .side{display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:0 16px 22px;background:linear-gradient(180deg,var(--sidebar),#1e171a);color:#fff;box-shadow:8px 0 30px rgba(20,12,15,.1);z-index:20;overflow-y:auto}
+        .brand{height:88px;display:flex;flex-shrink:0;align-items:center;gap:12px;padding:0 8px;border-bottom:1px solid rgba(255,255,255,.09)}
         .brand img{width:50px;height:50px;object-fit:contain}
         .brand strong{font:700 16px/1.2 'Open Sans'; display:block;}
         .brand small{display:block;margin-top:2px;color:#baaeb4;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
         .nav-label{padding:22px 14px 8px;color:#82747b;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
-        .nav{display:grid;gap:5px}
+        .nav{display:grid;gap:5px;flex-shrink:0}
         .nav a{position:relative;display:flex;align-items:center;gap:13px;min-height:44px;padding:0 14px;border-radius:10px;color:#cfc4c9;text-decoration:none;font-weight:600;transition:.2s}
         .nav a i{width:20px;text-align:center;font-size:15px;color:#9c8d94}
         .nav a:hover{background:rgba(255,255,255,.06);color:#fff}
@@ -28,7 +28,7 @@
         .nav a.active{background:linear-gradient(90deg,var(--primary),#713638);color:#fff;box-shadow:0 8px 20px rgba(141,68,69,.28)}
         .nav a.active i{color:#fff}
         .nav a.active:before{content:"";position:absolute;left:-16px;top:9px;width:4px;height:26px;border-radius:0 5px 5px 0;background:#e7a2a3}
-        .side-bottom{position:absolute;left:16px;right:16px;bottom:22px}
+        .side-bottom{margin-top:auto;padding-top:20px;flex-shrink:0}
         .main{min-width:0}
         .top{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 34px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
         .top-left{display:flex;align-items:center;gap:14px}

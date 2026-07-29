@@ -161,8 +161,10 @@
             transition: transform 0.35s ease;
         }
 
-        .industry-card:hover .industry-card__image-wrap img {
-            transform: scale(1.05);
+        @media (hover: hover) {
+            .industry-card:hover .industry-card__image-wrap img {
+                transform: scale(1.05);
+            }
         }
 
         /* Bottom content area — grows to push button to same level across all cards */
@@ -177,7 +179,7 @@
         .industry-card__text {
             font-family: 'DM Sans', sans-serif;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.5;
             color: #333;
             text-align: left;
@@ -218,10 +220,20 @@
             flex-shrink: 0;
         }
 
-        .industry-card__btn:hover {
-            background: #8D4445;
-            border-color: #8D4445;
-            color: #fff;
+        @media (hover: hover) {
+            .industry-card__btn:hover {
+                background: #8D4445;
+                border-color: #8D4445;
+                color: #fff;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .industry-card__btn {
+                background: #8D4445;
+                color: #fff;
+                border-color: #8D4445;
+            }
         }
 
         /* ─────────────────────────────────────────
@@ -801,9 +813,9 @@
             .premium-desc     { width: 100%; font-size: 14px; }
             .premium-icons    { display: none; }
             .premium-content  { width: 100%; }
-            .premium-images   { width: 100%; height: 260px; }
-            .premium-img1     { width: 75%; height: 200px; top: 0; left: 0; }
-            .premium-img2     { width: 52%; height: auto; aspect-ratio: 370/341; top: 100px; left: 40%; }
+            .premium-images   { width: 100%; height: auto; position: relative; }
+            .premium-img1     { width: 100%; height: auto; max-height: 350px; position: relative; }
+            .premium-img2     { display: none; }
         }
 
         /* ─────────────────────────────────────────
@@ -988,7 +1000,7 @@
                 text-align: center;
             }
             .bestseller-dots {
-                justify-content: center;
+                display: none !important;
             }
             /* 2×2 card grid */
             .bestseller-cards {
@@ -1207,10 +1219,20 @@
         }
 
         /* Options pill bar */
-        .customize-detail-options {
+        .customize-detail-options-wrapper {
             width: 100%;
-            max-width: none;
             margin: 0 0 20px 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+        
+        .customize-detail-options-wrapper::-webkit-scrollbar { display: none; }
+        .customize-detail-options-wrapper.grabbing { cursor: grabbing; }
+
+        .customize-detail-options {
+            min-width: 100%;
+            width: max-content;
             border: 1px solid var(--section-text-color, #000);
             border-radius: 100px;
             display: flex;
@@ -1219,16 +1241,9 @@
             padding: 5px 6px;
             gap: 4px;
             justify-content: space-between;
-            overflow-x: auto;
-            scrollbar-width: none;
-            cursor: grab;
             user-select: none;
             box-sizing: border-box;
         }
-
-        .customize-detail-options::-webkit-scrollbar { display: none; }
-
-        .customize-detail-options.grabbing { cursor: grabbing; }
 
         .cdo-btn {
             flex: 1 1 auto;
@@ -1247,7 +1262,7 @@
         }
 
         .cdo-btn.active {
-            background: var(--primary-color, #8D4445);
+            background: #000;
             color: #fff;
         }
 
@@ -1307,7 +1322,8 @@
             .customize-detail-inner   { padding: 0 20px !important; }
             .customize-detail-heading { font-size: 24px; }
             .customize-detail-desc    { font-size: 14px; max-width: 100%; }
-            .cdo-btn                  { font-size: 13px; padding: 0 14px; height: 38px; }
+            .customize-detail-options { justify-content: flex-start; gap: 8px; }
+            .cdo-btn                  { font-size: 13px; padding: 0 14px; height: 38px; flex: 0 0 auto; }
 
             /* horizontal scroll */
             .customize-detail-cards { 
@@ -1753,7 +1769,7 @@
                                 <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your exact specifications.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/custom-sizes-and-designs.webp') }}" alt="Custom Sizes and Designs">
+                                <img src="{{ asset('uploads/custom-sizes-and-designs-transparent.png') }}" alt="Custom Sizes and Designs">
                             </div>
                         </div>
 
@@ -1764,7 +1780,7 @@
                                 <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on time, every time.</p>
                             </div>
                             <div class="why-card__img-box">
-                                <img src="{{ asset('uploads/fast-production-management.webp') }}" alt="Fast Production Management">
+                                <img src="{{ asset('uploads/fast-production-management.png') }}" alt="Fast Production Management">
                             </div>
                         </div>
 
@@ -1785,6 +1801,12 @@
                 <div class="bestseller-left">
                     <span class="bestseller-heading">Best Seller Product</span>
                     <p class="bestseller-desc">Custom packaging designed for different industries. Whether it's retail, beauty, or electronics, we create packaging that fits your industry's style and requirements.</p>
+                    
+                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
+                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 2"></button>
+                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 3"></button>
+                    </div>
                 </div>
 
                 <div class="bestseller-right">
@@ -1812,11 +1834,7 @@
                     @endforeach
                 </div><!-- /.bestseller-cards -->
                     
-                    <div class="bestseller-dots" role="tablist" aria-label="Best seller products">
-                        <button type="button" class="bestseller-dot active" role="tab" aria-selected="true" aria-label="Best seller tab 1"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 2"></button>
-                        <button type="button" class="bestseller-dot" role="tab" aria-selected="false" aria-label="Best seller tab 3"></button>
-                    </div>
+                    </div><!-- /.bestseller-dots removed -->
                 </div><!-- /.bestseller-right -->
 
             </div><!-- /.bestseller-inner -->
@@ -1878,13 +1896,15 @@
                 <p class="customize-detail-desc">Choose from premium materials, luxury finishes, custom inserts, and unique box styles to create packaging that perfectly represents your brand.</p>
 
                 <!-- Options pill bar (scrollable, draggable) -->
-                <div class="customize-detail-options" id="cdoBar">
-                    <button type="button" class="cdo-btn active" data-cdo="foiling">Foiling</button>
-                    <button type="button" class="cdo-btn" data-cdo="embossing">Embossing/Debossing</button>
-                    <button type="button" class="cdo-btn" data-cdo="laminations">Laminations</button>
-                    <button type="button" class="cdo-btn" data-cdo="magnetic">Magnetic Closure</button>
-                    <button type="button" class="cdo-btn" data-cdo="inserts">Custom Inserts</button>
-                    <button type="button" class="cdo-btn" data-cdo="coating">Coating</button>
+                <div class="customize-detail-options-wrapper" id="cdoBar">
+                    <div class="customize-detail-options">
+                        <button type="button" class="cdo-btn active" data-cdo="foiling">Foiling</button>
+                        <button type="button" class="cdo-btn" data-cdo="embossing">Embossing/Debossing</button>
+                        <button type="button" class="cdo-btn" data-cdo="laminations">Laminations</button>
+                        <button type="button" class="cdo-btn" data-cdo="magnetic">Magnetic Closure</button>
+                        <button type="button" class="cdo-btn" data-cdo="inserts">Custom Inserts</button>
+                        <button type="button" class="cdo-btn" data-cdo="coating">Coating</button>
+                    </div>
                 </div>
 
                 <!-- Cards -->
@@ -1896,7 +1916,7 @@
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/addon-silver-foil.webp') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
+                        <img src="{{ asset('uploads/silver-Foiling.webp') }}" alt="Silver Foil" id="cdo-img-2" onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
@@ -1936,12 +1956,10 @@
 
                         <div class="sustainable-right__card">
                             <img src="{{ asset('uploads/fsc-certified-packaging.webp') }}" alt="FSC Certified Packaging" onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
-                            <span class="sustainable-right__label">FSC Image</span>
                         </div>
 
                         <div class="sustainable-right__card">
                             <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="Circular Packaging" onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
-                            <span class="sustainable-right__label">Circular Packaging Image</span>
                         </div>
 
                     </div><!-- /.sustainable-right -->
@@ -1972,7 +1990,7 @@
             var cdoData = {
                 foiling:   [
                     { src: '{{ asset("uploads/addon-gold-foil.webp") }}',         label: 'Gold Foil' },
-                    { src: '{{ asset("uploads/addon-silver-foil.webp") }}',       label: 'Silver Foil' },
+                    { src: '{{ asset("uploads/addon-silver-foil.jpeg") }}',       label: 'Silver Foil' },
                     { src: '{{ asset("uploads/addon-Holographic.webp") }}',  label: 'Holographic Foil' }
                 ],
                 embossing: [
@@ -1991,9 +2009,9 @@
                     { src: '{{ asset("uploads/presentation-closure.webp") }}',  label: 'Presentation Closure' }
                 ],
                 inserts: [
-                    { src: '{{ asset("uploads/luxury-insert.webp") }}',      label: 'Luxury Insert' },
-                    { src: '{{ asset("uploads/paper-insert.webp") }}',       label: 'Custom Paper Insert' },
-                    { src: '{{ asset("uploads/protective-insert.webp") }}',  label: 'Protective Insert' }
+                    { src: '{{ asset("uploads/foam-Insert.webp") }}',      label: 'Foam Insert' },
+                    { src: '{{ asset("uploads/paper-insert.webp") }}',       label: 'Paper Insert' },
+                    { src: '{{ asset("uploads/corrugated-insert.webp") }}',  label: 'Corrugated Insert' }
                 ],
                 coating: [
                     { src: '{{ asset("uploads/uv-coating.webp") }}',          label: 'UV Coating' },

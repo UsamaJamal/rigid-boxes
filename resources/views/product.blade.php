@@ -1771,18 +1771,36 @@
     <section class="hero-section">
         <div class="container hero-container">
             @php
-                $pMainImg = !empty($product['image']) ? (\Illuminate\Support\Str::startsWith($product['image'], ['storage/', 'uploads/', 'images/']) ? $product['image'] : 'storage/' . $product['image']) : 'uploads/Gift-Boxes.webp';
-                $pTitle = $product['title'] ?? 'Custom Packaging Box';
-                $pGallery = [];
+                $pGalleryRaw = [];
                 if (!empty($product['images'])) {
-                    $pGallery = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
+                    $pGalleryRaw = is_string($product['images']) ? (json_decode($product['images'], true) ?: []) : (array) $product['images'];
                 }
-                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGallery)));
+                
+                $pMainImg = '';
+                if (!empty($product['image'])) {
+                    $pMainImg = $product['image'];
+                } elseif (!empty($pGalleryRaw) && count($pGalleryRaw) > 0) {
+                    $pMainImg = $pGalleryRaw[0];
+                } else {
+                    $pMainImg = 'uploads/Gift-Boxes.webp';
+                }
+
+                $normalizeImg = function($img) {
+                    if (empty($img)) return '';
+                    return \Illuminate\Support\Str::startsWith($img, ['storage/', 'uploads/', 'images/']) ? $img : 'storage/' . $img;
+                };
+
+                $pMainImg = $normalizeImg($pMainImg);
+                $pGalleryRaw = array_map($normalizeImg, $pGalleryRaw);
+
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $pGallery = array_values(array_unique(array_merge([$pMainImg], $pGalleryRaw)));
             @endphp
             <div class="hero-images">
                 <div class="main-image">
                     <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
+                @if(count($pGallery) > 1)
                 <div class="thumbnails">
                     @foreach($pGallery as $galleryIndex => $galleryImage)
                         @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
@@ -1790,48 +1808,6 @@
                             <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
                         </div>
                     @endforeach
-                </div>
-                
-                <!-- Desktop Only Review Section -->
-                <style>
-                    @media (max-width: 767px) {
-                        .desktop-only-reviews {
-                            display: none !important;
-                        }
-                    }
-                </style>
-                <div class="trust-badges-container desktop-only-reviews">
-                    <div class="trust-badge">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Rating" style="width:40px;height:40px; border:0.5px solid #6A6A6A; border-radius:10px; padding: 6px; background:transparent; object-fit: contain;">
-                        <div>
-                            <div style="font-weight:600;font-size:12px;line-height:1.2;color:#111;">Google Rating</div>
-                            <div style="display:flex;align-items:center;gap:3px;font-size:11px;color:#F59E0B;margin-top:4px;">
-                                <span style="font-weight:700;color:#F59E0B;">5.0</span>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="trust-badge" style="border-left: 1px solid #E5E7EB; padding-left: 20px;">
-                        <img src="{{ asset('uploads/trust-pilot.svg') }}" alt="trust pilot" style="width:40px;height:40px; border:0.5px solid #6A6A6A; border-radius:10px; padding: 6px; background:transparent; object-fit: contain;">
-                        <div>
-                            <div style="font-weight:600;font-size:12px;line-height:1.2;color:#111;">Trustpilot</div>
-                            <div style="font-size:10px;color:#555;margin-top:2px;"><span style="font-weight:700;color:#111;">4.6</span> out of 5</div>
-                            <div style="display:flex;align-items:center;gap:2px;margin-top:3px;">
-                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;"><svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-                                <div style="background:#219653;color:#fff;border-radius:2px;width:11.2px;height:10.6px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-                                    <div style="position:absolute; top:0; right:0; width:40%; height:100%; background:#DFE1E5;"></div>
-                                    <svg width="8.5" height="8.5" viewBox="0 0 24 24" fill="currentColor" style="position:relative; z-index:1;"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -2167,7 +2143,7 @@
                 <div class="quote-title-line"></div>
                 
                 <!-- Using the specific image requested by user -->
-                <img src="{{ asset('images/Jul 3, 2026, 03_38_53 PM 1.png') }}" alt="Premium Box">
+                <img src="{{ asset('uploads/product-cta.png') }}" alt="Premium Box">
                 
                 <div class="features-list">
                     <div class="feature-item">
@@ -2194,7 +2170,24 @@
                 @endphp
                 @foreach($rProds as $rp)
                     @php
-                        $rpImg = !empty($rp['image']) ? (\Illuminate\Support\Str::startsWith($rp['image'], ['storage/', 'uploads/', 'images/']) ? $rp['image'] : 'storage/' . $rp['image']) : 'uploads/Gift-Boxes.webp';
+                        $rpImg = '';
+                        if (!empty($rp['image'])) {
+                            $rpImg = $rp['image'];
+                        } else {
+                            $rpGalleryRaw = [];
+                            if (!empty($rp['images'])) {
+                                $rpGalleryRaw = is_string($rp['images']) ? (json_decode($rp['images'], true) ?: []) : (array) $rp['images'];
+                            }
+                            if (!empty($rpGalleryRaw) && count($rpGalleryRaw) > 0) {
+                                $rpImg = $rpGalleryRaw[0];
+                            } else {
+                                $rpImg = 'uploads/Gift-Boxes.webp';
+                            }
+                        }
+                        $rpImg = \Illuminate\Support\Str::startsWith($rpImg, ['storage/', 'uploads/', 'images/'])
+                            ? $rpImg
+                            : 'storage/' . $rpImg;
+                        
                         $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
                     @endphp
                     <div class="product-card">
@@ -2378,18 +2371,7 @@ function toggleFaq(element) {
                     { name: 'Presentation Closure', active: false, image: '{{ asset("uploads/presentation-closure.webp") }}' },
                     { name: 'Luxury Insert', active: false, image: '{{ asset("uploads/luxury-insert.webp") }}' },
                     { name: 'Paper Insert', active: false, image: '{{ asset("uploads/paper-insert.webp") }}' },
-                ]
-            },
-            'Addition Options': {
-                title: 'Addition Options',
-                items: [
-                    { name: 'Hot Foil Stamping', active: true, image: '{{ asset("uploads/hot-foil-stamping.png") }}' },
-                    { name: 'Cold Foil Stamping', active: false, image: '{{ asset("uploads/cold-foil-stamping.png") }}' },
-                    { name: 'Blind Embossing', active: false, image: '{{ asset("uploads/blind-embossing.png") }}' },
-                    { name: 'Blind Debossing', active: false, image: '{{ asset("uploads/blind-debossing.png") }}' },
-                    { name: 'Registered Embossing', active: false, image: '{{ asset("uploads/registered-embossing.png") }}' },
-                    { name: 'Combination Embossing', active: false, image: '{{ asset("uploads/combination-embossing.png") }}' },
-                    { name: 'Window Patching', active: false, image: '{{ asset("uploads/window-patching.png") }}' }
+                    { name: 'Protective Insert', active: false, image: '{{ asset("uploads/protective-insert.webp") }}' }
                 ]
             }
         };
@@ -2419,7 +2401,7 @@ function toggleFaq(element) {
                         currentItemIndex = index;
                         updateTabContent(currentTabIndex);
                         clearInterval(autoplayTimer);
-                        autoplayTimer = setInterval(advanceCarousel, 4000);
+                        autoplayTimer = setInterval(advanceCarousel, 8000);
                     });
                     carouselDotsContainer.appendChild(dot);
                 }
@@ -2525,7 +2507,7 @@ function toggleFaq(element) {
                                 
                                 // Reset autoplay timer
                                 clearInterval(autoplayTimer);
-                                autoplayTimer = setInterval(advanceCarousel, 4000);
+                                autoplayTimer = setInterval(advanceCarousel, 8000);
                             });
                             
                         itemsContainer.appendChild(itemDiv);
@@ -2562,7 +2544,7 @@ function toggleFaq(element) {
             }
 
             // Start auto play
-            autoplayTimer = setInterval(advanceCarousel, 4000);
+            autoplayTimer = setInterval(advanceCarousel, 8000);
             
             // Pause on hover
             const heroFormElement = document.querySelector('.hero-form');
