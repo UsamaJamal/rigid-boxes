@@ -19,8 +19,8 @@
     .header-nav {
         width: 100% !important;
         max-width: var(--site-container-width) !important;
-        padding-left: var(--site-container-gutter) !important;
-        padding-right: var(--site-container-gutter) !important;
+        padding-left: clamp(20px, 3.5vw, 55px) !important;
+        padding-right: clamp(20px, 3.5vw, 55px) !important;
         margin-left: auto !important;
         margin-right: auto !important;
         box-sizing: border-box !important;
@@ -59,19 +59,22 @@
         align-items: center;
         text-decoration: none;
         color: #fff;
+        flex: 0 0 126px;
+        width: 126px;
     }
 
     .header-logo-img {
-        height: 64px;
-        width: auto;
+        width: 126px !important;
+        height: 64px !important;
         display: block;
+        flex-shrink: 0;
     }
 
     .header-search {
-        width: 330px;
+        width: clamp(240px, 20vw, 330px);
         max-width: 100%;
         position: relative;
-        margin-left: clamp(35px, 4vw, 65px);
+        margin-left: clamp(20px, 2.5vw, 45px);
         flex: 0 1 330px;
     }
 
@@ -126,19 +129,29 @@
     .header-contact {
         display: flex;
         align-items: center;
-        gap: clamp(20px, 2vw, 30px);
+        gap: clamp(12px, 1.5vw, 24px);
         margin-left: auto;
+        flex: 0 0 auto;
+        flex-shrink: 0;
     }
 
     .contact-item {
         display: flex;
         align-items: center;
         gap: 10px;
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    .contact-item-phone,
+    .contact-item-email {
+        min-width: 0;
     }
 
     .site-header .contact-item svg {
         width: 34px;
         height: 34px;
+        flex-shrink: 0;
         fill: none;
         stroke: #fff;
         stroke-width: 1.5;
@@ -146,11 +159,20 @@
         stroke-linejoin: round;
     }
 
+    .contact-item-text {
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     .contact-item-text span {
         display: block;
         font-size: 14px;
         color: #fff;
         font-weight: 700;
+        white-space: nowrap;
+        line-height: 1.2;
     }
 
     .contact-item-text strong {
@@ -160,24 +182,28 @@
         font-weight: 400;
         margin-top: 1px;
         letter-spacing: 0;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
     }
 
     .get-quote-btn {
         background-color: #fff;
         color: var(--primary-color);
-        width: 190px;
-        min-height: 48px;
-        padding: 0 16px;
+        width: auto;
+        min-height: 44px;
+        padding: 0 clamp(12px, 1.2vw, 20px);
         border-radius: 6px;
         text-decoration: none;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 15px;
         transition: background-color 0.3s, color 0.3s;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
         box-shadow: 0 3px 5px rgba(55, 21, 22, .25);
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 
     .get-quote-btn:hover {
@@ -363,25 +389,17 @@
         transform: translateY(-1px);
     }
 
-    /* Desktop only items */
+    /* Desktop only items & Scroll Behavior */
     @media (min-width: 1101px) {
         .mobile-actions, .mobile-overlay, .mobile-sidebar {
             display: none !important;
         }
+        .site-header {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     }
 
-    @media (min-width: 1101px) and (max-width: 1500px) {
-        .header-top { padding-inline: 24px; }
-        .header-logo-img { height: 64px; }
-        .header-search { width: 330px; flex-basis: 330px; margin-left: 45px; }
-        .header-contact { gap: 22px; }
-        .site-header .contact-item svg { width: 34px; height: 34px; }
-        .contact-item-text span { font-size: 14px; }
-        .contact-item-text strong { font-size: 16px; }
-        .get-quote-btn { width: 190px; font-size: 16px; }
-        .header-nav { gap: 45px; padding-inline: 24px; }
-        .header-nav li a { font-size: 16px; }
-    }
+
 
     /* Mobile Styles */
     @media (max-width: 1100px) {
@@ -604,7 +622,7 @@
 <header class="site-header">
     <div class="header-top">
         <a href="/" class="header-logo">
-            <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
+            <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img" width="126" height="64" fetchpriority="high">
         </a>
 
         <!-- Desktop Search -->
@@ -620,7 +638,7 @@
 
         <!-- Desktop Contact -->
         <div class="header-contact">
-            <div class="contact-item">
+            <div class="contact-item contact-item-phone">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                     <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
@@ -628,11 +646,15 @@
                 </svg>
                 <div class="contact-item-text">
                     <span>Call Us 24/7</span>
-                    <strong>{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</strong>
+                    <strong>{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</strong>
                 </div>
             </div>
 
-            <div class="contact-item">
+            <div class="contact-item contact-item-email">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
                 <div class="contact-item-text">
                     <span>Email</span>
                     <strong>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
@@ -894,6 +916,38 @@
             dropdown.style.display = 'none';
         }
     }
+
+    // Sticky Navbar Scroll Behavior
+    document.addEventListener('DOMContentLoaded', function() {
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('.site-header');
+        const headerTop = document.querySelector('.header-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth <= 1100) return;
+            
+            const currentScrollY = window.scrollY;
+            const headerTopHeight = headerTop ? headerTop.offsetHeight : 88;
+            
+            if (currentScrollY > headerTopHeight) {
+                if (currentScrollY > lastScrollY) {
+                    // Scrolling Down
+                    header.classList.add('scrolled-down');
+                    header.style.transform = `translateY(-${headerTopHeight}px)`;
+                } else {
+                    // Scrolling Up
+                    header.classList.remove('scrolled-down');
+                    header.style.transform = 'translateY(0)';
+                }
+            } else {
+                // At top
+                header.classList.remove('scrolled-down');
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+    });
 </script>
 
 <script>
