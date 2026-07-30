@@ -1239,7 +1239,7 @@
             }
 
             .industry-card__text {
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .industry-card__btn {

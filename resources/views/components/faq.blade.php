@@ -212,8 +212,8 @@
 
     .faq-answer p {
         font-family: 'DM Sans', sans-serif;
-        font-size: 18px;
-        color: #555555;
+        font-size: 16px;
+        color: #000;
         line-height: 1.65;
         margin: 0;
     }
