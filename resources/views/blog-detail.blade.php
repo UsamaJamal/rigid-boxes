@@ -878,12 +878,12 @@
                 @endphp
                 @if($authorSlug)
                     <a href="{{ url('/author/' . $authorSlug) }}" class="author-info" style="text-decoration:none; color:inherit;">
-                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
                         <span class="author-name">{{ $authorName }}</span>
                     </a>
                 @else
                     <div class="author-info">
-                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                        <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
                         <span class="author-name">{{ $authorName }}</span>
                     </div>
                 @endif
@@ -900,7 +900,7 @@
 
         <!-- Featured Hero Image -->
         <div class="featured-image-wrap">
-            <img src="{{ asset('images/luxury-black-box.png') }}" alt="Luxury Black Rigid Box Packaging" class="featured-image">
+            <img src="{{ asset('images/luxury-black-box.png') }}" alt="Luxury Black Rigid Box Packaging" class="featured-image" loading="lazy">
         </div>
 
         <!-- Main Content & Sidebar Grid -->
@@ -964,7 +964,7 @@
                     @endphp
                     @if($authorSlug)
                         <a href="{{ url('/author/' . $authorSlug) }}" style="text-decoration:none; color:inherit; display:flex;">
-                            <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">
+                            <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
                         </a>
                     @else
                         <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'">

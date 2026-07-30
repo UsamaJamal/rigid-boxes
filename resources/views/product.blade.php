@@ -1873,7 +1873,7 @@
                     @foreach($pGallery as $galleryIndex => $galleryImage)
                         @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
                         <div class="thumb {{ $galleryIndex === 0 ? 'active' : '' }}" onclick="switchProductImage(this, '{{ asset($galleryImage) }}')">
-                            <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+                            <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;" loading="lazy">
                         </div>
                     @endforeach
                 </div>
@@ -2147,7 +2147,7 @@
         <h2 class="finishes-header">Custom Finishes <br class="mobile-heading-break">For Premium Feel</h2>
         <div class="finishes-grid">
             <div class="finishes-image-container">
-                <img src="{{ asset('uploads/finish-material-grey-board.webp') }}" alt="Grey Board Material">
+                <img src="{{ asset('uploads/finish-material-grey-board.webp') }}" alt="Grey Board Material" loading="lazy">
                 <div class="carousel-dots">
                     <div class="carousel-dot active"></div>
                     <div class="carousel-dot"></div>
@@ -2180,7 +2180,7 @@
         <div class="quote-grid">
             <div class="quote-form">
                 <div class="quote-form-header">
-                    <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="Sample Kit" style="width: 50px; height: 50px;"></div>
+                    <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="Sample Kit" style="width: 50px; height: 50px;" loading="lazy"></div>
                     <div>
                         <h2>Request A Sample Kit</h2>
                         <p>Fill out the form below and we'll send you a sample kit tailored to your needs.</p>
@@ -2260,17 +2260,17 @@
                 <div class="quote-title-line"></div>
                 
                 <!-- Using the specific image requested by user -->
-                <img src="{{ asset('uploads/product-cta.png') }}" alt="Premium Box">
+                <img src="{{ asset('uploads/product-cta.png') }}" alt="Premium Box" loading="lazy">
                 
                 <div class="features-list">
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality" loading="lazy"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs" loading="lazy"></div>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery"></div>
+                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery" loading="lazy"></div>
                     </div>
                 </div>
             </div>

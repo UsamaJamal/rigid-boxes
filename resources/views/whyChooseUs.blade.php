@@ -475,7 +475,7 @@
     <div class="container">
         <div class="why-us-content">
             <div class="why-us-image">
-                <img src="{{ asset('uploads/craftmenship.png') }}" alt="Why Us">
+                <img src="{{ asset('uploads/craftmenship.png') }}" alt="Why Us" loading="lazy">
             </div>
             <div class="why-us-text">
                 <h2>Craftsmanship Meets Scalable Precision</h2>
@@ -495,7 +495,7 @@
         <div class="trust-us-grid">
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="No Die & Plate Charges">
+                    <img src="{{ asset('uploads/no-die-plate-charges.svg') }}" alt="No Die & Plate Charges" loading="lazy">
                 </span>
                 <h3>No Die & Plate Charges</h3>
                 <p>No added tooling fees, just straightforward pricing</p>
@@ -503,7 +503,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="Customer Satisfaction">
+                    <img src="{{ asset('uploads/customer-satisfaction.svg') }}" alt="Customer Satisfaction" loading="lazy">
                 </span>
                 <h3>Customer Satisfaction</h3>
                 <p>Built on trust, quality, and long term partnerships.</p>
@@ -511,7 +511,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="Low Minimum Order Quantity">
+                    <img src="{{ asset('uploads/low-minimum-order-quantity.svg') }}" alt="Low Minimum Order Quantity" loading="lazy">
                 </span>
                 <h3>Low Minimum Order Quantity</h3>
                 <p>Flexible quantities to suit every business stage.</p>
@@ -519,7 +519,7 @@
 
             <div class="trust-card">
                 <span class="trust-icon">
-                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="Free Shipping">
+                    <img src="{{ asset('uploads/free-shipping.svg') }}" alt="Free Shipping" loading="lazy">
                 </span>
                 <h3>Free Shipping</h3>
                 <p>No shipping costs, no last-minute surprises.</p>

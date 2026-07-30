@@ -434,8 +434,8 @@
             </p>
         </div>
         <div class="passion-images">
-            <img src="{{ asset('uploads/born-from-passion.png') }}" alt="Born from a Passion" class="passion-img-main">
-            <img src="{{ asset('uploads/year-of-expertise.png') }}" alt="10+ Years of Expertise" class="passion-img-overlap">
+            <img src="{{ asset('uploads/born-from-passion.png') }}" alt="Born from a Passion" class="passion-img-main" loading="lazy">
+            <img src="{{ asset('uploads/year-of-expertise.png') }}" alt="10+ Years of Expertise" class="passion-img-overlap" loading="lazy">
         </div>
     </div>
 </section>
@@ -445,7 +445,7 @@
         <!-- Mission Card -->
         <div class="mv-card">
             <span class="mv-icon">
-                <img src="{{ asset('uploads/our-mission.svg') }}" alt="Our Mission">
+                <img src="{{ asset('uploads/our-mission.svg') }}" alt="Our Mission" loading="lazy">
             </span>
             <h3 class="mv-heading">Our Mission</h3>
             <p class="mv-text">To elevate brand value through the mastery of structure and material, setting the global standard for luxury B2B packaging solutions that respect both the creator and the environment.</p>
@@ -454,7 +454,7 @@
         <!-- Vision Card -->
         <div class="mv-card">
             <span class="mv-icon vision-icon">
-                <img src="{{ asset('uploads/our-vision.svg') }}" alt="Our Vision">
+                <img src="{{ asset('uploads/our-vision.svg') }}" alt="Our Vision" loading="lazy">
             </span>
             <h3 class="mv-heading">Our Vision</h3>
             <p class="mv-text">To redefine the unboxing experience as a moment of profound brand connection, leading a sustainable revolution in the high-end packaging industry through continuous innovation.</p>
@@ -517,21 +517,21 @@
 <section class="circular-future-section">
     <div class="cf-container">
         <div class="cf-image-wrapper">
-            <img src="{{ asset('uploads/circular-future.png') }}" alt="Circular Future" class="cf-image">
+            <img src="{{ asset('uploads/circular-future.png') }}" alt="Circular Future" class="cf-image" loading="lazy">
         </div>
         <div class="cf-content">
             <h2 class="cf-heading">Building a Circular Future</h2>
             <p class="cf-desc">We believe that true luxury should not come at a cost to our planet. Our circular packaging initiatives ensure that every structural design is as sustainable as it is sophisticated.</p>
             <div class="cf-list">
                 <div class="cf-list-item">
-                    <img src="{{ asset('uploads/fsc-certified.svg') }}" alt="FSC Certified" class="cf-list-icon" style="filter: hue-rotate(-20deg) brightness(0.6) saturate(2);">
+                    <img src="{{ asset('uploads/fsc-certified.svg') }}" alt="FSC Certified" class="cf-list-icon" style="filter: hue-rotate(-20deg) brightness(0.6) saturate(2);" loading="lazy">
                     <div>
                         <h4 class="cf-list-title">FSC® Certified Materials</h4>
                         <p class="cf-list-text">Every box we produce is made from responsibly sourced forest products.</p>
                     </div>
                 </div>
                 <div class="cf-list-item">
-                    <img src="{{ asset('uploads/recycling-icon.svg') }}" alt="Recyclable" class="cf-list-icon" style="filter: hue-rotate(-20deg) brightness(0.6) saturate(2);">
+                    <img src="{{ asset('uploads/recycling-icon.svg') }}" alt="Recyclable" class="cf-list-icon" style="filter: hue-rotate(-20deg) brightness(0.6) saturate(2);" loading="lazy">
                     <div>
                         <h4 class="cf-list-title">100% Recyclable Structures</h4>
                         <p class="cf-list-text">Innovative glue-free assembly methods that facilitate easy recycling.</p>
