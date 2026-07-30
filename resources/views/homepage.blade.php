@@ -76,7 +76,7 @@
         ───────────────────────────────────────── */
         .custom-boxes-section {
             background: #FAF8F8;
-            padding: 32px 0 30px;
+            padding: 0px 0 30px;
         }
 
         .custom-boxes-container {
@@ -3040,6 +3040,20 @@
                     }
                 ]
             };
+
+            // Preload all customization images in the background so tabs switch instantly
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    for (var key in cdoData) {
+                        if (cdoData.hasOwnProperty(key)) {
+                            cdoData[key].forEach(function(item) {
+                                var img = new Image();
+                                img.src = item.src;
+                            });
+                        }
+                    }
+                }, 500); // Start preloading half a second after page load
+            });
 
             var bar = document.getElementById('cdoBar');
 

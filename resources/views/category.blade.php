@@ -15,8 +15,8 @@
 
     /* Popular Boxes Section */
     .popular-boxes-section {
-        background: #FFF;
-        padding: 20px;
+        background: #FAF8F8;
+        padding: 0px;
     }
 
     .popular-boxes-inner {
@@ -733,6 +733,20 @@
                 ['uploads/window-patch.webp', 'Window Patching']
             ]
         };
+
+        // Preload all customization images in the background so tabs switch instantly
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                for (let key in customizeCardSets) {
+                    if (customizeCardSets.hasOwnProperty(key)) {
+                        customizeCardSets[key].forEach(function(item) {
+                            let img = new Image();
+                            img.src = customizeUploadsUrl + item[0];
+                        });
+                    }
+                }
+            }, 500); // Start preloading half a second after page load
+        });
 
         function setCustomizeCardOrder(option) {
             const cardSet = customizeCardSets[option] || customizeCardSets.materials;
