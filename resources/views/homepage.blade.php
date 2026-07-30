@@ -107,6 +107,7 @@
             color: var(--section-text-color);
             max-width: 600px;
             margin: 0 auto 28px;
+            text-align: justify;
         }
 
         /* ─────────────────────────────────────────
