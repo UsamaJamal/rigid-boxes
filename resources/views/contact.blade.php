@@ -322,16 +322,16 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
                         <h1>Need Help With Your<br class="mobile-heading-break"> Packaging? Let's Talk<br class="mobile-heading-break"> Real Quick.</h1>
                         <p class="intro-copy">Get in touch with our packaging experts for fast and reliable support. We help you choose the right packaging solutions based on your product, branding, and budget requirements.</p>
                         <div class="contact-details">
-                            <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}" class="detail-item"><img src="{{ asset('images/contact-phone-icon.png') }}" alt="" class="detail-icon"><span>{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}</span></a>
-                            <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}" class="detail-item"><img src="{{ asset('images/envelope 2.png') }}" alt="" class="detail-icon"><span>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</span></a>
-                            <div class="detail-item"><img src="{{ asset('images/calendar 1.png') }}" alt="" class="detail-icon"><span>Monday - Sunday</span></div>
+                            <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}" class="detail-item"><img src="{{ asset('images/contact-phone-icon.png') }}" alt="" class="detail-icon" loading="lazy"><span>{{ $siteSettings['company_phone'] ?? '1800-518-8441' }}</span></a>
+                            <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}" class="detail-item"><img src="{{ asset('images/envelope 2.png') }}" alt="" class="detail-icon" loading="lazy"><span>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</span></a>
+                            <div class="detail-item"><img src="{{ asset('images/calendar 1.png') }}" alt="" class="detail-icon" loading="lazy"><span>Monday - Sunday</span></div>
                             @php
                                 $rawAddress = $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd<br>Suite 207 Houston, TX<br>77077';
                                 $cleanAddress = strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' ', $rawAddress));
                                 $mobileAddress = str_replace('Suite 207', 'Suite<br>207', $cleanAddress);
                                 $mobileAddress = str_replace([' Chicago', ', Chicago'], ['<br>Chicago', '<br>Chicago'], $mobileAddress);
                             @endphp
-                            <address class="detail-item contact-address"><img src="{{ asset('images/marker 1.png') }}" alt="" class="detail-icon"><span class="address-desktop">{!! $rawAddress !!}</span><span class="address-mobile">{!! $mobileAddress !!}</span></address>
+                            <address class="detail-item contact-address"><img src="{{ asset('images/marker 1.png') }}" alt="" class="detail-icon" loading="lazy"><span class="address-desktop">{!! $rawAddress !!}</span><span class="address-mobile">{!! $mobileAddress !!}</span></address>
                         </div>
                     </div>
                     @if(session('success'))

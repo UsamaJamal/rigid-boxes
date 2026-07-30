@@ -533,10 +533,10 @@
                                 style="text-decoration:none; color:inherit; width:100%; display:block;">
                                 <div class="box-image-wrapper">
                                     <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" class="main-img"
-                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'" loading="lazy">
                                     @if($pHoverImg && $pHoverImg !== $pImg)
                                     <img src="{{ asset($pHoverImg) }}" alt="{{ $p['title'] }} Hover" class="hover-img"
-                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'">
+                                        onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'" loading="lazy">
                                     @endif
                                 </div>
                                 <h3 class="box-title">{{ $p['title'] }}</h3>
@@ -573,7 +573,7 @@
                         <div class="customize-grid">
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
-                                    <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard">
+                                    <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard" loading="lazy">
 
                                 </div>
                                 <h4 class="custom-card-title">Duplex Chipboard</h4>
@@ -582,7 +582,7 @@
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
                                     <img src="{{ asset('uploads/grey-board.webp') }}" alt="Grey Chipboard Cardboard"
-                                        onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'">
+                                        onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'" loading="lazy">
                                 </div>
                                 <h4 class="custom-card-title">Grey Chipboard Cardboard</h4>
                             </div>
@@ -590,7 +590,7 @@
                             <div class="custom-card">
                                 <div class="custom-img-wrapper">
                                     <img src="{{ asset('uploads/black-kraft.webp') }}" alt="Black-Kraft"
-                                        onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'">
+                                        onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'" loading="lazy">
                                 </div>
                                 <h4 class="custom-card-title">Black-Kraft</h4>
                             </div>

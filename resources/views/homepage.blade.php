@@ -2602,7 +2602,7 @@
                                 <span class="industry-card__title">{{ $cat['title'] }}</span>
                             </a>
                             <a href="{{ $catUrl }}" class="industry-card__image-wrap" style="display:block;">
-                                <img src="{{ asset($cImg) }}" alt="{{ $cat['title'] }}"
+                                <img src="{{ asset($cImg) }}" alt="{{ $cat['title'] }}" loading="lazy"
                                     onerror="this.src='https://placehold.co/275x266/dddddd/555555?text={{ urlencode($cat['title']) }}'">
                             </a>
                             <div class="industry-card__bottom">
@@ -2647,7 +2647,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-design-support.png') }}"
-                                    alt="Packaging designer creating a custom box dieline">
+                                    alt="Packaging designer creating a custom box dieline" loading="lazy">
                             </div>
                         </div>
 
@@ -2660,7 +2660,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-premium-materials.png') }}"
-                                    alt="Sample materials showing paper and cardstock swatches">
+                                    alt="Sample materials showing paper and cardstock swatches" loading="lazy">
                             </div>
                         </div>
 
@@ -2673,7 +2673,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-low-moq.png') }}"
-                                    alt="Custom box sample representing low MOQ orders">
+                                    alt="Custom box sample representing low MOQ orders" loading="lazy">
                             </div>
                         </div>
 
@@ -2691,7 +2691,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-customer-service.png') }}"
-                                    alt="Customer service specialist with headset smiling">
+                                    alt="Customer service specialist with headset smiling" loading="lazy">
                             </div>
                         </div>
 
@@ -2704,7 +2704,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/custom-sizes-and-designs-transparent.png') }}"
-                                    alt="Custom Sizes and Designs">
+                                    alt="Custom Sizes and Designs" loading="lazy">
                             </div>
                         </div>
 
@@ -2717,7 +2717,7 @@
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/fast-production-management.png') }}"
-                                    alt="Fast Production Management">
+                                    alt="Fast Production Management" loading="lazy">
                             </div>
                         </div>
 
@@ -2773,7 +2773,7 @@
                             <a href="{{ $prodUrl }}" class="bestseller-card"
                                 style="text-decoration:none; color:inherit;">
                                 <div class="bestseller-card__img">
-                                    <img src="{{ asset($pImg) }}" alt="{{ $prod['title'] }}"
+                                    <img src="{{ asset($pImg) }}" alt="{{ $prod['title'] }}" loading="lazy"
                                         onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
                                 </div>
                                 <p class="bestseller-card__title">{{ $prod['title'] }}</p>
@@ -2796,10 +2796,10 @@
                 <!-- LEFT: two overlapping images -->
                 <div class="premium-images">
                     <img class="premium-img1" src="{{ asset('uploads/premium-rigid-boxes-showcase.webp') }}"
-                        alt="Premium Custom Rigid Boxes"
+                        alt="Premium Custom Rigid Boxes" loading="lazy"
                         onerror="this.src='https://placehold.co/504x465/6b3a3a/ffffff?text=Premium+Boxes'">
                     <img class="premium-img2" src="{{ asset('uploads/luxury-rigid-box-detail.webp') }}"
-                        alt="Luxury Rigid Box Detail"
+                        alt="Luxury Rigid Box Detail" loading="lazy"
                         onerror="this.src='https://placehold.co/370x341/7a4040/ffffff?text=Luxury+Box'">
                 </div>
 
@@ -2821,19 +2821,19 @@
                     <div class="premium-icons">
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="Premium Quality"
+                            <img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="Premium Quality" loading="lazy"
                                 onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=Q'">
                             <span class="premium-icon-text">Premium Quality</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Designs"
+                            <img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Designs" loading="lazy"
                                 onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=D'">
                             <span class="premium-icon-text">Custom Designs</span>
                         </div>
 
                         <div class="premium-icon-item">
-                            <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast & Reliable Delivery"
+                            <img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast & Reliable Delivery" loading="lazy"
                                 onerror="this.src='https://placehold.co/50x50/ffffff/8D4445?text=F'">
                             <span class="premium-icon-text">Fast &amp; Reliable Delivery</span>
                         </div>
@@ -2873,20 +2873,20 @@
                 <div class="customize-detail-cards" id="cdoCards">
 
                     <div class="cdc-card cdc-card--gold">
-                        <img src="{{ asset('uploads/addon-gold-foil.webp') }}" alt="Gold Foil" id="cdo-img-1"
+                        <img src="{{ asset('uploads/addon-gold-foil.webp') }}" alt="Gold Foil" id="cdo-img-1" loading="lazy"
                             onerror="this.src='https://placehold.co/350x406/d4af37/fff?text=Gold+Foil'">
                         <span class="cdc-card__label" id="cdo-label-1">Gold Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--silver">
-                        <img src="{{ asset('uploads/silver-Foiling.webp') }}" alt="Silver Foil" id="cdo-img-2"
+                        <img src="{{ asset('uploads/silver-Foiling.webp') }}" alt="Silver Foil" id="cdo-img-2" loading="lazy"
                             onerror="this.src='https://placehold.co/345x403/c0c0c0/333?text=Silver+Foil'">
                         <span class="cdc-card__label" id="cdo-label-2">Silver Foil</span>
                     </div>
 
                     <div class="cdc-card cdc-card--holo">
                         <img src="{{ asset('uploads/addon-Holographic.webp') }}" alt="Holographic Foil"
-                            id="cdo-img-3"
+                            id="cdo-img-3" loading="lazy"
                             onerror="this.src='https://placehold.co/364x403/ccaaff/333?text=Holographic+Foil'">
                         <span class="cdc-card__label" id="cdo-label-3">Holographic Foil</span>
                     </div>
@@ -2910,7 +2910,7 @@
 
                     <!-- LEFT: big image with overlay -->
                     <div class="sustainable-left">
-                        <img src="{{ asset('uploads/eco-friendly-packaging.webp') }}" alt="Eco-Friendly Packaging"
+                        <img src="{{ asset('uploads/eco-friendly-img.webp') }}" alt="Eco-Friendly Packaging" loading="lazy"
                             onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
@@ -2924,12 +2924,12 @@
 
                         <div class="sustainable-right__card">
                             <img src="{{ asset('uploads/fsc-certified-packaging.webp') }}"
-                                alt="FSC Certified Packaging"
+                                alt="FSC Certified Packaging" loading="lazy"
                                 onerror="this.src='https://placehold.co/613x295/b5a08a/fff?text=FSC+Image'">
                         </div>
 
                         <div class="sustainable-right__card">
-                            <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="Circular Packaging"
+                            <img src="{{ asset('uploads/circular-packaging.webp') }}" alt="Circular Packaging" loading="lazy"
                                 onerror="this.src='https://placehold.co/613x295/8a9b7a/fff?text=Circular+Packaging+Image'">
                         </div>
 

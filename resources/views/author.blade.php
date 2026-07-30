@@ -673,7 +673,7 @@
                     <div class="author-image-wrapper">
                         @if(!empty($author['image']))
                             @php $img = \Illuminate\Support\Str::startsWith($author['image'], ['http', 'storage/', 'uploads/', 'images/']) ? asset($author['image']) : asset('storage/'.$author['image']); @endphp
-                            <img src="{{ $img }}" alt="{{ $author['title'] }}" class="author-image" onerror="this.style.display='none'">
+                            <img src="{{ $img }}" alt="{{ $author['title'] }}" class="author-image" onerror="this.style.display='none'" loading="lazy">
                         @endif
                     </div>
                     <div class="author-info">
@@ -719,7 +719,7 @@
                         <article class="blog-card">
                             <div class="card-image-wrapper">
                                 @php $blogImg = !empty($item['image']) ? (\Illuminate\Support\Str::startsWith($item['image'], ['http', 'storage/', 'uploads/', 'images/']) ? asset($item['image']) : asset('storage/'.$item['image'])) : asset('images/below-hero.png'); @endphp
-                                <img src="{{ $blogImg }}" alt="{{ $item['title'] }}" class="card-image" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                                <img src="{{ $blogImg }}" alt="{{ $item['title'] }}" class="card-image" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
                             </div>
                             <div class="card-content">
                                 <h3 class="card-heading">{{ $item['title'] }}</h3>

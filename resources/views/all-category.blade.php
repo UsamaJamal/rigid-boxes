@@ -981,7 +981,7 @@
                     <div class="sustainable-container">
                         <div class="sustainable-header">
                             <img src="{{ asset('images/sustainable-packaging-icon.png') }}" alt="Sustainable"
-                                class="sustainable-icon">
+                                class="sustainable-icon" loading="lazy">
                             <h2 class="sustainable-title">Sustainable Bulk Packaging Options</h2>
                         </div>
                         <p class="sustainable-description">
@@ -1047,7 +1047,7 @@
                     </div>
                     <div class="cta-image">
                         <img src="{{ asset('uploads/allcategory-cta.webp') }}" alt="Custom Packaging Box"
-                            class="cta-box-image">
+                            class="cta-box-image" loading="lazy">
                     </div>
                 </div>
             </div>

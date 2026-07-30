@@ -402,13 +402,13 @@ html, body { overflow-x: clip; }
 <div class="page"><main>
 <section class="hero"><div class="container"><div><div class="breadcrumb">Home <span>/</span> Blog</div><h1>Insights on Luxury Packaging &amp; Design</h1><p>Expert perspectives on packaging trends, sustainable materials, unboxing strategy and brand elevation - curated for discerning B2B leaders.</p></div></div></section>
 <nav class="categories" aria-label="Blog categories"><div class="category-row">
-<button class="filter active" data-filter="all"><img src="{{ asset('images/blog-filter-all.svg') }}" class="filter-icon" alt=""> All</button>
-<button class="filter" data-filter="packaging"><img src="{{ asset('images/blog-filter-packaging.png') }}" class="filter-icon" alt=""> Packaging Basics</button>
-<button class="filter" data-filter="marketing"><img src="{{ asset('images/01 align center.png') }}" class="filter-icon" alt=""> Marketing Tips</button>
-<button class="filter" data-filter="sustainability"><img src="{{ asset('images/blog-filter-sustainability.png') }}" class="filter-icon" alt=""> Sustainable Packaging Guide</button>
-<button class="filter" data-filter="production"><img src="{{ asset('images/blog-filter-production.png') }}" class="filter-icon" alt=""> Production &amp; MOQ Tips</button>
-<button class="filter" data-filter="design"><img src="{{ asset('images/blog-filter-design.png') }}" class="filter-icon" alt=""> Design Tips</button>
-<button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt=""> Industry Specific Studies</button>
+<button class="filter active" data-filter="all"><img src="{{ asset('images/blog-filter-all.svg') }}" class="filter-icon" alt="" loading="lazy"> All</button>
+<button class="filter" data-filter="packaging"><img src="{{ asset('images/blog-filter-packaging.png') }}" class="filter-icon" alt="" loading="lazy"> Packaging Basics</button>
+<button class="filter" data-filter="marketing"><img src="{{ asset('images/01 align center.png') }}" class="filter-icon" alt="" loading="lazy"> Marketing Tips</button>
+<button class="filter" data-filter="sustainability"><img src="{{ asset('images/blog-filter-sustainability.png') }}" class="filter-icon" alt="" loading="lazy"> Sustainable Packaging Guide</button>
+<button class="filter" data-filter="production"><img src="{{ asset('images/blog-filter-production.png') }}" class="filter-icon" alt="" loading="lazy"> Production &amp; MOQ Tips</button>
+<button class="filter" data-filter="design"><img src="{{ asset('images/blog-filter-design.png') }}" class="filter-icon" alt="" loading="lazy"> Design Tips</button>
+<button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt="" loading="lazy"> Industry Specific Studies</button>
 </div></nav>
 <section class="container content">
 @php
@@ -433,7 +433,7 @@ html, body { overflow-x: clip; }
         $fUrl = url('/blog/' . $fSlug);
     @endphp
     <article class="feature">
-        <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="feature-copy">
             <p class="eyebrow">{{ $fCat }}</p>
             <h2><a href="{{ $fUrl }}" style="color:inherit; text-decoration:none;">{{ $fTitle }}</a></h2>
@@ -442,7 +442,7 @@ html, body { overflow-x: clip; }
         </div>
     </article>
 @else
-    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
+    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes" loading="lazy"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}">Read More &rarr;</a></div></article>
 @endif
 
 <div class="grid">
@@ -459,7 +459,7 @@ html, body { overflow-x: clip; }
         $bUrl = url('/blog/' . $bSlug);
     @endphp
     <article class="card" data-category="{{ $bCat }}">
-        <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+        <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="card-copy">
             <div class="meta">
                 @if(!empty($item['author_slug']))
