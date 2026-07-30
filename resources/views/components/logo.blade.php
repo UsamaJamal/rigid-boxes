@@ -1,6 +1,6 @@
 <style>
     .brand-logos-section {
-        background: #fff;
+        background: #FAF8F8;
         overflow: hidden;
     }
 

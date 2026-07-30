@@ -1565,7 +1565,7 @@
            SUSTAINABLE PACKAGING SOLUTIONS SECTION
         ───────────────────────────────────────── */
         .sustainable-section {
-            background: #FFFFFF;
+            background: #FAF8F8;
             padding: 20px 0 20px;
         }
 
