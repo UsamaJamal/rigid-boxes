@@ -11,9 +11,9 @@
     <meta name="description"
         content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
     <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=optional" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -1890,8 +1890,8 @@
 
         .testimonial-img {
             position: absolute;
-            left: 30px;
-            top: -44px;
+            left: 0px;
+            top: -9px;
             width: 160px;
             height: 250px;
             border-radius: 16px 16px 0 0;

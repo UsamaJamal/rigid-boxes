@@ -94,8 +94,8 @@
 
     .testimonial-img {
         position: absolute;
-        left: -20px;
-        top: -20px;
+        left: 0px;
+        top: -9px;
         width: 145px;
         height: 215px;
         border-radius: 16px;
