@@ -395,7 +395,7 @@
             display: none !important;
         }
         .site-header {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 
@@ -933,16 +933,18 @@
                 if (currentScrollY > lastScrollY) {
                     // Scrolling Down
                     header.classList.add('scrolled-down');
-                    header.style.transform = `translateY(-${headerTopHeight}px)`;
+                    header.style.top = `-${headerTopHeight}px`;
+                    header.style.transform = 'none'; // Ensure transform is cleared
                 } else {
                     // Scrolling Up
                     header.classList.remove('scrolled-down');
-                    header.style.transform = 'translateY(0)';
+                    header.style.top = '0px';
+                    header.style.transform = 'none';
                 }
             } else {
-                // At top
                 header.classList.remove('scrolled-down');
-                header.style.transform = 'translateY(0)';
+                header.style.top = '0px';
+                header.style.transform = 'none';
             }
             
             lastScrollY = currentScrollY;

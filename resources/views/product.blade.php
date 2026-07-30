@@ -139,12 +139,13 @@
             background-color: var(--secondary-color);
             border-radius: 8px;
             cursor: pointer;
-            border: 1px solid var(--primary-color);
+            border: 2px solid #eaeaea; /* Light border by default */
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             position: relative;
+            transition: border-color 0.3s ease;
         }
 
         .thumb::after {
@@ -195,13 +196,32 @@
             color: #000;
             line-height: 1.2;
         }
-        
         .hero-form > p {
-            color: var(--color-text-secondary);
+            color: #000;
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 15px;
         }
+
+        .hero-form > p {
+            color: #000;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .hero-form > p.desc-text {
+            margin-bottom: 15px;
+        }
+
+        .read-more-btn {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
 
         .section-label {
             display: block;
@@ -1830,6 +1850,33 @@
                 display: none !important;
             }
         }
+
+        /* BREADCRUMB CSS */
+        .desktop-breadcrumb {
+            margin-bottom: 24px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--section-text-color, #191919);
+        }
+
+        .desktop-breadcrumb a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .desktop-breadcrumb a:hover {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .desktop-breadcrumb {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1837,6 +1884,24 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
+        <div class="container">
+            @php
+                $pTitle = $product['title'] ?? 'Custom Packaging Box';
+                $productCatId = DB::table('admin_category_product')->where('product_id', $product['id'] ?? 0)->value('category_id');
+                $productCategory = $productCatId ? DB::table('admin_categories')->where('id', $productCatId)->first() : null;
+                $catTitle = $productCategory ? strtoupper($productCategory->title) : 'PRODUCTS';
+                $catUrl = $productCategory ? url('/' . ($productCategory->slug ?? \Illuminate\Support\Str::slug($productCategory->title))) . '/' : '#';
+            @endphp
+            <div class="desktop-breadcrumb">
+                <a href="/">HOME</a> / 
+                @if($productCategory)
+                    <a href="{{ $catUrl }}">{{ $catTitle }}</a> / 
+                @else
+                    {{ $catTitle }} /
+                @endif
+                <strong>{{ strtoupper($pTitle) }}</strong>
+            </div>
+        </div>
         <div class="container hero-container">
             @php
                 $pGalleryRaw = [];
@@ -1930,8 +1995,39 @@
 
             <div class="hero-form">
                 <h1>{{ $pTitle }}</h1>
-                <p>{{ strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.') }}</p>
+                @php
+                    $descText = strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.');
+                    $limit = 180;
+                    $isLong = strlen($descText) > $limit;
+                @endphp
+                <p class="desc-text">
+                    @if($isLong)
+                        <span id="shortDescText">{{ \Illuminate\Support\Str::limit($descText, $limit, '') }}... </span>
+                        <span id="fullDescText" style="display:none;">{{ $descText }} </span>
+                        <span class="read-more-btn" id="readMoreBtn" onclick="toggleReadMore()">Read More</span>
+                    @else
+                        {{ $descText }}
+                    @endif
+                </p>
                 
+                <script>
+                    function toggleReadMore() {
+                        var shortText = document.getElementById('shortDescText');
+                        var fullText = document.getElementById('fullDescText');
+                        var btn = document.getElementById('readMoreBtn');
+                        
+                        if (fullText.style.display === 'none') {
+                            fullText.style.display = 'inline';
+                            shortText.style.display = 'none';
+                            btn.textContent = 'Read Less';
+                        } else {
+                            fullText.style.display = 'none';
+                            shortText.style.display = 'inline';
+                            btn.textContent = 'Read More';
+                        }
+                    }
+                </script>
+
                 <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 

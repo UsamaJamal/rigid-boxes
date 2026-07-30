@@ -44,7 +44,7 @@
         padding: 8px 55px 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
-        align-items: center;
+        align-items: start;
         gap: 70px;
         position: relative;
         z-index: 2;
@@ -55,6 +55,8 @@
         max-width: 560px;
         position: relative;
         z-index: 2;
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 
 
@@ -108,6 +110,7 @@
         justify-content: flex-end;
         position: relative;
         z-index: 3;
+        align-self: center;
     }
 
     .hero-image-wrapper img {
@@ -148,6 +151,8 @@
 
         .hero-content {
             max-width: 100%;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
         .hero-title {
@@ -177,7 +182,7 @@
         }
 
         .hero-title {
-            font-size: 28px;
+            font-size: 18px;
             line-height: 1.3;
             word-wrap: break-word;
         }
@@ -214,7 +219,6 @@
                 .hero-breadcrumb {
                     display: block;
                     text-align: left;
-                    margin-top: -35px;
                     margin-bottom: 14px;
                     font-family: 'Open Sans', sans-serif;
                     font-size: 14px;
@@ -228,7 +232,7 @@
                 }
                 .hero-breadcrumb a:hover {
                     color: #fff;
-                    text-decoration: underline;
+                    text-decoration: none;
                 }
                 @media (max-width: 768px) {
                     .hero-breadcrumb {
@@ -236,8 +240,23 @@
                     }
                 }
             </style>
+            @php
+                $catId = $settings['id'] ?? ($category['id'] ?? 0);
+                $parentCatName = 'CATEGORIES';
+                $parentCatUrl = url('/categories') . '/';
+                if ($catId) {
+                    $parentId = \Illuminate\Support\Facades\DB::table('admin_categories')->where('id', $catId)->value('parent_id');
+                    if ($parentId) {
+                        $parentCat = \Illuminate\Support\Facades\DB::table('admin_categories')->where('id', $parentId)->first();
+                        if ($parentCat) {
+                            $parentCatName = strtoupper($parentCat->title);
+                            $parentCatUrl = url('/' . ($parentCat->slug ?? \Illuminate\Support\Str::slug($parentCat->title))) . '/';
+                        }
+                    }
+                }
+            @endphp
             <div class="hero-breadcrumb">
-                <a href="/">HOME</a> / BOXES BY INDUSTRY / <strong>{{ !empty($settings['title']) ? strtoupper($settings['title']) : (!empty($category['title']) ? strtoupper($category['title']) : 'CATEGORY') }}</strong>
+                <a href="/">HOME</a> / <a href="{{ $parentCatUrl }}">{{ $parentCatName }}</a> / <strong>{{ !empty($settings['title']) ? strtoupper($settings['title']) : (!empty($category['title']) ? strtoupper($category['title']) : 'CATEGORY') }}</strong>
             </div>
             @endif
             <h1 class="hero-title">

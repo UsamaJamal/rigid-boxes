@@ -2587,7 +2587,7 @@
                     @foreach ($featuredCategories as $cat)
                         @php
                             $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
-                            $catUrl = url('/category/' . $catSlug);
+                            $catUrl = url('/' . $catSlug) . '/';
                             $cImg = !empty($cat['image'])
                                 ? (\Illuminate\Support\Str::startsWith($cat['image'], [
                                     'storage/',
@@ -2618,7 +2618,7 @@
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="{{ url('/categories') }}/" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/box-by-industry') }}/" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->

@@ -909,7 +909,8 @@
                     }
 
                     .desktop-breadcrumb a:hover {
-                        text-decoration: underline;
+                        text-decoration: none;
+                        color: var(--primary-color);
                     }
 
                     @media (max-width: 768px) {
