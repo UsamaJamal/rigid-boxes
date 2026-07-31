@@ -417,7 +417,7 @@
         }
 
         .header-search, .header-contact, .header-bottom {
-            display: none;
+            display: none !important;
         }
 
         .mobile-actions {
