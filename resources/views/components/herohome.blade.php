@@ -182,7 +182,7 @@
         }
 
         .hero-title {
-            font-size: 18px;
+            font-size: 29px !important;
             line-height: 1.3;
             word-wrap: break-word;
         }
