@@ -2895,6 +2895,19 @@ function toggleFaq(element) {
             clickedControl.style.setProperty('border', '1px solid #8d4445', 'important');
         }, true);
     </script>
+    <script>
+        let isScrollingToInvalid = false;
+        document.addEventListener('invalid', function(e) {
+            if (!isScrollingToInvalid) {
+                isScrollingToInvalid = true;
+                setTimeout(function() {
+                    e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    e.target.focus();
+                    setTimeout(() => isScrollingToInvalid = false, 1000);
+                }, 10);
+            }
+        }, true);
+    </script>
 
     @include('components.footer')
 </body>

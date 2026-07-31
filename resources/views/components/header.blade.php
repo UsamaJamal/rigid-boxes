@@ -74,7 +74,7 @@
         width: clamp(240px, 20vw, 330px);
         max-width: 100%;
         position: relative;
-        margin-left: clamp(20px, 2.5vw, 45px);
+        margin: 0 0 0 clamp(20px, 2.5vw, 45px) !important;
         flex: 0 1 330px;
     }
 
@@ -90,6 +90,7 @@
         transition: border-color 0.3s;
         font-family: inherit;
         font-size: 15px;
+        margin: 0 !important;
     }
 
     .header-search input:focus {
@@ -130,7 +131,7 @@
         display: flex;
         align-items: center;
         gap: clamp(12px, 1.5vw, 24px);
-        margin-left: auto;
+        margin: 0 0 0 auto !important;
         flex: 0 0 auto;
         flex-shrink: 0;
     }
@@ -139,6 +140,8 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        margin: 0 !important;
+        padding: 0 !important;
         flex-shrink: 0;
         white-space: nowrap;
     }
@@ -637,31 +640,31 @@
         </form>
 
         <!-- Desktop Contact -->
-        <div class="header-contact">
-            <div class="contact-item contact-item-phone">
-                <svg viewBox="0 0 24 24">
+        <div class="header-contact" style="display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); margin: 0 0 0 auto; flex: 0 0 auto; flex-shrink: 0;">
+            <div class="contact-item contact-item-phone" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0;">
+                <svg viewBox="0 0 24 24" width="34" height="34" style="width: 34px; height: 34px; flex-shrink: 0; fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block;">
                     <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                     <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
                     <path d="M14 22h-4"></path>
                 </svg>
-                <div class="contact-item-text">
-                    <span>Call Us 24/7</span>
-                    <strong>{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</strong>
+                <div class="contact-item-text" style="white-space: nowrap; font-variant-numeric: tabular-nums;">
+                    <span style="display: block; font-size: 14px; color: #fff; font-weight: 700; line-height: 1.2;">Call Us 24/7</span>
+                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</strong>
                 </div>
             </div>
 
-            <div class="contact-item contact-item-email">
-                <svg viewBox="0 0 24 24">
+            <div class="contact-item contact-item-email" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0;">
+                <svg viewBox="0 0 24 24" width="34" height="34" style="width: 34px; height: 34px; flex-shrink: 0; fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block;">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <div class="contact-item-text">
-                    <span>Email</span>
-                    <strong>{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
+                <div class="contact-item-text" style="white-space: nowrap; font-variant-numeric: tabular-nums;">
+                    <span style="display: block; font-size: 14px; color: #fff; font-weight: 700; line-height: 1.2;">Email</span>
+                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
                 </div>
             </div>
 
-            <a href="/request-quote/" class="get-quote-btn">Get Instant Quote</a>
+            <a href="/request-quote/" class="get-quote-btn" style="background-color: #fff; color: #8D4445; min-height: 44px; padding: 0 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(55, 21, 22, .25); flex-shrink: 0; white-space: nowrap;">Get Instant Quote</a>
         </div>
 
         <!-- Mobile Actions -->
