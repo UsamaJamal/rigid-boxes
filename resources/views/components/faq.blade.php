@@ -67,7 +67,7 @@
         font-size: 16px;
         line-height: 25.6px;
         color: var(--section-text-color);
-        margin: 0 0 80px 0;
+        margin: 0 0 30px 0;
         padding: 0;
         text-align: left;
     }

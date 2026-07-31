@@ -103,9 +103,9 @@
                         @if(empty($quickLinks))
                             <li><a href="/about-us/">About Us</a></li>
                             <li><a href="/contact-us/">Contact Us</a></li>
-                            <li><a href="/request-quote">Get A Free Quote</a></li>
+                            <li><a href="/request-quote/">Get A Free Quote</a></li>
                             <li><a href="/contact-us/">Refund & Exchange Policy</a></li>
-                            <li><a href="/blog">Blogs</a></li>
+                            <li><a href="/blog/">Blog</a></li>
                         @else
                             @foreach($quickLinks as $link)
                                 <li><a href="{{ $link['url'] }}">{{ $link['name'] }}</a></li>

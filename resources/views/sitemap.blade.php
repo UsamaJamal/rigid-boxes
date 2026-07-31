@@ -86,8 +86,8 @@
                         <ul class="sitemap-list">
                             <li><a href="/">Home</a></li>
                             <li><a href="/contact-us/">Contact Us</a></li>
-                            <li><a href="/request-quote">Get Instant Quote</a></li>
-                            <li><a href="/blog">Blogs</a></li>
+                            <li><a href="/request-quote/">Get Instant Quote</a></li>
+                            <li><a href="/blog/">Blog</a></li>
                             <li><a href="/categories">All Categories</a></li>
                             @foreach($pages as $page)
                                 <li><a href="/page/{{ $page->slug ?? '' }}">{{ $page->title }}</a></li>

@@ -6,7 +6,17 @@
         background: var(--header-gradient, linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%));
         color: #fff;
         position: relative;
+    }
+
+    .hero-bg-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
     }
 
     .category-hero-wrapper::before {
@@ -41,11 +51,8 @@
         width: 100%;
         max-width: 1280px;
         margin: 0 auto;
-        padding: 8px 55px 0;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 456px);
-        align-items: start;
-        gap: 70px;
+        padding: 40px 55px !important;
+        display: block;
         position: relative;
         z-index: 2;
         box-sizing: border-box;
@@ -55,8 +62,8 @@
         max-width: 560px;
         position: relative;
         z-index: 2;
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
 
@@ -106,17 +113,21 @@
     }
 
     .hero-image-wrapper {
+        position: absolute;
+        right: 55px;
+        top: 20px;
+        width: 456px;
         display: flex;
         justify-content: flex-end;
-        position: relative;
+        align-items: flex-start;
         z-index: 3;
-        align-self: center;
     }
 
     .hero-image-wrapper img {
         width: 100%;
         max-width: 456px;
         height: 456px;
+        max-height: none;
         border-radius: 16px;
         box-shadow: none;
         background-color: transparent;
@@ -161,8 +172,13 @@
         }
 
         .hero-image-wrapper {
+            position: relative;
+            right: auto;
+            top: auto;
+            bottom: auto;
             justify-content: center;
             width: 100%;
+            height: auto;
             margin-top: 10px;
         }
 
@@ -170,6 +186,7 @@
             width: 100%;
             height: auto;
             max-width: 450px;
+            max-height: 456px;
             aspect-ratio: auto;
         }
     }
@@ -203,12 +220,14 @@
 
 <!-- Hero Banner with gradient -->
 <div class="category-hero-wrapper">
-    <div class="hero-line hero-line-1" aria-hidden="true"></div>
-    <div class="hero-line hero-line-2" aria-hidden="true"></div>
-    <div class="hero-line hero-line-3" aria-hidden="true"></div>
-    <div class="hero-line hero-line-4" aria-hidden="true"></div>
-    <div class="hero-line hero-line-5" aria-hidden="true"></div>
-    <div class="hero-line hero-line-6" aria-hidden="true"></div>
+    <div class="hero-bg-lines">
+        <div class="hero-line hero-line-1" aria-hidden="true"></div>
+        <div class="hero-line hero-line-2" aria-hidden="true"></div>
+        <div class="hero-line hero-line-3" aria-hidden="true"></div>
+        <div class="hero-line hero-line-4" aria-hidden="true"></div>
+        <div class="hero-line hero-line-5" aria-hidden="true"></div>
+        <div class="hero-line hero-line-6" aria-hidden="true"></div>
+    </div>
 
 
     <section class="hero-section">
@@ -267,7 +286,7 @@
                 {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
-            <a href="/request-quote" class="hero-btn">Get Instant Quote</a>
+            <a href="/request-quote/" class="hero-btn">Get Instant Quote</a>
         </div>
 
         <div class="hero-image-wrapper">
