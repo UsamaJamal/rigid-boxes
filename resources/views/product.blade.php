@@ -610,7 +610,7 @@
             font-family: 'DM Sans', sans-serif;
             font-weight: 400;
             font-size: 16px;
-            color: var(--color-text-secondary);
+            color: #000;
             margin-bottom: 15px;
             line-height: 40px;
             text-align: justify;
