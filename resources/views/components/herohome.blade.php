@@ -196,7 +196,7 @@
     @media (max-width: 576px) {
 
         .hero-section {
-            padding: 24px 16px 16px;
+            padding: 24px 16px 16px !important;
             text-align: left;
         }
 

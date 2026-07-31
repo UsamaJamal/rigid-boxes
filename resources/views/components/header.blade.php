@@ -581,14 +581,84 @@
             flex-direction: column;
         }
 
-        .mobile-nav a {
-            color: var(--primary-color);
+        .mobile-nav-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link-top,
+        .mobile-nav > li > a {
+            color: #111111;
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
+            font-family: 'DM Sans', 'Open Sans', sans-serif;
             display: block;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            flex: 1;
+            padding: 12px 0;
+        }
+
+        .mobile-nav-header .mobile-nav-link-top {
+            padding: 0;
+        }
+
+        .mobile-dropdown-toggle {
+            background: none;
+            border: none;
+            padding: 4px 6px;
+            cursor: pointer;
+            color: #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-dropdown-toggle .chevron-icon {
+            width: 18px;
+            height: 18px;
+            stroke: #222222;
+            stroke-width: 2.2;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav-item.has-dropdown.open .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .mobile-submenu {
+            display: none;
+            list-style: none;
+            padding: 4px 0 12px 14px;
+            margin: 0;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mobile-nav-item.has-dropdown.open .mobile-submenu {
+            display: flex;
+        }
+
+        .mobile-submenu li a {
+            color: #444444;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            display: block;
+            padding: 6px 0;
+            border: none;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-submenu li a:hover {
+            color: #8D4445;
         }
 
         .mobile-contact {
@@ -701,13 +771,24 @@
         </form>
     </div>
 
+    @php
+        $navCatsAll = $navCategories ?? [];
+        $navParents = array_values(array_filter($navCatsAll, fn($c) => empty($c['parent_id'])));
+        $navChildren = array_filter($navCatsAll, fn($c) => !empty($c['parent_id']));
+        
+        $navByParentSlug = [];
+        foreach ($navParents as $parent) {
+            $slug = $parent['slug'];
+            $children = array_filter($navChildren, fn($c) => $c['parent_id'] == $parent['id']);
+            $navByParentSlug[$slug] = array_values($children);
+        }
+        $navParentItems = $navParents;
+    @endphp
+
     <!-- Desktop Navigation -->
     <div class="header-bottom">
         <ul class="header-nav">
             <li><a href="/">Home</a></li>
-            @php
-                $navParentItems = isset($navCategories) ? array_values(array_filter($navCategories, fn($c) => empty($c['parent_id']))) : [];
-            @endphp
             @foreach($navParentItems as $navParent)
             <li class="has-mega" data-mega-type="{{ $navParent['slug'] }}">
                 <a href="{{ url('/' . $navParent['slug']) }}/" class="mega-trigger">{{ $navParent['title'] }}</a>
@@ -762,11 +843,38 @@
             </form>
 
             <ul class="mobile-nav">
-                <li><a href="/">Home</a></li>
-                @foreach($navParentItems as $navParent)
-                    <li><a href="{{ url('/' . $navParent['slug']) }}/">{{ $navParent['title'] }}</a></li>
+                <li><a href="/" class="mobile-nav-link-top" style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">Home</a></li>
+                @foreach($navParents as $navParent)
+                    @php
+                        $children = $navByParentSlug[$navParent['slug']] ?? [];
+                    @endphp
+                    @if(count($children) > 0)
+                        <li class="mobile-nav-item has-dropdown">
+                            <div class="mobile-nav-header" onclick="this.parentElement.classList.toggle('open')">
+                                <a href="{{ url('/' . $navParent['slug']) }}/" class="mobile-nav-link-top" onclick="event.stopPropagation();">{{ $navParent['title'] }}</a>
+                                <button type="button" class="mobile-dropdown-toggle" aria-label="Toggle {{ $navParent['title'] }} dropdown">
+                                    <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            <ul class="mobile-submenu">
+                                @foreach($children as $child)
+                                    <li>
+                                        <a href="{{ url('/' . $child['slug']) }}/">{{ $child['title'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @else
+                        <li class="mobile-nav-item">
+                            <div class="mobile-nav-header">
+                                <a href="{{ url('/' . $navParent['slug']) }}/" class="mobile-nav-link-top">{{ $navParent['title'] }}</a>
+                            </div>
+                        </li>
+                    @endif
                 @endforeach
-                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/blog/" class="mobile-nav-link-top" style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">Blog</a></li>
             </ul>
 
             <a href="/contact-us/" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
