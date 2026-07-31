@@ -91,6 +91,7 @@
         box-sizing: border-box;
         appearance: none;
         -webkit-appearance: none;
+        scroll-margin-top: 180px;
     }
 
     .form-row input::placeholder,
@@ -128,6 +129,7 @@
         box-sizing: border-box;
         appearance: none;
         -webkit-appearance: none;
+        scroll-margin-top: 180px;
     }
     .select-wrapper select option:checked {
         background: var(--primary-color) linear-gradient(0deg, var(--primary-color) 0%, var(--primary-color) 100%);
@@ -147,6 +149,7 @@
         outline: none;
         transition: border-color 0.2s;
         box-sizing: border-box;
+        scroll-margin-top: 180px;
     }
     .pref-input:focus {
         border-color: var(--primary-color);
@@ -189,6 +192,7 @@
         outline: none;
         transition: border-color 0.2s;
         box-sizing: border-box;
+        scroll-margin-top: 180px;
     }
 
     .specs-row input::placeholder {
@@ -221,6 +225,7 @@
         appearance: none;
         -webkit-appearance: none;
         box-sizing: border-box;
+        scroll-margin-top: 180px;
     }
     
     .specs-unit select option:checked {
@@ -268,6 +273,7 @@
         resize: vertical;
         transition: border-color 0.2s;
         box-sizing: border-box;
+        scroll-margin-top: 180px;
     }
 
     .textarea-row textarea::placeholder {

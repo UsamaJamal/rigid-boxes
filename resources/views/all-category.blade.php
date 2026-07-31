@@ -158,7 +158,7 @@
         /* Hero Section */
         .hero-section {
             background-color: var(--background-color);
-            padding-top: var(--space-64);
+            padding-top: 30px !important;
             padding-bottom: var(--space-8);
         }
 
@@ -1038,7 +1038,7 @@
                         <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>
                         <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience
                             with fully customized rigid box solutions.</p>
-                        <a href="/request-quote" class="cta-button">
+                        <a href="/request-quote/" class="cta-button">
                             Get Started Today
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2"

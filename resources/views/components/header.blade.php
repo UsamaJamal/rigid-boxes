@@ -710,7 +710,7 @@
                 <a href="{{ url('/' . $navParent['slug']) }}/" class="mega-trigger">{{ $navParent['title'] }}</a>
             </li>
             @endforeach
-            <li><a href="/blog">Blogs</a></li>
+            <li><a href="/blog/">Blog</a></li>
         </ul>
 
         <!-- Mega Menu Panel -->
@@ -763,7 +763,7 @@
                 @foreach($navParentItems as $navParent)
                     <li><a href="{{ url('/' . $navParent['slug']) }}/">{{ $navParent['title'] }}</a></li>
                 @endforeach
-                <li><a href="/blog">Blogs</a></li>
+                <li><a href="/blog/">Blog</a></li>
             </ul>
 
             <a href="/contact-us/" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
@@ -866,7 +866,7 @@
                 const iconHtml = icon
                     ? `<img src="${icon}" alt="" loading="lazy">`
                     : giftBoxSvg;
-                return `<a href="/${slug}" class="mega-menu-item">
+                return `<a href="/${slug}/" class="mega-menu-item">
                     <div class="mega-menu-icon">${iconHtml}</div>
                     <span>${title}</span>
                 </a>`;

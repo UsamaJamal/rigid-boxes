@@ -2841,7 +2841,7 @@
 
                     </div><!-- /.premium-icons -->
 
-                    <a href="/request-quote" class="premium-btn">Order Now</a>
+                    <a href="/request-quote/" class="premium-btn">Order Now</a>
 
                 </div><!-- /.premium-content -->
 
@@ -2916,7 +2916,7 @@
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
-                            <a href="/kraft-paper-boxes/" class="sustainable-btn">Browse Products</a>
+                            <a href="/kraft-boxes/" class="sustainable-btn">Browse Products</a>
                         </div>
                     </div>
 

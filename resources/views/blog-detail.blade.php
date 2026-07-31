@@ -859,7 +859,7 @@
             <div class="breadcrumb">
                 <a href="{{ url('/') }}">HOME</a>
                 <span class="sep">/</span>
-                <a href="{{ url('/blog') }}">BLOGS</a>
+                <a href="{{ url('/blog/') }}">BLOG</a>
                 <span class="sep">/</span>
                 <span class="current">THE FUTURE OF LUXURY PACKAGING: 7 TRENDS DEFINING 2026 AND BEYOND</span>
             </div>

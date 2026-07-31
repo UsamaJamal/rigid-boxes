@@ -649,7 +649,7 @@
         .specs-section {
             max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
             width: calc(100% - (var(--margin-sides) * 2));
-            margin: 32px auto;
+            margin: 10px auto;
             border-radius: 12px;
             overflow: hidden;
             border: 0.5px solid #8d4445;
