@@ -149,7 +149,7 @@
         }
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 992px) {
         .hero-line {
             display: none;
         }

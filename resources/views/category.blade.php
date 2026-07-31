@@ -37,7 +37,7 @@
 
     .section-subtitle {
         font-size: 16px;
-        color: #666;
+        color: #000;
         margin-bottom: 20px;
     }
 

@@ -29,8 +29,8 @@
         align-items: center;
         justify-content: center;
         gap: 40px;
-        padding: 20px 20px;
-        min-height: 108px;
+        padding: 5px 20px 20px 20px; /* Reduced top padding to move logos up */
+        min-height: 80px;
     }
 
     .brand-logo-item {
