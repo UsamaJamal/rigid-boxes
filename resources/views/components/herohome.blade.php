@@ -6,6 +6,7 @@
         background: var(--header-gradient, linear-gradient(278.74deg, #AB5A5B 0.2%, #8D4445 44.25%, #5B2829 88.3%));
         color: #fff;
         position: relative;
+        overflow: hidden;
     }
 
     .hero-bg-lines {
@@ -115,19 +116,20 @@
     .hero-image-wrapper {
         position: absolute;
         right: 55px;
-        top: 20px;
+        top: 0;
+        bottom: 0;
         width: 456px;
         display: flex;
         justify-content: flex-end;
-        align-items: flex-start;
+        align-items: center;
         z-index: 3;
     }
 
     .hero-image-wrapper img {
         width: 100%;
         max-width: 456px;
-        height: 456px;
-        max-height: none;
+        height: auto;
+        max-height: 100%;
         border-radius: 16px;
         box-shadow: none;
         background-color: transparent;
