@@ -221,7 +221,7 @@
     /* Responsive Styles */
     @media (max-width: 991px) {
         .faq-section {
-            padding: 0px 0, 20px;
+            padding: 0 0 20px;
         }
 
         .faq-wrapper {
