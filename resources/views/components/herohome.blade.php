@@ -73,7 +73,7 @@
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
         font-size: clamp(28px, 3.5vw, 50px);
-        line-height: 50px;
+        line-height: 65px;
         letter-spacing: 0%;
         text-transform: uppercase;
         color: #fff;
