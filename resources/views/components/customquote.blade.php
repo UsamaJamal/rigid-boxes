@@ -448,7 +448,7 @@
         .quote-steps {
             width: 100%;
             padding-top: 0;
-            padding-bottom: 40px;
+            padding-bottom: 0;
         }
         .quote-steps-inner {
             height: auto;
@@ -463,6 +463,7 @@
             padding: 30px 0;
         }
         .quote-container {
+            gap:20px;
             padding: 0 20px;
         }
         .quote-form-card {

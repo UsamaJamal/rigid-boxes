@@ -811,6 +811,7 @@
             }
 
             .cta-wrapper {
+                margin-top: -100px;
                 margin-bottom: 22px;
                 height: 568px;
                 flex-direction: column;

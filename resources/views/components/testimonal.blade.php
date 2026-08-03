@@ -257,7 +257,7 @@
             width: 135px;
             height: 195px;
             left: -20px;
-            top: -20px;
+            top: 0px;
             border-radius: 16px;
         }
 

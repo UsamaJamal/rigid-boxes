@@ -135,7 +135,7 @@
 
     @media (max-width: 576px) {
         .popular-boxes-section {
-            padding: 24px 0 32px;
+            padding: 0px 0 25px;
         }
 
         .popular-boxes-inner {
@@ -348,6 +348,7 @@
         .customize-layout {
             display: flex;
             flex-direction: column;
+            gap:0px
         }
 
         .customize-sidebar {
@@ -383,7 +384,7 @@
 
     @media (max-width: 576px) {
         .customize-section {
-            padding: 36px 0 36px;
+            padding: 0px 0 36px;
         }
 
         .customize-title {
