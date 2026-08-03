@@ -112,11 +112,12 @@
         background: #FAF8F8;
         border: 1px solid var(--primary-color);
         border-radius: 16px;
-        padding: 15px 48px 74px 48px;
+        padding: 45px 48px;
         box-shadow: 0px 2px 4px 0px #0000002E;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     .mv-icon img {
@@ -286,7 +287,7 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #444748;
-        margin-bottom: -8px;
+        margin-bottom: 20px;
     }
 
     .tb-logos {
