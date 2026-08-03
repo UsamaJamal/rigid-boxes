@@ -53,24 +53,24 @@
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 30px 55px 20px 55px;
+            padding: 40px 55px 20px 55px;
             text-align: center;
             box-sizing: border-box;
         }
 
         .iq-breadcrumb {
             text-align: left;
-            margin-bottom: 24px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-color, #8D4445);
-            letter-spacing: 0.1em;
+            margin-bottom: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: 1px;
             text-transform: uppercase;
             font-family: 'Open Sans', sans-serif;
         }
 
         .iq-breadcrumb a {
-            color: var(--primary-color, #8D4445);
+            color: #666;
             text-decoration: none;
         }
 
@@ -168,6 +168,16 @@
             box-sizing: border-box;
             outline: none;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Remove number input spinner arrows */
+        .iq-form-group input[type="number"]::-webkit-inner-spin-button,
+        .iq-form-group input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .iq-form-group input[type="number"] {
+            -moz-appearance: textfield;
         }
 
         .iq-form-group textarea {

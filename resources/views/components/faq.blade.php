@@ -4,7 +4,7 @@
     ───────────────────────────────────────── */
     .faq-section {
         background: var(--background-color, #FAF8F8);
-        padding: 0px 0 70px;
+        padding: 0px 0 40px;
         width: 100%;
         display: block;
     }
@@ -19,7 +19,7 @@
         display: grid;
         grid-template-columns: minmax(0, 42%) minmax(0, 58%);
         align-items: start;
-        gap: 60px;
+        gap: 40px;
         width: 100%;
     }
 
@@ -39,7 +39,7 @@
         width: 100%;
         max-width: 520px;
         height: auto;
-        min-height: 366px;
+        min-height: auto;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -67,7 +67,7 @@
         font-size: 16px;
         line-height: 25.6px;
         color: var(--section-text-color);
-        margin: 0 0 30px 0;
+        margin: 0 0 16px 0;
         padding: 0;
         text-align: left;
     }
@@ -81,7 +81,7 @@
         width: 210px;
         height: 60px;
         border-radius: 8px;
-        margin: 0 0 30px 0;
+        margin: 0 0 16px 0;
         object-fit: cover;
         display: block;
     }
@@ -124,7 +124,7 @@
     .faq-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 10px;
         width: 100%;
     }
 
@@ -147,8 +147,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        min-height: 70px;
-        padding: 18px 28px;
+        min-height: 56px;
+        padding: 14px 24px;
         background: none;
         border: none;
         cursor: pointer;

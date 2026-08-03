@@ -13,7 +13,7 @@
        SECTION 1: Craftsmanship Meets Precision
        ========================================= */
     .why-us-section {
-        padding: 20px 0 80px 0;
+        padding: 40px 0;
         background-color: #faf9f9;
         display: flex;
         justify-content: center;
@@ -32,7 +32,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 60px;
+        gap: 40px;
         flex-wrap: wrap;
         overflow: hidden;
     }
@@ -85,7 +85,7 @@
        ========================================= */
     .trust-us-section {
         background-color: var(--secondary-color);
-        padding: 20px 0 80px 0; /* Padding top 20px */
+        padding: 24px 0;
     }
 
     .trust-us-container {
@@ -97,7 +97,7 @@
 
     .trust-us-header {
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
     }
 
     .trust-us-header h2 {
@@ -121,14 +121,14 @@
     .trust-us-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
+        gap: 20px;
     }
 
     .trust-card {
         background: #FFFFFF;
         border: 0.5px solid #8D4445;
         border-radius: 12px;
-        padding: 40px 20px;
+        padding: 24px 20px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -146,11 +146,11 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         background-color: var(--secondary-color);
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .trust-icon img {
@@ -183,7 +183,7 @@
        SECTION 3: Sustainable Packaging
        ========================================= */
     .sustainable-section {
-        padding: 20px 0 80px 0; /* Padding top 20px */
+        padding: 40px 0;
         background-color: #ffffff;
         display: flex;
         justify-content: center;
@@ -200,7 +200,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 60px;
+        gap: 40px;
         flex-wrap: wrap;
     }
 
@@ -232,7 +232,7 @@
         font-weight: 700;
         font-size: 32px;
         color: var(--section-text-color, #000);
-        margin: 0 0 24px 0;
+        margin: 0 0 16px 0;
     }
 
     .sustainable-content p {
@@ -247,8 +247,8 @@
 
     .sustainable-icons {
         display: flex;
-        gap: 32px;
-        padding-top: 24px;
+        gap: 20px;
+        padding-top: 16px;
     }
 
     .icon-box {
@@ -332,7 +332,7 @@
         .why-us-section,
         .trust-us-section,
         .sustainable-section {
-            padding: 25px 0;
+            padding: 24px 0;
         }
 
         .why-us-section .container,
@@ -394,7 +394,7 @@
             width: 100%;
             margin: 0 auto;
             border-radius: 12px;
-            padding: 30px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;

@@ -38,8 +38,8 @@
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        padding: 80px 24px;
-        min-height: 400px;
+        padding: 40px 55px;
+        min-height: 0;
         display: flex;
         align-items: center;
     }
@@ -55,7 +55,6 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 20px;
-        /* margin-top: 5px; */
         color: #FFFFFF;
         text-align:left !important
     }
@@ -102,16 +101,13 @@
             background-position: bottom center !important;
             background-size: 100% auto !important;
             background-repeat: no-repeat;
+            padding: 40px 24px 65vw 24px;
+            min-height: 0;
+            align-items: flex-start;
         }
 
         .inner-hero-title {
             font-size: 32px;
-        }
-
-        .inner-hero-container {
-            padding: 40px 5% 65vw 5%; /* 65vw gives enough space at the bottom for boxes on any mobile */
-            min-height: 0;
-            align-items: flex-start;
         }
 
         .inner-hero-content {

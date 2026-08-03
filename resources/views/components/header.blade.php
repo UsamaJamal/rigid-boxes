@@ -27,11 +27,6 @@
         min-width: 0;
     }
 
-    h1 { font-size: var(--heading-h1-size) !important; }
-    h2 { font-size: var(--heading-h2-size) !important; }
-    h3 { font-size: var(--heading-h3-size) !important; }
-    h4 { font-size: var(--heading-h4-size) !important; }
-
     .site-header {
         background: var(--header-gradient);
         width: 100%;
@@ -41,6 +36,9 @@
         position: sticky;
         top: 0;
         z-index: 1000;
+        /* Isolate header from page CSS resets */
+        line-height: normal;
+        font-size: initial;
     }
 
     .site-header * {
@@ -226,6 +224,8 @@
         list-style: none;
         gap: clamp(36px, 4vw, 62px);
         align-items: center;
+        padding: 0;
+        margin: 0;
     }
 
     @media (max-width: 768px) {
@@ -245,10 +245,15 @@
         text-decoration: none;
         font-size: 16px;
         font-weight: 700;
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
         transition: opacity 0.3s;
         display: inline-flex;
         align-items: center;
         padding: 12px 0;
+        margin: 0;
     }
 
     .header-nav li a:hover {
