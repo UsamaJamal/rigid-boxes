@@ -76,7 +76,7 @@
         ───────────────────────────────────────── */
         .custom-boxes-section {
             background: #FAF8F8;
-            padding: 0px 0 30px;
+            padding: 10px 0 30px;
         }
 
         .custom-boxes-container {
