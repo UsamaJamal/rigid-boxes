@@ -873,9 +873,10 @@
             
             <div class="article-meta">
                 @php 
-                    $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : 'Ahmed Khan';
+                    $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : (!empty($blog['author_name']) ? $blog['author_name'] : 'Ahmed Khan');
                     $authorSlug = $blog['joined_author_slug'] ?? null;
                     $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
+                    $publishDate = !empty($blog['publish_date']) ? date('M j, Y', strtotime($blog['publish_date'])) : (!empty($blog['created_at']) ? date('M j, Y', strtotime($blog['created_at'])) : 'Mar 3, 2026');
                 @endphp
                 @if($authorSlug)
                     <a href="{{ url('/author/' . $authorSlug) }}" class="author-info" style="text-decoration:none; color:inherit;">
@@ -890,7 +891,7 @@
                 @endif
                 <div class="meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                    <span>Mar 3, 2026</span>
+                    <span>{{ $publishDate }}</span>
                 </div>
                 <div class="meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
