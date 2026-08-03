@@ -75,7 +75,8 @@
            ========================================================================== */
 
         .breadcrumb {
-            padding:30px 0px 0;
+            padding:30px 0px 30px;
+            margin-bottom: 30px;
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
             color: var(--color-text-secondary);
@@ -129,6 +130,7 @@
             height: 261px;
             border-radius: 8px;
             object-fit: cover;
+            object-position: top;
         }
 
         .author-info {

@@ -947,6 +947,25 @@
             margin: 0 auto 60px;
             padding: 40px 0;
             background-color: var(--primary-color);
+            background-image: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255,255,255,0.15) 40%, rgba(255,255,255,0.15) calc(40% + 1px),
+                transparent calc(40% + 1px), transparent 48%,
+                rgba(255,255,255,0.15) 48%, rgba(255,255,255,0.15) calc(48% + 1px),
+                transparent calc(48% + 1px), transparent 56%,
+                rgba(255,255,255,0.15) 56%, rgba(255,255,255,0.15) calc(56% + 1px),
+                transparent calc(56% + 1px), transparent 64%,
+                rgba(255,255,255,0.15) 64%, rgba(255,255,255,0.15) calc(64% + 1px),
+                transparent calc(64% + 1px), transparent 72%,
+                rgba(255,255,255,0.15) 72%, rgba(255,255,255,0.15) calc(72% + 1px),
+                transparent calc(72% + 1px), transparent 80%,
+                rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.15) calc(80% + 1px),
+                transparent calc(80% + 1px)
+            );
+            background-size: 85% 75%;
+            background-position: left center;
+            background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
             border-radius: 16px;
@@ -957,11 +976,29 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 300px;
-            height: 300px;
-            background-image: radial-gradient(rgba(255,255,255,0.2) 2px, transparent 2px);
-            background-size: 15px 15px;
-            opacity: 0.5;
+            width: 268px;
+            height: 294px;
+            background-image: url("{{ asset('uploads/request-sample-kit-dots.svg') }}");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: top right;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .quote-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 140px;
+            height: 184px;
+            background-image: url("{{ asset('uploads/request-sample-kit-box.svg') }}");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom left;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .quote-grid {
@@ -1109,14 +1146,16 @@
         
         .quote-info h3 {
             font-family: 'Open Sans', sans-serif;
-            font-size: 32px;
+            font-size: 34px;
+            font-weight: 700;
             color: #fff;
             margin-bottom: 15px;
             line-height: 1.3;
+            letter-spacing: 0.5px;
         }
         
         .quote-title-line {
-            width: 60px;
+            width: 86px;
             height: 3px;
             background-color: #fff;
             margin-bottom: 40px;
@@ -1132,7 +1171,7 @@
         .features-list {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 15px;
         }
         
         .feature-item {
@@ -1140,7 +1179,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            width: 140px;
         }
         
         .feature-icon {
@@ -1156,17 +1195,22 @@
         }
 
         .feature-icon img {
-            width: 139px;
-            height: 110px;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
             display: block;
+            margin: 0;
         }
         
         .feature-item span {
-            font-size: 12px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
             font-weight: 600;
-            max-width: 100px;
-            line-height: 1.4;
+            line-height: 20px;
+            letter-spacing: 0;
+            color: #fff;
+            display: block;
+            width: 100%;
         }
 
         /* Related Products Section */
@@ -2281,7 +2325,7 @@
         <div class="quote-grid">
             <div class="quote-form">
                 <div class="quote-form-header">
-                    <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="Sample Kit" style="width: 50px; height: 50px;" loading="lazy"></div>
+                    <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="sample kit" style="width: 50px; height: 50px;" ></div>
                     <div>
                         <h2>Request A Sample Kit</h2>
                         <p>Fill out the form below and we'll send you a sample kit tailored to your needs.</p>
@@ -2365,13 +2409,16 @@
                 
                 <div class="features-list">
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/premium-quality-icon.png') }}" alt="Premium Quality" loading="lazy"></div>
+                        <div class="feature-icon"><img src="{{ asset('uploads/icon-premium-quality.svg') }}" alt="Premium Quality" loading="lazy"></div>
+                        <span>Premium<br>Quality</span>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/custom-design.svg') }}" alt="Custom Designs" loading="lazy"></div>
+                        <div class="feature-icon"><img src="{{ asset('uploads/icon-custom-design.svg') }}" alt="Custom Designs" loading="lazy"></div>
+                        <span>Custom<br>Designs</span>
                     </div>
                     <div class="feature-item">
-                        <div class="feature-icon"><img src="{{ asset('images/fast-and-reliable.png') }}" alt="Fast & Reliable Delivery" loading="lazy"></div>
+                        <div class="feature-icon"><img src="{{ asset('uploads/icon-fast-delivery.svg') }}" alt="Fast & Reliable Delivery" loading="lazy"></div>
+                        <span>Fast & Reliable<br>Delivery</span>
                     </div>
                 </div>
             </div>

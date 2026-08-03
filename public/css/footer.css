@@ -146,7 +146,7 @@
 
 /* Main Footer Content */
 .footer-content {
-    padding: 30px 0 40px;
+    padding: 40px 0;
 }
 
 .footer-grid {
@@ -450,7 +450,7 @@
 
     /* Footer Content */
     .footer-content {
-        padding: 24px 0 16px;
+        padding: 24px 0;
     }
 
     .footer-grid {
@@ -606,7 +606,7 @@
     }
 
     .footer-content {
-        padding: 20px 12px 10px;
+        padding: 20px 12px;
     }
 
     .footer-column:not(.brand-column) {
