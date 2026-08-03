@@ -8,7 +8,7 @@
     <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond | The Rigid Boxes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-primary: #8d4445;
@@ -27,7 +27,12 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        /* Ensure header sticky works properly */
+        body {
+            position: relative;
         }
 
         .blog-detail-page * {
@@ -93,7 +98,7 @@
         }
 
         .breadcrumb a {
-            color: var(--color-muted);
+            color: black;
             transition: color 0.2s;
         }
 
@@ -1075,7 +1080,7 @@
                         <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;">
                             <h3 class="related-card-title">{{ $rb->title }}</h3>
                         </a>
-                        <p class="related-card-desc">{{ Str::limit(strip_tags($rb->excerpt ?? $rb->content), 90) }}</p>
+                        <p class="related-card-desc">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($rb->excerpt ?? $rb->content))), 90) }}</p>
                         <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn">
                             Read More &rarr;
                         </a>
