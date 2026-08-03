@@ -503,7 +503,8 @@
         .form-row select,
         .specs-row input,
         .specs-unit select,
-        .preferences-grid select {
+        .preferences-grid select,
+        .pref-input {
             height: 37px;
             padding-left: 12px;
             font-size: 12px;
