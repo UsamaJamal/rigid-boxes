@@ -15,7 +15,7 @@
     <meta name="robots" content="{{ $product['robots'] ?? 'index,follow' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=optional" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <style>
@@ -611,7 +611,7 @@
             font-weight: 400;
             font-size: 16px;
             color: #000;
-            margin-bottom: 15px;
+            /* margin-bottom: 15px; */
             line-height: 40px;
             text-align: justify;
         }
@@ -811,7 +811,7 @@
         .mobile-heading-break { display: none; }
 
         .finishes-header {
-            margin-top: 60px;
+            margin-top: 34px;
             text-align: center;
             font-family: 'DM Sans', sans-serif;
             font-size: 24px;
@@ -1353,7 +1353,7 @@
             .mobile-heading-break { display: none; }
 
         .finishes-header {
-                margin: 24px 0 30px;
+                margin: 5px 0 30px;
                 font-size: 20px;
                 line-height: 24px;
                 max-width: 260px;
@@ -2045,8 +2045,8 @@
             <div class="hero-form">
                 <h1>{{ $pTitle }}</h1>
                 @php
-                    $descText = strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.');
-                    $limit = 180;
+                    $descText = html_entity_decode(html_entity_decode(strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.')));
+                    $limit = 400;
                     $isLong = strlen($descText) > $limit;
                 @endphp
                 <p class="desc-text">
@@ -2205,9 +2205,56 @@
 
     <!-- Content Section -->
     <section class="content-section container" id="content-description">
-        <div>
+        <style>
+            .content-read-more-btn {
+                color: var(--primary-color, #8D4445);
+                cursor: pointer;
+                font-weight: 700;
+                font-size: 14px;
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 2px;
+            }
+            .content-read-more-btn:hover {
+                text-decoration: underline;
+            }
+        </style>
+        <div id="desc-wrapper">
             {!! !empty($product['long_description']) ? $product['long_description'] : '<p>' . ($product['description'] ?? '') . '</p>' !!}
         </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const wrapper = document.getElementById('desc-wrapper');
+                if (wrapper) {
+                    const children = Array.from(wrapper.children);
+                    if (children.length > 2) {
+                        const hiddenWrapper = document.createElement('div');
+                        hiddenWrapper.style.display = 'none';
+                        
+                        // Move elements from index 2 onwards into hiddenWrapper
+                        for (let i = 2; i < children.length; i++) {
+                            hiddenWrapper.appendChild(children[i]);
+                        }
+                        wrapper.appendChild(hiddenWrapper);
+                        
+                        const btn = document.createElement('span');
+                        btn.className = 'content-read-more-btn';
+                        btn.textContent = 'Read More';
+                        btn.onclick = function() {
+                            if (hiddenWrapper.style.display === 'none') {
+                                hiddenWrapper.style.display = 'block';
+                                btn.textContent = 'Read Less';
+                            } else {
+                                hiddenWrapper.style.display = 'none';
+                                btn.textContent = 'Read More';
+                            }
+                        };
+                        wrapper.appendChild(btn);
+                    }
+                }
+            });
+        </script>
     </section>
 
     <!-- Specs Section -->

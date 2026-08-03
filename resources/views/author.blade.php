@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
         rel="stylesheet">
     <style>
         /* ==========================================================================
@@ -725,7 +725,7 @@
                             </div>
                             <div class="card-content">
                                 <h3 class="card-heading">{{ $item['title'] }}</h3>
-                                <p class="card-description">{{ Str::limit(strip_tags($item['excerpt'] ?: $item['content']), 120) }}</p>
+                                <p class="card-description">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($item['excerpt'] ?: $item['content']))), 120) }}</p>
                                 <a href="{{ url('/blog/' . $item['slug']) }}" class="read-more">Read Full Article</a>
                             </div>
                         </article>

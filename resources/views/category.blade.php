@@ -540,7 +540,7 @@
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'" loading="lazy">
                                     @endif
                                 </div>
-                                <h3 class="box-title">{{ $p['title'] }}</h3>
+                                <span class="box-title">{{ $p['title'] }}</span>
                             </a>
                         </div>
                     @endforeach
@@ -577,7 +577,7 @@
                                     <img src="{{ asset('uploads/duplex-chipboard.webp') }}" alt="Duplex Chipboard" loading="lazy">
 
                                 </div>
-                                <h4 class="custom-card-title">Duplex Chipboard</h4>
+                                <span class="custom-card-title">Duplex Chipboard</span>
                             </div>
 
                             <div class="custom-card">
@@ -585,7 +585,7 @@
                                     <img src="{{ asset('uploads/grey-board.webp') }}" alt="Grey Chipboard Cardboard"
                                         onerror="this.src='https://placehold.co/200x200/DDDDDD/888888?text=Grey+Cardboard'" loading="lazy">
                                 </div>
-                                <h4 class="custom-card-title">Grey Chipboard Cardboard</h4>
+                                <span class="custom-card-title">Grey Chipboard Cardboard</span>
                             </div>
 
                             <div class="custom-card">
@@ -593,7 +593,7 @@
                                     <img src="{{ asset('uploads/black-kraft.webp') }}" alt="Black-Kraft"
                                         onerror="this.src='https://placehold.co/200x200/333333/FFFFFF?text=Black-Kraft'" loading="lazy">
                                 </div>
-                                <h4 class="custom-card-title">Black-Kraft</h4>
+                                <span class="custom-card-title">Black-Kraft</span>
                             </div>
 
                             <div class="custom-card">
@@ -601,7 +601,7 @@
                                     <img src="{{ asset('uploads/finish-material-holographic.webp') }}" alt="Holographic"
                                         onerror="this.src='https://placehold.co/200x200/FFCCEE/555555?text=Holographic'">
                                 </div>
-                                <h4 class="custom-card-title">Holographic</h4>
+                                <span class="custom-card-title">Holographic</span>
                             </div>
 
                             <div class="custom-card">
@@ -609,7 +609,7 @@
                                     <img src="{{ asset('uploads/metallic-paper.webp') }}" alt="Metallic Paper"
                                         onerror="this.src='https://placehold.co/200x200/FFDD55/555555?text=Metallic+Paper'">
                                 </div>
-                                <h4 class="custom-card-title">Metallic Paper</h4>
+                                <span class="custom-card-title">Metallic Paper</span>
                             </div>
 
                             <div class="custom-card">
@@ -617,7 +617,7 @@
                                     <img src="{{ asset('uploads/natural-brown-.webp') }}" alt="Natural Brown Kraft"
                                         onerror="this.src='https://placehold.co/200x200/A08060/FFFFFF?text=Brown+Kraft'">
                                 </div>
-                                <h4 class="custom-card-title">Natural Brown Kraft</h4>
+                                <span class="custom-card-title">Natural Brown Kraft</span>
                             </div>
 
                             <div class="custom-card">
@@ -625,7 +625,7 @@
                                     <img src="{{ asset('uploads/sbs-c2s.webp') }}" alt="SBS C2S"
                                         onerror="this.src='https://placehold.co/200x200/F5F5F5/888888?text=SBS+C2S'">
                                 </div>
-                                <h4 class="custom-card-title">SBS C2S</h4>
+                                <span class="custom-card-title">SBS C2S</span>
                             </div>
 
                             <div class="custom-card">
@@ -633,7 +633,7 @@
                                     <img src="{{ asset('uploads/textured-.webp') }}" alt="Textured"
                                         onerror="this.src='https://placehold.co/200x200/CCBBAA/333?text=Textured'">
                                 </div>
-                                <h4 class="custom-card-title">Textured</h4>
+                                <span class="custom-card-title">Textured</span>
                             </div>
                         </div>
                     </div>
@@ -768,7 +768,7 @@
                     const image = card.querySelector('img');
                     image.src = customizeUploadsUrl + imagePath;
                     image.alt = title;
-                    card.querySelector('h4').textContent = title;
+                    card.querySelector('.custom-card-title').textContent = title;
                     card.style.order = position + 1;
                     card.style.display = 'flex';
                 });
