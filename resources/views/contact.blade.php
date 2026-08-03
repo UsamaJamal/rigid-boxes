@@ -22,20 +22,20 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
     margin:0 auto;
     padding:0 var(--margin-sides);
 }
-.contact-hero { padding:68px 0 40px; }
+.contact-hero { padding:40px 0; }
 .contact-hero .contact-container,
 .map-section .contact-container,
 .faq-section .contact-container { max-width:var(--container-width); }
 .contact-page .main-footer .container { max-width:var(--container-width); }
 .contact-grid { display:grid; grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr); align-items:center; gap:90px; }
-.contact-breadcrumb { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #000; margin-top: 40px; margin-bottom: 40px; font-family: 'Open Sans', sans-serif; }
+.contact-breadcrumb { font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #000; margin-top: 0; margin-bottom: 14px; font-family: 'Open Sans', sans-serif; }
 @media (max-width: 768px) { .contact-breadcrumb { display: none; } }
 .contact-breadcrumb a { color: #666; text-decoration: none; }
 .contact-breadcrumb .sep { padding: 0 8px; color: #999; }
 .contact-breadcrumb .current { color: #000; font-weight: 700; }
 .eyebrow { margin:0 0 18px; color:var(--contact-primary); font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
 .contact-intro h1,.faq-section h2 { margin:0; color:#242424; font-family:'Open Sans',sans-serif; font-weight:800; }
-.contact-intro h1 { max-width:590px; font-size:clamp(30px,3vw,44px); line-height:1.24; }
+.contact-intro h1 { max-width:590px; font-size:clamp(28px,3.5vw,50px); line-height:45px; font-weight:700; }
 .intro-copy { max-width:550px; margin:23px 0 32px; color:var(--contact-muted); font-size:15px; line-height:1.7; }
 .contact-details { display:grid; grid-template-columns:1fr; max-width:545px; gap:20px; }
 .detail-item { display:flex; align-items:flex-start; gap:12px; color:#3e3e3e; font-size:14px; font-style:normal; line-height:1.45; text-decoration:none; }
@@ -54,7 +54,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .map-frame iframe { position:absolute; top:-60px; left:0; width:100%; height:calc(100% + 110px); border:0; filter:saturate(.78) contrast(.93); }.map-pin { position:absolute; top:48%; left:50%; transform:translate(-50%,-100%); display:grid; width:38px; height:38px; place-items:center; border-radius:50% 50% 50% 0; background:#d84735; color:#fff; font-size:19px; box-shadow:0 3px 10px rgba(0,0,0,.3); pointer-events:none; }
 .faq-section { padding:0 0 72px; }.faq-section h2 { margin-bottom:20px; text-align:center; font-size:28px; line-height:1.3; }
 .contact-faq { margin-bottom:12px; overflow:hidden; border:1px solid #bababa; border-radius:5px; background:#fffdfd; }.contact-faq button { display:flex; width:100%; min-height:57px; align-items:center; justify-content:space-between; gap:20px; padding:14px 22px; border:0; background:transparent; color:#292929; cursor:pointer; font:500 13px 'DM Sans',sans-serif; text-align:left; }.contact-faq button i { font-size:14px; transition:transform .2s ease; }.contact-faq p { display:none; margin:0; padding:0 22px 18px; color:var(--contact-muted); font-size:13px; line-height:1.6; }.contact-faq.is-open { border-color:var(--contact-primary); }.contact-faq.is-open p { display:block; }.contact-faq.is-open button i { transform:rotate(45deg); color:var(--contact-primary); }
-@media (max-width:900px) { .contact-hero { padding-top:45px; }.contact-grid { grid-template-columns:1fr; gap:38px; }.contact-intro h1,.intro-copy { max-width:100%; }.contact-form { max-width:650px; width:100%; }.map-frame { height:340px; } }
+@media (max-width:900px) { .contact-hero { padding-top:30px; }.contact-grid { grid-template-columns:1fr; gap:38px; }.contact-intro h1 { font-size:38px; line-height:1.3; max-width:100%; }.intro-copy { max-width:100%; }.contact-form { max-width:650px; width:100%; }.map-frame { height:340px; } }
 
 /* Mobile Typography for Live Support */
 @media (max-width: 767px) {
@@ -82,10 +82,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 
 @media (max-width:560px) { :root { --margin-sides:16px; }.contact-hero { padding:36px 0 28px; }.contact-intro h1 { font-size:28px; }.contact-details { grid-template-columns:1fr; gap:16px; }.contact-form { padding:24px 18px 20px; }.map-section { padding-bottom:42px; }.map-frame { height:275px; }.faq-section { padding-bottom:48px; }.faq-section h2 { font-size:24px; }.contact-faq button { min-height:62px; padding:13px 16px; font-size:12px; } }
 
-/* Figma contact hero alignment */
-.contact-hero { padding: 14px 0 40px; }
-.contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.03fr); align-items: start; gap: 60px; padding-right: 10px; }
-.contact-intro { padding-top: 66px; }
+/* Remove conflicting duplicate styles - global padding set above */
 
 /* Preserve the compact two-column Figma composition on narrow landscape/tablet canvases. */
 @media (min-width: 481px) and (max-width: 600px) {
@@ -165,9 +162,9 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .contact-intro h1 {
     color:#1f1f1f;
     font-family:'Open Sans', sans-serif;
-    font-size:32px;
+    font-size:clamp(28px, 3.5vw, 50px);
     font-weight:700;
-    line-height:1.35;
+    line-height:45px;
     letter-spacing:0;
 }
 /* Figma typography for the contact-page intro copy. */
@@ -234,7 +231,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 /* Compact one-column mobile layout from the Contact Us design. */
 @media (max-width:480px) {
     :root { --margin-sides:20px; }
-    .contact-hero { padding:48px 0 0; }
+    .contact-hero { padding:40px 0; }
     .contact-grid { grid-template-columns:1fr; gap:24px; padding-right:0; }
     .contact-intro { padding-top:0; }
     .eyebrow { margin:0 0 20px; font-size:10px; line-height:12px; letter-spacing:1.5px; }

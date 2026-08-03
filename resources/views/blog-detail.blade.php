@@ -76,15 +76,16 @@
 
         /* Breadcrumb */
         .breadcrumb-wrap {
-            padding: 16px 0 12px;
+            padding: 40px 0 12px;
         }
 
         .breadcrumb {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--color-muted);
+            color: #000;
+            font-family: 'Open Sans', sans-serif;
             display: flex;
             align-items: center;
             gap: 8px;
