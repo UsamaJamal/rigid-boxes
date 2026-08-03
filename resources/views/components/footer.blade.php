@@ -4,7 +4,7 @@
         <div class="container">
             <div class="newsletter-content">
                 <div class="newsletter-text">
-                    <h3>Sign Up For Exclusive Offers<br>And Updates!</h3>
+                    <span class="newsletter-heading">Sign Up For Exclusive Offers<br>And Updates!</span>
                 </div>
                 <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
                     @csrf
@@ -159,7 +159,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
             </svg>
         </div>
-        <h2>Thank You!</h2>
+        <span class="thank-you-title">Thank You!</span>
         <p>{{ session('success') }}</p>
         <button onclick="document.getElementById('successPopup').style.display='none'">Close</button>
     </div>
@@ -183,7 +183,7 @@
     margin: 0 auto 15px;
 }
 .success-icon svg { width: 35px; height: 35px; }
-.success-popup-box h2 { color: #333; margin-bottom: 10px; font-family: 'Open Sans', sans-serif; }
+.success-popup-box h2, .success-popup-box .thank-you-title { color: #333; margin-bottom: 10px; font-family: 'Open Sans', sans-serif; display: block; }
 .success-popup-box p { color: #666; font-size: 16px; margin-bottom: 25px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
 .success-popup-box button {
     background: #8D4445; color: #fff; border: none;

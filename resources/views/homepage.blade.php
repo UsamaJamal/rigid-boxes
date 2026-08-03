@@ -13,7 +13,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Open+Sans:wght@300;400;600;700;800&display=optional" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -2608,7 +2608,7 @@
                             </a>
                             <div class="industry-card__bottom">
                                 <p class="industry-card__text">
-                                    {{ Str::limit(strip_tags($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'), 80) }}
+                                    {{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'))), 80) }}
                                 </p>
                                 <a href="{{ $catUrl }}" class="industry-card__btn">Explore Boxes</a>
                             </div>

@@ -69,7 +69,8 @@
     gap: 40px;
 }
 
-.newsletter-text h3 {
+.newsletter-text h3,
+.newsletter-text .newsletter-heading {
     width: auto;
     max-width: 497px;
     font-family: 'Open Sans', sans-serif;
@@ -363,7 +364,8 @@
         gap: 24px;
     }
 
-    .newsletter-text h3 {
+    .newsletter-text h3,
+    .newsletter-text .newsletter-heading {
         font-size: clamp(18px, 2.35vw, 24px);
         line-height: 1.35;
     }
@@ -398,7 +400,8 @@
         gap: 24px;
     }
 
-    .newsletter-text h3 {
+    .newsletter-text h3,
+    .newsletter-text .newsletter-heading {
         width: 100%;
         max-width: 378px;
         font-family: 'Open Sans', sans-serif;
@@ -703,5 +706,6 @@
                  w h i t e - s p a c e :   n o w r a p   ! i m p o r t a n t ; 
          } 
  } 
-  
+ 
+ 
  
