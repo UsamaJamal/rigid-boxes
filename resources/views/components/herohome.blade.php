@@ -71,11 +71,11 @@
 
     .hero-title {
         font-family: 'Open Sans', sans-serif;
-        font-weight: 700;
-        font-size: clamp(28px, 3.5vw, 50px);
+        font-weight: 600;
+        font-size:32px;
         line-height: 50px;
         letter-spacing: 0%;
-        text-transform: uppercase;
+       
         color: #fff;
         margin-bottom: 14px;
         overflow-wrap: break-word;

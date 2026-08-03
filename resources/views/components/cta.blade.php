@@ -138,58 +138,72 @@
     }
 
     @media (max-width: 992px) {
+        .cta-section {
+            padding: 50px 0 30px;
+        }
         .cta-container {
-            padding: 0;
+            padding: 0 16px;
         }
         .cta-banner {
             display: flex;
             flex-direction: column;
-            max-width: 412px;
+            max-width: 380px;
             margin: 0 auto;
-            padding: 24px 19px 0;
-            overflow: hidden;
+            padding: 0 20px 30px;
+            overflow: visible;
             background: linear-gradient(177.63deg, #BD7678 0%, #8D4445 100%);
-            border-radius: 0 0 2px 2px;
+            border-radius: 16px;
+            position: relative;
         }
         .cta-image-wrapper {
             position: relative;
             left: auto;
             top: auto;
             order: 1;
-            z-index: 1;
-            width: 100%;
-            height: 184px;
-            margin: 0;
-            border-radius: 16px;
+            z-index: 2;
+            width: calc(100% - 10px);
+            height: auto;
+            margin: -45px auto 20px;
+            border-radius: 0;
+            overflow: visible;
+            box-shadow: none;
         }
         .cta-image-wrapper img {
-            object-fit: cover;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
         }
         .cta-text-card {
             order: 2;
             width: 100%;
             min-height: 0;
-            padding: 26px 0 25px;
+            padding: 0 5px;
             background: transparent;
             border-radius: 0;
             justify-content: flex-start;
+            text-align: left;
+            align-items: flex-start;
         }
         .cta-heading {
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1.25;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            color: #fff;
         }
         .cta-desc {
-            max-width: 280px;
-            margin: 0 0 12px;
-            font-size: 13px;
-            line-height: 1.38;
+            max-width: 100%;
+            margin: 0 0 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
         }
         .cta-btn {
             gap: 8px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            align-self: flex-start;
         }
         .cta-text-card > :not(.cta-ellipse) {
             position: relative;

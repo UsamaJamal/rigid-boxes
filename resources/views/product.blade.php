@@ -126,6 +126,31 @@
             height: auto;
             object-fit: contain;
         }
+
+        .in-stock-tag {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background-color: #e6f7eb;
+            color: #111;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        .stock-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #38c172;
+            border-radius: 50%;
+            display: inline-block;
+        }
         
         .thumbnails {
             display: flex;
@@ -612,7 +637,7 @@
             font-size: 16px;
             color: #000;
             /* margin-bottom: 15px; */
-            line-height: 40px;
+            line-height: 25px;
             text-align: justify;
         }
         
@@ -1980,6 +2005,9 @@
             @endphp
             <div class="hero-images">
                 <div class="main-image">
+                    <div class="in-stock-tag">
+                        <span class="stock-dot"></span> In Stock
+                    </div>
                     <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
                 @if(count($pGallery) > 1)
@@ -2046,21 +2074,21 @@
                 <h1>{{ $pTitle }}</h1>
                 @php
                     $descText = html_entity_decode(html_entity_decode(strip_tags($product['description'] ?? 'Custom printed boxes crafted to protect your products while showcasing your brand with premium-quality printing and luxury finishes.')));
-                    $limit = 400;
+                    $limit = 260;
                     $isLong = strlen($descText) > $limit;
                 @endphp
-                <p class="desc-text">
+                <p class="desc-text" style="color: #000; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
                     @if($isLong)
                         <span id="shortDescText">{{ \Illuminate\Support\Str::limit($descText, $limit, '') }}... </span>
                         <span id="fullDescText" style="display:none;">{{ $descText }} </span>
-                        <span class="read-more-btn" id="readMoreBtn" onclick="toggleReadMore()">Read More</span>
+                        <span class="read-more-btn" id="readMoreBtn" onclick="toggleTopReadMore()" style="color: var(--primary-color); cursor: pointer; font-weight: 700;">Read More</span>
                     @else
                         {{ $descText }}
                     @endif
                 </p>
                 
                 <script>
-                    function toggleReadMore() {
+                    function toggleTopReadMore() {
                         var shortText = document.getElementById('shortDescText');
                         var fullText = document.getElementById('fullDescText');
                         var btn = document.getElementById('readMoreBtn');
@@ -2206,14 +2234,25 @@
     <!-- Content Section -->
     <section class="content-section container" id="content-description">
         <style>
+            #desc-wrapper {
+                display: -webkit-box;
+                -webkit-line-clamp: 14;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            #desc-wrapper.expanded {
+                display: block;
+                -webkit-line-clamp: unset;
+                overflow: visible;
+            }
             .content-read-more-btn {
                 color: var(--primary-color, #8D4445);
                 cursor: pointer;
                 font-weight: 700;
                 font-size: 14px;
                 text-decoration: none;
-                display: inline-block;
-                margin-top: 2px;
+                display: none;
+                margin-top: 5px;
             }
             .content-read-more-btn:hover {
                 text-decoration: underline;
@@ -2227,31 +2266,31 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const wrapper = document.getElementById('desc-wrapper');
                 if (wrapper) {
-                    const children = Array.from(wrapper.children);
-                    if (children.length > 2) {
-                        const hiddenWrapper = document.createElement('div');
-                        hiddenWrapper.style.display = 'none';
-                        
-                        // Move elements from index 2 onwards into hiddenWrapper
-                        for (let i = 2; i < children.length; i++) {
-                            hiddenWrapper.appendChild(children[i]);
+                    const btn = document.createElement('span');
+                    btn.className = 'content-read-more-btn';
+                    btn.textContent = 'Read More';
+                    wrapper.parentNode.insertBefore(btn, wrapper.nextSibling);
+
+                    // Check if content overflows the 14 lines clamp
+                    setTimeout(() => {
+                        if (wrapper.scrollHeight > wrapper.clientHeight + 10) {
+                            btn.style.display = 'inline-block';
                         }
-                        wrapper.appendChild(hiddenWrapper);
-                        
-                        const btn = document.createElement('span');
-                        btn.className = 'content-read-more-btn';
-                        btn.textContent = 'Read More';
-                        btn.onclick = function() {
-                            if (hiddenWrapper.style.display === 'none') {
-                                hiddenWrapper.style.display = 'block';
-                                btn.textContent = 'Read Less';
-                            } else {
-                                hiddenWrapper.style.display = 'none';
-                                btn.textContent = 'Read More';
-                            }
-                        };
-                        wrapper.appendChild(btn);
-                    }
+                    }, 50);
+
+                    btn.onclick = function() {
+                        if (wrapper.classList.contains('expanded')) {
+                            wrapper.classList.remove('expanded');
+                            btn.textContent = 'Read More';
+                            
+                            // Scroll back to the top of the content section
+                            const offset = wrapper.getBoundingClientRect().top + window.scrollY - 150;
+                            window.scrollTo({ top: offset, behavior: 'smooth' });
+                        } else {
+                            wrapper.classList.add('expanded');
+                            btn.textContent = 'Read Less';
+                        }
+                    };
                 }
             });
         </script>
