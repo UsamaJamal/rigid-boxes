@@ -137,4 +137,23 @@
         <button class="btn" type="submit">Save {{ $meta['singular'] }}</button>
     </div>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.init({
+                ...window.tinyMceUploadConfig,
+                selector: 'textarea[name="content"]',
+                height: 400,
+                plugins: 'code advlist autolink lists link image charmap preview anchor searchreplace visualblocks fullscreen insertdatetime media table help wordcount',
+                toolbar: 'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | code fullscreen preview',
+                block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6; Preformatted=pre',
+                branding: false,
+                promotion: false,
+                content_style: 'body { font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; }'
+            });
+        }
+    });
+</script>
 @endsection

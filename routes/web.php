@@ -279,6 +279,12 @@ Route::get('/{slug}', function ($slug) {
         ]);
     }
 
-    // If neither category nor product
+    // 3. Check if it's a dynamic page
+    $page = DB::table('admin_pages')->where('slug', $slug)->where('status', 'published')->first();
+    if ($page) {
+        return view('dynamic-page', ['page' => (array) $page]);
+    }
+
+    // If neither category, product, nor page
     abort(404);
 });

@@ -201,7 +201,7 @@
             </a>
             <a class="{{ request()->route('module') === 'pages' ? 'active' : '' }}" href="{{ route('admin.module.index', 'pages') }}">
                 <i class="fa-regular fa-file-lines"></i>
-                <span>Static Pages</span>
+                <span>Dynamic Pages</span>
             </a>
         </nav>
         <div class="side-bottom">

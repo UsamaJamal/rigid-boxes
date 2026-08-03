@@ -14,7 +14,7 @@ class AdminContentController extends Controller
             'products' => ['title' => 'Products', 'singular' => 'Product'],
             'categories' => ['title' => 'Categories', 'singular' => 'Category'],
             'blogs' => ['title' => 'Blog Posts', 'singular' => 'Blog Post'],
-            'pages' => ['title' => 'Static Pages', 'singular' => 'Page'],
+            'pages' => ['title' => 'Dynamic Pages', 'singular' => 'Page'],
             'authors' => ['title' => 'Authors', 'singular' => 'Author'],
         ];
     }
