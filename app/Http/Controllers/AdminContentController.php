@@ -136,6 +136,10 @@ class AdminContentController extends Controller
         \Log::info('AdminContentController payload for ' . $module, $payload);
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
 
+        if (isset($payload['publish_date']) && !empty(trim($payload['publish_date']))) {
+            $payload['publish_date'] = date('Y-m-d', strtotime(trim($payload['publish_date'])));
+        }
+
         foreach (['show_home', 'show_in_nav'] as $checkboxField) {
             if (in_array($checkboxField, $fields, true)) {
                 $payload[$checkboxField] = $request->boolean($checkboxField) ? 1 : 0;

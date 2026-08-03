@@ -1180,7 +1180,7 @@
                 flex-wrap: wrap;
                 flex-direction: row;
                 gap: 12px;
-                justify-content: center;
+                justify-content: flex-start;
             }
 
             .bestseller-card {
@@ -1732,7 +1732,7 @@
 
         @media (max-width: 768px) {
             .sustainable-section {
-                padding: 40px 0 50px;
+                padding: 0px 0 50px;
             }
 
             .sustainable-inner {

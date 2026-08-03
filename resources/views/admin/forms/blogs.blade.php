@@ -71,7 +71,7 @@
             
             <div class="field">
                 <label>Publish Date</label>
-                <input type="date" name="publish_date" value="{{ $v('publish_date') }}">
+                <input type="text" name="publish_date" value="{{ $v('publish_date') }}" placeholder="YYYY-MM-DD">
             </div>
             
             <div class="field">
