@@ -12,7 +12,7 @@
         $mobileBg  = asset('uploads/whychoose-us-banner-mobile-view.png');
     } else {
         $desktopBg = asset('uploads/about-us-banner.webp');
-        $mobileBg  = asset('uploads/about-us-banner.webp');
+        $mobileBg  = asset('uploads/whychoose-us-banner-mobile-view.png');
     }
 @endphp
 
@@ -54,9 +54,10 @@
         font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         /* margin-top: 5px; */
         color: #FFFFFF;
+        text-align:left !important
     }
 
     .inner-hero-breadcrumb span {
