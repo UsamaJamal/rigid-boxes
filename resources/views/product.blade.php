@@ -1286,6 +1286,11 @@
             }
         }
         @media (max-width: 767px) {
+            .process-cards {
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
             .content-section, .specs-section, .faqs-section {
                 width: calc(100% - (var(--margin-sides) * 2)); margin-left: auto; margin-right: auto;
                 margin-bottom: 10px !important;

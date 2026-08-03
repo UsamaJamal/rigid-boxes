@@ -222,7 +222,7 @@
 
     .customize-title {
         font-family: 'Open Sans', sans-serif;
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 800;
         color: var(--section-text-color);
         margin-bottom: 12px;

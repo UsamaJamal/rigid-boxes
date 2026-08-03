@@ -187,7 +187,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-Route::get('/whyChooseUs',[WhyChooseUsController::class, 'index']);
+Route::get('/why-choose-us/',[WhyChooseUsController::class, 'index']);
 
 try {
     $faqRow = DB::table('homepage_contents')->where('section', 'faq_page')->where('field_key', 'faq_page_slug')->first();
