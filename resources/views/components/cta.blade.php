@@ -123,6 +123,7 @@
         object-fit: contain;
         object-position: center;
         display: block;
+        border-radius: 16px;
     }
 
     @media (max-width: 1100px) {
