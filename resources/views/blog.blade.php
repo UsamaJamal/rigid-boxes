@@ -7,7 +7,7 @@
 <style>
 /* Figma Design Overrides */
 .hero {
-    background-image: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.58) 42%, rgba(0,0,0,.12) 77%), url('{{ asset('uploads/hero-home-banner.webp') }}');
+    background-image: linear-gradient(90deg, rgba(40,10,10,1) 0%, rgba(80,20,20,1) 40%, rgba(141,68,69,.0) 65%), url('{{ asset('uploads/blog-page-banner.webp') }}');
     background-position: center 52%;
     background-size: cover;
 }
@@ -385,8 +385,28 @@ html, body { overflow-x: clip; }
 .category-row { width: 100%; padding-left: 0; padding-right: 0; }
 .content { padding-bottom: 0; }
 .content > .cta-section { margin: 40px 0 0; padding-bottom: 24px; }
+/* Fix CTA alignment - remove extra padding, match content width */
+.content > .cta-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box;
+}
+.content > .cta-section .cta-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100%;
+}
+.content > .cta-section .cta-banner {
+    border-radius: 24px;
+    overflow: hidden;
+}
 @media (max-width: 1100px) {
     .hero .container, .categories, .content { padding-left: 32px; padding-right: 32px; }
+    .content > .cta-section { padding-left: 0 !important; padding-right: 0 !important; }
+    .content > .cta-section .cta-container { padding-left: 0 !important; padding-right: 0 !important; }
+}
+@media (max-width: 992px) {
+    .content > .cta-section { padding-left: 0 !important; padding-right: 0 !important; }
 }
 @media (max-width: 768px) {
     .hero .container, .categories, .content { padding-left: 20px; padding-right: 20px; }
@@ -651,6 +671,12 @@ nextBtn.addEventListener('click', () => {
 /* Figma mobile layout */
 @media (max-width: 600px) {
     .hero { height: 270px; }
+    /* Mobile: dark overlay from bottom covering text area */
+    .hero {
+        background-image:
+            linear-gradient(to top, rgba(40,10,10,.95) 0%, rgba(80,20,20,.80) 50%, rgba(141,68,69,.20) 100%),
+            url('{{ asset('uploads/blog-page-banner.webp') }}');
+    }
     .hero h1 { font-size: 28px; line-height: 1.22; margin-top: 26px; }
     .hero p { font-size: 12px; line-height: 1.55; }
     .hero .breadcrumb { top: -4px; }
