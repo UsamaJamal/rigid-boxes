@@ -533,22 +533,7 @@
                 width: 100%;
             }
 
-            .cta-wrapper {
-                flex-direction: column-reverse;
-                align-items: stretch;
-            }
 
-            .cta-content {
-                width: 100%;
-                flex: 1 1 auto;
-            }
-
-            .cta-image {
-                width: 100%;
-                flex: 1 1 auto;
-                margin-left: 0;
-                height: 300px;
-            }
         }
 
         /* Mobile */
@@ -564,10 +549,7 @@
                 padding-right: 16px;
             }
 
-            .cta-section .container {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
+
 
             .heading-01 {
                 font-size: 28px;
@@ -640,254 +622,12 @@
             }
         }
 
-        /* ==========================================================================
-           CTA SECTION
-           ========================================================================== */
 
-        .cta-section {
-            padding: 30px 0;
-            background-color: var(--background-color);
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .cta-section .container {
-            padding-left: var(--margin-sides);
-            padding-right: var(--margin-sides);
-            max-width: var(--container-width);
-            overflow: visible;
-        }
-
-        .cta-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            position: relative;
-            max-width: 100%;
-        }
-
-        /* CTA Content (Right) */
-        .cta-content {
-            height: 398px;
-            flex: 1 1 60%;
-            min-width: 0;
-            background: url('{{ asset('images/Container.png') }}') no-repeat center center / cover, linear-gradient(135deg, #DB9E9F 0%, #8D4445 100%);
-            border-radius: 0px;
-            padding: 60px;
-            color: #FFFFFF;
-        }
-
-        .cta-title {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: #FFFFFF;
-        }
-
-        .cta-description {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 24px;
-            margin-bottom: 32px;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 400px;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 32px;
-            background-color: #FFFFFF;
-            color: #191919;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .cta-button svg {
-            transition: transform 0.3s ease;
-        }
-
-        .cta-button:hover svg {
-            transform: translateX(4px);
-        }
-
-        /* CTA Image (Left) */
-        .cta-image {
-            margin-left: -64px;
-            flex: 1 1 40%;
-            min-width: 0;
-            max-width: 500px;
-            height: 310px;
-            border-radius: 0px;
-            overflow: hidden;
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-        }
-
-        .cta-box-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: center;
-            display: block;
-        }
-
-        @media (max-width: 1400px) {
-            .cta-content {
-                padding: 50px;
-            }
-
-            .cta-image {
-                max-width: 450px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .cta-content {
-                padding: 40px;
-            }
-
-            .cta-image {
-                max-width: 400px;
-                height: 280px;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .cta-content {
-                padding: 40px;
-                text-align: center;
-            }
-
-            .cta-description {
-                max-width: 100%;
-            }
-
-            .cta-image {
-                flex: 0 0 300px;
-                max-width: 350px;
-                height: 280px;
-                margin-left: 0;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .cta-wrapper {
-                padding: 0;
-            }
-
-            .cta-image {
-                margin-left: 0;
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .cta-section {
-                padding: 0;
-            }
-
-            .cta-section .container {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            .cta-wrapper {
-                margin-top: -80px;
-                margin-bottom: 22px;
-                height: auto;
-                flex-direction: column;
-                gap: 0;
-                background: url('{{ asset('images/Container.png') }}') no-repeat center center / cover, linear-gradient(135deg, #DB9E9F 0%, #8D4445 100%);
-                padding-top: 40px;
-            }
-
-            .cta-image {
-                width: 100%;
-                max-width: 77%;
-                height: auto;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: -20px;
-                border-radius: 0;
-                order: 1;
-            }
-
-            .cta-image img {
-                height: auto;
-            }
-
-            .cta-content {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                order: 2;
-                padding: 0 32px 32px 32px;
-                border-radius: 0;
-                text-align: center;
-                background: none;
-            }
-
-            .cta-title {
-                font-size: 24px;
-                line-height: 32px;
-                margin-bottom: 16px;
-            }
-
-            .cta-description {
-                font-size: 14px;
-                line-height: 22px;
-                max-width: 100%;
-                margin-bottom: 24px;
-            }
-
-            .cta-button {
-                width: auto;
-                justify-content: center;
-                padding: 14px 28px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cta-image {
-                height: auto;
-            }
-
-            .cta-content {
-                padding: 0 24px 32px 24px;
-            }
-
-            .cta-wrapper {
-                padding: 65px 0 0 0;
-            }
-
-            .cta-title {
-                margin-top: 0;
-                font-size: 22px;
-                line-height: 30px;
-            }
-
-            .cta-description {
-                font-size: 13px;
-                line-height: 20px;
-            }
+        /* CTA Width Override for this page */
+        .cta-section .cta-container {
+            max-width: var(--container-width) !important;
+            padding-left: var(--margin-sides) !important;
+            padding-right: var(--margin-sides) !important;
         }
     </style>
 </head>
@@ -1038,28 +778,7 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-wrapper">
-                    <div class="cta-content">
-                        <span class="cta-title" style="display: block;">Get Your Custom Packaging Today</span>
-                        <p class="cta-description">Deliver elegance, protection, and a memorable unboxing experience
-                            with fully customized rigid box solutions.</p>
-                        <a href="/request-quote/" class="cta-button">
-                            Get Started Today
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="cta-image">
-                        <img src="{{ asset('uploads/allcategory-cta.webp') }}" alt="Custom Packaging Box"
-                            class="cta-box-image" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
+        @include('components.cta')
     </main>
 
     <!-- Footer Component -->

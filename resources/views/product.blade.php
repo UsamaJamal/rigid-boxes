@@ -695,7 +695,7 @@
         .specs-section {
             max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
             width: calc(100% - (var(--margin-sides) * 2));
-            margin: 10px auto;
+            margin: 0 auto 60px;
             border-radius: 12px;
             overflow: hidden;
             border: 0.5px solid #8d4445;
@@ -732,7 +732,7 @@
         .faqs-section {
             max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
             width: calc(100% - (var(--margin-sides) * 2));
-            margin: 32px auto;
+            margin: 0 auto 60px;
         }
         
         .faq-item {
@@ -773,7 +773,7 @@
         .order-process-section {
             max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
             width: calc(100% - (var(--margin-sides) * 2));
-            margin: 32px auto 60px;
+            margin: 0 auto 60px;
         }
         
         .process-cards {
@@ -1728,7 +1728,7 @@
             .finishes-details-box {
                 order: 2;
                 width: 100%;
-                padding: 24px 18px;
+                padding: 0px 18px;
                 background: #FAF4F2;
                 border-radius: 16px;
             }

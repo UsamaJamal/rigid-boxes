@@ -123,6 +123,7 @@
         object-fit: contain;
         object-position: center;
         display: block;
+        border-radius: 16px;
     }
 
     @media (max-width: 1100px) {
@@ -138,19 +139,32 @@
     }
 
     @media (max-width: 992px) {
-        .cta-container {
-            padding: 0;
+        .cta-section {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        main > section.cta-section > .cta-container,
+        .cta-section > .cta-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
         }
         .cta-banner {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 24px 19px 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 24px 0 0 !important;
             overflow: hidden;
             background: linear-gradient(177.63deg, #BD7678 0%, #8D4445 100%);
-            border-radius: 0 0 2px 2px;
+            border-radius: 0 !important;
+            box-sizing: border-box !important;
         }
         .cta-image-wrapper {
             position: relative;
@@ -158,9 +172,9 @@
             top: auto;
             order: 1;
             z-index: 1;
-            width: 100%;
+            width: calc(100% - 38px);
             height: 184px;
-            margin: 0;
+            margin: 0 19px;
             border-radius: 16px;
         }
         .cta-image-wrapper img {
@@ -170,27 +184,33 @@
             order: 2;
             width: 100%;
             min-height: 0;
-            padding: 26px 0 25px;
-            background: transparent;
-            border-radius: 0;
-            justify-content: flex-start;
+            padding: 26px 19px 25px;
+            background: transparent !important;
+            border-radius: 0 !important;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
         .cta-heading {
             font-size: 20px;
             line-height: 1.25;
             margin-bottom: 8px;
+            text-align: center;
         }
         .cta-desc {
             max-width: 280px;
-            margin: 0 0 12px;
+            margin: 0 auto 12px;
             font-size: 13px;
             line-height: 1.38;
+            text-align: center;
         }
         .cta-btn {
             gap: 8px;
             padding: 12px 15px;
             border-radius: 8px;
             font-size: 14px;
+            align-self: center;
+            margin: 0 auto;
         }
         .cta-text-card > :not(.cta-ellipse) {
             position: relative;
@@ -199,20 +219,20 @@
         .cta-ellipse-1 {
             width: 82px;
             height: 74px;
-            right: -28px;
-            bottom: -25px;
+            right: 0;
+            bottom: 0;
         }
         .cta-ellipse-2 {
             width: 62px;
             height: 62px;
-            right: -2px;
-            bottom: 2px;
+            right: 12px;
+            bottom: 12px;
         }
     }
 
     @media (max-width: 576px) {
         .cta-section {
-            padding: 0 0 30px;
+            padding: 0 0 30px !important;
         }
     }
 </style>

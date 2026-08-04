@@ -727,21 +727,16 @@
             }
 
             .article-meta {
-                gap: 10px;
-                font-size: 15px;
+                gap: 5px;
+                font-size: 13px;
                 color: #000000;
                 margin-top: 20px;
-                flex-wrap: wrap;
-                white-space: normal;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                overflow-x: auto;
             }
 
-            .meta-item {
-                gap: 0;
-            }
 
-            .meta-item svg {
-                display: none;
-            }
 
             .article-body p {
                 font-family: 'DM Sans', sans-serif;
