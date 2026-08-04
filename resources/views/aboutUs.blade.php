@@ -5,8 +5,6 @@
         justify-content: center;
         padding: 30px 0;
         width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
     }
 
     .passion-container {
@@ -90,8 +88,6 @@
         justify-content: center;
         padding: 0 0 30px 0;
         width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
     }
 
     .mission-vision-container {
@@ -178,8 +174,6 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        max-width: 1440px;
-        margin: 0 auto;
     }
     .pe-container {
         max-width: 1440px;
@@ -190,7 +184,7 @@
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
         font-size: 32px;
-        margin-bottom: 24px;
+        margin-bottom: 0px;
         position: relative;
         color: #FFFFFF;
     }
@@ -200,13 +194,13 @@
         width: 80px;
         height: 3px;
         background-color: #FFFFFF;
-        margin-top: 24px;
+        margin-top: 7px;
     }
     .pe-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 24px;
-        margin-top: 60px;
+        margin-top: 9px;
     }
     .pe-column {
         padding-right: 24px;
@@ -272,8 +266,6 @@
         justify-content: center;
         background-color: #FFFFFF;
         text-align: center;
-        max-width: 1440px;
-        margin: 0 auto;
     }
     .tb-container {
         max-width: 1440px;
@@ -337,8 +329,6 @@
         padding: 30px 0;
         width: 100%;
         background-color: #FAF8F8;
-        max-width: 1440px;
-        margin: 0 auto;
     }
     .cf-container {
         display: flex;
@@ -409,6 +399,9 @@
     @media (max-width: 1024px) {
         .cf-container {
             flex-direction: column;
+        }
+        .circular-future-section {
+            padding-bottom: 15px;
         }
     }
 </style>

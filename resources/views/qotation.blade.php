@@ -159,7 +159,7 @@
             width: 100%;
             height: 44px;
             padding: 0 14px;
-            border: 1px solid #E2D9D5;
+            border: 0.5px solid #8d4445;
             border-radius: 8px;
             font-size: 14px;
             font-family: 'DM Sans', sans-serif;

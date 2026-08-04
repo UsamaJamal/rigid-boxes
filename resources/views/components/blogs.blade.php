@@ -83,6 +83,7 @@
         flex-direction: column;
         transition: box-shadow 0.3s, transform 0.3s;
         position: relative;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .blog-card:hover {
@@ -129,6 +130,11 @@
         position: absolute;
         inset: 0;
         z-index: 1;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .blog-card a {
+        -webkit-tap-highlight-color: transparent;
     }
 
     .blog-card:hover .blog-card__title {
@@ -238,6 +244,10 @@
             min-width: 100% !important;
             scroll-snap-align: center !important;
             border-radius: 16px !important;
+        }
+
+        .blog-card:hover {
+            box-shadow: none !important;
         }
 
         .blog-card__image {

@@ -17,7 +17,7 @@
 
     .testimonial-header {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
     }
 
     .testimonial-title {
@@ -73,34 +73,33 @@
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
-        padding: 30px 18px 10px 25px;
+        padding: 30px 18px 45px 25px;
         box-sizing: border-box;
     }
 
     .testimonial-card {
         width: 100%;
-        max-width: 540px;
-        min-height: 200px;
+        max-width: 512px;
+        height: 230px;
         background: #0B0B0B;
         border-radius: 16px;
         position: relative;
         display: flex;
         align-items: center;
-        padding: 24px 20px 24px 165px;
+        padding: 20px 20px 20px 210px;
         color: #FFF;
         box-sizing: border-box;
-        box-shadow: none;
+        overflow: visible;
     }
 
     .testimonial-img {
         position: absolute;
         left: 0px;
-        top: -9px;
-        width: 145px;
-        height: 215px;
+        top: -20px;
+        width: 160px;
+        height: 250px;
         border-radius: 16px;
         object-fit: cover;
-        box-shadow: none;
         z-index: 5;
     }
 
@@ -110,6 +109,7 @@
         justify-content: center;
         position: relative;
         width: 100%;
+        height: 100%;
         text-align: left;
     }
 
@@ -194,7 +194,7 @@
         justify-content: center;
         align-items: center;
         gap: 8px;
-        margin-top: 28px;
+        margin-top: 50px;
     }
 
     .page-dot {
@@ -215,7 +215,7 @@
     /* Mobile Responsive View — 1 Card per Slide */
     @media (max-width: 768px) {
         .testimonial-section {
-            padding: 30px 0 40px;
+            padding: 20px 0 30px;
         }
 
         .testimonial-container {
@@ -223,7 +223,7 @@
         }
 
         .testimonial-header {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .testimonial-title {
@@ -243,21 +243,21 @@
 
         .testimonial-card-wrap {
             flex: 0 0 100%;
-            padding: 30px 10px 10px 24px;
+            padding: 24px 15px 10px 15px;
         }
 
         .testimonial-card {
             max-width: 100%;
-            min-height: 175px;
-            padding: 16px 12px 16px 135px;
+            height: 195px;
+            padding: 24px 12px 16px 155px;
             border-radius: 16px;
         }
 
         .testimonial-img {
             width: 135px;
-            height: 195px;
-            left: -20px;
-            top: 0px;
+            height: 210px;
+            left: 0px;
+            top: -15px;
             border-radius: 16px;
         }
 

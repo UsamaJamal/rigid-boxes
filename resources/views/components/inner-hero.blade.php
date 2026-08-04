@@ -111,8 +111,12 @@
         }
 
         .inner-hero-content {
+            text-align: left;
+            margin: 0;
+        }
+
+        .inner-hero-desc {
             text-align: center;
-            margin: 0 auto;
         }
 
         br.desktop-br {

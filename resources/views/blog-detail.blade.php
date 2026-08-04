@@ -665,23 +665,33 @@
                 display: block;
                 padding: 20px;
             }
-            .author-card-avatar {
+            .author-card > a,
+            .author-card > img.author-card-avatar {
                 float: left;
-                margin-right: 16px;
-                margin-bottom: 8px;
-                width: 64px;
-                height: 64px;
+                margin-left: -14px;
+                margin-right: 44px;
+                margin-bottom: 12px;
+                display: block !important;
+            }
+            .author-card-avatar {
+                width: 80px !important;
+                height: 80px !important;
+                border: 2px solid var(--color-primary) !important;
+                margin: 0 !important;
+                float: none !important;
+                padding: 2px;
             }
             .author-card-details {
                 display: block;
             }
             .author-card-tag {
-                padding-top: 4px;
+                padding-top: 14px;
             }
             .author-card-bio {
                 clear: left;
                 display: block;
-                padding-top: 8px;
+                padding-top: 4px;
+                text-align: justify;
             }
             .author-divider {
                 margin: 24px 0 16px 0;
