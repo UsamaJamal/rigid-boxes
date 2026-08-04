@@ -809,9 +809,9 @@
             }
 
             .cta-wrapper {
-                margin-top: -100px;
+                margin-top: -40px;
                 margin-bottom: 22px;
-                height: 568px;
+                height: auto;
                 flex-direction: column;
                 gap: 0;
             }
@@ -819,11 +819,15 @@
             .cta-image {
                 width: 100%;
                 max-width: 77%;
-                height: 340px;
+                height: auto;
                 margin-left: 0;
-                margin-bottom: -116px;
+                margin-bottom: -162px;
                 border-radius: 0;
                 order: 1;
+            }
+
+            .cta-image img {
+                height: auto;
             }
 
             .cta-content {
@@ -831,7 +835,7 @@
                 max-width: 100%;
                 height: auto;
                 order: 2;
-                padding: 40px 32px 24px 32px;
+                padding: 60px 32px 24px 32px;
                 border-radius: 0;
                 text-align: center;
             }

@@ -680,6 +680,8 @@
                 width: 100% !important;
                 height: 100% !important;
                 object-fit: contain !important;
+                object-position: center !important;
+                
             }
 
             .why-card__content {

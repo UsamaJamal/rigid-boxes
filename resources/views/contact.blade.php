@@ -162,7 +162,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .contact-intro h1 {
     color:#1f1f1f;
     font-family:'Open Sans', sans-serif;
-    font-size:clamp(28px, 3.5vw, 50px);
+    font-size:32px;
     font-weight:700;
     line-height:45px;
     letter-spacing:0;
