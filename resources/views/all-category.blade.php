@@ -809,19 +809,22 @@
             }
 
             .cta-wrapper {
-                margin-top: -40px;
+                margin-top: -80px;
                 margin-bottom: 22px;
                 height: auto;
                 flex-direction: column;
                 gap: 0;
+                background: url('{{ asset('images/Container.png') }}') no-repeat center center / cover, linear-gradient(135deg, #DB9E9F 0%, #8D4445 100%);
+                padding-top: 40px;
             }
 
             .cta-image {
                 width: 100%;
                 max-width: 77%;
                 height: auto;
-                margin-left: 0;
-                margin-bottom: -162px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: -20px;
                 border-radius: 0;
                 order: 1;
             }
@@ -835,9 +838,10 @@
                 max-width: 100%;
                 height: auto;
                 order: 2;
-                padding: 60px 32px 24px 32px;
+                padding: 0 32px 32px 32px;
                 border-radius: 0;
                 text-align: center;
+                background: none;
             }
 
             .cta-title {
@@ -863,19 +867,19 @@
 
         @media (max-width: 480px) {
             .cta-image {
-                height: 280px;
+                height: auto;
             }
 
             .cta-content {
-                padding: 32px 24px;
+                padding: 0 24px 32px 24px;
             }
 
             .cta-wrapper {
-                padding: 0;
+                padding: 65px 0 0 0;
             }
 
             .cta-title {
-                margin-top: 96px;
+                margin-top: 0;
                 font-size: 22px;
                 line-height: 30px;
             }
