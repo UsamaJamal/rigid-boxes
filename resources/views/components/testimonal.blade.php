@@ -1,7 +1,7 @@
 <style>
     .testimonial-section {
         background: var(--secondary-color, #FAF8F8);
-        padding: 20px 0 30px;
+        padding: 20px 0 5px;
         position: relative;
         font-family: 'DM Sans', sans-serif;
         overflow: hidden;
@@ -17,7 +17,7 @@
 
     .testimonial-header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 10px;
     }
 
     .testimonial-title {
@@ -49,7 +49,7 @@
         justify-content: center;
         gap: 20px;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 0;
     }
 
     .testimonial-slider {
@@ -73,7 +73,7 @@
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
-        padding: 30px 18px 45px 25px;
+        padding: 30px 18px 15px 25px;
         box-sizing: border-box;
     }
 
@@ -194,7 +194,7 @@
         justify-content: center;
         align-items: center;
         gap: 8px;
-        margin-top: 50px;
+        margin-top: 10px;
     }
 
     .page-dot {
@@ -215,7 +215,7 @@
     /* Mobile Responsive View — 1 Card per Slide */
     @media (max-width: 768px) {
         .testimonial-section {
-            padding: 20px 0 30px;
+            padding: 20px 0 5px;
         }
 
         .testimonial-container {
@@ -223,7 +223,7 @@
         }
 
         .testimonial-header {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .testimonial-title {
@@ -299,7 +299,7 @@
         }
 
         .pagination-dots {
-            margin-top: 20px;
+            margin-top: 10px;
             gap: 8px;
         }
 

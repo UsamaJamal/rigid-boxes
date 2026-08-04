@@ -308,8 +308,9 @@
             font-weight: 600;
         }
 
-        .input-wrap input, .input-wrap select, .form-control, textarea.form-control {
+        .input-wrap input, .input-wrap select, .form-control {
             width: 100%;
+            height: 45px;
             padding: 12px 15px;
             border: 1px solid var(--color-border);
             border-radius: 6px;
@@ -318,6 +319,23 @@
             outline: none;
             transition: border-color 0.3s;
             background: #fff;
+            box-sizing: border-box;
+        }
+
+        textarea.form-control {
+            width: 100%;
+            min-height: 100px;
+            height: auto;
+            padding: 12px 15px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s;
+            background: #fff;
+            box-sizing: border-box;
+            resize: vertical;
         }
 
         /* Custom Select Arrow Styling */
@@ -355,6 +373,7 @@
         
         .custom-select-trigger {
             width: 100%;
+            height: 45px;
             padding: 12px 40px 12px 15px;
             border: 1px solid var(--color-border);
             border-radius: 6px;
@@ -369,6 +388,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
         }
 
         .custom-select-trigger::after {

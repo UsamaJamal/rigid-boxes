@@ -173,12 +173,14 @@
             order: 1;
             z-index: 1;
             width: calc(100% - 38px);
-            height: 184px;
+            height: auto;
             margin: 0 19px;
             border-radius: 16px;
         }
         .cta-image-wrapper img {
-            object-fit: cover;
+            object-fit: contain;
+            height: auto;
+            width: 100%;
         }
         .cta-text-card {
             order: 2;
