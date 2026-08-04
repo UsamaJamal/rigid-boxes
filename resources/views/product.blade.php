@@ -242,6 +242,7 @@
         .read-more-btn {
             color: var(--primary-color);
             cursor: pointer;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 700;
             font-size: 14px;
             text-decoration: none;
@@ -619,6 +620,7 @@
         /* Content Section */
         .content-section {
             padding-bottom: 60px;
+            word-spacing: 0.08em;
         }
         
         .content-section h2 {
@@ -636,9 +638,28 @@
             font-weight: 400;
             font-size: 16px;
             color: #000;
-            /* margin-bottom: 15px; */
-            line-height: 25px;
+            margin-bottom: 18px;
+            line-height: 1.7;
             text-align: justify;
+        }
+
+        .content-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section h3,
+        .content-section h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 28px 0 14px;
+            color: #000;
+        }
+
+        .content-section h3:first-child,
+        .content-section h4:first-child {
+            margin-top: 0;
         }
         
         .content-section ul,
@@ -2081,7 +2102,7 @@
                     @if($isLong)
                         <span id="shortDescText">{{ \Illuminate\Support\Str::limit($descText, $limit, '') }}... </span>
                         <span id="fullDescText" style="display:none;">{{ $descText }} </span>
-                        <span class="read-more-btn" id="readMoreBtn" onclick="toggleTopReadMore()" style="color: var(--primary-color); cursor: pointer; font-weight: 700;">Read More</span>
+                        <span class="read-more-btn" id="readMoreBtn" onclick="toggleTopReadMore()" style="color: var(--primary-color); cursor: pointer;">Read More</span>
                     @else
                         {{ $descText }}
                     @endif
@@ -2239,6 +2260,7 @@
                 -webkit-line-clamp: 14;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
+                line-height: 1.7;
             }
             #desc-wrapper.expanded {
                 display: block;
@@ -2248,6 +2270,7 @@
             .content-read-more-btn {
                 color: var(--primary-color, #8D4445);
                 cursor: pointer;
+                font-family: 'Open Sans', sans-serif;
                 font-weight: 700;
                 font-size: 14px;
                 text-decoration: none;

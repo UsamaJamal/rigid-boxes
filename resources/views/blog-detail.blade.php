@@ -363,7 +363,7 @@
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 28px;
         }
 
         .widget {
@@ -469,7 +469,7 @@
             font-family: var(--font-heading);
             font-size: 22px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             color: #ffffff;
     }
 
@@ -477,13 +477,13 @@
             font-size: 13.5px;
             line-height: 1.55;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .newsletter-widget .newsletter-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
 
         .newsletter-widget .newsletter-input {
@@ -524,6 +524,11 @@
         /* Share Blog Widget */
         .share-widget {
             padding: 22px 26px;
+        }
+
+        .share-widget .widget-title {
+            margin-bottom: 22px;
+            color: #000000;
         }
 
         .social-buttons {
@@ -878,9 +883,25 @@
             
             <div class="article-meta">
                 @php 
-                    $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : (!empty($blog['author_name']) ? $blog['author_name'] : 'Ahmed Khan');
-                    $authorSlug = $blog['joined_author_slug'] ?? null;
-                    $authorImg = !empty($blog['joined_author_image']) ? (\Illuminate\Support\Str::startsWith($blog['joined_author_image'], ['http', 'storage/']) ? asset($blog['joined_author_image']) : asset('storage/'.$blog['joined_author_image'])) : asset('images/ahmed-khan.png'); 
+                    $authorName = !empty($blog['joined_author_name']) ? $blog['joined_author_name'] : (!empty($blog['author_name']) ? $blog['author_name'] : null);
+                    $authorSlug = $blog['joined_author_slug'] ?? ($blog['author_slug'] ?? null);
+                    $authorImgPath = !empty($blog['joined_author_image']) ? $blog['joined_author_image'] : (!empty($blog['author_image']) ? $blog['author_image'] : null);
+                    $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : (!empty($blog['author_description']) ? $blog['author_description'] : null);
+
+                    if (!$authorName || !$authorImgPath) {
+                        $defaultAuthor = \Illuminate\Support\Facades\DB::table('admin_authors')->first();
+                        if ($defaultAuthor) {
+                            $authorName = $authorName ?: $defaultAuthor->title;
+                            $authorSlug = $authorSlug ?: $defaultAuthor->slug;
+                            $authorImgPath = $authorImgPath ?: $defaultAuthor->image;
+                            $authorDesc = $authorDesc ?: $defaultAuthor->description;
+                        }
+                    }
+
+                    $authorName = $authorName ?: 'Ahmed Khan';
+                    $authorDesc = $authorDesc ?: 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
+
+                    $authorImg = $authorImgPath ? (\Illuminate\Support\Str::startsWith($authorImgPath, ['http', 'storage/', 'uploads/', 'images/']) ? asset($authorImgPath) : asset('storage/'.$authorImgPath)) : asset('images/ahmed-khan.png'); 
                     $publishDate = !empty($blog['publish_date']) ? date('M j, Y', strtotime($blog['publish_date'])) : (!empty($blog['created_at']) ? date('M j, Y', strtotime($blog['created_at'])) : 'Mar 3, 2026');
                 @endphp
                 @if($authorSlug)
@@ -966,9 +987,6 @@
 
                 <!-- Author Bio Card -->
                 <div class="author-card">
-                    @php 
-                        $authorDesc = !empty($blog['joined_author_desc']) ? $blog['joined_author_desc'] : 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
-                    @endphp
                     @if($authorSlug)
                         <a href="{{ url('/author/' . $authorSlug) }}" style="text-decoration:none; color:inherit; display:flex;">
                             <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
@@ -1016,6 +1034,7 @@
                             </div>
                         </div>
                         @endforeach
+                    </div>
                 </div>
 
                 <!-- Newsletter Stay Inspired Widget -->

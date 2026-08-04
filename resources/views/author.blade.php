@@ -64,8 +64,33 @@
            ========================================================================== */
 
         .container {
-            width: min(calc(100% - 40px), var(--container-max-width));
+            width: 100%;
+            max-width: 1280px;
             margin: 0 auto;
+            padding-left: 55px;
+            padding-right: 55px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1100px) {
+            .container {
+                padding-left: 32px;
+                padding-right: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
         }
 
         /* ==========================================================================
@@ -73,7 +98,7 @@
            ========================================================================== */
 
         .breadcrumb {
-            padding:30px 0px 30px;
+            padding:20px 0px 30px;
             margin-bottom: 30px;
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
@@ -81,7 +106,7 @@
         }
 
         .breadcrumb a {
-            color: var(--color-text-secondary);
+            color: #000;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -108,13 +133,13 @@
             min-height: 421px;
             display: flex;
             flex-direction: column;
-            padding: 24px 0 60px 0;
+            padding: 0px 0 60px 0;
             border-radius: 0 0 40px 40px;
         }
 
         .hero-content {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 60px;
             width: 100%;
         }
@@ -134,6 +159,7 @@
         .author-info {
             flex: 1;
             max-width: 100%;
+            padding-top: 10px;
         }
 
         .author-name {

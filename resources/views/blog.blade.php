@@ -434,13 +434,13 @@ html, body { overflow-x: clip; }
         $fImg = !empty($featuredBlog['image']) ? asset($featuredBlog['image']) : asset('images/below-hero.png');
         $fUrl = url('/blog/' . $fSlug);
     @endphp
-    <article class="feature">
+    <article class="feature" onclick="window.location.href='{{ $fUrl }}';" style="cursor: pointer;">
         <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="feature-copy">
             <p class="eyebrow">{{ $fCat }}</p>
-            <h2><a href="{{ $fUrl }}" style="color:inherit; text-decoration:none;">{{ $fTitle }}</a></h2>
+            <h2><a href="{{ $fUrl }}" style="color:inherit; text-decoration:none;" onclick="event.stopPropagation();">{{ $fTitle }}</a></h2>
             <p>{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($fExcerpt))), 150) }}</p>
-            <a class="button" href="{{ $fUrl }}">Read More &rarr;</a>
+            <a class="button" href="{{ $fUrl }}" onclick="event.stopPropagation();">Read More &rarr;</a>
         </div>
     </article>
 @else
@@ -460,20 +460,20 @@ html, body { overflow-x: clip; }
         $bImg = !empty($item['image']) ? asset($item['image']) : asset('images/Frame 571 (1).png');
         $bUrl = url('/blog/' . $bSlug);
     @endphp
-    <article class="card" data-category="{{ $bCat }}">
+    <article class="card" data-category="{{ $bCat }}" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
         <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="card-copy">
             <div class="meta">
                 @if(!empty($item['author_slug']))
-                    <a href="{{ url('/author/' . $item['author_slug']) }}" style="color:inherit;text-decoration:none;"><span>{{ $bAuthor }}</span></a>
+                    <a href="{{ url('/author/' . $item['author_slug']) }}" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation();"><span>{{ $bAuthor }}</span></a>
                 @else
                     <span>{{ $bAuthor }}</span>
                 @endif
                 <time>{{ $bDate }}</time>
             </div>
-            <h3><a href="{{ $bUrl }}" style="color:inherit; text-decoration:none;">{{ $bTitle }}</a></h3>
+            <h3><a href="{{ $bUrl }}" style="color:inherit; text-decoration:none;" onclick="event.stopPropagation();">{{ $bTitle }}</a></h3>
             <p>{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($bExcerpt))), 90) }}</p>
-            <a class="button" href="{{ $bUrl }}">Read More &rarr;</a>
+            <a class="button" href="{{ $bUrl }}" onclick="event.stopPropagation();">Read More &rarr;</a>
         </div>
     </article>
 @endforeach
