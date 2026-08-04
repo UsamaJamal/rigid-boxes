@@ -229,6 +229,7 @@
 
         /* Responsive Breakpoints */
         @media (max-width: 992px) {
+            
             .iq-page-container {
                 padding: 0 20px 50px;
             }
@@ -248,8 +249,12 @@
             .iq-page-hero {
                 padding: 20px 20px 16px;
             }
+            .iq-page-hero p {
+                margin-bottom: 0;
+            }
             .iq-breadcrumb {
                 margin-bottom: 16px;
+                display: none;
             } 
             .iq-page-container {
                 padding: 0 20px 40px;
@@ -271,6 +276,7 @@
         }
 
         @media (max-width: 400px) {
+            
             .iq-grid-4 {
                 grid-template-columns: ;
             }
