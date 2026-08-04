@@ -804,8 +804,8 @@
             }
 
             .cta-section .container {
-                padding-left: 12px;
-                padding-right: 12px;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
 
             .cta-wrapper {
@@ -816,6 +816,10 @@
                 gap: 0;
                 background: url('{{ asset('images/Container.png') }}') no-repeat center center / cover, linear-gradient(135deg, #DB9E9F 0%, #8D4445 100%);
                 padding-top: 40px;
+                width: 100% !important;
+                border-radius: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
             }
 
             .cta-image {

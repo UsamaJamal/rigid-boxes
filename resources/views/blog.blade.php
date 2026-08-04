@@ -478,129 +478,9 @@ html, body { overflow-x: clip; }
     </article>
 @endforeach
 </div>
-<style>
-/* CTA Overrides */
-.cta {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    background: #985555;
-    border-radius: 24px;
-    padding: 30px 80px 30px 30px;
-    margin: 24px 0 0 0;
-    color: #fff;
-    min-height: 340px;
-    position: relative;
-    overflow: hidden;
-}
 
-.cta > img {
-    width: 45%;
-    height: 100%;
-    min-height: 280px;
-    border-radius: 16px;
-    object-fit: cover;
-    position: relative;
-    z-index: 2;
-}
-
-/* Overlapping circles */
-.cta::before {
-    content: "";
-    position: absolute;
-    width: 269px;
-    height: 269px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 50%;
-    right: -60px;
-    bottom: -100px;
-    z-index: 1;
-}
-
-.cta::after {
-    content: "";
-    position: absolute;
-    width: 138px;
-    height: 138px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 50%;
-    right: 110px;
-    top: 220px;
-    z-index: 1;
-}
-
-.cta-copy {
-    flex: 1;
-    padding: 0;
-    background: none;
-    align-self: center;
-    max-width: 500px;
-    position: relative;
-    z-index: 2;
-}
-.cta-copy h2 {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 135%;
-    letter-spacing: 0%;
-    text-transform: capitalize;
-    margin: 0 0 16px 0;
-}
-.cta-copy p {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 165%;
-    letter-spacing: 0%;
-    margin: 0 0 32px 0;
-    color: #FFFFFF;
-}
-.cta .button {
-    background: #ffffff;
-    color: #000000;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 14px 28px;
-    border-radius: 6px;
-    text-transform: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-}
-.cta .button:hover {
-    background: var(--color-primary-soft);
-    color: var(--color-primary);
-}
-@media (max-width: 900px) {
-    .cta {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-    }
-    .cta > img {
-        width: 100%;
-        min-height: auto;
-    }
-    .cta::before {
-        right: -50px;
-        bottom: -100px;
-    }
-    .cta::after {
-        right: -30px;
-        top: -30px;
-        transform: none;
-    }
-    .cta-copy {
-        max-width: 100%;
-    }
-}
-</style>
-@include('components.cta')
 </section>
+@include('components.cta')
 </main></div>
 <script>
 // Always start the page at the left edge; category scrolling stays local to its row.
@@ -666,12 +546,13 @@ nextBtn.addEventListener('click', () => {
         overflow-y: hidden;
     }
     .filter {
-        flex: 0 0 142px;
-        width: 142px;
+        flex: 0 0 auto;
+        width: auto;
         min-height: 58px;
         height: 58px;
-        padding: 7px 8px;
+        padding: 7px 16px;
         font-size: 12px;
+        white-space: nowrap;
     }
     .filter-icon { width: 19px; height: 19px; }
 
