@@ -196,6 +196,10 @@
     margin: 0 0 20px 0;
     max-width: 100%;
     vertical-align: middle;
+    transition: color 0.3s ease;
+}
+.feature:hover h2 {
+    color: var(--color-primary);
 }
 .feature p:not(.eyebrow) {
     font-family: 'Hanken Grotesk', sans-serif;
@@ -265,6 +269,10 @@
     color: #000000;
     margin: 0 0 12px 0;
     text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+.card:hover h3 {
+    color: var(--color-primary);
 }
 .card p {
     font-family: 'DM Sans', sans-serif;

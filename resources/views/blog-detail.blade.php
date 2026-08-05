@@ -619,6 +619,7 @@
             color: var(--color-ink);
             line-height: 1.35;
             margin-bottom: 10px;
+            transition: color 0.3s ease;
         }
 
         .related-card-desc {
@@ -633,15 +634,21 @@
             margin-top: auto;
             font-size: 14px;
             font-weight: 700;
-            color: var(--color-primary);
+            color: #8d4445 !important;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             transition: gap 0.2s;
+            text-decoration: none !important;
         }
 
-        .related-card-btn:hover {
+        .related-card-btn:hover, .related-card:hover .related-card-btn {
             gap: 10px;
+            color: #8d4445 !important;
+        }
+
+        .related-card:hover .related-card-title {
+            color: var(--color-primary);
         }
 
         /* Responsive Layout */
@@ -904,6 +911,9 @@
                     }
 
                     $authorName = $authorName ?: 'Ahmed Khan';
+                    if (empty($authorSlug) && !empty($authorName)) {
+                        $authorSlug = \Illuminate\Support\Str::slug($authorName);
+                    }
                     $authorDesc = $authorDesc ?: 'Written by the Rigid Box Pro Team, specialists in custom rigid boxes and luxury packaging solutions. We share industry insights, design inspiration, and expert guidance to help brands create packaging that leaves a lasting impression.';
 
                     $authorImg = $authorImgPath ? (\Illuminate\Support\Str::startsWith($authorImgPath, ['http', 'storage/', 'uploads/', 'images/']) ? asset($authorImgPath) : asset('storage/'.$authorImgPath)) : asset('images/ahmed-khan.png'); 
@@ -1087,26 +1097,37 @@
             <div class="related-grid">
 
                 @foreach($recentBlogs as $rb)
-                <article class="related-card">
+                <article class="related-card" onclick="window.location.href='{{ url('/blog/' . $rb->slug) }}';" style="cursor: pointer;">
                     @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
-                    <a href="{{ url('/blog/' . $rb->slug) }}" style="display:block;">
+                    <a href="{{ url('/blog/' . $rb->slug) }}" style="display:block;" onclick="event.stopPropagation();">
                         <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                     </a>
                     <div class="related-card-body">
                         <div class="related-card-meta">
-                            @if(!empty($rb->author_slug))
-                                <a href="{{ url('/author/' . $rb->author_slug) }}" style="color:inherit;text-decoration:none;"><span>{{ $rb->author_name ?? 'Admin' }}</span></a>
-                            @else
-                                <span>{{ $rb->author_name ?? 'Admin' }}</span>
-                            @endif
+                            @php 
+                                $bAuthor = $rb->author_name ?? null;
+                                $bAuthorSlug = $rb->author_slug ?? null;
+                                
+                                if (!$bAuthor) {
+                                    $defaultAuthor = \Illuminate\Support\Facades\DB::table('admin_authors')->first();
+                                    if ($defaultAuthor) {
+                                        $bAuthor = $defaultAuthor->title;
+                                        $bAuthorSlug = $defaultAuthor->slug;
+                                    }
+                                }
+                                
+                                $bAuthor = $bAuthor ?: 'Admin';
+                                $bAuthorSlug = $bAuthorSlug ?: \Illuminate\Support\Str::slug($bAuthor);
+                            @endphp
+                            <a href="{{ url('/author/' . $bAuthorSlug) }}" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation();"><span>{{ $bAuthor }}</span></a>
                             <span>{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                         </div>
-                        <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;">
+                        <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;" onclick="event.stopPropagation();">
                             <h3 class="related-card-title">{{ $rb->title }}</h3>
                         </a>
                         <p class="related-card-desc">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($rb->excerpt ?? $rb->content))), 90) }}</p>
-                        <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn">
-                            Read More &rarr;
+                        <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn" onclick="event.stopPropagation();">
+                            <span>Read More</span> <span>&rarr;</span>
                         </a>
                     </div>
                 </article>

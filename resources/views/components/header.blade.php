@@ -59,6 +59,12 @@
         color: #fff;
         flex: 0 0 126px;
         width: 126px;
+        outline: none;
+    }
+    
+    .header-logo:focus, .header-logo:active {
+        outline: none;
+        box-shadow: none;
     }
 
     .header-logo-img {
