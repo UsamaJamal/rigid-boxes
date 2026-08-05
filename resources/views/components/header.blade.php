@@ -99,6 +99,16 @@
         color: rgba(255, 255, 255, 0.8);
     }
 
+    /* Fix for browser autofill white background */
+    .header-search input:-webkit-autofill,
+    .header-search input:-webkit-autofill:hover, 
+    .header-search input:-webkit-autofill:focus, 
+    .header-search input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-text-fill-color: #fff !important;
+        caret-color: #fff !important;
+    }
+
     .header-search .search-icon {
         position: absolute;
         left: 16px;

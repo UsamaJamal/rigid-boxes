@@ -34,13 +34,30 @@ Route::get('/', function () {
 Route::get('/search', function (\Illuminate\Http\Request $request) {
     $q = $request->input('q');
     $products = [];
+    $categories = [];
+    $blogs = [];
+    $totalCount = 0;
+
     if ($q) {
         $products = DB::table('admin_products')
             ->where('title', 'like', "%{$q}%")
             ->orWhere('description', 'like', "%{$q}%")
             ->get()->map(fn($r)=>(array)$r)->all();
+            
+        $categories = DB::table('admin_categories')
+            ->where('title', 'like', "%{$q}%")
+            ->orWhere('description', 'like', "%{$q}%")
+            ->get()->map(fn($r)=>(array)$r)->all();
+            
+        $blogs = DB::table('admin_blogs')
+            ->where('title', 'like', "%{$q}%")
+            ->orWhere('content', 'like', "%{$q}%")
+            ->get()->map(fn($r)=>(array)$r)->all();
+            
+        $totalCount = count($products) + count($categories) + count($blogs);
     }
-    return view('search', compact('q', 'products'));
+    
+    return view('search', compact('q', 'products', 'categories', 'blogs', 'totalCount'));
 });
 
 Route::get('/category', function () {
