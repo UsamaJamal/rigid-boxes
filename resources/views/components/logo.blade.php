@@ -52,8 +52,10 @@
         to { transform: translateX(-50%); }
     }
 
-    .brand-logos-marquee:hover .brand-logos-track {
-        animation-play-state: paused;
+    @media (hover: hover) {
+        .brand-logos-marquee:hover .brand-logos-track {
+            animation-play-state: paused;
+        }
     }
 
     @media (max-width: 576px) {

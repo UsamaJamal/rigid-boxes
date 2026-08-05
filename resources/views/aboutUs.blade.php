@@ -404,6 +404,20 @@
             padding-bottom: 15px;
         }
     }
+    @media (max-width: 768px) {
+        .tb-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px 15px;
+        }
+        .tb-stat-item {
+            min-width: 0;
+            flex: unset;
+        }
+        .tb-stat-number {
+            font-size: 36px; /* slightly smaller for very small screens */
+        }
+    }
 </style>
 <main class="about-us-page">
 @include('components.header')
