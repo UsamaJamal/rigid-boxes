@@ -190,11 +190,11 @@
 
     @media (max-width: 600px) {
         .blogs-section {
-            padding: 30px 0;
+            padding: 0px 0;
         }
 
         .blogs-container {
-            padding: 0 16px;
+            padding: 0 16px 25px;
         }
 
         .blogs-header {

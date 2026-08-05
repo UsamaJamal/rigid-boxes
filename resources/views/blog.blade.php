@@ -7,7 +7,7 @@
 <style>
 /* Figma Design Overrides */
 .hero {
-    background-image: linear-gradient(90deg, rgba(40,10,10,1) 0%, rgba(80,20,20,1) 40%, rgba(141,68,69,.0) 65%), url('{{ asset('uploads/blog-page-banner.webp') }}');
+    background-image: url('{{ asset('uploads/blog-page-banner.webp') }}');
     background-position: center 52%;
     background-size: cover;
 }
@@ -499,8 +499,8 @@ html, body { overflow-x: clip; }
 @endforeach
 </div>
 
-</section>
 @include('components.cta')
+</section>
 </main></div>
 <script>
 // Always start the page at the left edge; category scrolling stays local to its row.
@@ -553,9 +553,7 @@ nextBtn.addEventListener('click', () => {
     .hero { height: 270px; }
     /* Mobile: dark overlay from bottom covering text area */
     .hero {
-        background-image:
-            linear-gradient(to top, rgba(40,10,10,.95) 0%, rgba(80,20,20,.80) 50%, rgba(141,68,69,.20) 100%),
-            url('{{ asset('uploads/blog-page-banner.webp') }}');
+        background-image: url('{{ asset('uploads/blog-page-banner.webp') }}');
     }
     .hero h1 { font-size: 28px; line-height: 1.22; margin-top: 26px; }
     .hero p { font-size: 12px; line-height: 1.55; }
