@@ -117,6 +117,7 @@
 
         .inner-hero-desc {
             text-align: center;
+            margin-bottom:30px;
         }
 
         br.desktop-br {
