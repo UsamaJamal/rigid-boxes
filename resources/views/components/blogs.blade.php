@@ -172,7 +172,7 @@
     }
 
     .blog-card:hover .blog-card__readmore {
-        color: #5F2D2F;
+        color: var(--primary-color, #8D4445);
     }
 
     /* Responsive */
@@ -316,64 +316,68 @@
         </div>
 
         <div class="blogs-grid" id="blogsGrid">
+            @if(isset($recentBlogs) && count($recentBlogs) > 0)
+                @foreach($recentBlogs->take(3) as $blog)
+                    @php
+                        $bTitle = $blog->title ?? 'Sustainable Packaging Trends For 2026';
+                        $bAuthor = $blog->author_name ?? null;
+                        $authorSlug = $blog->author_slug ?? null;
+                        
+                        if (!$bAuthor) {
+                            $defaultAuthor = \Illuminate\Support\Facades\DB::table('admin_authors')->first();
+                            if ($defaultAuthor) {
+                                $bAuthor = $defaultAuthor->title;
+                                $authorSlug = $defaultAuthor->slug;
+                            }
+                        }
+                        
+                        $bAuthor = $bAuthor ?: 'Joe Danley';
+                        $authorSlug = $authorSlug ?: \Illuminate\Support\Str::slug($bAuthor);
 
-            <!-- Card 1 -->
-            <article class="blog-card">
-                <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
-                <div class="blog-card__content">
-                    <div class="blog-card__meta">
-                        <span class="blog-card__author">Joe Danley</span>
-                        <span class="blog-card__date">Nov 15, 2024</span>
+                        $bDate = !empty($blog->publish_date) ? date('M d, Y', strtotime($blog->publish_date)) : (!empty($blog->created_at) ? date('M d, Y', strtotime($blog->created_at)) : 'Nov 15, 2024');
+                        $bExcerpt = $blog->excerpt ?? 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable';
+                        $bSlug = $blog->slug ?? 'blog-detail';
+                        $bImg = !empty($blog->image) ? asset($blog->image) : asset('uploads/industry-custom-luxury-box.jfif');
+                        $bUrl = url('/blog/' . $bSlug);
+                    @endphp
+                    <article class="blog-card" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
+                        <img src="{{ $bImg }}" alt="{{ $bTitle }}" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                        <div class="blog-card__content">
+                            <div class="blog-card__meta">
+                                <a href="{{ url('/author/' . $authorSlug) }}" class="blog-card__author" style="color:inherit;text-decoration:none;z-index:2;position:relative;" onclick="event.stopPropagation();">{{ $bAuthor }}</a>
+                                <span class="blog-card__date">{{ $bDate }}</span>
+                            </div>
+                            <a href="{{ $bUrl }}" class="blog-card__title" onclick="event.stopPropagation();">{{ $bTitle }}</a>
+                            <p class="blog-card__desc">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($bExcerpt))), 90) }}</p>
+                            <div>
+                                <a href="{{ $bUrl }}" class="blog-card__readmore" onclick="event.stopPropagation();">
+                                    Read More
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            @else
+                <!-- Card 1 Fallback -->
+                <article class="blog-card">
+                    <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                    <div class="blog-card__content">
+                        <div class="blog-card__meta">
+                            <span class="blog-card__author">Joe Danley</span>
+                            <span class="blog-card__date">Nov 15, 2024</span>
+                        </div>
+                        <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
+                        <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
+                        <div>
+                            <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
+                                Read More
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
                     </div>
-                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
-                    <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                    <div>
-                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
-                            Read More
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="blog-card">
-                <img src="{{ asset('uploads/industry-magnetic-closure-boxes.webp') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
-                <div class="blog-card__content">
-                    <div class="blog-card__meta">
-                        <span class="blog-card__author">Joe Danley</span>
-                        <span class="blog-card__date">Nov 15, 2024</span>
-                    </div>
-                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
-                    <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                    <div>
-                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
-                            Read More
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="blog-card">
-                <img src="{{ asset('uploads/industry-rigid-presentation-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
-                <div class="blog-card__content">
-                    <div class="blog-card__meta">
-                        <span class="blog-card__author">Joe Danley</span>
-                        <span class="blog-card__date">Nov 15, 2024</span>
-                    </div>
-                    <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
-                    <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
-                    <div>
-                        <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
-                            Read More
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
+                </article>
+            @endif
         </div>
 
         <!-- Mobile Pagination Dots -->
