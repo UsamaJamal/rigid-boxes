@@ -275,7 +275,7 @@
     .tb-heading {
         font-family: 'Open Sans', sans-serif;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 20px;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #444748;

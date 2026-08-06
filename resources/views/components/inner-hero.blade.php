@@ -18,7 +18,7 @@
 
 <style>
     .inner-hero-section {
-        background: var(--header-gradient, #8D4445);
+        background-color: #8D4445;
         background-image: url('{{ $desktopBg }}');
         background-size: 100% 100%;
         background-position: center;
@@ -26,8 +26,7 @@
         position: relative;
         color: #FFFFFF;
         font-family: 'Open Sans', sans-serif;
-        max-width: 1440px;
-        margin: 0 auto;
+        width: 100%;
     }
 
     .inner-hero-section * {

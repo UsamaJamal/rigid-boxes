@@ -435,8 +435,8 @@ html, body { overflow-x: clip; }
 @include('components.header')
 <div class="page"><main>
 <section class="hero" style="position: relative; overflow: hidden; background: #8D4445;">
-    <img src="{{ asset('uploads/blog-banner-rigid-boxes.webp') }}" alt="blog banner rigid boxes" class="hero-bg-img desktop-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; z-index: 0;">
-    <img src="{{ asset('uploads/blog-banner-mobile-view.webp') }}" alt="blog banner mobile view" class="hero-bg-img mobile-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: bottom center; z-index: 0; display: none;">
+    <img src="{{ asset('uploads/blog-banner-rigid-boxes.webp') }}" alt="blog banner rigid boxes" class="hero-bg-img desktop-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; object-position: right center; z-index: 0;">
+    <img src="{{ asset('uploads/blog-banner-mobile-view.webp') }}" alt="blog banner mobile view" class="hero-bg-img mobile-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; object-position: bottom center; z-index: 0; display: none;">
     
     <div class="container" style="position: relative; z-index: 2; height: 100%;">
         <div class="hero-text-wrapper" style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column;">
