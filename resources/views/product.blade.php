@@ -314,7 +314,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             outline: none;
             transition: border-color 0.3s;
             background: #fff;
@@ -329,7 +329,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             outline: none;
             transition: border-color 0.3s;
             background: #fff;
@@ -377,7 +377,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             background: #fff;
             cursor: pointer;
             position: relative;
@@ -435,7 +435,7 @@
 
         .custom-option {
             padding: 10px 15px;
-            font-size: 13px;
+            font-size: 15px;
             cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
         }
@@ -1604,7 +1604,7 @@
                 min-height: 45px !important;
                 height: 45px !important;
                 padding: 12px 16px 12px 4px !important;
-                font-size: 8.5px !important;
+                font-size: 14px !important;
                 line-height: 21px !important;
                 display: block !important;
                 overflow: hidden !important;

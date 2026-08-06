@@ -172,7 +172,7 @@
         }
 
         .box-title {
-            font-size: 14px;
+            font-size: 14px !important;
             font-weight: 700;
             line-height: 1.25;
         }
