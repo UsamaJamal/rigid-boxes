@@ -149,9 +149,6 @@
     </div>
 </footer>
 
-<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-
-
 <div id="successPopup" class="success-popup-overlay" style="display: none;">
     <div class="success-popup-box">
         <div class="success-icon">

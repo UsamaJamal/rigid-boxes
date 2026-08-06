@@ -194,7 +194,7 @@ class AdminContentController extends Controller
     public function destroy(string $module, string $id)
     {
         abort_unless(isset($this->modules()[$module]), 404);
-        $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages'][$module]; DB::table($table)->where('id',$id)->delete();
+        $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module]; DB::table($table)->where('id',$id)->delete();
         return back()->with('success', 'Item deleted successfully.');
     }
 }

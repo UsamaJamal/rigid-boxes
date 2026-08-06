@@ -43,13 +43,18 @@
 /* Breadcrumb aligned with contact page - 40px top gap */
 .hero .container > div {
     margin-top: 0;
-    padding-top: 40px;
+    padding-top: 30px;
     align-self: flex-start;
 }
 .hero .breadcrumb {
     position: relative;
     top: 0;
 }
+.blog-content{
+    margin-top:30px !important;
+    margin-bottom:30px !important;
+}
+
 .hero h1 {
     margin-top: 0;
 }
@@ -424,7 +429,7 @@ html, body { overflow-x: clip; }
     .feature, .grid, .feature > img, .card, .card img { max-width: 100%; }
     .content > .cta-section { margin-top: 24px; }
     .breadcrumb { display: none; }
-}
+
 </style>
 </head><body>
 @include('components.header')
@@ -433,10 +438,14 @@ html, body { overflow-x: clip; }
     <div class="container" style="position: relative; z-index: 2; height: 100%;">
         <img src="{{ asset('uploads/blog-banner-rigid-boxes.webp') }}" alt="blog banner rigid boxes" class="hero-bg-img desktop-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; z-index: 0;">
         <img src="{{ asset('uploads/blog-banner-mobile-view.webp') }}" alt="blog banner mobile view" class="hero-bg-img mobile-hero-img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: bottom center; z-index: 0; display: none;">
-        <div class="hero-text-wrapper" style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+        <div class="hero-text-wrapper" style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column;">
             <div class="breadcrumb"><a href="/">HOME</a> / <span>BLOGS</span></div>
-            <h1>Insights on Luxury Packaging &amp; Design</h1>
+            
+            <div class="blog-content">
+                 <h1>Insights on Luxury Packaging &amp; Design</h1>
             <p>Expert perspectives on packaging trends, sustainable materials, unboxing strategy and brand elevation - curated for discerning B2B leaders.</p>
+            </div>
+           
         </div>
     </div>
 </section>
@@ -579,9 +588,10 @@ nextBtn.addEventListener('click', () => {
     .hero {
         background: none;
     }
-    .hero h1 { font-size: 28px; line-height: 1.22; margin-top: 26px; }
+    .hero h1 { font-size: 28px; line-height: 1.22; margin-top: 0px; }
     .hero p { font-size: 12px; line-height: 1.55; }
     .hero .breadcrumb { top: -4px; }
+    .blog-content { margin-top: 15px !important; }
 
     .categories { overflow: hidden; }
     .category-row {
