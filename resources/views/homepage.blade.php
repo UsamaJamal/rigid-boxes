@@ -2666,7 +2666,7 @@
                             onerror="this.src='https://placehold.co/606x600/c4a882/fff?text=Eco+Packaging'">
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
-                            <p class="sustainable-tagline">Go green with sustainably responsible packaging</p>
+                            <p class="sustainable-tagline">Go Green With Sustainably Responsible Packaging</p>
                             <a href="/kraft-boxes/" class="sustainable-btn">Browse Products</a>
                         </div>
                     </div>

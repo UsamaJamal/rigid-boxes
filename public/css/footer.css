@@ -511,13 +511,13 @@
         grid-column: 1 / -1;
     }
 
+    .footer-column:not(.brand-column) {
+        text-align: left;
+    }
+
     .footer-column:nth-child(4) {
         grid-column: 1 / -1;
         text-align: center;
-    }
-
-    .footer-column:not(.brand-column) {
-        text-align: left;
     }
 
     .footer-heading {
@@ -542,12 +542,12 @@
         display: inline-flex;
         flex-direction: column;
         gap: 24px;
-        text-align: left;
-        align-items: flex-start;
+        text-align: center;
+        align-items: center;
     }
 
     .footer-column:nth-child(4) .contact-item {
-        justify-content: flex-start;
+        justify-content: center;
         margin-bottom: 0;
     }
 
@@ -617,6 +617,10 @@
         text-align: left;
         margin-bottom: 18px;
     }
+    
+    .footer-column:nth-child(4) {
+        text-align: center !important;
+    }
 
     .footer-links {
         text-align: left;
@@ -626,12 +630,12 @@
         display: inline-flex;
         flex-direction: column;
         gap: 20px;
-        text-align: left;
-        align-items: flex-start;
+        text-align: center;
+        align-items: center;
     }
 
     .contact-item {
-        justify-content: flex-start;
+        justify-content: center;
         margin-bottom: 0;
     }
 
@@ -698,14 +702,13 @@
         font-size: 13px;
     }
 }
- @ m e d i a   ( m a x - w i d t h :   7 6 8 p x )   { 
-         . d e s k t o p - b r   {   d i s p l a y :   n o n e   ! i m p o r t a n t ;   } 
-         . n e w s l e t t e r - t e x t   h 3   { 
-                 m a x - w i d t h :   1 0 0 %   ! i m p o r t a n t ; 
-                 f o n t - s i z e :   c l a m p ( 1 4 p x ,   4 v w ,   1 8 p x )   ! i m p o r t a n t ; 
-                 w h i t e - s p a c e :   n o w r a p   ! i m p o r t a n t ; 
-         } 
- } 
- 
- 
- 
+@media (max-width: 768px) {
+    .desktop-br { display: none !important; }
+    .newsletter-text h3 {
+        max-width: 100% !important;
+        font-size: clamp(14px, 4vw, 18px) !important;
+        white-space: nowrap !important;
+    }
+}
+
+
