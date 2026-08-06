@@ -28,7 +28,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
 .faq-section .contact-container { max-width:var(--container-width); }
 .contact-page .main-footer .container { max-width:var(--container-width); }
 .contact-grid { display:grid; grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr); align-items:center; gap:90px; }
-.contact-breadcrumb { font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #000; margin-top: 0; margin-bottom: 14px; font-family: 'Open Sans', sans-serif; }
+.contact-breadcrumb { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #000; margin-top: 0; margin-bottom: 20px; font-family: 'Open Sans', sans-serif; }
 @media (max-width: 768px) { .contact-breadcrumb { display: none; } }
 .contact-breadcrumb a { color: #666; text-decoration: none; }
 .contact-breadcrumb .sep { padding: 0 8px; color: #999; }

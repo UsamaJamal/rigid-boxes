@@ -8,7 +8,7 @@
 <style>
     .dynamic-hero {
         background-color: #ffffff;
-        padding: 30px 24px;
+        padding: 40px 24px 30px;
         text-align: center;
         border-bottom: 1px solid #eaeaea;
         font-family: 'DM Sans', sans-serif;
@@ -22,15 +22,19 @@
     }
     .dynamic-breadcrumb {
         font-size: 13px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 20px;
-        color: var(--section-text-color, #666);
+        color: var(--section-text-color, #111);
         text-align: left;
         max-width: var(--site-container-width, 1280px);
-        margin: 0 auto 10px auto;
+        margin: 0 auto 20px auto;
         padding: 0 var(--site-container-gutter, 55px);
-        font-family: 'DM Sans', sans-serif;
+        font-family: 'Open Sans', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
     .dynamic-breadcrumb span {
         font-weight: 700;

@@ -157,8 +157,14 @@ class AdminContentController extends Controller
             if ($request->hasFile($field)) {
                 if (in_array($field, $fields)) {
                     $file = $request->file($field);
-                    $fileName = $file->getClientOriginalName();
-                    $file->move(public_path('uploads'), $fileName);
+                    $ext = $file->getClientOriginalExtension();
+                    $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    $fileName = $baseName . '_' . time() . '.' . $ext;
+                    $uploadPath = public_path('uploads');
+                    if (!is_dir($uploadPath)) {
+                        mkdir($uploadPath, 0775, true);
+                    }
+                    $file->move($uploadPath, $fileName);
                     $payload[$field] = 'uploads/' . $fileName;
                 }
             }
@@ -172,10 +178,16 @@ class AdminContentController extends Controller
 
             $newImages = [];
             if ($galleryFiles) {
+                $uploadPath = public_path('uploads');
+                if (!is_dir($uploadPath)) {
+                    mkdir($uploadPath, 0775, true);
+                }
                 $newImages = collect($galleryFiles)
-                    ->map(function ($file) {
-                        $fileName = $file->getClientOriginalName();
-                        $file->move(public_path('uploads'), $fileName);
+                    ->map(function ($file) use ($uploadPath) {
+                        $ext = $file->getClientOriginalExtension();
+                        $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                        $fileName = $baseName . '_' . time() . '_' . rand(100, 999) . '.' . $ext;
+                        $file->move($uploadPath, $fileName);
                         return 'uploads/' . $fileName;
                     })
                     ->values()

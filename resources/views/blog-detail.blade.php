@@ -85,7 +85,7 @@
         }
 
         .breadcrumb {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;

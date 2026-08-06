@@ -1452,7 +1452,7 @@
         }
 
         .cdo-btn:hover:not(.active) {
-            background: rgba(0, 0, 0, 0.06);
+            background: transparent;
         }
 
         /* Cards row */

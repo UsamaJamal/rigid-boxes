@@ -156,7 +156,7 @@
         /* Hero Section */
         .hero-section {
             background-color: var(--background-color);
-            padding-top: 30px !important;
+            padding-top: 40px !important;
             padding-bottom: var(--space-8);
         }
 
@@ -640,11 +640,15 @@
             <div class="container">
                 <style>
                     .desktop-breadcrumb {
-                        display: block;
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 8px;
                         text-align: left;
-                        margin-bottom: 14px;
+                        margin-bottom: 20px;
                         font-family: 'Open Sans', sans-serif;
-                        font-size: 14px;
+                        font-size: 13px;
+                        font-weight: 600;
                         text-transform: uppercase;
                         letter-spacing: 1px;
                         color: var(--section-text-color, #191919);

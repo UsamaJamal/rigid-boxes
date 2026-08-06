@@ -104,11 +104,17 @@
            ========================================================================== */
 
         .breadcrumb {
-            padding:20px 0px 30px;
-            margin-bottom: 30px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            color: var(--color-text-secondary);
+            padding: 40px 0 0;
+            margin-bottom: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .breadcrumb a {

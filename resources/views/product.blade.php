@@ -83,9 +83,8 @@
 
         /* Hero Section */
         .hero-section {
-            padding: 20px 0 40px;
+            padding: 40px 0 40px;
             background-color: #FAF8F8;
-            margin-top: 20px; /* space for header */
         }
         
         .hero-container {
@@ -1986,10 +1985,14 @@
 
         /* BREADCRUMB CSS */
         .desktop-breadcrumb {
-            margin-bottom: 24px;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 500;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--section-text-color, #191919);

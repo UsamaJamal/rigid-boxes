@@ -60,18 +60,7 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
     return view('search', compact('q', 'products', 'categories', 'blogs', 'totalCount'));
 });
 
-Route::get('/category', function () {
-    return redirect('/categories', 301);
-});
 
-Route::get('/categories', function () {
-    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
-    return view('all-category', compact('categories'));
-});
-
-Route::get('/all-category', function () {
-    return redirect('/categories', 301);
-});
 
 Route::get('/all-category/{slug}', function (string $slug) {
     return redirect('/' . $slug, 301);
