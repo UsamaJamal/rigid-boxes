@@ -86,6 +86,7 @@
     }
 
     .hero-description {
+        text-align: justify;
         font-family: 'DM Sans', sans-serif;
         font-size: 16px;
         line-height: 1.6;

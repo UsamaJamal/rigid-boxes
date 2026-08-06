@@ -1025,13 +1025,10 @@
             <aside class="sidebar">
 
                 <!-- Table of Contents Widget -->
-                <div class="widget">
+                <div class="widget" id="tocWidget">
                     <div class="widget-title">TABLE OF CONTENTS</div>
-                    <ul class="toc-list">
-                        <li class="toc-item"><a href="#">01. Defining the Foundation</a></li>
-                        <li class="toc-item"><a href="#">02. Materiality & Touch</a></li>
-                        <li class="toc-item"><a href="#">03. Expert Tips & Specs</a></li>
-                        <li class="toc-item active"><a href="#">04. Sustainability & Longevity</a></li>
+                    <ul class="toc-list" id="tocList">
+                        <!-- Auto-generated from article h2 headings via JS -->
                     </ul>
                 </div>
 
@@ -1138,6 +1135,68 @@
     </div>
 </main>
 @include('components.footer')
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var articleBody = document.querySelector('.article-body');
+    var tocList = document.getElementById('tocList');
+    var tocWidget = document.getElementById('tocWidget');
+
+    if (!articleBody || !tocList) return;
+
+    // Get all h2 headings from article body
+    var headings = articleBody.querySelectorAll('h2');
+
+    if (headings.length === 0) {
+        if (tocWidget) tocWidget.style.display = 'none';
+        return;
+    }
+
+    // Generate TOC items
+    headings.forEach(function (heading, index) {
+        // Add ID to heading for anchor link
+        var id = 'toc-heading-' + index;
+        heading.setAttribute('id', id);
+
+        var li = document.createElement('li');
+        li.className = 'toc-item';
+
+        var num = (index + 1).toString().padStart(2, '0');
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = num + '. ' + heading.textContent.trim();
+
+        // Smooth scroll on click
+        a.addEventListener('click', function (e) {
+            e.preventDefault();
+            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        li.appendChild(a);
+        tocList.appendChild(li);
+    });
+
+    // Highlight active TOC item on scroll
+    window.addEventListener('scroll', function () {
+        var scrollY = window.scrollY + 120;
+        var activeIndex = 0;
+
+        headings.forEach(function (heading, index) {
+            if (heading.offsetTop <= scrollY) {
+                activeIndex = index;
+            }
+        });
+
+        tocList.querySelectorAll('.toc-item').forEach(function (item, i) {
+            if (i === activeIndex) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>
