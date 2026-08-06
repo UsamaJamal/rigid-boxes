@@ -382,9 +382,13 @@
 
         <!-- Mobile Pagination Dots -->
         <div class="blog-dots" id="blogDots">
-            <span class="blog-dot active" data-index="0"></span>
-            <span class="blog-dot" data-index="1"></span>
-            <span class="blog-dot" data-index="2"></span>
+            @if(isset($recentBlogs) && count($recentBlogs) > 0)
+                @foreach($recentBlogs->take(3) as $i => $b)
+                    <span class="blog-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
+                @endforeach
+            @else
+                <span class="blog-dot active" data-index="0"></span>
+            @endif
         </div>
 
         <!-- Mobile View All Blogs Button -->

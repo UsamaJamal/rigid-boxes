@@ -1589,6 +1589,7 @@
             }
             .form-row-2col {
                 grid-template-columns: 1fr 1fr;
+                gap: 8px !important;
             }
             .badges-horizontal {
                 display: grid;
@@ -1598,6 +1599,21 @@
             }
             .badges-horizontal > div {
                 min-width: 0;
+            }
+            .custom-select-trigger {
+                white-space: nowrap !important;
+                min-height: 45px !important;
+                height: 45px !important;
+                padding: 12px 16px 12px 4px !important;
+                font-size: 8.5px !important;
+                line-height: 21px !important;
+                display: block !important;
+                overflow: hidden !important;
+                text-overflow: clip !important;
+                letter-spacing: -0.1px;
+            }
+            .custom-select-trigger::after {
+                right: 5px !important;
             }
             .badges-horizontal > div {
                 display: flex;
@@ -2510,7 +2526,6 @@
                         <div class="form-group" style="flex: 1.5;">
                             <label>Box Style *</label>
                             <select name="box_style" class="form-control" id="quote-box-style">
-                                <option value="">Select style</option>
                                 <option value="{{ $product['title'] ?? 'Custom Box' }}" selected>{{ $product['title'] ?? 'Custom Box' }}</option>
                             </select>
                         </div>
