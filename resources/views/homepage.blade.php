@@ -2756,11 +2756,11 @@
                         label: 'Magnetic Closure'
                     },
                     {
-                        src: '{{ asset('uploads/luxury-magnetic-box.webp') }}',
+                        src: '{{ asset('uploads/luxury-magnetic.webp') }}',
                         label: 'Luxury Magnetic Box'
                     },
                     {
-                        src: '{{ asset('uploads/presentation-closure.webp') }}',
+                        src: '{{ asset('uploads/presentation-magnetic.webp') }}',
                         label: 'Presentation Closure'
                     }
                 ],

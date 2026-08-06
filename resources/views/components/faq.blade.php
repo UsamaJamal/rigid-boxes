@@ -279,7 +279,8 @@
         }
 
         .faq-main-heading {
-            font-size: 25px;
+            font-size: 21px;
+            white-space: nowrap;
         }
 
         .faq-question {

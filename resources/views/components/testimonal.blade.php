@@ -212,6 +212,10 @@
         border-color: var(--primary-color, #8D4445);
     }
 
+    .page-dot.desktop-hide {
+        display: none;
+    }
+
     /* Mobile Responsive View — 1 Card per Slide */
     @media (max-width: 768px) {
         .testimonial-section {
@@ -306,6 +310,10 @@
         .page-dot {
             width: 11px;
             height: 11px;
+        }
+
+        .page-dot.desktop-hide {
+            display: block;
         }
     }
 </style>
@@ -409,6 +417,7 @@
             <div class="page-dot active" data-index="0"></div>
             <div class="page-dot" data-index="1"></div>
             <div class="page-dot" data-index="2"></div>
+            <div class="page-dot desktop-hide" data-index="3"></div>
         </div>
     </div>
 </section>
