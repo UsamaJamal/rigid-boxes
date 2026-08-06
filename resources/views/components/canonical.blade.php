@@ -17,3 +17,4 @@
     }
 </script>
 @include('components.schemas')
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
