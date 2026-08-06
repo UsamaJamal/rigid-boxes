@@ -71,7 +71,7 @@
 
     .hero-title {
         font-family: 'Open Sans', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         font-size:32px;
         line-height: 50px;
         letter-spacing: 0%;
