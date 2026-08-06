@@ -1105,8 +1105,8 @@
                     <div class="related-card-body">
                         <div class="related-card-meta">
                             @php 
-                                $bAuthor = $rb->author_name ?? null;
-                                $bAuthorSlug = $rb->author_slug ?? null;
+                                $bAuthor = $rb->author_name ?? $rb->joined_author_name ?? null;
+                                $bAuthorSlug = $rb->author_slug ?? $rb->joined_author_slug ?? null;
                                 
                                 if (!$bAuthor) {
                                     $defaultAuthor = \Illuminate\Support\Facades\DB::table('admin_authors')->first();
