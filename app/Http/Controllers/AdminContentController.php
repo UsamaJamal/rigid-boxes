@@ -159,7 +159,7 @@ class AdminContentController extends Controller
                     $file = $request->file($field);
                     $ext = $file->getClientOriginalExtension();
                     $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                    $fileName = $baseName . '_' . time() . '.' . $ext;
+                    $fileName = $baseName . '.' . $ext;
                     $uploadPath = public_path('uploads');
                     if (!is_dir($uploadPath)) {
                         mkdir($uploadPath, 0775, true);
@@ -186,7 +186,7 @@ class AdminContentController extends Controller
                     ->map(function ($file) use ($uploadPath) {
                         $ext = $file->getClientOriginalExtension();
                         $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                        $fileName = $baseName . '_' . time() . '_' . rand(100, 999) . '.' . $ext;
+                        $fileName = $baseName . '.' . $ext;
                         $file->move($uploadPath, $fileName);
                         return 'uploads/' . $fileName;
                     })
