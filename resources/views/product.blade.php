@@ -2030,11 +2030,6 @@
             @endphp
             <div class="desktop-breadcrumb">
                 <a href="/">HOME</a> / 
-                @if($productCategory)
-                    <a href="{{ $catUrl }}">{{ $catTitle }}</a> / 
-                @else
-                    {{ $catTitle }} /
-                @endif
                 <strong>{{ strtoupper($pTitle) }}</strong>
             </div>
         </div>

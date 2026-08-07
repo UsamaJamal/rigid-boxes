@@ -533,10 +533,10 @@
                             <a href="{{ url('/' . $pSlug) }}/"
                                 style="text-decoration:none; color:inherit; width:100%; display:block;">
                                 <div class="box-image-wrapper">
-                                    <img src="{{ asset($pImg) }}" alt="{{ $p['title'] }}" class="main-img"
+                                    <img src="{{ asset($pImg) }}?v={{ @filemtime(public_path($pImg)) ?: 1 }}" alt="{{ $p['title'] }}" class="main-img"
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'" loading="lazy">
                                     @if($pHoverImg && $pHoverImg !== $pImg)
-                                    <img src="{{ asset($pHoverImg) }}" alt="{{ $p['title'] }} Hover" class="hover-img"
+                                    <img src="{{ asset($pHoverImg) }}?v={{ @filemtime(public_path($pHoverImg)) ?: 1 }}" alt="{{ $p['title'] }} Hover" class="hover-img"
                                         onerror="this.src='https://placehold.co/284x322/dddddd/555555?text={{ urlencode($p['title']) }}'" loading="lazy">
                                     @endif
                                 </div>
