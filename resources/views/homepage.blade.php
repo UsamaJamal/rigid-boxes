@@ -2329,7 +2329,17 @@
                 <div class="cards-grid">
                     @php
                         $featuredCatIds = (array) ($settings['featured_categories'] ?? []);
-                        $featuredCategories = collect($categories)->whereIn('id', $featuredCatIds)->all();
+                        
+                        // Categories from Home Settings
+                        $settingCategories = collect($categories)->whereIn('id', $featuredCatIds);
+                        
+                        // Categories where "Show on home page" is checked
+                        $homeCategories = collect($categories)->where('show_home', 1);
+                        
+                        // Combine both and ensure no duplicates, limit to 8
+                        $featuredCategories = $homeCategories->merge($settingCategories)->unique('id')->take(8)->all();
+                        
+                        // Fallback if none are selected
                         if (empty($featuredCategories)) {
                             $featuredCategories = array_slice($categories, 0, 8);
                         }
