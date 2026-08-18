@@ -2243,28 +2243,6 @@
             margin-bottom: 14px;
         }
 
-        .text-content-body ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 14px;
-        }
-
-        .text-content-body ul li {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.7;
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 4px;
-        }
-
-        .text-content-body ul li::before {
-            content: '•';
-            position: absolute;
-            left: 4px;
-            color: #333;
-        }
-
         .text-content-body a {
             color: #333;
             text-decoration: underline;
