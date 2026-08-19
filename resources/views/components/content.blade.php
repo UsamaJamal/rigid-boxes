@@ -109,7 +109,19 @@
 
     .text-content-body a:hover {
         color: blue;
+        text-decoration: underline;
+    }
+
+    .text-content-body ul li a,
+    .text-content-body ol li a {
+        color: blue;
         text-decoration: none;
+    }
+
+    .text-content-body ul li a:hover,
+    .text-content-body ol li a:hover {
+        color: blue;
+        text-decoration: underline;
     }
 
     @media (max-width: 992px) {

@@ -712,6 +712,17 @@
             font-weight: 600;
         }
 
+        .content-section ul li a,
+        .content-section ol li a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .content-section ul li a:hover,
+        .content-section ol li a:hover {
+            text-decoration: underline;
+        }
+
         /* Specs Section */
         .specs-section {
             max-width: calc(var(--container-width) - (var(--margin-sides) * 2));
