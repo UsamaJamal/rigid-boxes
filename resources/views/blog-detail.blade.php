@@ -215,14 +215,30 @@
             margin-bottom: 16px;
         }
 
-        .article-body a {
-            color: blue;
-            text-decoration: none;
+        .article-body a,
+        .article-body a * {
+            color: blue !important;
+            text-decoration: none !important;
         }
 
-        .article-body a:hover {
-            color: blue;
-            text-decoration: none;
+        .article-body a:hover,
+        .article-body a:hover * {
+            text-decoration: underline !important;
+        }
+
+        .article-body ul li a,
+        .article-body ol li a,
+        .article-body ul li a *,
+        .article-body ol li a * {
+            color: blue !important;
+            text-decoration: none !important;
+        }
+
+        .article-body ul li a:hover,
+        .article-body ol li a:hover,
+        .article-body ul li a:hover *,
+        .article-body ol li a:hover * {
+            text-decoration: underline !important;
         }
 
         .article-body h2 {

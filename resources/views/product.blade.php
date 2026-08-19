@@ -713,14 +713,18 @@
         }
 
         .content-section ul li a,
-        .content-section ol li a {
-            color: blue;
-            text-decoration: none;
+        .content-section ol li a,
+        .content-section ul li a *,
+        .content-section ol li a * {
+            color: blue !important;
+            text-decoration: none !important;
         }
 
         .content-section ul li a:hover,
-        .content-section ol li a:hover {
-            text-decoration: underline;
+        .content-section ol li a:hover,
+        .content-section ul li a:hover *,
+        .content-section ol li a:hover * {
+            text-decoration: underline !important;
         }
 
         /* Specs Section */
@@ -2309,13 +2313,15 @@
                 overflow: hidden;
                 line-height: 1.7;
             }
-            #desc-wrapper a {
-                text-decoration: none;
-                color: blue;
+            #desc-wrapper a,
+            #desc-wrapper a * {
+                text-decoration: none !important;
+                color: blue !important;
             }
-            #desc-wrapper a:hover {
-                text-decoration: none;
-                color: blue;
+            #desc-wrapper a:hover,
+            #desc-wrapper a:hover * {
+                text-decoration: underline !important;
+                color: blue !important;
             }
             #desc-wrapper.expanded {
                 display: block;
