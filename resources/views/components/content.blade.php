@@ -103,8 +103,13 @@
     }
 
     .text-content-body a {
-        color: #333;
-        text-decoration: underline;
+        color: blue;
+        text-decoration: none;
+    }
+
+    .text-content-body a:hover {
+        color: blue;
+        text-decoration: none;
     }
 
     @media (max-width: 992px) {
