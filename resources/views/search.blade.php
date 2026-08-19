@@ -1,5 +1,5 @@
 @include('components.htmlboilerplate', [
-    'title' => 'Search Results - The Rigid Boxes',
+    'title' => 'Search Results',
     'metaDescription' => 'Search results for your queried products at The Rigid Boxes.',
     'metaKeywords' => 'search, products, packaging, rigid boxes',
 ])

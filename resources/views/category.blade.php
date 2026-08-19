@@ -1,5 +1,5 @@
 @include('components.htmlboilerplate', [
-    'title' => $category['meta_title'] ?? ($category['title'] ?? 'Custom Packaging') . ' - The Rigid Boxes',
+    'title' => $category['meta_title'] ?? ($category['title'] ?? 'Custom Packaging'),
     'metaDescription' => $category['meta_description'] ?? '',
     'metaKeywords' => $category['meta_keywords'] ?? '',
     'robots' => $category['robots'] ?? 'index,follow',

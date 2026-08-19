@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
-    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
+    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }}</title>
     @if(!empty($product['meta_description']))
         <meta name="description" content="{{ $product['meta_description'] }}">
     @endif
@@ -2297,6 +2297,14 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 line-height: 1.7;
+            }
+            #desc-wrapper a {
+                text-decoration: none;
+                color: blue;
+            }
+            #desc-wrapper a:hover {
+                text-decoration: none;
+                color: blue;
             }
             #desc-wrapper.expanded {
                 display: block;
