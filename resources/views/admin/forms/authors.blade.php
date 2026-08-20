@@ -6,7 +6,7 @@
 @php
     $v = fn($key, $default = '') => old($key, $item[$key] ?? $default);
     $editing = (bool)$item;
-    $resolveImg = fn($path) => empty($path) ? '' : (\Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/']) ? asset($path) : asset('storage/' . $path));
+    $resolveImg = fn($path) => empty($path) ? '' : (\Illuminate\Support\Str::startsWith($path, ['storage/', 'uploads/', 'images/']) ? asset($path) . '?v=' . (@filemtime(public_path($path)) ?: 1) : asset('storage/' . $path) . '?v=' . (@filemtime(storage_path('app/public/' . $path)) ?: 1));
 @endphp
 
 @if($errors->any())

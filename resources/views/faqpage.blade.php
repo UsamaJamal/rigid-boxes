@@ -262,14 +262,15 @@
         <p>Find clear answers to common questions about our luxury packaging services, processes, and policies.</p>
     </div>
 
+    @php
+        $sections = $settings['faq_page_sections'] ?? [];
+    @endphp
+    @if(!empty($sections))
     <div class="faq-container">
         <aside class="faq-sidebar">
             <h2 class="faq-filter-title">Filter By Category</h2>
             <ul class="faq-categories">
                 <li><button class="active" data-filter="all">All</button></li>
-                @php
-                    $sections = $settings['faq_page_sections'] ?? [];
-                @endphp
                 @foreach($sections as $index => $section)
                     @php 
                         $slug = \Illuminate\Support\Str::slug($section['heading']);
@@ -286,34 +287,31 @@
         </aside>
 
         <div class="faq-content">
-            @if(empty($sections))
-                <p style="color: #666; font-size: 16px;">No FAQs have been added yet.</p>
-            @else
-                @foreach($sections as $index => $section)
-                    @php 
-                        $slug = \Illuminate\Support\Str::slug($section['heading']);
-                        $faqs = $section['faqs'] ?? [];
-                    @endphp
-                    <div class="faq-section" data-category="{{ $slug }}" {!! $index > 0 ? 'style="display: none;"' : '' !!}>
-                        <h2 class="faq-section-title">{{ $section['heading'] }}</h2>
-                        <div class="faq-accordion">
-                            @foreach($faqs as $faq)
-                                <div class="faq-item">
-                                    <div class="faq-item-header">
-                                        {{ $faq['question'] }}
-                                        <span class="faq-item-icon">+</span>
-                                    </div>
-                                    <div class="faq-item-body">
-                                        <p>{!! nl2br(e($faq['answer'])) !!}</p>
-                                    </div>
+            @foreach($sections as $index => $section)
+                @php 
+                    $slug = \Illuminate\Support\Str::slug($section['heading']);
+                    $faqs = $section['faqs'] ?? [];
+                @endphp
+                <div class="faq-section" data-category="{{ $slug }}" {!! $index > 0 ? 'style="display: none;"' : '' !!}>
+                    <h2 class="faq-section-title">{{ $section['heading'] }}</h2>
+                    <div class="faq-accordion">
+                        @foreach($faqs as $faq)
+                            <div class="faq-item">
+                                <div class="faq-item-header">
+                                    {{ $faq['question'] }}
+                                    <span class="faq-item-icon">+</span>
                                 </div>
-                            @endforeach
-                        </div>
+                                <div class="faq-item-body">
+                                    <p>{!! nl2br(e($faq['answer'])) !!}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-            @endif
+                </div>
+            @endforeach
         </div>
     </div>
+    @endif
 @include('components.cta')
 @include('components.footer')
 

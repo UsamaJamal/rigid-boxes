@@ -6,7 +6,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes - The Rigid Boxes' }}
+    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes' }}
     </title>
     <meta name="description"
         content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
@@ -2243,28 +2243,6 @@
             margin-bottom: 14px;
         }
 
-        .text-content-body ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 14px;
-        }
-
-        .text-content-body ul li {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.7;
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 4px;
-        }
-
-        .text-content-body ul li::before {
-            content: '•';
-            position: absolute;
-            left: 4px;
-            color: #333;
-        }
-
         .text-content-body a {
             color: #333;
             text-decoration: underline;
@@ -2328,7 +2306,17 @@
                 <div class="cards-grid">
                     @php
                         $featuredCatIds = (array) ($settings['featured_categories'] ?? []);
-                        $featuredCategories = collect($categories)->whereIn('id', $featuredCatIds)->all();
+                        
+                        // Categories from Home Settings
+                        $settingCategories = collect($categories)->whereIn('id', $featuredCatIds);
+                        
+                        // Categories where "Show on home page" is checked
+                        $homeCategories = collect($categories)->where('show_home', 1);
+                        
+                        // Combine both and ensure no duplicates, limit to 8
+                        $featuredCategories = $homeCategories->merge($settingCategories)->unique('id')->take(8)->all();
+                        
+                        // Fallback if none are selected
                         if (empty($featuredCategories)) {
                             $featuredCategories = array_slice($categories, 0, 8);
                         }

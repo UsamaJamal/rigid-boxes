@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Instant Quote | The Rigid Boxes</title>
+    <title>Get Instant Quote</title>
     <meta name="description" content="Request your free custom quote for luxury rigid packaging boxes. Fast estimates & high quality custom boxes.">
     
     <!-- Fonts & Icons -->

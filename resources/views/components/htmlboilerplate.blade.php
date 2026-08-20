@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'The Rigid Boxes' }}</title>
+    <title>{{ $title ?? '' }}</title>
     @if(!empty($metaDescription))
         <meta name="description" content="{{ $metaDescription }}">
     @endif

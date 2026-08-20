@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
-    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
+    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }}</title>
     @if(!empty($product['meta_description']))
         <meta name="description" content="{{ $product['meta_description'] }}">
     @endif
@@ -314,7 +314,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             outline: none;
             transition: border-color 0.3s;
             background: #fff;
@@ -329,7 +329,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             outline: none;
             transition: border-color 0.3s;
             background: #fff;
@@ -377,7 +377,7 @@
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 15px;
             background: #fff;
             cursor: pointer;
             position: relative;
@@ -435,7 +435,7 @@
 
         .custom-option {
             padding: 10px 15px;
-            font-size: 13px;
+            font-size: 15px;
             cursor: pointer;
             transition: background-color 0.2s, color 0.2s;
         }
@@ -710,6 +710,21 @@
         .content-section li::marker {
             color: var(--color-text);
             font-weight: 600;
+        }
+
+        .content-section ul li a,
+        .content-section ol li a,
+        .content-section ul li a *,
+        .content-section ol li a * {
+            color: blue !important;
+            text-decoration: none !important;
+        }
+
+        .content-section ul li a:hover,
+        .content-section ol li a:hover,
+        .content-section ul li a:hover *,
+        .content-section ol li a:hover * {
+            text-decoration: underline !important;
         }
 
         /* Specs Section */
@@ -1604,7 +1619,7 @@
                 min-height: 45px !important;
                 height: 45px !important;
                 padding: 12px 16px 12px 4px !important;
-                font-size: 8.5px !important;
+                font-size: 14px !important;
                 line-height: 21px !important;
                 display: block !important;
                 overflow: hidden !important;
@@ -2030,11 +2045,6 @@
             @endphp
             <div class="desktop-breadcrumb">
                 <a href="/">HOME</a> / 
-                @if($productCategory)
-                    <a href="{{ $catUrl }}">{{ $catTitle }}</a> / 
-                @else
-                    {{ $catTitle }} /
-                @endif
                 <strong>{{ strtoupper($pTitle) }}</strong>
             </div>
         </div>
@@ -2070,14 +2080,14 @@
                     <div class="in-stock-tag">
                         <span class="stock-dot"></span> In Stock
                     </div>
-                    <img id="product-main-image" src="{{ asset($pMainImg) }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
+                    <img id="product-main-image" src="{{ asset($pMainImg) }}?v={{ @filemtime(public_path($pMainImg)) ?: 1 }}" alt="{{ $pTitle }}" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x500/eeeeee/555555?text={{ urlencode($pTitle) }}'">
                 </div>
                 @if(count($pGallery) > 1)
                 <div class="thumbnails">
                     @foreach($pGallery as $galleryIndex => $galleryImage)
                         @php $galleryImage = \Illuminate\Support\Str::startsWith($galleryImage, ['storage/', 'uploads/', 'images/']) ? $galleryImage : 'storage/' . $galleryImage; @endphp
-                        <div class="thumb {{ $galleryIndex === 0 ? 'active' : '' }}" onclick="switchProductImage(this, '{{ asset($galleryImage) }}')">
-                            <img src="{{ asset($galleryImage) }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;" loading="lazy">
+                        <div class="thumb {{ $galleryIndex === 0 ? 'active' : '' }}" onclick="switchProductImage(this, '{{ asset($galleryImage) }}?v={{ @filemtime(public_path($galleryImage)) ?: 1 }}')">
+                            <img src="{{ asset($galleryImage) }}?v={{ @filemtime(public_path($galleryImage)) ?: 1 }}" alt="{{ $pTitle }} thumbnail {{ $galleryIndex + 1 }}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;" loading="lazy">
                         </div>
                     @endforeach
                 </div>
@@ -2302,6 +2312,16 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 line-height: 1.7;
+            }
+            #desc-wrapper a,
+            #desc-wrapper a * {
+                text-decoration: none !important;
+                color: blue !important;
+            }
+            #desc-wrapper a:hover,
+            #desc-wrapper a:hover * {
+                text-decoration: underline !important;
+                color: blue !important;
             }
             #desc-wrapper.expanded {
                 display: block;

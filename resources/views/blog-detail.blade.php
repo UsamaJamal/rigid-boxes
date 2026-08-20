@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond | The Rigid Boxes</title>
+    <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -213,6 +213,32 @@
         .article-body p {
             color: #000000;
             margin-bottom: 16px;
+        }
+
+        .article-body a,
+        .article-body a * {
+            color: blue !important;
+            text-decoration: none !important;
+        }
+
+        .article-body a:hover,
+        .article-body a:hover * {
+            text-decoration: underline !important;
+        }
+
+        .article-body ul li a,
+        .article-body ol li a,
+        .article-body ul li a *,
+        .article-body ol li a * {
+            color: blue !important;
+            text-decoration: none !important;
+        }
+
+        .article-body ul li a:hover,
+        .article-body ol li a:hover,
+        .article-body ul li a:hover *,
+        .article-body ol li a:hover * {
+            text-decoration: underline !important;
         }
 
         .article-body h2 {
