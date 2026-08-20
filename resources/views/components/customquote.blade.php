@@ -665,8 +665,8 @@
                         <span class="step-ghost-num">1</span>
                     </div>
                     <div class="step-text">
-                        <div class="step-title">Share Requirements</div>
-                        <p class="step-desc">Share your box style, size, quantity, and design preferences. Our team will recommend the best packaging solution for your needs.</p>
+                        <div class="step-title">Tell Us What You Need</div>
+                        <p class="step-desc">Tell our team about your box requirements, intented use, box style, design and closure. Our team is there to help you choose the best.</p>
                     </div>
                 </div>
 
@@ -676,8 +676,8 @@
                         <span class="step-ghost-num">2</span>
                     </div>
                     <div class="step-text">
-                        <div class="step-title">Approve Design</div>
-                        <p class="step-desc">Receive a custom artwork and 3D mockup for review. Once approved, we'll prepare everything for production.</p>
+                        <div class="step-title">See It Before We Make It</div>
+                        <p class="step-desc">Brands can get physical and digital samples to review the artwork, text placement and box strength.</p>
                     </div>
                 </div>
 
@@ -687,8 +687,8 @@
                         <span class="step-ghost-num">3</span>
                     </div>
                     <div class="step-text">
-                        <div class="step-title">Production</div>
-                        <p class="step-desc">Your packaging is produced using premium materials and carefully inspected to ensure exceptional quality and flawless finishing.</p>
+                        <div class="step-title">We Bring Your Box to Life</div>
+                        <p class="step-desc">Your vision is our goal. From material to box structure, we consider your requirements and customization. We deliver you packaging that matches your brand vision.</p>
                     </div>
                 </div>
 
@@ -698,8 +698,8 @@
                         <span class="step-ghost-num">4</span>
                     </div>
                     <div class="step-text">
-                        <div class="step-title">Fast Delivery</div>
-                        <p class="step-desc">Your custom packaging is securely packed and delivered to your doorstep on time.</p>
+                        <div class="step-title">Packed and On Its Way</div>
+                        <p class="step-desc">Right on schedule, every order. Count on us because you are in capable hands. We deliver your package on time, rest assured.</p>
                     </div>
                 </div>
 
