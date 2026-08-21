@@ -102,9 +102,30 @@
         font-weight: 600;
     }
 
-    .text-content-body a {
-        color: #333;
-        text-decoration: underline;
+    .text-content-body a,
+    .text-content-body a * {
+        color: blue !important;
+        text-decoration: none !important;
+    }
+
+    .text-content-body a:hover,
+    .text-content-body a:hover * {
+        text-decoration: underline !important;
+    }
+
+    .text-content-body ul li a,
+    .text-content-body ol li a,
+    .text-content-body ul li a *,
+    .text-content-body ol li a * {
+        color: blue !important;
+        text-decoration: none !important;
+    }
+
+    .text-content-body ul li a:hover,
+    .text-content-body ol li a:hover,
+    .text-content-body ul li a:hover *,
+    .text-content-body ol li a:hover * {
+        text-decoration: underline !important;
     }
 
     @media (max-width: 992px) {

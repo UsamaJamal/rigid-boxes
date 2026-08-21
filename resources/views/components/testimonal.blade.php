@@ -35,9 +35,9 @@
         font-weight: 400;
         font-size: 16px;
         line-height: 1.5;
-        text-align: center;
+        text-align: justify;
         color: #333;
-        max-width: 620px;
+        max-width: 740px;
         margin: 0 auto;
     }
 
@@ -321,9 +321,10 @@
 <section class="testimonial-section">
     <div class="testimonial-container">
         <div class="testimonial-header">
-            <span class="testimonial-title" style="display: block;">What Our Clients Say</span>
-            <p class="testimonial-subtitle">Trusted by brands that value premium quality, reliable production, and luxury packaging that leaves a lasting impression.</p>
-        </div>
+            <span class="testimonial-title" style="display: block;">Trusted by Brands, Remembered by Customers</span>
+            <p class="testimonial-subtitle">Know what our customers say about our products, communication, assistance and services.
+“We ordered magnetic rigid boxes and trust me our product launch was well-executed with premium presentation. Customization was exactly the way we asked them.” </p>
+  </div>
 
         <div class="testimonial-slider-wrapper">
             <button class="nav-btn prev-btn" aria-label="Previous Testimonial">
@@ -341,9 +342,11 @@
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
-                                <p class="testimonial-text">Excellent packaging quality and fast production. Our luxury product line now looks much more premium.</p>
-                                <div class="testimonial-author">Elisa Grant</div>
-                                <div class="testimonial-role">CEO, Urban Apparel</div>
+                                <p class="testimonial-text">“We were looking for premium appearance without costing an arm and leg. Trust me the team was so helpful and guided us about the materials and dimensions. Highly recommended. “
+</p>
+                                <div class="testimonial-author">Olivia Bennett</div>
+                                <div class="testimonial-role">Product Manager, Lumera Skincare
+</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>
@@ -359,9 +362,10 @@
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
-                                <p class="testimonial-text">The rigid box structural integrity and foil finishing exceeded our expectations. Highly recommended!</p>
-                                <div class="testimonial-author">Marcus Vance</div>
-                                <div class="testimonial-role">Founder, Vance Cosmetics</div>
+                                <p class="testimonial-text">“The boxes were sturdy, have smooth closure and presented all the required branded elements exceptionally. Definitely going to order again. “</p>
+                                <div class="testimonial-author">Daniel Carter</div>
+                                <div class="testimonial-role">Founder, North & Vale
+</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>
@@ -377,9 +381,9 @@
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
-                                <p class="testimonial-text">Outstanding custom sample support. Their team guided us through every step of the unboxing design.</p>
-                                <div class="testimonial-author">Sophia Loren</div>
-                                <div class="testimonial-role">Design Lead, Aura Luxury</div>
+                                <p class="testimonial-text">“I asked for rush delivery and they have done it. Customized printing with premium finishing added value to our jewelry pieces. Highly impressed by their professional attitude.”</p>
+                                <div class="testimonial-author">Sophia Reynolds</div>
+                                <div class="testimonial-role">Creative Director, Elara Fragrances</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>
@@ -396,8 +400,8 @@
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
                                 <p class="testimonial-text">Fast delivery and flawless printing. Our customers love the premium unboxing experience.</p>
-                                <div class="testimonial-author">David Miller</div>
-                                <div class="testimonial-role">Product Manager, Heritage</div>
+                                <div class="testimonial-author">Ethan Brooks</div>
+                                <div class="testimonial-role">Operations Manager, Cedar & Finch Gifts</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>

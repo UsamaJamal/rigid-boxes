@@ -6,7 +6,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes - The Rigid Boxes' }}
+    <title>{{ !empty($settings['meta_title']) ? $settings['meta_title'] : 'Custom Printed Boxes' }}
     </title>
     <meta name="description"
         content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
@@ -108,7 +108,7 @@
             letter-spacing: 0%;
             text-align: center;
             color: var(--section-text-color);
-            max-width: 600px;
+            max-width: 752px;
             margin: 0 auto 28px;
             text-align: justify;
         }
@@ -1395,9 +1395,9 @@
             font-weight: 400;
             font-size: 16px;
             line-height: 1.5;
-            text-align: center;
+            text-align: justify;
             color: var(--section-text-color);
-            max-width: 583px;
+            max-width: 548px;
             margin: 0 auto 24px;
         }
 
@@ -1601,9 +1601,9 @@
             font-weight: 400;
             font-size: 16px;
             line-height: 1.5;
-            text-align: center;
+            text-align: justify;
             color: var(--section-text-color);
-            max-width: 583px;
+            max-width: 624px;
             margin: 0 auto 24px;
         }
 
@@ -2246,28 +2246,6 @@
             margin-bottom: 14px;
         }
 
-        .text-content-body ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 14px;
-        }
-
-        .text-content-body ul li {
-            font-size: 16px;
-            color: #333;
-            line-height: 1.7;
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 4px;
-        }
-
-        .text-content-body ul li::before {
-            content: '•';
-            position: absolute;
-            left: 4px;
-            color: #333;
-        }
-
         .text-content-body a {
             color: #333;
             text-decoration: underline;
@@ -2325,9 +2303,8 @@
         <section class="custom-boxes-section">
             <div class="custom-boxes-container">
 
-                <h2>Custom Printed Boxes For Every Industry</h2>
-                <p class="section-desc">Custom packaging designed for different industries. Whether it's retail, beauty,
-                    or electronics, we create packaging that fits your industry's style and requirements.</p>
+                <h2>Great Unboxing Starts with the Right Structure</h2>
+                <p class="section-desc">Box opening changes customer’s experience instantly. Right structure anticipates a customer’s pleasant unboxing experience. Explore our rigid box styles and choose the one that matches your vision.</p>
 
                 <div class="cards-grid">
                     @php
@@ -2394,9 +2371,8 @@
         <section class="why-choose-section">
             <div class="why-choose-container">
 
-                <span class="h2-heading">Why Choose Us</span>
-                <p class="why-desc">From premium materials to expert support, we provide everything you need for
-                    exceptional custom packaging.</p>
+                <span class="h2-heading">What Sets Our Boxes Apart</span>
+                <p class="why-desc">Our aim is to present your products in a premium packaging. From design support to choosing the material, our team assists you to achieve your business goals.</p>
 
                 <div class="why-bento">
 
@@ -2406,9 +2382,8 @@
                         <!-- CARD 1 — pink-1: Free Design Support -->
                         <div class="why-card wc-pink1">
                             <div class="why-card__content">
-                                <span class="why-card__title">Free Design Support</span>
-                                <p class="why-card__text">Get expert assistance with artwork, layouts, and packaging
-                                    design at no extra cost.</p>
+                                <span class="why-card__title">Creative Direction</span>
+                                <p class="why-card__text">We have professional designers who provide assistance with artwork, reference images and early concepts. We don’t charge extra for this service.</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-design-support.png') }}"
@@ -2419,9 +2394,8 @@
                         <!-- CARD 2 — pink-2: Premium Quality Materials -->
                         <div class="why-card wc-pink2">
                             <div class="why-card__content">
-                                <span class="why-card__title">Premium Quality Materials</span>
-                                <p class="why-card__text">Durable materials crafted to protect your products and elevate
-                                    brand perception.</p>
+                                <span class="why-card__title">Material Integrity</span>
+                                <p class="why-card__text">Get sturdy boxes made from premium materials that offer great protection with an elite presentation.</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-premium-materials.png') }}"
@@ -2432,9 +2406,9 @@
                         <!-- CARD 3 — blue: Low MOQ -->
                         <div class="why-card wc-blue">
                             <div class="why-card__content">
-                                <span class="why-card__title">Low MOQ</span>
-                                <p class="why-card__text">Order in quantities that suit your business size, starting
-                                    from low minimums.</p>
+                                <span class="why-card__title">Flexible Order Runs: NO MOQ</span>
+                                <p class="why-card__text">Choose an order quantity that makes sense for your current plans. We do not have any low minimum quantity (MOQ) rule.
+</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-low-moq.png') }}"
@@ -2450,9 +2424,8 @@
                         <!-- CARD 4 — yellow: Dedicated Customer Service -->
                         <div class="why-card wc-yellow">
                             <div class="why-card__content">
-                                <span class="why-card__title">Dedicated Customer Service</span>
-                                <p class="why-card__text">Our packaging specialists are here to guide you through every
-                                    step of your order.</p>
+                                <span class="why-card__title">Precision Sizing</span>
+                                <p class="why-card__text">Your boxes are manufactured according to the provided dimensions. We customize the internal space, opening style, and fitted insert.</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/why-customer-service.png') }}"
@@ -2463,9 +2436,8 @@
                         <!-- CARD 5 — green: Custom Sizes & Designs -->
                         <div class="why-card wc-green">
                             <div class="why-card__content">
-                                <span class="why-card__title">Custom Sizes &amp; Designs</span>
-                                <p class="why-card__text">Fully tailored dimensions, shapes, and finishes built to your
-                                    exact specifications.</p>
+                                <span class="why-card__title">Guidance at Every Turn</span>
+                                <p class="why-card__text">Our team assistance is available 24/7. Specialists guide you throughout the process.</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/custom-sizes-and-designs-transparent.png') }}"
@@ -2476,9 +2448,9 @@
                         <!-- CARD 6 — skin: Fast Production Time -->
                         <div class="why-card wc-skin">
                             <div class="why-card__content">
-                                <span class="why-card__title">Fast Production Time</span>
-                                <p class="why-card__text">Efficient manufacturing processes to deliver your packaging on
-                                    time, every time.</p>
+                                <span class="why-card__title">Reliable Turnaround</span>
+                                <p class="why-card__text">Right on schedule, every order. Your deadline is our commitment; so, you will receive your package on time.
+</p>
                             </div>
                             <div class="why-card__img-box">
                                 <img src="{{ asset('uploads/fast-production-management.png') }}"
@@ -2571,16 +2543,11 @@
                 <!-- RIGHT: content col -->
                 <div class="premium-content">
 
-                    <span class="premium-heading">Premium Custom Rigid Boxes</span>
+                    <span class="premium-heading">Give Your Product the Presentation It Deserves</span>
 
-                    <p class="premium-desc">Custom printed rigid packaging boxes offer the perfect combination of
-                        luxury, durability, and sophistication. Crafted from sturdy, high-quality materials, these boxes
-                        provide exceptional protection for fragile and premium products while enhancing their overall
-                        presentation. Elegant finishes and refined detailing create a high-end look that reflects your
-                        brand's value. Our luxury black rigid boxes are especially suited for delicate, expensive, and
-                        gift-worthy items. With endless customization possibilities, they can be tailored for branding,
-                        retail display, and special occasions, helping you create a memorable unboxing experience and
-                        leave a lasting impression on your customers.</p>
+                    <p class="premium-desc">A thoughtful packaging box shows the value of the product inside it. Before opening the box, customers get expectations based on the packaging. Our rigid boxes have structural strength to protect your products and have custom-fitted inserts to restrict the movement. Finely designed box with exceptional wrapping makes the presentation premium. A box with top-tier branded elements wins customer’s heart even before opening it.
+From customized dimensions to box style, color, interior, layout and refined finishing; we give the best to boost your brand identity. Get magnetic closure rigid boxes to uplift your gift collections. We ensure your delicate products are safe while the unboxing experience is unforgettable.
+</p>
 
                     <!-- Icons row -->
                     <div class="premium-icons">
@@ -2618,9 +2585,8 @@
         <section class="customize-detail-section">
             <div class="customize-detail-inner">
 
-                <span class="customize-detail-heading">Customize Every Detail</span>
-                <p class="customize-detail-desc">Choose from premium materials, luxury finishes, custom inserts, and
-                    unique box styles to create packaging that perfectly represents your brand.</p>
+                <span class="customize-detail-heading">Make Every Detail Distinctly Yours</span>
+                <p class="customize-detail-desc">We manufacture packaging exclusively for your products. To give the boxes a premium appearance, choose the customized finishing. Foil stamping, embossing, protective laminations, magnetic closures, fitted inserts, and coatings make the box distinctly yours.</p>
 
                 <!-- Options pill bar (scrollable, draggable) -->
                 <div class="customize-detail-options-wrapper" id="cdoBar">
@@ -2667,9 +2633,8 @@
         <section class="sustainable-section">
             <div class="sustainable-inner">
 
-                <span class="sustainable-heading">Sustainable Packaging Solutions</span>
-                <p class="sustainable-desc">Packaging designed to reduce environmental impact without compromising on
-                    quality, durability, or presentation.</p>
+                <span class="sustainable-heading">A Greener Approach to Rigid Packaging</span>
+                <p class="sustainable-desc">The Rigid Boxes recognizes the eco-friendly approach in packaging. We have recycled board options for eco-friendly packaging that keeps the environment safe. Get strong presentation that appeals customers with sustainability.<p>
 
                 <div class="sustainable-grid">
 

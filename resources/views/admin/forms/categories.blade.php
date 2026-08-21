@@ -142,16 +142,25 @@
     </div>
 
     <div class="section">
-        <h3>Category FAQs</h3>
-        <div class="form-grid">
-            @for($i = 0; $i < 4; $i++)
-                <div class="field">
-                    <label>Question {{ $i + 1 }}</label>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin-bottom: 0;">Category FAQs</h3>
+            <button type="button" onclick="addFaqRow()" class="btn light" style="padding: 6px 12px; font-size: 13px;"><i class="fa-solid fa-plus"></i> Add FAQ</button>
+        </div>
+        <div class="form-grid" id="faqsContainer">
+            @php
+                $faqsCount = max(1, count($categoryFaqs ?? []), count(old('faq_question', [])));
+            @endphp
+            @for($i = 0; $i < $faqsCount; $i++)
+                <div class="field faq-question-field">
+                    <label class="faq-q-label">Question {{ $i + 1 }}</label>
                     <input name="faq_question[]" value="{{ old('faq_question.' . $i, $categoryFaqs[$i]['question'] ?? '') }}">
                 </div>
-                <div class="field">
-                    <label>Answer {{ $i + 1 }}</label>
-                    <textarea name="faq_answer[]" style="min-height:70px">{{ old('faq_answer.' . $i, $categoryFaqs[$i]['answer'] ?? '') }}</textarea>
+                <div class="field faq-answer-field">
+                    <label class="faq-a-label">Answer {{ $i + 1 }}</label>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <textarea name="faq_answer[]" style="min-height:70px; flex: 1;">{{ old('faq_answer.' . $i, $categoryFaqs[$i]['answer'] ?? '') }}</textarea>
+                        <button type="button" onclick="removeFaqRow(this)" style="background: none; border: none; color: #e74c3c; cursor: pointer; padding: 5px; margin-top: 5px;" title="Remove FAQ"><i class="fa-solid fa-trash"></i></button>
+                    </div>
                 </div>
             @endfor
         </div>
@@ -237,6 +246,41 @@
         }
         hidden.value = '1';
         wrapper.style.display = 'none';
+    }
+
+    function addFaqRow() {
+        const container = document.getElementById('faqsContainer');
+        const count = container.querySelectorAll('.faq-question-field').length;
+        const newIndex = count + 1;
+        
+        const qField = document.createElement('div');
+        qField.className = 'field faq-question-field';
+        qField.innerHTML = `<label class="faq-q-label">Question ${newIndex}</label><input name="faq_question[]" value="">`;
+        
+        const aField = document.createElement('div');
+        aField.className = 'field faq-answer-field';
+        aField.innerHTML = `
+            <label class="faq-a-label">Answer ${newIndex}</label>
+            <div style="display: flex; gap: 10px; align-items: flex-start;">
+                <textarea name="faq_answer[]" style="min-height:70px; flex: 1;"></textarea>
+                <button type="button" onclick="removeFaqRow(this)" style="background: none; border: none; color: #e74c3c; cursor: pointer; padding: 5px; margin-top: 5px;" title="Remove FAQ"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+        
+        container.appendChild(qField);
+        container.appendChild(aField);
+    }
+
+    function removeFaqRow(btn) {
+        const aField = btn.closest('.faq-answer-field');
+        const qField = aField.previousElementSibling;
+        aField.remove();
+        qField.remove();
+        
+        const qLabels = document.querySelectorAll('#faqsContainer .faq-q-label');
+        const aLabels = document.querySelectorAll('#faqsContainer .faq-a-label');
+        qLabels.forEach((lbl, idx) => lbl.innerText = 'Question ' + (idx + 1));
+        aLabels.forEach((lbl, idx) => lbl.innerText = 'Answer ' + (idx + 1));
     }
 </script>
 

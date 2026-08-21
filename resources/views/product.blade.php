@@ -5,7 +5,7 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
-    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }} - The Rigid Boxes</title>
+    <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }}</title>
     @if(!empty($product['meta_description']))
         <meta name="description" content="{{ $product['meta_description'] }}">
     @endif
@@ -710,6 +710,21 @@
         .content-section li::marker {
             color: var(--color-text);
             font-weight: 600;
+        }
+
+        .content-section ul li a,
+        .content-section ol li a,
+        .content-section ul li a *,
+        .content-section ol li a * {
+            color: blue !important;
+            text-decoration: none !important;
+        }
+
+        .content-section ul li a:hover,
+        .content-section ol li a:hover,
+        .content-section ul li a:hover *,
+        .content-section ol li a:hover * {
+            text-decoration: underline !important;
         }
 
         /* Specs Section */
@@ -2297,6 +2312,16 @@
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 line-height: 1.7;
+            }
+            #desc-wrapper a,
+            #desc-wrapper a * {
+                text-decoration: none !important;
+                color: blue !important;
+            }
+            #desc-wrapper a:hover,
+            #desc-wrapper a:hover * {
+                text-decoration: underline !important;
+                color: blue !important;
             }
             #desc-wrapper.expanded {
                 display: block;
