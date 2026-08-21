@@ -151,7 +151,7 @@
     <div class="panel">
         <div class="panel-head">
             <h2 style="font-size: 17px;"><i class="fa-solid fa-globe" style="color:var(--primary); margin-right: 8px;"></i> 1. Search Engine Optimization (SEO)</h2>
-            <span style="color:var(--muted); font-size: 12px;">Manage Meta Title & Meta Description for Google & search engines</span>
+            <span style="color:var(--muted); font-size: 12px;">Manage Meta Title, Meta Description & Meta Keywords for search engines</span>
         </div>
         <div class="section">
             <div class="form-grid">
@@ -165,6 +165,12 @@
                     <label for="meta_description">Homepage Meta Description</label>
                     <textarea id="meta_description" name="meta_description" rows="3" placeholder="e.g. Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging." maxlength="1000">{{ old('meta_description', $settings['meta_description'] ?? '') }}</textarea>
                     <small>Recommended length: 150-160 characters describing your homepage content.</small>
+                </div>
+
+                <div class="field full">
+                    <label for="meta_keywords">Homepage Meta Keywords</label>
+                    <input type="text" id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', $settings['meta_keywords'] ?? '') }}" placeholder="e.g. custom rigid boxes, luxury packaging, wholesale boxes" maxlength="1000">
+                    <small>Optional: enter relevant keywords separated by commas.</small>
                 </div>
 
                 <div class="field full">

@@ -10,6 +10,9 @@
     </title>
     <meta name="description"
         content="{{ !empty($settings['meta_description']) ? $settings['meta_description'] : 'Custom printed rigid packaging boxes at wholesale rates. Premium luxury boxes for retail, cosmetic, and gift packaging.' }}">
+    @if(!empty($settings['meta_keywords']))
+        <meta name="keywords" content="{{ $settings['meta_keywords'] }}">
+    @endif
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

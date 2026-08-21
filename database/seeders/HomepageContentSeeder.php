@@ -25,11 +25,18 @@ class HomepageContentSeeder extends Seeder
                 'sort_order' => 2
             ],
             [
+                'section' => 'seo',
+                'field_key' => 'meta_keywords',
+                'value' => '',
+                'value_type' => 'text',
+                'sort_order' => 3
+            ],
+            [
                 'section' => 'hero',
                 'field_key' => 'hero_title',
                 'value' => 'Custom Printed Boxes & Packaging Manufacturer',
                 'value_type' => 'text',
-                'sort_order' => 3
+                'sort_order' => 4
             ],
             [
                 'section' => 'hero',
