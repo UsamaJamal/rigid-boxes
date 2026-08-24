@@ -864,7 +864,8 @@
             color: #FFFFFF;
         }
         
-        .process-card:hover h4 {
+        .process-card:hover h4,
+        .process-card:hover span.process-title {
             color: #FFFFFF;
         }
         
@@ -879,13 +880,16 @@
             transition: color 0.3s ease;
         }
         
-        .process-card h4 {
+        .process-card h4,
+        .process-card span.process-title {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-size: 14px;
             font-weight: 700;
             line-height: 20px;
             color: #000000;
             text-align: center;
+            margin-top: 1.33em;
             margin-bottom: 10px;
             transition: color 0.3s ease;
         }
@@ -1139,10 +1143,14 @@
             flex-shrink: 0;
         }
         
-        .quote-form h2 {
+        .quote-form h2,
+        .quote-form span.quote-form-title {
+            display: block;
             font-family: 'Open Sans', sans-serif;
             font-size: 24px;
+            margin-top: 0.83em;
             margin-bottom: 5px;
+            font-weight: 700;
             color: #000;
         }
         
@@ -1364,10 +1372,13 @@
             overflow: hidden;
         }
         
-        .product-card h4 {
+        .product-card h4,
+        .product-card span.product-card-title {
+            display: block;
             font-size: 18px;
             font-weight: 700;
             color: #000;
+            margin-top: 1.33em;
             margin-bottom: 10px;
             font-family: 'Open Sans', sans-serif;
         }
@@ -1883,7 +1894,8 @@
             .quote-form-header {
                 gap: 10px;
             }
-            .quote-form h2 {
+            .quote-form h2,
+            .quote-form span.quote-form-title {
                 font-size: 20px;
                 white-space: nowrap;
             }
@@ -2455,22 +2467,22 @@
         <div class="process-cards">
             <div class="process-card">
                 <div class="process-icon"><i class="fas fa-gift"></i></div>
-                <h4>Customize Your Packaging</h4>
+                <span class="process-title">Customize Your Packaging</span>
                 <p>Choose from our extensive packaging solutions and personalize them with a variety of options to bring your ideal packaging to life.</p>
             </div>
             <div class="process-card">
                 <div class="process-icon"><i class="fas fa-clipboard-list"></i></div>
-                <h4>Request a Quote</h4>
+                <span class="process-title">Request a Quote</span>
                 <p>After customizing your packaging, simply request a quote, and our packaging specialists will review your submission.</p>
             </div>
             <div class="process-card">
                 <div class="process-icon"><i class="fas fa-headset"></i></div>
-                <h4>Expert Consultation</h4>
+                <span class="process-title">Expert Consultation</span>
                 <p>Get expert consultation on your quote to reduce costs, improve efficiency, and minimize environmental impact.</p>
             </div>
             <div class="process-card">
                 <div class="process-icon"><i class="fas fa-truck-fast"></i></div>
-                <h4>Production & Delivery</h4>
+                <span class="process-title">Production & Delivery</span>
                 <p>After finalizing the details, we'll handle the entire production and shipping process. Just sit back and wait for your packaging to arrive!</p>
             </div>
         </div>
@@ -2516,7 +2528,7 @@
                 <div class="quote-form-header">
                     <div class="quote-icon-box"><img src="{{ asset('images/request-sample-kit.svg') }}" alt="sample kit" style="width: 50px; height: 50px;" ></div>
                     <div>
-                        <h2>Request A Sample Kit</h2>
+                        <span class="quote-form-title">Request A Sample Kit</span>
                         <p>Fill out the form below and we'll send you a sample kit tailored to your needs.</p>
                     </div>
                 </div>
@@ -2648,7 +2660,7 @@
                             <div class="product-image">
                                 <img src="{{ asset($rpImg) }}" alt="{{ $rp['title'] }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($rp['title']) }}'">
                             </div>
-                            <h4>{{ $rp['title'] }}</h4>
+                            <span class="product-card-title">{{ $rp['title'] }}</span>
                         </a>
                     </div>
                 @endforeach
