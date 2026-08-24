@@ -89,9 +89,9 @@
             <div class="field">
                 <label>Status</label>
                 <select name="status">
-                    <option value="draft" @selected($v('status') === 'draft')>Draft</option>
-                    <option value="published" @selected($v('status') === 'published')>Published</option>
-                    <option value="inactive" @selected($v('status') === 'inactive')>Inactive</option>
+                    <option value="published" {{ strtolower(trim($v('status', 'published'))) === 'published' ? 'selected' : '' }}>Published</option>
+                    <option value="draft" {{ strtolower(trim($v('status', 'published'))) === 'draft' ? 'selected' : '' }}>Draft</option>
+                    <option value="inactive" {{ strtolower(trim($v('status', 'published'))) === 'inactive' ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
             <div class="field">

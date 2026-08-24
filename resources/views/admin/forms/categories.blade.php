@@ -41,9 +41,9 @@
             <div class="field">
                 <label>Status</label>
                 <select name="status">
-                    <option value="draft" @if($v('status') === 'draft') selected @endif>Draft</option>
-                    <option value="published" @if($v('status') === 'published') selected @endif>Published</option>
-                    <option value="inactive" @if($v('status') === 'inactive') selected @endif>Inactive</option>
+                    <option value="published" @if(strtolower(trim($v('status', 'published'))) === 'published') selected @endif>Published</option>
+                    <option value="draft" @if(strtolower(trim($v('status', 'published'))) === 'draft') selected @endif>Draft</option>
+                    <option value="inactive" @if(strtolower(trim($v('status', 'published'))) === 'inactive') selected @endif>Inactive</option>
                 </select>
             </div>
             
