@@ -98,6 +98,10 @@
     </style>
     <script>
         window.tinyMceUploadConfig = {
+            relative_urls: false,
+            remove_script_host: false,
+            convert_urls: false,
+            document_base_url: '{{ url('/') }}/',
             automatic_uploads: true,
             paste_data_images: true,
             file_picker_types: 'image media',

@@ -690,7 +690,7 @@
             font-size: 16px;
             margin: 0 0 15px;
             padding-left: 2rem;
-            color: var(--color-text-secondary);
+            color: #000;
             line-height: 40px;
             text-align: justify;
         }
@@ -712,19 +712,36 @@
             font-weight: 600;
         }
 
+        .content-section a,
+        .content-section a * {
+            color: #5b2829 !important;
+            text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
+        }
+
+        .content-section a:hover,
+        .content-section a:hover * {
+            color: #5b2829 !important;
+            text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
+        }
+
         .content-section ul li a,
         .content-section ol li a,
         .content-section ul li a *,
         .content-section ol li a * {
-            color: blue !important;
-            text-decoration: none !important;
+            color: #5b2829 !important;
+            text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         .content-section ul li a:hover,
         .content-section ol li a:hover,
         .content-section ul li a:hover *,
         .content-section ol li a:hover * {
+            color: #5b2829 !important;
             text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         /* Specs Section */
@@ -2315,13 +2332,15 @@
             }
             #desc-wrapper a,
             #desc-wrapper a * {
-                text-decoration: none !important;
-                color: blue !important;
+                text-decoration: underline !important;
+                text-decoration-color: #5b2829 !important;
+                color: #5b2829 !important;
             }
             #desc-wrapper a:hover,
             #desc-wrapper a:hover * {
                 text-decoration: underline !important;
-                color: blue !important;
+                text-decoration-color: #5b2829 !important;
+                color: #5b2829 !important;
             }
             #desc-wrapper.expanded {
                 display: block;
