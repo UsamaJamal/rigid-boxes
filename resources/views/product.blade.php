@@ -682,6 +682,10 @@
         .content-section h4:first-child {
             margin-top: 0;
         }
+
+        .content-section h3 {
+            font-size: 20px !important;
+        }
         
         .content-section ul,
         .content-section ol {

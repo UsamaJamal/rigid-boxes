@@ -74,6 +74,15 @@
         margin-bottom: 0;
     }
 
+    .text-content-body h3 {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px !important;
+        font-weight: 700;
+        line-height: 1.4;
+        color: #000;
+        margin: 24px 0 12px;
+    }
+
     .text-content-body ul,
     .text-content-body ol {
         padding-left: 2rem;
@@ -177,6 +186,10 @@
             font-size: 13.5px;
             line-height: 1.55;
             margin-bottom: 10px;
+        }
+
+        .text-content-body h3 {
+            font-size: 20px !important;
         }
     }
 </style>
