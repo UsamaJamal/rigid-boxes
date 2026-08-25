@@ -136,6 +136,10 @@ class AdminContentController extends Controller
         \Log::info('AdminContentController payload for ' . $module, $payload);
         $payload['title'] = $request->title; $payload['slug'] = Str::slug($request->slug ?: $request->title); $payload['updated_at'] = now();
 
+        if (in_array('status', $fields, true)) {
+            $payload['status'] = $request->filled('status') ? strtolower(trim($request->input('status'))) : ($existing->status ?? 'published');
+        }
+
         if (isset($payload['publish_date']) && !empty(trim($payload['publish_date']))) {
             $payload['publish_date'] = date('Y-m-d', strtotime(trim($payload['publish_date'])));
         }

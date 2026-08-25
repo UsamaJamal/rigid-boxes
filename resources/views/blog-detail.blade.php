@@ -217,28 +217,34 @@
 
         .article-body a,
         .article-body a * {
-            color: blue !important;
-            text-decoration: none !important;
+            color: #5b2829 !important;
+            text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         .article-body a:hover,
         .article-body a:hover * {
+            color: #5b2829 !important;
             text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         .article-body ul li a,
         .article-body ol li a,
         .article-body ul li a *,
         .article-body ol li a * {
-            color: blue !important;
-            text-decoration: none !important;
+            color: #5b2829 !important;
+            text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         .article-body ul li a:hover,
         .article-body ol li a:hover,
         .article-body ul li a:hover *,
         .article-body ol li a:hover * {
+            color: #5b2829 !important;
             text-decoration: underline !important;
+            text-decoration-color: #5b2829 !important;
         }
 
         .article-body h2 {

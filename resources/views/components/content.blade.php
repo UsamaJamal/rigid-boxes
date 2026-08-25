@@ -104,28 +104,34 @@
 
     .text-content-body a,
     .text-content-body a * {
-        color: blue !important;
-        text-decoration: none !important;
+        color: #5b2829 !important;
+        text-decoration: underline !important;
+        text-decoration-color: #5b2829 !important;
     }
 
     .text-content-body a:hover,
     .text-content-body a:hover * {
+        color: #5b2829 !important;
         text-decoration: underline !important;
+        text-decoration-color: #5b2829 !important;
     }
 
     .text-content-body ul li a,
     .text-content-body ol li a,
     .text-content-body ul li a *,
     .text-content-body ol li a * {
-        color: blue !important;
-        text-decoration: none !important;
+        color: #5b2829 !important;
+        text-decoration: underline !important;
+        text-decoration-color: #5b2829 !important;
     }
 
     .text-content-body ul li a:hover,
     .text-content-body ol li a:hover,
     .text-content-body ul li a:hover *,
     .text-content-body ol li a:hover * {
+        color: #5b2829 !important;
         text-decoration: underline !important;
+        text-decoration-color: #5b2829 !important;
     }
 
     @media (max-width: 992px) {
