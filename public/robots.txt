@@ -1,7 +1,9 @@
 User-agent: *
-Disallow: /
+Allow: /
 Disallow: /admin/
 Disallow: /search
 Disallow: /submit-contact
 Disallow: /submit-quote
 Disallow: /submit-newsletter
+
+Sitemap: https://www.therigidbox.com/sitemap.xml
