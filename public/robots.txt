@@ -6,4 +6,4 @@ Disallow: /submit-contact
 Disallow: /submit-quote
 Disallow: /submit-newsletter
 
-Sitemap: https://www.therigidbox.com/sitemap.xml
+Sitemap: https://therigidboxes.com/sitemap.xml
