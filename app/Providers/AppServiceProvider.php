@@ -9,6 +9,19 @@ use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private function footerSettingsBackup(): array
+    {
+        $path = storage_path('app/site-settings.json');
+
+        if (!file_exists($path)) {
+            return [];
+        }
+
+        $settings = json_decode(file_get_contents($path), true);
+
+        return is_array($settings) ? $settings : [];
+    }
+
     public function register()
     {
         //
@@ -60,17 +73,20 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
                 
-                $siteSettings = array_merge($defaults, $settings);
+                // The admin settings page also keeps a JSON backup. Use it here
+                // as well so a deployment cannot make the public footer fall
+                // back to the placeholder details while the backup is present.
+                $siteSettings = array_merge($defaults, $this->footerSettingsBackup(), $settings);
                 $view->with('siteSettings', $siteSettings);
             } catch (\Exception $e) {
                 $view->with('navCategories', []);
-                $view->with('siteSettings', [
+                $view->with('siteSettings', array_merge([
                     'company_email' => 'example@gmail.com',
                     'company_phone' => '1800-315-8441',
                     'company_address' => '4000 N Montrose Ave<br>550 Chicago, IL 60641',
                     'footer_categories' => [],
                     'footer_quick_links' => []
-                ]);
+                ], $this->footerSettingsBackup()));
             }
         });
     }
