@@ -13,6 +13,18 @@
     # Allow SSL/domain validation files to remain accessible from the project root.
     RewriteRule ^\.well-known/ - [L]
 
+    # Redirect to remove trailing slash from XML files (e.g., sitemap.xml/ -> sitemap.xml)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} \.xml/$ [NC]
+    RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+    # Redirect to add trailing slash to all pages (except files, XMLs, and homepage)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteCond %{REQUEST_URI} !\.xml$
+    RewriteCond %{REQUEST_URI} !\.[a-zA-Z0-9]+$
+    RewriteRule ^(.*)$ /$1/ [R=301,L]
+
     # Prevent a rewrite loop after handing the request to Laravel's public folder.
     RewriteRule ^public/ - [L]
 
