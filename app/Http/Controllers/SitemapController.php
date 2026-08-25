@@ -45,49 +45,86 @@ class SitemapController extends Controller
     public function xml()
     {
         $baseUrl = rtrim(url('/'), '/');
+        $categories = DB::table('admin_categories')
+            ->where('status', 'published')
+            ->select('slug', 'updated_at')
+            ->get();
+        $products = DB::table('admin_products')
+            ->where('status', 'published')
+            ->select('slug', 'updated_at')
+            ->get();
+        $blogs = DB::table('admin_blogs')
+            ->where('status', 'published')
+            ->select('slug', 'updated_at')
+            ->get();
+        $pages = DB::table('admin_pages')
+            ->where('status', 'published')
+            ->select('slug', 'updated_at')
+            ->get();
+
+        $contentLastModified = DB::table('homepage_contents')->max('updated_at');
+        $defaultLastModified = $contentLastModified
+            ? date('Y-m-d', strtotime($contentLastModified))
+            : date('Y-m-d', filemtime(resource_path('views/homepage.blade.php')));
+
         $urls = [];
-        $addUrl = function (string $path = '', $lastModified = null) use (&$urls, $baseUrl) {
+        $addUrl = function (
+            string $path = '',
+            $lastModified = null,
+            string $changeFrequency = 'monthly',
+            string $priority = '0.5'
+        ) use (&$urls, $baseUrl, $defaultLastModified) {
+            $lastModifiedTimestamp = $lastModified ? strtotime((string) $lastModified) : false;
+
             $urls[] = [
                 'loc' => $path === '' ? $baseUrl : $baseUrl . '/' . trim($path, '/') . '/',
-                'lastmod' => $lastModified ? date('Y-m-d', strtotime($lastModified)) : null,
+                'lastmod' => $lastModifiedTimestamp
+                    ? date('Y-m-d', $lastModifiedTimestamp)
+                    : $defaultLastModified,
+                'changefreq' => $changeFrequency,
+                'priority' => $priority,
             ];
         };
 
-        foreach ([
-            '',
-            'box-by-industry',
-            'box-by-material',
-            'box-by-style',
-            'contact-us',
-            'request-quote',
-            'blog',
-            'sitemap',
-            'why-choose-us',
-            'about-us',
-        ] as $path) {
-            $addUrl($path);
+        $staticPages = [
+            ['path' => '', 'lastmod' => $contentLastModified, 'changefreq' => 'weekly', 'priority' => '1.0'],
+            ['path' => 'box-by-industry', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['path' => 'box-by-material', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['path' => 'box-by-style', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['path' => 'contact-us', 'changefreq' => 'yearly', 'priority' => '0.5'],
+            ['path' => 'request-quote', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['path' => 'blog', 'lastmod' => $blogs->max('updated_at'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+            ['path' => 'sitemap', 'changefreq' => 'monthly', 'priority' => '0.3'],
+            ['path' => 'why-choose-us', 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['path' => 'about-us', 'changefreq' => 'monthly', 'priority' => '0.6'],
+        ];
+
+        foreach ($staticPages as $page) {
+            $category = $categories->firstWhere('slug', $page['path']);
+            $lastModified = $page['lastmod'] ?? ($category->updated_at ?? null);
+            $addUrl($page['path'], $lastModified, $page['changefreq'], $page['priority']);
         }
 
         $faqSlug = DB::table('homepage_contents')
             ->where('section', 'faq_page')
             ->where('field_key', 'faq_page_slug')
             ->value('value') ?: 'frequentlyAskedQuestions';
-        $addUrl($faqSlug);
+        $addUrl($faqSlug, $contentLastModified, 'monthly', '0.6');
 
-        foreach (DB::table('admin_categories')->where('status', 'published')->select('slug', 'updated_at')->get() as $category) {
-            if (!empty($category->slug)) $addUrl($category->slug, $category->updated_at);
+        foreach ($categories as $category) {
+            if (!empty($category->slug)) $addUrl($category->slug, $category->updated_at, 'weekly', '0.8');
         }
 
-        foreach (DB::table('admin_products')->where('status', 'published')->select('slug', 'updated_at')->get() as $product) {
-            if (!empty($product->slug)) $addUrl($product->slug, $product->updated_at);
+        foreach ($products as $product) {
+            if (!empty($product->slug)) $addUrl($product->slug, $product->updated_at, 'weekly', '0.9');
         }
 
-        foreach (DB::table('admin_blogs')->where('status', 'published')->select('slug', 'updated_at')->get() as $blog) {
-            if (!empty($blog->slug)) $addUrl('blog/' . $blog->slug, $blog->updated_at);
+        foreach ($blogs as $blog) {
+            if (!empty($blog->slug)) $addUrl('blog/' . $blog->slug, $blog->updated_at, 'monthly', '0.7');
         }
 
-        foreach (DB::table('admin_pages')->where('status', 'published')->select('slug', 'updated_at')->get() as $page) {
-            if (!empty($page->slug)) $addUrl($page->slug, $page->updated_at);
+        foreach ($pages as $page) {
+            if (!empty($page->slug)) $addUrl($page->slug, $page->updated_at, 'monthly', '0.6');
         }
 
         $urls = collect($urls)->unique('loc')->values()->all();
