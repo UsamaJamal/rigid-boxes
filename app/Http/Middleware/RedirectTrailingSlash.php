@@ -13,6 +13,11 @@ class RedirectTrailingSlash
         $path = $request->getPathInfo();
 
         if (in_array($request->method(), ['GET', 'HEAD'], true) && $path !== '/' && str_ends_with($path, '/')) {
+            // Prevent redirect loop for XML files
+            if (str_ends_with($path, '.xml/')) {
+                return $next($request);
+            }
+
             $target = rtrim($path, '/');
 
             if ($request->getQueryString()) {

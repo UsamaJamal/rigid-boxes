@@ -29,11 +29,11 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // Shared hosts sometimes point APP_URL at "/public". Keep generated
-        // links, assets, canonicals and schemas on the clean domain instead.
+        // Shared hosts sometimes point APP_URL at "/public" or misconfigure SCRIPT_NAME.
+        // Keep generated links, assets, canonicals and schemas on the clean domain instead.
         $configuredUrl = rtrim((string) config('app.url'), '/');
         $cleanUrl = preg_replace('#/public$#i', '', $configuredUrl);
-        if ($cleanUrl && $cleanUrl !== $configuredUrl) {
+        if ($cleanUrl && $cleanUrl !== 'http://localhost') {
             URL::forceRootUrl($cleanUrl);
         }
 
