@@ -98,7 +98,7 @@ Route::get('/box-by-industry', fn () => $parentCategoryLanding('box-by-industry'
 Route::get('/box-by-material', fn () => $parentCategoryLanding('box-by-material'));
 Route::get('/box-by-style', fn () => $parentCategoryLanding('box-by-style'));
 
-Route::get('/contact-us/', function () {
+Route::get('/contact-us', function () {
     return view('contact');
 });
 
@@ -162,6 +162,7 @@ Route::get('/author/{slug?}', function ($slug = null) {
 
 Route::get('/request-quote', [QuotationController::class, 'index']);
 Route::get('/sitemap', [SitemapController::class, 'index']);
+Route::get('/sitemap.xml', [SitemapController::class, 'xml']);
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
@@ -193,7 +194,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
-Route::get('/why-choose-us/',[WhyChooseUsController::class, 'index']);
+Route::get('/why-choose-us',[WhyChooseUsController::class, 'index']);
 
 try {
     $faqRow = DB::table('homepage_contents')->where('section', 'faq_page')->where('field_key', 'faq_page_slug')->first();
@@ -203,7 +204,7 @@ try {
 }
 Route::get('/' . ltrim($faqSlug, '/'), [FrequentlyAskedQuestionController::class, 'index']);
 
-Route::get('/about-us/',[AboutUsController::class,'index']);
+Route::get('/about-us',[AboutUsController::class,'index']);
 
 use App\Http\Controllers\FormSubmitController;
 Route::post('/submit-contact', [FormSubmitController::class, 'submitContact']);

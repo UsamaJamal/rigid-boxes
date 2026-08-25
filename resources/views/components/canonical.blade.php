@@ -2,7 +2,7 @@
     $canonicalPath = trim(request()->path(), '/');
     $canonicalUrl = $canonicalPath === ''
         ? rtrim(url('/'), '/')
-        : rtrim(url('/' . $canonicalPath), '/') . '/';
+        : rtrim(url('/' . $canonicalPath), '/');
 @endphp
 <link rel="canonical" href="{{ $canonicalUrl }}">
 <script>
