@@ -711,7 +711,7 @@
                             );
                             $cSlug = $cat['slug'] ?? \Illuminate\Support\Str::slug($cat['title']);
                         @endphp
-                        <a href="{{ url('/' . $cSlug) }}/" style="text-decoration:none; color:inherit;">
+                        <a href="{{ url('/' . $cSlug) }}" style="text-decoration:none; color:inherit;">
                             <article class="industry-card">
                                 <div class="card-img-wrapper">
                                     <img src="{{ asset($cBanner) }}" alt="{{ $cat['title'] }}" loading="lazy"

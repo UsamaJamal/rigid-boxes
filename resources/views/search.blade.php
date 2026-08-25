@@ -302,7 +302,7 @@
                                 $cImg = !empty($category['image']) ? $category['image'] : 'images/placeholder.jpg';
                                 $cImgUrl = \Illuminate\Support\Str::startsWith($cImg, ['storage/', 'uploads/', 'images/']) ? asset($cImg) : asset('storage/' . $cImg);
                             @endphp
-                            <a href="{{ url('/' . $category['slug']) }}/" class="item-card">
+                            <a href="{{ url('/' . $category['slug']) }}" class="item-card">
                                 <div class="item-image-wrapper">
                                     <img src="{{ $cImgUrl }}" alt="{{ $category['title'] }}">
                                 </div>
@@ -342,7 +342,7 @@
                                 $pImg = !empty($product['image']) ? $product['image'] : (!empty($pGalleryRaw) ? $pGalleryRaw[0] : 'images/placeholder.jpg');
                                 $pImgUrl = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/']) ? asset($pImg) : asset('storage/' . $pImg);
                             @endphp
-                            <a href="{{ url('/' . $product['slug']) }}/" class="item-card">
+                            <a href="{{ url('/' . $product['slug']) }}" class="item-card">
                                 <div class="item-image-wrapper">
                                     <img src="{{ $pImgUrl }}" alt="{{ $product['title'] }}">
                                 </div>
@@ -378,7 +378,7 @@
                                 $bImg = !empty($blog['image']) ? $blog['image'] : 'images/placeholder.jpg';
                                 $bImgUrl = \Illuminate\Support\Str::startsWith($bImg, ['storage/', 'uploads/', 'images/']) ? asset($bImg) : asset('storage/' . $bImg);
                             @endphp
-                            <a href="{{ url('/blog/' . $blog['slug']) }}/" class="blog-item">
+                            <a href="{{ url('/blog/' . $blog['slug']) }}" class="blog-item">
                                 <img src="{{ $bImgUrl }}" alt="{{ $blog['title'] }}" class="blog-item-img">
                                 <div class="blog-item-content">
                                     <div class="blog-item-title">{{ $blog['title'] }}</div>

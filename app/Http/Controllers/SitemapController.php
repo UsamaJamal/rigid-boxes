@@ -53,7 +53,18 @@ class SitemapController extends Controller
             ];
         };
 
-        foreach (['', 'contact-us', 'request-quote', 'blog', 'sitemap', 'why-choose-us', 'about-us'] as $path) {
+        foreach ([
+            '',
+            'box-by-industry',
+            'box-by-material',
+            'box-by-style',
+            'contact-us',
+            'request-quote',
+            'blog',
+            'sitemap',
+            'why-choose-us',
+            'about-us',
+        ] as $path) {
             $addUrl($path);
         }
 

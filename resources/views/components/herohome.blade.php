@@ -265,14 +265,14 @@
             @php
                 $catId = $settings['id'] ?? ($category['id'] ?? 0);
                 $parentCatName = 'CATEGORIES';
-                $parentCatUrl = url('/categories') . '/';
+                $parentCatUrl = url('/categories');
                 if ($catId) {
                     $parentId = \Illuminate\Support\Facades\DB::table('admin_categories')->where('id', $catId)->value('parent_id');
                     if ($parentId) {
                         $parentCat = \Illuminate\Support\Facades\DB::table('admin_categories')->where('id', $parentId)->first();
                         if ($parentCat) {
                             $parentCatName = strtoupper($parentCat->title);
-                            $parentCatUrl = url('/' . ($parentCat->slug ?? \Illuminate\Support\Str::slug($parentCat->title))) . '/';
+                            $parentCatUrl = url('/' . ($parentCat->slug ?? \Illuminate\Support\Str::slug($parentCat->title)));
                         }
                     }
                 }
@@ -289,7 +289,7 @@
                 {{ !empty($settings['hero_description']) ? $settings['hero_description'] : 'Crafted for prestige brands, our bespoke luxury boxes merge structural integrity with tactile sophistication. Redefining the unboxing experience through heritage craftsmanship and modern minimalism.' }}
             </p>
 
-            <a href="/request-quote/" class="hero-btn">Get Instant Quote</a>
+            <a href="/request-quote" class="hero-btn">Get Instant Quote</a>
         </div>
 
         <div class="hero-image-wrapper">

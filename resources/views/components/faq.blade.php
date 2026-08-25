@@ -311,7 +311,7 @@
                     questions ? <strong>Contact our customer support</strong>.</p>
                 <img src="{{ asset('uploads/faq-frequently-asked-questions.png') }}" alt="Frequently Asked Questions"
                     class="faq-left-image">
-                <a href="/contact-us/" class="faq-left-button">Ask a Question</a>
+                <a href="/contact-us" class="faq-left-button">Ask a Question</a>
             </div>
             <div class="faq-right">
                 <span class="faq-main-heading">Frequently Asked Questions</span>

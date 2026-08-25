@@ -2070,7 +2070,7 @@
                 $productCatId = DB::table('admin_category_product')->where('product_id', $product['id'] ?? 0)->value('category_id');
                 $productCategory = $productCatId ? DB::table('admin_categories')->where('id', $productCatId)->first() : null;
                 $catTitle = $productCategory ? strtoupper($productCategory->title) : 'PRODUCTS';
-                $catUrl = $productCategory ? url('/' . ($productCategory->slug ?? \Illuminate\Support\Str::slug($productCategory->title))) . '/' : '#';
+                $catUrl = $productCategory ? url('/' . ($productCategory->slug ?? \Illuminate\Support\Str::slug($productCategory->title))) : '#';
             @endphp
             <div class="desktop-breadcrumb">
                 <a href="/">HOME</a> / 
@@ -2656,7 +2656,7 @@
                         $rpSlug = $rp['slug'] ?? \Illuminate\Support\Str::slug($rp['title']);
                     @endphp
                     <div class="product-card">
-                        <a href="{{ url('/' . $rpSlug) }}/" style="text-decoration:none; color:inherit;">
+                        <a href="{{ url('/' . $rpSlug) }}" style="text-decoration:none; color:inherit;">
                             <div class="product-image">
                                 <img src="{{ asset($rpImg) }}" alt="{{ $rp['title'] }}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($rp['title']) }}'">
                             </div>

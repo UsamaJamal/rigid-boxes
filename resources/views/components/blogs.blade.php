@@ -312,7 +312,7 @@
                 <span class="blogs-title" style="display: block;">Packaging Insights &amp; Industry Trends</span>
                 <p class="blogs-subtitle">Stay updated with packaging trends, design ideas, and expert tips to make smarter packaging decisions.</p>
             </div>
-            <a href="/blog/" class="view-all-blogs-btn desktop-btn">View All Blogs</a>
+            <a href="/blog" class="view-all-blogs-btn desktop-btn">View All Blogs</a>
         </div>
 
         <div class="blogs-grid" id="blogsGrid">
@@ -393,7 +393,7 @@
 
         <!-- Mobile View All Blogs Button -->
         <div class="mobile-btn-wrap">
-            <a href="/blog/" class="view-all-blogs-btn mobile-btn">View All Blogs</a>
+            <a href="/blog" class="view-all-blogs-btn mobile-btn">View All Blogs</a>
         </div>
 
     </div>
