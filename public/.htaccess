@@ -13,15 +13,6 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Keep public page URLs aligned with canonical URLs:
-    # homepage has no trailing path, other GET pages end in "/".
-    RewriteCond %{REQUEST_METHOD} =GET
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_URI} !^/admin(?:/|$) [NC]
-    RewriteCond %{REQUEST_URI} !^/submit- [NC]
-    RewriteRule ^(.+[^/])$ $1/ [L,R=301]
-
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
