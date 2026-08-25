@@ -720,7 +720,7 @@
         </a>
 
         <!-- Desktop Search -->
-        <form action="/search" method="GET" class="header-search">
+        <form action="/search/" method="GET" class="header-search">
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
             </svg>
@@ -755,7 +755,7 @@
                 </div>
             </div>
 
-            <a href="/request-quote" class="get-quote-btn" style="background-color: #fff; color: #8D4445; min-height: 44px; padding: 0 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(55, 21, 22, .25); flex-shrink: 0; white-space: nowrap;">Get Instant Quote</a>
+            <a href="/request-quote/" class="get-quote-btn" style="background-color: #fff; color: #8D4445; min-height: 44px; padding: 0 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(55, 21, 22, .25); flex-shrink: 0; white-space: nowrap;">Get Instant Quote</a>
         </div>
 
         <!-- Mobile Actions -->
@@ -775,7 +775,7 @@
 
     <!-- Mobile Search Dropdown -->
     <div class="mobile-search-dropdown" id="mobileSearchDropdown" style="display: none; padding: 12px 20px; background: #FAF8F8; border-bottom: 1px solid rgba(0,0,0,0.1);">
-        <form action="/search" method="GET" style="display: flex; position: relative; width: 100%;">
+        <form action="/search/" method="GET" style="display: flex; position: relative; width: 100%;">
             <input type="text" name="q" placeholder="Search products..." style="width: 100%; padding: 10px 75px 10px 15px; border: 1px solid #ddd; border-radius: 6px; outline: none; font-size: 15px; color: #333;" oninput="this.nextElementSibling.style.display = this.value ? 'flex' : 'none';">
             
             <!-- Clear text icon -->
@@ -812,10 +812,10 @@
             <li><a href="/">Home</a></li>
             @foreach($navParentItems as $navParent)
             <li class="has-mega" data-mega-type="{{ $navParent['slug'] }}">
-                <a href="{{ url('/' . $navParent['slug']) }}" class="mega-trigger">{{ $navParent['title'] }}</a>
+                <a href="{{ url('/' . $navParent['slug']) }}/" class="mega-trigger">{{ $navParent['title'] }}</a>
             </li>
             @endforeach
-            <li><a href="/blog">Blog</a></li>
+            <li><a href="/blog/">Blog</a></li>
         </ul>
 
         <!-- Mega Menu Panel -->
@@ -833,7 +833,7 @@
                     </div>
                     <span>Need a custom packaging solution?</span>
                 </div>
-                <a href="/contact-us" class="mega-menu-cta">Talk to us</a>
+                <a href="/contact-us/" class="mega-menu-cta">Talk to us</a>
             </div>
         </div>
     </div>
@@ -853,7 +853,7 @@
         </div>
 
         <div class="mobile-sidebar-content">
-            <form action="/search" method="GET" class="mobile-search">
+            <form action="/search/" method="GET" class="mobile-search">
                 <svg class="search-icon" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
@@ -872,7 +872,7 @@
                     @if(count($children) > 0)
                         <li class="mobile-nav-item has-dropdown">
                             <div class="mobile-nav-header" onclick="this.parentElement.classList.toggle('open')">
-                                <a href="{{ url('/' . $navParent['slug']) }}" class="mobile-nav-link-top" onclick="event.stopPropagation();">{{ $navParent['title'] }}</a>
+                                <a href="{{ url('/' . $navParent['slug']) }}/" class="mobile-nav-link-top" onclick="event.stopPropagation();">{{ $navParent['title'] }}</a>
                                 <button type="button" class="mobile-dropdown-toggle" aria-label="Toggle {{ $navParent['title'] }} dropdown">
                                     <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -882,7 +882,7 @@
                             <ul class="mobile-submenu">
                                 @foreach($children as $child)
                                     <li>
-                                        <a href="{{ url('/' . $child['slug']) }}">{{ $child['title'] }}</a>
+                                        <a href="{{ url('/' . $child['slug']) }}/">{{ $child['title'] }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -890,15 +890,15 @@
                     @else
                         <li class="mobile-nav-item">
                             <div class="mobile-nav-header">
-                                <a href="{{ url('/' . $navParent['slug']) }}" class="mobile-nav-link-top">{{ $navParent['title'] }}</a>
+                                <a href="{{ url('/' . $navParent['slug']) }}/" class="mobile-nav-link-top">{{ $navParent['title'] }}</a>
                             </div>
                         </li>
                     @endif
                 @endforeach
-                <li><a href="/blog" class="mobile-nav-link-top" style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">Blog</a></li>
+                <li><a href="/blog/" class="mobile-nav-link-top" style="border-bottom: 1px solid rgba(0, 0, 0, 0.08);">Blog</a></li>
             </ul>
 
-            <a href="/contact-us" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
+            <a href="/contact-us/" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
 
             <div class="mobile-contact" style="margin-top: 0; gap: 0; display: flex; flex-direction: column; align-items: flex-start;">
                 <span style="display: block; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #000; text-align: left;">Get In Touch</span>
@@ -998,7 +998,7 @@
                 const iconHtml = icon
                     ? `<img src="${icon}" alt="" loading="lazy">`
                     : giftBoxSvg;
-                return `<a href="/${slug}" class="mega-menu-item">
+                return `<a href="/${slug}/" class="mega-menu-item">
                     <div class="mega-menu-icon">${iconHtml}</div>
                     <span>${title}</span>
                 </a>`;

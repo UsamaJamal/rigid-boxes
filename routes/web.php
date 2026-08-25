@@ -63,14 +63,14 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
 
 
 Route::get('/all-category/{slug}', function (string $slug) {
-    return redirect('/' . $slug, 301);
+    return redirect('/' . $slug . '/', 301);
 });
 
 Route::get('/product', function () {
     return redirect('/', 301);
 });
 Route::get('/product/{slug}', function ($slug) {
-    return redirect('/' . $slug, 301);
+    return redirect('/' . $slug . '/', 301);
 });
 
 /* Parent-category landing pages use clean root-level URLs without a route catch-all. */

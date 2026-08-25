@@ -312,7 +312,7 @@
                 <span class="blogs-title" style="display: block;">Packaging Insights &amp; Industry Trends</span>
                 <p class="blogs-subtitle">Stay updated with packaging trends, design ideas, and expert tips to make smarter packaging decisions.</p>
             </div>
-            <a href="/blog" class="view-all-blogs-btn desktop-btn">View All Blogs</a>
+            <a href="/blog/" class="view-all-blogs-btn desktop-btn">View All Blogs</a>
         </div>
 
         <div class="blogs-grid" id="blogsGrid">
@@ -338,13 +338,13 @@
                         $bExcerpt = $blog->excerpt ?? 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable';
                         $bSlug = $blog->slug ?? 'blog-detail';
                         $bImg = !empty($blog->image) ? asset($blog->image) : asset('uploads/industry-custom-luxury-box.jfif');
-                        $bUrl = url('/blog/' . $bSlug);
+                        $bUrl = url('/blog/' . $bSlug) . '/';
                     @endphp
                     <article class="blog-card" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
                         <img src="{{ $bImg }}" alt="{{ $bTitle }}" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
                         <div class="blog-card__content">
                             <div class="blog-card__meta">
-                                <a href="{{ url('/author/' . $authorSlug) }}" class="blog-card__author" style="color:inherit;text-decoration:none;z-index:2;position:relative;" onclick="event.stopPropagation();">{{ $bAuthor }}</a>
+                                <a href="{{ url('/author/' . $authorSlug) }}/" class="blog-card__author" style="color:inherit;text-decoration:none;z-index:2;position:relative;" onclick="event.stopPropagation();">{{ $bAuthor }}</a>
                                 <span class="blog-card__date">{{ $bDate }}</span>
                             </div>
                             <a href="{{ $bUrl }}" class="blog-card__title" onclick="event.stopPropagation();">{{ $bTitle }}</a>
@@ -367,10 +367,10 @@
                             <span class="blog-card__author">Joe Danley</span>
                             <span class="blog-card__date">Nov 15, 2024</span>
                         </div>
-                        <a href="{{ url('/blog-detail') }}" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
+                        <a href="{{ url('/blog-detail') }}/" class="blog-card__title">Sustainable Packaging Trends For 2026</a>
                         <p class="blog-card__desc">Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable</p>
                         <div>
-                            <a href="{{ url('/blog-detail') }}" class="blog-card__readmore">
+                            <a href="{{ url('/blog-detail') }}/" class="blog-card__readmore">
                                 Read More
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </a>
@@ -393,7 +393,7 @@
 
         <!-- Mobile View All Blogs Button -->
         <div class="mobile-btn-wrap">
-            <a href="/blog" class="view-all-blogs-btn mobile-btn">View All Blogs</a>
+            <a href="/blog/" class="view-all-blogs-btn mobile-btn">View All Blogs</a>
         </div>
 
     </div>

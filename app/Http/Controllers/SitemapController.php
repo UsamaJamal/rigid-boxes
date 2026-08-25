@@ -41,14 +41,14 @@ class SitemapController extends Controller
         return view('sitemap', compact('blogs', 'pages', 'sitemapData'));
     }
 
-    /** XML sitemap for search engines, using URLs without trailing slashes. */
+    /** XML sitemap: page URLs use '/', while the sitemap endpoint does not. */
     public function xml()
     {
         $baseUrl = rtrim(url('/'), '/');
         $urls = [];
         $addUrl = function (string $path = '', $lastModified = null) use (&$urls, $baseUrl) {
             $urls[] = [
-                'loc' => $path === '' ? $baseUrl : $baseUrl . '/' . trim($path, '/'),
+                'loc' => $path === '' ? $baseUrl : $baseUrl . '/' . trim($path, '/') . '/',
                 'lastmod' => $lastModified ? date('Y-m-d', strtotime($lastModified)) : null,
             ];
         };

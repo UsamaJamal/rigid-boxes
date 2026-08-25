@@ -282,7 +282,7 @@
             <div class="faq-contact-box">
                 <h3>Still Have a Questions?</h3>
                 <p>If you don't find your answer, feel free to reach out.</p>
-                <a href="/contact-us" class="btn-contact">Contact Us</a>
+                <a href="/contact-us/" class="btn-contact">Contact Us</a>
             </div>
         </aside>
 

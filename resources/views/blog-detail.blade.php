@@ -952,7 +952,7 @@
                     $publishDate = !empty($blog['publish_date']) ? date('M j, Y', strtotime($blog['publish_date'])) : (!empty($blog['created_at']) ? date('M j, Y', strtotime($blog['created_at'])) : 'Mar 3, 2026');
                 @endphp
                 @if($authorSlug)
-                    <a href="{{ url('/author/' . $authorSlug) }}" class="author-info" style="text-decoration:none; color:inherit;">
+                    <a href="{{ url('/author/' . $authorSlug) }}/" class="author-info" style="text-decoration:none; color:inherit;">
                         <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-avatar-sm" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
                         <span class="author-name">{{ $authorName }}</span>
                     </a>
@@ -1035,7 +1035,7 @@
                 <!-- Author Bio Card -->
                 <div class="author-card">
                     @if($authorSlug)
-                        <a href="{{ url('/author/' . $authorSlug) }}" style="text-decoration:none; color:inherit; display:flex;">
+                        <a href="{{ url('/author/' . $authorSlug) }}/" style="text-decoration:none; color:inherit; display:flex;">
                             <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="author-card-avatar" onerror="this.src='{{ asset('images/ahmed-khan.png') }}'" loading="lazy">
                         </a>
                     @else
@@ -1044,7 +1044,7 @@
                     <div class="author-card-details">
                         <div class="author-card-tag">WRITTEN BY</div>
                         @if($authorSlug)
-                            <a href="{{ url('/author/' . $authorSlug) }}" class="author-card-name" style="text-decoration:none; color:inherit; display:inline-block;">{{ $authorName }}</a>
+                            <a href="{{ url('/author/' . $authorSlug) }}/" class="author-card-name" style="text-decoration:none; color:inherit; display:inline-block;">{{ $authorName }}</a>
                         @else
                             <span class="author-card-name">{{ $authorName }}</span>
                         @endif
@@ -1073,7 +1073,7 @@
                             @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/below-hero.png'); @endphp
                             <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                             <div class="recent-article-info">
-                                <a href="{{ url('/blog/' . $rb->slug) }}" class="recent-article-title">{{ $rb->title }}</a>
+                                <a href="{{ url('/blog/' . $rb->slug) }}/" class="recent-article-title">{{ $rb->title }}</a>
                                 <span class="recent-article-date">{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                             </div>
                         </div>
@@ -1126,9 +1126,9 @@
             <div class="related-grid">
 
                 @foreach($recentBlogs as $rb)
-                <article class="related-card" onclick="window.location.href='{{ url('/blog/' . $rb->slug) }}';" style="cursor: pointer;">
+                <article class="related-card" onclick="window.location.href='{{ url('/blog/' . $rb->slug) }}/';" style="cursor: pointer;">
                     @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
-                    <a href="{{ url('/blog/' . $rb->slug) }}" style="display:block;" onclick="event.stopPropagation();">
+                    <a href="{{ url('/blog/' . $rb->slug) }}/" style="display:block;" onclick="event.stopPropagation();">
                         <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                     </a>
                     <div class="related-card-body">
@@ -1148,14 +1148,14 @@
                                 $bAuthor = $bAuthor ?: 'Admin';
                                 $bAuthorSlug = $bAuthorSlug ?: \Illuminate\Support\Str::slug($bAuthor);
                             @endphp
-                            <a href="{{ url('/author/' . $bAuthorSlug) }}" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation();"><span>{{ $bAuthor }}</span></a>
+                            <a href="{{ url('/author/' . $bAuthorSlug) }}/" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation();"><span>{{ $bAuthor }}</span></a>
                             <span>{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
                         </div>
-                        <a href="{{ url('/blog/' . $rb->slug) }}" style="text-decoration:none; color:inherit; display:block;" onclick="event.stopPropagation();">
+                        <a href="{{ url('/blog/' . $rb->slug) }}/" style="text-decoration:none; color:inherit; display:block;" onclick="event.stopPropagation();">
                             <h3 class="related-card-title">{{ $rb->title }}</h3>
                         </a>
                         <p class="related-card-desc">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($rb->excerpt ?? $rb->content))), 90) }}</p>
-                        <a href="{{ url('/blog/' . $rb->slug) }}" class="related-card-btn" onclick="event.stopPropagation();">
+                        <a href="{{ url('/blog/' . $rb->slug) }}/" class="related-card-btn" onclick="event.stopPropagation();">
                             <span>Read More</span> <span>&rarr;</span>
                         </a>
                     </div>

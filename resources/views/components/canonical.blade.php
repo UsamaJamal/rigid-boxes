@@ -1,8 +1,12 @@
 @php
     $canonicalPath = trim(request()->path(), '/');
-    $canonicalUrl = $canonicalPath === ''
-        ? rtrim(url('/'), '/')
-        : rtrim(url('/' . $canonicalPath), '/');
+    if ($canonicalPath === '') {
+        $canonicalUrl = rtrim(url('/'), '/');
+    } elseif (strtolower($canonicalPath) === 'sitemap.xml') {
+        $canonicalUrl = rtrim(url('/sitemap.xml'), '/');
+    } else {
+        $canonicalUrl = rtrim(url('/' . $canonicalPath), '/') . '/';
+    }
 @endphp
 <link rel="canonical" href="{{ $canonicalUrl }}">
 <script>

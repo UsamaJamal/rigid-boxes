@@ -783,15 +783,15 @@
                 @if(isset($blogs) && count($blogs) > 0)
                     <div class="blog-grid">
                         @foreach($blogs as $item)
-                        <article class="blog-card" onclick="window.location.href='{{ url('/blog/' . $item['slug']) }}';" style="cursor: pointer;">
+                        <article class="blog-card" onclick="window.location.href='{{ url('/blog/' . $item['slug']) }}/';" style="cursor: pointer;">
                             <div class="card-image-wrapper">
                                 @php $blogImg = !empty($item['image']) ? (\Illuminate\Support\Str::startsWith($item['image'], ['http', 'storage/', 'uploads/', 'images/']) ? asset($item['image']) : asset('storage/'.$item['image'])) : asset('images/below-hero.png'); @endphp
                                 <img src="{{ $blogImg }}" alt="{{ $item['title'] }}" class="card-image" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
                             </div>
                             <div class="card-content">
-                                <h3 class="card-heading"><a href="{{ url('/blog/' . $item['slug']) }}" style="color:inherit; text-decoration:none;" onclick="event.stopPropagation();">{{ $item['title'] }}</a></h3>
+                                <h3 class="card-heading"><a href="{{ url('/blog/' . $item['slug']) }}/" style="color:inherit; text-decoration:none;" onclick="event.stopPropagation();">{{ $item['title'] }}</a></h3>
                                 <p class="card-description">{{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($item['excerpt'] ?: $item['content']))), 120) }}</p>
-                                <a href="{{ url('/blog/' . $item['slug']) }}" class="read-more" onclick="event.stopPropagation();">Read Full Article</a>
+                                <a href="{{ url('/blog/' . $item['slug']) }}/" class="read-more" onclick="event.stopPropagation();">Read Full Article</a>
                             </div>
                         </article>
                         @endforeach

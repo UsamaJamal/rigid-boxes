@@ -247,7 +247,7 @@
                 <img src="{{ asset('uploads/cta-ellipse-2.png') }}" alt="" class="cta-ellipse cta-ellipse-2">
                 <span class="cta-heading" style="display: block;">Get Your Custom Packaging<br>Today</span>
                 <p class="cta-desc">Deliver elegance, protection, and a memorable unboxing experience with fully customized rigid box solutions.</p>
-                <a href="/request-quote" class="cta-btn">
+                <a href="/request-quote/" class="cta-btn">
                     Get Started Today
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 8h10M9 4l4 4-4 4"/>

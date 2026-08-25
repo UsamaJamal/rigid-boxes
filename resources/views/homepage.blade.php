@@ -2328,7 +2328,7 @@
                     @foreach ($featuredCategories as $cat)
                         @php
                             $catSlug = $cat['slug'] ?? Str::slug($cat['title']);
-                            $catUrl = url('/' . $catSlug);
+                            $catUrl = url('/' . $catSlug) . '/';
                             $cImg = !empty($cat['image'])
                                 ? (\Illuminate\Support\Str::startsWith($cat['image'], [
                                     'storage/',
@@ -2359,7 +2359,7 @@
 
                 <!-- View All Categories Button -->
                 <div class="view-all-wrap">
-                    <a href="{{ url('/box-by-industry') }}" class="view-all-btn">View All Categories</a>
+                    <a href="{{ url('/box-by-industry') }}/" class="view-all-btn">View All Categories</a>
                 </div>
 
             </div><!-- /.custom-boxes-container -->
@@ -2496,7 +2496,7 @@
                         @foreach ($bestsellerProducts as $prod)
                             @php
                                 $prodSlug = $prod['slug'] ?? Str::slug($prod['title']);
-                                $prodUrl = url('/' . $prodSlug);
+                                $prodUrl = url('/' . $prodSlug) . '/';
                                 $pImg = !empty($prod['image'])
                                     ? (\Illuminate\Support\Str::startsWith($prod['image'], [
                                         'storage/',
@@ -2572,7 +2572,7 @@ From customized dimensions to box style, color, interior, layout and refined fin
 
                     </div><!-- /.premium-icons -->
 
-                    <a href="/request-quote" class="premium-btn">Order Now</a>
+                    <a href="/request-quote/" class="premium-btn">Order Now</a>
 
                 </div><!-- /.premium-content -->
 
@@ -2645,7 +2645,7 @@ From customized dimensions to box style, color, interior, layout and refined fin
                         <div class="sustainable-left__overlay">
                             <span class="sustainable-eco-label">ECO-FRIENDLY PACKAGING</span>
                             <p class="sustainable-tagline">Go Green With Sustainably Responsible Packaging</p>
-                            <a href="/kraft-boxes" class="sustainable-btn">Browse Products</a>
+                            <a href="/kraft-boxes/" class="sustainable-btn">Browse Products</a>
                         </div>
                     </div>
 

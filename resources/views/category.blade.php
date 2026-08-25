@@ -530,7 +530,7 @@
                             $pSlug = $p['slug'] ?? \Illuminate\Support\Str::slug($p['title']);
                         @endphp
                         <div class="box-card">
-                            <a href="{{ url('/' . $pSlug) }}"
+                            <a href="{{ url('/' . $pSlug) }}/"
                                 style="text-decoration:none; color:inherit; width:100%; display:block;">
                                 <div class="box-image-wrapper">
                                     <img src="{{ asset($pImg) }}?v={{ @filemtime(public_path($pImg)) ?: 1 }}" alt="{{ $p['title'] }}" class="main-img"

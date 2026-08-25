@@ -1,9 +1,12 @@
 @php
     $schemaSiteUrl = rtrim(url('/'), '/');
+    $schemaPath = trim(request()->path(), '/');
     $schemaPageUrl = $canonicalUrl ?? (
-        trim(request()->path(), '/') === ''
+        $schemaPath === ''
             ? $schemaSiteUrl
-            : rtrim(url('/' . trim(request()->path(), '/')), '/')
+            : (strtolower($schemaPath) === 'sitemap.xml'
+                ? rtrim(url('/sitemap.xml'), '/')
+                : rtrim(url('/' . $schemaPath), '/') . '/')
     );
     $schemaLogo = asset('uploads/logo-rigid-boxes.svg');
     $schemaSettings = $siteSettings ?? [];
@@ -215,11 +218,11 @@
                     return null;
                 }
                 if ($schemaCollectionKind === 'blog') {
-                    $itemUrl = url('/blog/' . $slug);
+                    $itemUrl = url('/blog/' . $slug) . '/';
                 } elseif ($schemaCollectionKind === 'product') {
-                    $itemUrl = url('/' . $slug);
+                    $itemUrl = url('/' . $slug) . '/';
                 } else {
-                    $itemUrl = url('/' . $slug);
+                    $itemUrl = url('/' . $slug) . '/';
                 }
                 return [
                     '@type' => 'ListItem',

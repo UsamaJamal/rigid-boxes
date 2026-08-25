@@ -13,9 +13,21 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Public URL policy: no trailing slash (except the homepage).
+    # Sitemap XML is the only non-homepage URL without a trailing slash.
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.+)/$ /$1 [R=301,L,NE]
+    RewriteCond %{REQUEST_URI} \.xml/$ [NC]
+    RewriteRule ^(.+\.xml)/$ /$1 [R=301,L,NE]
+
+    # Every public page except the homepage and sitemap.xml uses a trailing slash.
+    RewriteCond %{REQUEST_METHOD} ^(?:GET|HEAD)$
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteCond %{REQUEST_URI} !^/(?:admin|api|sanctum)(?:/|$) [NC]
+    RewriteCond %{REQUEST_URI} !^/submit- [NC]
+    RewriteCond %{REQUEST_URI} !\.xml$ [NC]
+    RewriteCond %{REQUEST_URI} !\.[a-z0-9]+$ [NC]
+    RewriteRule ^(.+)$ /$1/ [R=301,L,NE]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
