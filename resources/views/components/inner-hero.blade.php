@@ -137,7 +137,9 @@
                 HOME / <span>{{ $breadcrumb }}</span>
             </div>
 
-            <div class="inner-hero-subtitle">{{ $subTitle }}</div>
+            @if (isset($page) && $page == 'whyChooseUs')
+                <div class="inner-hero-subtitle">{{ $subTitle }}</div>
+            @endif
 
             @if (isset($page) && $page == 'whyChooseUs')
                 <h1 class="inner-hero-title">

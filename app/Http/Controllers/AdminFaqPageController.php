@@ -12,7 +12,11 @@ class AdminFaqPageController extends Controller
     {
         $defaults = [
             'faq_page_title' => 'Frequently Asked Questions',
-            'faq_page_slug' => 'frequentlyAskedQuestions',
+            'faq_page_slug' => 'frequently-asked-questions',
+            'faq_meta_title' => '',
+            'faq_meta_description' => '',
+            'faq_meta_keywords' => '',
+            'faq_robots' => 'index,follow',
             'faq_page_sections' => []
         ];
 
@@ -54,6 +58,10 @@ class AdminFaqPageController extends Controller
         $request->validate([
             'faq_page_title' => 'required|string|max:255',
             'faq_page_slug' => 'required|string|max:255',
+            'faq_meta_title' => 'nullable|string|max:255',
+            'faq_meta_description' => 'nullable|string',
+            'faq_meta_keywords' => 'nullable|string|max:255',
+            'faq_robots' => 'nullable|string|max:50',
             'headings' => 'nullable|array',
             'questions' => 'nullable|array',
             'answers' => 'nullable|array',
@@ -62,6 +70,10 @@ class AdminFaqPageController extends Controller
         $settings = $this->getSettings();
         $settings['faq_page_title'] = $request->input('faq_page_title');
         $settings['faq_page_slug'] = Str::slug($request->input('faq_page_slug'));
+        $settings['faq_meta_title'] = $request->input('faq_meta_title');
+        $settings['faq_meta_description'] = $request->input('faq_meta_description');
+        $settings['faq_meta_keywords'] = $request->input('faq_meta_keywords');
+        $settings['faq_robots'] = $request->input('faq_robots', 'index,follow');
 
         // Reconstruct the sections JSON
         $sections = [];

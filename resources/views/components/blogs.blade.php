@@ -304,6 +304,7 @@
     }
 </style>
 
+@if(isset($recentBlogs) && count($recentBlogs) > 0)
 <section class="blogs-section">
     <div class="blogs-container">
 
@@ -426,3 +427,4 @@
         });
     })();
 </script>
+@endif

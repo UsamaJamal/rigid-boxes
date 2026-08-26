@@ -165,6 +165,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminHomepageController;
 use App\Http\Controllers\AdminFooterController;
 use App\Http\Controllers\AdminFaqPageController;
+use App\Http\Controllers\AdminAboutUsController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Auth Routes
@@ -181,6 +182,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/footer-settings', [AdminFooterController::class, 'update'])->name('footer.update');
         Route::get('/faq-page-settings', [AdminFaqPageController::class, 'edit'])->name('faqpage.edit');
         Route::post('/faq-page-settings', [AdminFaqPageController::class, 'update'])->name('faqpage.update');
+        Route::get('/about-us-settings', [AdminAboutUsController::class, 'edit'])->name('aboutus.edit');
+        Route::post('/about-us-settings', [AdminAboutUsController::class, 'update'])->name('aboutus.update');
         Route::post('/tinymce/upload', [AdminContentController::class, 'uploadTinyMceMedia'])->name('tinymce.upload');
         Route::get('/{module}', [AdminContentController::class, 'index'])->name('module.index');
         Route::get('/{module}/create', [AdminContentController::class, 'create'])->name('module.create');
@@ -195,9 +198,9 @@ Route::get('/why-choose-us',[WhyChooseUsController::class, 'index']);
 
 try {
     $faqRow = DB::table('homepage_contents')->where('section', 'faq_page')->where('field_key', 'faq_page_slug')->first();
-    $faqSlug = $faqRow ? $faqRow->value : 'frequentlyAskedQuestions';
+    $faqSlug = $faqRow ? $faqRow->value : 'frequently-asked-questions';
 } catch (\Exception $e) {
-    $faqSlug = 'frequentlyAskedQuestions';
+    $faqSlug = 'frequently-asked-questions';
 }
 Route::get('/' . ltrim($faqSlug, '/'), [FrequentlyAskedQuestionController::class, 'index']);
 

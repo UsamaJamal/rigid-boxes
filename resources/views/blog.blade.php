@@ -457,20 +457,18 @@ html, body { overflow-x: clip; }
     }
 </style>
 <nav class="categories" aria-label="Blog categories"><div class="category-row">
-<button class="filter active" data-filter="all"><img src="{{ asset('images/blog-filter-all.svg') }}" class="filter-icon" alt="" loading="lazy"> All</button>
-<button class="filter" data-filter="packaging"><img src="{{ asset('images/blog-filter-packaging.png') }}" class="filter-icon" alt="" loading="lazy"> Packaging Basics</button>
-<button class="filter" data-filter="marketing"><img src="{{ asset('images/01 align center.png') }}" class="filter-icon" alt="" loading="lazy"> Marketing Tips</button>
-<button class="filter" data-filter="sustainability"><img src="{{ asset('images/blog-filter-sustainability.png') }}" class="filter-icon" alt="" loading="lazy"> Sustainable Packaging Guide</button>
-<button class="filter" data-filter="production"><img src="{{ asset('images/blog-filter-production.png') }}" class="filter-icon" alt="" loading="lazy"> Production &amp; MOQ Tips</button>
-<button class="filter" data-filter="design"><img src="{{ asset('images/blog-filter-design.png') }}" class="filter-icon" alt="" loading="lazy"> Design Tips</button>
-<button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt="" loading="lazy"> Industry Specific Studies</button>
+<button class="filter active" data-filter="all"><img src="{{ asset('images/blog-filter-all.svg') }}" class="filter-icon" alt="All Blogs Filter Icon" loading="lazy"> All</button>
+<button class="filter" data-filter="packaging"><img src="{{ asset('images/blog-filter-packaging.png') }}" class="filter-icon" alt="Packaging Basics Filter Icon" loading="lazy"> Packaging Basics</button>
+<button class="filter" data-filter="marketing"><img src="{{ asset('images/01 align center.png') }}" class="filter-icon" alt="Marketing Tips Filter Icon" loading="lazy"> Marketing Tips</button>
+<button class="filter" data-filter="sustainability"><img src="{{ asset('images/blog-filter-sustainability.png') }}" class="filter-icon" alt="Sustainable Packaging Guide Filter Icon" loading="lazy"> Sustainable Packaging Guide</button>
+<button class="filter" data-filter="production"><img src="{{ asset('images/blog-filter-production.png') }}" class="filter-icon" alt="Production and MOQ Tips Filter Icon" loading="lazy"> Production &amp; MOQ Tips</button>
+<button class="filter" data-filter="design"><img src="{{ asset('images/blog-filter-design.png') }}" class="filter-icon" alt="Design Tips Filter Icon" loading="lazy"> Design Tips</button>
+<button class="filter" data-filter="industry"><img src="{{ asset('images/blog-filter-industry.png') }}" class="filter-icon" alt="Industry Specific Studies Filter Icon" loading="lazy"> Industry Specific Studies</button>
 </div></nav>
 <section class="container content">
 @php
     $featuredBlog = null;
-    $displayBlogs = [
-        ['title' => 'Sustainable Packaging Trends For 2026', 'blog_category' => 'packaging', 'image' => 'images/Frame 571 (1).png', 'author_name' => 'Joe Danley', 'publish_date' => '2024-11-15', 'excerpt' => 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable', 'slug' => 'sustainable-packaging-trends'],
-    ];
+    $displayBlogs = [];
     if (!empty($blogs) && count($blogs) > 0) {
         $blogsArray = json_decode(json_encode($blogs), true);
         $featuredBlog = $blogsArray[0];
@@ -496,8 +494,13 @@ html, body { overflow-x: clip; }
             <a class="button" href="{{ $fUrl }}" onclick="event.stopPropagation();">Read More &rarr;</a>
         </div>
     </article>
-@else
-    <article class="feature"><img src="{{ asset('images/below-hero.png') }}" alt="Luxury rigid boxes" loading="lazy"><div class="feature-copy"><p class="eyebrow">Structural Integrity</p><h2><a href="{{ url('/blog-detail') }}/" style="color:inherit; text-decoration:none;">The Weight of Prestige: Why Mass Matters in Rigid Construction</a></h2><p>In the realm of high-end manufacturing, the tactile sensation of gravity serves as a silent communicator of quality. We analyze the psychology of physical weight and the engineering required to achieve it.</p><a class="button" href="{{ url('/blog-detail') }}/">Read More &rarr;</a></div></article>
+@endif
+
+@if(!$featuredBlog && empty($displayBlogs))
+    <div style="text-align: center; padding: 60px 20px; font-family: 'DM Sans', sans-serif; color: #666; background: #fff; border-radius: 8px; margin-bottom: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <h3 style="font-size: 20px; margin-bottom: 8px; color: #333;">No blog posts published yet.</h3>
+        <p>Please check back later.</p>
+    </div>
 @endif
 
 <div class="grid">

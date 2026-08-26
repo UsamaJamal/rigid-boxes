@@ -187,6 +187,10 @@
                 <i class="fa-solid fa-circle-question"></i>
                 <span>FAQ Page</span>
             </a>
+            <a class="{{ request()->routeIs('admin.aboutus.edit') ? 'active' : '' }}" href="{{ route('admin.aboutus.edit') }}">
+                <i class="fa-solid fa-address-card"></i>
+                <span>About Us Page</span>
+            </a>
             <a class="{{ request()->route('module') === 'products' ? 'active' : '' }}" href="{{ route('admin.module.index', 'products') }}">
                 <i class="fa-solid fa-box-open"></i>
                 <span>Products</span>

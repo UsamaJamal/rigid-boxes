@@ -26,7 +26,12 @@ class FrequentlyAskedQuestionController extends Controller
             }
         }
         
-        return view("faqpage", compact('settings'));
+        $title = $settings['faq_meta_title'] ?? ($settings['faq_page_title'] ?? 'Frequently Asked Questions');
+        $metaDescription = $settings['faq_meta_description'] ?? '';
+        $metaKeywords = $settings['faq_meta_keywords'] ?? '';
+        $robots = $settings['faq_robots'] ?? 'index,follow';
+        
+        return view("faqpage", compact('settings', 'title', 'metaDescription', 'metaKeywords', 'robots'));
     }
 }
 

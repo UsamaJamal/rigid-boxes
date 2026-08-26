@@ -264,8 +264,8 @@
             </style>
             @php
                 $catId = $settings['id'] ?? ($category['id'] ?? 0);
-                $parentCatName = 'CATEGORIES';
-                $parentCatUrl = url('/categories') . '/';
+                $parentCatName = '';
+                $parentCatUrl = '';
                 if ($catId) {
                     $parentId = \Illuminate\Support\Facades\DB::table('admin_categories')->where('id', $catId)->value('parent_id');
                     if ($parentId) {
@@ -278,7 +278,7 @@
                 }
             @endphp
             <div class="hero-breadcrumb">
-                <a href="/">HOME</a> / <a href="{{ $parentCatUrl }}">{{ $parentCatName }}</a> / <strong>{{ !empty($settings['title']) ? strtoupper($settings['title']) : (!empty($category['title']) ? strtoupper($category['title']) : 'CATEGORY') }}</strong>
+                <a href="/">HOME</a> / @if($parentCatName)<a href="{{ $parentCatUrl }}">{{ $parentCatName }}</a> / @endif<strong>{{ !empty($settings['title']) ? strtoupper($settings['title']) : (!empty($category['title']) ? strtoupper($category['title']) : 'CATEGORY') }}</strong>
             </div>
             @endif
             <h1 class="hero-title">

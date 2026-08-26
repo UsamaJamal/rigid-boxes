@@ -106,7 +106,7 @@
                     <div class="brand-logos-set" @if ($isDuplicate) aria-hidden="true" @endif>
                         @foreach ($brandLogos as $brandLogo)
                             <div class="brand-logo-item">
-                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $isDuplicate ? '' : $brandLogo['alt'] }}">
+                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $brandLogo['alt'] }}">
                             </div>
                         @endforeach
                     </div>

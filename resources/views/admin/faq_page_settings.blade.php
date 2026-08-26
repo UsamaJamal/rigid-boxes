@@ -99,6 +99,33 @@
         </div>
 
         <div style="margin-bottom:30px;">
+            <h3 style="font-size:18px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #eaeaea;">SEO Configuration</h3>
+            
+            <div class="form-group">
+                <label class="form-label">Meta Title</label>
+                <input type="text" name="faq_meta_title" class="form-input" value="{{ old('faq_meta_title', $settings['faq_meta_title'] ?? '') }}" placeholder="Enter Meta Title">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Meta Keywords</label>
+                <input type="text" name="faq_meta_keywords" class="form-input" value="{{ old('faq_meta_keywords', $settings['faq_meta_keywords'] ?? '') }}" placeholder="e.g. rigid boxes faq, packaging questions">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Meta Description</label>
+                <textarea name="faq_meta_description" class="form-input" rows="3" placeholder="Enter Meta Description">{{ old('faq_meta_description', $settings['faq_meta_description'] ?? '') }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Meta Robots</label>
+                <select name="faq_robots" class="form-input">
+                    <option value="index,follow" {{ (old('faq_robots', $settings['faq_robots'] ?? 'index,follow') == 'index,follow') ? 'selected' : '' }}>Index, Follow</option>
+                    <option value="noindex,nofollow" {{ (old('faq_robots', $settings['faq_robots'] ?? '') == 'noindex,nofollow') ? 'selected' : '' }}>No Index, No Follow</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin-bottom:30px;">
             <h3 style="font-size:18px; margin-bottom:15px; padding-bottom:8px; border-bottom:1px solid #eaeaea;">FAQ Sections (Headings & Q/A)</h3>
             
             <div id="faq-sections-container">

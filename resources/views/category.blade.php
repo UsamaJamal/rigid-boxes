@@ -465,9 +465,6 @@
         }
     }
 </style>
-</head>
-
-<body>
 
     @include('components.header')
 
