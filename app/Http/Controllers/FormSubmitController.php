@@ -8,6 +8,7 @@ use App\Mail\ContactFormMail;
 use App\Mail\QuoteFormMail;
 use App\Mail\NewsletterMail;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\SpamDetector;
 
 class FormSubmitController extends Controller
 {
@@ -23,7 +24,11 @@ class FormSubmitController extends Controller
             'message' => 'nullable|string'
         ]);
 
-        Mail::to($this->adminEmail)->send(new ContactFormMail($validated));
+        $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
+
+        if (!$isSpam) {
+            Mail::to($this->adminEmail)->send(new ContactFormMail($validated));
+        }
 
         if ($request->expectsJson()) {
             return response()->json(['success' => 'Thank you for contacting us! Your message has been sent successfully.']);
@@ -60,7 +65,11 @@ class FormSubmitController extends Controller
             $validated['quote_file_path'] = $path;
         }
 
-        Mail::to($this->adminEmail)->send(new QuoteFormMail($validated));
+        $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? 'Quote Request', $validated['email'] ?? '');
+
+        if (!$isSpam) {
+            Mail::to($this->adminEmail)->send(new QuoteFormMail($validated));
+        }
 
         if ($request->expectsJson()) {
             return response()->json(['success' => 'Thank you! Your request for a quote has been submitted successfully.']);
