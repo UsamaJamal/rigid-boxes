@@ -322,11 +322,6 @@
         $schemaGraph[$schemaWebPageIndex]['mainEntity'] = ['@id' => $schemaPersonId];
     }
 
-    $schemaPayload = [
-        '@context' => 'https://schema.org',
-        '@graph' => $schemaGraph,
-    ];
-
     $schemaCustomRaw = $schemaProduct['schema']
         ?? $schemaCategory['schema']
         ?? $schemaBlog['schema']
@@ -342,15 +337,27 @@
             $schemaCustomPayload = $schemaCustomDecoded;
         }
     }
+
+    // A product schema entered in Admin replaces only the generated Product node.
+    // Keep the shared site, breadcrumb and FAQ schemas available on the page.
+    if ($schemaCustomPayload !== null && !empty($schemaProduct)) {
+        $schemaGraph = array_values(array_filter(
+            $schemaGraph,
+            fn ($node) => ($node['@type'] ?? null) !== 'Product'
+        ));
+    }
+
+    $schemaPayload = [
+        '@context' => 'https://schema.org',
+        '@graph' => $schemaGraph,
+    ];
 @endphp
-@if($schemaCustomPayload === null)
 <script type="application/ld+json">
 {!! json_encode(
     $schemaPayload,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
-@endif
 @if($schemaCustomPayload !== null)
 <script type="application/ld+json">
 {!! json_encode(
