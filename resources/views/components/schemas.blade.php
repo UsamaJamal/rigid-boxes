@@ -343,12 +343,14 @@
         }
     }
 @endphp
+@if($schemaCustomPayload === null)
 <script type="application/ld+json">
 {!! json_encode(
     $schemaPayload,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
+@endif
 @if($schemaCustomPayload !== null)
 <script type="application/ld+json">
 {!! json_encode(
