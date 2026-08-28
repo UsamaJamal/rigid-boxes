@@ -322,11 +322,6 @@
         $schemaGraph[$schemaWebPageIndex]['mainEntity'] = ['@id' => $schemaPersonId];
     }
 
-    $schemaPayload = [
-        '@context' => 'https://schema.org',
-        '@graph' => $schemaGraph,
-    ];
-
     $schemaCustomRaw = $schemaProduct['schema']
         ?? $schemaCategory['schema']
         ?? $schemaBlog['schema']
@@ -342,6 +337,42 @@
             $schemaCustomPayload = $schemaCustomDecoded;
         }
     }
+
+    $schemaCustomTypes = [];
+    $schemaCollectTypes = function ($value) use (&$schemaCollectTypes, &$schemaCustomTypes) {
+        if (!is_array($value)) {
+            return;
+        }
+
+        if (!empty($value['@type'])) {
+            foreach ((array) $value['@type'] as $type) {
+                $schemaCustomTypes[] = $type;
+            }
+        }
+
+        foreach ($value as $child) {
+            $schemaCollectTypes($child);
+        }
+    };
+    $schemaCollectTypes($schemaCustomPayload);
+    $schemaCustomTypes = array_values(array_intersect(
+        array_unique($schemaCustomTypes),
+        ['Product', 'WebPage', 'CollectionPage']
+    ));
+
+    // Admin-defined page nodes replace their generated equivalents.
+    // Keep the shared site, breadcrumb and FAQ schemas available on the page.
+    if ($schemaCustomPayload !== null) {
+        $schemaGraph = array_values(array_filter(
+            $schemaGraph,
+            fn ($node) => !in_array($node['@type'] ?? null, $schemaCustomTypes, true)
+        ));
+    }
+
+    $schemaPayload = [
+        '@context' => 'https://schema.org',
+        '@graph' => $schemaGraph,
+    ];
 @endphp
 <script type="application/ld+json">
 {!! json_encode(

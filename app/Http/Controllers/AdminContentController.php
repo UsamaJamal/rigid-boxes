@@ -120,9 +120,20 @@ class AdminContentController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
-            'status' => 'required|in:published,draft,inactive',
-            'schema' => 'nullable|json',
+            'schema' => 'nullable|string',
         ]);
+
+        if ($request->filled('schema')) {
+            $normalizedSchema = $this->normalizeSchemaInput($request->input('schema'));
+
+            if ($normalizedSchema === null) {
+                return back()
+                    ->withInput()
+                    ->withErrors(['schema' => 'Enter valid JSON-LD. You may paste one schema, an array of schemas, or multiple complete JSON objects.']);
+            }
+
+            $request->merge(['schema' => $normalizedSchema]);
+        }
         $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module];
         $columns = [
             'products' => ['title','slug','status','show_home','image','hover_image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
@@ -206,6 +217,35 @@ class AdminContentController extends Controller
         if ($module==='products') { DB::table('admin_category_product')->where('product_id',$id)->delete(); foreach((array)$request->input('categories',[]) as $cat) if($cat) DB::table('admin_category_product')->insert(['product_id'=>$id,'category_id'=>$cat]); DB::table('admin_product_faqs')->where('product_id',$id)->delete(); foreach((array)$request->input('faq_question',[]) as $i=>$q) if($q && !empty($request->input('faq_answer')[$i]??'')) DB::table('admin_product_faqs')->insert(['product_id'=>$id,'question'=>$q,'answer'=>$request->input('faq_answer')[$i],'created_at'=>now(),'updated_at'=>now()]); }
         if ($module==='categories') { DB::table('admin_category_faqs')->where('category_id',$id)->delete(); foreach((array)$request->input('faq_question',[]) as $i=>$q) if($q && !empty($request->input('faq_answer')[$i]??'')) DB::table('admin_category_faqs')->insert(['category_id'=>$id,'question'=>$q,'answer'=>$request->input('faq_answer')[$i],'created_at'=>now(),'updated_at'=>now()]); }
         return redirect()->route('admin.module.index', $module)->with('success', $this->modules()[$module]['singular'].' saved successfully.');
+    }
+
+    /**
+     * Store Schema JSON-LD in a single valid JSON value. This also accepts
+     * multiple complete objects pasted together from a schema testing tool.
+     */
+    private function normalizeSchemaInput(string $schema): ?string
+    {
+        $schema = trim($schema);
+
+        if ($schema === '') {
+            return '';
+        }
+
+        $decoded = json_decode($schema, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            return json_encode($decoded, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+
+        // Some tools copy multiple JSON-LD scripts as consecutive root objects.
+        // Convert `}{` between those documents into an array boundary.
+        $combined = '[' . preg_replace('/}\s*{/', '},{', $schema) . ']';
+        $decoded = json_decode($combined, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE || !is_array($decoded) || $decoded === []) {
+            return null;
+        }
+
+        return json_encode($decoded, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     public function destroy(string $module, string $id)
