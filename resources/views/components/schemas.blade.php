@@ -357,12 +357,12 @@
     $schemaCollectTypes($schemaCustomPayload);
     $schemaCustomTypes = array_values(array_intersect(
         array_unique($schemaCustomTypes),
-        ['Product', 'WebPage']
+        ['Product', 'WebPage', 'CollectionPage']
     ));
 
-    // Admin-defined Product/WebPage nodes replace their generated equivalents.
+    // Admin-defined page nodes replace their generated equivalents.
     // Keep the shared site, breadcrumb and FAQ schemas available on the page.
-    if ($schemaCustomPayload !== null && !empty($schemaProduct)) {
+    if ($schemaCustomPayload !== null) {
         $schemaGraph = array_values(array_filter(
             $schemaGraph,
             fn ($node) => !in_array($node['@type'] ?? null, $schemaCustomTypes, true)
