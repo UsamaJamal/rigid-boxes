@@ -20,8 +20,8 @@
     .inner-hero-section {
         background-color: #8D4445;
         background-image: url('{{ $desktopBg }}');
-        background-size: 100% 100%;
-        background-position: center;
+        background-size: cover;
+        background-position: center center;
         background-repeat: no-repeat;
         position: relative;
         color: #FFFFFF;
@@ -37,8 +37,8 @@
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        padding: 40px 55px;
-        min-height: 0;
+        padding: 48px 55px;
+        min-height: 460px;
         display: flex;
         align-items: center;
     }
@@ -127,6 +127,22 @@
             display: none;
         }
     }
+
+    @media (min-width: 1101px) and (max-width: 1450px) {
+        .inner-hero-section {
+            background-position: 54% center;
+        }
+
+        .inner-hero-container {
+            min-height: 420px;
+            padding-left: 42px;
+            padding-right: 42px;
+        }
+
+        .inner-hero-content {
+            max-width: 610px;
+        }
+    }
 </style>
 
 <section class="inner-hero-section">
@@ -136,10 +152,6 @@
             <div class="inner-hero-breadcrumb">
                 HOME / <span>{{ $breadcrumb }}</span>
             </div>
-
-            @if (isset($page) && $page == 'whyChooseUs')
-                <div class="inner-hero-subtitle">{{ $subTitle }}</div>
-            @endif
 
             @if (isset($page) && $page == 'whyChooseUs')
                 <h1 class="inner-hero-title">

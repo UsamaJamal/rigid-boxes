@@ -581,8 +581,8 @@
             <div class="preferences-grid">
                 <div class="select-wrapper">
                     @php
-                        $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
-                        $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
+                        $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->where('status', 'published')->first();
+                        $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->where('status', 'published')->get() : [];
                     @endphp
                     <select name="box_style">
                         <option value="" disabled selected>Box Style</option>

@@ -22,8 +22,8 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SitemapController;
 Route::get('/', function () {
     $settings = (new \App\Http\Controllers\AdminHomepageController())->loadSettings();
-    $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
-    $products = DB::table('admin_products')->get()->map(fn($r)=>(array)$r)->all();
+    $categories = DB::table('admin_categories')->where('status', 'published')->get()->map(fn($r)=>(array)$r)->all();
+    $products = DB::table('admin_products')->where('status', 'published')->get()->map(fn($r)=>(array)$r)->all();
     $recentBlogs = DB::table('admin_blogs')
         ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
         ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.slug as author_slug')
@@ -40,14 +40,17 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
 
     if ($q) {
         $products = DB::table('admin_products')
+            ->where('status', 'published')
             ->where('title', 'like', "%{$q}%")
             ->get()->map(fn($r)=>(array)$r)->all();
             
         $categories = DB::table('admin_categories')
+            ->where('status', 'published')
             ->where('title', 'like', "%{$q}%")
             ->get()->map(fn($r)=>(array)$r)->all();
             
         $blogs = DB::table('admin_blogs')
+            ->where('status', 'published')
             ->where('title', 'like', "%{$q}%")
             ->get()->map(fn($r)=>(array)$r)->all();
             
@@ -74,6 +77,7 @@ Route::get('/product/{slug}', function ($slug) {
 $parentCategoryLanding = function (string $slug) {
     $parentCategory = DB::table('admin_categories')
         ->where('slug', $slug)
+        ->where('status', 'published')
         ->whereNull('parent_id')
         ->first();
 
@@ -81,6 +85,7 @@ $parentCategoryLanding = function (string $slug) {
 
     $categories = DB::table('admin_categories')
         ->where('parent_id', $parentCategory->id)
+        ->where('status', 'published')
         ->get()
         ->map(fn($r) => (array) $r)
         ->all();
@@ -125,14 +130,11 @@ Route::get('/blog/{slug}', function ($slug) {
     $blog = DB::table('admin_blogs')
         ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
         ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.image as joined_author_image', 'admin_authors.description as joined_author_desc', 'admin_authors.facebook as joined_author_facebook', 'admin_authors.twitter as joined_author_twitter', 'admin_authors.linkedin as joined_author_linkedin', 'admin_authors.slug as joined_author_slug')
-        ->where('admin_blogs.slug', $slug)->first();
-    if (!$blog) {
-        $blog = DB::table('admin_blogs')
-            ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
-            ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.image as joined_author_image', 'admin_authors.description as joined_author_desc', 'admin_authors.facebook as joined_author_facebook', 'admin_authors.twitter as joined_author_twitter', 'admin_authors.linkedin as joined_author_linkedin', 'admin_authors.slug as joined_author_slug')
-            ->where('admin_blogs.status', 'published')->first();
-    }
-    $blog = $blog ? (array) $blog : [];
+        ->where('admin_blogs.slug', $slug)
+        ->where('admin_blogs.status', 'published')
+        ->first();
+    abort_unless($blog, 404);
+    $blog = (array) $blog;
     $recentBlogs = DB::table('admin_blogs')
         ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
         ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.slug as joined_author_slug')
@@ -142,9 +144,9 @@ Route::get('/blog/{slug}', function ($slug) {
 
 Route::get('/author/{slug?}', function ($slug = null) {
     if ($slug) {
-        $author = DB::table('admin_authors')->where('slug', $slug)->first();
+        $author = DB::table('admin_authors')->where('slug', $slug)->where('status', 'published')->first();
     } else {
-        $author = DB::table('admin_authors')->first();
+        $author = DB::table('admin_authors')->where('status', 'published')->first();
     }
     if (!$author) abort(404);
     $author = (array) $author;
@@ -234,21 +236,21 @@ Route::get('/preview-email', function () {
 // Catch-all route for categories and products
 Route::get('/{slug}', function ($slug) {
     // 1. Check if it's a category
-    $category = DB::table('admin_categories')->where('slug', $slug)->first();
+    $category = DB::table('admin_categories')->where('slug', $slug)->where('status', 'published')->first();
     if ($category) {
         $categoryArr = (array) $category;
-        $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+        $categories = DB::table('admin_categories')->where('status', 'published')->get()->map(fn($r)=>(array)$r)->all();
         
         $products = [];
         $faqs = [];
         if (!empty($categoryArr['id'])) {
             $productIds = DB::table('admin_category_product')->where('category_id', $categoryArr['id'])->pluck('product_id');
-            $products = DB::table('admin_products')->whereIn('id', $productIds)->get()->map(fn($r)=>(array)$r)->all();
+            $products = DB::table('admin_products')->where('status', 'published')->whereIn('id', $productIds)->get()->map(fn($r)=>(array)$r)->all();
             
-            $childIds = DB::table('admin_categories')->where('parent_id', $categoryArr['id'])->pluck('id');
+            $childIds = DB::table('admin_categories')->where('parent_id', $categoryArr['id'])->where('status', 'published')->pluck('id');
             if ($childIds->count() > 0) {
                 $childProductIds = DB::table('admin_category_product')->whereIn('category_id', $childIds)->pluck('product_id');
-                $moreProducts = DB::table('admin_products')->whereIn('id', $childProductIds)->get()->map(fn($r)=>(array)$r)->all();
+                $moreProducts = DB::table('admin_products')->where('status', 'published')->whereIn('id', $childProductIds)->get()->map(fn($r)=>(array)$r)->all();
                 $products = array_merge($products, $moreProducts);
             }
 
@@ -265,16 +267,16 @@ Route::get('/{slug}', function ($slug) {
     }
 
     // 2. Check if it's a product
-    $product = DB::table('admin_products')->where('slug', $slug)->first();
+    $product = DB::table('admin_products')->where('slug', $slug)->where('status', 'published')->first();
     if ($product) {
         $productArr = (array) $product;
-        $categories = DB::table('admin_categories')->get()->map(fn($r)=>(array)$r)->all();
+        $categories = DB::table('admin_categories')->where('status', 'published')->get()->map(fn($r)=>(array)$r)->all();
         $faqs = [];
         $relatedProducts = [];
 
         if (!empty($productArr['id'])) {
             $faqs = DB::table('admin_product_faqs')->where('product_id', $productArr['id'])->get()->map(fn($r)=>(array)$r)->all();
-            $relatedProducts = DB::table('admin_products')->where('id', '!=', $productArr['id'])->limit(4)->get()->map(fn($r)=>(array)$r)->all();
+            $relatedProducts = DB::table('admin_products')->where('status', 'published')->where('id', '!=', $productArr['id'])->limit(4)->get()->map(fn($r)=>(array)$r)->all();
         }
 
         return view('product', [

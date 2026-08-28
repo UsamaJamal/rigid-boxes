@@ -10,14 +10,15 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        $blogs = DB::table('admin_blogs')->get();
-        $pages = DB::table('admin_pages')->get();
+        $blogs = DB::table('admin_blogs')->where('status', 'published')->get();
+        $pages = DB::table('admin_pages')->where('status', 'published')->get();
         
-        $parentCategories = DB::table('admin_categories')->whereNull('parent_id')->get();
-        $allCategories = DB::table('admin_categories')->whereNotNull('parent_id')->get();
+        $parentCategories = DB::table('admin_categories')->where('status', 'published')->whereNull('parent_id')->get();
+        $allCategories = DB::table('admin_categories')->where('status', 'published')->whereNotNull('parent_id')->get();
         $allProducts = DB::table('admin_products')
             ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
             ->select('admin_products.id', 'admin_products.title', 'admin_products.slug', 'admin_category_product.category_id')
+            ->where('admin_products.status', 'published')
             ->get();
             
         $sitemapData = [];

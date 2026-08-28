@@ -2072,7 +2072,7 @@
             @php
                 $pTitle = $product['title'] ?? 'Custom Packaging Box';
                 $productCatId = DB::table('admin_category_product')->where('product_id', $product['id'] ?? 0)->value('category_id');
-                $productCategory = $productCatId ? DB::table('admin_categories')->where('id', $productCatId)->first() : null;
+                $productCategory = $productCatId ? DB::table('admin_categories')->where('id', $productCatId)->where('status', 'published')->first() : null;
                 $catTitle = $productCategory ? strtoupper($productCategory->title) : 'PRODUCTS';
                 $catUrl = $productCategory ? url('/' . ($productCategory->slug ?? \Illuminate\Support\Str::slug($productCategory->title))) . '/' : '#';
             @endphp
@@ -2240,8 +2240,8 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             @php
-                                $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->first();
-                                $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->get() : [];
+                                $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->where('status', 'published')->first();
+                                $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->where('status', 'published')->get() : [];
                             @endphp
                             <select name="box_style" class="form-control" id="pref-box-style">
                                 <option value="" disabled selected>Box Style</option>
