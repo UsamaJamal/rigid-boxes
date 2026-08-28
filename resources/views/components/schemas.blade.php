@@ -338,12 +338,34 @@
         }
     }
 
-    // A product schema entered in Admin replaces only the generated Product node.
+    $schemaCustomTypes = [];
+    $schemaCollectTypes = function ($value) use (&$schemaCollectTypes, &$schemaCustomTypes) {
+        if (!is_array($value)) {
+            return;
+        }
+
+        if (!empty($value['@type'])) {
+            foreach ((array) $value['@type'] as $type) {
+                $schemaCustomTypes[] = $type;
+            }
+        }
+
+        foreach ($value as $child) {
+            $schemaCollectTypes($child);
+        }
+    };
+    $schemaCollectTypes($schemaCustomPayload);
+    $schemaCustomTypes = array_values(array_intersect(
+        array_unique($schemaCustomTypes),
+        ['Product', 'WebPage']
+    ));
+
+    // Admin-defined Product/WebPage nodes replace their generated equivalents.
     // Keep the shared site, breadcrumb and FAQ schemas available on the page.
     if ($schemaCustomPayload !== null && !empty($schemaProduct)) {
         $schemaGraph = array_values(array_filter(
             $schemaGraph,
-            fn ($node) => ($node['@type'] ?? null) !== 'Product'
+            fn ($node) => !in_array($node['@type'] ?? null, $schemaCustomTypes, true)
         ));
     }
 
