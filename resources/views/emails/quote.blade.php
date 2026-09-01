@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.webp') }}" type="image/webp">
+    <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.png') }}" type="image/png">
     <style>
         table {
             width: 100%;
