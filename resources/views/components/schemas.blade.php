@@ -369,6 +369,14 @@
         ));
     }
 
+    if (!empty($schemaProduct)) {
+        $allowedProductSchemas = ['Product', 'FAQPage', 'BreadcrumbList'];
+        $schemaGraph = array_values(array_filter(
+            $schemaGraph,
+            fn ($node) => in_array($node['@type'] ?? null, $allowedProductSchemas, true)
+        ));
+    }
+
     $schemaPayload = [
         '@context' => 'https://schema.org',
         '@graph' => $schemaGraph,
