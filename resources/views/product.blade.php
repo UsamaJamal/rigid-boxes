@@ -1135,8 +1135,9 @@
         }
         
         .quote-icon-box {
-            width: 50px;
-            height: 50px;
+            width: 4rem;
+            height: 4rem;
+            margin-top:30px;
             background-color: #F8EEEC;
             border-radius: 8px;
             display: flex;
