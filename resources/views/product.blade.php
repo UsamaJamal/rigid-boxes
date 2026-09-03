@@ -1129,7 +1129,7 @@
         
         .quote-form-header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 15px;
             margin-bottom: 30px;
         }
@@ -1137,7 +1137,7 @@
         .quote-icon-box {
             width: 4rem;
             height: 4rem;
-            margin-top:30px;
+            margin-top:10px;
             background-color: #F8EEEC;
             border-radius: 8px;
             display: flex;
