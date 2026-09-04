@@ -5,7 +5,12 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</title>
+    @php
+        $blogTitle = $blog['title'] ?? 'The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond';
+        $blogExcerpt = $blog['excerpt'] ?? 'From bio-based rigid board to augmented reality unboxing, discover the innovations reshaping premium packaging and how early adopters are capturing measurable brand lift.';
+        $blogExcerpt = trim(preg_replace('/\s+/', ' ', strip_tags(html_entity_decode(html_entity_decode((string) $blogExcerpt)))));
+    @endphp
+    <title>{{ $blog['meta_title'] ?? $blogTitle }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -916,14 +921,14 @@
                 <span class="sep">/</span>
                 <a href="{{ url('/blog/') }}">BLOG</a>
                 <span class="sep">/</span>
-                <span class="current">THE FUTURE OF LUXURY PACKAGING: 7 TRENDS DEFINING 2026 AND BEYOND</span>
+                <span class="current">{{ \Illuminate\Support\Str::upper($blogTitle) }}</span>
             </div>
         </div>
 
         <!-- Article Header -->
         <header class="article-header">
-            <h1 class="article-title">The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</h1>
-            <p class="article-subtitle">From bio-based rigid board to augmented reality unboxing, discover the innovations reshaping premium packaging and how early adopters are capturing measurable brand lift.</p>
+            <h1 class="article-title">{{ $blogTitle }}</h1>
+            <p class="article-subtitle">{{ $blogExcerpt }}</p>
             
             <div class="article-meta">
                 @php 
