@@ -39,11 +39,14 @@ class FormSubmitController extends Controller
         $validated['source'] = $validated['source'] ?? null;
         if (empty($validated['source'])) {
             $refererPath = parse_url((string) $request->headers->get('referer'), PHP_URL_PATH) ?: '';
-            $validated['source'] = match (trim($refererPath, '/')) {
-                '', 'home', 'homepage' => 'Homepage',
-                'request-quote' => 'Request a Quote Page',
-                default => ($request->headers->get('referer') ?: 'N/A'),
-            };
+            $sourcePath = trim($refererPath, '/');
+            if ($sourcePath === '' || $sourcePath === 'home' || $sourcePath === 'homepage') {
+                $validated['source'] = 'Homepage';
+            } elseif ($sourcePath === 'request-quote') {
+                $validated['source'] = 'Request a Quote Page';
+            } else {
+                $validated['source'] = $request->headers->get('referer') ?: 'N/A';
+            }
         }
 
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
