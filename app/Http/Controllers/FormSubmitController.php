@@ -35,20 +35,6 @@ class FormSubmitController extends Controller
                 $validated['product_name'] = DB::table('admin_products')->where('slug', $slug)->value('title');
             }
         }
-        $validated['product_name'] = $validated['product_name'] ?: 'N/A';
-        $validated['source'] = $validated['source'] ?? null;
-        if (empty($validated['source'])) {
-            $refererPath = parse_url((string) $request->headers->get('referer'), PHP_URL_PATH) ?: '';
-            $sourcePath = trim($refererPath, '/');
-            if ($sourcePath === '' || $sourcePath === 'home' || $sourcePath === 'homepage') {
-                $validated['source'] = 'Homepage';
-            } elseif ($sourcePath === 'request-quote') {
-                $validated['source'] = 'Request a Quote Page';
-            } else {
-                $validated['source'] = $request->headers->get('referer') ?: 'N/A';
-            }
-        }
-
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
 
         if (!$isSpam) {
@@ -65,6 +51,8 @@ class FormSubmitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'product_name' => 'nullable|string|max:255',
+            'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'company_name' => 'nullable|string|max:255',
@@ -84,6 +72,9 @@ class FormSubmitController extends Controller
             'quote_file' => 'nullable|file|max:10240', // 10MB max
             'message' => 'nullable|string'
         ]);
+
+        $validated['product_name'] = $validated['product_name'] ?: 'N/A';
+        $validated['source'] = $validated['source'] ?: 'N/A';
 
         if ($request->hasFile('quote_file')) {
             $path = $request->file('quote_file')->store('quotes', 'public');
