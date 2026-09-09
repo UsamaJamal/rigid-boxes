@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use App\Mail\ContactFormMail;
 use App\Mail\QuoteFormMail;
 use App\Mail\NewsletterMail;
@@ -26,7 +27,15 @@ class FormSubmitController extends Controller
             'message' => 'nullable|string'
         ]);
 
-        $validated['product_name'] = $validated['product_name'] ?? 'N/A';
+        $validated['product_name'] = $validated['product_name'] ?? null;
+        if (empty($validated['product_name'])) {
+            $refererPath = parse_url((string) $request->headers->get('referer'), PHP_URL_PATH);
+            $slug = trim((string) basename(rtrim($refererPath ?: '', '/')));
+            if ($slug) {
+                $validated['product_name'] = DB::table('admin_products')->where('slug', $slug)->value('title');
+            }
+        }
+        $validated['product_name'] = $validated['product_name'] ?: 'N/A';
         $validated['source'] = $validated['source'] ?? ($request->headers->get('referer') ?: 'N/A');
 
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
