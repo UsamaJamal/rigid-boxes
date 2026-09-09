@@ -2213,6 +2213,8 @@
 
                 <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="product_name" value="{{ $product['title'] ?? $product['name'] ?? '' }}">
+                    <input type="hidden" name="source" value="Product Page">
 
                     <div class="form-section">
                         <span class="section-label">Contact Information</span>

@@ -18,11 +18,16 @@ class FormSubmitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'product_name' => 'nullable|string|max:255',
+            'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string'
         ]);
+
+        $validated['product_name'] = $validated['product_name'] ?? 'N/A';
+        $validated['source'] = $validated['source'] ?? ($request->headers->get('referer') ?: 'N/A');
 
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
 

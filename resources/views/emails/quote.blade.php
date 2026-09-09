@@ -17,7 +17,7 @@
             font-size: 14px;
         }
         th {
-            background-color: #8D4445;
+            background-color: #3498DB !important;
             color: #ffffff;
             width: 30%;
             font-weight: bold;
@@ -28,7 +28,7 @@
         }
         .header {
             text-align: center;
-            color: #8D4445;
+            color: #3498DB;
             font-family: Arial, sans-serif;
             margin-bottom: 20px;
             font-size: 24px;
@@ -40,8 +40,14 @@
     </style>
 </head>
 <body style="background-color: #f9f9f9; padding: 20px;">
-    <h2 style="text-align: center; color: #8D4445; font-family: Arial, sans-serif; margin-bottom: 20px; font-size: 24px;">New Quote Request Received</h2>
+    <h2 style="text-align: center; color: #3498DB; font-family: Arial, sans-serif; margin-bottom: 20px; font-size: 24px;">New Quote Request Received</h2>
     <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
+        @if(!empty($data['product_name']) && $data['product_name'] !== 'N/A')
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Product Name:</th>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['product_name'] }}</td>
+        </tr>
+        @endif
         @if(!empty($data['name']) && $data['name'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Client Name:</th>
@@ -165,6 +171,13 @@
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Message:</th>
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['message'] }}</td>
+        </tr>
+        @endif
+
+        @if(!empty($data['source']) && $data['source'] !== 'N/A')
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Source:</th>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['source'] }}</td>
         </tr>
         @endif
         
