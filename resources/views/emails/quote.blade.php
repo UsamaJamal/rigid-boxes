@@ -172,12 +172,10 @@
         </tr>
         @endif
 
-        @if(!empty($data['source']) && $data['source'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Source:</th>
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['source'] }}</td>
         </tr>
-        @endif
         
         @if(!empty($data['quote_file_path']) && $data['quote_file_path'] !== 'N/A')
         <tr>
