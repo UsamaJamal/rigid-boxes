@@ -44,7 +44,7 @@
     <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Product Name:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['product_name'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['product_name'] ?? 'N/A' }}</td>
         </tr>
         @if(!empty($data['name']) && $data['name'] !== 'N/A')
         <tr>
@@ -174,7 +174,7 @@
 
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Source:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['source'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['source'] ?? 'N/A' }}</td>
         </tr>
         
         @if(!empty($data['quote_file_path']) && $data['quote_file_path'] !== 'N/A')

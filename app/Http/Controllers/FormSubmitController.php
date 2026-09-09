@@ -73,8 +73,8 @@ class FormSubmitController extends Controller
             'message' => 'nullable|string'
         ]);
 
-        $validated['product_name'] = $validated['product_name'] ?: 'N/A';
-        $validated['source'] = $validated['source'] ?: 'N/A';
+        $validated['product_name'] = $validated['product_name'] ?? 'N/A';
+        $validated['source'] = $validated['source'] ?? 'N/A';
 
         if ($request->hasFile('quote_file')) {
             $path = $request->file('quote_file')->store('quotes', 'public');
