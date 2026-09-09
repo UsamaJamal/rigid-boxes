@@ -1,0 +1,109 @@
+ app/Http/Controllers/FormSubmitController.php         |   2 +-
+ error_log                                             |  13 +++++++++++++
+ .../uploads/687ac10c-04a2-4890-9ac8-fe06e6948d42.png  | Bin 0 -> 1710337 bytes
+ public/uploads/About ussince 2016.webp                | Bin 0 -> 99702 bytes
+ public/uploads/Apparel Boxes-icon.webp                | Bin 0 -> 15208 bytes
+ public/uploads/Bakery Boxes-icon.webp                 | Bin 0 -> 12186 bytes
+ public/uploads/CBD Boxes-icon.webp                    | Bin 0 -> 13992 bytes
+ public/uploads/Cookie-Boxes.webp                      | Bin 0 -> 61956 bytes
+ public/uploads/Cosmetic Boxes-icon.webp               | Bin 0 -> 15932 bytes
+ public/uploads/Cosmetic-Boxes-Banner.webp             | Bin 0 -> 126726 bytes
+ public/uploads/Gift Boxes-icon.webp                   | Bin 0 -> 6194 bytes
+ ...ging dieline project board illustration - Copy.png | Bin 0 -> 188633 bytes
+ .../Packaging dieline project board illustration.png  | Bin 0 -> 188633 bytes
+ public/uploads/Phrma Boxes-icon.webp                  | Bin 0 -> 11250 bytes
+ public/uploads/Stationery Boxes-icon.webp             | Bin 0 -> 13418 bytes
+ public/uploads/apparel-boxes-banner.webp              | Bin 0 -> 77940 bytes
+ public/uploads/apparel-boxes.webp                     | Bin 0 -> 102890 bytes
+ public/uploads/apparel-packaging.png                  | Bin 0 -> 2079670 bytes
+ public/uploads/bakery-boxes-banner.webp               | Bin 0 -> 85356 bytes
+ public/uploads/book-boxes-wholesale.webp              | Bin 0 -> 23596 bytes
+ public/uploads/book-boxes.webp                        | Bin 0 -> 25548 bytes
+ public/uploads/cake-boxes-with-lid.webp               | Bin 0 -> 69578 bytes
+ public/uploads/cake-boxes.webp                        | Bin 0 -> 50522 bytes
+ public/uploads/cardboard-pencil-boxes.webp            | Bin 0 -> 27622 bytes
+ public/uploads/cbd-banner.webp                        | Bin 0 -> 110098 bytes
+ public/uploads/cbd-oil-boxes.png                      | Bin 0 -> 2724880 bytes
+ public/uploads/cookie-boxes-with-window.webp          | Bin 0 -> 102350 bytes
+ public/uploads/cosmetic-boxes.png                     | Bin 0 -> 2265358 bytes
+ public/uploads/crayon-boxes.webp                      | Bin 0 -> 30874 bytes
+ public/uploads/custom-apparel-boxes.png               | Bin 0 -> 1687080 bytes
+ public/uploads/custom-apparel-boxes.webp              | Bin 0 -> 424836 bytes
+ public/uploads/custom-apparel-packaging-boxes.png     | Bin 0 -> 1687080 bytes
+ public/uploads/custom-apparel-packaging-boxes.webp    | Bin 0 -> 18122 bytes
+ public/uploads/custom-apparel-packaging.webp          | Bin 0 -> 424836 bytes
+ public/uploads/custom-apparel.webp                    | Bin 0 -> 186726 bytes
+ public/uploads/custom-bakery-boxes.png                | Bin 0 -> 2747496 bytes
+ public/uploads/custom-book-boxes.webp                 | Bin 0 -> 19330 bytes
+ public/uploads/custom-book-packaging-boxes.webp       | Bin 0 -> 45988 bytes
+ public/uploads/custom-cake-boxes-wholesale.webp       | Bin 0 -> 82604 bytes
+ public/uploads/custom-cake-boxes.webp                 | Bin 0 -> 60128 bytes
+ public/uploads/custom-cookie-boxes-wholesale.webp     | Bin 0 -> 100268 bytes
+ public/uploads/custom-cookie-boxes-with-logo.webp     | Bin 0 -> 101524 bytes
+ public/uploads/custom-cookie-boxes.webp               | Bin 0 -> 76668 bytes
+ public/uploads/custom-crayon-boxes-with-logo.webp     | Bin 0 -> 36934 bytes
+ public/uploads/custom-crayon-boxes.webp               | Bin 0 -> 25786 bytes
+ public/uploads/custom-cufflink-boxes.png              | Bin 0 -> 2328292 bytes
+ public/uploads/custom-cufflink-boxes.webp             | Bin 0 -> 38438 bytes
+ public/uploads/custom-cufflink-boxes_11zon.png        | Bin 0 -> 92983 bytes
+ public/uploads/custom-deluxe-gift-boxes.webp          | Bin 0 -> 31788 bytes
+ public/uploads/custom-desert-boxes.webp               | Bin 0 -> 79970 bytes
+ public/uploads/custom-dessert-boxes-with-logo.webp    | Bin 0 -> 90550 bytes
+ public/uploads/custom-donut-boxes.webp                | Bin 0 -> 70304 bytes
+ public/uploads/custom-dount-boxes-wholesale.webp      | Bin 0 -> 70872 bytes
+ public/uploads/custom-gift-pillow-boxes.webp          | Bin 0 -> 39282 bytes
+ public/uploads/custom-invitation-boxes.webp           | Bin 0 -> 28892 bytes
+ public/uploads/custom-invitation-packaging.webp       | Bin 0 -> 31516 bytes
+ public/uploads/custom-pencil-boxes.webp               | Bin 0 -> 35414 bytes
+ public/uploads/custom-pencil-packaging-boxes.webp     | Bin 0 -> 22300 bytes
+ public/uploads/custom-pie-boxes.webp                  | Bin 0 -> 95538 bytes
+ public/uploads/custom-pie-packaging-boxes.webp        | Bin 0 -> 94222 bytes
+ public/uploads/custom-pre-roll-boxes.png              | Bin 0 -> 2568673 bytes
+ public/uploads/custom-printed-crayon-boxes.webp       | Bin 0 -> 25824 bytes
+ public/uploads/custom-printed-invitation-boxes.webp   | Bin 0 -> 56806 bytes
+ public/uploads/custom-printed-pie-boxes.webp          | Bin 0 -> 89728 bytes
+ public/uploads/custom-shirt-boxes.png                 | Bin 0 -> 2107436 bytes
+ public/uploads/custom-shirt-boxes.webp                | Bin 0 -> 23314 bytes
+ public/uploads/custom-stapler-boxes-wholesale.webp    | Bin 0 -> 31668 bytes
+ public/uploads/custom-stapler-boxes.webp              | Bin 0 -> 17296 bytes
+ public/uploads/custom-stationery-boxes.png            | Bin 0 -> 2583629 bytes
+ public/uploads/custom-tie-boxes.png                   | Bin 0 -> 1876621 bytes
+ public/uploads/custom-tie-boxes.webp                  | Bin 0 -> 24702 bytes
+ public/uploads/custom-tie-boxes_11zon.png             | Bin 0 -> 207560 bytes
+ public/uploads/customized-deluxe-gift-boxes.webp      | Bin 0 -> 26502 bytes
+ public/uploads/deluxe-gift-box.webp                   | Bin 0 -> 26952 bytes
+ public/uploads/deluxe-gift-boxes.webp                 | Bin 0 -> 33912 bytes
+ public/uploads/dessert-boxes-wholesale.webp           | Bin 0 -> 57130 bytes
+ public/uploads/dount-box.webp                         | Bin 0 -> 97726 bytes
+ public/uploads/dount-boxes-with-window.webp           | Bin 0 -> 89422 bytes
+ public/uploads/dount-boxes.webp                       | Bin 0 -> 97726 bytes
+ public/uploads/dount-packaging-boxes.webp             | Bin 0 -> 80010 bytes
+ public/uploads/gift-boxes-banner.webp                 | Bin 0 -> 79254 bytes
+ public/uploads/gift-boxes.png                         | Bin 0 -> 2348930 bytes
+ public/uploads/gift-pillow-boxes-with-logo.webp       | Bin 0 -> 29954 bytes
+ public/uploads/gift-pillow-boxes.webp                 | Bin 0 -> 49078 bytes
+ public/uploads/invitation-boxes-wholesale.webp        | Bin 0 -> 55388 bytes
+ public/uploads/invitation-boxes.webp                  | Bin 0 -> 21530 bytes
+ public/uploads/luxury-custom-book-boxes.webp          | Bin 0 -> 36920 bytes
+ public/uploads/luxury-gift-pillow-boxes.webp          | Bin 0 -> 27808 bytes
+ public/uploads/luxury-stapler-boxes.webp              | Bin 0 -> 36032 bytes
+ public/uploads/pencil-boxes-with-logo.webp            | Bin 0 -> 20746 bytes
+ public/uploads/perfume-boxes.webp                     | Bin 0 -> 33438 bytes
+ public/uploads/personalized-crayon-boxes.webp         | Bin 0 -> 32686 bytes
+ public/uploads/personalized-pencil-boxes.webp         | Bin 0 -> 20928 bytes
+ public/uploads/pie-boxes.webp                         | Bin 0 -> 97602 bytes
+ public/uploads/pie-shipping-boxes.webp                | Bin 0 -> 57266 bytes
+ public/uploads/pre-roll-banner.webp                   | Bin 0 -> 244212 bytes
+ public/uploads/premium-cake-boxes.webp                | Bin 0 -> 56768 bytes
+ public/uploads/premium-dessert-boxes.webp             | Bin 0 -> 98362 bytes
+ public/uploads/sam-grey.png                           | Bin 0 -> 1841244 bytes
+ public/uploads/sample-image-for-blog.jfif             | Bin 0 -> 14341 bytes
+ public/uploads/stapler-boxes.webp                     | Bin 0 -> 20120 bytes
+ public/uploads/stapler-packaging-boxes.webp           | Bin 0 -> 43778 bytes
+ public/uploads/stationary-boxes-banner.webp           | Bin 0 -> 90154 bytes
+ public/uploads/test-box.webp                          | Bin 0 -> 79254 bytes
+ public/uploads/wholesale-deluxe-gift-boxes.webp       | Bin 0 -> 27508 bytes
+ public/uploads/why-premiumBoxes.webp                  | Bin 0 -> 101574 bytes
+ public/uploads/window-dessert-boxes.webp              | Bin 0 -> 76102 bytes
+ public/uploads/window-gift-pillow-boxes.webp          | Bin 0 -> 37826 bytes
+ 108 files changed, 14 insertions(+), 1 deletion(-)

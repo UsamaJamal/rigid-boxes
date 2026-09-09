@@ -13,7 +13,7 @@ use App\Helpers\SpamDetector;
 
 class FormSubmitController extends Controller
 {
-    private $adminEmail = 'quote@therigidbox.com';
+    private $adminEmail = 'quote@therigidboxes.com';
 
     public function submitContact(Request $request)
     {
