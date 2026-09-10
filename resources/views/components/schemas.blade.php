@@ -66,24 +66,6 @@
 
     $schemaGraph = [
         [
-            '@type' => 'Organization',
-            '@id' => $schemaOrganizationId,
-            'name' => 'The Rigid Boxes',
-            'url' => $schemaSiteUrl,
-            'logo' => [
-                '@type' => 'ImageObject',
-                'url' => $schemaLogo,
-            ],
-            'description' => 'Custom rigid box and premium packaging manufacturer.',
-            'contactPoint' => [
-                '@type' => 'ContactPoint',
-                'telephone' => $schemaSettings['company_phone'] ?? '',
-                'email' => $schemaSettings['company_email'] ?? '',
-                'contactType' => 'customer service',
-                'availableLanguage' => 'English',
-            ],
-        ],
-        [
             '@type' => 'LocalBusiness',
             '@id' => $schemaBusinessId,
             'name' => 'The Rigid Boxes',
@@ -98,22 +80,6 @@
                 '@type' => 'PostalAddress',
                 'streetAddress' => $schemaAddress,
                 'addressCountry' => 'US',
-            ],
-            'parentOrganization' => ['@id' => $schemaOrganizationId],
-        ],
-        [
-            '@type' => 'WebSite',
-            '@id' => $schemaWebsiteId,
-            'url' => $schemaSiteUrl,
-            'name' => 'The Rigid Boxes',
-            'publisher' => ['@id' => $schemaOrganizationId],
-            'potentialAction' => [
-                '@type' => 'SearchAction',
-                'target' => [
-                    '@type' => 'EntryPoint',
-                    'urlTemplate' => $schemaSiteUrl . '/search?q={search_term_string}',
-                ],
-                'query-input' => 'required name=search_term_string',
             ],
         ],
     ];
@@ -137,16 +103,7 @@
         $schemaWebPageType = 'ProfilePage';
     }
 
-    $schemaWebPageIndex = count($schemaGraph);
-    $schemaGraph[] = [
-        '@type' => $schemaWebPageType,
-        '@id' => $schemaWebPageId,
-        'url' => $schemaPageUrl,
-        'name' => trim(strip_tags((string) $schemaPageName)),
-        'description' => $schemaPageDescription,
-        'isPartOf' => ['@id' => $schemaWebsiteId],
-        'about' => ['@id' => $schemaBusinessId],
-    ];
+
 
     $schemaBreadcrumbs = [[
         '@type' => 'ListItem',
@@ -162,11 +119,13 @@
             'item' => $schemaPageUrl,
         ];
     }
-    $schemaGraph[] = [
-        '@type' => 'BreadcrumbList',
-        '@id' => $schemaPageUrl . '#breadcrumb',
-        'itemListElement' => $schemaBreadcrumbs,
-    ];
+    if (empty($schemaCategory)) {
+        $schemaGraph[] = [
+            '@type' => 'BreadcrumbList',
+            '@id' => $schemaPageUrl . '#breadcrumb',
+            'itemListElement' => $schemaBreadcrumbs,
+        ];
+    }
 
     $schemaFaqs = [];
     if (!empty($faqs) && is_iterable($faqs)) {
@@ -195,35 +154,16 @@
         ];
     }
 
-    if ($schemaWebPageType === 'CollectionPage') {
-        $schemaCollectionRows = [];
-        $schemaCollectionKind = null;
-        if (request()->is('blog') && !empty($blogs)) {
-            $schemaCollectionRows = $blogs;
-            $schemaCollectionKind = 'blog';
-        } elseif (!empty($products)) {
-            $schemaCollectionRows = $products;
-            $schemaCollectionKind = 'product';
-        } elseif (!empty($categories)) {
-            $schemaCollectionRows = $categories;
-            $schemaCollectionKind = 'category';
-        }
-
-        $schemaListItems = collect($schemaCollectionRows)
+    if (!empty($schemaCategory) && !empty($products)) {
+        $schemaListItems = collect($products)
             ->take(20)
-            ->map(function ($row, $index) use ($schemaCollectionKind) {
+            ->map(function ($row, $index) {
                 $row = (array) $row;
                 $slug = trim($row['slug'] ?? '', '/');
                 if ($slug === '') {
                     return null;
                 }
-                if ($schemaCollectionKind === 'blog') {
-                    $itemUrl = url('/blog/' . $slug) . '/';
-                } elseif ($schemaCollectionKind === 'product') {
-                    $itemUrl = url('/' . $slug) . '/';
-                } else {
-                    $itemUrl = url('/' . $slug) . '/';
-                }
+                $itemUrl = url('/' . $slug) . '/';
                 return [
                     '@type' => 'ListItem',
                     'position' => $index + 1,
@@ -241,9 +181,13 @@
                 '@type' => 'ItemList',
                 '@id' => $schemaItemListId,
                 'name' => trim(strip_tags((string) $schemaPageName)),
+                'description' => $schemaPageDescription,
+                'url' => $schemaPageUrl,
+                'itemListOrder' => 'https://schema.org/ItemListOrderAscending',
+                'numberOfItems' => count($schemaListItems),
                 'itemListElement' => $schemaListItems,
             ];
-            $schemaGraph[$schemaWebPageIndex]['mainEntity'] = ['@id' => $schemaItemListId];
+            // WebPage schema removed, skip mainEntity addition
         }
     }
 
@@ -278,7 +222,6 @@
                 '@type' => 'Brand',
                 'name' => 'The Rigid Boxes',
             ],
-            'mainEntityOfPage' => ['@id' => $schemaWebPageId],
         ], fn ($value) => $value !== null && $value !== '' && $value !== []);
     }
 
@@ -303,8 +246,7 @@
                 '@type' => !empty($schemaBlog['joined_author_name']) ? 'Person' : 'Organization',
                 'name' => $schemaBlogAuthor,
             ],
-            'publisher' => ['@id' => $schemaOrganizationId],
-            'mainEntityOfPage' => ['@id' => $schemaWebPageId],
+            'publisher' => ['@id' => $schemaBusinessId],
         ], fn ($value) => $value !== null && $value !== '');
     }
 
@@ -317,9 +259,8 @@
             'url' => $schemaPageUrl,
             'image' => $schemaImageUrl($schemaAuthor['image'] ?? null),
             'description' => trim(strip_tags($schemaAuthor['description'] ?? '')),
-            'worksFor' => ['@id' => $schemaOrganizationId],
+            'worksFor' => ['@id' => $schemaBusinessId],
         ], fn ($value) => $value !== null && $value !== '');
-        $schemaGraph[$schemaWebPageIndex]['mainEntity'] = ['@id' => $schemaPersonId];
     }
 
     $schemaCustomRaw = $schemaProduct['schema']
