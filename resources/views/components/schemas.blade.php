@@ -119,7 +119,7 @@
             'item' => $schemaPageUrl,
         ];
     }
-    if (empty($schemaCategory) && trim(request()->path(), '/') !== '') {
+    if (trim(request()->path(), '/') !== '') {
         $schemaGraph[] = [
             '@type' => 'BreadcrumbList',
             '@id' => $schemaPageUrl . '#breadcrumb',
