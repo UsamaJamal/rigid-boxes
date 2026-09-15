@@ -66,7 +66,6 @@ class FormSubmitController extends Controller
             'material' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:255',
             'paper_coating' => 'nullable|string|max:255',
-            'cad_sample' => 'nullable|string|max:255',
             'turn_around_time' => 'nullable|string|max:255',
             'quantity' => 'required|integer|min:1',
             'quote_file' => 'nullable|file|max:10240', // 10MB max

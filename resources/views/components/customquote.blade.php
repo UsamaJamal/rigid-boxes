@@ -155,6 +155,168 @@
         border-color: var(--primary-color);
         background: #fff;
     }
+    .quote-file-control {
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+        border: 1px solid var(--primary-color);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #666;
+        background: #fafafa;
+        font: 14px 'DM Sans', sans-serif;
+        overflow: hidden;
+    }
+    .quote-file-control:hover {
+        border-color: var(--primary-color);
+        background: #fff;
+    }
+    .quote-file-label {
+        min-width: 0;
+        padding: 0 12px;
+        overflow: hidden;
+        color: #666;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .quote-file-button {
+        align-self: stretch;
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 14px;
+        border-left: 1px solid var(--primary-color);
+        background: var(--primary-color);
+        color: #fff;
+        font: 700 13px 'DM Sans', sans-serif;
+        cursor: pointer;
+    }
+    .quote-file-button:hover {
+        background: #6e3031;
+    }
+    .quote-file-control input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .product-combobox-wrapper.is-open {
+        z-index: 100;
+    }
+    .select-wrapper.product-combobox-wrapper::after {
+        display: none;
+    }
+    .product-combobox-toggle {
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        z-index: 3;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+    .product-combobox-toggle::before {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 14px;
+        width: 9px;
+        height: 9px;
+        border-right: 2px solid #666;
+        border-bottom: 2px solid #666;
+        transform: rotate(45deg);
+        transition: transform .2s ease;
+    }
+    .product-combobox-wrapper.is-open .product-combobox-toggle::before {
+        top: 18px;
+        transform: rotate(225deg);
+    }
+    .product-combobox-trigger {
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+        border: 1px solid var(--primary-color);
+        border-radius: 6px;
+        padding: 0 42px 0 14px;
+        font: 14px 'DM Sans', sans-serif;
+        color: #333;
+        background: #fafafa;
+        text-align: left;
+        position: relative;
+    }
+    .product-combobox-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        width: 100%;
+        padding: 6px;
+        background: #fff;
+        border: 1px solid var(--primary-color);
+        border-radius: 7px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+    }
+    .product-combobox-wrapper.is-open .product-combobox-menu {
+        display: block;
+    }
+    .product-combobox-options {
+        max-height: 220px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+    .product-combobox-option {
+        display: block;
+        width: 100%;
+        padding: 9px 10px;
+        border: 0;
+        border-radius: 4px;
+        background: transparent;
+        color: #333;
+        font: 14px 'DM Sans', sans-serif;
+        text-align: left;
+        cursor: pointer;
+    }
+    .product-combobox-option[hidden] {
+        display: none;
+    }
+    .product-combobox-group[hidden] {
+        display: none;
+    }
+    .product-combobox-group + .product-combobox-group {
+        margin-top: 5px;
+        padding-top: 5px;
+        border-top: 1px solid #eee;
+    }
+    .product-combobox-category {
+        padding: 8px 10px 5px;
+        color: var(--primary-color);
+        font: 700 13px 'Open Sans', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+    .product-combobox-group .product-combobox-option {
+        padding-left: 18px;
+    }
+    .product-combobox-option:hover,
+    .product-combobox-option:focus,
+    .product-combobox-option.is-selected {
+        background: var(--primary-color);
+        color: #fff;
+        outline: none;
+    }
+    .product-combobox-empty {
+        display: none;
+        padding: 12px 10px;
+        color: #777;
+        font-size: 13px;
+    }
 
     .select-wrapper::after {
         content: '';
@@ -505,7 +667,8 @@
         .specs-row input,
         .specs-unit select,
         .preferences-grid select,
-        .pref-input {
+        .pref-input,
+        .quote-file-control {
             height: 37px;
             padding-left: 12px;
             font-size: 12px;
@@ -548,7 +711,7 @@
 
         <!-- Left: Form Card -->
         <div class="quote-form-card">
-            <form action="{{ url('/submit-quote') }}" method="POST">
+            <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="source" value="Homepage">
 
@@ -580,17 +743,71 @@
             <!-- Packaging Preferences -->
             <p class="form-section-label">Packaging Preferences</p>
             <div class="preferences-grid">
-                <div class="select-wrapper">
+                <div class="select-wrapper product-combobox-wrapper" data-product-combobox>
                     @php
-                        $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->where('status', 'published')->first();
-                        $boxStyles = $boxStyleParent ? \Illuminate\Support\Facades\DB::table('admin_categories')->where('parent_id', $boxStyleParent->id)->where('status', 'published')->get() : [];
+                        $boxStyleCategories = \Illuminate\Support\Facades\DB::table('admin_categories')
+                            ->where('status', 'published')
+                            ->select('id', 'title')
+                            ->orderBy('title')
+                            ->get();
+
+                        $boxStyleProducts = $boxStyleCategories->isNotEmpty()
+                            ? \Illuminate\Support\Facades\DB::table('admin_products')
+                                ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
+                                ->where('admin_products.status', 'published')
+                                ->whereIn('admin_category_product.category_id', $boxStyleCategories->pluck('id'))
+                                ->select('admin_category_product.category_id', 'admin_products.id', 'admin_products.title')
+                                ->distinct()
+                                ->orderBy('admin_products.title')
+                                ->get()
+                                ->groupBy('category_id')
+                            : collect();
+
+                        $groupedProductIds = $boxStyleProducts
+                            ->flatten(1)
+                            ->pluck('id')
+                            ->unique();
+
+                        $uncategorizedProducts = \Illuminate\Support\Facades\DB::table('admin_products')
+                            ->where('status', 'published')
+                            ->when($groupedProductIds->isNotEmpty(), function ($query) use ($groupedProductIds) {
+                                $query->whereNotIn('id', $groupedProductIds);
+                            })
+                            ->select('id', 'title')
+                            ->orderBy('title')
+                            ->get();
                     @endphp
-                    <select name="box_style">
-                        <option value="" disabled selected>Box Style</option>
-                        @foreach($boxStyles as $style)
-                            <option value="{{ $style->title }}">{{ $style->title }}</option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" name="box_style" value="">
+                    <input type="text" class="product-combobox-trigger" placeholder="Select Box Style" autocomplete="off" aria-label="Search and select box style" aria-haspopup="listbox" aria-expanded="false">
+                    <button type="button" class="product-combobox-toggle" aria-label="Toggle box style options" tabindex="-1"></button>
+                    <div class="product-combobox-menu">
+                        <div class="product-combobox-options" role="listbox">
+                            @foreach($boxStyleCategories as $category)
+                                @php($categoryProducts = $boxStyleProducts->get($category->id, collect()))
+                                @if($categoryProducts->isNotEmpty())
+                                    <div class="product-combobox-group" data-category="{{ $category->title }}">
+                                        <div class="product-combobox-category">{{ $category->title }}</div>
+                                        @foreach($categoryProducts as $product)
+                                            <button type="button" class="product-combobox-option" role="option" data-value="{{ $product->title }}">
+                                                {{ $product->title }}
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            @endforeach
+                            @if($uncategorizedProducts->isNotEmpty())
+                                <div class="product-combobox-group" data-category="Other Products">
+                                    <div class="product-combobox-category">Other Products</div>
+                                    @foreach($uncategorizedProducts as $product)
+                                        <button type="button" class="product-combobox-option" role="option" data-value="{{ $product->title }}">
+                                            {{ $product->title }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endif
+                            <div class="product-combobox-empty">No product found</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="select-wrapper">
                     <select name="material">
@@ -631,15 +848,17 @@
                         <option>Semi Matte</option>
                     </select>
                 </div>
-                <div class="select-wrapper">
-                    <select name="cad_sample">
-                        <option value="" disabled selected>CAD Sample</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
                 <div class="pref-input-wrapper">
                     <input type="number" name="quantity" class="pref-input" placeholder="Quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                </div>
+                <div class="pref-input-wrapper">
+                    <div class="quote-file-control">
+                        <span class="quote-file-label">Upload File</span>
+                        <label class="quote-file-button">
+                            Upload
+                            <input type="file" name="quote_file" accept=".pdf,.ai,.eps,.zip,.doc,.docx,image/*">
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -709,3 +928,88 @@
 
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-product-combobox]').forEach(function (combobox) {
+        const trigger = combobox.querySelector('.product-combobox-trigger');
+        const toggle = combobox.querySelector('.product-combobox-toggle');
+        const hiddenInput = combobox.querySelector('input[name="box_style"]');
+        const options = Array.from(combobox.querySelectorAll('.product-combobox-option'));
+        const groups = Array.from(combobox.querySelectorAll('.product-combobox-group'));
+        const emptyState = combobox.querySelector('.product-combobox-empty');
+
+        function setOpen(open) {
+            const wasOpen = combobox.classList.contains('is-open');
+            combobox.classList.toggle('is-open', open);
+            trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (open && !wasOpen) {
+                options.forEach(function (option) { option.hidden = false; });
+                groups.forEach(function (group) { group.hidden = false; });
+                emptyState.style.display = 'none';
+                window.setTimeout(function () { trigger.focus(); }, 0);
+            }
+        }
+
+        trigger.addEventListener('focus', function () {
+            setOpen(true);
+        });
+
+        trigger.addEventListener('click', function () {
+            setOpen(true);
+        });
+
+        toggle.addEventListener('click', function (event) {
+            event.stopPropagation();
+            setOpen(!combobox.classList.contains('is-open'));
+        });
+
+        trigger.addEventListener('input', function () {
+            hiddenInput.value = '';
+            setOpen(true);
+            const query = trigger.value.trim().toLowerCase();
+            let visibleCount = 0;
+            groups.forEach(function (group) {
+                const categoryMatches = group.dataset.category.toLowerCase().includes(query);
+                let groupMatches = 0;
+                group.querySelectorAll('.product-combobox-option').forEach(function (option) {
+                    const matches = categoryMatches || option.textContent.trim().toLowerCase().includes(query);
+                    option.hidden = !matches;
+                    if (matches) groupMatches++;
+                });
+                group.hidden = groupMatches === 0;
+                visibleCount += groupMatches;
+            });
+            emptyState.style.display = visibleCount ? 'none' : 'block';
+        });
+
+        options.forEach(function (option) {
+            option.addEventListener('click', function () {
+                hiddenInput.value = option.dataset.value;
+                trigger.value = option.dataset.value;
+                options.forEach(function (item) { item.classList.remove('is-selected'); });
+                option.classList.add('is-selected');
+                setOpen(false);
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!combobox.contains(event.target)) setOpen(false);
+        });
+
+        combobox.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                setOpen(false);
+                trigger.focus();
+            }
+        });
+    });
+
+    document.querySelectorAll('input[name="quote_file"]').forEach(function (input) {
+        input.addEventListener('change', function () {
+            const label = input.closest('.quote-file-control').querySelector('.quote-file-label');
+            label.textContent = input.files && input.files[0] ? input.files[0].name : 'Upload File';
+        });
+    });
+});
+</script>

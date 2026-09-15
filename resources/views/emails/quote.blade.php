@@ -146,13 +146,6 @@
         </tr>
         @endif
         
-        @if(!empty($data['cad_sample']) && $data['cad_sample'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">CAD Sample:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['cad_sample'] }}</td>
-        </tr>
-        @endif
-        
         @if(!empty($data['turn_around_time']) && $data['turn_around_time'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Turn Around Time:</th>
