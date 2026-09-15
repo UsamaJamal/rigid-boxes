@@ -118,13 +118,6 @@
         </tr>
         @endif
         
-        @if(!empty($data['box_style']) && $data['box_style'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['box_style'] }}</td>
-        </tr>
-        @endif
-        
         @if(!empty($data['material']) && $data['material'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Material:</th>

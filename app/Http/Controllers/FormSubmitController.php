@@ -72,8 +72,16 @@ class FormSubmitController extends Controller
             'message' => 'nullable|string'
         ]);
 
-        $validated['product_name'] = $validated['product_name'] ?? 'N/A';
         $validated['source'] = $validated['source'] ?? 'N/A';
+        $isProductPageQuote = strtolower(trim((string) $validated['source'])) === 'product page';
+
+        // Product pages already provide their own product name. On every
+        // other quote form, the selected box style is the requested product.
+        $validated['product_name'] = $isProductPageQuote
+            ? ($validated['product_name'] ?? 'N/A')
+            : (!empty(trim((string) ($validated['box_style'] ?? '')))
+                ? trim($validated['box_style'])
+                : ($validated['product_name'] ?? 'N/A'));
 
         if ($request->hasFile('quote_file')) {
             $path = $request->file('quote_file')->store('quotes', 'public');
