@@ -801,6 +801,7 @@
         foreach ($navParents as $parent) {
             $slug = $parent['slug'];
             $children = array_filter($navChildren, fn($c) => $c['parent_id'] == $parent['id']);
+            usort($children, fn($a, $b) => strcasecmp($a['title'] ?? '', $b['title'] ?? ''));
             $navByParentSlug[$slug] = array_values($children);
         }
         $navParentItems = $navParents;
@@ -950,6 +951,7 @@
             foreach ($navParents as $parent) {
                 $slug = $parent['slug'];
                 $children = array_filter($navChildren, fn($c) => $c['parent_id'] == $parent['id']);
+                usort($children, fn($a, $b) => strcasecmp($a['title'] ?? '', $b['title'] ?? ''));
                 $navByParentSlug[$slug] = array_values($children);
             }
         @endphp
