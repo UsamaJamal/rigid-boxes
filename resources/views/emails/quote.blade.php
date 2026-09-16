@@ -48,6 +48,12 @@
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['product_name'] ?? 'N/A' }}</td>
         </tr>
         @endif
+        @if(strtolower(trim((string) ($data['source'] ?? ''))) === 'product page' && !empty($data['box_style']))
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['box_style'] }}</td>
+        </tr>
+        @endif
         @if(!empty($data['name']) && $data['name'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Client Name:</th>

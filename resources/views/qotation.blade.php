@@ -171,6 +171,16 @@
             scroll-margin-top: 150px;
         }
 
+        .iq-form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            padding-right: 42px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%238d4445' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 12px 8px;
+        }
+
         /* Remove number input spinner arrows */
         .iq-form-group input[type="number"]::-webkit-inner-spin-button,
         .iq-form-group input[type="number"]::-webkit-outer-spin-button {
@@ -356,34 +366,64 @@
                         </div>
                     </div>
 
-                    <!-- Row 4: Select options -->
-                    <div class="iq-grid-3">
+                    <!-- Row 4: Packaging preferences -->
+                    <div class="iq-grid-4">
+                        @php
+                            $quoteBoxStyles = \Illuminate\Support\Facades\DB::table('admin_products')
+                                ->where('status', 'published')
+                                ->select('title')
+                                ->orderBy('title')
+                                ->get();
+                        @endphp
                         <div class="iq-form-group">
-                            <label>Select Material</label>
+                            <label>Box Style</label>
+                            <select name="box_style">
+                                <option value="">Select Box Style</option>
+                                @foreach($quoteBoxStyles as $boxStyle)
+                                    <option value="{{ $boxStyle->title }}">{{ $boxStyle->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="iq-form-group">
+                            <label>Paper Stock</label>
                             <select name="material">
-                                <option value="">Choose option</option>
-                                <option value="Rigid Board">Rigid Board</option>
-                                <option value="Cardboard">Cardboard</option>
-                                <option value="Kraft Paper">Kraft Paper</option>
-                                <option value="Corrugated">Corrugated</option>
+                                <option value="">Paper Stock</option>
+                                <option>12pt Cardboard Stock</option>
+                                <option>14pt Cardboard Stock</option>
+                                <option>16pt Cardboard Stock</option>
+                                <option>18pt Cardboard Stock</option>
+                                <option>20pt Cardboard Stock</option>
+                                <option>22pt Cardboard Stock</option>
+                                <option>24pt Cardboard Stock</option>
+                                <option>Kraft Stock</option>
+                                <option>Recycled BuxBoard</option>
+                                <option>Corrugated Stock</option>
+                                <option>No Printing Required</option>
                             </select>
                         </div>
                         <div class="iq-form-group">
-                            <label>Color Options</label>
+                            <label>Color</label>
                             <select name="color">
-                                <option value="">Color Options</option>
-                                <option value="1 Color">1 Color</option>
-                                <option value="2 Colors">2 Colors</option>
-                                <option value="3 Colors">3 Colors</option>
-                                <option value="Full Color">Full Color</option>
+                                <option value="">Color</option>
+                                <option>1 color</option>
+                                <option>2 color</option>
+                                <option>3 color</option>
+                                <option>4 color</option>
+                                <option>4/1 color</option>
+                                <option>4/2 color</option>
+                                <option>4/3 color</option>
+                                <option>4/4 color</option>
                             </select>
                         </div>
                         <div class="iq-form-group">
-                            <label>Turn Around Time</label>
-                            <select name="turn_around_time">
-                                <option value="">Choose option</option>
-                                <option value="Standard (8-10 Days)">Standard (8-10 Days)</option>
-                                <option value="Rush (4-6 Days)">Rush (4-6 Days)</option>
+                            <label>Paper Coating</label>
+                            <select name="paper_coating">
+                                <option value="">Paper Coating</option>
+                                <option>Aqueous Coating</option>
+                                <option>Semi Gloss</option>
+                                <option>Gloss UV</option>
+                                <option>Matte UV</option>
+                                <option>Semi Matte</option>
                             </select>
                         </div>
                     </div>
