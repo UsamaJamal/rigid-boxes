@@ -40,18 +40,14 @@
     </style>
 </head>
 <body style="background-color: #f9f9f9; padding: 20px;">
-    <h2 style="text-align: center; color: #3498DB; font-family: Arial, sans-serif; margin-bottom: 20px; font-size: 24px;">New Quote Request Received</h2>
+    <h2 style="text-align: center; color: #3498DB; font-family: Arial, sans-serif; margin-bottom: 20px; font-size: 24px;">
+        {{ strtolower(trim((string) ($data['source'] ?? ''))) === 'contact us' ? 'New Contact Us Request Received' : 'New Quote Request Received' }}
+    </h2>
     <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
         @if(!empty($data['product_name']) && $data['product_name'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #3498DB; color: #ffffff; width: 30%; font-weight: bold;">Product Name:</th>
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['product_name'] ?? 'N/A' }}</td>
-        </tr>
-        @endif
-        @if(strtolower(trim((string) ($data['source'] ?? ''))) === 'product page' && !empty($data['box_style']))
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['box_style'] }}</td>
         </tr>
         @endif
         @if(!empty($data['name']) && $data['name'] !== 'N/A')
@@ -121,6 +117,12 @@
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Unit:</th>
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['units'] }}</td>
+        </tr>
+        @endif
+        @if(strtolower(trim((string) ($data['source'] ?? ''))) === 'product page' && !empty($data['box_style']))
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['box_style'] }}</td>
         </tr>
         @endif
         

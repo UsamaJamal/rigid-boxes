@@ -2611,8 +2611,46 @@
                     <div class="form-row form-row-2col">
                         <div class="form-group" style="flex: 1.5;">
                             <label>Box Style *</label>
+                            @php
+                                $sampleKitBoxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')
+                                    ->where('slug', 'box-by-style')
+                                    ->where('status', 'published')
+                                    ->first();
+                                $sampleKitBoxStyleCategories = $sampleKitBoxStyleParent
+                                    ? \Illuminate\Support\Facades\DB::table('admin_categories')
+                                        ->where('parent_id', $sampleKitBoxStyleParent->id)
+                                        ->where('status', 'published')
+                                        ->select('id', 'title')
+                                        ->orderBy('title')
+                                        ->get()
+                                    : collect();
+                                $sampleKitBoxStyleProducts = $sampleKitBoxStyleCategories->isNotEmpty()
+                                    ? \Illuminate\Support\Facades\DB::table('admin_products')
+                                        ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
+                                        ->where('admin_products.status', 'published')
+                                        ->whereIn('admin_category_product.category_id', $sampleKitBoxStyleCategories->pluck('id'))
+                                        ->select('admin_category_product.category_id', 'admin_products.id', 'admin_products.title')
+                                        ->distinct()
+                                        ->orderBy('admin_products.title')
+                                        ->get()
+                                        ->groupBy('category_id')
+                                    : collect();
+                                $currentProductTitle = $product['title'] ?? $product['name'] ?? 'Custom Box';
+                            @endphp
                             <select name="box_style" class="form-control" id="quote-box-style">
-                                <option value="{{ $product['title'] ?? 'Custom Box' }}" selected>{{ $product['title'] ?? 'Custom Box' }}</option>
+                                <option value="{{ $currentProductTitle }}" selected>{{ $currentProductTitle }}</option>
+                                @foreach($sampleKitBoxStyleCategories as $category)
+                                    @php($categoryProducts = $sampleKitBoxStyleProducts->get($category->id, collect()))
+                                    @if($categoryProducts->isNotEmpty())
+                                        <optgroup label="{{ $category->title }}">
+                                            @foreach($categoryProducts as $productOption)
+                                                @if($productOption->title !== $currentProductTitle)
+                                                    <option value="{{ $productOption->title }}">{{ $productOption->title }}</option>
+                                                @endif
+                                            @endforeach
+                                        </optgroup>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

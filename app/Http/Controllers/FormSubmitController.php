@@ -28,6 +28,7 @@ class FormSubmitController extends Controller
         ]);
 
         $validated['product_name'] = $validated['product_name'] ?? null;
+        $validated['source'] = 'Contact Us';
         if (empty($validated['product_name'])) {
             $refererPath = parse_url((string) $request->headers->get('referer'), PHP_URL_PATH);
             $slug = trim((string) basename(rtrim($refererPath ?: '', '/')));

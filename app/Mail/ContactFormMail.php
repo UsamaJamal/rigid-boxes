@@ -31,6 +31,6 @@ class ContactFormMail extends Mailable
     public function build()
     {
         return $this->subject('Contact Us')
-                    ->markdown('emails.contact');
+                    ->view('emails.quote');
     }
 }
