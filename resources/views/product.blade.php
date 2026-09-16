@@ -373,11 +373,11 @@
         .custom-select-trigger {
             width: 100%;
             height: 45px;
-            padding: 12px 40px 12px 15px;
+            padding: 12px 32px 12px 12px;
             border: 1px solid var(--color-border);
             border-radius: 6px;
             font-family: inherit;
-            font-size: 15px;
+            font-size: 13px;
             background: #fff;
             cursor: pointer;
             position: relative;
@@ -395,7 +395,7 @@
         .custom-select-trigger::after {
             content: '';
             position: absolute;
-            right: 15px;
+            right: 11px;
             top: 50%;
             transform: translateY(-50%);
             width: 14px;

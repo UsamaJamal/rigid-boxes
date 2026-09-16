@@ -713,7 +713,7 @@
         <div class="quote-form-card">
             <form action="{{ url('/submit-quote') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="source" value="Homepage">
+                <input type="hidden" name="source" value="{{ request()->getPathInfo() === '/' ? 'Homepage' : 'Category Page' }}">
 
             <h2 class="quote-form-title">Get Custom Quote</h2>
 
