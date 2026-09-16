@@ -2640,7 +2640,9 @@
                             <select name="box_style" class="form-control" id="quote-box-style">
                                 <option value="{{ $currentProductTitle }}" selected>{{ $currentProductTitle }}</option>
                                 @foreach($sampleKitBoxStyleCategories as $category)
-                                    @php($categoryProducts = $sampleKitBoxStyleProducts->get($category->id, collect()))
+                                    @php
+                                        $categoryProducts = $sampleKitBoxStyleProducts->get($category->id, collect());
+                                    @endphp
                                     @if($categoryProducts->isNotEmpty())
                                         <optgroup label="{{ $category->title }}">
                                             @foreach($categoryProducts as $productOption)
