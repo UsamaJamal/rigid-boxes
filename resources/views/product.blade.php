@@ -2454,7 +2454,7 @@
             </tr>
             <tr>
                 <td>MOQ</td>
-                <td>NO MOQ</td>
+                <td>No MOQ</td>
             </tr>
             <tr>
                 <td>Material Stock</td>
