@@ -2454,7 +2454,7 @@
             </tr>
             <tr>
                 <td>MOQ</td>
-                <td>{{ $product['moq'] ?? '100 Units' }}</td>
+                <td>NO MOQ</td>
             </tr>
             <tr>
                 <td>Material Stock</td>
