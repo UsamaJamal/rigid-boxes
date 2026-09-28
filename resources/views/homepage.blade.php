@@ -2349,7 +2349,7 @@
                             </a>
                             <div class="industry-card__bottom">
                                 <p class="industry-card__text">
-                                    {{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'))), 80) }}
+                                    {{ Str::limit(html_entity_decode(html_entity_decode(strip_tags($cat['feature_description'] ?? $cat['description'] ?? 'Premium packaging with a luxury feel and durable structure.'))), 80) }}
                                 </p>
                                 <a href="{{ $catUrl }}" class="industry-card__btn">Explore Boxes</a>
                             </div>

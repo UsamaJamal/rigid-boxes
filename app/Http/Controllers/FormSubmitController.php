@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use App\Mail\ContactFormMail;
 use App\Mail\QuoteFormMail;
 use App\Mail\NewsletterMail;
@@ -18,12 +19,23 @@ class FormSubmitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'product_name' => 'nullable|string|max:255',
+            'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string'
         ]);
 
+        $validated['product_name'] = $validated['product_name'] ?? null;
+        $validated['source'] = 'Contact Us';
+        if (empty($validated['product_name'])) {
+            $refererPath = parse_url((string) $request->headers->get('referer'), PHP_URL_PATH);
+            $slug = trim((string) basename(rtrim($refererPath ?: '', '/')));
+            if ($slug) {
+                $validated['product_name'] = DB::table('admin_products')->where('slug', $slug)->value('title');
+            }
+        }
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
 
         if (!$isSpam) {
@@ -40,6 +52,8 @@ class FormSubmitController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'product_name' => 'nullable|string|max:255',
+            'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'company_name' => 'nullable|string|max:255',
@@ -53,12 +67,22 @@ class FormSubmitController extends Controller
             'material' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:255',
             'paper_coating' => 'nullable|string|max:255',
-            'cad_sample' => 'nullable|string|max:255',
             'turn_around_time' => 'nullable|string|max:255',
             'quantity' => 'required|integer|min:1',
             'quote_file' => 'nullable|file|max:10240', // 10MB max
             'message' => 'nullable|string'
         ]);
+
+        $validated['source'] = $validated['source'] ?? 'N/A';
+        $isProductPageQuote = strtolower(trim((string) $validated['source'])) === 'product page';
+
+        // Product pages already provide their own product name. On every
+        // other quote form, the selected box style is the requested product.
+        $validated['product_name'] = $isProductPageQuote
+            ? ($validated['product_name'] ?? 'N/A')
+            : (!empty(trim((string) ($validated['box_style'] ?? '')))
+                ? trim($validated['box_style'])
+                : ($validated['product_name'] ?? 'N/A'));
 
         if ($request->hasFile('quote_file')) {
             $path = $request->file('quote_file')->store('quotes', 'public');

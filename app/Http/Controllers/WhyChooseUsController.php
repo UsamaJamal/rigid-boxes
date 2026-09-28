@@ -8,6 +8,8 @@ class WhyChooseUsController extends Controller
 {
     public function index()
     {
-            return view('whyChooseUs');
+        return view('whyChooseUs', [
+            'title' => 'Why Choose The Rigid Boxes | Quality & Fast Turnaround',
+        ]);
     }
 }

@@ -276,7 +276,28 @@ Route::get('/{slug}', function ($slug) {
 
         if (!empty($productArr['id'])) {
             $faqs = DB::table('admin_product_faqs')->where('product_id', $productArr['id'])->get()->map(fn($r)=>(array)$r)->all();
-            $relatedProducts = DB::table('admin_products')->where('status', 'published')->where('id', '!=', $productArr['id'])->limit(4)->get()->map(fn($r)=>(array)$r)->all();
+            
+            $relatedIds = [];
+            if (!empty($productArr['related'])) {
+                $relatedIds = json_decode($productArr['related'], true) ?: [];
+            }
+            
+            if (!empty($relatedIds)) {
+                $relatedProducts = DB::table('admin_products')
+                    ->where('status', 'published')
+                    ->whereIn('id', $relatedIds)
+                    ->get()
+                    ->map(fn($r)=>(array)$r)
+                    ->all();
+            } else {
+                $relatedProducts = DB::table('admin_products')
+                    ->where('status', 'published')
+                    ->where('id', '!=', $productArr['id'])
+                    ->limit(4)
+                    ->get()
+                    ->map(fn($r)=>(array)$r)
+                    ->all();
+            }
         }
 
         return view('product', [

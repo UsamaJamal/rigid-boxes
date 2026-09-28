@@ -135,6 +135,11 @@
         <h3>Category Sections</h3>
         <div class="form-grid">
             <div class="field full">
+                <label>Feature Description</label>
+                <textarea name="feature_description" placeholder="Enter the description to show on the homepage category card">{{ $v('feature_description') }}</textarea>
+                <small>This text appears below the category image on the homepage card.</small>
+            </div>
+            <div class="field full">
                 <label>Category Description</label>
                 <textarea name="description" style="min-height:180px">{{ $v('description') }}</textarea>
             </div>

@@ -30,7 +30,10 @@ class QuoteFormMail extends Mailable
      */
     public function build()
     {
-        $mail = $this->subject('New Quote Request')
+        $isProductRequest = strtolower(trim((string) ($this->data['source'] ?? ''))) === 'product page';
+        $subject = $isProductRequest ? 'Product Request a Quote' : 'Request a Quote';
+
+        $mail = $this->subject($subject)
                      ->view('emails.quote');
                      
         if (!empty($this->data['quote_file_path'])) {
