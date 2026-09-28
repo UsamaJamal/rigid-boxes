@@ -703,9 +703,9 @@
                                     : 'storage/' . $path;
                             };
                             $cBanner = $resolveCategoryAsset(
-                                $cat['banner_image'] ?? '',
+                                $cat['image'] ?? '',
                                 $resolveCategoryAsset(
-                                    $cat['image'] ?? '',
+                                    $cat['banner_image'] ?? '',
                                     'uploads/Gift-Boxes.webp'
                                 )
                             );
