@@ -71,26 +71,11 @@
         </tr>
         @endif
         
-        @if(!empty($data['company_name']) && $data['company_name'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Company:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['company_name'] }}</td>
-        </tr>
-        @endif
+
         
-        @if(!empty($data['website']) && $data['website'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Website:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['website'] }}</td>
-        </tr>
-        @endif
+
         
-        @if(!empty($data['physical_address']) && $data['physical_address'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Physical Address:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['physical_address'] }}</td>
-        </tr>
-        @endif
+
         
         @if(!empty($data['width']) && $data['width'] !== 'N/A')
         <tr>
@@ -126,12 +111,7 @@
         </tr>
         @endif
         
-        @if(!empty($data['material']) && $data['material'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Material:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['material'] }}</td>
-        </tr>
-        @endif
+
         
         @if(!empty($data['color']) && $data['color'] !== 'N/A')
         <tr>
@@ -154,12 +134,7 @@
         </tr>
         @endif
         
-        @if(!empty($data['turn_around_time']) && $data['turn_around_time'] !== 'N/A')
-        <tr>
-            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Turn Around Time:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['turn_around_time'] }}</td>
-        </tr>
-        @endif
+
         
         @if(!empty($data['quantity']) && $data['quantity'] !== 'N/A')
         <tr>
