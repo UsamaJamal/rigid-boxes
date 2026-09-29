@@ -367,7 +367,7 @@
                     </div>
 
                     <!-- Row 4: Packaging preferences -->
-                    <div class="iq-grid-4">
+                    <div class="iq-grid-3">
                         @php
                             $quoteBoxStyles = \Illuminate\Support\Facades\DB::table('admin_products')
                                 ->where('status', 'published')
@@ -415,6 +415,10 @@
                                 <option>4/4 color</option>
                             </select>
                         </div>
+                    </div>
+
+                    <!-- Row 5: Paper Coating & Quantity -->
+                    <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Paper Coating</label>
                             <select name="paper_coating">
@@ -426,13 +430,21 @@
                                 <option>Semi Matte</option>
                             </select>
                         </div>
-                    </div>
-
-                    <!-- Row 5: Quantity & File Upload -->
-                    <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Quantity *</label>
                             <input type="number" name="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: CAD Sample & File Upload -->
+                    <div class="iq-grid-2">
+                        <div class="iq-form-group">
+                            <label>CAD Sample</label>
+                            <select name="cad_sample">
+                                <option value="">Select CAD Sample</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
                         </div>
                         <div class="iq-form-group">
                             <label>Upload File Here</label>

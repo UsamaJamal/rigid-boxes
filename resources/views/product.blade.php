@@ -285,6 +285,13 @@
             gap: 8px;
             margin-bottom: 12px;
         }
+
+        .form-grid-production {
+            display: grid;
+            grid-template-columns: 1fr 100px 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
         
         .file-upload-wrap {
             display: flex;
@@ -1610,7 +1617,7 @@
                 width: 65px;
                 height: 65px;
             }
-            .form-row, .form-grid-3, .form-grid-2-upload {
+            .form-row, .form-grid-3, .form-grid-2-upload, .form-grid-production {
                 display: grid;
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -2305,8 +2312,13 @@
                     
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
-                        <div class="form-grid-2-upload">
-                            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
+                        <div class="form-grid-production">
+                            <select name="cad_sample" class="form-control">
+                                <option value="" disabled selected>CAD Sample</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <input type="number" name="quantity" class="form-control" placeholder="Quantity" required style="text-align: center;">
                             <div class="file-upload-wrap" style="position: relative;">
                                 <input type="file" name="quote_file" id="quote_file_input" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="document.getElementById('quote_file_text').value = this.files.length > 0 ? this.files[0].name : ''">
                                 <input type="text" id="quote_file_text" class="form-control" placeholder="No File Choosen" readonly style="pointer-events: none;">
@@ -2608,8 +2620,8 @@
                         </div>
                     </div>
                     
-                    <div class="form-row form-row-2col">
-                        <div class="form-group" style="flex: 1.5;">
+                    <div class="form-grid-3">
+                        <div class="form-group">
                             <label>Box Style *</label>
                             @php
                                 $sampleKitBoxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')
@@ -2653,6 +2665,16 @@
                                         </optgroup>
                                     @endif
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Color</label>
+                            <select name="color" class="form-control">
+                                <option value="">Select Color</option>
+                                <option value="1 Color">1 Color</option>
+                                <option value="2 Colors">2 Colors</option>
+                                <option value="3 Colors">3 Colors</option>
+                                <option value="Full Color">Full Color</option>
                             </select>
                         </div>
                         <div class="form-group">

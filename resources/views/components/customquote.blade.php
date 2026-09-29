@@ -416,6 +416,14 @@
         width: 100%;
     }
 
+    .preferences-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+        margin-top: 12px;
+    }
+
     /* Textarea row */
     .textarea-row {
         width: 100%;
@@ -662,6 +670,11 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 11px 8px;
         }
+        .preferences-grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px 8px;
+            margin-top: 11px;
+        }
         .form-row input,
         .form-row select,
         .specs-row input,
@@ -838,6 +851,9 @@
                         <option>4/4 color</option>
                     </select>
                 </div>
+            </div>
+            
+            <div class="preferences-grid-2">
                 <div class="select-wrapper">
                     <select name="paper_coating">
                         <option value="" disabled selected>Paper Coating</option>
@@ -851,12 +867,22 @@
                 <div class="pref-input-wrapper">
                     <input type="number" name="quantity" class="pref-input" placeholder="Quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                 </div>
+            </div>
+
+            <div class="preferences-grid-2">
+                <div class="select-wrapper">
+                    <select name="cad_sample">
+                        <option value="" disabled selected>Select CAD Sample</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
                 <div class="pref-input-wrapper">
                     <div class="quote-file-control">
                         <span class="quote-file-label">Upload File</span>
                         <label class="quote-file-button">
                             Upload
-                            <input type="file" name="quote_file" accept=".pdf,.ai,.eps,.zip,.doc,.docx,image/*">
+                            <input type="file" name="quote_file" accept=".pdf,.ai,.eps,.zip,.doc,.docx,image/*" onchange="this.parentElement.previousElementSibling.textContent = this.files[0] ? this.files[0].name : 'Upload File'">
                         </label>
                     </div>
                 </div>
