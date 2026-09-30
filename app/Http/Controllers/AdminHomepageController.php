@@ -107,8 +107,10 @@ class AdminHomepageController extends Controller
         if ($request->hasFile('hero_image')) {
             $file = $request->file('hero_image');
             $fileName = $file->getClientOriginalName();
-            $file->move(public_path('uploads'), $fileName);
-            $settings['hero_image'] = 'uploads/' . $fileName;
+            $uploadPath = public_path('storage/uploads');
+            if (!is_dir($uploadPath)) { mkdir($uploadPath, 0775, true); }
+            $file->move($uploadPath, $fileName);
+            $settings['hero_image'] = 'storage/uploads/' . $fileName;
         }
 
         $settings['featured_categories'] = array_map('intval', (array) $request->input('featured_categories', []));

@@ -176,12 +176,12 @@ class AdminContentController extends Controller
                     $ext = $file->getClientOriginalExtension();
                     $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                     $fileName = $baseName . '.' . $ext;
-                    $uploadPath = public_path('uploads');
+                    $uploadPath = public_path('storage/uploads');
                     if (!is_dir($uploadPath)) {
                         mkdir($uploadPath, 0775, true);
                     }
                     $file->move($uploadPath, $fileName);
-                    $payload[$field] = 'uploads/' . $fileName;
+                    $payload[$field] = 'storage/uploads/' . $fileName;
                 }
             }
         }
@@ -194,7 +194,7 @@ class AdminContentController extends Controller
 
             $newImages = [];
             if ($galleryFiles) {
-                $uploadPath = public_path('uploads');
+                $uploadPath = public_path('storage/uploads');
                 if (!is_dir($uploadPath)) {
                     mkdir($uploadPath, 0775, true);
                 }
@@ -204,7 +204,7 @@ class AdminContentController extends Controller
                         $baseName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                         $fileName = $baseName . '.' . $ext;
                         $file->move($uploadPath, $fileName);
-                        return 'uploads/' . $fileName;
+                        return 'storage/uploads/' . $fileName;
                     })
                     ->values()
                     ->all();
