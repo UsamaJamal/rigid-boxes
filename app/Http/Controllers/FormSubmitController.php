@@ -13,17 +13,7 @@ use App\Helpers\SpamDetector;
 
 class FormSubmitController extends Controller
 {
-    /**
-     * Website form submissions must go to a valid mailbox on the live domain.
-     * This may be overridden with MAIL_TO_ADDRESS on an environment where a
-     * different inbox should receive the leads.
-     */
-    private $adminEmail;
-
-    public function __construct()
-    {
-        $this->adminEmail = env('MAIL_TO_ADDRESS', 'support@therigidboxes.com');
-    }
+    private $adminEmail = 'quote@therigidbox.com';
 
     public function submitContact(Request $request)
     {
