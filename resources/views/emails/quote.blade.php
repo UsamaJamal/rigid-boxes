@@ -104,6 +104,12 @@
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['units'] }}</td>
         </tr>
         @endif
+        @if(!empty($data['material']) && $data['material'] !== 'N/A')
+        <tr>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Paper Stock:</th>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['material'] }}</td>
+        </tr>
+        @endif
         @if(strtolower(trim((string) ($data['source'] ?? ''))) === 'product page' && !empty($data['box_style']))
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
