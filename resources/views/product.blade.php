@@ -2668,6 +2668,23 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Paper Stock</label>
+                            <select name="material" class="form-control">
+                                <option value="">Select Paper Stock</option>
+                                <option value="12pt Cardboard Stock">12pt Cardboard Stock</option>
+                                <option value="14pt Cardboard Stock">14pt Cardboard Stock</option>
+                                <option value="16pt Cardboard Stock">16pt Cardboard Stock</option>
+                                <option value="18pt Cardboard Stock">18pt Cardboard Stock</option>
+                                <option value="20pt Cardboard Stock">20pt Cardboard Stock</option>
+                                <option value="22pt Cardboard Stock">22pt Cardboard Stock</option>
+                                <option value="24pt Cardboard Stock">24pt Cardboard Stock</option>
+                                <option value="Kraft Stock">Kraft Stock</option>
+                                <option value="Recycled BuxBoard">Recycled BuxBoard</option>
+                                <option value="Corrugated Stock">Corrugated Stock</option>
+                                <option value="No Printing Required">No Printing Required</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Color</label>
                             <select name="color" class="form-control">
                                 <option value="">Select Color</option>
@@ -2675,6 +2692,28 @@
                                 <option value="2 Colors">2 Colors</option>
                                 <option value="3 Colors">3 Colors</option>
                                 <option value="Full Color">Full Color</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div class="form-group">
+                            <label>Paper Coating</label>
+                            <select name="paper_coating" class="form-control">
+                                <option value="">Select Paper Coating</option>
+                                <option value="Aqueous Coating">Aqueous Coating</option>
+                                <option value="Semi Gloss">Semi Gloss</option>
+                                <option value="Gloss UV">Gloss UV</option>
+                                <option value="Matte UV">Matte UV</option>
+                                <option value="Semi Matte">Semi Matte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>CAD Sample</label>
+                            <select name="cad_sample" class="form-control">
+                                <option value="">Select CAD Sample</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                         <div class="form-group">
