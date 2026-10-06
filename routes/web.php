@@ -43,6 +43,15 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             ->where('status', 'published')
             ->where('title', 'like', "%{$q}%")
             ->get()->map(fn($r)=>(array)$r)->all();
+
+        // The header search is product-first. When no website product matches,
+        // carry the visitor's request to the quote form instead of showing an
+        // empty result page.
+        if (empty($products)) {
+            $quoteBoxStyle = \Illuminate\Support\Str::ucfirst(\Illuminate\Support\Str::lower($q));
+
+            return redirect()->to('/request-quote?from_search=1&box_style=' . urlencode($quoteBoxStyle));
+        }
             
         $categories = DB::table('admin_categories')
             ->where('status', 'published')

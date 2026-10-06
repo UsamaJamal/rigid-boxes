@@ -310,6 +310,11 @@
             <!-- Left form section -->
             <div class="iq-page-form-card">
                 <h2>Instant Quotes, Quick Service!</h2>
+                @if(request()->boolean('from_search') && filled(request('box_style')))
+                    <div style="margin: 0 0 22px; padding: 14px 16px; border-left: 4px solid #8D4445; border-radius: 4px; background: #fff3ef; color: #111111; font-size: 16px; font-weight: 500; line-height: 1.6;">
+                        We don’t currently list <strong>"{{ request('box_style') }}"</strong> on our website, but we can manufacture it to your requirements. Submit your specifications below to request a custom quote.
+                    </div>
+                @endif
                 @if(session('success'))
                     <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
                         {{ session('success') }}
@@ -370,7 +375,7 @@
                     <div class="iq-grid-3">
                         <div class="iq-form-group">
                             <label>Box Style</label>
-                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'request-quote-box-style'])
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'request-quote-box-style', 'selected' => old('box_style', request('box_style', ''))])
                         </div>
                         <div class="iq-form-group">
                             <label>Paper Stock</label>
