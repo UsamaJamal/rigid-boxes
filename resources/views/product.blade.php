@@ -2252,12 +2252,12 @@
                             @php
                                 $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                             @endphp
-                            <input name="box_style" class="form-control" id="pref-box-style" list="pref-box-style-options" placeholder="Search Box Style">
-                            <datalist id="pref-box-style-options">
+                            <select name="box_style" class="form-control" id="pref-box-style">
+                                <option value="" disabled selected>Box Style</option>
                                 @foreach($quoteProductOptions as $productOption)
-                                    <option value="{{ $productOption }}"></option>
+                                    <option value="{{ $productOption }}">{{ $productOption }}</option>
                                 @endforeach
-                            </datalist>
+                            </select>
                             <select name="material" class="form-control" id="pref-paper-stock">
                                 <option value="" disabled selected>Select Paper Stock</option>
                                 <option>12pt Cardboard Stock</option>
@@ -2603,12 +2603,14 @@
                                 $currentProductTitle = $product['title'] ?? $product['name'] ?? 'Custom Box';
                                 $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                             @endphp
-                            <input name="box_style" class="form-control" id="quote-box-style" list="quote-box-style-options" value="{{ $currentProductTitle }}" placeholder="Search Box Style">
-                            <datalist id="quote-box-style-options">
+                            <select name="box_style" class="form-control" id="quote-box-style">
+                                <option value="{{ $currentProductTitle }}" selected>{{ $currentProductTitle }}</option>
                                 @foreach($quoteProductOptions as $productOption)
-                                    <option value="{{ $productOption }}"></option>
+                                    @if($productOption !== $currentProductTitle)
+                                        <option value="{{ $productOption }}">{{ $productOption }}</option>
+                                    @endif
                                 @endforeach
-                            </datalist>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Paper Stock</label>
