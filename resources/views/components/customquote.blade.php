@@ -756,26 +756,16 @@
             <!-- Packaging Preferences -->
             <p class="form-section-label">Packaging Preferences</p>
             <div class="preferences-grid">
-                <div class="select-wrapper product-combobox-wrapper" data-product-combobox>
+                <div class="select-wrapper">
                     @php
                         $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                     @endphp
-                    <input type="hidden" name="box_style" value="">
-                    <input type="text" class="product-combobox-trigger" placeholder="Select Box Style" autocomplete="off" aria-label="Search and select box style" aria-haspopup="listbox" aria-expanded="false">
-                    <button type="button" class="product-combobox-toggle" aria-label="Toggle box style options" tabindex="-1"></button>
-                    <div class="product-combobox-menu">
-                        <div class="product-combobox-options" role="listbox">
-                            <div class="product-combobox-group" data-category="All Products">
-                                <div class="product-combobox-category">All Products</div>
-                                @foreach($quoteProductOptions as $productName)
-                                    <button type="button" class="product-combobox-option" role="option" data-value="{{ $productName }}">
-                                        {{ $productName }}
-                                    </button>
-                                @endforeach
-                            </div>
-                            <div class="product-combobox-empty">No product found</div>
-                        </div>
-                    </div>
+                    <select name="box_style" aria-label="Select Box Style">
+                        <option value="" disabled selected>Select Box Style</option>
+                        @foreach($quoteProductOptions as $productName)
+                            <option value="{{ $productName }}">{{ $productName }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="select-wrapper">
                     <select name="material">
