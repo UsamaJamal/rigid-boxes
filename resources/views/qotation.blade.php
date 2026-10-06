@@ -368,17 +368,9 @@
 
                     <!-- Row 4: Packaging preferences -->
                     <div class="iq-grid-3">
-                        @php
-                            $quoteBoxStyles = app(\App\Support\QuoteProductOptions::class)->all();
-                        @endphp
                         <div class="iq-form-group">
                             <label>Box Style</label>
-                            <select name="box_style">
-                                <option value="">Select Box Style</option>
-                                @foreach($quoteBoxStyles as $boxStyle)
-                                    <option value="{{ $boxStyle }}">{{ $boxStyle }}</option>
-                                @endforeach
-                            </select>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'request-quote-box-style'])
                         </div>
                         <div class="iq-form-group">
                             <label>Paper Stock</label>

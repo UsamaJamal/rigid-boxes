@@ -757,15 +757,7 @@
             <p class="form-section-label">Packaging Preferences</p>
             <div class="preferences-grid">
                 <div class="select-wrapper">
-                    @php
-                        $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
-                    @endphp
-                    <select name="box_style" aria-label="Select Box Style">
-                        <option value="" disabled selected>Select Box Style</option>
-                        @foreach($quoteProductOptions as $productName)
-                            <option value="{{ $productName }}">{{ $productName }}</option>
-                        @endforeach
-                    </select>
+                    @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'home-category-box-style'])
                 </div>
                 <div class="select-wrapper">
                     <select name="material">

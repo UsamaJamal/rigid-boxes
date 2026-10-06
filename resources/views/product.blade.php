@@ -2249,15 +2249,7 @@
                     <div class="form-section">
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
-                            @php
-                                $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
-                            @endphp
-                            <select name="box_style" class="form-control" id="pref-box-style">
-                                <option value="" disabled selected>Box Style</option>
-                                @foreach($quoteProductOptions as $productOption)
-                                    <option value="{{ $productOption }}">{{ $productOption }}</option>
-                                @endforeach
-                            </select>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-preferences-box-style'])
                             <select name="material" class="form-control" id="pref-paper-stock">
                                 <option value="" disabled selected>Select Paper Stock</option>
                                 <option>12pt Cardboard Stock</option>
@@ -2601,16 +2593,8 @@
                             <label>Box Style *</label>
                             @php
                                 $currentProductTitle = $product['title'] ?? $product['name'] ?? 'Custom Box';
-                                $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                             @endphp
-                            <select name="box_style" class="form-control" id="quote-box-style">
-                                <option value="{{ $currentProductTitle }}" selected>{{ $currentProductTitle }}</option>
-                                @foreach($quoteProductOptions as $productOption)
-                                    @if($productOption !== $currentProductTitle)
-                                        <option value="{{ $productOption }}">{{ $productOption }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-sample-box-style', 'selected' => $currentProductTitle])
                         </div>
                         <div class="form-group">
                             <label>Paper Stock</label>
