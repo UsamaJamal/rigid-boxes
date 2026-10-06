@@ -2249,12 +2249,7 @@
                     <div class="form-section">
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
-                            <input name="box_style" class="form-control" id="product-preferences-box-style" list="product-preferences-box-style-options" placeholder="Select Box Style" autocomplete="off">
-                            <datalist id="product-preferences-box-style-options">
-                                @foreach(app(\App\Support\QuoteProductOptions::class)->all() as $productOption)
-                                    <option value="{{ $productOption }}"></option>
-                                @endforeach
-                            </datalist>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-preferences-box-style'])
                             <select name="material" class="form-control" id="pref-paper-stock">
                                 <option value="" disabled selected>Select Paper Stock</option>
                                 <option>12pt Cardboard Stock</option>
@@ -2596,12 +2591,7 @@
                     <div class="form-grid-3">
                         <div class="form-group">
                             <label>Box Style *</label>
-                            <input name="box_style" class="form-control" id="product-sample-box-style" list="product-sample-box-style-options" value="{{ $product['title'] ?? $product['name'] ?? 'Custom Box' }}" placeholder="Select Box Style" autocomplete="off">
-                            <datalist id="product-sample-box-style-options">
-                                @foreach(app(\App\Support\QuoteProductOptions::class)->all() as $productOption)
-                                    <option value="{{ $productOption }}"></option>
-                                @endforeach
-                            </datalist>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-sample-box-style', 'selected' => ($product['title'] ?? $product['name'] ?? 'Custom Box')])
                         </div>
                         <div class="form-group">
                             <label>Paper Stock</label>
