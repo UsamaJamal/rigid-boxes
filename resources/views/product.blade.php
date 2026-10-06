@@ -269,6 +269,11 @@
             gap: 8px;
             margin-bottom: 12px;
         }
+
+        .form-grid-pref .product-picker-trigger,
+        .form-grid-3 .product-picker-trigger {
+            height: 45px;
+        }
         
         /* Mobile view handled in main media query below */
         
