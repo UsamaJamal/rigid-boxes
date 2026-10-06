@@ -2250,36 +2250,12 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             @php
-                                $boxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')->where('slug', 'box-by-style')->where('status', 'published')->first();
-                                $boxStyles = $boxStyleParent
-                                    ? \Illuminate\Support\Facades\DB::table('admin_categories')
-                                        ->where('parent_id', $boxStyleParent->id)
-                                        ->where('status', 'published')
-                                        ->select('id', 'title')
-                                        ->orderBy('title')
-                                        ->get()
-                                    : collect();
-                                $boxStyleProducts = $boxStyles->isNotEmpty()
-                                    ? \Illuminate\Support\Facades\DB::table('admin_products')
-                                        ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
-                                        ->where('admin_products.status', 'published')
-                                        ->whereIn('admin_category_product.category_id', $boxStyles->pluck('id'))
-                                        ->select('admin_category_product.category_id', 'admin_products.id', 'admin_products.title')
-                                        ->distinct()
-                                        ->orderBy('admin_products.title')
-                                        ->get()
-                                        ->groupBy('category_id')
-                                    : collect();
+                                $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                             @endphp
                             <select name="box_style" class="form-control" id="pref-box-style">
                                 <option value="" disabled selected>Box Style</option>
-                                @foreach($boxStyles as $style)
-                                    <optgroup label="{{ $style->title }}">
-                                        <option value="{{ $style->title }}">{{ $style->title }}</option>
-                                        @foreach($boxStyleProducts->get($style->id, collect()) as $productOption)
-                                            <option value="{{ $productOption->title }}">{{ $productOption->title }}</option>
-                                        @endforeach
-                                    </optgroup>
+                                @foreach($quoteProductOptions as $productOption)
+                                    <option value="{{ $productOption }}">{{ $productOption }}</option>
                                 @endforeach
                             </select>
                             <select name="material" class="form-control" id="pref-paper-stock">
@@ -2624,45 +2600,14 @@
                         <div class="form-group">
                             <label>Box Style *</label>
                             @php
-                                $sampleKitBoxStyleParent = \Illuminate\Support\Facades\DB::table('admin_categories')
-                                    ->where('slug', 'box-by-style')
-                                    ->where('status', 'published')
-                                    ->first();
-                                $sampleKitBoxStyleCategories = $sampleKitBoxStyleParent
-                                    ? \Illuminate\Support\Facades\DB::table('admin_categories')
-                                        ->where('parent_id', $sampleKitBoxStyleParent->id)
-                                        ->where('status', 'published')
-                                        ->select('id', 'title')
-                                        ->orderBy('title')
-                                        ->get()
-                                    : collect();
-                                $sampleKitBoxStyleProducts = $sampleKitBoxStyleCategories->isNotEmpty()
-                                    ? \Illuminate\Support\Facades\DB::table('admin_products')
-                                        ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
-                                        ->where('admin_products.status', 'published')
-                                        ->whereIn('admin_category_product.category_id', $sampleKitBoxStyleCategories->pluck('id'))
-                                        ->select('admin_category_product.category_id', 'admin_products.id', 'admin_products.title')
-                                        ->distinct()
-                                        ->orderBy('admin_products.title')
-                                        ->get()
-                                        ->groupBy('category_id')
-                                    : collect();
                                 $currentProductTitle = $product['title'] ?? $product['name'] ?? 'Custom Box';
+                                $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                             @endphp
                             <select name="box_style" class="form-control" id="quote-box-style">
                                 <option value="{{ $currentProductTitle }}" selected>{{ $currentProductTitle }}</option>
-                                @foreach($sampleKitBoxStyleCategories as $category)
-                                    @php
-                                        $categoryProducts = $sampleKitBoxStyleProducts->get($category->id, collect());
-                                    @endphp
-                                    @if($categoryProducts->isNotEmpty())
-                                        <optgroup label="{{ $category->title }}">
-                                            @foreach($categoryProducts as $productOption)
-                                                @if($productOption->title !== $currentProductTitle)
-                                                    <option value="{{ $productOption->title }}">{{ $productOption->title }}</option>
-                                                @endif
-                                            @endforeach
-                                        </optgroup>
+                                @foreach($quoteProductOptions as $productOption)
+                                    @if($productOption !== $currentProductTitle)
+                                        <option value="{{ $productOption }}">{{ $productOption }}</option>
                                     @endif
                                 @endforeach
                             </select>

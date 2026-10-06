@@ -758,66 +758,21 @@
             <div class="preferences-grid">
                 <div class="select-wrapper product-combobox-wrapper" data-product-combobox>
                     @php
-                        $boxStyleCategories = \Illuminate\Support\Facades\DB::table('admin_categories')
-                            ->where('status', 'published')
-                            ->select('id', 'title')
-                            ->orderBy('title')
-                            ->get();
-
-                        $boxStyleProducts = $boxStyleCategories->isNotEmpty()
-                            ? \Illuminate\Support\Facades\DB::table('admin_products')
-                                ->join('admin_category_product', 'admin_products.id', '=', 'admin_category_product.product_id')
-                                ->where('admin_products.status', 'published')
-                                ->whereIn('admin_category_product.category_id', $boxStyleCategories->pluck('id'))
-                                ->select('admin_category_product.category_id', 'admin_products.id', 'admin_products.title')
-                                ->distinct()
-                                ->orderBy('admin_products.title')
-                                ->get()
-                                ->groupBy('category_id')
-                            : collect();
-
-                        $groupedProductIds = $boxStyleProducts
-                            ->flatten(1)
-                            ->pluck('id')
-                            ->unique();
-
-                        $uncategorizedProducts = \Illuminate\Support\Facades\DB::table('admin_products')
-                            ->where('status', 'published')
-                            ->when($groupedProductIds->isNotEmpty(), function ($query) use ($groupedProductIds) {
-                                $query->whereNotIn('id', $groupedProductIds);
-                            })
-                            ->select('id', 'title')
-                            ->orderBy('title')
-                            ->get();
+                        $quoteProductOptions = app(\App\Support\QuoteProductOptions::class)->all();
                     @endphp
                     <input type="hidden" name="box_style" value="">
                     <input type="text" class="product-combobox-trigger" placeholder="Select Box Style" autocomplete="off" aria-label="Search and select box style" aria-haspopup="listbox" aria-expanded="false">
                     <button type="button" class="product-combobox-toggle" aria-label="Toggle box style options" tabindex="-1"></button>
                     <div class="product-combobox-menu">
                         <div class="product-combobox-options" role="listbox">
-                            @foreach($boxStyleCategories as $category)
-                                @php($categoryProducts = $boxStyleProducts->get($category->id, collect()))
-                                @if($categoryProducts->isNotEmpty())
-                                    <div class="product-combobox-group" data-category="{{ $category->title }}">
-                                        <div class="product-combobox-category">{{ $category->title }}</div>
-                                        @foreach($categoryProducts as $product)
-                                            <button type="button" class="product-combobox-option" role="option" data-value="{{ $product->title }}">
-                                                {{ $product->title }}
-                                            </button>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            @endforeach
-                            @if($uncategorizedProducts->isNotEmpty())
-                                <div class="product-combobox-group" data-category="Other Products">
-                                    <div class="product-combobox-category">Other Products</div>
-                                    @foreach($uncategorizedProducts as $product)
-                                        <button type="button" class="product-combobox-option" role="option" data-value="{{ $product->title }}">
-                                            {{ $product->title }}
-                                        </button>
-                                    @endforeach
-                                </div>
-                            @endif
+                            <div class="product-combobox-group" data-category="All Products">
+                                <div class="product-combobox-category">All Products</div>
+                                @foreach($quoteProductOptions as $productName)
+                                    <button type="button" class="product-combobox-option" role="option" data-value="{{ $productName }}">
+                                        {{ $productName }}
+                                    </button>
+                                @endforeach
+                            </div>
                             <div class="product-combobox-empty">No product found</div>
                         </div>
                     </div>

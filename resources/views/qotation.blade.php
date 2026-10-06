@@ -369,18 +369,14 @@
                     <!-- Row 4: Packaging preferences -->
                     <div class="iq-grid-3">
                         @php
-                            $quoteBoxStyles = \Illuminate\Support\Facades\DB::table('admin_products')
-                                ->where('status', 'published')
-                                ->select('title')
-                                ->orderBy('title')
-                                ->get();
+                            $quoteBoxStyles = app(\App\Support\QuoteProductOptions::class)->all();
                         @endphp
                         <div class="iq-form-group">
                             <label>Box Style</label>
                             <select name="box_style">
                                 <option value="">Select Box Style</option>
                                 @foreach($quoteBoxStyles as $boxStyle)
-                                    <option value="{{ $boxStyle->title }}">{{ $boxStyle->title }}</option>
+                                    <option value="{{ $boxStyle }}">{{ $boxStyle }}</option>
                                 @endforeach
                             </select>
                         </div>
