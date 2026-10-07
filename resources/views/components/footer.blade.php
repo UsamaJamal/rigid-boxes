@@ -242,6 +242,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     ajaxForms.forEach(form => {
         form.addEventListener('submit', function(e) {
+            // A form-specific validator (such as Box Style selection) may
+            // already have cancelled this submission. Do not send AJAX data
+            // when that validation has failed.
+            if (e.defaultPrevented) return;
+
             e.preventDefault();
             
             const submitBtn = form.querySelector('button[type="submit"]');
