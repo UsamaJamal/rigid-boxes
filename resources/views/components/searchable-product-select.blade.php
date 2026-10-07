@@ -29,7 +29,7 @@
 @once
 <style>
     .product-picker { position: relative; width: 100%; min-width: 0; }
-    .product-picker-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; height: 44px; min-height: 0; padding: 10px 14px; border: 1px solid #8d4445; border-radius: 8px; background: #fff; color: #222; font: inherit; text-align: left; cursor: pointer; box-sizing: border-box; }
+    .product-picker-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; height: 44px; min-height: 0; padding: 10px 14px; border: 1px solid #8d4445; border-radius: 6px; background: #fafafa; color: #333; font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.2; text-align: left; cursor: pointer; box-sizing: border-box; }
     .product-picker-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .product-picker-chevron { width: 9px; height: 9px; flex: 0 0 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-3px); }
     .product-picker-menu { position: absolute; z-index: 1000; top: calc(100% + 5px); left: 0; width: 100%; min-width: 260px; padding: 8px; border: 1px solid #8d4445; border-radius: 8px; background: #fff; box-shadow: 0 12px 24px rgba(0,0,0,.13); box-sizing: border-box; }

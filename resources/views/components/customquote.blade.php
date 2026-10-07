@@ -332,6 +332,19 @@
         pointer-events: none;
     }
 
+    /* The searchable Box Style picker uses the same visual treatment as the
+       neighbouring native selects in this form. */
+    .select-wrapper .product-picker-trigger {
+        padding: 0 36px 0 14px;
+        border-radius: 6px;
+        background: #FAFAFA;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+    }
+    .select-wrapper .product-picker-chevron {
+        display: none;
+    }
+
     /* Box specs row: Width, Length, Depth + unit dropdown */
     .specs-row {
         display: flex;
@@ -697,6 +710,11 @@
         }
         .select-wrapper::after {
             right: 10px;
+        }
+        .preferences-grid .product-picker-trigger {
+            height: 37px;
+            padding: 0 32px 0 12px;
+            font-size: 12px;
         }
         .textarea-row textarea {
             height: 66px;
