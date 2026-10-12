@@ -125,18 +125,24 @@
                 <div class="footer-column">
                     <span class="footer-heading" style="display: block;">Company Info</span>
                     <ul class="footer-contact">
+                        @if(!empty($siteSettings['company_email']))
                         <li class="contact-item">
                             <img src="{{ asset('images/contact-email.png') }}" alt="Email" class="contact-icon">
-                            <a href="mailto:{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</a>
+                            <a href="mailto:{{ $siteSettings['company_email'] }}">{{ $siteSettings['company_email'] }}</a>
                         </li>
+                        @endif
+                        @if(!empty($siteSettings['company_phone']))
                         <li class="contact-item">
                             <img src="{{ asset('images/material-symbols_call-sharp.png') }}" alt="Phone" class="contact-icon">
-                            <a href="tel:{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}">{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</a>
+                            <a href="tel:{{ $siteSettings['company_phone'] }}">{{ $siteSettings['company_phone'] }}</a>
                         </li>
+                        @endif
+                        @if(!empty($siteSettings['company_address']))
                         <li class="contact-item">
                             <img src="{{ asset('images/contact-address.png') }}" alt="Address" class="contact-icon">
-                            <span>{!! $siteSettings['company_address'] ?? '4000 N Montrose Ave<br>550 Chicago, IL 60641' !!}</span>
+                            <span>{!! $siteSettings['company_address'] !!}</span>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

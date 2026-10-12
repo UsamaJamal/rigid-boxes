@@ -15,8 +15,8 @@ class AdminFooterController extends Controller
     public function getSettings(): array
     {
         $defaults = [
-            'company_email' => 'example@gmail.com',
-            'company_phone' => '1800-315-8441',
+            'company_email' => '',
+            'company_phone' => '',
             'company_address' => '4000 N Montrose Ave<br>550 Chicago, IL 60641',
             'footer_categories' => [],
             'footer_quick_links' => [],
@@ -43,10 +43,16 @@ class AdminFooterController extends Controller
                     if ($type === 'json' || $type === 'array') {
                         $settings[$key] = json_decode($val, true) ?: [];
                     } else {
-                        $settings[$key] = $val;
+                        $settings[$key] = $val ?? '';
                     }
                 }
-                return array_merge($defaults, $settings);
+                $merged = array_merge($defaults, $settings);
+                foreach (['company_email', 'company_phone', 'company_address'] as $contactKey) {
+                    if (array_key_exists($contactKey, $merged) && $merged[$contactKey] === null) {
+                        $merged[$contactKey] = '';
+                    }
+                }
+                return $merged;
             }
         } catch (\Exception $e) {
             // Fallback
@@ -56,7 +62,13 @@ class AdminFooterController extends Controller
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             if (is_array($data)) {
-                return array_merge($defaults, $data);
+                $merged = array_merge($defaults, $data);
+                foreach (['company_email', 'company_phone', 'company_address'] as $contactKey) {
+                    if (array_key_exists($contactKey, $merged) && $merged[$contactKey] === null) {
+                        $merged[$contactKey] = '';
+                    }
+                }
+                return $merged;
             }
         }
 
@@ -90,9 +102,9 @@ class AdminFooterController extends Controller
 
         $settings = $this->getSettings();
 
-        $settings['company_email'] = $request->input('company_email');
-        $settings['company_phone'] = $request->input('company_phone');
-        $settings['company_address'] = $request->input('company_address');
+        $settings['company_email'] = $request->input('company_email') ?: '';
+        $settings['company_phone'] = $request->input('company_phone') ?: '';
+        $settings['company_address'] = $request->input('company_address') ?: '';
         $settings['social_facebook'] = $request->input('social_facebook');
         $settings['social_twitter'] = $request->input('social_twitter');
         $settings['social_instagram'] = $request->input('social_instagram');

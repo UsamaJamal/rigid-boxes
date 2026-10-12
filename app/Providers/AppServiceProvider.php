@@ -51,8 +51,8 @@ class AppServiceProvider extends ServiceProvider
 
                 // Load Global Settings for Header/Footer
                 $defaults = [
-                    'company_email' => 'example@gmail.com',
-                    'company_phone' => '1800-315-8441',
+                    'company_email' => '',
+                    'company_phone' => '',
                     'company_address' => '4000 N Montrose Ave<br>550 Chicago, IL 60641',
                     'footer_categories' => [],
                     'footer_quick_links' => []
@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
                     if ($type === 'json' || $type === 'array') {
                         $settings[$key] = json_decode($val, true) ?: [];
                     } else {
-                        $settings[$key] = $val;
+                        $settings[$key] = $val ?? '';
                     }
                 }
                 
@@ -78,12 +78,20 @@ class AppServiceProvider extends ServiceProvider
                 // as well so a deployment cannot make the public footer fall
                 // back to the placeholder details while the backup is present.
                 $siteSettings = array_merge($defaults, $this->footerSettingsBackup(), $settings);
+
+                // If any contact detail was cleared/saved as null, convert it to empty string
+                foreach (['company_email', 'company_phone', 'company_address'] as $contactKey) {
+                    if (array_key_exists($contactKey, $siteSettings) && $siteSettings[$contactKey] === null) {
+                        $siteSettings[$contactKey] = '';
+                    }
+                }
+
                 $view->with('siteSettings', $siteSettings);
             } catch (\Exception $e) {
                 $view->with('navCategories', []);
                 $view->with('siteSettings', array_merge([
-                    'company_email' => 'example@gmail.com',
-                    'company_phone' => '1800-315-8441',
+                    'company_email' => '',
+                    'company_phone' => '',
                     'company_address' => '4000 N Montrose Ave<br>550 Chicago, IL 60641',
                     'footer_categories' => [],
                     'footer_quick_links' => []

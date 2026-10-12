@@ -288,7 +288,7 @@ Route::get('/{slug}', function ($slug) {
             
             $relatedIds = [];
             if (!empty($productArr['related'])) {
-                $relatedIds = json_decode($productArr['related'], true) ?: [];
+                $relatedIds = is_array($productArr['related']) ? $productArr['related'] : (json_decode($productArr['related'], true) ?: []);
             }
             
             if (!empty($relatedIds)) {
@@ -299,13 +299,7 @@ Route::get('/{slug}', function ($slug) {
                     ->map(fn($r)=>(array)$r)
                     ->all();
             } else {
-                $relatedProducts = DB::table('admin_products')
-                    ->where('status', 'published')
-                    ->where('id', '!=', $productArr['id'])
-                    ->limit(4)
-                    ->get()
-                    ->map(fn($r)=>(array)$r)
-                    ->all();
+                $relatedProducts = [];
             }
         }
 

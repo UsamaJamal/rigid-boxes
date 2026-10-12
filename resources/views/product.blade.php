@@ -2690,14 +2690,12 @@
     </section>
 
     <!-- Related Products -->
+    @if(!empty($relatedProducts) && count($relatedProducts) > 0)
     <section class="related-products">
         <div class="container">
             <h2>Related Products</h2>
             <div class="products-grid">
-                @php
-                    $rProds = !empty($relatedProducts) ? $relatedProducts : [];
-                @endphp
-                @foreach($rProds as $rp)
+                @foreach($relatedProducts as $rp)
                     @php
                         $rpImg = '';
                         if (!empty($rp['image'])) {
@@ -2731,6 +2729,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <script>
         function switchTab(tabId) {

@@ -158,6 +158,8 @@
         padding: 0 !important;
         flex-shrink: 0;
         white-space: nowrap;
+        text-decoration: none;
+        color: inherit;
     }
 
     .contact-item-phone,
@@ -732,7 +734,8 @@
 
         <!-- Desktop Contact -->
         <div class="header-contact" style="display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); margin: 0 0 0 auto; flex: 0 0 auto; flex-shrink: 0;">
-            <div class="contact-item contact-item-phone" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0;">
+            @if(!empty($siteSettings['company_phone']))
+            <a href="tel:{{ $siteSettings['company_phone'] }}" class="contact-item contact-item-phone" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0; text-decoration: none; color: inherit;">
                 <svg viewBox="0 0 24 24" width="34" height="34" style="width: 34px; height: 34px; flex-shrink: 0; fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block;">
                     <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
                     <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
@@ -740,20 +743,23 @@
                 </svg>
                 <div class="contact-item-text" style="white-space: nowrap; font-variant-numeric: tabular-nums;">
                     <span style="display: block; font-size: 14px; color: #fff; font-weight: 700; line-height: 1.2;">Call Us 24/7</span>
-                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_phone'] ?? '1800-315-8441' }}</strong>
+                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_phone'] }}</strong>
                 </div>
-            </div>
+            </a>
+            @endif
 
-            <div class="contact-item contact-item-email" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0;">
+            @if(!empty($siteSettings['company_email']))
+            <a href="mailto:{{ $siteSettings['company_email'] }}" class="contact-item contact-item-email" style="display: flex; align-items: center; gap: 10px; margin: 0; padding: 0; flex-shrink: 0; white-space: nowrap; min-width: 0; text-decoration: none; color: inherit;">
                 <svg viewBox="0 0 24 24" width="34" height="34" style="width: 34px; height: 34px; flex-shrink: 0; fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block;">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
                 <div class="contact-item-text" style="white-space: nowrap; font-variant-numeric: tabular-nums;">
                     <span style="display: block; font-size: 14px; color: #fff; font-weight: 700; line-height: 1.2;">Email</span>
-                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</strong>
+                    <strong style="display: block; font-size: 16px; line-height: 1.35; font-weight: 400; margin-top: 1px;">{{ $siteSettings['company_email'] }}</strong>
                 </div>
-            </div>
+            </a>
+            @endif
 
             <a href="/request-quote/" class="get-quote-btn" style="background-color: #fff; color: #8D4445; min-height: 44px; padding: 0 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 5px rgba(55, 21, 22, .25); flex-shrink: 0; white-space: nowrap;">Get Instant Quote</a>
         </div>
@@ -902,30 +908,38 @@
             <a href="/contact-us/" class="get-quote-btn" style="display:flex; width: 100%; text-align: center; justify-content: center; margin: 30px 0; background: #8D4445; color: #fff; padding: 12px 20px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 16px; text-decoration: none;">Get Instant Quote</a>
 
             <div class="mobile-contact" style="margin-top: 0; gap: 0; display: flex; flex-direction: column; align-items: flex-start;">
+                @if(!empty($siteSettings['company_phone']) || !empty($siteSettings['company_email']) || !empty($siteSettings['company_address']))
                 <span style="display: block; font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #000; text-align: left;">Get In Touch</span>
+                @endif
                 
-                <div class="mobile-contact-item" style="display: flex; align-items: flex-start; justify-content: flex-start !important; gap: 15px; margin-bottom: 20px; width: 100%; text-align: left;">
+                @if(!empty($siteSettings['company_phone']))
+                <a href="tel:{{ $siteSettings['company_phone'] }}" class="mobile-contact-item" style="display: flex; align-items: flex-start; justify-content: flex-start !important; gap: 15px; margin-bottom: 20px; width: 100%; text-align: left; text-decoration: none; color: inherit;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
-                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{{ $siteSettings['company_phone'] ?? '1800-518-9441' }}</span>
-                </div>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{{ $siteSettings['company_phone'] }}</span>
+                </a>
+                @endif
 
-                <div class="mobile-contact-item" style="display: flex; align-items: flex-start; justify-content: flex-start !important; gap: 15px; margin-bottom: 20px; width: 100%; text-align: left;">
+                @if(!empty($siteSettings['company_email']))
+                <a href="mailto:{{ $siteSettings['company_email'] }}" class="mobile-contact-item" style="display: flex; align-items: flex-start; justify-content: flex-start !important; gap: 15px; margin-bottom: 20px; width: 100%; text-align: left; text-decoration: none; color: inherit;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{{ $siteSettings['company_email'] ?? 'example@gmail.com' }}</span>
-                </div>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{{ $siteSettings['company_email'] }}</span>
+                </a>
+                @endif
 
+                @if(!empty($siteSettings['company_address']))
                 <div class="mobile-contact-item" style="display: flex; align-items: flex-start; justify-content: flex-start !important; gap: 15px; width: 100%; text-align: left;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; stroke: #8D4445; flex-shrink: 0; margin-top: 2px;">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                     </svg>
-                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{!! strip_tags(str_replace('<br>', ' ', $siteSettings['company_address'] ?? '1880 S Dairy Ashford Rd Suite 207 Houston, TX 77077')) !!}</span>
+                    <span style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: #111; font-weight: 400; text-align: left;">{!! strip_tags(str_replace('<br>', ' ', $siteSettings['company_address'])) !!}</span>
                 </div>
+                @endif
             </div>
         </div>
     </div>

@@ -139,16 +139,43 @@
     .item-image-wrapper {
         width: 100%;
         aspect-ratio: 1;
-        background-color: #F9F9F9;
+        background-color: #FFF;
         position: relative;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .item-image-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        padding: 16px;
+        object-fit: cover;
+        object-position: center;
+        padding: 0;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .item-image-wrapper .hover-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .item-card:hover .item-image-wrapper img.main-img {
+        transform: scale(1.05);
+    }
+
+    .item-card:hover .item-image-wrapper .hover-img {
+        opacity: 1;
+        transform: scale(1.05);
     }
 
     .item-title {
@@ -157,6 +184,8 @@
         color: #222;
         padding: 16px;
         text-align: center;
+        background: #FFF;
+        border-top: 1px solid #F0F0F0;
     }
 
     /* Blogs list */
@@ -341,10 +370,15 @@
                                 }
                                 $pImg = !empty($product['image']) ? $product['image'] : (!empty($pGalleryRaw) ? $pGalleryRaw[0] : 'images/placeholder.jpg');
                                 $pImgUrl = \Illuminate\Support\Str::startsWith($pImg, ['storage/', 'uploads/', 'images/']) ? asset($pImg) : asset('storage/' . $pImg);
+                                $pHoverImg = !empty($product['hover_image']) ? $product['hover_image'] : '';
+                                $pHoverUrl = $pHoverImg ? (\Illuminate\Support\Str::startsWith($pHoverImg, ['storage/', 'uploads/', 'images/']) ? asset($pHoverImg) : asset('storage/' . $pHoverImg)) : '';
                             @endphp
                             <a href="{{ url('/' . $product['slug']) }}/" class="item-card">
                                 <div class="item-image-wrapper">
-                                    <img src="{{ $pImgUrl }}" alt="{{ $product['title'] }}">
+                                    <img src="{{ $pImgUrl }}" alt="{{ $product['title'] }}" class="main-img" loading="lazy">
+                                    @if($pHoverUrl)
+                                        <img src="{{ $pHoverUrl }}" alt="{{ $product['title'] }}" class="hover-img" loading="lazy">
+                                    @endif
                                 </div>
                                 <div class="item-title">{{ $product['title'] }}</div>
                             </a>
