@@ -344,9 +344,9 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
                     @endif
                     <form class="contact-form" action="{{ url('/submit-contact') }}" method="post">
                         @csrf
-                        <label for="name">Name <em>*</em></label><input id="name" name="name" type="text" placeholder="Name" pattern="[A-Za-z' -]+" title="Name can contain letters only." required>
-                        <label for="email">Email Address <em>*</em></label><input id="email" name="email" type="email" placeholder="Email" required>
-                        <label for="phone">Phone <em>*</em></label><input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Phone number" pattern="[0-9+() -]+" title="Phone can contain numbers only." required>
+                        <label for="name">Name <em>*</em></label><input id="name" name="name" type="text" placeholder="Name" pattern="[A-Za-z' -]+" title="Name can contain letters only." oninput="this.value = this.value.replace(/[^A-Za-z'\- ]/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')" required>
+                        <label for="email">Email Address <em>*</em></label><input id="email" name="email" type="email" placeholder="Email" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                        <label for="phone">Phone <em>*</em></label><input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Phone number" pattern="[0-9+() -]+" title="Phone can contain numbers only." oninput="this.value = this.value.replace(/[^0-9+()\- ]/g, '').replace(/^\s+/, '')" required>
                         <label for="subject">Subject</label><input id="subject" name="subject" type="text" placeholder="Subject">
                         <label for="message">Message</label><textarea id="message" name="message" placeholder="Enter your message"></textarea>
                         <button type="submit">Send Message</button>
