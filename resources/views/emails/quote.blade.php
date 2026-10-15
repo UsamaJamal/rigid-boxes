@@ -104,12 +104,10 @@
             <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['units'] }}</td>
         </tr>
         @endif
-        @if(!empty($data['material']) && $data['material'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Paper Stock:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['material'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ trim((string) ($data['material'] ?? '')) !== '' && $data['material'] !== 'N/A' ? $data['material'] : 'Not sure' }}</td>
         </tr>
-        @endif
         @if(strtolower(trim((string) ($data['source'] ?? ''))) === 'product page' && !empty($data['box_style']))
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Box Style:</th>
@@ -119,26 +117,20 @@
         
 
         
-        @if(!empty($data['color']) && $data['color'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Color:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['color'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ trim((string) ($data['color'] ?? '')) !== '' && $data['color'] !== 'N/A' ? $data['color'] : 'Not sure' }}</td>
         </tr>
-        @endif
         
-        @if(!empty($data['paper_coating']) && $data['paper_coating'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">Paper Coating:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['paper_coating'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ trim((string) ($data['paper_coating'] ?? '')) !== '' && $data['paper_coating'] !== 'N/A' ? $data['paper_coating'] : 'Not sure' }}</td>
         </tr>
-        @endif
 
-        @if(!empty($data['cad_sample']) && $data['cad_sample'] !== 'N/A')
         <tr>
             <th style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; background-color: #8D4445; color: #ffffff; width: 30%; font-weight: bold;">CAD Sample:</th>
-            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ $data['cad_sample'] }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px; text-align: left; font-size: 14px; color: #333333; background-color: #ffffff;">{{ trim((string) ($data['cad_sample'] ?? '')) !== '' && $data['cad_sample'] !== 'N/A' ? $data['cad_sample'] : 'No' }}</td>
         </tr>
-        @endif
         
 
         

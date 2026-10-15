@@ -268,6 +268,12 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             margin-bottom: 12px;
+            align-items: start;
+        }
+        .pref-field-wrap {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
         }
 
         .form-grid-pref .product-picker-trigger,
@@ -2231,9 +2237,9 @@
                     <div class="form-section">
                         <span class="section-label">Contact Information</span>
                         <div class="form-grid-3">
-                            <input type="text" name="name" class="form-control" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
-                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
-                            <input type="tel" name="phone" class="form-control" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')" required>
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')" required>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                            <input type="tel" name="phone" class="form-control" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '').replace(/^\s+/, '')" required>
                         </div>
                     </div>
 
@@ -2255,31 +2261,45 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-preferences-box-style'])
-                            <select name="material" class="form-control" id="pref-paper-stock">
-                                <option value="" disabled selected>Select Paper Stock</option>
-                                <option>12pt Cardboard Stock</option>
-                                <option>14pt Cardboard Stock</option>
-                                <option>16pt Cardboard Stock</option>
-                                <option>18pt Cardboard Stock</option>
-                                <option>20pt Cardboard Stock</option>
-                                <option>22pt Cardboard Stock</option>
-                                <option>24pt Cardboard Stock</option>
-                                <option>Kraft Stock</option>
-                                <option>Recycled BuxBoard</option>
-                                <option>Corrugated Stock</option>
-                                <option>No Printing Required</option>
-                            </select>
-                            <select name="color" class="form-control">
-                                <option value="" disabled selected>Select Color</option>
-                                <option>1 color</option>
-                                <option>2 color</option>
-                                <option>3 color</option>
-                                <option>4 color</option>
-                                <option>4/1 color</option>
-                                <option>4/2 color</option>
-                                <option>4/3 color</option>
-                                <option>4/4 color</option>
-                            </select>
+                            <div class="pref-field-wrap">
+                                <select name="material" class="form-control" id="pref-paper-stock">
+                                    <option value="" disabled selected hidden>Select Paper Stock</option>
+                                    <option value="Not Sure">Not Sure</option>
+                                    <option>12pt Cardboard Stock</option>
+                                    <option>14pt Cardboard Stock</option>
+                                    <option>16pt Cardboard Stock</option>
+                                    <option>18pt Cardboard Stock</option>
+                                    <option>20pt Cardboard Stock</option>
+                                    <option>22pt Cardboard Stock</option>
+                                    <option>24pt Cardboard Stock</option>
+                                    <option>Kraft Stock</option>
+                                    <option>Recycled BuxBoard</option>
+                                    <option>Corrugated Stock</option>
+                                    <option>No Printing Required</option>
+                                </select>
+                                <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-stock.mp4') }}" data-video-title="Paper Stock Guide">
+                                    <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                    Watch Video Guide
+                                </button>
+                            </div>
+                            <div class="pref-field-wrap">
+                                <select name="color" class="form-control">
+                                    <option value="" disabled selected hidden>Select Color</option>
+                                    <option value="Not Sure">Not Sure</option>
+                                    <option>1 color</option>
+                                    <option>2 color</option>
+                                    <option>3 color</option>
+                                    <option>4 color</option>
+                                    <option>4/1 color</option>
+                                    <option>4/2 color</option>
+                                    <option>4/3 color</option>
+                                    <option>4/4 color</option>
+                                </select>
+                                <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/colors.mp4') }}" data-video-title="Color Guide">
+                                    <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                    Watch Video Guide
+                                </button>
+                            </div>
                         </div>
                     </div>
                     
@@ -2287,7 +2307,7 @@
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-production">
                             <select name="cad_sample" class="form-control">
-                                <option value="" disabled selected>CAD Sample</option>
+                                <option value="" disabled selected hidden>Select CAD Sample</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
@@ -2560,15 +2580,15 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Name *</label>
-                            <input type="text" name="name" class="form-control" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
+                            <input type="text" name="name" class="form-control" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')" required>
                         </div>
                         <div class="form-group">
                             <label>Email Address *</label>
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control" placeholder="Email" oninput="this.value = this.value.replace(/\s/g, '')" required>
                         </div>
                         <div class="form-group">
                             <label>Phone *</label>
-                            <input type="tel" name="phone" class="form-control" placeholder="Phone number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '')" required>
+                            <input type="tel" name="phone" class="form-control" placeholder="Phone number" oninput="this.value = this.value.replace(/[^0-9+\-\(\)\s]/g, '').replace(/^\s+/, '')" required>
                             
                             <!-- Hidden inputs for required fields from backend validation -->
                             <input type="hidden" name="width" value="N/A">
@@ -2588,64 +2608,30 @@
                             <input type="text" name="website" class="form-control" placeholder="Website">
                         </div>
                         <div class="form-group">
-                            <label>Physical Address</label>
-                            <input type="text" name="physical_address" class="form-control" placeholder="Address">
+                            <label>Physical Address *</label>
+                            <input type="text" name="physical_address" class="form-control" placeholder="Address" oninput="this.value = this.value.replace(/^\s+/, '')" required>
                         </div>
                     </div>
                     
                     <div class="form-grid-3">
                         <div class="form-group">
                             <label>Box Style *</label>
-                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-sample-box-style', 'selected' => ($product['title'] ?? $product['name'] ?? 'Custom Box')])
-                        </div>
-                        <div class="form-group">
-                            <label>Paper Stock</label>
-                            <select name="material" class="form-control">
-                                <option value="">Select Paper Stock</option>
-                                <option value="12pt Cardboard Stock">12pt Cardboard Stock</option>
-                                <option value="14pt Cardboard Stock">14pt Cardboard Stock</option>
-                                <option value="16pt Cardboard Stock">16pt Cardboard Stock</option>
-                                <option value="18pt Cardboard Stock">18pt Cardboard Stock</option>
-                                <option value="20pt Cardboard Stock">20pt Cardboard Stock</option>
-                                <option value="22pt Cardboard Stock">22pt Cardboard Stock</option>
-                                <option value="24pt Cardboard Stock">24pt Cardboard Stock</option>
-                                <option value="Kraft Stock">Kraft Stock</option>
-                                <option value="Recycled BuxBoard">Recycled BuxBoard</option>
-                                <option value="Corrugated Stock">Corrugated Stock</option>
-                                <option value="No Printing Required">No Printing Required</option>
-                            </select>
+                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-sample-box-style'])
                         </div>
                         <div class="form-group">
                             <label>Color</label>
                             <select name="color" class="form-control">
-                                <option value="">Select Color</option>
+                                <option value="" selected disabled hidden>Select Color</option>
+                                <option value="Not Sure">Not Sure</option>
                                 <option value="1 Color">1 Color</option>
                                 <option value="2 Colors">2 Colors</option>
                                 <option value="3 Colors">3 Colors</option>
                                 <option value="Full Color">Full Color</option>
                             </select>
-                        </div>
-                    </div>
-
-                    <div class="form-grid-3">
-                        <div class="form-group">
-                            <label>Paper Coating</label>
-                            <select name="paper_coating" class="form-control">
-                                <option value="">Select Paper Coating</option>
-                                <option value="Aqueous Coating">Aqueous Coating</option>
-                                <option value="Semi Gloss">Semi Gloss</option>
-                                <option value="Gloss UV">Gloss UV</option>
-                                <option value="Matte UV">Matte UV</option>
-                                <option value="Semi Matte">Semi Matte</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>CAD Sample</label>
-                            <select name="cad_sample" class="form-control">
-                                <option value="">Select CAD Sample</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
+                            <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/colors.mp4') }}" data-video-title="Color Guide">
+                                <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                Watch Video Guide
+                            </button>
                         </div>
                         <div class="form-group">
                             <label>Quantity *</label>
@@ -3225,5 +3211,7 @@ function toggleFaq(element) {
     </script>
 
     @include('components.footer')
+
+    @include('components.video-guide-modal')
 </body>
 </html>

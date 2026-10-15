@@ -327,11 +327,11 @@
                     <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Name *</label>
-                            <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[0-9]/g, '')" required>
+                            <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[0-9]/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')" required>
                         </div>
                         <div class="iq-form-group">
                             <label>Email Address *</label>
-                            <input type="email" name="email" placeholder="Enter your email" required>
+                            <input type="email" name="email" placeholder="Enter your email" oninput="this.value = this.value.replace(/\s/g, '')" required>
                         </div>
                     </div>
 
@@ -339,11 +339,11 @@
                     <div class="iq-grid-2">
                         <div class="iq-form-group">
                             <label>Phone *</label>
-                            <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\- ]/g, '')" required>
+                            <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\- ]/g, '').replace(/^\s+/, '')" required>
                         </div>
                         <div class="iq-form-group">
-                            <label>Physical Address</label>
-                            <input type="text" name="physical_address" placeholder="Enter your address">
+                            <label>Physical Address *</label>
+                            <input type="text" name="physical_address" placeholder="Enter your address" oninput="this.value = this.value.replace(/^\s+/, '')" required>
                         </div>
                     </div>
 
@@ -371,16 +371,49 @@
                         </div>
                     </div>
 
-                    <!-- Row 4: Packaging preferences -->
+                    <!-- Row 4: Box Style | CAD Sample | Quantity -->
                     <div class="iq-grid-3">
                         <div class="iq-form-group">
                             <label>Box Style</label>
                             @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'request-quote-box-style', 'selected' => old('box_style', request('box_style', ''))])
                         </div>
                         <div class="iq-form-group">
+                            <label>CAD Sample</label>
+                            <select name="cad_sample">
+                                <option value="" selected disabled hidden>Select CAD Sample</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="iq-form-group">
+                            <label>Quantity *</label>
+                            <input type="number" name="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Paper Coating | Paper Stock | Color (each with video guide) -->
+                    <div class="iq-grid-3">
+                        <div class="iq-form-group">
+                            <label>Paper Coating</label>
+                            <select name="paper_coating">
+                                <option value="" selected disabled hidden>Select Paper Coating</option>
+                                <option value="Not Sure">Not Sure</option>
+                                <option>Aqueous Coating</option>
+                                <option>Semi Gloss</option>
+                                <option>Gloss UV</option>
+                                <option>Matte UV</option>
+                                <option>Semi Matte</option>
+                            </select>
+                            <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-coating.mp4') }}" data-video-title="Paper Coating Guide">
+                                <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                Watch Video Guide
+                            </button>
+                        </div>
+                        <div class="iq-form-group">
                             <label>Paper Stock</label>
                             <select name="material">
-                                <option value="">Paper Stock</option>
+                                <option value="" selected disabled hidden>Select Paper Stock</option>
+                                <option value="Not Sure">Not Sure</option>
                                 <option>12pt Cardboard Stock</option>
                                 <option>14pt Cardboard Stock</option>
                                 <option>16pt Cardboard Stock</option>
@@ -393,11 +426,16 @@
                                 <option>Corrugated Stock</option>
                                 <option>No Printing Required</option>
                             </select>
+                            <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-stock.mp4') }}" data-video-title="Paper Stock Guide">
+                                <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                Watch Video Guide
+                            </button>
                         </div>
                         <div class="iq-form-group">
                             <label>Color</label>
                             <select name="color">
-                                <option value="">Color</option>
+                                <option value="" selected disabled hidden>Select Color</option>
+                                <option value="Not Sure">Not Sure</option>
                                 <option>1 color</option>
                                 <option>2 color</option>
                                 <option>3 color</option>
@@ -407,45 +445,20 @@
                                 <option>4/3 color</option>
                                 <option>4/4 color</option>
                             </select>
+                            <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/colors.mp4') }}" data-video-title="Color Guide">
+                                <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                Watch Video Guide
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Row 5: Paper Coating & Quantity -->
-                    <div class="iq-grid-2">
-                        <div class="iq-form-group">
-                            <label>Paper Coating</label>
-                            <select name="paper_coating">
-                                <option value="">Paper Coating</option>
-                                <option>Aqueous Coating</option>
-                                <option>Semi Gloss</option>
-                                <option>Gloss UV</option>
-                                <option>Matte UV</option>
-                                <option>Semi Matte</option>
-                            </select>
-                        </div>
-                        <div class="iq-form-group">
-                            <label>Quantity *</label>
-                            <input type="number" name="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                        </div>
-                    </div>
-
-                    <!-- Row 6: CAD Sample & File Upload -->
-                    <div class="iq-grid-2">
-                        <div class="iq-form-group">
-                            <label>CAD Sample</label>
-                            <select name="cad_sample">
-                                <option value="">Select CAD Sample</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                        <div class="iq-form-group">
-                            <label>Upload File Here</label>
-                            <div style="display: flex; align-items: center; border: 1px solid #E2D9D5; border-radius: 8px; overflow: hidden; background: #FFFFFF; height: 44px;">
-                                <input type="file" name="quote_file" id="quote-file-input" style="display: none;" onchange="document.getElementById('quote-file-name').value = this.files[0] ? this.files[0].name : ''">
-                                <input type="text" id="quote-file-name" placeholder="No file chosen" readonly style="flex: 1; padding: 0 14px; border: none; font-size: 14px; background: transparent; outline: none; color: #666; height: 100%;">
-                                <button type="button" onclick="document.getElementById('quote-file-input').click()" style="background-color: var(--primary-color, #8D4445); color: white; border: none; padding: 0 20px; font-size: 14px; font-weight: 600; cursor: pointer; height: 100%; font-family: 'DM Sans', sans-serif;">Upload</button>
-                            </div>
+                    <!-- Row 6: File Upload (full width) -->
+                    <div class="iq-form-group">
+                        <label>Upload File Here</label>
+                        <div style="display: flex; align-items: center; border: 1px solid #E2D9D5; border-radius: 8px; overflow: hidden; background: #FFFFFF; height: 44px;">
+                            <input type="file" name="quote_file" id="quote-file-input" style="display: none;" onchange="document.getElementById('quote-file-name').value = this.files[0] ? this.files[0].name : ''">
+                            <input type="text" id="quote-file-name" placeholder="No file chosen" readonly style="flex: 1; padding: 0 14px; border: none; font-size: 14px; background: transparent; outline: none; color: #666; height: 100%;">
+                            <button type="button" onclick="document.getElementById('quote-file-input').click()" style="background-color: var(--primary-color, #8D4445); color: white; border: none; padding: 0 20px; font-size: 14px; font-weight: 600; cursor: pointer; height: 100%; font-family: 'DM Sans', sans-serif;">Upload</button>
                         </div>
                     </div>
 
@@ -518,6 +531,8 @@
     </main>
 
     @include('components.footer')
+
+    @include('components.video-guide-modal')
 
 </body>
 </html>

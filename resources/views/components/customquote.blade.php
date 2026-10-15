@@ -118,9 +118,10 @@
         height: 44px;
         border: 1px solid var(--primary-color);
         border-radius: 6px;
-        padding: 0 36px 0 14px;
+        padding: 0 26px 0 11px;
         font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
+        font-size: 12px;
+        text-overflow: ellipsis;
         color: #333;
         background: #FAFAFA;
         outline: none;
@@ -335,11 +336,11 @@
     /* The searchable Box Style picker uses the same visual treatment as the
        neighbouring native selects in this form. */
     .select-wrapper .product-picker-trigger {
-        padding: 0 36px 0 14px;
+        padding: 0 26px 0 11px;
         border-radius: 6px;
         background: #FAFAFA;
         font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
+        font-size: 12px;
     }
     .select-wrapper .product-picker-chevron {
         display: none;
@@ -435,6 +436,30 @@
         gap: 12px;
         width: 100%;
         margin-top: 12px;
+    }
+
+    /* Second preferences row: Coating / Stock / Color, each with a video guide */
+    .preferences-grid-videos {
+        margin-top: 12px;
+        align-items: start;
+    }
+    .pref-field {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+    .pref-field .select-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    /* Upload row spans the full width below the preferences */
+    .upload-row {
+        width: 100%;
+        margin-top: 12px;
+    }
+    .upload-row .quote-file-control {
+        width: 100%;
     }
 
     /* Textarea row */
@@ -751,9 +776,9 @@
             <!-- Contact Information -->
             <p class="form-section-label">Contact Information</p>
             <div class="form-row">
-                <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '')" required>
+                <input type="text" name="name" placeholder="Enter your name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/^\s+/, '').replace(/\s{2,}/g, ' ')" required>
+                <input type="email" name="email" placeholder="Enter your email" oninput="this.value = this.value.replace(/\s/g, '')" required>
+                <input type="tel" name="phone" placeholder="Enter your number" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '').replace(/^\s+/, '')" required>
             </div>
 
             <!-- Box Specifications -->
@@ -773,50 +798,17 @@
 
             <!-- Packaging Preferences -->
             <p class="form-section-label">Packaging Preferences</p>
+
+            <!-- Row 1: Box Style | CAD Sample | Quantity -->
             <div class="preferences-grid">
                 <div class="select-wrapper">
                     @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'home-category-box-style'])
                 </div>
                 <div class="select-wrapper">
-                    <select name="material">
-                        <option value="" disabled selected>Paper Stock</option>
-                        <option>12pt Cardboard Stock</option>
-                        <option>14pt Cardboard Stock</option>
-                        <option>16pt Cardboard Stock</option>
-                        <option>18pt Cardboard Stock</option>
-                        <option>20pt Cardboard Stock</option>
-                        <option>22pt Cardboard Stock</option>
-                        <option>24pt Cardboard Stock</option>
-                        <option>Kraft Stock</option>
-                        <option>Recycled BuxBoard</option>
-                        <option>Corrugated Stock</option>
-                        <option>No Printing Required</option>
-                    </select>
-                </div>
-                <div class="select-wrapper">
-                    <select name="color">
-                        <option value="" disabled selected>Color</option>
-                        <option>1 color</option>
-                        <option>2 color</option>
-                        <option>3 color</option>
-                        <option>4 color</option>
-                        <option>4/1 color</option>
-                        <option>4/2 color</option>
-                        <option>4/3 color</option>
-                        <option>4/4 color</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="preferences-grid-2">
-                <div class="select-wrapper">
-                    <select name="paper_coating">
-                        <option value="" disabled selected>Paper Coating</option>
-                        <option>Aqueous Coating</option>
-                        <option>Semi Gloss</option>
-                        <option>Gloss UV</option>
-                        <option>Matte UV</option>
-                        <option>Semi Matte</option>
+                    <select name="cad_sample">
+                        <option value="" disabled selected hidden>Select CAD Sample</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
                     </select>
                 </div>
                 <div class="pref-input-wrapper">
@@ -824,22 +816,78 @@
                 </div>
             </div>
 
-            <div class="preferences-grid-2">
-                <div class="select-wrapper">
-                    <select name="cad_sample">
-                        <option value="" disabled selected>Select CAD Sample</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-                <div class="pref-input-wrapper">
-                    <div class="quote-file-control">
-                        <span class="quote-file-label">Upload File</span>
-                        <label class="quote-file-button">
-                            Upload
-                            <input type="file" name="quote_file" accept=".pdf,.ai,.eps,.zip,.doc,.docx,image/*" onchange="this.parentElement.previousElementSibling.textContent = this.files[0] ? this.files[0].name : 'Upload File'">
-                        </label>
+            <!-- Row 2: Paper Coating | Paper Stock | Color (each with a video guide) -->
+            <div class="preferences-grid preferences-grid-videos">
+                <div class="pref-field">
+                    <div class="select-wrapper">
+                        <select name="paper_coating">
+                            <option value="" disabled selected hidden>Select Paper Coating</option>
+                            <option value="Not Sure">Not Sure</option>
+                            <option>Aqueous Coating</option>
+                            <option>Semi Gloss</option>
+                            <option>Gloss UV</option>
+                            <option>Matte UV</option>
+                            <option>Semi Matte</option>
+                        </select>
                     </div>
+                    <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-coating.mp4') }}" data-video-title="Paper Coating Guide">
+                        <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                        Watch Video Guide
+                    </button>
+                </div>
+                <div class="pref-field">
+                    <div class="select-wrapper">
+                        <select name="material">
+                            <option value="" disabled selected hidden>Select Paper Stock</option>
+                            <option value="Not Sure">Not Sure</option>
+                            <option>12pt Cardboard Stock</option>
+                            <option>14pt Cardboard Stock</option>
+                            <option>16pt Cardboard Stock</option>
+                            <option>18pt Cardboard Stock</option>
+                            <option>20pt Cardboard Stock</option>
+                            <option>22pt Cardboard Stock</option>
+                            <option>24pt Cardboard Stock</option>
+                            <option>Kraft Stock</option>
+                            <option>Recycled BuxBoard</option>
+                            <option>Corrugated Stock</option>
+                            <option>No Printing Required</option>
+                        </select>
+                    </div>
+                    <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-stock.mp4') }}" data-video-title="Paper Stock Guide">
+                        <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                        Watch Video Guide
+                    </button>
+                </div>
+                <div class="pref-field">
+                    <div class="select-wrapper">
+                        <select name="color">
+                            <option value="" disabled selected hidden>Select Color</option>
+                            <option value="Not Sure">Not Sure</option>
+                            <option>1 color</option>
+                            <option>2 color</option>
+                            <option>3 color</option>
+                            <option>4 color</option>
+                            <option>4/1 color</option>
+                            <option>4/2 color</option>
+                            <option>4/3 color</option>
+                            <option>4/4 color</option>
+                        </select>
+                    </div>
+                    <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/colors.mp4') }}" data-video-title="Color Guide">
+                        <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                        Watch Video Guide
+                    </button>
+                </div>
+            </div>
+
+            <!-- Row 3: Upload (full width) -->
+            <div class="upload-row">
+                <div class="quote-file-control">
+                    <span class="quote-file-label">Upload File</span>
+                    <label class="quote-file-button">
+                        Upload
+                        <input type="file" name="quote_file" accept=".pdf,.ai,.eps,.zip,.doc,.docx,image/*" onchange="this.parentElement.previousElementSibling.textContent = this.files[0] ? this.files[0].name : 'Upload File'">
+                    </label>
                 </div>
             </div>
 
@@ -909,6 +957,8 @@
 
     </div>
 </section>
+
+@include('components.video-guide-modal')
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
