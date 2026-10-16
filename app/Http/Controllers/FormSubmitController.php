@@ -15,17 +15,36 @@ class FormSubmitController extends Controller
 {
     private $adminEmail = 'quote@therigidboxes.com';
 
+    // Letters (any language), spaces, apostrophes, hyphens and dots.
+    private const NAME_RULE = 'regex:/^[\pL\s\'\-.]+$/u';
+    // Digits and common phone symbols, with at least one digit.
+    private const PHONE_RULE = 'regex:/^(?=.*\d)[0-9+\-\s()]+$/';
+
+    // TrimStrings + ConvertEmptyStringsToNull run before validation, so a
+    // value made only of spaces arrives as null and fails "required".
+    private function contactMessages(): array
+    {
+        return [
+            'name.required' => 'Please enter your name.',
+            'name.regex' => 'Name can contain letters only.',
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'phone.required' => 'Please enter your phone number.',
+            'phone.regex' => 'Please enter a valid phone number.',
+        ];
+    }
+
     public function submitContact(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', self::NAME_RULE],
             'product_name' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => ['required', 'string', 'max:20', self::PHONE_RULE],
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string'
-        ]);
+        ], $this->contactMessages());
 
         $validated['product_name'] = $validated['product_name'] ?? null;
         $validated['source'] = 'Contact Us';
@@ -51,28 +70,48 @@ class FormSubmitController extends Controller
     public function submitQuote(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => ['required', 'string', 'max:255', self::NAME_RULE],
             'product_name' => 'nullable|string|max:255',
             'source' => 'nullable|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => ['required', 'string', 'max:20', self::PHONE_RULE],
             'company_name' => 'nullable|string|max:255',
             'website' => 'nullable|string|max:255',
-            'physical_address' => 'nullable|string|max:255',
+            // Only the Request-a-Quote page and the product sample-kit form
+            // show this field; when a form sends it, it must be filled in.
+            'physical_address' => 'sometimes|required|string|max:255',
             'width' => 'required|string|max:255',
             'length' => 'required|string|max:255',
             'depth' => 'required|string|max:255',
             'units' => 'required|string|max:255',
-            'box_style' => 'required|string|max:255',
+            // Every quote form shows a Box Style picker except the top product
+            // page form, where the product itself is the box style.
+            'box_style' => 'sometimes|required|string|max:255',
             'material' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:255',
             'paper_coating' => 'nullable|string|max:255',
-            'cad_sample' => 'nullable|string|max:255',
+            'cad_sample' => 'nullable|in:Yes,No',
             'turn_around_time' => 'nullable|string|max:255',
             'quantity' => 'required|integer|min:1',
             'quote_file' => 'nullable|file|max:10240', // 10MB max
             'message' => 'nullable|string'
+        ], $this->contactMessages() + [
+            'physical_address.required' => 'Please enter your physical address.',
+            'width.required' => 'Please enter the box width.',
+            'length.required' => 'Please enter the box length.',
+            'depth.required' => 'Please enter the box depth.',
+            'units.required' => 'Please select the units.',
+            'box_style.required' => 'Please select a Box Style.',
+            'quantity.required' => 'Please enter the quantity.',
+            'quantity.integer' => 'Quantity must be a whole number.',
+            'quantity.min' => 'Quantity must be at least 1.',
         ]);
+
+        // Optional preferences: an empty choice is recorded explicitly.
+        foreach (['material', 'color', 'paper_coating'] as $field) {
+            $validated[$field] = $validated[$field] ?? 'Not sure';
+        }
+        $validated['cad_sample'] = $validated['cad_sample'] ?? 'No';
 
         $validated['source'] = $validated['source'] ?? 'N/A';
         $isProductPageQuote = strtolower(trim((string) $validated['source'])) === 'product page';

@@ -3,6 +3,7 @@
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.png') }}" type="image/png">
     @include('components.canonical')
+    @include('components.video-guide-styles')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
     <title>{{ ($product['meta_title'] ?? $product['title'] ?? 'Custom Packaging') }}</title>
@@ -2260,7 +2261,6 @@
                     <div class="form-section">
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
-                            @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-preferences-box-style'])
                             <div class="pref-field-wrap">
                                 <select name="material" class="form-control" id="pref-paper-stock">
                                     <option value="" disabled selected hidden>Select Paper Stock</option>
@@ -2278,6 +2278,21 @@
                                     <option>No Printing Required</option>
                                 </select>
                                 <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-stock.mp4') }}" data-video-title="Paper Stock Guide">
+                                    <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
+                                    Watch Video Guide
+                                </button>
+                            </div>
+                            <div class="pref-field-wrap">
+                                <select name="paper_coating" class="form-control">
+                                    <option value="" disabled selected hidden>Select Paper Coating</option>
+                                    <option value="Not Sure">Not Sure</option>
+                                    <option>Aqueous Coating</option>
+                                    <option>Semi Gloss</option>
+                                    <option>Gloss UV</option>
+                                    <option>Matte UV</option>
+                                    <option>Semi Matte</option>
+                                </select>
+                                <button type="button" class="video-guide-btn" data-video="{{ asset('uploads/paper-coating.mp4') }}" data-video-title="Paper Coating Guide">
                                     <span class="vg-play"><svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l6 4-6 4z"/></svg></span>
                                     Watch Video Guide
                                 </button>
@@ -3124,6 +3139,10 @@ function toggleFaq(element) {
                 optionsContainer.className = 'custom-options';
                 
                 Array.from(select.options).forEach((option, index) => {
+                    // Hidden options are placeholders ("Select Paper Stock"):
+                    // they label the closed field but are not choices in the list.
+                    if (option.hidden) return;
+
                     const customOption = document.createElement('div');
                     customOption.className = 'custom-option';
                     if (index === select.selectedIndex) customOption.classList.add('selected');
@@ -3147,7 +3166,15 @@ function toggleFaq(element) {
                 });
                 
                 wrapper.appendChild(optionsContainer);
-                
+
+                // After a successful submit the form resets; show the placeholder again.
+                if (select.form) {
+                    select.form.addEventListener('reset', () => setTimeout(() => {
+                        trigger.textContent = select.options[select.selectedIndex]?.text || '';
+                        optionsContainer.querySelectorAll('.custom-option').forEach(opt => opt.classList.remove('selected'));
+                    }, 0));
+                }
+
                 trigger.addEventListener('click', function(e) {
                     e.stopPropagation();
                     document.querySelectorAll('.custom-select-trigger').forEach(t => {

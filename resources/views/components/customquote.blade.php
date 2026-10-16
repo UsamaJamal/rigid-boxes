@@ -1,3 +1,4 @@
+@include('components.video-guide-styles')
 <style>
     .quote-section {
         background: var(--primary-color);

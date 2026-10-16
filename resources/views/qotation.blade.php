@@ -3,6 +3,7 @@
 <head>
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.png') }}" type="image/png">
     @include('components.canonical')
+    @include('components.video-guide-styles')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Instant Quote</title>

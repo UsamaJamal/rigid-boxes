@@ -245,7 +245,43 @@ document.addEventListener('DOMContentLoaded', function() {
     imageObserver.observe(document.body, { childList: true, subtree: true });
 
     const ajaxForms = document.querySelectorAll('form[action*="/submit-quote"], form[action*="/submit-newsletter"], form[action*="/submit-contact"]');
-    
+
+    function clearFormErrors(form) {
+        const box = form.querySelector('.ajax-inline-error');
+        if (box) box.style.display = 'none';
+    }
+
+    // Shows the server's validation messages at the top of the form and
+    // moves focus to the first field that failed.
+    function showFormErrors(form, errors, fallbackMessage) {
+        let box = form.querySelector('.ajax-inline-error');
+        if (!box) {
+            box = document.createElement('div');
+            box.className = 'ajax-inline-error';
+            box.setAttribute('role', 'alert');
+            box.style.cssText = 'background:#f8d7da;color:#721c24;padding:10px 12px;border-radius:5px;margin-bottom:16px;font-size:14px;line-height:1.5;';
+            form.insertBefore(box, form.firstChild);
+        }
+
+        const messages = errors
+            ? Object.values(errors).map(list => list[0])
+            : [fallbackMessage || 'Something went wrong. Please try again.'];
+        box.innerHTML = '';
+        messages.forEach(text => {
+            const line = document.createElement('div');
+            line.textContent = text;
+            box.appendChild(line);
+        });
+        box.style.display = 'block';
+
+        const firstField = errors ? form.querySelector('[name="' + Object.keys(errors)[0] + '"]') : null;
+        const focusTarget = firstField && firstField.type === 'hidden'
+            ? firstField.closest('[data-product-picker]')?.querySelector('.product-picker-trigger')
+            : firstField;
+        (focusTarget || box).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (focusTarget) focusTarget.focus({ preventScroll: true });
+    }
+
     ajaxForms.forEach(form => {
         form.addEventListener('submit', function(e) {
             // A form-specific validator (such as Box Style selection) may
@@ -269,10 +305,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Accept': 'application/json'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(response => response.json()
+                .catch(() => ({}))
+                .then(data => ({ ok: response.ok, status: response.status, data })))
+            .then(({ ok, status, data }) => {
                 if(submitBtn) submitBtn.innerHTML = originalBtnText;
-                
+
+                // A rejected submission keeps the user's input and explains why.
+                if (!ok) {
+                    showFormErrors(form, status === 422 ? data.errors : null, data.message);
+                    return;
+                }
+                clearFormErrors(form);
+
                 // Show Global Popup
                 const popup = document.getElementById('successPopup');
                 if(popup) {
