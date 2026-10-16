@@ -2616,11 +2616,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Company Name</label>
-                            <input type="text" name="company_name" class="form-control" placeholder="Company">
+                            <input type="text" name="company_name" class="form-control" placeholder="Company" oninput="this.value = this.value.replace(/^\s+/, '').replace(/\s{2,}/g, ' ')">
                         </div>
                         <div class="form-group">
                             <label>Website</label>
-                            <input type="text" name="website" class="form-control" placeholder="Website">
+                            <input type="text" name="website" class="form-control" placeholder="Website" oninput="this.value = this.value.replace(/\s/g, '')">
                         </div>
                         <div class="form-group">
                             <label>Physical Address *</label>

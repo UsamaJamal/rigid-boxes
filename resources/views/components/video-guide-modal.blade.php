@@ -25,7 +25,8 @@
     <div class="video-guide-modal-dialog">
         <span class="video-guide-modal-title" data-video-title></span>
         <button type="button" class="video-guide-modal-close" aria-label="Close video">&times;</button>
-        <video controls preload="none" playsinline></video>
+        {{-- No download button in the player menu and no "Save video as" on right-click. --}}
+        <video controls controlslist="nodownload" preload="none" playsinline oncontextmenu="return false;"></video>
     </div>
 </div>
 
