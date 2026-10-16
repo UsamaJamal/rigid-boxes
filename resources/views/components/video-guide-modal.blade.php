@@ -123,6 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openModal(src, title) {
         if (!src) return;
+        // Show the first frame immediately while the video starts buffering.
+        video.poster = src.replace(/\.mp4(\?.*)?$/, '-poster.jpg');
         video.src = src;
         titleEl.textContent = title || '';
         modal.classList.add('is-open');
@@ -135,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeModal() {
         video.pause();
         video.removeAttribute('src');
+        video.removeAttribute('poster');
         video.load();
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
