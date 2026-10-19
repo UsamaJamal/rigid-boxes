@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class QuoteFormMail extends Mailable
 {
@@ -36,8 +37,12 @@ class QuoteFormMail extends Mailable
         $mail = $this->subject($subject)
                      ->view('emails.quote');
                      
-        if (!empty($this->data['quote_file_path'])) {
-            $mail->attach(storage_path('app/public/' . $this->data['quote_file_path']));
+        // Read the upload from the disk it was saved to. The public disk's
+        // folder differs between hosts (symlinked or real public/storage),
+        // so a hard-coded storage path can point at a file that isn't there.
+        $path = $this->data['quote_file_path'] ?? null;
+        if (!empty($path) && Storage::disk('public')->exists($path)) {
+            $mail->attachFromStorageDisk('public', $path, $this->data['quote_file_name'] ?? null);
         }
         
         return $mail;

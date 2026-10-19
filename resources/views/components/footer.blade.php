@@ -313,7 +313,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // A rejected submission keeps the user's input and explains why.
                 if (!ok) {
-                    showFormErrors(form, status === 422 ? data.errors : null, data.message);
+                    // Only validation messages are shown; server errors can
+                    // contain internal details, so they get a generic message.
+                    showFormErrors(form, status === 422 ? data.errors : null,
+                        'Something went wrong while sending your request. Please try again, or contact us by phone or email.');
                     form.dispatchEvent(new CustomEvent('ajax-form-error', { detail: status === 422 ? data.errors : null }));
                     return;
                 }

@@ -151,6 +151,7 @@ class FormSubmitController extends Controller
         if ($request->hasFile('quote_file')) {
             $path = $request->file('quote_file')->store('quotes', 'public');
             $validated['quote_file_path'] = $path;
+            $validated['quote_file_name'] = $request->file('quote_file')->getClientOriginalName();
         }
 
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? 'Quote Request', $validated['email'] ?? '');
