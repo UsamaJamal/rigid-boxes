@@ -10,6 +10,8 @@ use App\Mail\QuoteFormMail;
 use App\Mail\NewsletterMail;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\SpamDetector;
+use App\Support\HumanCheck;
+use Illuminate\Validation\ValidationException;
 
 class FormSubmitController extends Controller
 {
@@ -31,7 +33,27 @@ class FormSubmitController extends Controller
             'email.email' => 'Please enter a valid email address.',
             'phone.required' => 'Please enter your phone number.',
             'phone.regex' => 'Please enter a valid phone number.',
+            'human_token.required' => 'Please refresh the page and try again.',
+            'human_answer.required' => 'Please solve the "Are you a human?" check.',
+            'human_answer.integer' => 'Please solve the "Are you a human?" check.',
         ];
+    }
+
+    private const HUMAN_CHECK_RULES = [
+        'human_token' => 'required|string',
+        'human_answer' => 'required|integer',
+    ];
+
+    // Runs after every other rule has passed, so a typo elsewhere does not
+    // burn the question. The token is single-use from here on.
+    private function confirmHuman(Request $request, array &$validated): void
+    {
+        if (!HumanCheck::passes($request->input('human_token'), $request->input('human_answer'), true)) {
+            throw ValidationException::withMessages([
+                'human_answer' => 'Please solve the new "Are you a human?" question and try again.',
+            ]);
+        }
+        unset($validated['human_token'], $validated['human_answer']);
     }
 
     public function submitContact(Request $request)
@@ -44,7 +66,8 @@ class FormSubmitController extends Controller
             'phone' => ['required', 'string', 'max:20', self::PHONE_RULE],
             'subject' => 'nullable|string|max:255',
             'message' => 'nullable|string'
-        ], $this->contactMessages());
+        ] + self::HUMAN_CHECK_RULES, $this->contactMessages());
+        $this->confirmHuman($request, $validated);
 
         $validated['product_name'] = $validated['product_name'] ?? null;
         $validated['source'] = 'Contact Us';
@@ -95,7 +118,7 @@ class FormSubmitController extends Controller
             'quantity' => 'required|integer|min:1',
             'quote_file' => 'nullable|file|max:10240', // 10MB max
             'message' => 'nullable|string'
-        ], $this->contactMessages() + [
+        ] + self::HUMAN_CHECK_RULES, $this->contactMessages() + [
             'physical_address.required' => 'Please enter your physical address.',
             'width.required' => 'Please enter the box width.',
             'length.required' => 'Please enter the box length.',
@@ -106,6 +129,7 @@ class FormSubmitController extends Controller
             'quantity.integer' => 'Quantity must be a whole number.',
             'quantity.min' => 'Quantity must be at least 1.',
         ]);
+        $this->confirmHuman($request, $validated);
 
         // Optional preferences: an empty choice is recorded explicitly.
         foreach (['material', 'color', 'paper_coating'] as $field) {

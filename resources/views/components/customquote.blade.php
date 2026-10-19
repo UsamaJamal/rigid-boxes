@@ -898,6 +898,8 @@
                 <textarea name="message" placeholder="Enter your message"></textarea>
             </div>
 
+            @include('components.human-check')
+
             <!-- Submit -->
             <div class="quote-btn-wrap">
                 <button type="submit" class="quote-submit-btn">Get Free Quote</button>

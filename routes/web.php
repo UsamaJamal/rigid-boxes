@@ -222,6 +222,18 @@ Route::post('/submit-contact', [FormSubmitController::class, 'submitContact']);
 Route::post('/submit-quote', [FormSubmitController::class, 'submitQuote']);
 Route::post('/submit-newsletter', [FormSubmitController::class, 'submitNewsletter']);
 
+// "Are you a human?" check used by the public forms.
+Route::middleware('throttle:30,1')->group(function () {
+    Route::get('/human-check/new', function () {
+        return response()->json(\App\Support\HumanCheck::issue());
+    });
+    Route::post('/human-check/verify', function (\Illuminate\Http\Request $request) {
+        return response()->json([
+            'ok' => \App\Support\HumanCheck::passes($request->input('human_token'), $request->input('human_answer')),
+        ]);
+    });
+});
+
 // Temporary route to preview email design
 Route::get('/preview-email', function () {
     $data = [

@@ -2340,6 +2340,8 @@
                         <textarea name="message" class="form-control" rows="3" placeholder="Enter your message"></textarea>
                     </div>
 
+                    @include('components.human-check')
+
                     <button type="submit" class="btn-primary">Get a Quote</button>
                 </form>
             </div>
@@ -2659,6 +2661,8 @@
                         <textarea name="message" class="form-control" rows="4" placeholder="Enter your message"></textarea>
                     </div>
                     
+                    @include('components.human-check')
+
                     <div style="text-align: center;">
                         <button type="submit" class="btn-submit-quote">Get Free Quote</button>
                     </div>

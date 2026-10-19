@@ -469,6 +469,8 @@
                         <textarea name="message" rows="4" placeholder="Enter your message"></textarea>
                     </div>
                     
+                    @include('components.human-check')
+
                     <!-- Submit button -->
                     <div style="text-align: center; margin-top: 10px;">
                         <button type="submit" style="background-color: var(--primary-color, #8D4445); color: white; border: none; border-radius: 6px; padding: 14px 40px; font-size: 16px; font-weight: 700; font-family: 'Open Sans', sans-serif; width: 100%; max-width: 320px; cursor: pointer; transition: background-color 0.2s ease;" onmouseover="this.style.backgroundColor='#6E3435'" onmouseout="this.style.backgroundColor='var(--primary-color, #8D4445)'">Get a Quote</button>

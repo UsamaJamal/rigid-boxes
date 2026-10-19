@@ -314,6 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // A rejected submission keeps the user's input and explains why.
                 if (!ok) {
                     showFormErrors(form, status === 422 ? data.errors : null, data.message);
+                    form.dispatchEvent(new CustomEvent('ajax-form-error', { detail: status === 422 ? data.errors : null }));
                     return;
                 }
                 clearFormErrors(form);

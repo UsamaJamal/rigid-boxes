@@ -349,6 +349,7 @@ body.contact-page { margin:0; color:var(--contact-dark); background:var(--contac
                         <label for="phone">Phone <em>*</em></label><input id="phone" name="phone" type="tel" inputmode="tel" placeholder="Phone number" pattern="[0-9+() -]+" title="Phone can contain numbers only." oninput="this.value = this.value.replace(/[^0-9+()\- ]/g, '').replace(/^\s+/, '')" required>
                         <label for="subject">Subject</label><input id="subject" name="subject" type="text" placeholder="Subject">
                         <label for="message">Message</label><textarea id="message" name="message" placeholder="Enter your message"></textarea>
+                        @include('components.human-check')
                         <button type="submit">Send Message</button>
                     </form>
                 </div>
