@@ -1,3 +1,6 @@
+@php
+    $isCategory = !empty($is_category) || isset($category) || (!request()->is('/') && !empty($settings));
+@endphp
 <style>
     .category-hero-wrapper {
         width: 100%;
@@ -129,6 +132,14 @@
         z-index: 3;
     }
 
+    /* Category condition: image container width becomes 456px */
+    .hero-image-wrapper.is-category-image,
+    .category-hero-wrapper.is-category-hero .hero-image-wrapper {
+        flex: 0 0 456px;
+        max-width: 456px;
+        width: 456px;
+    }
+
     .hero-image-wrapper img {
         width: 100%;
         max-width: 100%;
@@ -141,12 +152,23 @@
         object-position: center right;
     }
 
+    .hero-image-wrapper.is-category-image img,
+    .category-hero-wrapper.is-category-hero .hero-image-wrapper img {
+        max-width: 456px;
+    }
+
     @media (max-width: 1500px) and (min-width: 993px) {
         .hero-section {
             gap: 24px;
         }
         .hero-image-wrapper {
             max-width: 580px;
+        }
+        .hero-image-wrapper.is-category-image,
+        .category-hero-wrapper.is-category-hero .hero-image-wrapper {
+            flex: 0 0 456px;
+            max-width: 456px;
+            width: 456px;
         }
         .hero-image-wrapper img {
             max-width: 100%;
@@ -160,23 +182,34 @@
             display: none;
         }
 
+        .category-hero-wrapper {
+            overflow: hidden;
+        }
+
         .hero-section {
             flex-direction: column;
             display: flex;
-            padding: 30px 55px 24px;
+            padding: 30px 20px 24px !important;
             text-align: left;
             gap: 20px;
+            align-items: flex-start;
         }
 
         .hero-content {
             max-width: 100%;
             padding-top: 0;
             padding-bottom: 0;
+            flex: 0 0 auto;
+            width: 100%;
         }
 
         .hero-title {
-            font-size: 38px;
+            font-size: 32px;
             line-height: 1.3;
+        }
+
+        .hero-description {
+            margin-bottom: 16px;
         }
 
         .hero-image-wrapper {
@@ -185,25 +218,45 @@
             top: auto;
             bottom: auto;
             justify-content: center;
+            align-items: flex-end;
             width: 100%;
-            height: auto;
-            margin-top: 10px;
+            flex: 0 0 auto;
+            min-height: 0;
+            overflow: visible;
+            margin-top: 0;
+        }
+
+        .hero-image-wrapper.is-category-image,
+        .category-hero-wrapper.is-category-hero .hero-image-wrapper {
+            flex: 0 0 auto;
+            max-width: 100%;
+            width: 100%;
         }
 
         .hero-image-wrapper img {
             width: 100%;
             height: auto;
+            max-width: 100%;
+            max-height: 280px;
+            aspect-ratio: auto;
+            object-fit: contain;
+            object-position: center bottom;
+            display: block;
+        }
+
+        /* Category page: restore original image size */
+        .category-hero-wrapper.is-category-hero .hero-image-wrapper img,
+        .hero-image-wrapper.is-category-image img {
             max-width: 450px;
             max-height: 456px;
-            aspect-ratio: auto;
         }
     }
 
     @media (max-width: 576px) {
 
         .hero-section {
-            padding: 24px 16px 16px !important;
-            text-align: left;
+            padding: 24px 16px 20px !important;
+            gap: 16px;
         }
 
         .hero-title {
@@ -214,6 +267,22 @@
 
         .hero-description {
             font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .hero-image-wrapper {
+            margin-top: 0;
+        }
+
+        .hero-image-wrapper img {
+            max-height: 220px;
+        }
+
+        /* Category page: restore original image size at mobile */
+        .category-hero-wrapper.is-category-hero .hero-image-wrapper img,
+        .hero-image-wrapper.is-category-image img {
+            max-width: 450px;
+            max-height: 456px;
         }
 
     }
@@ -227,7 +296,7 @@
 </style>
 
 <!-- Hero Banner with gradient -->
-<div class="category-hero-wrapper">
+<div class="category-hero-wrapper {{ $isCategory ? 'is-category-hero' : '' }}">
     <div class="hero-bg-lines">
         <div class="hero-line hero-line-1" aria-hidden="true"></div>
         <div class="hero-line hero-line-2" aria-hidden="true"></div>
@@ -297,7 +366,7 @@
             <a href="/request-quote/" class="hero-btn">Get Instant Quote</a>
         </div>
 
-        <div class="hero-image-wrapper">
+        <div class="hero-image-wrapper {{ $isCategory ? 'is-category-image' : '' }}">
             @php
                 $hImg = !empty($settings['hero_image']) ? $settings['hero_image'] : (!empty($category['hero_image']) ? $category['hero_image'] : 'uploads/Home-Banner.webp');
                 $hImgPath = \Illuminate\Support\Str::startsWith($hImg, ['storage/', 'uploads/', 'images/']) ? $hImg : 'storage/' . $hImg;
