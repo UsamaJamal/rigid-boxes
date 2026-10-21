@@ -39,33 +39,95 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
     $totalCount = 0;
 
     if ($q) {
+        $words = array_values(array_filter(explode(' ', $q), fn($w) => mb_strlen($w) >= 2));
+        $variants = [];
+        foreach ($words as $w) {
+            $v = [strtolower($w)];
+            if (str_ends_with($w, 'es') && strlen($w) > 3) {
+                $v[] = substr($w, 0, -2);
+            } elseif (str_ends_with($w, 's') && strlen($w) > 2) {
+                $v[] = substr($w, 0, -1);
+            }
+            $variants[] = array_unique($v);
+        }
+
         $products = DB::table('admin_products')
             ->where('status', 'published')
-            ->where('title', 'like', "%{$q}%")
+            ->where(function ($query) use ($q, $variants) {
+                $query->where('title', 'like', "%{$q}%")
+                      ->orWhere('meta_keywords', 'like', "%{$q}%")
+                      ->orWhere('meta_title', 'like', "%{$q}%")
+                      ->orWhere('box_style', 'like', "%{$q}%");
+
+                if (!empty($variants)) {
+                    $query->orWhere(function ($sub) use ($variants) {
+                        foreach ($variants as $vGroup) {
+                            $sub->where(function ($wSub) use ($vGroup) {
+                                foreach ($vGroup as $vw) {
+                                    $wSub->orWhere('title', 'like', "%{$vw}%");
+                                }
+                            });
+                        }
+                    });
+                }
+            })
             ->get()->map(fn($r)=>(array)$r)->all();
 
-        // The header search is product-first. When no website product matches,
-        // carry the visitor's request to the quote form instead of showing an
-        // empty result page.
-        if (empty($products)) {
+        $categories = DB::table('admin_categories')
+            ->where('status', 'published')
+            ->where(function ($query) use ($q, $variants) {
+                $query->where('title', 'like', "%{$q}%")
+                      ->orWhere('meta_keywords', 'like', "%{$q}%")
+                      ->orWhere('meta_title', 'like', "%{$q}%");
+
+                if (!empty($variants)) {
+                    $query->orWhere(function ($sub) use ($variants) {
+                        foreach ($variants as $vGroup) {
+                            $sub->where(function ($wSub) use ($vGroup) {
+                                foreach ($vGroup as $vw) {
+                                    $wSub->orWhere('title', 'like', "%{$vw}%");
+                                }
+                            });
+                        }
+                    });
+                }
+            })
+            ->get()->map(fn($r)=>(array)$r)->all();
+
+        $blogs = DB::table('admin_blogs')
+            ->where('status', 'published')
+            ->where(function ($query) use ($q, $variants) {
+                $query->where('title', 'like', "%{$q}%")
+                      ->orWhere('tags', 'like', "%{$q}%")
+                      ->orWhere('excerpt', 'like', "%{$q}%")
+                      ->orWhere('meta_keywords', 'like', "%{$q}%");
+
+                if (!empty($variants)) {
+                    $query->orWhere(function ($sub) use ($variants) {
+                        foreach ($variants as $vGroup) {
+                            $sub->where(function ($wSub) use ($vGroup) {
+                                foreach ($vGroup as $vw) {
+                                    $wSub->orWhere('title', 'like', "%{$vw}%")
+                                         ->orWhere('tags', 'like', "%{$vw}%");
+                                }
+                            });
+                        }
+                    });
+                }
+            })
+            ->get()->map(fn($r)=>(array)$r)->all();
+
+        $totalCount = count($products) + count($categories) + count($blogs);
+
+        // When nothing matches across products, categories, and blogs,
+        // carry visitor's request to the quote form with their search query pre-filled.
+        if ($totalCount === 0) {
             $quoteBoxStyle = \Illuminate\Support\Str::ucfirst(\Illuminate\Support\Str::lower($q));
 
             return redirect()->to('/request-quote?from_search=1&box_style=' . urlencode($quoteBoxStyle));
         }
-            
-        $categories = DB::table('admin_categories')
-            ->where('status', 'published')
-            ->where('title', 'like', "%{$q}%")
-            ->get()->map(fn($r)=>(array)$r)->all();
-            
-        $blogs = DB::table('admin_blogs')
-            ->where('status', 'published')
-            ->where('title', 'like', "%{$q}%")
-            ->get()->map(fn($r)=>(array)$r)->all();
-            
-        $totalCount = count($products) + count($categories) + count($blogs);
     }
-    
+
     return view('search', compact('q', 'products', 'categories', 'blogs', 'totalCount'));
 });
 

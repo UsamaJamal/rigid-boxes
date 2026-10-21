@@ -187,6 +187,7 @@
         }
 
         .hero-section {
+       
             flex-direction: column;
             display: flex;
             padding: 30px 20px 24px !important;
