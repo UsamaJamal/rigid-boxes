@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @php
+        $articleTitle = $blog['meta_title'] ?? $blog['title'] ?? 'Packaging Blog | The Rigid Boxes';
+        $articleSubtitle = preg_replace('/\s+/', ' ', trim(strip_tags(html_entity_decode($blog['excerpt'] ?? ''))));
+    @endphp
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.png') }}" type="image/png">
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</title>
+    <title>{{ $articleTitle }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -916,14 +920,16 @@
                 <span class="sep">/</span>
                 <a href="{{ url('/blog/') }}">BLOG</a>
                 <span class="sep">/</span>
-                <span class="current">THE FUTURE OF LUXURY PACKAGING: 7 TRENDS DEFINING 2026 AND BEYOND</span>
+                <span class="current">{{ $blog['title'] ?? 'BLOG ARTICLE' }}</span>
             </div>
         </div>
 
         <!-- Article Header -->
         <header class="article-header">
-            <h1 class="article-title">The Future of Luxury Packaging: 7 Trends Defining 2026 and Beyond</h1>
-            <p class="article-subtitle">From bio-based rigid board to augmented reality unboxing, discover the innovations reshaping premium packaging and how early adopters are capturing measurable brand lift.</p>
+            <h1 class="article-title">{{ $blog['title'] ?? 'Packaging Insights' }}</h1>
+            @if(!empty($articleSubtitle))
+                <p class="article-subtitle">{{ $articleSubtitle }}</p>
+            @endif
             
             <div class="article-meta">
                 @php 
@@ -974,8 +980,25 @@
         </header>
 
         <!-- Featured Hero Image -->
+        @php
+            $featuredImagePath = $blog['image'] ?? null;
+            $featuredImage = null;
+            if (!empty($featuredImagePath)) {
+                $isRemoteImage = \Illuminate\Support\Str::startsWith($featuredImagePath, ['http://', 'https://']);
+                $publicImagePath = \Illuminate\Support\Str::startsWith($featuredImagePath, ['storage/', 'uploads/', 'images/'])
+                    ? $featuredImagePath
+                    : 'storage/' . ltrim($featuredImagePath, '/');
+
+                // Use the same graceful fallback as blog cards if an old image path no longer exists.
+                $featuredImage = ($isRemoteImage || file_exists(public_path($publicImagePath)))
+                    ? ($isRemoteImage ? $featuredImagePath : asset($publicImagePath))
+                    : asset('images/below-hero.png');
+            }
+            $featuredImage = $featuredImage ?: asset('images/below-hero.png');
+            $featuredImageAlt = $blog['alt_text'] ?? $blog['title'] ?? 'Rigid box packaging';
+        @endphp
         <div class="featured-image-wrap">
-            <img src="{{ asset('images/luxury-black-box.png') }}" alt="Luxury Black Rigid Box Packaging" class="featured-image" loading="lazy">
+            <img src="{{ $featuredImage }}" alt="{{ $featuredImageAlt }}" class="featured-image" onerror="this.onerror=null; this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         </div>
 
         <!-- Main Content & Sidebar Grid -->
@@ -1070,7 +1093,16 @@
                     <div class="recent-articles-list">
                         @foreach($recentBlogs as $rb)
                         <div class="recent-article-item">
-                            @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/below-hero.png'); @endphp
+                            @php
+                                $rbImagePath = $rb->image ?? null;
+                                $rbIsRemoteImage = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['http://', 'https://']);
+                                $rbPublicImagePath = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['storage/', 'uploads/', 'images/'])
+                                    ? $rbImagePath
+                                    : ($rbImagePath ? 'storage/' . ltrim($rbImagePath, '/') : null);
+                                $rbImg = ($rbIsRemoteImage || ($rbPublicImagePath && file_exists(public_path($rbPublicImagePath))))
+                                    ? ($rbIsRemoteImage ? $rbImagePath : asset($rbPublicImagePath))
+                                    : asset('images/below-hero.png');
+                            @endphp
                             <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                             <div class="recent-article-info">
                                 <a href="{{ url('/blog/' . $rb->slug) }}/" class="recent-article-title">{{ $rb->title }}</a>
@@ -1127,7 +1159,16 @@
 
                 @foreach($recentBlogs as $rb)
                 <article class="related-card" onclick="window.location.href='{{ url('/blog/' . $rb->slug) }}/';" style="cursor: pointer;">
-                    @php $rbImg = !empty($rb->image) ? (\Illuminate\Support\Str::startsWith($rb->image, ['http', 'storage/']) ? asset($rb->image) : asset('storage/'.$rb->image)) : asset('images/luxury-black-box.png'); @endphp
+                    @php
+                        $rbImagePath = $rb->image ?? null;
+                        $rbIsRemoteImage = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['http://', 'https://']);
+                        $rbPublicImagePath = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['storage/', 'uploads/', 'images/'])
+                            ? $rbImagePath
+                            : ($rbImagePath ? 'storage/' . ltrim($rbImagePath, '/') : null);
+                        $rbImg = ($rbIsRemoteImage || ($rbPublicImagePath && file_exists(public_path($rbPublicImagePath))))
+                            ? ($rbIsRemoteImage ? $rbImagePath : asset($rbPublicImagePath))
+                            : asset('images/below-hero.png');
+                    @endphp
                     <a href="{{ url('/blog/' . $rb->slug) }}/" style="display:block;" onclick="event.stopPropagation();">
                         <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="related-card-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
                     </a>
