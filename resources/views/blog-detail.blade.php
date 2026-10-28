@@ -214,9 +214,32 @@
 
         /* Article Main Content */
         .article-body {
+            min-width: 0;
+            max-width: 100%;
             font-size: 16px;
             color: #374151;
             line-height: 1.8;
+        }
+
+        .table-responsive {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-responsive table {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border-collapse: collapse;
+        }
+
+        .table-responsive th,
+        .table-responsive td {
+            overflow-wrap: anywhere;
+            white-space: normal !important;
         }
 
         .article-body p {
@@ -709,6 +732,10 @@
         }
 
         @media (max-width: 640px) {
+            .table-responsive table {
+                min-width: 620px;
+            }
+
             .author-card {
                 display: block;
                 padding: 20px;
@@ -1221,7 +1248,19 @@ document.addEventListener('DOMContentLoaded', function () {
     var tocList = document.getElementById('tocList');
     var tocWidget = document.getElementById('tocWidget');
 
-    if (!articleBody || !tocList) return;
+    if (!articleBody) return;
+
+    // Keep wide tables inside the article on small screens instead of widening the page.
+    articleBody.querySelectorAll('table').forEach(function (table) {
+        if (table.parentElement && table.parentElement.classList.contains('table-responsive')) return;
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'table-responsive';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
+
+    if (!tocList) return;
 
     // Get all h2 headings from article body
     var headings = articleBody.querySelectorAll('h2');
