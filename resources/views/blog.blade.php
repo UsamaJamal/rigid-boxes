@@ -144,9 +144,9 @@
 @media (max-width: 1240px) and (min-width: 901px) {
     /* Buttons should not shrink/crop, let them scroll horizontally */
     .category-row { gap: clamp(6px, 1.5vw, 24px); }
-    .feature { min-height: 470px; }
-    .feature > img { height: 470px; }
-    .feature-copy { width: 47%; padding: clamp(26px, 4vw, 60px); }
+    .feature { min-height: 343px; }
+    .feature > img { height: 343px; }
+    .feature-copy { width: 48%; height: 343px; padding: 26px 36px; }
     .feature h2, .cta-copy h2 { font-size: clamp(24px, 2.55vw, 32px); line-height: 1.25; }
     .feature p:not(.eyebrow), .cta-copy p { font-size: clamp(13px, 1.4vw, 16px); line-height: 1.5; }
     .cta { gap: clamp(22px, 4vw, 50px); padding-right: clamp(30px, 6vw, 80px); }
@@ -160,24 +160,25 @@
 .feature {
     display: block;
     position: relative;
-    min-height: 545px;
+    min-height: 343px;
     margin-bottom: 48px;
 }
 .feature > img {
-    width: 68%;
-    height: 545px;
+    width: 56%;
+    height: 343px;
     object-fit: cover;
 }
 .feature-copy {
     position: absolute;
-    top: 50%;
+    top: 56%;
     right: 12px; /* Leaves room for the 12px shadow */
     transform: translateY(-50%);
-    width: 44%;
+    width: 46%;
+    height: 343px;
     background: #fff;
     border: none;
     box-shadow: 12px 12px 0px var(--color-primary); /* Maroon drop shadow */
-    padding: 60px 50px;
+    padding: 26px 36px;
     z-index: 10;
 }
 .eyebrow {
@@ -627,14 +628,14 @@ nextBtn.addEventListener('click', () => {
     .feature p:not(.eyebrow) { margin-bottom: 18px; font-size: 13px; line-height: 1.5; text-align: left; }
     .feature-copy .button { padding: 9px 16px; font-size: 12px; }
 
-    .grid { grid-template-columns: 1fr; gap: 14px; }
-    .card { display: flex; min-height: 0; border-radius: 8px; }
-    .card img { width: 100%; height: 128px !important; min-height: 0; }
-    .card-copy { padding: 13px 14px 15px; }
+    .grid { grid-template-columns: 1fr; gap: 24px; background: var(--color-page); }
+    .card { display: flex; min-height: 330px; border-radius: 8px; }
+    .card img { width: 100%; height: 170px !important; min-height: 0; object-fit: cover; object-position: center; }
+    .card-copy { padding: 13px 14px 32px; }
     .card .meta { margin-bottom: 8px; font-size: 11px; }
     .card h3 { min-height: 0; margin-bottom: 8px; font-size: 16px; line-height: 1.3; }
     .card p { display: block; margin: 0 0 12px; font-size: 13px; line-height: 1.45; text-align: left; }
-    .card .button { font-size: 13px; line-height: 1.3; }
+    .card .button { margin-top: 0; font-size: 13px; line-height: 1.3; }
     .pages { gap: 3px; margin: 26px 0; }
     .pages button { width: 32px; height: 32px; font-size: 12px; }
     .pages button.text-btn { padding: 0 7px; }

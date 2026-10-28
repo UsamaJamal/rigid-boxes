@@ -189,12 +189,17 @@
         /* Featured Hero Image */
         .featured-image-wrap {
             margin-bottom: 28px;
+            /* Slightly taller banner keeps the full packaging artwork in view. */
+            aspect-ratio: 2.1 / 1;
         }
 
         .featured-image {
+            display: block;
             width: 100%;
-            height: 480px;
+            height: 100%;
+            max-width: 100%;
             object-fit: cover;
+            object-position: center;
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         }
@@ -695,7 +700,7 @@
             }
 
             .featured-image {
-                height: 380px;
+                height: 100%;
             }
 
             .related-grid {
@@ -848,12 +853,13 @@
             .featured-image-wrap {
                 margin-left: -16px;
                 margin-right: -16px;
+                aspect-ratio: 2.1 / 1;
             }
 
             .featured-image {
-                height: 392px;
                 width: 100%;
-                border-radius: 0;
+                height: 100%;
+                border-radius: 12px;
                 object-fit: cover;
             }
 
