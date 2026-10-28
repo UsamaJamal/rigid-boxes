@@ -844,15 +844,6 @@
                 display: none;
             }
 
-            .article-body h2:nth-of-type(n+4),
-            .article-body h2:nth-of-type(n+4) ~ p,
-            .article-body h2:nth-of-type(n+4) ~ ul,
-            .article-body h2:nth-of-type(n+4) ~ ol,
-            .article-body h2:nth-of-type(n+4) ~ .callout-box,
-            .article-body h2:nth-of-type(n+4) ~ .quote-box {
-                display: none;
-            }
-
             .sidebar {
                 display: none;
             }
