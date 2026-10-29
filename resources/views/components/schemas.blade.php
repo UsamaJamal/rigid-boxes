@@ -262,35 +262,10 @@
         }
     }
 
-    $schemaCustomTypes = [];
-    $schemaCollectTypes = function ($value) use (&$schemaCollectTypes, &$schemaCustomTypes) {
-        if (!is_array($value)) {
-            return;
-        }
-
-        if (!empty($value['@type'])) {
-            foreach ((array) $value['@type'] as $type) {
-                $schemaCustomTypes[] = $type;
-            }
-        }
-
-        foreach ($value as $child) {
-            $schemaCollectTypes($child);
-        }
-    };
-    $schemaCollectTypes($schemaCustomPayload);
-    $schemaCustomTypes = array_values(array_intersect(
-        array_unique($schemaCustomTypes),
-        ['Product', 'WebPage', 'CollectionPage']
-    ));
-
-    // Admin-defined page nodes replace their generated equivalents.
-    // FAQ schema continues to be generated from the page's saved FAQs.
+    // A custom schema replaces the generated schema for this page entirely.
+    // If it is removed, the generated defaults below are rendered again.
     if ($schemaCustomPayload !== null) {
-        $schemaGraph = array_values(array_filter(
-            $schemaGraph,
-            fn ($node) => !in_array($node['@type'] ?? null, $schemaCustomTypes, true)
-        ));
+        $schemaGraph = [];
     }
 
     if (!empty($schemaProduct)) {
@@ -306,12 +281,14 @@
         '@graph' => $schemaGraph,
     ];
 @endphp
+@if($schemaCustomPayload === null)
 <script type="application/ld+json">
 {!! json_encode(
     $schemaPayload,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
+@endif
 @if($schemaCustomPayload !== null)
 <script type="application/ld+json">
 {!! json_encode(
