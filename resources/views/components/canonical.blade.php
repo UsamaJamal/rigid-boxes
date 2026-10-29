@@ -44,6 +44,14 @@
 <meta name="twitter:title" content="{{ $socialTitle }}">
 <meta name="twitter:description" content="{{ $socialDescription }}">
 <meta name="twitter:image" content="{{ $socialImage }}">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5VLT0GNXMD"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5VLT0GNXMD');
+</script>
 <script>
     if (window.location.pathname === '/public' || window.location.pathname.startsWith('/public/')) {
         window.history.replaceState(
