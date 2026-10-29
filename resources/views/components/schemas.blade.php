@@ -64,8 +64,10 @@
     $schemaWebsiteId = $schemaSiteUrl . '#website';
     $schemaWebPageId = $schemaPageUrl . '#webpage';
 
-    $schemaGraph = [
-        [
+    $schemaGraph = [];
+    // LocalBusiness schema belongs to site and commerce pages, not individual blog posts.
+    if (empty($schemaBlog)) {
+        $schemaGraph[] = [
             '@type' => 'LocalBusiness',
             '@id' => $schemaBusinessId,
             'name' => 'The Rigid Boxes',
@@ -81,8 +83,8 @@
                 'streetAddress' => $schemaAddress,
                 'addressCountry' => 'US',
             ],
-        ],
-    ];
+        ];
+    }
 
     $schemaWebPageType = 'WebPage';
     if (request()->is('contact-us')) {
@@ -101,30 +103,6 @@
         $schemaWebPageType = 'CollectionPage';
     } elseif (!empty($schemaAuthor)) {
         $schemaWebPageType = 'ProfilePage';
-    }
-
-
-
-    $schemaBreadcrumbs = [[
-        '@type' => 'ListItem',
-        'position' => 1,
-        'name' => 'Home',
-        'item' => $schemaSiteUrl,
-    ]];
-    if (trim(request()->path(), '/') !== '') {
-        $schemaBreadcrumbs[] = [
-            '@type' => 'ListItem',
-            'position' => 2,
-            'name' => trim(strip_tags((string) $schemaPageName)),
-            'item' => $schemaPageUrl,
-        ];
-    }
-    if (trim(request()->path(), '/') !== '') {
-        $schemaGraph[] = [
-            '@type' => 'BreadcrumbList',
-            '@id' => $schemaPageUrl . '#breadcrumb',
-            'itemListElement' => $schemaBreadcrumbs,
-        ];
     }
 
     $schemaFaqs = [];
@@ -246,7 +224,12 @@
                 '@type' => !empty($schemaBlog['joined_author_name']) ? 'Person' : 'Organization',
                 'name' => $schemaBlogAuthor,
             ],
-            'publisher' => ['@id' => $schemaBusinessId],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'The Rigid Boxes',
+                'url' => $schemaSiteUrl,
+                'logo' => $schemaLogo,
+            ],
         ], fn ($value) => $value !== null && $value !== '');
     }
 
@@ -302,7 +285,7 @@
     ));
 
     // Admin-defined page nodes replace their generated equivalents.
-    // Keep the shared site, breadcrumb and FAQ schemas available on the page.
+    // FAQ schema continues to be generated from the page's saved FAQs.
     if ($schemaCustomPayload !== null) {
         $schemaGraph = array_values(array_filter(
             $schemaGraph,
@@ -311,7 +294,7 @@
     }
 
     if (!empty($schemaProduct)) {
-        $allowedProductSchemas = ['Product', 'FAQPage', 'BreadcrumbList'];
+        $allowedProductSchemas = ['Product', 'FAQPage'];
         $schemaGraph = array_values(array_filter(
             $schemaGraph,
             fn ($node) => in_array($node['@type'] ?? null, $allowedProductSchemas, true)

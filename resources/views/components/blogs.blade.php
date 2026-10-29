@@ -93,8 +93,9 @@
 
     .blog-card__image {
         width: 100%;
-        height: 240px;
-        object-fit: cover;
+        aspect-ratio: auto;
+        height: auto;
+        object-fit: contain;
         border-bottom: 1px solid #EAEAEA;
     }
 
@@ -251,7 +252,17 @@
         }
 
         .blog-card__image {
-            height: 210px;
+            display: block;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            max-height: none !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            object-position: left center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-bottom: 0;
         }
 
         .blog-card__content {

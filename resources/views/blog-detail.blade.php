@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     @php
-        $articleTitle = $blog['meta_title'] ?? $blog['title'] ?? 'Packaging Blog | The Rigid Boxes';
+        $articleTitle = trim((string) ($blog['meta_title'] ?? '')) ?: ($blog['title'] ?? 'Packaging Blog | The Rigid Boxes');
+        $articleDescriptionSource = $blog['meta_description'] ?? $blog['excerpt'] ?? $blog['content'] ?? '';
+        $articleDescription = preg_replace('/\s+/', ' ', trim(strip_tags(html_entity_decode((string) $articleDescriptionSource))));
+        $articleKeywords = trim((string) ($blog['meta_keywords'] ?? ''));
         $articleSubtitle = preg_replace('/\s+/', ' ', trim(strip_tags(html_entity_decode($blog['excerpt'] ?? ''))));
     @endphp
     <link rel="icon" href="{{ asset('uploads/favicon-rigid-boxes.png') }}" type="image/png">
@@ -10,6 +13,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $articleTitle }}</title>
+    <meta name="description" content="{{ $articleDescription }}">
+    @if($articleKeywords)
+    <meta name="keywords" content="{{ $articleKeywords }}">
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -204,16 +211,21 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         }
 
+        .mobile-toc-widget {
+            display: none;
+        }
+
         /* Main 2-Column Layout */
         .article-layout {
             display: grid;
             grid-template-columns: 1fr 340px;
             gap: 32px;
-            align-items: start;
+            align-items: stretch;
         }
 
         /* Article Main Content */
         .article-body {
+            align-self: start;
             min-width: 0;
             max-width: 100%;
             font-size: 16px;
@@ -225,15 +237,17 @@
             width: 100%;
             max-width: 100%;
             margin: 20px 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            /* Desktop tables fit the article column; reserve scrolling for phones. */
+            overflow-x: hidden;
         }
 
         .table-responsive table {
             width: 100% !important;
             max-width: none !important;
+            min-width: 0 !important;
             margin: 0 !important;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         .table-responsive th,
@@ -366,7 +380,7 @@
 
         /* Author Biography Card */
         .author-card {
-            margin-bottom: -20px;
+            margin-bottom: 40px;
             background: #FAF8F8;
             border-radius: 16px;
             padding: 24px;
@@ -383,6 +397,48 @@
             border-top: 1px solid #EAEAEA;
             margin: 40px 0 24px 0;
             width: 100%;
+        }
+
+        .author-share-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 220px;
+            gap: 20px;
+            align-items: stretch;
+            margin-bottom: 40px;
+        }
+
+        .author-share-row .author-card,
+        .author-share-row .article-share-widget {
+            margin: 0;
+        }
+
+        .author-share-row .author-card {
+            order: 2;
+        }
+
+        .author-share-row .article-share-widget {
+            order: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .article-end-widgets {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .article-end-widgets .newsletter-widget,
+        .article-end-widgets .article-share-widget {
+            margin: 0;
+        }
+
+        .article-end-widgets .article-share-widget {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .author-card-avatar {
@@ -428,6 +484,18 @@
             display: flex;
             flex-direction: column;
             gap: 28px;
+            align-self: stretch;
+            position: relative;
+        }
+
+        /* These remain at the bottom of the right column, beside the end of the article. */
+        .sidebar-static-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: auto;
+            padding-bottom: 40px;
+            box-sizing: border-box;
         }
 
         .widget {
@@ -436,6 +504,29 @@
             padding: 20px;
             border: 1px solid #EAEAEA;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Keep the table of contents visible while the article scrolls. */
+        #tocWidget {
+            position: sticky;
+            top: 96px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            z-index: 2;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        #tocWidget::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* The TOC stops immediately above the static sidebar actions. */
+        #tocWidget.toc-stopped-at-actions {
+            position: absolute;
+            top: var(--toc-stop-top);
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .widget-title {
@@ -732,8 +823,112 @@
         }
 
         @media (max-width: 640px) {
+            .mobile-toc-widget {
+                display: block;
+                margin: 0 0 22px;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            }
+
+            .mobile-toc-toggle {
+                width: 100%;
+                border: 0;
+                background: var(--color-primary);
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px;
+                font: 700 16px var(--font-heading);
+                cursor: pointer;
+            }
+
+            .mobile-toc-toggle__label {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .mobile-toc-chevron {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #ffffff;
+                color: var(--color-primary);
+                position: relative;
+                display: block;
+                transition: transform 0.2s ease;
+            }
+
+            .mobile-toc-chevron svg {
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                /* Optical centering: the chevron's stroke carries more visual weight above its box. */
+                top: 55%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 2.5;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .mobile-toc-widget.is-open .mobile-toc-chevron {
+                transform: rotate(180deg);
+            }
+
+            .mobile-toc-list {
+                display: none;
+                list-style: none;
+                margin: 0;
+                padding: 12px 16px;
+                background: #ffffff;
+            }
+
+            .mobile-toc-widget.is-open .mobile-toc-list {
+                display: block;
+            }
+
+            .mobile-toc-item a {
+                display: block;
+                padding: 9px 0;
+                color: #374151;
+                font-size: 14px;
+                line-height: 1.35;
+                text-decoration: none;
+                border-radius: 6px;
+                transition: background-color 0.18s ease, color 0.18s ease;
+            }
+
+            .mobile-toc-item a:hover {
+                background: #f7eeee;
+                color: var(--color-primary);
+            }
+
+            .mobile-toc-item.active a {
+                color: var(--color-primary);
+                font-weight: 700;
+                background: #f7eeee;
+            }
+
+            .author-share-row {
+                grid-template-columns: 1fr;
+            }
+
+            .article-end-widgets {
+                grid-template-columns: 1fr;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .table-responsive table {
-                min-width: 620px;
+                min-width: 620px !important;
             }
 
             .author-card {
@@ -869,16 +1064,16 @@
             }
 
             .featured-image-wrap {
-                margin-left: -16px;
-                margin-right: -16px;
-                aspect-ratio: 2.1 / 1;
+                margin-left: 0;
+                margin-right: 0;
+                aspect-ratio: auto;
             }
 
             .featured-image {
                 width: 100%;
-                height: 100%;
+                height: auto;
                 border-radius: 12px;
-                object-fit: cover;
+                object-fit: contain;
             }
 
             .author-card {
@@ -1013,7 +1208,6 @@
                     ? $featuredImagePath
                     : 'storage/' . ltrim($featuredImagePath, '/');
 
-                // Use the same graceful fallback as blog cards if an old image path no longer exists.
                 $featuredImage = ($isRemoteImage || file_exists(public_path($publicImagePath)))
                     ? ($isRemoteImage ? $featuredImagePath : asset($publicImagePath))
                     : asset('images/below-hero.png');
@@ -1023,6 +1217,15 @@
         @endphp
         <div class="featured-image-wrap">
             <img src="{{ $featuredImage }}" alt="{{ $featuredImageAlt }}" class="featured-image" onerror="this.onerror=null; this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
+        </div>
+
+        <!-- Mobile-only collapsible table of contents -->
+        <div class="mobile-toc-widget" id="mobileTocWidget">
+            <button class="mobile-toc-toggle" id="mobileTocToggle" type="button" aria-expanded="false" aria-controls="mobileTocList">
+                <span class="mobile-toc-toggle__label"><span aria-hidden="true">☷</span> Table of Contents</span>
+                <span class="mobile-toc-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg></span>
+            </button>
+            <ul class="mobile-toc-list" id="mobileTocList"></ul>
         </div>
 
         <!-- Main Content & Sidebar Grid -->
@@ -1078,7 +1281,6 @@
                 @endif
 
                 <hr class="author-divider">
-
                 <!-- Author Bio Card -->
                 <div class="author-card">
                     @if($authorSlug)
@@ -1098,6 +1300,34 @@
                         <div class="author-card-bio">{{ $authorDesc }}</div>
                     </div>
                 </div>
+
+                @if(false)
+                <!-- End-of-article actions: moved below Related Blogs. -->
+                <div class="article-end-widgets">
+                    <div class="newsletter-widget">
+                        <h3 class="newsletter-title">Stay Inspired</h3>
+                        <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
+                        <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                            @csrf
+                            @if(session('success'))
+                                <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 13px;">{{ session('success') }}</div>
+                            @endif
+                            <input type="email" name="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+                            <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                        </form>
+                    </div>
+
+                    <div class="widget share-widget article-share-widget">
+                        <div class="widget-title">SHARE BLOG</div>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg></a>
+                            <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                            <a href="#" class="social-btn" aria-label="Email"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                            <a href="#" class="social-btn" aria-label="Bookmark"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2-2v14c0 1.1-.9 2-2 2z"></path></svg></a>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </article>
 
             <!-- Right Sidebar -->
@@ -1112,6 +1342,7 @@
                 </div>
 
                 <!-- Recent Articles Widget -->
+                @if($recentBlogs->isNotEmpty())
                 <div class="widget">
                     <div class="widget-title" style="font-size: 18px; font-family: var(--font-heading); color: var(--color-ink); text-transform: none; font-weight: 700; margin-bottom: 20px;">Recent Articles</div>
                     <div class="recent-articles-list">
@@ -1136,40 +1367,29 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
 
-                <!-- Newsletter Stay Inspired Widget -->
+                <!-- Static actions at the bottom of the right sidebar. -->
+                <div class="sidebar-static-actions">
                 <div class="newsletter-widget">
                     <h3 class="newsletter-title">Stay Inspired</h3>
                     <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
                     <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
                         @csrf
-                        @if(session('success'))
-                            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 13px;">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                         <input type="email" name="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
                         <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
                     </form>
                 </div>
 
-                <!-- Share Blog Widget -->
                 <div class="widget share-widget">
                     <div class="widget-title">SHARE BLOG</div>
                     <div class="social-buttons">
-                        <a href="#" class="social-btn" aria-label="Facebook">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="Instagram">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="Email">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
-                        <a href="#" class="social-btn" aria-label="Bookmark">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                        </a>
+                        <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg></a>
+                        <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" class="social-btn" aria-label="Email"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                        <a href="#" class="social-btn" aria-label="Bookmark"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14c0 1.1-.9 2-2 2z"></path></svg></a>
                     </div>
+                </div>
                 </div>
 
             </aside>
@@ -1177,6 +1397,7 @@
         </div>
 
         <!-- Related Blogs Section -->
+        @if($recentBlogs->isNotEmpty())
         <section class="related-blogs-section">
             <h2 class="related-title">Related Blogs</h2>
             <div class="related-grid">
@@ -1228,6 +1449,31 @@
                 @endforeach
             </div>
         </section>
+        @endif
+
+        @if(false)
+        <!-- Final page actions, moved back into the right sidebar. -->
+        <div class="article-end-widgets">
+            <div class="newsletter-widget">
+                <h3 class="newsletter-title">Stay Inspired</h3>
+                <p class="newsletter-desc">Join 12,000+ brand leaders receiving weekly packaging insights and trend reports</p>
+                <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
+                    @csrf
+                    <input type="email" name="email" class="newsletter-input" placeholder="YOUR EMAIL" required>
+                    <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+                </form>
+            </div>
+            <div class="widget share-widget article-share-widget">
+                <div class="widget-title">SHARE BLOG</div>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn" aria-label="Facebook"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.714 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg></a>
+                    <a href="#" class="social-btn" aria-label="Instagram"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#" class="social-btn" aria-label="Email"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                    <a href="#" class="social-btn" aria-label="Bookmark"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14c0 1.1-.9 2-2 2z"></path></svg></a>
+                </div>
+            </div>
+        </div>
+        @endif
 
     </div>
 </main>
@@ -1238,8 +1484,52 @@ document.addEventListener('DOMContentLoaded', function () {
     var articleBody = document.querySelector('.article-body');
     var tocList = document.getElementById('tocList');
     var tocWidget = document.getElementById('tocWidget');
+    var mobileTocWidget = document.getElementById('mobileTocWidget');
+    var mobileTocList = document.getElementById('mobileTocList');
+    var mobileTocToggle = document.getElementById('mobileTocToggle');
 
     if (!articleBody) return;
+
+    // Keep the TOC sticky until the static actions below it are reached, then
+    // lock it directly above them. This creates a clean stop with no overlap.
+    if (tocWidget) {
+        var sidebar = tocWidget.closest('.sidebar');
+        var staticActions = sidebar ? sidebar.querySelector('.sidebar-static-actions') : null;
+        var tocStickyTop = 96;
+        var tocWidgetGap = 28;
+        var updateTocStopPoint = function () {
+            if (!staticActions || !window.matchMedia('(min-width: 1025px)').matches) {
+                tocWidget.classList.remove('toc-stopped-at-actions');
+                tocWidget.style.removeProperty('--toc-stop-top');
+                return;
+            }
+
+            var actionsRect = staticActions.getBoundingClientRect();
+            var tocHeight = tocWidget.offsetHeight;
+
+            if (tocWidget.classList.contains('toc-stopped-at-actions')) {
+                if (actionsRect.top > tocStickyTop + tocHeight + tocWidgetGap) {
+                    tocWidget.classList.remove('toc-stopped-at-actions');
+                    tocWidget.style.removeProperty('--toc-stop-top');
+                }
+                return;
+            }
+
+            var tocRect = tocWidget.getBoundingClientRect();
+            var tocIsPinned = tocRect.top <= tocStickyTop + 2;
+            var hasReachedActions = actionsRect.top <= tocRect.bottom + tocWidgetGap;
+
+            if (tocIsPinned && hasReachedActions) {
+                var stopTop = Math.max(0, staticActions.offsetTop - tocHeight - tocWidgetGap);
+                tocWidget.style.setProperty('--toc-stop-top', stopTop + 'px');
+                tocWidget.classList.add('toc-stopped-at-actions');
+            }
+        };
+
+        updateTocStopPoint();
+        window.addEventListener('scroll', updateTocStopPoint, { passive: true });
+        window.addEventListener('resize', updateTocStopPoint);
+    }
 
     // Keep wide tables inside the article on small screens instead of widening the page.
     articleBody.querySelectorAll('table').forEach(function (table) {
@@ -1251,15 +1541,33 @@ document.addEventListener('DOMContentLoaded', function () {
         wrapper.appendChild(table);
     });
 
-    if (!tocList) return;
+    if (!tocList && !mobileTocList) return;
+
+    if (mobileTocToggle && mobileTocWidget) {
+        mobileTocToggle.addEventListener('click', function () {
+            var isOpen = mobileTocWidget.classList.toggle('is-open');
+            mobileTocToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    }
 
     // Get all h2 headings from article body
     var headings = articleBody.querySelectorAll('h2');
 
     if (headings.length === 0) {
         if (tocWidget) tocWidget.style.display = 'none';
+        if (mobileTocWidget) mobileTocWidget.style.display = 'none';
         return;
     }
+
+    var markTocItemActive = function (activeIndex) {
+        document.querySelectorAll('.toc-item, .mobile-toc-item').forEach(function (item) {
+            var isActive = Number(item.dataset.tocIndex) === activeIndex;
+            item.classList.toggle('active', isActive);
+            if (isActive && tocWidget && item.classList.contains('toc-item')) {
+                tocWidget.scrollTop = Math.max(0, item.offsetTop - (tocWidget.clientHeight / 2) + (item.offsetHeight / 2));
+            }
+        });
+    };
 
     // Generate TOC items
     headings.forEach(function (heading, index) {
@@ -1269,6 +1577,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var li = document.createElement('li');
         li.className = 'toc-item';
+        li.dataset.tocIndex = index;
 
         var num = (index + 1).toString().padStart(2, '0');
         var a = document.createElement('a');
@@ -1278,32 +1587,51 @@ document.addEventListener('DOMContentLoaded', function () {
         // Smooth scroll on click
         a.addEventListener('click', function (e) {
             e.preventDefault();
+            markTocItemActive(index);
             heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         li.appendChild(a);
-        tocList.appendChild(li);
+        if (tocList) tocList.appendChild(li);
+
+        if (mobileTocList) {
+            var mobileLi = document.createElement('li');
+            mobileLi.className = 'mobile-toc-item';
+            mobileLi.dataset.tocIndex = index;
+            var mobileLink = a.cloneNode(true);
+            mobileLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                markTocItemActive(index);
+                heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            mobileLi.appendChild(mobileLink);
+            mobileTocList.appendChild(mobileLi);
+        }
     });
 
-    // Highlight active TOC item on scroll
-    window.addEventListener('scroll', function () {
-        var scrollY = window.scrollY + 120;
+    // Highlight and keep in view the item for the section currently on screen.
+    var updateActiveTocItem = function () {
         var activeIndex = 0;
 
         headings.forEach(function (heading, index) {
-            if (heading.offsetTop <= scrollY) {
+            if (heading.getBoundingClientRect().top <= 150) {
                 activeIndex = index;
             }
         });
 
-        tocList.querySelectorAll('.toc-item').forEach(function (item, i) {
-            if (i === activeIndex) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
+        markTocItemActive(activeIndex);
+    };
+
+    var tocScrollQueued = false;
+    window.addEventListener('scroll', function () {
+        if (tocScrollQueued) return;
+        tocScrollQueued = true;
+        window.requestAnimationFrame(function () {
+            updateActiveTocItem();
+            tocScrollQueued = false;
         });
-    });
+    }, { passive: true });
+    updateActiveTocItem();
 });
 </script>
 

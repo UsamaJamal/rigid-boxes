@@ -27,7 +27,10 @@ Route::get('/', function () {
     $recentBlogs = DB::table('admin_blogs')
         ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
         ->select('admin_blogs.*', 'admin_authors.title as author_name', 'admin_authors.slug as author_slug')
-        ->where('admin_blogs.status', 'published')->limit(4)->get();
+        ->where('admin_blogs.status', 'published')
+        ->where('admin_blogs.show_home', true)
+        ->limit(4)
+        ->get();
     return view('homepage', compact('settings', 'categories', 'products', 'recentBlogs'));
 });
 
@@ -209,7 +212,10 @@ Route::get('/blog/{slug}', function ($slug) {
     $recentBlogs = DB::table('admin_blogs')
         ->leftJoin('admin_authors', 'admin_blogs.author_id', '=', 'admin_authors.id')
         ->select('admin_blogs.*', 'admin_authors.title as joined_author_name', 'admin_authors.slug as joined_author_slug')
-        ->where('admin_blogs.status', 'published')->limit(4)->get();
+        ->where('admin_blogs.status', 'published')
+        ->where('admin_blogs.slug', '!=', $blog['slug'])
+        ->limit(4)
+        ->get();
     return view('blog-detail', compact('blog', 'recentBlogs'));
 });
 
