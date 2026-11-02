@@ -1115,7 +1115,12 @@
             }
         }
 
+        // Fallback only: alt text written in the admin or the editor is never
+        // replaced. Images with no alt get a readable one from the filename,
+        // e.g. "rigid-box-guide.webp" -> "Rigid box guide".
         function applyImageMetadata(image) {
+            if ((image.getAttribute('alt') || '').trim() !== '') return;
+
             const imageName = imageNameFromSrc(image);
             if (!imageName) return;
 
@@ -1128,10 +1133,8 @@
 
             if (!words.length) return;
 
-            image.alt = words.map(word => word.toLowerCase()).join('-');
-            image.title = words
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join(' ');
+            const sentence = words.join(' ').toLowerCase();
+            image.alt = sentence.charAt(0).toUpperCase() + sentence.slice(1);
         }
 
         function applyToImages(root) {

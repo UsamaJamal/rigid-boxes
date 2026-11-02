@@ -109,25 +109,24 @@ class AdminContentController extends Controller
 
         $file = $request->file('file');
 
-        // Editor media is public site content, so it lives under /uploads with
-        // a clean, SEO-friendly name (e.g. /uploads/images/rigid-box-guide.webp).
-        $folder = Str::startsWith((string) $file->getMimeType(), 'video/') ? 'uploads/videos' : 'uploads/images';
+        // Editor media is served straight from the site root with a clean,
+        // SEO-friendly name: https://therigidboxes.com/rigid-box-guide.webp
 
         // The extension comes from the detected file type, never from the
-        // uploaded name, so a file can't be saved as e.g. ".php".
+        // uploaded name, so a file can't be saved as e.g. ".html" or ".php".
         $extension = $file->guessExtension() ?: 'bin';
         $base = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) ?: 'image';
 
         // Keep existing files: a second upload with the same name gets -2, -3, ...
         $name = $base . '.' . $extension;
-        for ($i = 2; file_exists(public_path($folder . '/' . $name)); $i++) {
+        for ($i = 2; file_exists(public_path($name)); $i++) {
             $name = $base . '-' . $i . '.' . $extension;
         }
 
-        $file->move(public_path($folder), $name);
+        $file->move(public_path(), $name);
 
         return response()->json([
-            'location' => asset($folder . '/' . $name),
+            'location' => asset($name),
         ]);
     }
 
