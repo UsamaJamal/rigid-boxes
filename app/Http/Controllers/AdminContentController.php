@@ -108,10 +108,26 @@ class AdminContentController extends Controller
         ]);
 
         $file = $request->file('file');
-        $path = $file->storeAs('admin/tinymce', $file->getClientOriginalName(), 'public');
+
+        // Editor media is public site content, so it lives under /uploads with
+        // a clean, SEO-friendly name (e.g. /uploads/images/rigid-box-guide.webp).
+        $folder = Str::startsWith((string) $file->getMimeType(), 'video/') ? 'uploads/videos' : 'uploads/images';
+
+        // The extension comes from the detected file type, never from the
+        // uploaded name, so a file can't be saved as e.g. ".php".
+        $extension = $file->guessExtension() ?: 'bin';
+        $base = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) ?: 'image';
+
+        // Keep existing files: a second upload with the same name gets -2, -3, ...
+        $name = $base . '.' . $extension;
+        for ($i = 2; file_exists(public_path($folder . '/' . $name)); $i++) {
+            $name = $base . '-' . $i . '.' . $extension;
+        }
+
+        $file->move(public_path($folder), $name);
 
         return response()->json([
-            'location' => asset('storage/' . $path),
+            'location' => asset($folder . '/' . $name),
         ]);
     }
 

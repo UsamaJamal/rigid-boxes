@@ -127,7 +127,8 @@
 
                     try {
                         const location = await window.uploadTinyMceFile(data);
-                        callback(location, { title: file.name });
+                        // Leave title/alt for the editor to write in the image dialog.
+                        callback(location);
                     } catch (error) {
                         window.alert(error.message || 'Upload failed.');
                     }

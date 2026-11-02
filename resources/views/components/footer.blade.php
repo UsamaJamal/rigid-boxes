@@ -215,34 +215,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Keep meaningful image alt text consistent without changing decorative alt="" images.
-    const normalizeImageAlt = function(image) {
-        const alt = image.getAttribute('alt');
-        if (alt === null || alt.trim() === '') return;
-
-        image.setAttribute(
-            'alt',
-            alt
-                .trim()
-                .replace(/[-_]+/g, ' ')
-                .replace(/\s+/g, ' ')
-                .toLowerCase()
-        );
-    };
-
-    document.querySelectorAll('img[alt]').forEach(normalizeImageAlt);
-
-    // Normalize images added later by sliders, AJAX content, or other components.
-    const imageObserver = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            mutation.addedNodes.forEach(function(node) {
-                if (!(node instanceof Element)) return;
-                if (node.matches('img[alt]')) normalizeImageAlt(node);
-                node.querySelectorAll('img[alt]').forEach(normalizeImageAlt);
-            });
-        });
-    });
-    imageObserver.observe(document.body, { childList: true, subtree: true });
 
     const ajaxForms = document.querySelectorAll('form[action*="/submit-quote"], form[action*="/submit-newsletter"], form[action*="/submit-contact"]');
 
