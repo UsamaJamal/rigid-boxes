@@ -237,6 +237,7 @@
 
         .hero-form > p.desc-text {
             margin-bottom: 15px;
+            text-align: justify;
         }
 
         .read-more-btn {

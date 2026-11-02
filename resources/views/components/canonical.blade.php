@@ -65,3 +65,17 @@
 </script>
 @include('components.schemas')
 <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+<style>
+    /* Keep paragraph copy consistent across all public pages on desktop. */
+    @media (min-width: 769px) {
+        p {
+            font-size: 16px !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+        p {
+            font-size: 16px !important;
+        }
+    }
+</style>

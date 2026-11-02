@@ -1137,7 +1137,7 @@
             <div class="breadcrumb">
                 <a href="{{ url('/') }}">HOME</a>
                 <span class="sep">/</span>
-                <a href="{{ url('/blog/') }}">BLOG</a>
+                <a href="{{ rtrim(url('/blog'), '/') }}/">BLOG</a>
                 <span class="sep">/</span>
                 <span class="current">{{ $blog['title'] ?? 'BLOG ARTICLE' }}</span>
             </div>
