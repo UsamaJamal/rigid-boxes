@@ -469,7 +469,7 @@
     @include('components.header')
 
     <main>
-        @include('components.herohome', ['settings' => $category ?? []])
+        @include('components.herohome', ['settings' => $category ?? [], 'is_category' => true])
 
         @include('components.logo')
 

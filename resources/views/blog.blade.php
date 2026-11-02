@@ -144,9 +144,9 @@
 @media (max-width: 1240px) and (min-width: 901px) {
     /* Buttons should not shrink/crop, let them scroll horizontally */
     .category-row { gap: clamp(6px, 1.5vw, 24px); }
-    .feature { min-height: 470px; }
-    .feature > img { height: 470px; }
-    .feature-copy { width: 47%; padding: clamp(26px, 4vw, 60px); }
+    .feature { min-height: 343px; }
+    .feature > img { height: 343px; }
+    .feature-copy { width: 48%; height: 343px; padding: 26px 36px; }
     .feature h2, .cta-copy h2 { font-size: clamp(24px, 2.55vw, 32px); line-height: 1.25; }
     .feature p:not(.eyebrow), .cta-copy p { font-size: clamp(13px, 1.4vw, 16px); line-height: 1.5; }
     .cta { gap: clamp(22px, 4vw, 50px); padding-right: clamp(30px, 6vw, 80px); }
@@ -160,24 +160,25 @@
 .feature {
     display: block;
     position: relative;
-    min-height: 545px;
+    min-height: 343px;
     margin-bottom: 48px;
 }
 .feature > img {
-    width: 68%;
-    height: 545px;
+    width: 56%;
+    height: 343px;
     object-fit: cover;
 }
 .feature-copy {
     position: absolute;
-    top: 50%;
+    top: 56%;
     right: 12px; /* Leaves room for the 12px shadow */
     transform: translateY(-50%);
-    width: 44%;
+    width: 46%;
+    height: 343px;
     background: #fff;
     border: none;
     box-shadow: 12px 12px 0px var(--color-primary); /* Maroon drop shadow */
-    padding: 60px 50px;
+    padding: 26px 36px;
     z-index: 10;
 }
 .eyebrow {
@@ -456,6 +457,7 @@ html, body { overflow-x: clip; }
         .mobile-hero-img { display: block !important; }
     }
 </style>
+<style>.feature[hidden]{display:none!important}</style>
 <nav class="categories" aria-label="Blog categories"><div class="category-row">
 <button class="filter active" data-filter="all"><img src="{{ asset('images/blog-filter-all.svg') }}" class="filter-icon" alt="All Blogs Filter Icon" loading="lazy"> All</button>
 <button class="filter" data-filter="packaging"><img src="{{ asset('images/blog-filter-packaging.png') }}" class="filter-icon" alt="Packaging Basics Filter Icon" loading="lazy"> Packaging Basics</button>
@@ -469,6 +471,22 @@ html, body { overflow-x: clip; }
 @php
     $featuredBlog = null;
     $displayBlogs = [];
+    $categoryKeys = [
+        'packaging basics' => 'packaging',
+        'marketing tips' => 'marketing',
+        'sustainable packaging guide' => 'sustainability',
+        'production & moq tips' => 'production',
+        'design tips' => 'design',
+        'industry specific studies' => 'industry',
+    ];
+    $categoryLabels = [
+        'packaging' => 'Packaging Basics',
+        'marketing' => 'Marketing Tips',
+        'sustainability' => 'Sustainable Packaging Guide',
+        'production' => 'Production & MOQ Tips',
+        'design' => 'Design Tips',
+        'industry' => 'Industry Specific Studies',
+    ];
     if (!empty($blogs) && count($blogs) > 0) {
         $blogsArray = json_decode(json_encode($blogs), true);
         $featuredBlog = $blogsArray[0];
@@ -479,13 +497,14 @@ html, body { overflow-x: clip; }
 @if($featuredBlog)
     @php
         $fTitle = $featuredBlog['title'] ?? '';
-        $fCat = str_replace('-', ' ', $featuredBlog['blog_category'] ?? 'Category');
+        $fCategoryKey = $categoryKeys[strtolower(trim((string) ($featuredBlog['blog_category'] ?? '')))] ?? strtolower(trim((string) ($featuredBlog['blog_category'] ?? ''))) ?: 'packaging';
+        $fCat = $categoryLabels[$fCategoryKey] ?? str_replace('-', ' ', $fCategoryKey);
         $fExcerpt = $featuredBlog['excerpt'] ?? '';
         $fSlug = $featuredBlog['slug'] ?? '';
         $fImg = !empty($featuredBlog['image']) ? asset($featuredBlog['image']) : asset('images/below-hero.png');
         $fUrl = url('/blog/' . $fSlug) . '/';
     @endphp
-    <article class="feature" onclick="window.location.href='{{ $fUrl }}';" style="cursor: pointer;">
+    <article class="feature" data-category="{{ $fCategoryKey }}" onclick="window.location.href='{{ $fUrl }}';" style="cursor: pointer;">
         <img src="{{ $fImg }}" alt="{{ $fTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="feature-copy">
             <p class="eyebrow">{{ $fCat }}</p>
@@ -509,6 +528,7 @@ html, body { overflow-x: clip; }
         $item = (array) $item;
         $bTitle = $item['title'] ?? 'Sustainable Packaging Trends For 2026';
         $bCat = $item['blog_category'] ?? 'packaging';
+        $bCategoryKey = $categoryKeys[strtolower(trim((string) $bCat))] ?? strtolower(trim((string) $bCat)) ?: 'packaging';
         $bAuthor = $item['author_name'] ?? 'Joe Danley';
         $bDate = !empty($item['publish_date']) ? date('M d, Y', strtotime($item['publish_date'])) : 'Nov 15, 2024';
         $bExcerpt = $item['excerpt'] ?? 'Explore how eco-friendly rigid boxes are transforming luxury packaging with sustainable';
@@ -516,7 +536,7 @@ html, body { overflow-x: clip; }
         $bImg = !empty($item['image']) ? asset($item['image']) : asset('images/Frame 571 (1).png');
         $bUrl = url('/blog/' . $bSlug) . '/';
     @endphp
-    <article class="card" data-category="{{ $bCat }}" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
+    <article class="card" data-category="{{ $bCategoryKey }}" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
         <img src="{{ $bImg }}" alt="{{ $bTitle }}" onerror="this.src='{{ asset('images/below-hero.png') }}'" loading="lazy">
         <div class="card-copy">
             <div class="meta">
@@ -546,7 +566,7 @@ document.documentElement.scrollLeft = 0;
 document.querySelectorAll('.filter').forEach(f=>f.addEventListener('click',()=>{
     document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
     f.classList.add('active');
-    document.querySelectorAll('.card').forEach(c=>c.hidden=f.dataset.filter!=='all'&&c.dataset.category!==f.dataset.filter);
+    document.querySelectorAll('.card, .feature').forEach(c=>c.hidden=f.dataset.filter!=='all'&&c.dataset.category!==f.dataset.filter);
     // Scroll only the category strip; never move the whole page horizontally.
     const row = f.closest('.category-row');
     if (row) {
@@ -627,14 +647,14 @@ nextBtn.addEventListener('click', () => {
     .feature p:not(.eyebrow) { margin-bottom: 18px; font-size: 13px; line-height: 1.5; text-align: left; }
     .feature-copy .button { padding: 9px 16px; font-size: 12px; }
 
-    .grid { grid-template-columns: 1fr; gap: 14px; }
-    .card { display: flex; min-height: 0; border-radius: 8px; }
-    .card img { width: 100%; height: 128px !important; min-height: 0; }
-    .card-copy { padding: 13px 14px 15px; }
+    .grid { grid-template-columns: 1fr; gap: 24px; background: var(--color-page); }
+    .card { display: flex; min-height: 330px; border-radius: 8px; }
+    .card img { width: 100%; height: 170px !important; min-height: 0; object-fit: cover; object-position: center; }
+    .card-copy { padding: 13px 14px 32px; }
     .card .meta { margin-bottom: 8px; font-size: 11px; }
     .card h3 { min-height: 0; margin-bottom: 8px; font-size: 16px; line-height: 1.3; }
     .card p { display: block; margin: 0 0 12px; font-size: 13px; line-height: 1.45; text-align: left; }
-    .card .button { font-size: 13px; line-height: 1.3; }
+    .card .button { margin-top: 0; font-size: 13px; line-height: 1.3; }
     .pages { gap: 3px; margin: 26px 0; }
     .pages button { width: 32px; height: 32px; font-size: 12px; }
     .pages button.text-btn { padding: 0 7px; }

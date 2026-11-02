@@ -296,7 +296,8 @@
 
         .card-image-wrapper {
             width: 100%;
-            height: 233px;
+            aspect-ratio: 1.9 / 1;
+            height: unset;
             overflow: hidden;
             background-color: #F5F5F5;
         }
@@ -563,7 +564,8 @@
             }
 
             .card-image-wrapper {
-                height: 260px;
+                aspect-ratio: 1.9 / 1;
+                height: unset;
             }
         }
 
@@ -666,6 +668,27 @@
 
             .card-image-wrapper {
                 height: 200px;
+            }
+        }
+
+        /* Match homepage cards on mobile: retain the entire uploaded image. */
+        @media screen and (max-width: 768px) {
+            .card-image-wrapper {
+                width: 100%;
+                height: auto !important;
+                aspect-ratio: auto !important;
+            }
+
+            .card-image {
+                display: block;
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                max-height: none !important;
+                object-fit: contain !important;
+                object-position: left center !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
         }
 

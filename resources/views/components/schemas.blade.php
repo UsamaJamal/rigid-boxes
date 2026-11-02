@@ -64,8 +64,10 @@
     $schemaWebsiteId = $schemaSiteUrl . '#website';
     $schemaWebPageId = $schemaPageUrl . '#webpage';
 
-    $schemaGraph = [
-        [
+    $schemaGraph = [];
+    // LocalBusiness schema belongs to site and commerce pages, not individual blog posts.
+    if (empty($schemaBlog)) {
+        $schemaGraph[] = [
             '@type' => 'LocalBusiness',
             '@id' => $schemaBusinessId,
             'name' => 'The Rigid Boxes',
@@ -81,8 +83,8 @@
                 'streetAddress' => $schemaAddress,
                 'addressCountry' => 'US',
             ],
-        ],
-    ];
+        ];
+    }
 
     $schemaWebPageType = 'WebPage';
     if (request()->is('contact-us')) {
@@ -101,30 +103,6 @@
         $schemaWebPageType = 'CollectionPage';
     } elseif (!empty($schemaAuthor)) {
         $schemaWebPageType = 'ProfilePage';
-    }
-
-
-
-    $schemaBreadcrumbs = [[
-        '@type' => 'ListItem',
-        'position' => 1,
-        'name' => 'Home',
-        'item' => $schemaSiteUrl,
-    ]];
-    if (trim(request()->path(), '/') !== '') {
-        $schemaBreadcrumbs[] = [
-            '@type' => 'ListItem',
-            'position' => 2,
-            'name' => trim(strip_tags((string) $schemaPageName)),
-            'item' => $schemaPageUrl,
-        ];
-    }
-    if (trim(request()->path(), '/') !== '') {
-        $schemaGraph[] = [
-            '@type' => 'BreadcrumbList',
-            '@id' => $schemaPageUrl . '#breadcrumb',
-            'itemListElement' => $schemaBreadcrumbs,
-        ];
     }
 
     $schemaFaqs = [];
@@ -246,7 +224,12 @@
                 '@type' => !empty($schemaBlog['joined_author_name']) ? 'Person' : 'Organization',
                 'name' => $schemaBlogAuthor,
             ],
-            'publisher' => ['@id' => $schemaBusinessId],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'The Rigid Boxes',
+                'url' => $schemaSiteUrl,
+                'logo' => $schemaLogo,
+            ],
         ], fn ($value) => $value !== null && $value !== '');
     }
 
@@ -279,39 +262,14 @@
         }
     }
 
-    $schemaCustomTypes = [];
-    $schemaCollectTypes = function ($value) use (&$schemaCollectTypes, &$schemaCustomTypes) {
-        if (!is_array($value)) {
-            return;
-        }
-
-        if (!empty($value['@type'])) {
-            foreach ((array) $value['@type'] as $type) {
-                $schemaCustomTypes[] = $type;
-            }
-        }
-
-        foreach ($value as $child) {
-            $schemaCollectTypes($child);
-        }
-    };
-    $schemaCollectTypes($schemaCustomPayload);
-    $schemaCustomTypes = array_values(array_intersect(
-        array_unique($schemaCustomTypes),
-        ['Product', 'WebPage', 'CollectionPage']
-    ));
-
-    // Admin-defined page nodes replace their generated equivalents.
-    // Keep the shared site, breadcrumb and FAQ schemas available on the page.
+    // A custom schema replaces the generated schema for this page entirely.
+    // If it is removed, the generated defaults below are rendered again.
     if ($schemaCustomPayload !== null) {
-        $schemaGraph = array_values(array_filter(
-            $schemaGraph,
-            fn ($node) => !in_array($node['@type'] ?? null, $schemaCustomTypes, true)
-        ));
+        $schemaGraph = [];
     }
 
     if (!empty($schemaProduct)) {
-        $allowedProductSchemas = ['Product', 'FAQPage', 'BreadcrumbList'];
+        $allowedProductSchemas = ['Product', 'FAQPage'];
         $schemaGraph = array_values(array_filter(
             $schemaGraph,
             fn ($node) => in_array($node['@type'] ?? null, $allowedProductSchemas, true)
@@ -323,12 +281,14 @@
         '@graph' => $schemaGraph,
     ];
 @endphp
+@if($schemaCustomPayload === null)
 <script type="application/ld+json">
 {!! json_encode(
     $schemaPayload,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
+@endif
 @if($schemaCustomPayload !== null)
 <script type="application/ld+json">
 {!! json_encode(

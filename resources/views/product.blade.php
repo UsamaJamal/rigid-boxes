@@ -237,6 +237,7 @@
 
         .hero-form > p.desc-text {
             margin-bottom: 15px;
+            text-align: justify;
         }
 
         .read-more-btn {
@@ -659,8 +660,30 @@
 
         /* Content Section */
         .content-section {
+            min-width: 0;
             padding-bottom: 60px;
             word-spacing: 0.08em;
+        }
+
+        .content-table-scroll {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .content-table-scroll table {
+            width: 100% !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border-collapse: collapse;
+        }
+
+        .content-table-scroll th,
+        .content-table-scroll td {
+            white-space: normal !important;
+            overflow-wrap: anywhere;
         }
         
         .content-section h2 {
@@ -1464,6 +1487,10 @@
             }
         }
         @media (max-width: 767px) {
+            .content-table-scroll table {
+                min-width: 620px;
+            }
+
             .process-cards {
                 justify-content: center;
                 align-items: center;
@@ -2433,6 +2460,16 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const wrapper = document.getElementById('desc-wrapper');
                 if (wrapper) {
+                    // Keep admin-added tables within the product content on mobile.
+                    wrapper.querySelectorAll('table').forEach(function(table) {
+                        if (table.parentElement && table.parentElement.classList.contains('content-table-scroll')) return;
+
+                        const tableScroll = document.createElement('div');
+                        tableScroll.className = 'content-table-scroll';
+                        table.parentNode.insertBefore(tableScroll, table);
+                        tableScroll.appendChild(table);
+                    });
+
                     const btn = document.createElement('span');
                     btn.className = 'content-read-more-btn';
                     btn.textContent = 'Read More';

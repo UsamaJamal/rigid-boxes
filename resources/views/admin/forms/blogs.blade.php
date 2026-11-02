@@ -160,7 +160,6 @@
                 <input type="checkbox" name="show_home" value="1" @checked($v('show_home'))> 
                 Show on home page
             </label>
-            <label class="check"><input type="checkbox" name="set_home" value="1" @checked($v('set_home'))> Feature on home</label>
         </div>
     </div>
 
