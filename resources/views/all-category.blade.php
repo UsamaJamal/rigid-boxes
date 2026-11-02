@@ -6,7 +6,23 @@
     @include('components.canonical')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Categories of Industries</title>
+    @php
+        // SEO comes from this landing page's own admin record
+        // (Box By Industry / Box By Style / Box By Material).
+        $seoTitle = trim((string) ($parentCategory['meta_title'] ?? ''));
+        $seoTitle = $seoTitle !== '' ? $seoTitle : trim((string) ($parentCategory['title'] ?? 'Custom Packaging Boxes'));
+        $seoDescription = trim((string) ($parentCategory['meta_description'] ?? ''));
+        $seoKeywords = trim((string) ($parentCategory['meta_keywords'] ?? ''));
+        $seoRobots = trim((string) ($parentCategory['robots'] ?? '')) ?: 'index,follow';
+    @endphp
+    <title>{{ $seoTitle }}</title>
+    @if($seoDescription !== '')
+        <meta name="description" content="{{ $seoDescription }}">
+    @endif
+    @if($seoKeywords !== '')
+        <meta name="keywords" content="{{ $seoKeywords }}">
+    @endif
+    <meta name="robots" content="{{ $seoRobots }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Open+Sans:wght@300;400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
