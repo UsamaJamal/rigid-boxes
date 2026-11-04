@@ -1115,12 +1115,21 @@
             }
         }
 
-        // Fallback only: alt text written in the admin or the editor is never
-        // replaced. Images with no alt get a readable one from the filename,
-        // e.g. "rigid-box-guide.webp" -> "Rigid box guide".
-        function applyImageMetadata(image) {
-            if ((image.getAttribute('alt') || '').trim() !== '') return;
+        // Fills an attribute only if it is empty or holds a value this script
+        // generated earlier, so written text is never replaced but auto text
+        // follows the picture when a slider changes the image's src.
+        function fillAttribute(image, attribute, flag, value) {
+            const current = (image.getAttribute(attribute) || '').trim();
+            if (current !== '' && current !== image.dataset[flag]) return;
 
+            image.setAttribute(attribute, value);
+            image.dataset[flag] = value;
+        }
+
+        // Fallback only: alt and title written in the admin or the editor are
+        // never replaced. Missing ones get readable text from the filename,
+        // e.g. "rigid-box-guide.webp" -> alt "Rigid box guide", title "Rigid Box Guide".
+        function applyImageMetadata(image) {
             const imageName = imageNameFromSrc(image);
             if (!imageName) return;
 
@@ -1134,7 +1143,10 @@
             if (!words.length) return;
 
             const sentence = words.join(' ').toLowerCase();
-            image.alt = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+            fillAttribute(image, 'alt', 'autoAlt', sentence.charAt(0).toUpperCase() + sentence.slice(1));
+            fillAttribute(image, 'title', 'autoTitle', words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' '));
         }
 
         function applyToImages(root) {
