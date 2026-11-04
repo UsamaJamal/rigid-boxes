@@ -301,6 +301,17 @@
             max-width: 100%;
         }
 
+        /* Headings in the admin description match the normal category pages. */
+        .text-content-body h1,
+        .text-content-body h2,
+        .text-content-body h4,
+        .text-content-body h5,
+        .text-content-body h6 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            color: #000000;
+        }
+
         /* Sustainable Container (Left) */
         .sustainable-container {
             width: 100%;
@@ -796,6 +807,16 @@
                 </div>
             </div>
         </section>
+
+        {{-- Long text from the admin "Category Description" field. Hidden when empty
+             so the component's generic fallback text never shows on these pages. --}}
+        @php
+            $landingText = html_entity_decode(strip_tags((string) ($parentCategory['description'] ?? ''), '<img>'));
+            $landingText = trim(str_replace("\xC2\xA0", ' ', $landingText));
+        @endphp
+        @if($landingText !== '')
+            @include('components.content', ['category' => $parentCategory])
+        @endif
 
         <!-- CTA Section -->
         @include('components.cta')
