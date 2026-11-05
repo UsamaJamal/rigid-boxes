@@ -7,3 +7,4 @@ Disallow: /submit-quote
 Disallow: /submit-newsletter
 
 Sitemap: https://therigidboxes.com/sitemap.xml
+Sitemap: https://therigidboxes.com/image-sitemap.xml
