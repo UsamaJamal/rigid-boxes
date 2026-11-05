@@ -496,6 +496,8 @@
             margin-top: auto;
             padding-bottom: 40px;
             box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
 
         .widget {
@@ -506,27 +508,18 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
 
-        /* Keep the table of contents visible while the article scrolls. */
-        #tocWidget {
+        /* Keep the Table of Contents and Recent Articles sticky together while the article scrolls. */
+        .sidebar-sticky-group {
             position: sticky;
             top: 96px;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
             z-index: 2;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
         }
 
-        #tocWidget::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* The TOC stops immediately above the static sidebar actions. */
-        #tocWidget.toc-stopped-at-actions {
-            position: absolute;
-            top: var(--toc-stop-top);
-            width: 100%;
-            box-sizing: border-box;
+        #tocWidget {
+            overflow: visible;
         }
 
         .widget-title {
@@ -748,8 +741,10 @@
 
         .related-card-img {
             width: 100%;
-            height: 200px;
+            aspect-ratio: 1.9 / 1;
+            height: auto;
             object-fit: cover;
+            border-bottom: 1px solid #EAEAEA;
         }
 
         .related-card-body {
@@ -811,6 +806,16 @@
             .article-layout {
                 grid-template-columns: 1fr;
                 gap: 24px;
+            }
+
+            .sidebar-sticky-group {
+                position: static !important;
+                top: auto !important;
+            }
+
+            #tocWidget {
+                max-height: none !important;
+                overflow: visible !important;
             }
 
             .featured-image {
@@ -1333,41 +1338,44 @@
             <!-- Right Sidebar -->
             <aside class="sidebar">
 
-                <!-- Table of Contents Widget -->
-                <div class="widget" id="tocWidget">
-                    <div class="widget-title">TABLE OF CONTENTS</div>
-                    <ul class="toc-list" id="tocList">
-                        <!-- Auto-generated from article h2 headings via JS -->
-                    </ul>
-                </div>
-
-                <!-- Recent Articles Widget -->
-                @if($recentBlogs->isNotEmpty())
-                <div class="widget">
-                    <div class="widget-title" style="font-size: 18px; font-family: var(--font-heading); color: var(--color-ink); text-transform: none; font-weight: 700; margin-bottom: 20px;">Recent Articles</div>
-                    <div class="recent-articles-list">
-                        @foreach($recentBlogs as $rb)
-                        <div class="recent-article-item">
-                            @php
-                                $rbImagePath = $rb->image ?? null;
-                                $rbIsRemoteImage = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['http://', 'https://']);
-                                $rbPublicImagePath = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['storage/', 'uploads/', 'images/'])
-                                    ? $rbImagePath
-                                    : ($rbImagePath ? 'storage/' . ltrim($rbImagePath, '/') : null);
-                                $rbImg = ($rbIsRemoteImage || ($rbPublicImagePath && file_exists(public_path($rbPublicImagePath))))
-                                    ? ($rbIsRemoteImage ? $rbImagePath : asset($rbPublicImagePath))
-                                    : asset('images/below-hero.png');
-                            @endphp
-                            <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
-                            <div class="recent-article-info">
-                                <a href="{{ url('/blog/' . $rb->slug) }}/" class="recent-article-title">{{ $rb->title }}</a>
-                                <span class="recent-article-date">{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
-                            </div>
-                        </div>
-                        @endforeach
+                <!-- Sticky Group: Table of Contents & Recent Articles -->
+                <div class="sidebar-sticky-group" id="sidebarStickyGroup">
+                    <!-- Table of Contents Widget -->
+                    <div class="widget" id="tocWidget">
+                        <div class="widget-title">TABLE OF CONTENTS</div>
+                        <ul class="toc-list" id="tocList">
+                            <!-- Auto-generated from article h2 headings via JS -->
+                        </ul>
                     </div>
+
+                    <!-- Recent Articles Widget -->
+                    @if($recentBlogs->isNotEmpty())
+                    <div class="widget" id="recentArticlesWidget">
+                        <div class="widget-title" style="font-size: 18px; font-family: var(--font-heading); color: var(--color-ink); text-transform: none; font-weight: 700; margin-bottom: 20px;">Recent Articles</div>
+                        <div class="recent-articles-list">
+                            @foreach($recentBlogs as $rb)
+                            <div class="recent-article-item">
+                                @php
+                                    $rbImagePath = $rb->image ?? null;
+                                    $rbIsRemoteImage = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['http://', 'https://']);
+                                    $rbPublicImagePath = $rbImagePath && \Illuminate\Support\Str::startsWith($rbImagePath, ['storage/', 'uploads/', 'images/'])
+                                        ? $rbImagePath
+                                        : ($rbImagePath ? 'storage/' . ltrim($rbImagePath, '/') : null);
+                                    $rbImg = ($rbIsRemoteImage || ($rbPublicImagePath && file_exists(public_path($rbPublicImagePath))))
+                                        ? ($rbIsRemoteImage ? $rbImagePath : asset($rbPublicImagePath))
+                                        : asset('images/below-hero.png');
+                                @endphp
+                                <img src="{{ $rbImg }}" alt="{{ $rb->title }}" class="recent-article-img" onerror="this.src='{{ asset('images/below-hero.png') }}'">
+                                <div class="recent-article-info">
+                                    <a href="{{ url('/blog/' . $rb->slug) }}/" class="recent-article-title">{{ $rb->title }}</a>
+                                    <span class="recent-article-date">{{ date('M d, Y', strtotime($rb->created_at)) }}</span>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
                 </div>
-                @endif
 
                 <!-- Static actions at the bottom of the right sidebar. -->
                 <div class="sidebar-static-actions">
@@ -1490,45 +1498,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!articleBody) return;
 
-    // Keep the TOC sticky until the static actions below it are reached, then
-    // lock it directly above them. This creates a clean stop with no overlap.
-    if (tocWidget) {
-        var sidebar = tocWidget.closest('.sidebar');
+    // Keep the TOC and Recent Articles sticky until the static actions below them are reached, then
+    // smoothly glide up directly above them with an exact gap. This prevents any overlap.
+    var stickyGroup = document.getElementById('sidebarStickyGroup') || tocWidget;
+    if (stickyGroup) {
+        var sidebar = stickyGroup.closest('.sidebar');
         var staticActions = sidebar ? sidebar.querySelector('.sidebar-static-actions') : null;
-        var tocStickyTop = 96;
-        var tocWidgetGap = 28;
-        var updateTocStopPoint = function () {
-            if (!staticActions || !window.matchMedia('(min-width: 1025px)').matches) {
-                tocWidget.classList.remove('toc-stopped-at-actions');
-                tocWidget.style.removeProperty('--toc-stop-top');
+        var stickyTop = 96;
+        var widgetGap = 28;
+        var ticking = false;
+
+        var updateStopPoint = function () {
+            ticking = false;
+            if (!window.matchMedia('(min-width: 1025px)').matches) {
+                stickyGroup.style.removeProperty('top');
+                return;
+            }
+
+            if (!staticActions) {
+                stickyGroup.style.top = stickyTop + 'px';
                 return;
             }
 
             var actionsRect = staticActions.getBoundingClientRect();
-            var tocHeight = tocWidget.offsetHeight;
+            var recentWidget = document.getElementById('recentArticlesWidget');
+            var lastChild = recentWidget || stickyGroup.lastElementChild || stickyGroup;
+            var groupRect = stickyGroup.getBoundingClientRect();
+            var lastRect = lastChild.getBoundingClientRect();
+            var trueGroupHeight = lastRect.bottom - groupRect.top;
+            var groupHeight = Math.max(stickyGroup.offsetHeight, trueGroupHeight);
+            var maxTop = actionsRect.top - groupHeight - widgetGap;
+            var currentTop = Math.min(stickyTop, maxTop);
 
-            if (tocWidget.classList.contains('toc-stopped-at-actions')) {
-                if (actionsRect.top > tocStickyTop + tocHeight + tocWidgetGap) {
-                    tocWidget.classList.remove('toc-stopped-at-actions');
-                    tocWidget.style.removeProperty('--toc-stop-top');
-                }
-                return;
-            }
+            stickyGroup.style.top = currentTop + 'px';
+        };
 
-            var tocRect = tocWidget.getBoundingClientRect();
-            var tocIsPinned = tocRect.top <= tocStickyTop + 2;
-            var hasReachedActions = actionsRect.top <= tocRect.bottom + tocWidgetGap;
-
-            if (tocIsPinned && hasReachedActions) {
-                var stopTop = Math.max(0, staticActions.offsetTop - tocHeight - tocWidgetGap);
-                tocWidget.style.setProperty('--toc-stop-top', stopTop + 'px');
-                tocWidget.classList.add('toc-stopped-at-actions');
+        var requestTick = function () {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateStopPoint);
             }
         };
 
-        updateTocStopPoint();
-        window.addEventListener('scroll', updateTocStopPoint, { passive: true });
-        window.addEventListener('resize', updateTocStopPoint);
+        updateStopPoint();
+        window.addEventListener('scroll', requestTick, { passive: true });
+        window.addEventListener('resize', requestTick);
+        window.addEventListener('load', updateStopPoint);
     }
 
     // Keep wide tables inside the article on small screens instead of widening the page.

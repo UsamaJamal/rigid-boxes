@@ -671,22 +671,21 @@
             }
         }
 
-        /* Match homepage cards on mobile: retain the entire uploaded image. */
+        /* Maintain 1.9:1 wide banner ratio across mobile as well. */
         @media screen and (max-width: 768px) {
             .card-image-wrapper {
                 width: 100%;
                 height: auto !important;
-                aspect-ratio: auto !important;
+                aspect-ratio: 1.9 / 1 !important;
+                overflow: hidden !important;
             }
 
             .card-image {
                 display: block;
                 width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-                max-height: none !important;
-                object-fit: contain !important;
-                object-position: left center !important;
+                height: 100% !important;
+                aspect-ratio: 1.9 / 1 !important;
+                object-fit: cover !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }

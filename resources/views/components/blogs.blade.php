@@ -91,12 +91,25 @@
         transform: translateY(-4px);
     }
 
+    .blog-card__image-container {
+        width: 100%;
+        aspect-ratio: 1.9 / 1;
+        overflow: hidden;
+        background-color: #F5F5F5;
+        border-bottom: 1px solid #EAEAEA;
+    }
+
     .blog-card__image {
         width: 100%;
-        aspect-ratio: auto;
-        height: auto;
-        object-fit: contain;
-        border-bottom: 1px solid #EAEAEA;
+        height: 100%;
+        aspect-ratio: 1.9 / 1;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover .blog-card__image {
+        transform: scale(1.05);
     }
 
     .blog-card__content {
@@ -251,15 +264,22 @@
             box-shadow: none !important;
         }
 
-        .blog-card__image {
-            display: block;
+        .blog-card__image-container {
             width: 100% !important;
-            max-width: 100% !important;
+            aspect-ratio: 1.9 / 1 !important;
             height: auto !important;
+            overflow: hidden !important;
+            border-bottom: 1px solid #EAEAEA !important;
+        }
+
+        .blog-card__image {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
             max-height: none !important;
-            aspect-ratio: auto !important;
-            object-fit: contain !important;
-            object-position: left center !important;
+            aspect-ratio: 1.9 / 1 !important;
+            object-fit: cover !important;
             margin: 0 !important;
             padding: 0 !important;
             border-bottom: 0;
@@ -353,7 +373,9 @@
                         $bUrl = url('/blog/' . $bSlug) . '/';
                     @endphp
                     <article class="blog-card" onclick="window.location.href='{{ $bUrl }}';" style="cursor: pointer;">
-                        <img src="{{ $bImg }}" alt="{{ $bTitle }}" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                        <div class="blog-card__image-container">
+                            <img src="{{ $bImg }}" alt="{{ $bTitle }}" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                        </div>
                         <div class="blog-card__content">
                             <div class="blog-card__meta">
                                 <a href="{{ url('/author/' . $authorSlug) }}/" class="blog-card__author" style="color:inherit;text-decoration:none;z-index:2;position:relative;" onclick="event.stopPropagation();">{{ $bAuthor }}</a>
@@ -373,7 +395,9 @@
             @else
                 <!-- Card 1 Fallback -->
                 <article class="blog-card">
-                    <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                    <div class="blog-card__image-container">
+                        <img src="{{ asset('uploads/industry-custom-luxury-box.jfif') }}" alt="Sustainable Packaging Trends" class="blog-card__image" onerror="this.src='https://placehold.co/400x240/dddddd/555555?text=Blog+Image'">
+                    </div>
                     <div class="blog-card__content">
                         <div class="blog-card__meta">
                             <span class="blog-card__author">Joe Danley</span>

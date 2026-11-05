@@ -246,8 +246,9 @@
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.06);
 }
 .card img {
-    height: 233px !important;
     width: 100%;
+    aspect-ratio: 1.9 / 1;
+    height: auto !important;
     object-fit: cover;
     background: transparent !important;
 }
@@ -649,7 +650,7 @@ nextBtn.addEventListener('click', () => {
 
     .grid { grid-template-columns: 1fr; gap: 24px; background: var(--color-page); }
     .card { display: flex; min-height: 330px; border-radius: 8px; }
-    .card img { width: 100%; height: 170px !important; min-height: 0; object-fit: cover; object-position: center; }
+    .card img { width: 100%; height: auto !important; aspect-ratio: 1.9 / 1 !important; min-height: 0; object-fit: cover; object-position: center; }
     .card-copy { padding: 13px 14px 32px; }
     .card .meta { margin-bottom: 8px; font-size: 11px; }
     .card h3 { min-height: 0; margin-bottom: 8px; font-size: 16px; line-height: 1.3; }
