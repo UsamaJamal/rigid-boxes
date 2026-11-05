@@ -268,6 +268,23 @@
         $schemaGraph = [];
     }
 
+    // Exception: a product's FAQs are managed separately from its pasted schema,
+    // so they are still output unless the pasted schema already has a FAQPage.
+    $schemaProductFaqPayload = null;
+    if (
+        $schemaCustomPayload !== null
+        && !empty($schemaProduct)
+        && !empty($schemaFaqEntities)
+        && stripos(json_encode($schemaCustomPayload), 'FAQPage') === false
+    ) {
+        $schemaProductFaqPayload = [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            '@id' => $schemaPageUrl . '#faq',
+            'mainEntity' => $schemaFaqEntities,
+        ];
+    }
+
     if (!empty($schemaProduct)) {
         $allowedProductSchemas = ['Product', 'FAQPage'];
         $schemaGraph = array_values(array_filter(
@@ -293,6 +310,15 @@
 <script type="application/ld+json">
 {!! json_encode(
     $schemaCustomPayload,
+    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+) !!}
+</script>
+@endif
+
+@if($schemaProductFaqPayload !== null)
+<script type="application/ld+json">
+{!! json_encode(
+    $schemaProductFaqPayload,
     JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>

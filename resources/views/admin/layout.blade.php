@@ -97,7 +97,79 @@
         }
     </style>
     <script>
+        // Cleans HTML pasted from Word or other sources: no spans, Word classes
+        // or other inline styles, and the text becomes black. Bold, italic,
+        // headings, links, tables and text alignment are kept, and Word's fake
+        // bullets become real lists.
+        // mergesIntoLine: a single line pasted into text that already exists. Its
+        // paragraph is removed so it joins the line instead of splitting it, and
+        // it takes that line's color.
+        window.cleanPastedHtml = function (root, mergesIntoLine) {
+            const comments = document.createTreeWalker(root, NodeFilter.SHOW_COMMENT);
+            const commentNodes = [];
+            while (comments.nextNode()) commentNodes.push(comments.currentNode);
+            commentNodes.forEach(function (node) { node.remove(); });
+
+            root.querySelectorAll('style, meta, link, title, script, xml').forEach(function (el) { el.remove(); });
+
+            // Read before attributes are removed below.
+            const listParagraphs = Array.from(root.querySelectorAll('p')).filter(function (p) {
+                return /^MsoList/i.test(p.getAttribute('class') || '') || /mso-list/i.test(p.getAttribute('style') || '');
+            });
+
+            // Unwraps span, font and Word's namespaced tags such as o:p.
+            Array.from(root.querySelectorAll('*')).forEach(function (el) {
+                const tag = el.tagName.toLowerCase();
+                const bookmark = tag === 'a' && !el.hasAttribute('href');
+                if (tag === 'span' || tag === 'font' || tag.includes(':') || bookmark) el.replaceWith(...el.childNodes);
+            });
+            root.normalize();
+
+            const marker = /^[\s ]*(?:[·•▪§o\-–—]|(\d+|[a-zA-Z]+)[.)])[\s ]+/;
+            listParagraphs.forEach(function (p) {
+                const first = document.createTreeWalker(p, NodeFilter.SHOW_TEXT).nextNode();
+                const match = first ? first.nodeValue.match(marker) : null;
+                if (!match) return;
+                first.nodeValue = first.nodeValue.slice(match[0].length);
+
+                const type = match[1] ? 'OL' : 'UL';
+                let list = p.previousElementSibling;
+                if (!list || list.tagName !== type) {
+                    list = document.createElement(type);
+                    p.before(list);
+                }
+                const item = document.createElement('li');
+                item.append(...p.childNodes);
+                list.append(item);
+                p.remove();
+            });
+
+            root.querySelectorAll('*').forEach(function (el) {
+                const align = el.style && el.style.textAlign;
+                ['style', 'class', 'lang', 'dir'].forEach(function (name) { el.removeAttribute(name); });
+                if (align && align !== 'left' && /^(P|H[1-6]|DIV|LI|TD|TH)$/.test(el.tagName)) el.style.textAlign = align;
+            });
+
+            // Pasted text is always black. Links are left out so they keep the site's link color.
+            root.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, strong, b, em, i, u').forEach(function (el) {
+                el.style.color = '#000000';
+            });
+
+            const onlyLine = root.firstElementChild;
+            if (mergesIntoLine && onlyLine && onlyLine.tagName === 'P' && root.children.length === 1 && root.textContent.trim() === onlyLine.textContent.trim()) {
+                onlyLine.replaceWith(...onlyLine.childNodes);
+            }
+        };
+
         window.tinyMceUploadConfig = {
+            // TinyMCE strips other pasted styles before the cleanup below runs.
+            paste_webkit_styles: 'text-align',
+            // Copying inside the editor keeps its formatting.
+            paste_postprocess: function (editor, args) {
+                if (args.internal) return;
+                const line = editor.dom.getParent(editor.selection.getStart(), editor.dom.isBlock);
+                window.cleanPastedHtml(args.node, !!line && line.textContent.trim() !== '');
+            },
             relative_urls: false,
             remove_script_host: false,
             convert_urls: false,
