@@ -73,20 +73,20 @@
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
-        padding: 30px 18px 15px 25px;
+        padding: 26px 16px 16px 20px;
         box-sizing: border-box;
     }
 
     .testimonial-card {
         width: 100%;
-        max-width: 512px;
-        height: 230px;
+        max-width: 530px;
+        height: 250px;
         background: #0B0B0B;
         border-radius: 16px;
         position: relative;
         display: flex;
         align-items: center;
-        padding: 20px 20px 20px 210px;
+        padding: 20px 24px 20px 175px;
         color: #FFF;
         box-sizing: border-box;
         overflow: visible;
@@ -95,9 +95,9 @@
     .testimonial-img {
         position: absolute;
         left: 0px;
-        top: -20px;
-        width: 160px;
-        height: 250px;
+        top: -15px;
+        width: 150px;
+        height: calc(100% + 15px);
         border-radius: 16px;
         object-fit: cover;
         z-index: 5;
@@ -111,12 +111,13 @@
         width: 100%;
         height: 100%;
         text-align: left;
+        box-sizing: border-box;
     }
 
     .testimonial-stars {
         color: #F5C518;
-        font-size: 14px;
-        margin-bottom: 10px;
+        font-size: 13.5px;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
         gap: 5px;
@@ -125,28 +126,29 @@
     .testimonial-stars span {
         color: #CCC;
         font-size: 12px;
-        margin-left: 8px;
+        margin-left: 6px;
     }
 
     .testimonial-text {
         font-family: 'DM Sans', sans-serif;
-        font-size: 13.5px;
+        font-size: 13px;
         line-height: 1.45;
         color: rgba(255, 255, 255, 0.95);
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .testimonial-author {
         font-family: 'DM Sans', sans-serif;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 14.5px;
         color: #FFF;
         margin-bottom: 2px;
     }
 
     .testimonial-role {
         font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
+        font-size: 11.5px;
+        line-height: 1.35;
         color: #AAA;
     }
 
@@ -216,6 +218,51 @@
         display: none;
     }
 
+    /* Tablets & Laptops: 769px to 1100px */
+    @media (max-width: 1100px) and (min-width: 769px) {
+        .testimonial-card-wrap {
+            padding: 22px 10px 14px 14px;
+        }
+
+        .testimonial-card {
+            height: 245px;
+            padding: 16px 18px 16px 150px;
+        }
+
+        .testimonial-img {
+            width: 135px;
+            height: calc(100% + 14px);
+            top: -14px;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        .testimonial-stars {
+            font-size: 12.5px;
+            margin-bottom: 6px;
+        }
+
+        .testimonial-stars span {
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        .testimonial-text {
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-author {
+            font-size: 13.5px;
+            margin-bottom: 1px;
+        }
+
+        .testimonial-role {
+            font-size: 10.5px;
+        }
+    }
+
     /* Mobile Responsive View — 1 Card per Slide */
     @media (max-width: 768px) {
         .testimonial-section {
@@ -247,59 +294,63 @@
 
         .testimonial-card-wrap {
             flex: 0 0 100%;
-            padding: 24px 15px 10px 15px;
+            padding: 20px 8px 12px 8px;
         }
 
         .testimonial-card {
             max-width: 100%;
-            height: 195px;
-            padding: 24px 12px 16px 155px;
+            height: 255px;
+            padding: 14px 12px 14px 122px;
             border-radius: 16px;
         }
 
         .testimonial-img {
-            width: 135px;
-            height: 210px;
+            width: 110px;
+            height: calc(100% + 12px);
             left: 0px;
-            top: -15px;
-            border-radius: 16px;
+            top: -12px;
+            border-radius: 14px;
+            object-fit: cover;
         }
 
         .testimonial-dots-icon {
-            right: -12px;
-            top: 38%;
-            width: 26px;
-            height: 26px;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
         }
 
         .testimonial-dots-icon svg {
-            width: 12px;
-            height: 4px;
+            width: 10px;
+            height: 3px;
         }
 
         .testimonial-stars {
-            font-size: 12px;
+            font-size: 11px;
             margin-bottom: 6px;
-            gap: 3px;
+            gap: 2px;
         }
 
         .testimonial-stars span {
-            font-size: 10.5px;
-            margin-left: 4px;
+            font-size: 10px;
+            margin-left: 3px;
         }
 
         .testimonial-text {
-            font-size: 12px;
-            line-height: 1.4;
-            margin-bottom: 8px;
+            font-size: 11px;
+            line-height: 1.38;
+            margin-bottom: 6px;
         }
 
         .testimonial-author {
-            font-size: 13.5px;
+            font-size: 12.5px;
+            margin-bottom: 1px;
         }
 
         .testimonial-role {
-            font-size: 10.5px;
+            font-size: 10px;
+            line-height: 1.25;
         }
 
         .pagination-dots {
@@ -342,11 +393,9 @@
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
-                                <p class="testimonial-text">“We were looking for premium appearance without costing an arm and leg. Trust me the team was so helpful and guided us about the materials and dimensions. Highly recommended. “
-</p>
+                                <p class="testimonial-text">“We were looking for premium appearance without costing an arm and leg. Trust me the team was so helpful and guided us about the materials and dimensions. Highly recommended.“</p>
                                 <div class="testimonial-author">Olivia Bennett</div>
-                                <div class="testimonial-role">Product Manager, Lumera Skincare
-</div>
+                                <div class="testimonial-role">Product Manager, Lumera Skincare</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>
@@ -362,10 +411,9 @@
                                 <div class="testimonial-stars">
                                     ★ ★ ★ ★ ★ <span>5.0 rating</span>
                                 </div>
-                                <p class="testimonial-text">“The boxes were sturdy, have smooth closure and presented all the required branded elements exceptionally. Definitely going to order again. “</p>
+                                <p class="testimonial-text">“The boxes were sturdy, have smooth closure and presented all the required branded elements exceptionally. Definitely going to order again.“</p>
                                 <div class="testimonial-author">Daniel Carter</div>
-                                <div class="testimonial-role">Founder, North & Vale
-</div>
+                                <div class="testimonial-role">Founder, North & Vale</div>
                             </div>
                             <div class="testimonial-dots-icon">
                                 <svg width="14" height="4" viewBox="0 0 16 4" fill="currentColor"><circle cx="2" cy="2" r="2"/><circle cx="8" cy="2" r="2"/><circle cx="14" cy="2" r="2"/></svg>
