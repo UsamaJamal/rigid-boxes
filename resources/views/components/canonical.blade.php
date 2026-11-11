@@ -45,30 +45,12 @@
 <meta name="twitter:description" content="{{ $socialDescription }}">
 <meta name="twitter:image" content="{{ $socialImage }}">
 <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5VLT0GNXMD"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-5VLT0GNXMD');
-    (function() {
-        var gtmLoaded = false;
-        function loadGTM() {
-            if (gtmLoaded) return;
-            gtmLoaded = true;
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-5VLT0GNXMD';
-            document.head.appendChild(s);
-        }
-        if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(function() { setTimeout(loadGTM, 5000); });
-        } else {
-            window.addEventListener('load', function() { setTimeout(loadGTM, 5000); });
-        }
-        ['scroll', 'touchstart', 'mousemove', 'keydown'].forEach(function(e) {
-            window.addEventListener(e, loadGTM, { once: true, passive: true });
-        });
-    })();
 </script>
 <script>
     if (window.location.pathname === '/public' || window.location.pathname.startsWith('/public/')) {
@@ -82,8 +64,7 @@
     }
 </script>
 @include('components.schemas')
-<link rel="preload" href="{{ asset('css/footer.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{{ asset('css/footer.min.css') }}"></noscript>
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 <style>
     .sr-only {
         position: absolute !important;
