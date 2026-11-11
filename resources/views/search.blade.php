@@ -298,11 +298,17 @@
         </div>
 
         @if($totalCount == 0)
-            <div class="no-results">
+            <div class="no-results" style="background: #FFF; border-radius: 12px; padding: 60px 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); text-align: center; margin-bottom: 40px;">
                 <svg viewBox="0 0 24 24" style="width: 64px; height: 64px; fill: #CCC; margin-bottom: 16px; display: block; margin: 0 auto 16px;">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
-                We couldn't find any results matching "<strong>{{ $q }}</strong>". Try using different keywords.
+                <h2 style="font-size: 22px; font-weight: 700; color: #222; margin-bottom: 8px;">No Results Found</h2>
+                <p style="font-size: 15px; color: #666; max-width: 520px; margin: 0 auto 20px;">
+                    We couldn't find any results matching "<strong>{{ $q }}</strong>". Try using different keywords or request a custom quote.
+                </p>
+                <a href="/request-quote?from_search=1&box_style={{ urlencode($q) }}" style="display: inline-block; background: var(--primary-color, #8D4445); color: #FFF; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px;">
+                    Request a Custom Quote
+                </a>
             </div>
         @else
             

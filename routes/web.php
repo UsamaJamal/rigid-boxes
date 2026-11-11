@@ -76,8 +76,12 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             })
             ->get()->map(fn($r)=>(array)$r)->all();
 
+        $excludedCategorySlugs = ['box-by-industry', 'box-by-material', 'box-by-style'];
+
         $categories = DB::table('admin_categories')
             ->where('status', 'published')
+            ->whereNotNull('parent_id')
+            ->whereNotIn('slug', $excludedCategorySlugs)
             ->where(function ($query) use ($q, $variants) {
                 $query->where('title', 'like', "%{$q}%")
                       ->orWhere('meta_keywords', 'like', "%{$q}%")
@@ -121,14 +125,6 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             ->get()->map(fn($r)=>(array)$r)->all();
 
         $totalCount = count($products) + count($categories) + count($blogs);
-
-        // When nothing matches across products, categories, and blogs,
-        // carry visitor's request to the quote form with their search query pre-filled.
-        if ($totalCount === 0) {
-            $quoteBoxStyle = \Illuminate\Support\Str::ucfirst(\Illuminate\Support\Str::lower($q));
-
-            return redirect()->to('/request-quote?from_search=1&box_style=' . urlencode($quoteBoxStyle));
-        }
     }
 
     return view('search', compact('q', 'products', 'categories', 'blogs', 'totalCount'));

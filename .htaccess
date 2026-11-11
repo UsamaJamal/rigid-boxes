@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # One address for the site: www.therigidboxes.com redirects to therigidboxes.com.
+    RewriteCond %{HTTP_HOST} ^www\.therigidboxes\.com$ [NC]
+    RewriteRule ^(.*)$ https://therigidboxes.com/$1 [R=301,L,NE]
+
     # Redirect directly requested /public URLs to their clean public equivalent.
     # THE_REQUEST ensures Laravel's internal rewrite does not trigger this redirect.
     RewriteCond %{THE_REQUEST} \s/+public(?:[/?\s]) [NC]
