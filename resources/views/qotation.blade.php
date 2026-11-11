@@ -363,8 +363,8 @@
                             <input type="text" name="depth" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                         </div>
                         <div class="iq-form-group">
-                            <label>Units *</label>
-                            <select name="units" required>
+                            <label for="quote_units">Units *</label>
+                            <select id="quote_units" name="units" aria-label="Measurement Unit" required>
                                 <option value="mm">mm</option>
                                 <option value="cm">cm</option>
                                 <option value="inches">inches</option>
@@ -379,8 +379,8 @@
                             @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'request-quote-box-style', 'selected' => old('box_style', request('box_style', ''))])
                         </div>
                         <div class="iq-form-group">
-                            <label>CAD Sample</label>
-                            <select name="cad_sample">
+                            <label for="quote_cad_sample">CAD Sample</label>
+                            <select id="quote_cad_sample" name="cad_sample" aria-label="CAD Sample">
                                 <option value="" selected disabled hidden>Select CAD Sample</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
@@ -395,8 +395,8 @@
                     <!-- Row 5: Paper Coating | Paper Stock | Color (each with video guide) -->
                     <div class="iq-grid-3">
                         <div class="iq-form-group">
-                            <label>Paper Coating</label>
-                            <select name="paper_coating">
+                            <label for="quote_paper_coating">Paper Coating</label>
+                            <select id="quote_paper_coating" name="paper_coating" aria-label="Paper Coating">
                                 <option value="" selected disabled hidden>Select Paper Coating</option>
                                 <option value="Not Sure">Not Sure</option>
                                 <option>Aqueous Coating</option>
@@ -411,8 +411,8 @@
                             </button>
                         </div>
                         <div class="iq-form-group">
-                            <label>Paper Stock</label>
-                            <select name="material">
+                            <label for="quote_material">Paper Stock</label>
+                            <select id="quote_material" name="material" aria-label="Paper Stock">
                                 <option value="" selected disabled hidden>Select Paper Stock</option>
                                 <option value="Not Sure">Not Sure</option>
                                 <option>12pt Cardboard Stock</option>
@@ -433,8 +433,8 @@
                             </button>
                         </div>
                         <div class="iq-form-group">
-                            <label>Color</label>
-                            <select name="color">
+                            <label for="quote_color">Color</label>
+                            <select id="quote_color" name="color" aria-label="Color">
                                 <option value="" selected disabled hidden>Select Color</option>
                                 <option value="Not Sure">Not Sure</option>
                                 <option>1 color</option>

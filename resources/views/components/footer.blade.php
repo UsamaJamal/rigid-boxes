@@ -8,7 +8,7 @@
                 </div>
                 <form class="newsletter-form" action="{{ url('/submit-newsletter') }}" method="POST">
                     @csrf
-                    <input type="email" name="email" placeholder="Email" class="newsletter-input" required>
+                    <input type="email" name="email" placeholder="Email" class="newsletter-input" aria-label="Email address for newsletter" required>
                     <button type="submit" class="newsletter-button">Subscribe</button>
                 </form>
             </div>
@@ -22,7 +22,7 @@
                 <!-- Brand Column -->
                 <div class="footer-column brand-column">
                     <div class="footer-logo">
-                        <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes Logo" class="logo-image">
+                        <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes Logo" class="logo-image" width="189" height="96" loading="lazy">
                     </div>
                     <p class="brand-description">
                         The Rigid Boxes is a leading custom packaging manufacturer, delivering premium boxes and packaging solutions tailored to your brand. From design to delivery, we ensure unmatched quality, style, and customer service.
@@ -342,4 +342,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-<script src="https://tcbconnect.com/widget.js" data-livechat-key="wk_a3c5abc8b9a7" async></script>
+<script>
+    (function() {
+        var chatLoaded = false;
+        function loadLiveChat() {
+            if (chatLoaded) return;
+            chatLoaded = true;
+            var s = document.createElement('script');
+            s.src = 'https://tcbconnect.com/widget.js';
+            s.setAttribute('data-livechat-key', 'wk_a3c5abc8b9a7');
+            s.async = true;
+            document.body.appendChild(s);
+        }
+        ['scroll', 'touchstart', 'mousemove', 'click'].forEach(function(e) {
+            window.addEventListener(e, loadLiveChat, { once: true, passive: true });
+        });
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(function() { setTimeout(loadLiveChat, 3500); });
+        } else {
+            window.addEventListener('load', function() { setTimeout(loadLiveChat, 3500); });
+        }
+    })();
+</script>

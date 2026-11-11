@@ -144,6 +144,7 @@
         width: 100%;
         max-width: 100%;
         height: auto;
+        aspect-ratio: 1208 / 832;
         max-height: 400px;
         border-radius: 16px;
         box-shadow: none;
@@ -239,7 +240,7 @@
             height: auto;
             max-width: 100%;
             max-height: 280px;
-            aspect-ratio: auto;
+            aspect-ratio: 1208 / 832;
             object-fit: contain;
             object-position: center bottom;
             display: block;
@@ -372,7 +373,7 @@
                 $hImg = !empty($settings['hero_image']) ? $settings['hero_image'] : (!empty($category['hero_image']) ? $category['hero_image'] : 'uploads/Home-Banner.webp');
                 $hImgPath = \Illuminate\Support\Str::startsWith($hImg, ['storage/', 'uploads/', 'images/']) ? $hImg : 'storage/' . $hImg;
             @endphp
-            <img src="{{ asset($hImgPath) }}?v={{ @filemtime(public_path($hImgPath)) ?: 1 }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'Custom Rigid Packaging Boxes')) }}" fetchpriority="high" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
+            <img src="{{ asset($hImgPath) }}?v={{ @filemtime(public_path($hImgPath)) ?: 1 }}" alt="{{ strip_tags($settings['hero_title'] ?? ($category['hero_title'] ?? 'Custom Rigid Packaging Boxes')) }}" width="1208" height="832" fetchpriority="high" onerror="this.src='{{ asset('uploads/Home-Banner.webp') }}'">
         </div>
     </section>
 </div>

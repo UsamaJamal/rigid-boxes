@@ -20,6 +20,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <style>
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
         /* Remove number input spinners globally */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
@@ -2277,7 +2288,8 @@
                             <input type="number" name="width" class="form-control" placeholder="Width" required>
                             <input type="number" name="length" class="form-control" placeholder="Length" required>
                             <input type="number" name="depth" class="form-control" placeholder="Depth" required>
-                            <select name="units" class="form-control" required>
+                            <label for="prod_quote_units" class="sr-only">Measurement Unit</label>
+                            <select id="prod_quote_units" name="units" class="form-control" aria-label="Measurement Unit" required>
                                 <option>mm</option>
                                 <option>cm</option>
                                 <option>inch</option>
@@ -2289,7 +2301,8 @@
                         <span class="section-label">Packaging Preferences</span>
                         <div class="form-grid-pref">
                             <div class="pref-field-wrap">
-                                <select name="material" class="form-control" id="pref-paper-stock">
+                                <label for="pref-paper-stock" class="sr-only">Paper Stock</label>
+                                <select name="material" class="form-control" id="pref-paper-stock" aria-label="Paper Stock">
                                     <option value="" disabled selected hidden>Select Paper Stock</option>
                                     <option value="Not Sure">Not Sure</option>
                                     <option>12pt Cardboard Stock</option>
@@ -2310,7 +2323,8 @@
                                 </button>
                             </div>
                             <div class="pref-field-wrap">
-                                <select name="paper_coating" class="form-control">
+                                <label for="prod_quote_paper_coating" class="sr-only">Paper Coating</label>
+                                <select id="prod_quote_paper_coating" name="paper_coating" class="form-control" aria-label="Paper Coating">
                                     <option value="" disabled selected hidden>Select Paper Coating</option>
                                     <option value="Not Sure">Not Sure</option>
                                     <option>Aqueous Coating</option>
@@ -2325,7 +2339,8 @@
                                 </button>
                             </div>
                             <div class="pref-field-wrap">
-                                <select name="color" class="form-control">
+                                <label for="prod_quote_color" class="sr-only">Color</label>
+                                <select id="prod_quote_color" name="color" class="form-control" aria-label="Color">
                                     <option value="" disabled selected hidden>Select Color</option>
                                     <option value="Not Sure">Not Sure</option>
                                     <option>1 color</option>
@@ -2348,7 +2363,8 @@
                     <div class="form-section">
                         <span class="section-label">Production Details</span>
                         <div class="form-grid-production">
-                            <select name="cad_sample" class="form-control">
+                            <label for="prod_quote_cad_sample" class="sr-only">CAD Sample</label>
+                            <select id="prod_quote_cad_sample" name="cad_sample" class="form-control" aria-label="CAD Sample">
                                 <option value="" disabled selected hidden>Select CAD Sample</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
@@ -2673,8 +2689,8 @@
                             @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'product-sample-box-style'])
                         </div>
                         <div class="form-group">
-                            <label>Color</label>
-                            <select name="color" class="form-control">
+                            <label for="sample_box_color">Color</label>
+                            <select id="sample_box_color" name="color" class="form-control" aria-label="Color">
                                 <option value="" selected disabled hidden>Select Color</option>
                                 <option value="Not Sure">Not Sure</option>
                                 <option value="1 Color">1 Color</option>

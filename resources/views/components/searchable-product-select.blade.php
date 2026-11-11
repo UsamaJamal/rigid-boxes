@@ -15,14 +15,12 @@
     <div class="product-picker-menu" id="{{ $pickerId }}" hidden>
         <input type="search" class="product-picker-search" placeholder="Search product..." autocomplete="off" aria-label="Search product">
         <div class="product-picker-options" role="listbox">
-            @if($pickerSelected && !$pickerOptions->contains($pickerSelected))
+            @if($pickerSelected)
                 <button type="button" class="product-picker-option is-selected" role="option" data-value="{{ $pickerSelected }}">{{ $pickerSelected }}</button>
             @endif
-            @foreach($pickerOptions as $pickerOption)
-                <button type="button" class="product-picker-option{{ $pickerOption === $pickerSelected ? ' is-selected' : '' }}" role="option" data-value="{{ $pickerOption }}">{{ $pickerOption }}</button>
-            @endforeach
             <p class="product-picker-empty" hidden>No product found</p>
         </div>
+        <script type="application/json" class="product-picker-data">@json($pickerOptions)</script>
     </div>
 </div>
 
@@ -51,18 +49,92 @@
             const menu = picker.querySelector('.product-picker-menu');
             const search = picker.querySelector('.product-picker-search');
             const value = picker.querySelector('.product-picker-value');
-            const options = Array.from(picker.querySelectorAll('.product-picker-option'));
+            const optionsContainer = picker.querySelector('.product-picker-options');
             const empty = picker.querySelector('.product-picker-empty');
             const form = picker.closest('form');
-            const close = function () { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); };
-            const filter = function () {
-                const term = search.value.trim().toLowerCase(); let visible = 0;
-                options.forEach(function (option) { const show = option.textContent.toLowerCase().includes(term); option.hidden = !show; if (show) visible++; });
-                empty.hidden = visible !== 0;
+
+            let rawOptions = [];
+            const dataScript = picker.querySelector('.product-picker-data');
+            if (dataScript) {
+                try {
+                    rawOptions = JSON.parse(dataScript.textContent || '[]');
+                } catch(e) {
+                    rawOptions = [];
+                }
+            }
+
+            const renderOptions = function (filterTerm) {
+                const term = (filterTerm || '').trim().toLowerCase();
+                const selectedVal = (value.value || '').trim();
+                optionsContainer.innerHTML = '';
+                let count = 0;
+
+                if (selectedVal && (!term || selectedVal.toLowerCase().includes(term))) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'product-picker-option is-selected';
+                    btn.setAttribute('role', 'option');
+                    btn.dataset.value = selectedVal;
+                    btn.textContent = selectedVal;
+                    optionsContainer.appendChild(btn);
+                    count++;
+                }
+
+                for (let i = 0; i < rawOptions.length; i++) {
+                    const opt = rawOptions[i];
+                    if (opt === selectedVal) continue;
+                    if (!term || opt.toLowerCase().includes(term)) {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'product-picker-option';
+                        btn.setAttribute('role', 'option');
+                        btn.dataset.value = opt;
+                        btn.textContent = opt;
+                        optionsContainer.appendChild(btn);
+                        count++;
+                        if (!term && count >= 100) break;
+                    }
+                }
+
+                if (empty) {
+                    empty.hidden = count !== 0;
+                    if (count === 0) {
+                        optionsContainer.appendChild(empty);
+                    }
+                }
             };
-            trigger.addEventListener('click', function () { const opening = menu.hidden; document.querySelectorAll('.product-picker-menu').forEach(function (other) { if (other !== menu) other.hidden = true; }); menu.hidden = !opening; trigger.setAttribute('aria-expanded', String(opening)); if (opening) { search.value = ''; filter(); search.focus(); } });
-            search.addEventListener('input', filter);
-            options.forEach(function (option) { option.addEventListener('click', function () { value.value = option.dataset.value; label.textContent = option.dataset.value; options.forEach(function (item) { item.classList.toggle('is-selected', item === option); }); close(); }); });
+
+            const close = function () { 
+                menu.hidden = true; 
+                trigger.setAttribute('aria-expanded', 'false'); 
+            };
+
+            trigger.addEventListener('click', function () { 
+                const opening = menu.hidden; 
+                document.querySelectorAll('.product-picker-menu').forEach(function (other) { 
+                    if (other !== menu) other.hidden = true; 
+                }); 
+                menu.hidden = !opening; 
+                trigger.setAttribute('aria-expanded', String(opening)); 
+                if (opening) { 
+                    search.value = ''; 
+                    renderOptions('');
+                    search.focus(); 
+                } 
+            });
+
+            search.addEventListener('input', function () {
+                renderOptions(search.value);
+            });
+
+            optionsContainer.addEventListener('click', function (event) {
+                const option = event.target.closest('.product-picker-option');
+                if (!option) return;
+                value.value = option.dataset.value;
+                label.textContent = option.dataset.value;
+                close();
+            });
+
             if (form) {
                 form.addEventListener('submit', function (event) {
                     if (value.value.trim()) return;
@@ -72,7 +144,9 @@
                     alert('Please select a Box Style from the list.');
                 });
             }
-            document.addEventListener('click', function (event) { if (!picker.contains(event.target)) close(); });
+            document.addEventListener('click', function (event) { 
+                if (!picker.contains(event.target)) close(); 
+            });
         });
     });
 </script>

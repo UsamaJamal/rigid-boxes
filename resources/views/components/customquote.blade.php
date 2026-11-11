@@ -1,5 +1,16 @@
 @include('components.video-guide-styles')
 <style>
+    .sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important;
+    }
     .quote-section {
         background: var(--primary-color);
         width: 100%;
@@ -789,7 +800,8 @@
                 <input type="number" name="length" placeholder="Length" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                 <input type="number" name="depth" placeholder="Depth" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
                 <div class="specs-unit">
-                    <select name="units" required>
+                    <label for="quote-units" class="sr-only">Measurement Unit</label>
+                    <select id="quote-units" name="units" aria-label="Measurement Unit" title="Measurement Unit" required>
                         <option value="mm">mm</option>
                         <option value="cm">cm</option>
                         <option value="in">in</option>
@@ -806,7 +818,8 @@
                     @include('components.searchable-product-select', ['name' => 'box_style', 'id' => 'home-category-box-style'])
                 </div>
                 <div class="select-wrapper">
-                    <select name="cad_sample">
+                    <label for="quote-cad-sample" class="sr-only">CAD Sample</label>
+                    <select id="quote-cad-sample" name="cad_sample" aria-label="CAD Sample" title="CAD Sample">
                         <option value="" disabled selected hidden>Select CAD Sample</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -821,7 +834,8 @@
             <div class="preferences-grid preferences-grid-videos">
                 <div class="pref-field">
                     <div class="select-wrapper">
-                        <select name="paper_coating">
+                        <label for="quote-paper-coating" class="sr-only">Paper Coating</label>
+                        <select id="quote-paper-coating" name="paper_coating" aria-label="Paper Coating" title="Paper Coating">
                             <option value="" disabled selected hidden>Select Paper Coating</option>
                             <option value="Not Sure">Not Sure</option>
                             <option>Aqueous Coating</option>
@@ -838,7 +852,8 @@
                 </div>
                 <div class="pref-field">
                     <div class="select-wrapper">
-                        <select name="material">
+                        <label for="quote-material" class="sr-only">Paper Stock</label>
+                        <select id="quote-material" name="material" aria-label="Paper Stock" title="Paper Stock">
                             <option value="" disabled selected hidden>Select Paper Stock</option>
                             <option value="Not Sure">Not Sure</option>
                             <option>12pt Cardboard Stock</option>
@@ -861,7 +876,8 @@
                 </div>
                 <div class="pref-field">
                     <div class="select-wrapper">
-                        <select name="color">
+                        <label for="quote-color" class="sr-only">Color</label>
+                        <select id="quote-color" name="color" aria-label="Color" title="Color">
                             <option value="" disabled selected hidden>Select Color</option>
                             <option value="Not Sure">Not Sure</option>
                             <option>1 color</option>

@@ -766,12 +766,14 @@
 
         <!-- Mobile Actions -->
         <div class="mobile-actions">
-            <button class="mobile-search-btn" onclick="toggleMobileSearch()">
+            <button class="mobile-search-btn" onclick="toggleMobileSearch()" aria-label="Search">
+                <span class="sr-only">Search</span>
                 <svg viewBox="0 0 24 24">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
             </button>
-            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open navigation menu">
+                <span class="sr-only">Open navigation menu</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -790,7 +792,8 @@
             </svg>
 
             <!-- Close dropdown icon -->
-            <button type="button" onclick="toggleMobileSearch()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8D4445; padding: 0; display: flex; align-items: center; justify-content: center; border-left: 1px solid #eee; padding-left: 10px; height: 24px;">
+            <button type="button" onclick="toggleMobileSearch()" aria-label="Close search" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #8D4445; padding: 0; display: flex; align-items: center; justify-content: center; border-left: 1px solid #eee; padding-left: 10px; height: 24px;">
+                <span class="sr-only">Close search</span>
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -850,9 +853,10 @@
     <div class="mobile-sidebar" id="mobileSidebar">
         <div class="mobile-sidebar-header">
             <a href="/" class="header-logo" style="margin: 0;">
-                <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img">
+                <img src="{{ asset('uploads/logo-rigid-boxes.svg') }}" alt="The Rigid Boxes" class="header-logo-img" width="126" height="64">
             </a>
-            <button class="close-menu-btn" onclick="toggleMobileMenu()">
+            <button class="close-menu-btn" onclick="toggleMobileMenu()" aria-label="Close navigation menu">
+                <span class="sr-only">Close navigation menu</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -1070,12 +1074,16 @@
         let lastScrollY = window.scrollY;
         const header = document.querySelector('.site-header');
         const headerTop = document.querySelector('.header-top');
+        let headerTopHeight = headerTop ? headerTop.offsetHeight : 88;
+        
+        window.addEventListener('resize', function() {
+            headerTopHeight = headerTop ? headerTop.offsetHeight : 88;
+        }, { passive: true });
         
         window.addEventListener('scroll', function() {
             if (window.innerWidth <= 1100) return;
             
             const currentScrollY = window.scrollY;
-            const headerTopHeight = headerTop ? headerTop.offsetHeight : 88;
             
             if (currentScrollY > headerTopHeight) {
                 if (currentScrollY > lastScrollY) {

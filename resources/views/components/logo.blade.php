@@ -41,9 +41,11 @@
 
     .brand-logo-item img {
         display: block;
-        width: 100%;
+        width: auto;
+        height: auto;
         max-width: 150px;
         max-height: 50px;
+        aspect-ratio: 150 / 50;
         object-fit: contain;
     }
 
@@ -71,6 +73,7 @@
         .brand-logo-item img {
             max-width: 100px;
             max-height: 32px;
+            aspect-ratio: 150 / 50;
         }
     }
 
@@ -106,7 +109,7 @@
                     <div class="brand-logos-set" @if ($isDuplicate) aria-hidden="true" @endif>
                         @foreach ($brandLogos as $brandLogo)
                             <div class="brand-logo-item">
-                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $brandLogo['alt'] }}">
+                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $isDuplicate ? '' : $brandLogo['alt'] }}" width="150" height="50" loading="lazy">
                             </div>
                         @endforeach
                     </div>
