@@ -8,18 +8,18 @@
 <body style="margin: 0; padding: 25px 0; background-color: #f7f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; line-height: 1.6; -webkit-font-smoothing: antialiased;">
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 18px rgba(141, 68, 69, 0.08); border: 1px solid #ebdada;">
         
-        {{-- Header with Exact Header Brand Logo on Clean White Background --}}
+        {{-- Header with Exact Brand Logo on Brand Burgundy (#8D4445) - Visible in Both Light & Dark Mode --}}
         <tr>
-            <td style="background: #ffffff; padding: 26px 20px 22px 20px; text-align: center;">
+            <td bgcolor="#8D4445" style="background-color: #8D4445; padding: 22px 20px 20px 20px; text-align: center; border-top-left-radius: 9px; border-top-right-radius: 9px;">
                 <a href="https://therigidboxes.com" target="_blank" style="text-decoration: none; display: inline-block;">
                     <img src="https://therigidboxes.com/images/The%20Rigid%20Boxes%20Logo%201.png" alt="The Rigid Boxes" width="189" height="96" style="display: block; margin: 0 auto; width: 189px; max-width: 100%; height: auto; border: 0;">
                 </a>
             </td>
         </tr>
 
-        {{-- Brand Burgundy Accent Bar (Matching Logo & Header) --}}
+        {{-- Brand Accent Divider Bar (#5B2829) --}}
         <tr>
-            <td style="height: 4px; background: #8D4445; line-height: 4px; font-size: 4px;">&nbsp;</td>
+            <td bgcolor="#5B2829" style="height: 3px; background-color: #5B2829; line-height: 3px; font-size: 3px;">&nbsp;</td>
         </tr>
 
         {{-- Main Body Content --}}
