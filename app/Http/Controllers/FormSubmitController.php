@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Mail\ContactFormMail;
 use App\Mail\QuoteFormMail;
 use App\Mail\NewsletterMail;
+use App\Mail\CustomerQuoteConfirmationMail;
+use App\Mail\CustomerContactConfirmationMail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\SpamDetector;
 use App\Support\HumanCheck;
@@ -81,7 +84,25 @@ class FormSubmitController extends Controller
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? '', $validated['email'] ?? '');
 
         if (!$isSpam) {
-            Mail::to($this->adminEmail)->send(new ContactFormMail($validated));
+            try {
+                Mail::to($this->adminEmail)->send(new ContactFormMail($validated));
+                Log::info('Admin Contact Form Mail Sent Successfully');
+            } catch (\Exception $e) {
+                Log::error('Admin Contact Form Mail Failed: ' . $e->getMessage());
+            }
+
+            // Send confirmation email copy to customer from support@therigidboxes.com
+            if (!empty($validated['email']) && filter_var($validated['email'], FILTER_VALIDATE_EMAIL)) {
+                try {
+                    $refCode = 'RB-' . strtoupper(substr(uniqid(), -6));
+                    $validated['ref_code'] = $refCode;
+                    Mail::to($validated['email'], $validated['name'] ?: 'Customer')
+                        ->send(new CustomerContactConfirmationMail($validated));
+                    Log::info('Customer Contact Confirmation Sent Successfully to: ' . $validated['email']);
+                } catch (\Exception $custEx) {
+                    Log::error('Customer Contact Confirmation Mail Failed: ' . $custEx->getMessage());
+                }
+            }
         }
 
         if ($request->expectsJson()) {
@@ -157,7 +178,25 @@ class FormSubmitController extends Controller
         $isSpam = SpamDetector::isSpam($validated['message'] ?? '', $validated['subject'] ?? 'Quote Request', $validated['email'] ?? '');
 
         if (!$isSpam) {
-            Mail::to($this->adminEmail)->send(new QuoteFormMail($validated));
+            try {
+                Mail::to($this->adminEmail)->send(new QuoteFormMail($validated));
+                Log::info('Admin Quote Form Mail Sent Successfully');
+            } catch (\Exception $e) {
+                Log::error('Admin Quote Form Mail Failed: ' . $e->getMessage());
+            }
+
+            // Send confirmation email copy to customer from support@therigidboxes.com
+            if (!empty($validated['email']) && filter_var($validated['email'], FILTER_VALIDATE_EMAIL)) {
+                try {
+                    $refCode = 'RB-' . strtoupper(substr(uniqid(), -6));
+                    $validated['ref_code'] = $refCode;
+                    Mail::to($validated['email'], $validated['name'] ?: 'Customer')
+                        ->send(new CustomerQuoteConfirmationMail($validated));
+                    Log::info('Customer Quote Confirmation Sent Successfully to: ' . $validated['email']);
+                } catch (\Exception $custEx) {
+                    Log::error('Customer Quote Confirmation Mail Failed: ' . $custEx->getMessage());
+                }
+            }
         }
 
         if ($request->expectsJson()) {
@@ -172,7 +211,12 @@ class FormSubmitController extends Controller
             'email' => 'required|email|max:255'
         ]);
 
-        Mail::to($this->adminEmail)->send(new NewsletterMail($validated['email']));
+        try {
+            Mail::to($this->adminEmail)->send(new NewsletterMail($validated['email']));
+            Log::info('Newsletter Mail Sent Successfully');
+        } catch (\Exception $e) {
+            Log::error('Newsletter Mail Failed: ' . $e->getMessage());
+        }
 
         if ($request->expectsJson()) {
             return response()->json(['success' => 'Thank you for subscribing to our newsletter!']);
