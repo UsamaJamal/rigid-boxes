@@ -11,16 +11,8 @@
         {{-- Header with Exact Header Brand Logo on Clean White Background --}}
         <tr>
             <td style="background: #ffffff; padding: 26px 20px 22px 20px; text-align: center;">
-                @php
-                    $logoPath = (function_exists('app') && method_exists(app(), 'basePath'))
-                        ? base_path('public/uploads/rigidboxes-header-logo-official.png')
-                        : (dirname(__DIR__, 2) . '/uploads/rigidboxes-header-logo-official.png');
-                    $logoUrl = (isset($message) && is_object($message) && method_exists($message, 'embed') && file_exists($logoPath))
-                        ? $message->embed($logoPath)
-                        : 'https://therigidboxes.com/images/The%20Rigid%20Boxes%20Logo%201.png';
-                @endphp
                 <a href="https://therigidboxes.com" target="_blank" style="text-decoration: none; display: inline-block;">
-                    <img src="{{ $logoUrl }}" alt="The Rigid Boxes" width="190" style="display: block; margin: 0 auto; width: 190px; max-width: 100%; height: auto; border: 0;">
+                    <img src="https://therigidboxes.com/images/The%20Rigid%20Boxes%20Logo%201.png" alt="The Rigid Boxes" width="189" height="96" style="display: block; margin: 0 auto; width: 189px; max-width: 100%; height: auto; border: 0;">
                 </a>
             </td>
         </tr>
