@@ -191,7 +191,7 @@
                 {{-- Auto-generated Notice --}}
                 <div style="margin-top: 20px; padding: 13px 18px; background-color: #faf6f6; border: 1px solid #ebdada; border-radius: 6px; text-align: center;">
                     <p style="margin: 0; font-size: 12px; color: #64748b; line-height: 1.5;">
-                        ℹ️ <strong style="color: #475569;">Please Note:</strong> This is an automatically generated email. Please do not reply directly to this message. For any assistance, please contact us at <a href="mailto:support@therigidboxes.com" style="color: #8D4445; text-decoration: underline; font-weight: 600;">support@therigidboxes.com</a>.
+                        ℹ️ <strong style="color: #475569;">Please Note:</strong> This is an automatically generated email. Please do not reply directly to this message.
                     </p>
                 </div>
 
