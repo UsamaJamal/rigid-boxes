@@ -381,9 +381,9 @@
                             @endphp
                             <a href="{{ url('/' . $product['slug']) }}/" class="item-card">
                                 <div class="item-image-wrapper">
-                                    <img src="{{ $pImgUrl }}" alt="{{ $product['title'] }}" class="main-img" loading="lazy">
+                                    <img src="{{ $pImgUrl }}" alt="{{ !empty($product['alt_text']) ? $product['alt_text'] : $product['title'] }}" class="main-img" loading="lazy">
                                     @if($pHoverUrl)
-                                        <img src="{{ $pHoverUrl }}" alt="{{ $product['title'] }}" class="hover-img" loading="lazy">
+                                        <img src="{{ $pHoverUrl }}" alt="{{ !empty($product['hover_alt_text']) ? $product['hover_alt_text'] : (!empty($product['alt_text']) ? $product['alt_text'] . ' Hover' : $product['title'] . ' Hover') }}" class="hover-img" loading="lazy">
                                     @endif
                                 </div>
                                 <div class="item-title">{{ $product['title'] }}</div>

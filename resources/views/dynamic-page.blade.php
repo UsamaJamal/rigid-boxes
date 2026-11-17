@@ -123,7 +123,7 @@
     </div>
 
     <div class="dynamic-container">
-        {!! $page['content'] !!}
+        {!! \App\Helpers\ContentFormatter::ensureImageAlts($page['content']) !!}
     </div>
 
     @include('components.cta')

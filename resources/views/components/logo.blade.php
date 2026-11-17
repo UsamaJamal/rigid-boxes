@@ -87,7 +87,7 @@
 @php
     $brandLogos = [
         ['file' => 'trusted-true-girl.svg', 'alt' => 'TrueGirl'],
-        ['file' => 'trusted-jeeter-mart.svg', 'alt' => 'Jester Mart'],
+        ['file' => 'trusted-jeeter-mart.svg', 'alt' => 'Jeeter Mart'],
         ['file' => 'trusted-bass-pro-shop.svg', 'alt' => 'Bass Pro Shops'],
         ['file' => 'trusted-hulu-motor.svg', 'alt' => 'The Hulu Motel'],
         ['file' => 'trusted-red-bull-logo.png', 'alt' => 'Red Bull'],
@@ -109,7 +109,7 @@
                     <div class="brand-logos-set" @if ($isDuplicate) aria-hidden="true" @endif>
                         @foreach ($brandLogos as $brandLogo)
                             <div class="brand-logo-item">
-                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $isDuplicate ? '' : $brandLogo['alt'] }}" width="150" height="50" loading="lazy">
+                                <img src="{{ asset('uploads/' . $brandLogo['file']) }}" alt="{{ $brandLogo['alt'] }}" width="150" height="50" loading="lazy">
                             </div>
                         @endforeach
                     </div>

@@ -1016,7 +1016,7 @@
                 const slug = typeof item === 'string' ? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : item.slug;
                 const icon = typeof item === 'object' ? item.icon : '';
                 const iconHtml = icon
-                    ? `<img src="${icon}" alt="" loading="lazy">`
+                    ? `<img src="${icon}" alt="${title}" loading="lazy">`
                     : giftBoxSvg;
                 return `<a href="/${slug}/" class="mega-menu-item">
                     <div class="mega-menu-icon">${iconHtml}</div>

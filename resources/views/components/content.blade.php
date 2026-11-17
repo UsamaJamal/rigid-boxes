@@ -218,9 +218,9 @@
             <div class="text-content-inner">
                 <div class="text-content-body">
                     @if(!empty($category['description']))
-                        {!! $category['description'] !!}
+                        {!! \App\Helpers\ContentFormatter::ensureImageAlts($category['description']) !!}
                     @elseif(!empty($settings['content_section']))
-                        {!! $settings['content_section'] !!}
+                        {!! \App\Helpers\ContentFormatter::ensureImageAlts($settings['content_section']) !!}
                     @else
                         <p>Do You Have A Business? Big Or Small Doesn't Matter!</p>
                         <p>Want To Give Your Customers Elegance With Great Packaging And A Secure Product Within? Look No Further!</p>

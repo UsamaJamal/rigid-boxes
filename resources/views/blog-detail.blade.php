@@ -1251,7 +1251,7 @@
             <!-- Left Main Column -->
             <article class="article-body">
                 @if(!empty($blog['content']))
-                    {!! $blog['content'] !!}
+                    {!! \App\Helpers\ContentFormatter::ensureImageAlts($blog['content']) !!}
                 @else
                 <p>The luxury packaging landscape is shifting faster than ever. Between sustainability mandates, digital integration, and ever-rising consumer expectations, brands that adapt early aren't just surviving — they're capturing disproportionate market attention. Here are the seven trends that will define premium packaging through 2026 and beyond.</p>
 

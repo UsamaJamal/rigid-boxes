@@ -252,7 +252,7 @@
                             <a href="{{ $prodUrl }}" class="bestseller-card"
                                 style="text-decoration:none; color:inherit;">
                                 <div class="bestseller-card__img">
-                                    <img src="{{ asset($pImg) }}" alt="" aria-hidden="true" width="275" height="266" loading="lazy"
+                                    <img src="{{ asset($pImg) }}" alt="{{ !empty($prod['alt_text']) ? $prod['alt_text'] : $prod['title'] }}" width="275" height="266" loading="lazy"
                                         onerror="this.src='https://placehold.co/284x284/eeeeee/555555?text={{ urlencode($prod['title']) }}'">
                                 </div>
                                 <p class="bestseller-card__title">{{ $prod['title'] }}</p>
