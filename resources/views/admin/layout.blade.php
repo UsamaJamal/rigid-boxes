@@ -150,15 +150,37 @@
                 if (align && align !== 'left' && /^(P|H[1-6]|DIV|LI|TD|TH)$/.test(el.tagName)) el.style.textAlign = align;
             });
 
-            // Pasted text is always black. Links are left out so they keep the site's link color.
-            root.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, strong, b, em, i, u').forEach(function (el) {
-                el.style.color = '#000000';
-            });
+            // Pasted text is always black #000000. Links are strictly left out so they keep the site's link color.
+            window.autoBlackenContent(root);
 
             const onlyLine = root.firstElementChild;
             if (mergesIntoLine && onlyLine && onlyLine.tagName === 'P' && root.children.length === 1 && root.textContent.trim() === onlyLine.textContent.trim()) {
                 onlyLine.replaceWith(...onlyLine.childNodes);
             }
+        };
+
+        window.autoBlackenContent = function (root) {
+            if (!root) return;
+            const textTags = 'p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, strong, b, em, i, u, span, div';
+            root.querySelectorAll(textTags).forEach(function (el) {
+                if (el.tagName === 'DIV' && el.querySelector('p, h1, h2, h3, h4, h5, h6, div, ul, ol, table')) {
+                    return;
+                }
+                if (el.closest('a')) {
+                    // Inside an internal link: remove any forced black color so link color is preserved!
+                    if (el.style && (el.style.color === 'rgb(0, 0, 0)' || el.style.color === '#000000' || el.style.color === 'black' || el.style.color === '#000')) {
+                        el.style.color = '';
+                    }
+                } else {
+                    // Content text: automatically pure black #000000
+                    el.style.color = '#000000';
+                }
+            });
+            root.querySelectorAll('a').forEach(function (a) {
+                if (a.style && (a.style.color === 'rgb(0, 0, 0)' || a.style.color === '#000000' || a.style.color === 'black' || a.style.color === '#000')) {
+                    a.style.color = '';
+                }
+            });
         };
 
         window.tinyMceUploadConfig = {
@@ -169,6 +191,16 @@
                 if (args.internal) return;
                 const line = editor.dom.getParent(editor.selection.getStart(), editor.dom.isBlock);
                 window.cleanPastedHtml(args.node, !!line && line.textContent.trim() !== '');
+            },
+            setup: function (editor) {
+                editor.on('SaveContent', function (e) {
+                    if (e.content) {
+                        const div = document.createElement('div');
+                        div.innerHTML = e.content;
+                        window.autoBlackenContent(div);
+                        e.content = div.innerHTML;
+                    }
+                });
             },
             relative_urls: false,
             remove_script_host: false,
@@ -230,6 +262,19 @@
 
             return result.location;
         };
+
+        // Ensure all TinyMCE editors auto-blacken content (while preserving links) before any admin form submits
+        document.addEventListener('submit', function (e) {
+            if (typeof tinymce !== 'undefined') {
+                tinymce.editors.forEach(function (editor) {
+                    const body = editor.getBody();
+                    if (body) {
+                        window.autoBlackenContent(body);
+                    }
+                    editor.save();
+                });
+            }
+        }, true);
     </script>
 </head>
 <body>

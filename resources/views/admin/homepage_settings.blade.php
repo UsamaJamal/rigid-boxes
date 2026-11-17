@@ -381,7 +381,7 @@
                 block_formats: 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6; Preformatted=pre',
                 branding: false,
                 promotion: false,
-                content_style: 'body { font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; } h3 { font-size:20px !important; line-height:1.4; }'
+                content_style: 'body { font-family:"DM Sans",sans-serif; font-size:14px; line-height:1.6; color:#000000; } body, p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, strong, b, em, i, u { color: #000000 !important; } a, a * { color: #8D4445 !important; text-decoration: underline !important; } h3 { font-size:20px !important; line-height:1.4; }'
             });
         }
 

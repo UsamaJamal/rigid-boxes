@@ -45,20 +45,35 @@
         margin: 30px auto 60px auto;
         padding: 0 var(--site-container-gutter, 55px);
         font-family: 'DM Sans', sans-serif;
-        color: #333;
+        color: #000000;
         line-height: 1.8;
         font-size: 16px;
     }
+    .dynamic-container p,
+    .dynamic-container h1,
+    .dynamic-container h2,
+    .dynamic-container h3,
+    .dynamic-container h4,
+    .dynamic-container h5,
+    .dynamic-container h6,
+    .dynamic-container li,
+    .dynamic-container td,
+    .dynamic-container th,
+    .dynamic-container blockquote,
+    .dynamic-container strong,
+    .dynamic-container b,
+    .dynamic-container em,
+    .dynamic-container i {
+        color: #000000 !important;
+    }
     .dynamic-container h2, .dynamic-container h3, .dynamic-container h4, .dynamic-container h5, .dynamic-container h6 {
         font-family: 'Open Sans', sans-serif;
-        color: #111;
         margin-top: 30px;
         margin-bottom: 15px;
         font-weight: 700;
     }
     .dynamic-container p {
         margin-bottom: 20px;
-        color: #444;
     }
     .dynamic-container ul, .dynamic-container ol {
         margin-bottom: 20px;
@@ -67,12 +82,14 @@
     .dynamic-container li {
         margin-bottom: 10px;
     }
-    .dynamic-container a {
-        color: var(--primary-color, #8D4445);
-        text-decoration: none;
+    .dynamic-container a,
+    .dynamic-container a * {
+        color: var(--primary-color, #8D4445) !important;
+        text-decoration: underline !important;
     }
-    .dynamic-container a:hover {
-        text-decoration: underline;
+    .dynamic-container a:hover,
+    .dynamic-container a:hover * {
+        text-decoration: underline !important;
     }
     .dynamic-container img {
         max-width: 100%;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\ContentFormatter;
 
 class AdminHomepageController extends Controller
 {
@@ -115,7 +116,7 @@ class AdminHomepageController extends Controller
 
         $settings['featured_categories'] = array_map('intval', (array) $request->input('featured_categories', []));
         $settings['bestseller_products'] = array_map('intval', (array) $request->input('bestseller_products', []));
-        $settings['content_section'] = $request->input('content_section');
+        $settings['content_section'] = ContentFormatter::autoBlackenContent($request->input('content_section'));
 
         // Reconstruct FAQs array
         $faqs = [];

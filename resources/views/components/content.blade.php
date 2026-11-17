@@ -62,10 +62,27 @@
         line-height: 1.4;
     }
 
+    .text-content-body p,
+    .text-content-body h1,
+    .text-content-body h2,
+    .text-content-body h3,
+    .text-content-body h4,
+    .text-content-body h5,
+    .text-content-body h6,
+    .text-content-body li,
+    .text-content-body td,
+    .text-content-body th,
+    .text-content-body blockquote,
+    .text-content-body strong,
+    .text-content-body b,
+    .text-content-body em,
+    .text-content-body i {
+        color: #000000 !important;
+    }
+
     .text-content-body p {
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
-        color: #000000;
         line-height: 1.7;
         margin-bottom: 14px;
     }
@@ -79,7 +96,6 @@
         font-size: 20px !important;
         font-weight: 700;
         line-height: 1.4;
-        color: #000;
         margin: 24px 0 12px;
     }
 
@@ -100,14 +116,13 @@
     .text-content-body li {
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
-        color: #333;
         line-height: 1.7;
         padding-left: 4px;
         margin-bottom: 4px;
     }
 
     .text-content-body li::marker {
-        color: #333;
+        color: #000000;
         font-weight: 600;
     }
 

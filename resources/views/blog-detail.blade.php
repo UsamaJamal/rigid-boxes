@@ -256,8 +256,25 @@
             white-space: normal !important;
         }
 
+        .article-body p,
+        .article-body h1,
+        .article-body h2,
+        .article-body h3,
+        .article-body h4,
+        .article-body h5,
+        .article-body h6,
+        .article-body li,
+        .article-body td,
+        .article-body th,
+        .article-body blockquote,
+        .article-body strong,
+        .article-body b,
+        .article-body em,
+        .article-body i {
+            color: #000000 !important;
+        }
+
         .article-body p {
-            color: #000000;
             margin-bottom: 16px;
         }
 
@@ -297,14 +314,9 @@
             font-family: var(--font-heading);
             font-size: 22px;
             font-weight: 700;
-            color: var(--color-ink);
             margin-top: 24px;
             margin-bottom: 12px;
             line-height: 1.35;
-        }
-
-        .article-body strong {
-            color: var(--color-ink);
         }
 
         .article-body ul,
@@ -327,7 +339,7 @@
         }
 
         .article-body li::marker {
-            color: var(--color-ink);
+            color: #000000;
             font-weight: 600;
         }
 
