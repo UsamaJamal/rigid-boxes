@@ -57,14 +57,12 @@
     .dynamic-container h5,
     .dynamic-container h6,
     .dynamic-container li,
-    .dynamic-container td,
-    .dynamic-container th,
     .dynamic-container blockquote,
     .dynamic-container strong,
     .dynamic-container b,
     .dynamic-container em,
     .dynamic-container i {
-        color: #000000 !important;
+        color: #000000;
     }
     .dynamic-container h2, .dynamic-container h3, .dynamic-container h4, .dynamic-container h5, .dynamic-container h6 {
         font-family: 'Open Sans', sans-serif;

@@ -146,11 +146,26 @@
 
             root.querySelectorAll('*').forEach(function (el) {
                 const align = el.style && el.style.textAlign;
-                ['style', 'class', 'lang', 'dir'].forEach(function (name) { el.removeAttribute(name); });
-                if (align && align !== 'left' && /^(P|H[1-6]|DIV|LI|TD|TH)$/.test(el.tagName)) el.style.textAlign = align;
+                const isTableEl = /^(TABLE|THEAD|TBODY|TFOOT|TR|TH|TD)$/i.test(el.tagName);
+                const isInsideTable = !isTableEl && !!el.closest('table');
+
+                if (isTableEl) {
+                    // Preserve table styles (custom colors, backgrounds, borders, widths)
+                    ['class', 'lang', 'dir'].forEach(function (name) { el.removeAttribute(name); });
+                } else if (isInsideTable) {
+                    // For text/spans inside table cells, preserve any custom color & background
+                    const color = el.style && el.style.color;
+                    const bg = el.style && (el.style.backgroundColor || el.style.background);
+                    ['class', 'lang', 'dir'].forEach(function (name) { el.removeAttribute(name); });
+                    if (color) el.style.color = color;
+                    if (bg) el.style.backgroundColor = bg;
+                } else {
+                    ['style', 'class', 'lang', 'dir'].forEach(function (name) { el.removeAttribute(name); });
+                    if (align && align !== 'left' && /^(P|H[1-6]|DIV|LI)$/i.test(el.tagName)) el.style.textAlign = align;
+                }
             });
 
-            // Pasted text is always black #000000. Links are strictly left out so they keep the site's link color.
+            // Auto-blacken content text while preserving internal links and custom table colors
             window.autoBlackenContent(root);
 
             const onlyLine = root.firstElementChild;
@@ -161,24 +176,48 @@
 
         window.autoBlackenContent = function (root) {
             if (!root) return;
-            const textTags = 'p, h1, h2, h3, h4, h5, h6, li, td, th, blockquote, strong, b, em, i, u, span, div';
+
+            // 1. Internal links (<a> and descendants): remove any accidental black style so link color is preserved!
+            root.querySelectorAll('a, a *').forEach(function (a) {
+                if (a.style && (a.style.color === 'rgb(0, 0, 0)' || a.style.color === '#000000' || a.style.color === 'black' || a.style.color === '#000')) {
+                    a.style.color = '';
+                }
+            });
+
+            // Helper to detect default/pasted grey or black shades
+            function isPastedGreyOrEmpty(col) {
+                if (!col) return true;
+                const c = col.trim().toLowerCase();
+                if (['#000', '#000000', 'black', 'rgb(0, 0, 0)', 'rgb(0,0,0)'].includes(c)) return true;
+                if (/^#([0-9a-f])\1\1$/i.test(c)) return true;
+                if (/^#([0-9a-f]{2})\1\1$/i.test(c)) return true;
+                const m = c.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+                if (m) {
+                    const r = parseInt(m[1]), g = parseInt(m[2]), b = parseInt(m[3]);
+                    if (Math.abs(r - g) <= 15 && Math.abs(g - b) <= 15 && Math.abs(r - b) <= 15) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // 2. Elements OUTSIDE of tables and links: ensure standard content is black #000000
+            const textTags = 'p, h1, h2, h3, h4, h5, h6, li, blockquote, strong, b, em, i, u, span, div';
             root.querySelectorAll(textTags).forEach(function (el) {
                 if (el.tagName === 'DIV' && el.querySelector('p, h1, h2, h3, h4, h5, h6, div, ul, ol, table')) {
                     return;
                 }
                 if (el.closest('a')) {
-                    // Inside an internal link: remove any forced black color so link color is preserved!
-                    if (el.style && (el.style.color === 'rgb(0, 0, 0)' || el.style.color === '#000000' || el.style.color === 'black' || el.style.color === '#000')) {
-                        el.style.color = '';
-                    }
-                } else {
-                    // Content text: automatically pure black #000000
-                    el.style.color = '#000000';
+                    return;
                 }
-            });
-            root.querySelectorAll('a').forEach(function (a) {
-                if (a.style && (a.style.color === 'rgb(0, 0, 0)' || a.style.color === '#000000' || a.style.color === 'black' || a.style.color === '#000')) {
-                    a.style.color = '';
+                // CRITICAL: If inside a table, do NOT touch or overwrite custom colors!
+                if (el.closest('table')) {
+                    return;
+                }
+
+                const curColor = el.style ? (el.style.color || '') : '';
+                if (isPastedGreyOrEmpty(curColor) || /^(P|H[1-6]|LI|BLOCKQUOTE)$/i.test(el.tagName)) {
+                    el.style.color = '#000000';
                 }
             });
         };

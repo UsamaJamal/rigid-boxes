@@ -264,18 +264,17 @@
         .article-body h5,
         .article-body h6,
         .article-body li,
-        .article-body td,
-        .article-body th,
         .article-body blockquote,
         .article-body strong,
         .article-body b,
         .article-body em,
         .article-body i {
-            color: #000000 !important;
+            color: #000000;
         }
 
         .article-body p {
             margin-bottom: 16px;
+            color: #000000;
         }
 
         .article-body a,

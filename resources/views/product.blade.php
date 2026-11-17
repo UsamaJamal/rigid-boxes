@@ -2446,14 +2446,12 @@
             #desc-wrapper h5,
             #desc-wrapper h6,
             #desc-wrapper li,
-            #desc-wrapper td,
-            #desc-wrapper th,
             #desc-wrapper blockquote,
             #desc-wrapper strong,
             #desc-wrapper b,
             #desc-wrapper em,
             #desc-wrapper i {
-                color: #000000 !important;
+                color: #000000;
             }
             #desc-wrapper a,
             #desc-wrapper a * {

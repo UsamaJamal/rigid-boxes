@@ -104,9 +104,39 @@ class ContentFormatter
     }
 
     /**
-     * Automatically formats rich text so that all content text is pure black (#000000),
-     * while completely preserving the color of internal links (<a> tags) and removing
-     * any accidental black styling from links. Also ensures all <img> tags have valid alt text.
+     * Checks if a CSS color value is an empty, default, or accidental pasted grey/black shade.
+     */
+    protected static function isPastedGreyOrEmpty(?string $col): bool
+    {
+        if (empty($col)) {
+            return true;
+        }
+        $c = strtolower(trim($col));
+        if (in_array($c, ['#000', '#000000', 'black', 'rgb(0, 0, 0)', 'rgb(0,0,0)'])) {
+            return true;
+        }
+        // Match 3-digit or 6-digit repeating hex codes (#333, #555555, etc.)
+        if (preg_match('/^#([0-9a-f])\1\1$/i', $c) || preg_match('/^#([0-9a-f]{2})\1\1$/i', $c)) {
+            return true;
+        }
+        // Match rgb/rgba grey shades where r, g, b are very close to each other
+        if (preg_match('/^rgba?\((\d+),\s*(\d+),\s*(\d+)/', $c, $m)) {
+            $r = (int) $m[1];
+            $g = (int) $m[2];
+            $b = (int) $m[3];
+            if (abs($r - $g) <= 15 && abs($g - $b) <= 15 && abs($r - $b) <= 15) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Automatically formats rich text so that content text defaults to pure black (#000000),
+     * while completely preserving:
+     * 1. The color of internal links (<a> tags)
+     * 2. Any custom table heading or table text colors (<th>, <td>, <table>) from code or user selection
+     * Also ensures all <img> tags have valid alt text.
      */
     public static function autoBlackenContent(?string $html): string
     {
@@ -129,21 +159,32 @@ class ContentFormatter
 
         $xpath = new DOMXPath($dom);
 
-        // 1. Text elements that are NOT <a> and NOT descendants of <a>: ensure color: #000000
-        $textTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'td', 'th', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'span'];
-        $query = '//' . implode('[not(ancestor-or-self::a)] | //', $textTags) . '[not(ancestor-or-self::a)]';
+        // 1. Text elements OUTSIDE of <a> and OUTSIDE of <table>: ensure default black #000000
+        $textTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'strong', 'b', 'em', 'i', 'u', 'span'];
+        $query = '//' . implode('[not(ancestor-or-self::a) and not(ancestor-or-self::table)] | //', $textTags) . '[not(ancestor-or-self::a) and not(ancestor-or-self::table)]';
         $nodes = $xpath->query($query);
 
         if ($nodes) {
             foreach ($nodes as $node) {
                 $style = $node->getAttribute('style');
-                // Remove existing color definition
-                $style = preg_replace('/color\s*:\s*[^;]+;?/i', '', $style);
-                $style = trim($style);
-                if ($style !== '' && substr($style, -1) !== ';') {
-                    $style .= ';';
+                // Extract current color if present
+                $curColor = '';
+                if (preg_match('/color\s*:\s*([^;]+);?/i', $style, $cm)) {
+                    $curColor = trim($cm[1]);
                 }
-                $node->setAttribute('style', trim($style . ' color: #000000;'));
+
+                $tagName = strtolower($node->nodeName);
+                $isBlock = in_array($tagName, ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote']);
+
+                // If no color, or if it is an accidental pasted grey/black shade, or if it's a standard block element: set #000000
+                if ($isBlock || self::isPastedGreyOrEmpty($curColor)) {
+                    $style = preg_replace('/color\s*:\s*[^;]+;?/i', '', $style);
+                    $style = trim($style);
+                    if ($style !== '' && substr($style, -1) !== ';') {
+                        $style .= ';';
+                    }
+                    $node->setAttribute('style', trim($style . ' color: #000000;'));
+                }
             }
         }
 
@@ -163,6 +204,9 @@ class ContentFormatter
                 }
             }
         }
+
+        // Note: Elements inside <table> (th, td, tr, thead, etc.) are NOT touched by the query above,
+        // so any custom text color, heading color, or background color in tables remains 100% preserved!
 
         $wrapper = $dom->getElementsByTagName('div')->item(0);
         if (!$wrapper) {

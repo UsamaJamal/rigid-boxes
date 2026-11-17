@@ -70,14 +70,12 @@
     .text-content-body h5,
     .text-content-body h6,
     .text-content-body li,
-    .text-content-body td,
-    .text-content-body th,
     .text-content-body blockquote,
     .text-content-body strong,
     .text-content-body b,
     .text-content-body em,
     .text-content-body i {
-        color: #000000 !important;
+        color: #000000;
     }
 
     .text-content-body p {
