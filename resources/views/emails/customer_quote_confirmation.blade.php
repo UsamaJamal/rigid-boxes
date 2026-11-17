@@ -165,7 +165,7 @@
                 </div>
 
                 {{-- What Happens Next (Timeline) --}}
-                <div style="background: #faf6f6; border: 1px solid #ebdada; border-left: 4px solid #8D4445; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px;">
+                <div style="background: #faf6f6; border: 1px solid #ebdada; border-left: 4px solid #8D4445; border-radius: 6px; padding: 18px 20px; margin-bottom: 0;">
                     <h3 style="margin: 0 0 12px 0; font-size: 13px; font-weight: 700; color: #8D4445; text-transform: uppercase; letter-spacing: 0.6px;">
                         ⚡ Next Steps in Your Order
                     </h3>
@@ -186,35 +186,6 @@
                             </td>
                         </tr>
                     </table>
-                </div>
-
-                {{-- Need Support / Help Box --}}
-                <div style="background: #ffffff; border: 1px dashed #d6c0c1; border-radius: 8px; padding: 20px; text-align: center;">
-                    <p style="margin: 0 0 6px 0; font-size: 14px; font-weight: 700; color: #231617;">
-                        Need Help or Want to Make Changes?
-                    </p>
-                    <p style="margin: 0 0 14px 0; font-size: 13px; color: #64748b;">
-                        Simply reply directly to this email or speak with our team:
-                    </p>
-                    <div>
-                        <a href="mailto:support@therigidboxes.com" style="display: inline-block; background: #8D4445; color: #ffffff; text-decoration: none; padding: 9px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; margin: 3px 4px;">
-                            ✉️ support@therigidboxes.com
-                        </a>
-                        @php
-                            $supportPhone = null;
-                            try {
-                                $rawPh = \Illuminate\Support\Facades\DB::table('homepage_contents')->where('field_key', 'company_phone')->value('value');
-                                if (!empty($rawPh) && strlen(trim($rawPh)) >= 7 && trim($rawPh) !== '01233') {
-                                    $supportPhone = trim($rawPh);
-                                }
-                            } catch (\Exception $e) {}
-                        @endphp
-                        @if(!empty($supportPhone))
-                        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $supportPhone) }}" style="display: inline-block; background: #ffffff; border: 1.5px solid #8D4445; color: #8D4445; text-decoration: none; padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; margin: 3px 4px;">
-                            📞 {{ $supportPhone }}
-                        </a>
-                        @endif
-                    </div>
                 </div>
 
             </td>
