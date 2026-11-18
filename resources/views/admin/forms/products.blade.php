@@ -308,6 +308,33 @@
     </div>
 
     <div class="section">
+        <h3>⭐ Schema Rating, Reviews &amp; Price <small style="font-weight:400; color:var(--muted, #6b7280);">(signs like $ are added automatically into the schema)</small></h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
+            <div class="field">
+                <label>Rating Value (★)</label>
+                <div class="schema-prefix-input"><span>★</span><input name="rating_value" value="{{ $v('rating_value') }}" placeholder="4.8" inputmode="decimal"></div>
+            </div>
+            <div class="field">
+                <label>Review Count</label>
+                <div class="schema-prefix-input"><span>💬</span><input name="review_count" value="{{ $v('review_count') }}" placeholder="27" inputmode="numeric"></div>
+            </div>
+            <div class="field">
+                <label>Price (USD $)</label>
+                <div class="schema-prefix-input"><span>$</span><input name="price" value="{{ $v('price') }}" placeholder="0.17" inputmode="decimal"></div>
+            </div>
+        </div>
+        <small style="display:block; margin-top:10px; color:var(--muted, #6b7280);">
+            Rating and Review Count appear in the product schema only when both are filled. Price adds the offer (price, shipping and returns). Leave empty to skip.
+            A product with its own Schema JSON-LD above uses that schema instead.
+        </small>
+        <style>
+            .schema-prefix-input { display:flex; align-items:stretch; }
+            .schema-prefix-input span { display:flex; align-items:center; justify-content:center; min-width:44px; padding:0 10px; border:1px solid var(--line, #d1d5db); border-right:0; border-radius:8px 0 0 8px; background:#f3f4f6; color:#b45309; font-weight:700; }
+            .schema-prefix-input input { flex:1; min-width:0; border-radius:0 8px 8px 0 !important; }
+        </style>
+    </div>
+
+    <div class="section">
         <h3>Visibility</h3>
         <div class="checks">
             <label class="check">

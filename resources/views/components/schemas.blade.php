@@ -183,6 +183,58 @@
             }
         }
 
+        // Rating, review count and price come from the product's admin fields.
+        $schemaRating = (float) ($schemaProduct['rating_value'] ?? 0);
+        $schemaReviews = (int) ($schemaProduct['review_count'] ?? 0);
+        $schemaPrice = (float) ($schemaProduct['price'] ?? 0);
+
+        $schemaAggregateRating = ($schemaRating > 0 && $schemaReviews > 0) ? [
+            '@type' => 'AggregateRating',
+            'ratingValue' => rtrim(rtrim(number_format($schemaRating, 1, '.', ''), '0'), '.'),
+            'reviewCount' => (string) $schemaReviews,
+            'bestRating' => '5',
+            'worstRating' => '1',
+        ] : null;
+
+        $schemaOffer = $schemaPrice > 0 ? [
+            '@type' => 'Offer',
+            'url' => $schemaPageUrl,
+            'priceCurrency' => 'USD',
+            'price' => number_format($schemaPrice, 2, '.', ''),
+            // Always a year ahead, so the price never shows as expired.
+            'priceValidUntil' => now()->addYear()->toDateString(),
+            'availability' => 'https://schema.org/InStock',
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'seller' => [
+                '@type' => 'Organization',
+                'name' => 'The Rigid Boxes',
+            ],
+            'shippingDetails' => [
+                '@type' => 'OfferShippingDetails',
+                'shippingDestination' => [
+                    '@type' => 'DefinedRegion',
+                    'addressCountry' => 'US',
+                ],
+                'deliveryTime' => [
+                    '@type' => 'ShippingDeliveryTime',
+                    'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 2, 'unitCode' => 'd'],
+                    'transitTime' => ['@type' => 'QuantitativeValue', 'minValue' => 7, 'maxValue' => 8, 'unitCode' => 'd'],
+                ],
+            ],
+            'hasMerchantReturnPolicy' => [
+                '@type' => 'MerchantReturnPolicy',
+                'applicableCountry' => 'US',
+                'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                'merchantReturnDays' => 180,
+                'returnMethod' => 'https://schema.org/ReturnByMail',
+                'returnFees' => 'https://schema.org/FreeReturn',
+                'refundType' => 'https://schema.org/FullRefund',
+            ],
+            'validFrom' => !empty($schemaProduct['updated_at'])
+                ? date('Y-m-d', strtotime($schemaProduct['updated_at']))
+                : now()->toDateString(),
+        ] : null;
+
         $schemaGraph[] = array_filter([
             '@type' => 'Product',
             '@id' => $schemaPageUrl . '#product',
@@ -200,6 +252,8 @@
                 '@type' => 'Brand',
                 'name' => 'The Rigid Boxes',
             ],
+            'aggregateRating' => $schemaAggregateRating,
+            'offers' => $schemaOffer,
         ], fn ($value) => $value !== null && $value !== '' && $value !== []);
     }
 

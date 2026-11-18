@@ -139,6 +139,24 @@ class AdminContentController extends Controller
             'schema' => 'nullable|string',
         ]);
 
+        if ($module === 'products') {
+            // Signs such as "$" or "," typed into the schema fields are dropped;
+            // the schema adds the currency itself.
+            foreach (['rating_value', 'review_count', 'price'] as $schemaField) {
+                $clean = preg_replace('/[^0-9.]/', '', (string) $request->input($schemaField, ''));
+                $request->merge([$schemaField => $clean === '' ? null : $clean]);
+            }
+            $request->validate([
+                'rating_value' => 'nullable|numeric|min:1|max:5',
+                'review_count' => 'nullable|integer|min:1',
+                'price' => 'nullable|numeric|min:0.01|max:99999999',
+            ], [
+                'rating_value.*' => 'Rating Value must be a number from 1 to 5, e.g. 4.8.',
+                'review_count.*' => 'Review Count must be a whole number, e.g. 27.',
+                'price.*' => 'Price must be a number, e.g. 0.17.',
+            ]);
+        }
+
         if ($request->filled('schema')) {
             $normalizedSchema = $this->normalizeSchemaInput($request->input('schema'));
 
@@ -152,7 +170,7 @@ class AdminContentController extends Controller
         }
         $table = ['products'=>'admin_products','categories'=>'admin_categories','blogs'=>'admin_blogs','pages'=>'admin_pages','authors'=>'admin_authors'][$module];
         $columns = [
-            'products' => ['title','slug','status','show_home','image','hover_image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related'],
+            'products' => ['title','slug','status','show_home','image','hover_image','images','description','long_description','alt_text','box_style','material','printing','finishing','dimensions','moq','turnaround','meta_title','meta_description','meta_keywords','robots','schema','related','rating_value','review_count','price'],
             'categories' => ['title','slug','status','parent_id','show_in_nav','show_home','image','icon','hero_image','banner_image','hero_title','hero_badge','hero_description','description','feature_description','products_heading','products_description','feature_title','why_choose_title','why_choose_description','meta_title','meta_description','meta_keywords','robots','schema'],
             'blogs' => ['title','slug','status','show_home','image','author_id','author_name','publish_date','blog_category','tags','excerpt','content','author_description','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
             'pages' => ['title','slug','status','show_home','image','heading','content','position','appearance','alt_text','meta_title','meta_description','meta_keywords','robots','schema'],
