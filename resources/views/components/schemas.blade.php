@@ -1,3 +1,4 @@
+
 @php
     $schemaSiteUrl = rtrim(url('/'), '/');
     $schemaPath = trim(request()->path(), '/');
@@ -219,6 +220,11 @@
                     '@type' => 'ShippingDeliveryTime',
                     'handlingTime' => ['@type' => 'QuantitativeValue', 'minValue' => 1, 'maxValue' => 2, 'unitCode' => 'd'],
                     'transitTime' => ['@type' => 'QuantitativeValue', 'minValue' => 7, 'maxValue' => 8, 'unitCode' => 'd'],
+                ],
+                'shippingRate' => [
+                    '@type' => 'MonetaryAmount',
+                    'currency' => 'USD',
+                    'value' => 0,
                 ],
             ],
             'hasMerchantReturnPolicy' => [
