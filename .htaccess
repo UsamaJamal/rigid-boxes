@@ -17,10 +17,10 @@
     # Allow SSL/domain validation files to remain accessible from the project root.
     RewriteRule ^\.well-known/ - [L]
 
-    # Sitemap XML is the only non-homepage URL without a trailing slash.
+    # .xml and .txt files (sitemap.xml, robots.txt, llms.txt) never take a trailing slash.
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} \.xml/$ [NC]
-    RewriteRule ^(.+\.xml)/$ /$1 [R=301,L,NE]
+    RewriteCond %{REQUEST_URI} \.(xml|txt)/$ [NC]
+    RewriteRule ^(.+\.(xml|txt))/$ /$1 [R=301,L,NE]
 
     # Every public page except the homepage and sitemap.xml uses a trailing slash.
     # Keep this before the internal rewrite to the public directory.

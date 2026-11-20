@@ -1,0 +1,279 @@
+# The Rigid Boxes
+
+> The Rigid Boxes provides custom rigid boxes and tailored packaging solutions for brands and businesses. The website covers packaging by industry, material, and style, along with custom manufacturing, printing, finishing, design support, and quotation services.
+
+The company focuses on premium rigid packaging and custom product boxes for industries such as apparel, bakery, cosmetics, jewelry, food, gifts, electronics, healthcare, and other retail applications. Packaging can be customized according to product dimensions, box structure, material, artwork, inserts, and finishing requirements.
+
+## Website and Company Information
+
+- [Home](https://therigidboxes.com): The official website and main entry point for The Rigid Boxes.
+- [Box by Industry](https://therigidboxes.com/box-by-industry/): Browse packaging categories organized by industry.
+- [Box by Material](https://therigidboxes.com/box-by-material/): Browse packaging categories organized by board and material options.
+- [Box by Style](https://therigidboxes.com/box-by-style/): Browse packaging structures and styles.
+- [About Us](https://therigidboxes.com/about-us/): Company background, mission, vision, and packaging approach.
+- [Why Choose Us](https://therigidboxes.com/why-choose-us/): Information about the company's service and packaging value proposition.
+- [Frequently Asked Questions](https://therigidboxes.com/frequently-asked-questions/): Answers to common questions about packaging, customization, and orders.
+- [Request a Quote](https://therigidboxes.com/request-quote/): Submit packaging specifications to request a customized quotation.
+- [Contact Us](https://therigidboxes.com/contact-us/): Contact the packaging team for product and order inquiries.
+- [Blog](https://therigidboxes.com/blog/): Packaging guides, product information, and educational articles.
+- [HTML Sitemap](https://therigidboxes.com/sitemap/): Browse the website's published pages through the HTML sitemap.
+
+## Customization, Ordering, and Manufacturing
+
+- **Custom manufacturing:** Services include structural design, prototype development, printing, die-cutting, lamination, foil stamping, embossing, debossing, folding, gluing, assembly, and shipping.
+- **Minimum order quantity:** The company states that it has no minimum order quantity (MOQ). Single-piece samples, short production runs, and large-volume orders may be requested. Some materials, styles, printing methods, and finishes may require higher quantities; single-piece orders may have a higher unit cost.
+- **Quotation requirements:** An accurate quote may require internal box dimensions (Length x Width x Depth), material, quantity, printing requirements, finishing options, box structure, assembly requirements, shipping destination, and preferred production timeline.
+- **Artwork and design:** Customers may provide production-ready artwork or request design assistance. Artwork requirements can include high-resolution images, outlined or embedded fonts, CMYK or Pantone color information where applicable, safe margins, and bleed areas.
+- **Proofs and samples:** Digital proofs, structural samples, and printed samples upon request are available for review. Production begins after approval of the final digital proof or physical sample.
+- **Production estimates:** The terms page lists standard orders at 8-10 business days and rush orders at 4-6 business days, with additional charges for rush orders. Timelines may vary by order size, customization, and seasonal demand.
+- **Branding and finishing:** Website information references foil stamping, embossing, debossing, protective laminations, coatings, magnetic closures, fitted inserts, and spot UV. Availability depends on the product and project requirements.
+
+## Packaging by Material
+
+### Main Material Categories
+
+The Box by Material page currently highlights cardboard, buxboard, kraft, and Luxury Rigid Boxes.
+
+- [Cardboard Boxes](https://therigidboxes.com/cardboard-boxes/): Custom cardboard packaging options for product packaging and presentation.
+- [Buxboard Boxes](https://therigidboxes.com/buxboard-boxes/): Packaging options using buxboard for custom product packaging.
+- [Kraft Boxes](https://therigidboxes.com/kraft-boxes/): Custom kraft packaging for brands and product applications.
+
+### Additional Board Material Page
+
+- [Grayboard Boxes](https://therigidboxes.com/grayboard-boxes/): A grayboard-related packaging page listed in the sitemap.
+
+### Luxury Rigid Boxes and Rigid Box Types
+
+Luxury Rigid Boxes is listed under the website's Box by Material group. The following pages are rigid-box constructions or types, rather than general packaging styles.
+
+- [Luxury Rigid Boxes](https://therigidboxes.com/luxury-rigid-boxes/): Premium rigid setup boxes for luxury products, gifts, retail, and presentation.
+- [Two Piece Boxes](https://therigidboxes.com/two-piece-boxes/): Rigid boxes with a separate base and removable lid.
+- [Magnetic Closure Rigid Boxes](https://therigidboxes.com/magnetic-closure-rigid-boxes/): Rigid packaging with a magnetic closure for a premium opening experience.
+- [Collapsible Rigid Boxes](https://therigidboxes.com/collapsible-rigid-boxes/): Foldable rigid boxes designed to ship and store flat before assembly.
+
+## Packaging by Style
+
+The main Box by Style group contains the following packaging styles.
+
+- [Display Boxes](https://therigidboxes.com/display-boxes/): Packaging designed to present products on counters or retail shelves.
+- [Favor Boxes](https://therigidboxes.com/favor-boxes/): Small presentation boxes for event favors and gifts.
+- [Gable Boxes](https://therigidboxes.com/gable-boxes/): Gable-style packaging with a built-in handle structure.
+- [Pillow Boxes](https://therigidboxes.com/pillow-boxes/): Curved pillow-style packaging for gifts, small products, and favors.
+- [Round Boxes](https://therigidboxes.com/round-boxes/): Round-shaped packaging for product presentation and gifting.
+- [Tuck Boxes](https://therigidboxes.com/tuck-boxes/): Tuck-style boxes with folding closure panels.
+- [Window Boxes](https://therigidboxes.com/window-boxes/): Packaging with a transparent or die-cut display window.
+
+### Additional Style Pages in the Sitemap
+
+- [Booklet Boxes](https://therigidboxes.com/booklet-boxes/): Booklet-style packaging with a book-like opening structure.
+- [Star-Shaped Boxes](https://therigidboxes.com/star-shaped-boxes/): Star-shaped packaging for themed gifts and special presentations.
+
+## Packaging by Industry
+
+The following product and category pages are grouped by their primary product or industry focus to make the website easier to understand and navigate.
+
+### Apparel Packaging
+
+- [Apparel Boxes](https://therigidboxes.com/apparel-boxes/): Custom packaging for clothing, garments, and fashion products.
+- [Bra Boxes](https://therigidboxes.com/bra-boxes/): Packaging for bras and intimate apparel products.
+- [Shirt Boxes](https://therigidboxes.com/shirt-boxes/): Custom boxes for shirts and folded apparel.
+- [Tie Boxes](https://therigidboxes.com/tie-boxes/): Packaging for ties and fashion accessories.
+- [Lingerie Boxes](https://therigidboxes.com/lingerie-boxes/): Packaging for lingerie and intimate apparel.
+- [Underwear Boxes](https://therigidboxes.com/underwear-boxes/): Custom packaging for underwear products.
+- [Swimwear Boxes](https://therigidboxes.com/swimwear-boxes/): Packaging for swimwear and related apparel.
+- [Pantyhose Boxes](https://therigidboxes.com/pantyhose-boxes/): Packaging for pantyhose and hosiery products.
+- [Hoodie Boxes](https://therigidboxes.com/hoodie-boxes/): Custom boxes for hoodies and other apparel items.
+- [Custom Hat Boxes](https://therigidboxes.com/custom-hat-boxes/): Custom packaging for hats and headwear.
+
+### Bakery Packaging
+
+- [Bakery Boxes](https://therigidboxes.com/bakery-boxes/): Packaging for bakery products and baked goods.
+- [Cookie Boxes](https://therigidboxes.com/cookie-boxes/): Custom packaging for cookies and assorted baked treats.
+- [Donut Boxes](https://therigidboxes.com/donut-boxes/): Packaging for donuts and bakery assortments.
+- [Pie Boxes](https://therigidboxes.com/pie-boxes/): Custom boxes for pies and baked desserts.
+- [Dessert Boxes](https://therigidboxes.com/dessert-boxes/): Packaging for desserts and sweet treats.
+- [Cake Boxes](https://therigidboxes.com/cake-boxes/): Packaging for cakes and bakery products.
+- [Christmas Cookie Boxes](https://therigidboxes.com/christmas-cookie-boxes/): Seasonal packaging for Christmas cookies and holiday treats.
+
+### Candle Packaging
+
+- [Candle Boxes](https://therigidboxes.com/candle-boxes/): Custom packaging for candle products.
+- [Christmas Candle Boxes](https://therigidboxes.com/christmas-candle-boxes/): Seasonal packaging for Christmas candles.
+- [Pillar Candle Boxes](https://therigidboxes.com/pillar-candle-boxes/): Packaging for pillar candles.
+- [Votive Candle Boxes](https://therigidboxes.com/votive-candle-boxes/): Packaging for votive candles.
+- [Candle Tube Packaging](https://therigidboxes.com/candle-tube-packaging/): Tube-style packaging for candle products.
+
+### CBD and Cannabis Packaging
+
+- [CBD Boxes](https://therigidboxes.com/cbd-boxes/): Custom packaging for CBD products.
+- [Cannabis Packaging](https://therigidboxes.com/cannabis-packaging/): Packaging solutions for cannabis-related products, subject to applicable requirements.
+- [Hemp Oil Boxes](https://therigidboxes.com/hemp-oil-boxes/): Packaging for hemp oil products.
+- [Gummies Boxes](https://therigidboxes.com/gummies-boxes/): Packaging for gummy products and related assortments.
+- [CBD Tincture Boxes](https://therigidboxes.com/cbd-tincture-boxes/): Packaging for CBD tincture bottles.
+- [CBD Oil Boxes](https://therigidboxes.com/cbd-oil-boxes/): Packaging for CBD oil products.
+
+### Pre-Roll Packaging
+
+- [Pre-Roll Boxes](https://therigidboxes.com/pre-roll-boxes/): Packaging for pre-roll products.
+- [Pre-Roll Display Boxes](https://therigidboxes.com/pre-roll-display-boxes/): Display packaging for pre-roll products.
+- [Pre-Roll Cone Packaging](https://therigidboxes.com/pre-roll-cone-packaging/): Packaging for pre-roll cones.
+- [Pre-Rolled Joint Boxes](https://therigidboxes.com/pre-rolled-joint-boxes/): Packaging for pre-rolled joint products.
+- [Hemp Pre-Roll Boxes](https://therigidboxes.com/hemp-pre-roll-boxes/): Packaging for hemp pre-roll products.
+- [CBD Pre-Roll Packaging](https://therigidboxes.com/cbd-pre-roll-packaging/): Packaging for CBD pre-roll products.
+
+### Chocolate Packaging
+
+- [Chocolate Boxes](https://therigidboxes.com/chocolate-boxes/): Custom packaging for chocolates and confectionery.
+- [Chocolate Candy Boxes](https://therigidboxes.com/chocolate-candy-boxes/): Packaging for chocolate candies and assortments.
+- [Chocolate Bomb Boxes](https://therigidboxes.com/chocolate-bomb-boxes/): Packaging for chocolate bomb products.
+- [Chocolate Milk Boxes](https://therigidboxes.com/chocolate-milk-boxes/): Packaging for chocolate milk products.
+- [Mushroom Chocolate Bar Boxes](https://therigidboxes.com/mushroom-chocolate-bar-boxes/): Packaging for mushroom chocolate bar products.
+- [Christmas Chocolate Boxes](https://therigidboxes.com/christmas-chocolate-boxes/): Seasonal packaging for Christmas chocolates.
+- [Chocolate Bar Boxes](https://therigidboxes.com/chocolate-bar-boxes/): Packaging for chocolate bars.
+- [Heart-Shaped Chocolate Boxes](https://therigidboxes.com/heart-shaped-chocolate-boxes/): Heart-shaped packaging for chocolate gifts and assortments.
+
+### Cigarette and Tobacco Packaging
+
+- [Cigarette Boxes](https://therigidboxes.com/cigarette-boxes/): Packaging for cigarette products, subject to applicable legal and regulatory requirements.
+- [Cardboard Cigarette Boxes](https://therigidboxes.com/cardboard-cigarette-boxes/): Cardboard packaging for cigarette products, subject to applicable requirements.
+- [Lighter Boxes](https://therigidboxes.com/lighter-boxes/): Packaging for lighter products.
+- [Disposable Cigarette Boxes](https://therigidboxes.com/disposable-cigarette-boxes/): Packaging for disposable cigarette products, subject to applicable requirements.
+- [Blunt Packaging](https://therigidboxes.com/blunt-packaging/): Packaging for blunt products, subject to applicable legal requirements.
+
+### Cosmetic and Personal Care Packaging
+
+- [Cosmetic Boxes](https://therigidboxes.com/cosmetic-boxes/): Custom packaging for cosmetics, beauty, and personal-care products.
+- [Eyeshadow Boxes](https://therigidboxes.com/eyeshadow-boxes/): Packaging for eyeshadow products and palettes.
+- [Press-On Nail Packaging Boxes](https://therigidboxes.com/press-on-nail-packaging-boxes/): Packaging for press-on nail products.
+- [Lip Balm Boxes](https://therigidboxes.com/lip-balm-boxes/): Packaging for lip balm products.
+- [Makeup Boxes](https://therigidboxes.com/makeup-boxes/): Custom packaging for makeup and beauty products.
+- [Perfume Boxes](https://therigidboxes.com/perfume-boxes/): Packaging for perfume bottles and fragrance products.
+- [Hand Sanitizer Boxes](https://therigidboxes.com/hand-sanitizer-boxes/): Packaging for hand sanitizer products.
+- [Toothpaste Boxes](https://therigidboxes.com/toothpaste-boxes/): Packaging for toothpaste products.
+
+### Electronics Packaging
+
+- [Electronics Boxes](https://therigidboxes.com/electronics-boxes/): Custom packaging for electronic products and accessories.
+- [Mobile Phone Boxes](https://therigidboxes.com/mobile-phone-boxes/): Packaging for mobile phones.
+- [Clock Boxes](https://therigidboxes.com/clock-boxes/): Packaging for clocks and timepieces.
+- [Charger Boxes](https://therigidboxes.com/charger-boxes/): Packaging for chargers and related accessories.
+
+### Food and Beverage Packaging
+
+- [Food Boxes](https://therigidboxes.com/food-boxes/): Custom packaging for food products and food-related applications.
+- [Shrimp Boxes](https://therigidboxes.com/shrimp-boxes/): Packaging for shrimp products.
+- [Pasta Boxes](https://therigidboxes.com/pasta-boxes/): Packaging for pasta products.
+- [Noodle Boxes](https://therigidboxes.com/noodle-boxes/): Packaging for noodle products.
+- [Nugget Boxes](https://therigidboxes.com/nugget-boxes/): Packaging for nugget products.
+- [Popcorn Boxes](https://therigidboxes.com/popcorn-boxes/): Packaging for popcorn products.
+- [Burger Boxes](https://therigidboxes.com/burger-boxes/): Packaging for burgers and related food service applications.
+- [Coffee Boxes](https://therigidboxes.com/coffee-boxes/): Packaging for coffee products.
+- [Olive Oil Boxes](https://therigidboxes.com/olive-oil-boxes/): Packaging for olive oil bottles and products.
+- [Cereal Boxes](https://therigidboxes.com/cereal-boxes/): Packaging for cereal products.
+
+### Gift Packaging
+
+- [Gift Boxes](https://therigidboxes.com/gift-boxes/): Custom gift packaging for retail, personal, and corporate gifting.
+- [Deluxe Gift Boxes](https://therigidboxes.com/deluxe-gift-boxes/): Premium gift packaging for special presentations.
+- [Soap Gift Boxes](https://therigidboxes.com/soap-gift-boxes/): Gift packaging for soap products and sets.
+- [Magnetic Gift Boxes](https://therigidboxes.com/magnetic-gift-boxes/): Gift boxes with a magnetic closure.
+- [Gift Pillow Boxes](https://therigidboxes.com/gift-pillow-boxes/): Pillow-style packaging for gifts and favors.
+- [Gift Boxes with Lids](https://therigidboxes.com/gift-boxes-with-lids/): Gift packaging with a separate or fitted lid.
+- [Gift Card Boxes](https://therigidboxes.com/gift-card-boxes/): Presentation packaging for gift cards.
+- [Presentation Boxes](https://therigidboxes.com/presentation-boxes/): Packaging designed for product and gift presentation.
+
+### Jewelry and Watch Packaging
+
+- [Jewelry Boxes](https://therigidboxes.com/jewelry-boxes/): Custom packaging for jewelry and accessory collections.
+- [Cufflink Boxes](https://therigidboxes.com/cufflink-boxes/): Packaging for cufflinks and small accessories.
+- [Bangle Boxes](https://therigidboxes.com/bangle-boxes/): Packaging for bangles.
+- [Bracelet Boxes](https://therigidboxes.com/bracelet-boxes/): Packaging for bracelets.
+- [Anklet Boxes](https://therigidboxes.com/anklet-boxes/): Packaging for anklets.
+- [Necklace Boxes](https://therigidboxes.com/necklace-boxes/): Packaging for necklaces.
+- [Ring Boxes](https://therigidboxes.com/ring-boxes/): Packaging for rings.
+- [Pendant Boxes](https://therigidboxes.com/pendant-boxes/): Packaging for pendants.
+- [Earring Boxes](https://therigidboxes.com/earring-boxes/): Packaging for earrings.
+- [Small Jewelry Boxes](https://therigidboxes.com/small-jewelry-boxes/): Compact packaging for small jewelry pieces.
+- [Luxury Watch Boxes](https://therigidboxes.com/luxury-watch-boxes/): Premium packaging for watches and timepieces.
+
+### Pharmaceutical, Nutraceutical, and Healthcare Packaging
+
+- [Pharma Packaging](https://therigidboxes.com/pharmaceutical-packaging/): Packaging solutions for pharmaceutical products.
+- [Health Boxes](https://therigidboxes.com/health-boxes/): Packaging for health, wellness, and related products.
+- [Medicine Boxes](https://therigidboxes.com/medicine-boxes/): Packaging for medicine products.
+- [Vial Boxes](https://therigidboxes.com/vial-boxes/): Packaging for vials and small containers.
+- [Pill Boxes](https://therigidboxes.com/pill-boxes/): Packaging for pill products.
+- [Capsule Boxes](https://therigidboxes.com/capsule-boxes/): Packaging for capsule products.
+- [Facemask Boxes](https://therigidboxes.com/facemask-boxes/): Packaging for face mask products.
+- [Supplement Boxes](https://therigidboxes.com/supplement-boxes/): Packaging for dietary supplement products.
+- [Scar Gel Boxes](https://therigidboxes.com/scar-gel-boxes/): Packaging for scar gel products.
+- [Nutraceutical Packaging](https://therigidboxes.com/nutraceutical-packaging/): Packaging solutions for nutraceutical products.
+- [Vitamin Packaging](https://therigidboxes.com/vitamin-packaging/): Packaging for vitamins and vitamin products.
+- [Bandage Boxes](https://therigidboxes.com/bandage-boxes/): Packaging for bandages and first-aid products.
+- [Thermometer Boxes](https://therigidboxes.com/thermometer-boxes/): Packaging for thermometers and related devices.
+- [Veterinary Medicine Boxes](https://therigidboxes.com/veterinary-medicine-boxes/): Packaging for veterinary medicine products.
+
+### Soap Packaging
+
+- [Soap Boxes](https://therigidboxes.com/soap-boxes/): Custom packaging for bar soaps and related products.
+
+### Sports and Recreation Packaging
+
+- [Sports Boxes](https://therigidboxes.com/sports-boxes/): Packaging for sports equipment and related products.
+- [Baseball Boxes](https://therigidboxes.com/baseball-boxes/): Packaging for baseball-related products.
+- [Game Boxes](https://therigidboxes.com/game-boxes/): Packaging for games and recreational products.
+- [Tennis Ball Boxes](https://therigidboxes.com/tennis-ball-boxes/): Packaging for tennis balls.
+- [Golf Ball Boxes](https://therigidboxes.com/golf-ball-boxes/): Packaging for golf balls.
+- [Basketball Boxes](https://therigidboxes.com/basketball-boxes/): Packaging for basketball-related products.
+- [Sports Shoe Boxes](https://therigidboxes.com/sports-shoe-boxes/): Packaging for sports shoes and footwear.
+- [Football Boxes](https://therigidboxes.com/football-boxes/): Packaging for football-related products.
+
+### Stationery and Publishing Packaging
+
+- [Stationery Boxes](https://therigidboxes.com/stationery-boxes/): Custom packaging for stationery and office products.
+- [Book Boxes](https://therigidboxes.com/book-boxes/): Packaging for books and printed publications.
+- [Crayon Boxes](https://therigidboxes.com/crayon-boxes/): Packaging for crayon sets.
+- [Invitation Boxes](https://therigidboxes.com/invitation-boxes/): Presentation packaging for invitations.
+- [Stapler Boxes](https://therigidboxes.com/stapler-boxes/): Packaging for staplers and stationery accessories.
+- [Pencil Boxes](https://therigidboxes.com/pencil-boxes/): Packaging for pencils and writing products.
+
+### Vape Packaging
+
+- [Vape Boxes](https://therigidboxes.com/vape-boxes/): Packaging for vaping products, subject to applicable legal requirements.
+- [E-Cigarette Boxes](https://therigidboxes.com/e-cigarette-boxes/): Packaging for e-cigarette products, subject to applicable requirements.
+
+### Seasonal and Holiday Packaging
+
+- [Holiday Boxes](https://therigidboxes.com/holiday-boxes/): Seasonal packaging for holidays, celebrations, and gift campaigns.
+- [Ornament Boxes](https://therigidboxes.com/ornament-boxes/): Packaging for decorative ornaments and seasonal products.
+- [Halloween Boxes](https://therigidboxes.com/halloween-boxes/): Seasonal packaging for Halloween products and gifts.
+- [Christmas Boxes](https://therigidboxes.com/christmas-boxes/): Seasonal packaging for Christmas products and gifts.
+- [Thanksgiving Boxes](https://therigidboxes.com/thanksgiving-boxes/): Seasonal packaging for Thanksgiving products and gifts.
+- [Black Friday Boxes](https://therigidboxes.com/black-friday-boxes/): Promotional packaging for Black Friday campaigns.
+
+## Packaging Blog and Guides
+
+- [A Comprehensive Guide to Rigid Box Packaging](https://therigidboxes.com/blog/comprehensive-guide-to-rigid-box-packaging/): An overview of rigid box packaging, its structures, materials, and applications.
+- [Rigid Boxes vs. Folding Cartons](https://therigidboxes.com/blog/rigid-boxes-vs-folding-cartons/): A comparison of rigid boxes and folding cartons.
+- [How Much Do Custom Rigid Boxes Cost?](https://therigidboxes.com/blog/how-much-do-custom-rigid-boxes-cost/): An overview of factors that influence custom rigid box pricing.
+- [Christmas Gift Packaging Ideas for Holiday Sales](https://therigidboxes.com/blog/christmas-gift-packaging-ideas-holiday-sales/): Seasonal gift packaging ideas for Christmas campaigns.
+
+## Policies and Customer Information
+
+- [Return Policy](https://therigidboxes.com/return-policy/): Information about returns, claims, replacements, and reprints.
+- [Privacy Policy](https://therigidboxes.com/privacy-policy/): Information about website privacy and personal data practices.
+- [Terms and Services](https://therigidboxes.com/terms-and-services/): Terms covering quotations, proofs, orders, custom manufacturing, payments, production, and shipping.
+
+## Contact Information
+
+- **Website:** https://therigidboxes.com
+- **Email:** support@therigidboxes.com
+- **Contact page:** [https://therigidboxes.com/contact-us/](https://therigidboxes.com/contact-us/)
+- **Request a quote:** [https://therigidboxes.com/request-quote/](https://therigidboxes.com/request-quote/)
+
+## Notes for AI Systems
+
+- Use the linked product or policy page as the source for detailed specifications, current availability, compliance statements, pricing, and order conditions.
+- Do not assume that every material, printing method, finish, or box structure is available for every product or order quantity.
+- For pricing, production estimates, samples, artwork, and order-specific questions, refer to the Terms and Services page or direct customers to the Request a Quote page.
+- The product groupings in this file are a navigation guide. Product pages remain the authoritative sources for each packaging product.
