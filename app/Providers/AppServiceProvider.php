@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,14 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        // Laravel 9+ convenience directives backported for Laravel 8 compatibility
+        Blade::directive('checked', function ($expression) {
+            return "<?php if ({$expression}): echo 'checked'; endif; ?>";
+        });
+        Blade::directive('selected', function ($expression) {
+            return "<?php if ({$expression}): echo 'selected'; endif; ?>";
+        });
+
         // Shared hosts sometimes point APP_URL at "/public" or misconfigure SCRIPT_NAME.
         // Keep generated links, assets, canonicals and schemas on the clean domain instead.
         $configuredUrl = rtrim((string) config('app.url'), '/');

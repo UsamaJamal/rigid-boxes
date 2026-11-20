@@ -125,7 +125,7 @@
         <h3>Visibility</h3>
         <div class="checks">
             <label class="check">
-                <input type="checkbox" name="show_home" value="1" @checked($v('show_home'))> 
+                <input type="checkbox" name="show_home" value="1" @if((bool) $v('show_home')) checked @endif> 
                 Show on home page
             </label>
             
