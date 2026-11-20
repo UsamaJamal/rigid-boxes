@@ -268,8 +268,8 @@ The following product and category pages are grouped by their primary product or
 
 - **Website:** https://therigidboxes.com
 - **Email:** support@therigidboxes.com
-- **Contact page:** [https://therigidboxes.com/contact-us/](https://therigidboxes.com/contact-us/)
-- **Request a quote:** [https://therigidboxes.com/request-quote/](https://therigidboxes.com/request-quote/)
+- **Contact page:** https://therigidboxes.com/contact-us/
+- **Request a quote:** https://therigidboxes.com/request-quote/
 
 ## Notes for AI Systems
 
