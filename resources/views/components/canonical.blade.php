@@ -44,6 +44,8 @@
 <meta name="twitter:title" content="{{ $socialTitle }}">
 <meta name="twitter:description" content="{{ $socialDescription }}">
 <meta name="twitter:image" content="{{ $socialImage }}">
+<!-- Google Search Console ownership verification -->
+<meta name="google-site-verification" content="RI5_TgiyTBDMEZU66ukfA5N8sFiQYCEV_tyQyCGScNE" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5VLT0GNXMD"></script>
 <script>
