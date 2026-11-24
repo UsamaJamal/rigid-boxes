@@ -47,6 +47,38 @@ class SitemapController extends Controller
     /**
      * Get the clean canonical base URL (ensures production https:// domain on live).
      */
+    /** The newest of the given dates (any may be empty), or null. */
+    protected function latestDate(...$dates): ?string
+    {
+        $stamps = array_filter(array_map(fn ($date) => $date ? strtotime((string) $date) : false, $dates));
+        return $stamps ? date('Y-m-d H:i:s', max($stamps)) : null;
+    }
+
+    /** Last change to the given settings sections of homepage_contents. */
+    protected function settingsChanged(array $sections): ?string
+    {
+        return DB::table('homepage_contents')->whereIn('section', $sections)->max('updated_at');
+    }
+
+    /** When a page's Blade template file last changed. */
+    protected function viewChanged(string $view): ?string
+    {
+        $path = resource_path('views/' . $view . '.blade.php');
+        return is_file($path) ? date('Y-m-d H:i:s', filemtime($path)) : null;
+    }
+
+    /** Last change to the homepage: its own settings fields or its template. */
+    protected function homepageLastModified(): ?string
+    {
+        return $this->latestDate(
+            DB::table('homepage_contents')->whereIn('field_key', [
+                'meta_title', 'meta_description', 'meta_keywords', 'schema', 'hero_title', 'hero_description',
+                'hero_image', 'featured_categories', 'bestseller_products', 'faqs', 'content_section',
+            ])->max('updated_at'),
+            $this->viewChanged('homepage')
+        );
+    }
+
     protected function getBaseUrl(): string
     {
         $configured = rtrim((string) config('app.url'), '/');
@@ -79,10 +111,18 @@ class SitemapController extends Controller
             ->select('slug', 'updated_at')
             ->get();
 
-        $contentLastModified = DB::table('homepage_contents')->max('updated_at');
-        $defaultLastModified = $contentLastModified
-            ? date('Y-m-d', strtotime($contentLastModified))
-            : date('Y-m-d', filemtime(resource_path('views/homepage.blade.php')));
+        // Each page's lastmod comes only from what that page shows, so editing
+        // one settings page (homepage, About Us, FAQ, footer) does not move the
+        // dates of unrelated pages.
+        $homepageLastModified = $this->homepageLastModified();
+        $companyInfoLastModified = $this->settingsChanged(['company_info']);
+        $contentLastModified = $this->latestDate(
+            $categories->max('updated_at'),
+            $products->max('updated_at'),
+            $blogs->max('updated_at'),
+            $pages->max('updated_at')
+        );
+        $defaultLastModified = date('Y-m-d', strtotime($homepageLastModified ?: 'now'));
 
         $urls = [];
         $addUrl = function (
@@ -104,16 +144,16 @@ class SitemapController extends Controller
         };
 
         $staticPages = [
-            ['path' => '', 'lastmod' => $contentLastModified, 'changefreq' => 'weekly', 'priority' => '1.0'],
+            ['path' => '', 'lastmod' => $homepageLastModified, 'changefreq' => 'weekly', 'priority' => '1.0'],
             ['path' => 'box-by-industry', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['path' => 'box-by-material', 'changefreq' => 'weekly', 'priority' => '0.9'],
             ['path' => 'box-by-style', 'changefreq' => 'weekly', 'priority' => '0.9'],
-            ['path' => 'contact-us', 'changefreq' => 'yearly', 'priority' => '0.5'],
-            ['path' => 'request-quote', 'changefreq' => 'monthly', 'priority' => '0.8'],
+            ['path' => 'contact-us', 'lastmod' => $this->latestDate($this->viewChanged('contact'), $companyInfoLastModified), 'changefreq' => 'yearly', 'priority' => '0.5'],
+            ['path' => 'request-quote', 'lastmod' => $this->latestDate($this->viewChanged('qotation'), $companyInfoLastModified), 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['path' => 'blog', 'lastmod' => $blogs->max('updated_at'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-            ['path' => 'sitemap', 'changefreq' => 'monthly', 'priority' => '0.3'],
-            ['path' => 'why-choose-us', 'changefreq' => 'monthly', 'priority' => '0.6'],
-            ['path' => 'about-us', 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['path' => 'sitemap', 'lastmod' => $contentLastModified, 'changefreq' => 'monthly', 'priority' => '0.3'],
+            ['path' => 'why-choose-us', 'lastmod' => $this->viewChanged('whyChooseUs'), 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['path' => 'about-us', 'lastmod' => $this->latestDate($this->settingsChanged(['about_us_page']), $this->viewChanged('aboutUs')), 'changefreq' => 'monthly', 'priority' => '0.6'],
         ];
 
         foreach ($staticPages as $page) {
@@ -125,8 +165,8 @@ class SitemapController extends Controller
         $faqSlug = DB::table('homepage_contents')
             ->where('section', 'faq_page')
             ->where('field_key', 'faq_page_slug')
-            ->value('value') ?: 'frequentlyAskedQuestions';
-        $addUrl($faqSlug, $contentLastModified, 'monthly', '0.6');
+            ->value('value') ?: 'frequently-asked-questions';
+        $addUrl($faqSlug, $this->latestDate($this->settingsChanged(['faq_page']), $this->viewChanged('faqpage')), 'monthly', '0.6');
 
         foreach ($categories as $category) {
             if (!empty($category->slug)) $addUrl($category->slug, $category->updated_at, 'weekly', '0.8');
@@ -202,10 +242,10 @@ class SitemapController extends Controller
                 'caption' => 'Leading custom packaging manufacturer delivering premium boxes and packaging solutions'
             ];
         }
-        $contentLastModified = DB::table('homepage_contents')->max('updated_at');
+        $homepageLastModified = $this->homepageLastModified();
         $urls['/'] = [
             'loc' => $baseUrl . '/',
-            'lastmod' => $contentLastModified ? date('Y-m-d', strtotime($contentLastModified)) : date('Y-m-d'),
+            'lastmod' => date('Y-m-d', strtotime($homepageLastModified ?: 'now')),
             'changefreq' => 'weekly',
             'priority' => '1.0',
             'images' => $homeImages
@@ -215,6 +255,7 @@ class SitemapController extends Controller
         $staticPages = [
             [
                 'slug' => 'about-us',
+                'lastmod' => $this->latestDate($this->settingsChanged(['about_us_page']), $this->viewChanged('aboutUs')),
                 'title' => 'About The Rigid Boxes',
                 'changefreq' => 'monthly',
                 'priority' => '0.6',
@@ -226,6 +267,7 @@ class SitemapController extends Controller
             ],
             [
                 'slug' => 'why-choose-us',
+                'lastmod' => $this->viewChanged('whyChooseUs'),
                 'title' => 'Why Choose The Rigid Boxes',
                 'changefreq' => 'monthly',
                 'priority' => '0.6',
@@ -249,7 +291,7 @@ class SitemapController extends Controller
             }
             $urls[$sp['slug']] = [
                 'loc' => $baseUrl . '/' . $sp['slug'] . '/',
-                'lastmod' => date('Y-m-d'),
+                'lastmod' => date('Y-m-d', strtotime($sp['lastmod'] ?: 'now')),
                 'changefreq' => $sp['changefreq'],
                 'priority' => $sp['priority'],
                 'images' => $sImgs

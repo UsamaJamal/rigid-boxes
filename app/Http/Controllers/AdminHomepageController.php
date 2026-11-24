@@ -133,34 +133,59 @@ class AdminHomepageController extends Controller
         }
         $settings['faqs'] = $faqs;
 
-        // Save into MySQL database table `homepage_contents`
-        foreach ($settings as $key => $value) {
-            $valueType = 'text';
-            $section = 'general';
+        // Save into MySQL database table `homepage_contents`.
+        // Only the homepage's own fields are written: the same table also holds
+        // About Us, FAQ page, footer and social settings, which have their own
+        // admin pages. A field is written only when its value changed, so
+        // saving without edits leaves updated_at (and the sitemap date) alone.
+        $homepageFields = [
+            'meta_title' => ['seo', 'text'],
+            'meta_description' => ['seo', 'text'],
+            'meta_keywords' => ['seo', 'text'],
+            'schema' => ['seo', 'text'],
+            'hero_title' => ['hero', 'text'],
+            'hero_description' => ['hero', 'text'],
+            'hero_image' => ['hero', 'text'],
+            'featured_categories' => ['list', 'json'],
+            'bestseller_products' => ['list', 'json'],
+            'faqs' => ['list', 'json'],
+            'content_section' => ['content', 'html'],
+        ];
+        $existingRows = DB::table('homepage_contents')
+            ->whereIn('field_key', array_keys($homepageFields))
+            ->get()
+            ->keyBy('field_key');
 
-            if (in_array($key, ['meta_title', 'meta_description', 'meta_keywords', 'schema'])) {
-                $section = 'seo';
-            } elseif (in_array($key, ['hero_title', 'hero_description', 'hero_image'])) {
-                $section = 'hero';
-            } elseif (in_array($key, ['featured_categories', 'bestseller_products', 'faqs'])) {
-                $section = 'list';
-                $valueType = 'json';
+        foreach ($homepageFields as $key => [$section, $valueType]) {
+            $value = $settings[$key] ?? null;
+            if ($valueType === 'json') {
                 $value = json_encode($value);
-            } elseif ($key === 'content_section') {
-                $section = 'content';
-                $valueType = 'html';
             }
 
-            DB::table('homepage_contents')->updateOrInsert(
-                ['field_key' => $key],
-                [
+            $existing = $existingRows->get($key);
+            if ($existing) {
+                $unchanged = (string) $existing->value === (string) $value
+                    && $existing->section === $section
+                    && $existing->value_type === $valueType;
+                if ($unchanged) {
+                    continue;
+                }
+                DB::table('homepage_contents')->where('id', $existing->id)->update([
                     'section' => $section,
                     'value' => $value,
                     'value_type' => $valueType,
                     'updated_at' => now(),
-                    'created_at' => now()
-                ]
-            );
+                ]);
+            } else {
+                DB::table('homepage_contents')->insert([
+                    'field_key' => $key,
+                    'section' => $section,
+                    'value' => $value,
+                    'value_type' => $valueType,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
 
         // Also save to JSON file as backup
