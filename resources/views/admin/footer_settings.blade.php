@@ -205,6 +205,11 @@
                 <label class="form-label">YouTube URL</label>
                 <input type="url" name="social_youtube" class="form-input" value="{{ old('social_youtube', $settings['social_youtube'] ?? '') }}">
             </div>
+
+            <div class="form-group">
+                <label class="form-label">TikTok URL</label>
+                <input type="url" name="social_tiktok" class="form-input" value="{{ old('social_tiktok', $settings['social_tiktok'] ?? '') }}" placeholder="https://www.tiktok.com/@therigidboxes">
+            </div>
         </div>
 
         <div style="margin-bottom:30px;">

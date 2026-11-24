@@ -25,7 +25,8 @@ class AdminFooterController extends Controller
             'social_instagram' => 'https://www.instagram.com/premiumboxes.usa/',
             'social_pinterest' => 'https://www.pinterest.com/premiumboxesusa/',
             'social_linkedin' => 'https://www.linkedin.com/company/premium-boxes-usa/',
-            'social_youtube' => ''
+            'social_youtube' => '',
+            'social_tiktok' => ''
         ];
 
         try {
@@ -98,6 +99,7 @@ class AdminFooterController extends Controller
             'social_pinterest' => 'nullable|url|max:255',
             'social_linkedin' => 'nullable|url|max:255',
             'social_youtube' => 'nullable|url|max:255',
+            'social_tiktok' => 'nullable|url|max:255',
         ]);
 
         $settings = $this->getSettings();
@@ -111,6 +113,7 @@ class AdminFooterController extends Controller
         $settings['social_pinterest'] = $request->input('social_pinterest');
         $settings['social_linkedin'] = $request->input('social_linkedin');
         $settings['social_youtube'] = $request->input('social_youtube');
+        $settings['social_tiktok'] = $request->input('social_tiktok');
         $settings['footer_categories'] = array_map('intval', (array) $request->input('footer_categories', []));
 
         $quickLinks = [];
@@ -139,16 +142,29 @@ class AdminFooterController extends Controller
                 $section = 'social_links';
             }
 
-            DB::table('homepage_contents')->updateOrInsert(
-                ['field_key' => $key],
-                [
+            // Write only fields whose value changed, so saving without edits
+            // keeps updated_at (and the sitemap dates built from it) as they were.
+            $existing = DB::table('homepage_contents')->where('field_key', $key)->first();
+            if ($existing) {
+                if ((string) $existing->value === (string) $value && $existing->section === $section && $existing->value_type === $valueType) {
+                    continue;
+                }
+                DB::table('homepage_contents')->where('id', $existing->id)->update([
                     'section' => $section,
                     'value' => $value,
                     'value_type' => $valueType,
                     'updated_at' => now(),
-                    'created_at' => now()
-                ]
-            );
+                ]);
+            } else {
+                DB::table('homepage_contents')->insert([
+                    'field_key' => $key,
+                    'section' => $section,
+                    'value' => $value,
+                    'value_type' => $valueType,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
 
         file_put_contents($this->getSettingsPath(), json_encode($settings, JSON_PRETTY_PRINT));
