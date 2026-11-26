@@ -57,10 +57,7 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
         $products = DB::table('admin_products')
             ->where('status', 'published')
             ->where(function ($query) use ($q, $variants) {
-                $query->where('title', 'like', "%{$q}%")
-                      ->orWhere('meta_keywords', 'like', "%{$q}%")
-                      ->orWhere('meta_title', 'like', "%{$q}%")
-                      ->orWhere('box_style', 'like', "%{$q}%");
+                $query->where('title', 'like', "%{$q}%");
 
                 if (!empty($variants)) {
                     $query->orWhere(function ($sub) use ($variants) {
@@ -83,9 +80,7 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             ->whereNotNull('parent_id')
             ->whereNotIn('slug', $excludedCategorySlugs)
             ->where(function ($query) use ($q, $variants) {
-                $query->where('title', 'like', "%{$q}%")
-                      ->orWhere('meta_keywords', 'like', "%{$q}%")
-                      ->orWhere('meta_title', 'like', "%{$q}%");
+                $query->where('title', 'like', "%{$q}%");
 
                 if (!empty($variants)) {
                     $query->orWhere(function ($sub) use ($variants) {
@@ -105,9 +100,7 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             ->where('status', 'published')
             ->where(function ($query) use ($q, $variants) {
                 $query->where('title', 'like', "%{$q}%")
-                      ->orWhere('tags', 'like', "%{$q}%")
-                      ->orWhere('excerpt', 'like', "%{$q}%")
-                      ->orWhere('meta_keywords', 'like', "%{$q}%");
+                      ->orWhere('tags', 'like', "%{$q}%");
 
                 if (!empty($variants)) {
                     $query->orWhere(function ($sub) use ($variants) {
@@ -125,6 +118,14 @@ Route::get('/search', function (\Illuminate\Http\Request $request) {
             ->get()->map(fn($r)=>(array)$r)->all();
 
         $totalCount = count($products) + count($categories) + count($blogs);
+    }
+
+    if ($q && $totalCount === 0) {
+        request()->merge([
+            'from_search' => 1,
+            'box_style' => $q,
+        ]);
+        return view('qotation', compact('q'));
     }
 
     return view('search', compact('q', 'products', 'categories', 'blogs', 'totalCount'));
