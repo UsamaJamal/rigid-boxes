@@ -109,8 +109,17 @@
     $schemaFaqs = [];
     if (!empty($faqs) && is_iterable($faqs)) {
         $schemaFaqs = $faqs;
-    } elseif (!empty(($settings ?? [])['faqs'])) {
+    } elseif (!empty(($settings ?? [])['faqs']) && is_iterable($settings['faqs'])) {
         $schemaFaqs = $settings['faqs'];
+    } elseif (!empty(($settings ?? [])['faq_page_sections']) && is_iterable($settings['faq_page_sections'])) {
+        foreach ($settings['faq_page_sections'] as $faqSection) {
+            $faqSectionArr = (array) $faqSection;
+            if (!empty($faqSectionArr['faqs']) && is_iterable($faqSectionArr['faqs'])) {
+                foreach ($faqSectionArr['faqs'] as $sectionFaq) {
+                    $schemaFaqs[] = $sectionFaq;
+                }
+            }
+        }
     }
     $schemaFaqEntities = collect($schemaFaqs)
         ->map(fn ($faq) => (array) $faq)
@@ -328,12 +337,11 @@
         $schemaGraph = [];
     }
 
-    // Exception: a product's FAQs are managed separately from its pasted schema,
-    // so they are still output unless the pasted schema already has a FAQPage.
+    // Exception: FAQs added separately in admin are still output even when
+    // a custom schema is pasted, unless that custom schema already has a FAQPage.
     $schemaProductFaqPayload = null;
     if (
         $schemaCustomPayload !== null
-        && !empty($schemaProduct)
         && !empty($schemaFaqEntities)
         && stripos(json_encode($schemaCustomPayload), 'FAQPage') === false
     ) {
