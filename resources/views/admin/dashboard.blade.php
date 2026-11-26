@@ -213,6 +213,17 @@
                 <strong style="color:var(--primary); font-size: 13px;">Manage <i class="fa-solid fa-arrow-right" style="font-size:11px;margin-left:5px"></i></strong>
             </a>
         @endforeach
+        <a class="card module-link" style="text-decoration:none;color:inherit;" href="{{ route('admin.redirects.index') }}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div class="icon"><i class="fa-solid fa-route"></i></div>
+                <span style="font-size:11px; background:var(--soft); color:var(--primary); font-weight:700; padding:4px 8px; border-radius:6px;">
+                    SEO Tools
+                </span>
+            </div>
+            <h3 style="font-family:'Open Sans';margin:16px 0 6px; font-size: 16px;">Redirections</h3>
+            <p style="color:var(--muted);line-height:1.5; font-size: 13px; margin-bottom: 12px;">Manage 301, 302, 410 redirects, wildcards &amp; URL rules.</p>
+            <strong style="color:var(--primary); font-size: 13px;">Manage <i class="fa-solid fa-arrow-right" style="font-size:11px;margin-left:5px"></i></strong>
+        </a>
     </div>
 </div>
 

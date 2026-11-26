@@ -368,6 +368,10 @@
                 <i class="fa-regular fa-file-lines"></i>
                 <span>Dynamic Pages</span>
             </a>
+            <a class="{{ request()->routeIs('admin.redirects.*') ? 'active' : '' }}" href="{{ route('admin.redirects.index') }}">
+                <i class="fa-solid fa-route"></i>
+                <span>Redirections</span>
+            </a>
         </nav>
         <div class="side-bottom">
             <nav class="nav">

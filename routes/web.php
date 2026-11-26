@@ -244,6 +244,7 @@ use App\Http\Controllers\AdminHomepageController;
 use App\Http\Controllers\AdminFooterController;
 use App\Http\Controllers\AdminFaqPageController;
 use App\Http\Controllers\AdminAboutUsController;
+use App\Http\Controllers\AdminRedirectController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin Auth Routes
@@ -262,6 +263,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/faq-page-settings', [AdminFaqPageController::class, 'update'])->name('faqpage.update');
         Route::get('/about-us-settings', [AdminAboutUsController::class, 'edit'])->name('aboutus.edit');
         Route::post('/about-us-settings', [AdminAboutUsController::class, 'update'])->name('aboutus.update');
+
+        // SEO Redirections Manager
+        Route::prefix('redirects')->name('redirects.')->group(function () {
+            Route::get('/', [AdminRedirectController::class, 'index'])->name('index');
+            Route::post('/', [AdminRedirectController::class, 'store'])->name('store');
+            Route::put('/{id}', [AdminRedirectController::class, 'update'])->name('update')->whereNumber('id');
+            Route::post('/{id}/toggle', [AdminRedirectController::class, 'toggle'])->name('toggle')->whereNumber('id');
+            Route::delete('/{id}', [AdminRedirectController::class, 'destroy'])->name('destroy')->whereNumber('id');
+            Route::post('/bulk-action', [AdminRedirectController::class, 'bulkAction'])->name('bulk');
+            Route::post('/bulk-import', [AdminRedirectController::class, 'bulkImport'])->name('import');
+            Route::post('/test-url', [AdminRedirectController::class, 'testUrl'])->name('test');
+            Route::get('/export', [AdminRedirectController::class, 'exportCsv'])->name('export');
+        });
+
         Route::post('/tinymce/upload', [AdminContentController::class, 'uploadTinyMceMedia'])->name('tinymce.upload');
         Route::get('/{module}', [AdminContentController::class, 'index'])->name('module.index');
         Route::get('/{module}/create', [AdminContentController::class, 'create'])->name('module.create');
